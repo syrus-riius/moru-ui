@@ -8,7 +8,7 @@ import { parse } from '@babel/parser'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultRoot = path.dirname(path.dirname(scriptPath))
-export const registryVersion = '0.3.3'
+export const registryVersion = '0.3.4'
 export const registryOrigin = 'https://moru-ui-lab.riius.chatgpt.site'
 export const registryRepository = 'syrus-riius/moru-ui'
 export const registryScope = ':where([data-moru-registry])'
@@ -37,6 +37,11 @@ export const registryDefinitions = [
   { name: 'menu', entry: 'src/components/ui/menu.tsx', title: 'Menu', description: 'Dropdown actions with keyboard navigation, disabled items and scoped popup theming.' },
   { name: 'popover', entry: 'src/components/ui/popover.tsx', title: 'Popover', description: 'Anchored popup with managed focus, collision handling and scoped portal styling.' },
   { name: 'drawer', entry: 'src/components/ui/drawer.tsx', title: 'Drawer', description: 'Bottom modal drawer with managed focus and keyboard or pointer dismissal.' },
+  { name: 'calendar', entry: 'src/components/ui/calendar.tsx', title: 'Calendar', description: 'Calendar with single-date or range selection, year/month navigation and display variants.' },
+  { name: 'date-picker', entry: 'src/components/ui/date-picker.tsx', title: 'Date Picker', description: 'Single-date field with a calendar popup, date bounds and native form integration.' },
+  { name: 'date-range-picker', entry: 'src/components/ui/date-range-picker.tsx', title: 'Date Range Picker', description: 'Start/end date field with range selection, calendar display options and native form integration.' },
+  { name: 'time-picker', entry: 'src/components/ui/time-picker.tsx', title: 'Time Picker', description: 'Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.' },
+  { name: 'time-range-picker', entry: 'src/components/ui/time-range-picker.tsx', title: 'Time Range Picker', description: 'Paired start/end time fields with duration feedback and optional overnight ranges.' },
   { name: 'login', entry: 'src/components/blocks/LoginBlock.tsx', type: 'registry:block', title: 'Login Block', description: 'Local login form demo. Connect your own authentication service.' },
   { name: 'otp', entry: 'src/components/blocks/OTPBlock.tsx', type: 'registry:block', title: 'OTP Block', description: 'Local OTP verification demo. The sample code is 123456.' },
   { name: 'search-filters', entry: 'src/components/blocks/SearchFiltersBlock.tsx', type: 'registry:block', title: 'Search Filters Block', description: 'Composable query, status and assignee filters with local demo data and a controlled application API.' },
@@ -47,7 +52,19 @@ const coreEntries = [
   'src/components/ui/theme-scope.tsx', 'src/components/ui/overlay-portal.tsx',
   'src/components/ui/field-context.ts', 'src/components/ui/state.ts',
   'src/components/ui/styles.css', 'src/theme/readability.css',
+  // Shared by Popover and the date/time fields. Components import it on demand.
+  'src/components/ui/overlays.css',
 ]
+// Calendar is the common foundation of both date fields. Keep their small shared
+// helpers here so a range field does not need the unused single-date component,
+// and unrelated core/Button installations do not include calendar JavaScript.
+const itemSupportEntries = {
+  calendar: [
+    'src/components/ui/calendar-options.ts',
+    'src/components/ui/date-picker-form-utils.ts',
+    'src/components/ui/date-picker-form.css',
+  ],
+}
 const specialTargets = {
   'src/components/ui/styles.css': '_styles/components.css',
   'src/components/ui/form-controls.css': '_styles/form-controls.css',
@@ -210,7 +227,7 @@ function sourceRewrite(source, importer, imports, graph) {
     if (!result.includes(original)) throw new Error('ThemeScope source changed; review registry scope markers before regenerating.')
     result = result.replace(original, "const attributes = { 'data-moru-registry': '', 'data-mode': mode,")
   }
-  const client = importer.endsWith('.tsx') || importer === 'src/components/ui/field-context.ts'
+  const client = importer.endsWith('.tsx') || ['src/components/ui/field-context.ts', 'src/components/ui/time-field-context.ts'].includes(importer)
   return `${client ? "'use client'\n" : ''}${banner}${result}`
 }
 
@@ -229,7 +246,7 @@ export async function generateRegistry(root = defaultRoot) {
       if (resolved) { record.dependencies.set(specifier.value, resolved); await readSource(resolved) }
     }
   }
-  for (const entry of [...coreEntries, ...registryDefinitions.filter((item) => item.entry).map((item) => item.entry)]) await readSource(entry)
+  for (const entry of [...coreEntries, ...registryDefinitions.filter((item) => item.entry).map((item) => item.entry), ...Object.values(itemSupportEntries).flat()]) await readSource(entry)
   const rootPackage = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
   if (rootPackage.version !== registryVersion) throw new Error(`Registry recipe version ${registryVersion} differs from package version ${rootPackage.version}. Review release URLs before building.`)
   const sourceFiles = [...graph.keys(), 'LICENSE', 'NOTICE.md', 'package.json', recipePath].sort()
@@ -249,7 +266,10 @@ export async function generateRegistry(root = defaultRoot) {
     for (const dependency of graph.get(file).dependencies.values()) collectCore(dependency)
   }
   for (const entry of coreEntries) collectCore(entry)
-  const primaryOwners = new Map(registryDefinitions.filter((item) => item.entry).map((item) => [item.entry, item.name]))
+  const primaryOwners = new Map([
+    ...registryDefinitions.filter((item) => item.entry).map((item) => [item.entry, item.name]),
+    ...Object.entries(itemSupportEntries).flatMap(([owner, files]) => files.map((file) => [file, owner])),
+  ])
   const ownership = new Map([...coreSources].map((file) => [file, 'core']))
   const itemSources = new Map([['core', coreSources]])
   const itemDependencies = new Map([['core', new Set()]])
@@ -261,12 +281,15 @@ export async function generateRegistry(root = defaultRoot) {
       if (owner && owner !== item.name) { dependencies.add(owner); return }
       if (files.has(file)) return
       const prior = ownership.get(file)
-      if (prior && prior !== item.name) throw new Error(`Registry helper has multiple owners: ${file} (${prior}, ${item.name})`)
+      // Direct helper/CSS imports can refer to a dependency item's owned files.
+      // Reuse that item rather than writing the same target more than once.
+      if (prior && prior !== item.name) { dependencies.add(prior); return }
       ownership.set(file, item.name)
       files.add(file)
       for (const dependency of graph.get(file).dependencies.values()) collect(dependency)
     }
     collect(item.entry)
+    for (const support of itemSupportEntries[item.name] ?? []) collect(support)
     itemSources.set(item.name, files)
     itemDependencies.set(item.name, dependencies)
   }

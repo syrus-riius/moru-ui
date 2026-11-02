@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "version": "0.3.3",
-  "sourceHash": "18eb5729f2ec3a10740dd585e255d380c7a0974b7d87c002c9a1a9f14c45167d",
-  "registrySourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+  "version": "0.3.4",
+  "sourceHash": "dd407990157754ba458b0b7ae994267707d0c6e31cff02091e78a7be065cf389",
+  "registrySourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
   "registryItems": [
     "badge",
     "button",
@@ -19,8 +19,8 @@
     "textarea"
   ],
   "archive": "/downloads/moru-project-starter.zip",
-  "archiveSha256": "5b4dbc1b6ba206d457ad540c8a5dd2c4c1e0014e3a5330ab5248a60c4ccbe00e",
-  "bytes": 81047,
-  "fileCount": 47,
+  "archiveSha256": "72d5664198b5d914b8b43fcb8206083a55942a4c847f3564180f2ba2913eb483",
+  "bytes": 82692,
+  "fileCount": 48,
   "entry": "src/main.tsx"
 }

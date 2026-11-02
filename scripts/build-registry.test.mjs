@@ -56,7 +56,7 @@ function hasKeyframeParent(rule) {
 
 test('the public catalog contains only the reviewed MVP items', () => {
   assert.deepEqual(github.items.map((entry) => entry.name), registryDefinitions.map((entry) => entry.name))
-  assert.equal(github.items.length, 22)
+  assert.equal(github.items.length, 27)
   assert.equal(item('core').type, 'registry:base')
   assert.equal(item('login').type, 'registry:block')
   assert.equal(item('otp').type, 'registry:block')

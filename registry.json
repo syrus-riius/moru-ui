@@ -71,6 +71,11 @@
           "target": "@ui/moru/overlay-portal.tsx"
         },
         {
+          "path": "registry/moru/overlays.css",
+          "type": "registry:file",
+          "target": "@ui/moru/overlays.css"
+        },
+        {
           "path": "registry/moru/provider.tsx",
           "type": "registry:ui",
           "target": "@ui/moru/provider.tsx"
@@ -96,8 +101,8 @@
         "foundation"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -115,7 +120,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -129,8 +134,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -148,7 +153,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -162,8 +167,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -181,7 +186,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -195,8 +200,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -211,7 +216,7 @@
       "title": "Card",
       "description": "A quiet, token-based content surface.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -225,8 +230,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -244,7 +249,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -258,8 +263,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -277,8 +282,8 @@
         "lucide-react@1.60.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3",
-        "syrus-riius/moru-ui/input#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/input#v0.3.4"
       ],
       "files": [
         {
@@ -297,8 +302,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -316,7 +321,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -340,8 +345,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -359,7 +364,7 @@
         "lucide-react@1.60.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -373,8 +378,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -392,7 +397,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -406,8 +411,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -422,7 +427,7 @@
       "title": "Badge",
       "description": "Compact status and category labels using semantic tokens.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -436,8 +441,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -455,7 +460,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -469,8 +474,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -488,7 +493,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -502,8 +507,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -521,7 +526,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -535,8 +540,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -554,7 +559,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -568,8 +573,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -587,7 +592,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -601,8 +606,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -620,14 +625,9 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
-        {
-          "path": "registry/moru/overlays.css",
-          "type": "registry:file",
-          "target": "@ui/moru/overlays.css"
-        },
         {
           "path": "registry/moru/popover.tsx",
           "type": "registry:ui",
@@ -639,8 +639,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -659,7 +659,7 @@
         "lucide-react@1.60.0"
       ],
       "registryDependencies": [
-        "syrus-riius/moru-ui/core#v0.3.3"
+        "syrus-riius/moru-ui/core#v0.3.4"
       ],
       "files": [
         {
@@ -683,8 +683,226 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Calendar with single-date or range selection, year/month navigation and display variants.",
+      "dependencies": [
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "syrus-riius/moru-ui/core#v0.3.4"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/calendar-options.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar-options.ts"
+        },
+        {
+          "path": "registry/moru/calendar-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar-utils.ts"
+        },
+        {
+          "path": "registry/moru/calendar.css",
+          "type": "registry:file",
+          "target": "@ui/moru/calendar.css"
+        },
+        {
+          "path": "registry/moru/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar.tsx"
+        },
+        {
+          "path": "registry/moru/date-picker-form-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-picker-form-utils.ts"
+        },
+        {
+          "path": "registry/moru/date-picker-form.css",
+          "type": "registry:file",
+          "target": "@ui/moru/date-picker-form.css"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Single-date field with a calendar popup, date bounds and native form integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "syrus-riius/moru-ui/calendar#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-range-picker",
+      "type": "registry:ui",
+      "title": "Date Range Picker",
+      "description": "Start/end date field with range selection, calendar display options and native form integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "syrus-riius/moru-ui/calendar#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/date-range-picker-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-range-picker-utils.ts"
+        },
+        {
+          "path": "registry/moru/date-range-picker.css",
+          "type": "registry:file",
+          "target": "@ui/moru/date-range-picker.css"
+        },
+        {
+          "path": "registry/moru/date-range-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-range-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "syrus-riius/moru-ui/core#v0.3.4"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/time-controls.css",
+          "type": "registry:file",
+          "target": "@ui/moru/time-controls.css"
+        },
+        {
+          "path": "registry/moru/time-field-context.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-field-context.ts"
+        },
+        {
+          "path": "registry/moru/time-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-picker.tsx"
+        },
+        {
+          "path": "registry/moru/time-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-utils.ts"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "time-range-picker",
+      "type": "registry:ui",
+      "title": "Time Range Picker",
+      "description": "Paired start/end time fields with duration feedback and optional overnight ranges.",
+      "registryDependencies": [
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/time-picker#v0.3.4"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/time-range-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-range-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -699,13 +917,13 @@
       "title": "Login Block",
       "description": "Local login form demo. Connect your own authentication service.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/button#v0.3.3",
-        "syrus-riius/moru-ui/card#v0.3.3",
-        "syrus-riius/moru-ui/checkbox#v0.3.3",
-        "syrus-riius/moru-ui/core#v0.3.3",
-        "syrus-riius/moru-ui/field#v0.3.3",
-        "syrus-riius/moru-ui/input#v0.3.3",
-        "syrus-riius/moru-ui/password-input#v0.3.3"
+        "syrus-riius/moru-ui/button#v0.3.4",
+        "syrus-riius/moru-ui/card#v0.3.4",
+        "syrus-riius/moru-ui/checkbox#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/field#v0.3.4",
+        "syrus-riius/moru-ui/input#v0.3.4",
+        "syrus-riius/moru-ui/password-input#v0.3.4"
       ],
       "files": [
         {
@@ -719,8 +937,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -735,11 +953,11 @@
       "title": "OTP Block",
       "description": "Local OTP verification demo. The sample code is 123456.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/button#v0.3.3",
-        "syrus-riius/moru-ui/card#v0.3.3",
-        "syrus-riius/moru-ui/core#v0.3.3",
-        "syrus-riius/moru-ui/field#v0.3.3",
-        "syrus-riius/moru-ui/input-otp#v0.3.3"
+        "syrus-riius/moru-ui/button#v0.3.4",
+        "syrus-riius/moru-ui/card#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/field#v0.3.4",
+        "syrus-riius/moru-ui/input-otp#v0.3.4"
       ],
       "files": [
         {
@@ -753,8 +971,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -769,14 +987,14 @@
       "title": "Search Filters Block",
       "description": "Composable query, status and assignee filters with local demo data and a controlled application API.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/badge#v0.3.3",
-        "syrus-riius/moru-ui/button#v0.3.3",
-        "syrus-riius/moru-ui/card#v0.3.3",
-        "syrus-riius/moru-ui/checkbox#v0.3.3",
-        "syrus-riius/moru-ui/core#v0.3.3",
-        "syrus-riius/moru-ui/field#v0.3.3",
-        "syrus-riius/moru-ui/input#v0.3.3",
-        "syrus-riius/moru-ui/select#v0.3.3"
+        "syrus-riius/moru-ui/badge#v0.3.4",
+        "syrus-riius/moru-ui/button#v0.3.4",
+        "syrus-riius/moru-ui/card#v0.3.4",
+        "syrus-riius/moru-ui/checkbox#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/field#v0.3.4",
+        "syrus-riius/moru-ui/input#v0.3.4",
+        "syrus-riius/moru-ui/select#v0.3.4"
       ],
       "files": [
         {
@@ -790,8 +1008,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -806,13 +1024,13 @@
       "title": "Settings Block",
       "description": "Workspace settings form with local demo feedback and controlled application save handlers.",
       "registryDependencies": [
-        "syrus-riius/moru-ui/button#v0.3.3",
-        "syrus-riius/moru-ui/card#v0.3.3",
-        "syrus-riius/moru-ui/core#v0.3.3",
-        "syrus-riius/moru-ui/field#v0.3.3",
-        "syrus-riius/moru-ui/input#v0.3.3",
-        "syrus-riius/moru-ui/select#v0.3.3",
-        "syrus-riius/moru-ui/switch#v0.3.3"
+        "syrus-riius/moru-ui/button#v0.3.4",
+        "syrus-riius/moru-ui/card#v0.3.4",
+        "syrus-riius/moru-ui/core#v0.3.4",
+        "syrus-riius/moru-ui/field#v0.3.4",
+        "syrus-riius/moru-ui/input#v0.3.4",
+        "syrus-riius/moru-ui/select#v0.3.4",
+        "syrus-riius/moru-ui/switch#v0.3.4"
       ],
       "files": [
         {
@@ -826,8 +1044,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.3",
-        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",

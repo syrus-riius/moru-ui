@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Accessible checkbox with label, description and loading state.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/checkbox.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/checkbox.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type ComponentPropsWithoutRef, type ReactNode } from 'react'\nimport { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport type { UIState } from './state'\n\nexport type CheckboxProps = Omit<ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,\n  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'> & {\n  label?: ReactNode\n  description?: string\n  checked?: boolean\n  defaultChecked?: boolean\n  onCheckedChange?: (checked: boolean) => void\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}\n\nexport function Checkbox({\n  label, description, checked, defaultChecked, onCheckedChange, className,\n  disabled, id, size = 'md', loading = false, previewState,\n  'aria-label': ariaLabel, 'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy, 'aria-invalid': invalid, ...props\n}: CheckboxProps) {\n  const generatedId = useId()\n  const descriptionId = `${generatedId}-description`\n  const labelId = `${generatedId}-label`\n  const field = useFieldContext()\n  const busy = loading || previewState === 'loading'\n  const unavailable = disabled || busy || previewState === 'disabled'\n  return (\n    <label className={cn('ui-checkbox-label inline-flex items-start', className)} data-size={size} data-disabled={unavailable || undefined} data-loading={busy || undefined}>\n      <BaseCheckbox.Root\n        {...props}\n        id={id ?? field?.controlId}\n        className=\"ui-checkbox inline-flex shrink-0 items-center justify-center\"\n        checked={checked}\n        defaultChecked={defaultChecked}\n        onCheckedChange={(value) => { if (!unavailable) onCheckedChange?.(value) }}\n        disabled={unavailable}\n        aria-label={ariaLabel}\n        aria-labelledby={labelledBy ?? (!ariaLabel && label ? labelId : undefined)}\n        aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}\n        aria-busy={busy || undefined}\n        data-ui-state={previewState}\n        data-loading={busy || undefined}\n        aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy, description ? descriptionId : undefined)}\n      >\n        {busy ? <span className=\"ui-checkbox-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" /> : <BaseCheckbox.Indicator className=\"ui-checkbox-indicator\">\n          <svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\">\n            <path d=\"m3 8 3.2 3.2L13 4.4\" stroke=\"currentColor\" strokeWidth=\"1.8\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n          </svg>\n        </BaseCheckbox.Indicator>}\n      </BaseCheckbox.Root>\n      {(label || description) && (\n        <span className=\"ui-checkbox-copy flex min-w-0 flex-col\">\n          {label && <span id={labelId} className=\"ui-checkbox-text\">{label}</span>}\n          {description && <span id={descriptionId} className=\"ui-checkbox-description\">{description}</span>}\n        </span>\n      )}\n    </label>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.4",
+    "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

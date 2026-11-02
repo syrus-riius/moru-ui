@@ -1,9 +1,9 @@
 # Moru 선택 설치
 
-Moru v0.3.3은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
+Moru v0.3.4는 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
 선택한 파일을 직접 수정할 수 있으며 Moru npm 라이브러리에 종속되지 않습니다.
-공통 기반 1개·UI 컴포넌트 17개·재사용 블록 4개로 총 22개 항목을 제공합니다.
-이번 버전에는 Tabs·Menu·Popover·Drawer가 추가됩니다.
+공통 기반 1개·UI 컴포넌트 22개·재사용 블록 4개로 총 27개 항목을 제공합니다.
+이번 버전에는 Calendar·DatePicker·DateRangePicker·TimePicker·TimeRangePicker가 추가됩니다.
 
 ## 준비
 
@@ -16,18 +16,18 @@ CLI 버전은 이전 릴리스에서 사용한 `4.23.0`으로 고정합니다.
 ## 필요한 항목 설치
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json
 ```
 
 항목 이름만 바꿔 Input·Field와 블록을 설치할 수 있습니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/search-filters.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/settings.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/settings.json
 ```
 
 공통 기반만 필요하면 `core.json`을 설치합니다. 다른 항목은 core를 의존성으로 가져옵니다.
@@ -133,10 +133,10 @@ export function AuthenticationExamples() {
 ## 탭·메뉴·팝오버·드로어
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/drawer.json
 ```
 
 앞에서 연결한 `MoruProvider` 안에서 사용하세요. 아래 트리거 예시는 별도 설치한 Button을 사용합니다.
@@ -182,16 +182,76 @@ Popover는 `open`·`defaultOpen`과 위치를, Drawer는 하단 모달의 열림
 Popover·Drawer는 `initialFocus`·`finalFocus`, Menu는 `finalFocus`를 받습니다.
 화면 밖 portal로 이동한 팝업도 같은 Moru 테마를 따릅니다.
 
+## 캘린더·날짜·시간 선택
+
+```sh
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-range-picker.json
+```
+
+필요한 캘린더·팝업·스타일·도우미도 함께 설치합니다.
+공통 스타일을 한 번 import하고 기존 `MoruProvider` 안에서 사용하세요.
+
+```tsx
+import { useState } from 'react'
+import { Calendar, type CalendarRange } from '@/components/ui/moru/calendar'
+import { DatePicker } from '@/components/ui/moru/date-picker'
+import { DateRangePicker } from '@/components/ui/moru/date-range-picker'
+import { TimePicker } from '@/components/ui/moru/time-picker'
+import { TimeRangePicker, type TimeRangeValue } from '@/components/ui/moru/time-range-picker'
+
+export function PlanningControls() {
+  const [day, setDay] = useState<Date | null>(null)
+  const [dates, setDates] = useState<CalendarRange>({ start: null, end: null })
+  const [time, setTime] = useState<string | null>(null)
+  const [times, setTimes] = useState<TimeRangeValue>({ start: '09:00', end: '10:00' })
+  return <div style={{ display: 'grid', gap: 24 }}>
+    <Calendar aria-label="일정 달력" value={day} onValueChange={setDay}
+      variant="minimal" dayShape="circle" weekStartsOn={1} />
+    <DatePicker label="마감일" name="dueDate" value={day}
+      onValueChange={setDay} calendarOptions={{ variant: 'schedule', dayShape: 'rounded' }} />
+    <DateRangePicker label="프로젝트 기간" name="period" value={dates}
+      onValueChange={setDates} required />
+    <TimePicker label="알림 시간" name="reminder" value={time}
+      onValueChange={setTime} min="08:00" max="20:00" step={15} />
+    <TimeRangePicker label="진행 시간" name="session" value={times}
+      onValueChange={setTimes} step={15} required />
+  </div>
+}
+```
+
+Calendar는 단일 날짜 선택과 `mode="range"` 범위 선택을 지원합니다.
+상단 년·월을 누르면 다른 년·월로 빠르게 이동합니다. `variant`는
+`default`·`minimal`·`schedule`·`activity`이며, `dayShape`, `size`, `weekStartsOn`,
+`showOutsideDays`, `fixedWeeks`, 날짜 키별 `dayData`로 표시를 바꿀 수 있습니다.
+DatePicker·DateRangePicker에는 이 표시 옵션을 `calendarOptions`로 전달합니다.
+값·날짜 제한·필드 검증은 각 picker가 관리합니다.
+
+날짜는 로컬 달력의 `Date`를 사용합니다. 고정 날짜는 `new Date(년, 월인덱스, 일)`로 만드세요.
+Calendar 자체는 폼 전송 필드를 만들지 않습니다. DatePicker의 `name` 값은 `YYYY-MM-DD`로,
+DateRangePicker는 `name.start`·`name.end` 두 항목으로 전송됩니다.
+날짜 범위 값은 `{ start: Date | null, end: Date | null }`입니다.
+TimePicker는 `HH:mm | null`, TimeRangePicker는
+`{ start: string | null, end: string | null }`을 사용하고 범위 이름도 `name.start`·`name.end`로 나뉩니다.
+`step={15}`의 단위는 분이며 `min`이 있으면 그 값을 간격의 기준으로 삼습니다.
+시간은 시간대 변환 없는 시·분 값입니다. 시간 범위는 기본적으로 같은 날 종료가 시작보다 늦어야 하며,
+자정을 넘는 일정에만 `allowOvernight`를 켭니다. 시작·종료가 같은 범위는 허용하지 않습니다.
+picker는 `disabled`, `loading`, `readOnly`, `required`도 받습니다.
+비제어 picker는 폼 초기화 시 `defaultValue`로 돌아가며, 제어형은 폼의 `onReset`에서 값을 갱신합니다.
+
 ## 버전과 업데이트
 
-HTTP 항목과 의존성은 `/r/v0.3.3/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
+HTTP 항목과 의존성은 `/r/v0.3.4/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
 다음 릴리스에는 새 버전 경로를 발행합니다. 사용자의 소스를 자동으로 갱신하지는 않습니다.
 새 버전을 설치하기 전에 현재 파일을 커밋하고 CLI의 diff·덮어쓰기 안내를 확인하세요.
-이미 발행한 `/r/v0.3.1/`·`/r/v0.3.2/` 폴더와 설치 URL은 그대로 유지합니다.
-이번 네 항목의 선택 설치는 v0.3.3부터 제공하며 이전 버전에 추가하지 않습니다.
+이미 발행한 `/r/v0.3.1/`·`/r/v0.3.2/`·`/r/v0.3.3/` 폴더와 설치 URL은 그대로 유지합니다.
+Tabs·Menu·Popover·Drawer는 v0.3.3부터, 날짜·시간 다섯 항목은 v0.3.4부터 제공하며 이전 버전에 추가하지 않습니다.
 
 GitHub의 `registry.json`도 같은 항목을 제공합니다. GitHub 주소 형식은
-`syrus-riius/moru-ui/button#v0.3.3`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
+`syrus-riius/moru-ui/button#v0.3.4`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
 HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하지 않았습니다.
 
 ## 지원 범위
@@ -199,7 +259,7 @@ HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하
 이 릴리스는 웹 React·Vite·TypeScript·Tailwind CSS 4를 대상으로 합니다.
 클라이언트 컴포넌트 경계는 생성 파일에 표시하지만 Next.js SSR·hydration은 별도 검증 범위입니다.
 React Native·Expo는 별도 구현이므로 이 웹 레지스트리로 설치하지 않습니다.
-v0.3.3은 산출물 생성과 프로덕션 빌드만 수행하며, 추가 항목의 자동 테스트·설치 스모크·브라우저 점검은 생략합니다.
+v0.3.4는 산출물 생성과 프로덕션 빌드만 수행하며, 추가 항목의 자동 테스트·설치 스모크·브라우저 점검·CI 실행은 생략합니다.
 
 원본은 `src/components/ui`, `src/components/blocks`, `src/theme`입니다.
 `npm run registry:build`가 설치용 파일을 생성하고 `npm run registry:check`가 오래된 산출물을 검사합니다.

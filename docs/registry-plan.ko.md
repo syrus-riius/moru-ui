@@ -1,6 +1,6 @@
 # Moru 레지스트리 구현과 확장 계획
 
-v0.3.3에서 Tabs·Menu·Popover·Drawer를 추가해 선택 설치 항목을 총 22개로 넓혔습니다.
+v0.3.4에서 Calendar·DatePicker·DateRangePicker·TimePicker·TimeRangePicker를 추가해 선택 설치 항목을 총 27개로 넓혔습니다.
 기존 공통 기반·Button·Input·Field·로그인·OTP·검색 필터·설정 폼도 같은 경로로 제공합니다.
 실제 설치와 테마 연결은 [사용 가이드](registry.ko.md)를 참고하세요.
 공개 소스는 [syrus-riius/moru-ui](https://github.com/syrus-riius/moru-ui)에 있습니다.
@@ -19,7 +19,7 @@ flowchart LR
 
 `scripts/build-registry.mjs`가 실제 import를 AST로 읽고 전용 CSS까지 재귀 수집합니다.
 갤러리·스타터·레지스트리를 위해 컴포넌트를 따로 손으로 수정하지 않습니다.
-설치용 소스는 `registry/moru/`, HTTP 항목은 `public/r/v0.3.3/`에 생성합니다.
+설치용 소스는 `registry/moru/`, HTTP 항목은 `public/r/v0.3.4/`에 생성합니다.
 `registry:check`는 소스 체크섬과 생성된 파일 내용이 일치하는지 검사합니다.
 
 ## 설치 단위
@@ -35,11 +35,16 @@ flowchart LR
 | menu | 사용자 트리거와 실행·비활성·위험 동작 항목을 받는 Menu |
 | popover | 트리거·내용·위치·포커스 이동을 설정하는 Popover와 전용 CSS |
 | drawer | 하단 모달·열림 상태·푸터·포커스 이동을 설정하는 Drawer와 제스처 도우미·전용 CSS |
+| calendar | 단일/범위 선택·년월 이동·표시 변형과 로컬 날짜 도우미·전용 CSS |
+| date-picker, date-range-picker | Calendar를 사용하는 날짜/기간 팝업, 폼 필드와 날짜 범위 도우미 |
+| time-picker, time-range-picker | 시·분 선택과 시간 범위, 입력·팝업·폼 연결·시간 계산 도우미 |
 | 보조 항목 | 블록에 필요한 Card·Checkbox·PasswordInput·InputOTP·StatusMessage도 개별 항목으로 제공 |
 
 차트·표·캐러셀은 이 설치 범위에 포함하지 않습니다. 폰트도 자동 다운로드하지 않습니다.
 공통 CSS는 첫 버전에서 함께 설치하며, 선택한 컴포넌트 소스와 전용 CSS는 분리합니다.
-22개 항목은 core 1개·UI 컴포넌트 17개·재사용 블록 4개로 구성됩니다.
+27개 항목은 core 1개·UI 컴포넌트 22개·재사용 블록 4개로 구성됩니다.
+선택 값은 날짜의 `Date`, `CalendarRange`, 시간의 `HH:mm | null`, `TimeRangeValue`로 나뉩니다.
+`calendar-options`·날짜/시간 도우미·필드 context 등은 공개 설치 항목을 따로 늘리지 않고 실제 import 의존성으로 포함합니다.
 
 ## 기존 앱과 함께 사용하기
 
@@ -52,28 +57,28 @@ flowchart LR
 
 ## 버전과 의존성
 
-HTTP 의존성은 `https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json`처럼
-버전 경로 전체를 사용합니다. GitHub 의존성도 `syrus-riius/moru-ui/core#v0.3.3`처럼 고정합니다.
+HTTP 의존성은 `https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json`처럼
+버전 경로 전체를 사용합니다. GitHub 의존성도 `syrus-riius/moru-ui/core#v0.3.4`처럼 고정합니다.
 단순히 `"button"`을 적으면 shadcn 기본 Button을 가리키므로 Moru 의존성에는 사용하지 않습니다.
 새 릴리스는 새 경로와 태그를 발행하며 이전 HTTP 버전 폴더는 유지합니다.
-이미 발행한 `public/r/v0.3.1/`과 `public/r/v0.3.2/`는 변경하지 않습니다.
+이미 발행한 `public/r/v0.3.1/`·`public/r/v0.3.2/`·`public/r/v0.3.3/`는 변경하지 않습니다.
 이전 버전 항목의 의존성도 해당 버전으로 고정된 상태를 유지합니다.
 
 ## 검증 경로
 
-v0.3.3 추가 범위에는 테스트·설치 스모크·브라우저 점검을 실행하거나 추가하지 않았습니다.
-이번 릴리스 작업은 산출물 생성과 프로덕션 빌드로 제한합니다.
+v0.3.4 추가 범위에는 테스트·설치 스모크·브라우저 점검을 실행하거나 추가하지 않았습니다.
+이번 릴리스 작업은 산출물 생성과 프로덕션 빌드로 제한하며 CI 실행도 생략합니다.
 아래는 기존 검증 도구의 동작 설명이며 이번 릴리스의 실행 결과를 뜻하지 않습니다.
 
 `npm run registry:smoke`는 실제 shadcn CLI로 독립적인 새 React 프로젝트를 생성합니다.
 기본 모드에서는 공개 항목을 임시 localhost에서 제공하며 Moru 의존성의 주소만 local로 변환합니다.
-`--base-url https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3` 모드는 배포된 JSON을 그대로 사용합니다.
+`--base-url https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4` 모드는 배포된 JSON을 그대로 사용합니다.
 기존 버튼 보존, 수정한 공통 파일 보존, 별칭·한글·공백 경로, 필요한 의존성만 설치되는지와
 TypeScript·프로덕션 빌드를 확인합니다. 화면·키보드·폼 동작은 설치된 소비자 앱에서 별도로 점검합니다.
 
 ## 다음 범위
 
-검색 필터·설정 블록과 Select·Switch·Badge·Dialog·Textarea는 v0.3.2에서 제공하며, 프로젝트·할 일 앱 템플릿에 연결했습니다. v0.3.3에는 Tabs·Menu·Popover·Drawer가 추가됩니다. 다음에는 Calendar·DatePicker와 나머지 탐색 컴포넌트를 같은 설치 경로로 넓힙니다.
+검색 필터·설정 블록과 Select·Switch·Badge·Dialog·Textarea는 v0.3.2에서 제공하며, 프로젝트·할 일 앱 템플릿에 연결했습니다. v0.3.3에는 Tabs·Menu·Popover·Drawer를, v0.3.4에는 Calendar와 날짜·시간의 단일/범위 선택 항목을 추가했습니다. 다음에는 나머지 탐색 컴포넌트를 같은 설치 경로로 넓힙니다.
 웹폰트 선택 설치와 더 작은 CSS 분리도 후속 범위입니다.
 현재 검증 기준은 Vite·React·TypeScript·Tailwind CSS 4입니다.
 Next.js SSR·hydration, React Native·Expo 설치는 이 릴리스에 포함하지 않습니다.

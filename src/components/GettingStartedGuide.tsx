@@ -71,7 +71,7 @@ export function GettingStartedGuide({ onExport, onImport, onExamples, onProjectT
         <p className="getting-started-footnote">Moru 소스는 MIT 라이선스로 사용·수정·재배포할 수 있습니다. LICENSE·NOTICE 고지를 유지하세요. 전체 스타터 또는 아래의 선택 설치를 사용할 수 있습니다. Moru 자체의 npm 패키지는 게시하지 않았습니다.</p>
         <div className="getting-started-registry" aria-labelledby="getting-started-registry-title">
           <h3 id="getting-started-registry-title">필요한 컴포넌트만 설치하기</h3>
-          <p>React · TypeScript · Tailwind CSS 4 프로젝트에서 shadcn 초기 설정을 마친 뒤 실행하세요. 탭·메뉴·팝오버·드로어도 개별 설치할 수 있고, 공통 기반과 필요한 스타일은 함께 가져옵니다.</p>
+          <p>React · TypeScript · Tailwind CSS 4 프로젝트에서 shadcn 초기 설정을 마친 뒤 실행하세요. 캘린더와 날짜·시간 선택, 날짜 범위·시간 범위도 개별 설치할 수 있습니다. 공통 기반과 필요한 컴포넌트·스타일은 함께 가져옵니다.</p>
           <div className="getting-started-registry-items" role="group" aria-label="설치할 Moru 항목">
             {registryInstallItems.map((item) => <button key={item.name} type="button" className="getting-started-button getting-started-button-quiet" aria-pressed={registryItem === item.name} onClick={() => setRegistryItem(item.name)}>{item.label}</button>)}
           </div>

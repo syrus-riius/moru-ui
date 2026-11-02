@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.3.3",
-  "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+  "version": "0.3.4",
+  "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
   "sources": [
     {
       "path": "LICENSE",
@@ -13,11 +13,11 @@
     },
     {
       "path": "package.json",
-      "sha256": "48d3255a466d961ce71ddd9871c3afb3e673a487a272b894e58e185b706162a1"
+      "sha256": "4161f366f58ed26f2a48b1d017a53def57ea819de48149d3a072ee20b3f32d21"
     },
     {
       "path": "scripts/build-registry.mjs",
-      "sha256": "c5abf6a0d3ffd867986c6e6a13e61b3bd43d69dbd8efc72e8926ea979e1ca730"
+      "sha256": "ccf953468bf23f49b4c51f6fd9cfe4ba7ed1c4b77a1a90f3f179843689446805"
     },
     {
       "path": "src/components/blocks/LoginBlock.tsx",
@@ -44,6 +44,22 @@
       "sha256": "5f710a810ec4cb8633bc244789dd50d3d3cdde07d6fd4194b6a0e0dc4119f4c6"
     },
     {
+      "path": "src/components/ui/calendar-options.ts",
+      "sha256": "df315236146f551d03ef153fc3730492cb56cc828629040413fff03fc870774d"
+    },
+    {
+      "path": "src/components/ui/calendar-utils.ts",
+      "sha256": "4158ab33508b86363c8ddd73c84909434a27334f5ea73c61555b9213cc6f00eb"
+    },
+    {
+      "path": "src/components/ui/calendar.css",
+      "sha256": "2fb8e96609d3df8340e33b32e66e5e941ac40e80555cc2d23175a118bbf50a92"
+    },
+    {
+      "path": "src/components/ui/calendar.tsx",
+      "sha256": "e81b2d8db44a429b917cbf4051d954581fa482e12f53992e30aefa4aa66b6252"
+    },
+    {
       "path": "src/components/ui/card.tsx",
       "sha256": "579010d8da331702572002f38de5d5c7ebff7b45691b6731a1e8117b045b6836"
     },
@@ -54,6 +70,30 @@
     {
       "path": "src/components/ui/controls-completion.css",
       "sha256": "aefd0e27a1c822a72aa7d21f200c7eafbab77f8117b95386f0746d9403b48b03"
+    },
+    {
+      "path": "src/components/ui/date-picker-form-utils.ts",
+      "sha256": "cf1a7c23271fd828fb57097679a776ee35b4daf5f3da53773e8bef5281f80fad"
+    },
+    {
+      "path": "src/components/ui/date-picker-form.css",
+      "sha256": "c7bf89b76a336209ced0413eeeead335bd91e8c9ae5e3cfa9b5717e275a6b72f"
+    },
+    {
+      "path": "src/components/ui/date-picker.tsx",
+      "sha256": "ef0631860ca196328684a2bc6cdf0e272a5c09be8e1b6603e16349cde650fed6"
+    },
+    {
+      "path": "src/components/ui/date-range-picker-utils.ts",
+      "sha256": "0eddbfc748c341e447dabed3e5b32f54feae595c4c5b5003de812746cdb1d8ff"
+    },
+    {
+      "path": "src/components/ui/date-range-picker.css",
+      "sha256": "fdc38e3e72772740f6afbc8a80c87582cc67b0dc9b6d9f5e0c83f286341a7952"
+    },
+    {
+      "path": "src/components/ui/date-range-picker.tsx",
+      "sha256": "67ca5abd6b8b3c49ff0f284e93561245c2161dcd30182508c66fe7f5e54621f7"
     },
     {
       "path": "src/components/ui/dialog.tsx",
@@ -156,6 +196,26 @@
       "sha256": "23cf043470ff104226302aee8b227046db6d591643b1321517a7a688a9516508"
     },
     {
+      "path": "src/components/ui/time-controls.css",
+      "sha256": "cf1808c6d24da187208e4dcf0d63cc21cbccbdfe93bd89c594c4fb5bbb45c9d8"
+    },
+    {
+      "path": "src/components/ui/time-field-context.ts",
+      "sha256": "62da0f015b617247bb8c5ae90c4c9113bb66a40097366f0ae47141850cb2a251"
+    },
+    {
+      "path": "src/components/ui/time-picker.tsx",
+      "sha256": "04cb4e64317b3e868c428513b534bb3a6d8726510a38058ea76affbbe58c42a4"
+    },
+    {
+      "path": "src/components/ui/time-range-picker.tsx",
+      "sha256": "64d24bd7cfa3d06fd940a38d369989386b2cf44d43c8653b9ac7bda4dcbc9657"
+    },
+    {
+      "path": "src/components/ui/time-utils.ts",
+      "sha256": "7b00e2d47aa65efe5ae55a788ea19974d6b77a130c16abe41765a6f2a13385cb"
+    },
+    {
       "path": "src/lib/cn.ts",
       "sha256": "521ac1b0c398708ce95c48dc004fb902416a342e084cfea4a6d621dbffeb5e5b"
     },
@@ -175,103 +235,123 @@
   "files": [
     {
       "path": "public/r/registry.json",
-      "sha256": "487a3cdd27f4b590974806e6746b26c9fea73b67ca99e22de1dc975ee3057a6f"
+      "sha256": "708ba95e29614288480d55d73504c4f96a2b03c55e0d62a72d243e2c331b8982"
     },
     {
-      "path": "public/r/v0.3.3/badge.json",
-      "sha256": "614585c299aefd46c32d06aa08f78820838244e305a98dc258bb2e913ec031fb"
+      "path": "public/r/v0.3.4/badge.json",
+      "sha256": "818603100ed641814be41c0ef82d341faee970e0cc92730aea6da48e4e6040ab"
     },
     {
-      "path": "public/r/v0.3.3/button.json",
-      "sha256": "9d75b96d88e937df64640ef279f0378f86f4856fdbdf894f703c42e84568ddd2"
+      "path": "public/r/v0.3.4/button.json",
+      "sha256": "8b0aca2a690477e02225a017c5031be26fa75448382063fb79aeeed396464bff"
     },
     {
-      "path": "public/r/v0.3.3/card.json",
-      "sha256": "17a83a1516c5b33c5582bcfc6501faa8f44408571e532513f2128453077662d9"
+      "path": "public/r/v0.3.4/calendar.json",
+      "sha256": "7e9330a5ecd560741cb32895ba8ecf8374de986bb8d8f6987b5e1501fce18ee3"
     },
     {
-      "path": "public/r/v0.3.3/checkbox.json",
-      "sha256": "4b9cb90d276e8e4951588bf29ddf8adcd02dd2597581ff694ecdef1e30487b5a"
+      "path": "public/r/v0.3.4/card.json",
+      "sha256": "6884e8a6b6c865f965a6dff98ef476ff91b1f3029a9f28cb0b5a071696ed998b"
     },
     {
-      "path": "public/r/v0.3.3/core.json",
-      "sha256": "c24680fd44e439d4813cac76de3dcfe9052c3af6b738f60ce3401a54b2c48123"
+      "path": "public/r/v0.3.4/checkbox.json",
+      "sha256": "f37f63ec9df43cb29a690d3eb8a40577400aea80bc428e2d3d2cc6eec9d26906"
     },
     {
-      "path": "public/r/v0.3.3/dialog.json",
-      "sha256": "0eb29fd8ec5b922e46b2ef3e37262dda3ae647a8d3607c8779123412875e7410"
+      "path": "public/r/v0.3.4/core.json",
+      "sha256": "91b148744875fa4eb6b7ef93c98c3f3a550f0ba188703585acf4d4e4d30b8f21"
     },
     {
-      "path": "public/r/v0.3.3/drawer.json",
-      "sha256": "af095a0471e8337a164dcf66d7c272509c42ba9e721ae0af81757486617a2a8f"
+      "path": "public/r/v0.3.4/date-picker.json",
+      "sha256": "0ffa6081c630969c6092adf9efc63ebcb2eef8f5fd3fb80531bb8a9ed31083f2"
     },
     {
-      "path": "public/r/v0.3.3/field.json",
-      "sha256": "a4942ddc74a3a5fcf07730743aee86d8f6798bd804e59d01a4b1063e9a5c9db7"
+      "path": "public/r/v0.3.4/date-range-picker.json",
+      "sha256": "a422ed560dede7274269c923339a413e98be02adb747664f6f4617898ee6a5ea"
     },
     {
-      "path": "public/r/v0.3.3/input-otp.json",
-      "sha256": "3f2a909a2fccc13eefd65d072e47e4d6f9199a526dd85f143a3892ce1acad31a"
+      "path": "public/r/v0.3.4/dialog.json",
+      "sha256": "d4578b6180e47323f372014767b044f31da20b412ca02d611748aba944e477b1"
     },
     {
-      "path": "public/r/v0.3.3/input.json",
-      "sha256": "347a50c493028c029c687b7772e344bb3835c60442fcf821d1fa1a5ee2a0dddf"
+      "path": "public/r/v0.3.4/drawer.json",
+      "sha256": "c4df91193be3cc32cf9c764e35587c8b2d08fcb00efc4c9e70b5f01207bfec9e"
     },
     {
-      "path": "public/r/v0.3.3/login.json",
-      "sha256": "4a044b47b74e5f42eb3d767a7e80c675ad2692de69e5fd9ad0ab81510646746e"
+      "path": "public/r/v0.3.4/field.json",
+      "sha256": "686bc7b11e046dd2aadefd8b716bebe1f658a38b01589d7fafdb1c79640e50ac"
     },
     {
-      "path": "public/r/v0.3.3/menu.json",
-      "sha256": "2068889bda2c50f3130975ef750d1f497469ad47e12f7d555143bde28bf8d3f8"
+      "path": "public/r/v0.3.4/input-otp.json",
+      "sha256": "cc6c2f82d5d03121af1f37d71f5ff0856ded502ceca3ac433bd3773b83757c8b"
     },
     {
-      "path": "public/r/v0.3.3/otp.json",
-      "sha256": "a08f979ccdd0443d43f470621c921ed3de0eccc16757521e534bf3be85cdf15b"
+      "path": "public/r/v0.3.4/input.json",
+      "sha256": "64ba3cb1081318c2b9c2e889121a96740de59133b95546768ab997f86af3a4f2"
     },
     {
-      "path": "public/r/v0.3.3/password-input.json",
-      "sha256": "d20780f89b8a2722932dd4ab9de8f965cbcefe696cd4008d55a6d44f15711d26"
+      "path": "public/r/v0.3.4/login.json",
+      "sha256": "5111f24f8dd429e99153d0dc292d7b3aa409a955947619b25f778f0d18767169"
     },
     {
-      "path": "public/r/v0.3.3/popover.json",
-      "sha256": "55bab75f4a46393980b2773e79f885cd737c5a907058b5abebe74035f8df4286"
+      "path": "public/r/v0.3.4/menu.json",
+      "sha256": "9ef644b975c693d1743234f0db140687e717a268d481af7f26ead65e099a4d20"
     },
     {
-      "path": "public/r/v0.3.3/registry.json",
-      "sha256": "487a3cdd27f4b590974806e6746b26c9fea73b67ca99e22de1dc975ee3057a6f"
+      "path": "public/r/v0.3.4/otp.json",
+      "sha256": "fb70e14c01ac20bbf6a675accbd8300c9a89fea9078537a1d832ca4a1d725714"
     },
     {
-      "path": "public/r/v0.3.3/search-filters.json",
-      "sha256": "21c7c8a51867aaa1a24f7f31d02d14ea90b5c589179fff5528e6034083e91cad"
+      "path": "public/r/v0.3.4/password-input.json",
+      "sha256": "7e871b140e04cbe5d59cf2f53759cfb993d6ff43d329a5628e7eb97ff3d5d623"
     },
     {
-      "path": "public/r/v0.3.3/select.json",
-      "sha256": "b317444d40f898d2d2b1c6b35ce4a856bec6d5ed1eab152ea526b8f755abee11"
+      "path": "public/r/v0.3.4/popover.json",
+      "sha256": "3fcc943eea2906eb63ad20a7a46efa04d89a21f2bd34dc9edc03695b710790f8"
     },
     {
-      "path": "public/r/v0.3.3/settings.json",
-      "sha256": "b8f38ebdead84f28575aa4996785e0b79f5ad7e7dd319b3b47a68851ee650093"
+      "path": "public/r/v0.3.4/registry.json",
+      "sha256": "708ba95e29614288480d55d73504c4f96a2b03c55e0d62a72d243e2c331b8982"
     },
     {
-      "path": "public/r/v0.3.3/status-message.json",
-      "sha256": "773993eeaf9f0c9baedc0a0436d079148328bf45b457a2922565c16d9dfd6e29"
+      "path": "public/r/v0.3.4/search-filters.json",
+      "sha256": "a618543a6c24924655435ab8b1809e1702ed01d4339ed4d9bcd062d310ab13ae"
     },
     {
-      "path": "public/r/v0.3.3/switch.json",
-      "sha256": "09325df577b57cc7c7279e2f73ca2c3e5a57855c93c9c2d1dfb3e22da1bce7b0"
+      "path": "public/r/v0.3.4/select.json",
+      "sha256": "c2004eb1e0a0b9774a8cf98b6f8890fd82e2d318fb625847ee14b929f2dfc966"
     },
     {
-      "path": "public/r/v0.3.3/tabs.json",
-      "sha256": "deb98d6110193f74b6b8a3999737246ccbc79ff8f4eefefb6ed30eb1a0f5c3fe"
+      "path": "public/r/v0.3.4/settings.json",
+      "sha256": "d63526123df3a46e278c526b10fb339d49e51dfe87ac31dd5a8383ad8741e531"
     },
     {
-      "path": "public/r/v0.3.3/textarea.json",
-      "sha256": "dd802c1ba18ef01bb37d009fba3de701c88c010e32fea56c8fe18995a82f14a4"
+      "path": "public/r/v0.3.4/status-message.json",
+      "sha256": "4aac96f2bd5db78e309799da3b0bbdefc17edeb2a5feb8cfc52f0ec3ac766228"
+    },
+    {
+      "path": "public/r/v0.3.4/switch.json",
+      "sha256": "1fe6f9f4331c8a5a2cae8237d55b61f4e796f489ffde497b3c6babe35f438100"
+    },
+    {
+      "path": "public/r/v0.3.4/tabs.json",
+      "sha256": "f421f0d9d26da27d3ed29a7e0c2403497036a944fe3d57abfaeb647075c62324"
+    },
+    {
+      "path": "public/r/v0.3.4/textarea.json",
+      "sha256": "01112ba27c68e7b5318c02242f5c5e91486070993f0c8ceff02d8fa4d0ee794c"
+    },
+    {
+      "path": "public/r/v0.3.4/time-picker.json",
+      "sha256": "982ef39bdf8d73d4d800dfe7249c9a1e29ef2edbe81b8e1cc41892e3bddec2ef"
+    },
+    {
+      "path": "public/r/v0.3.4/time-range-picker.json",
+      "sha256": "7f962d84825f2d674dad4b7ea2e2531c5dd7e13143462a715b4f3fa020bb04f7"
     },
     {
       "path": "registry.json",
-      "sha256": "4d7fba338f21b480d127dc15df1d6fe82c8326a6b78fb4575fee0c24767c35e3"
+      "sha256": "43d9b619b1f1088bb661dd99e75303858fbbcc49e39d1847002e1082c2b81391"
     },
     {
       "path": "registry/moru/_lib/cn.ts",
@@ -338,6 +418,22 @@
       "sha256": "a693552928ce5dc3a34a817fae6d4a48301e769bf3881e1d4d10c1c15a70ad7a"
     },
     {
+      "path": "registry/moru/calendar-options.ts",
+      "sha256": "01ce71b77a4ea8e41d7205ac074a548201775031a4686a6ae9e2d0b7e4d92210"
+    },
+    {
+      "path": "registry/moru/calendar-utils.ts",
+      "sha256": "9dbf8ae8dcc27d9a954718a5fad1f8e827518f81f08e97992c698dcbed050fdd"
+    },
+    {
+      "path": "registry/moru/calendar.css",
+      "sha256": "9d2f8190dc31ba347c8132f1e324f159bb00e7060b3e24cc87d60cdc5b0f2ecd"
+    },
+    {
+      "path": "registry/moru/calendar.tsx",
+      "sha256": "c7d4aaa2465cd7dc9333e517105fa29ba07f4610ce0c97b2ade061b44a3eb916"
+    },
+    {
       "path": "registry/moru/card.tsx",
       "sha256": "f8d2d831c03e3b28b65d3e54d5e66cc8ca348dd1e8c5570d83e5ebf186e3c227"
     },
@@ -348,6 +444,30 @@
     {
       "path": "registry/moru/controls-completion.css",
       "sha256": "4f33025c2dd5737ba2b254d2bd8de5d7f13d82749ba56ea5a0b34c107d7b35ac"
+    },
+    {
+      "path": "registry/moru/date-picker-form-utils.ts",
+      "sha256": "ba3935497a26105e61b1ae2f9eb83483cb94e7f7b9527f625002c1b83fe69448"
+    },
+    {
+      "path": "registry/moru/date-picker-form.css",
+      "sha256": "9b84971aabc2e9c0ad2bfe1e6180962fdcbe44893f7c14689e8fb69a3a1794ef"
+    },
+    {
+      "path": "registry/moru/date-picker.tsx",
+      "sha256": "574bd690f22abf7b67ff23816b4314daff15c41fe56f8ac8765ac560801a7e82"
+    },
+    {
+      "path": "registry/moru/date-range-picker-utils.ts",
+      "sha256": "9468e75c14f66fafe5645a725245f3dfff0f59420d3a407c2e10db7cf022d899"
+    },
+    {
+      "path": "registry/moru/date-range-picker.css",
+      "sha256": "d37eac56800b84a358a052cb64ebf5484b311f1820ed4a7c4efdf00d814c177e"
+    },
+    {
+      "path": "registry/moru/date-range-picker.tsx",
+      "sha256": "1d440f9f1e7dcf5c3a37ba19f0920b4f588c1b6dd8b85e98dc9b6c28bcaf4da6"
     },
     {
       "path": "registry/moru/dialog.tsx",
@@ -444,6 +564,26 @@
     {
       "path": "registry/moru/theme-scope.tsx",
       "sha256": "0a9eb025497dcb3bf81028e0c7b86f5e22ed2e46f832d4276ab3b7a7933a3553"
+    },
+    {
+      "path": "registry/moru/time-controls.css",
+      "sha256": "a8f9f50c9e44d65bc226bbfd842e189d9c26ddf75f27e6d85563787cd2f587b1"
+    },
+    {
+      "path": "registry/moru/time-field-context.ts",
+      "sha256": "dcef7b4da082f693726b08dcefcba8806d14a68e249cba4fb73279cb56544f93"
+    },
+    {
+      "path": "registry/moru/time-picker.tsx",
+      "sha256": "c4baad7f83ee1df2c71e35ab2c269ac893935ccb55d88c0d16f3c0d3f4fe9d85"
+    },
+    {
+      "path": "registry/moru/time-range-picker.tsx",
+      "sha256": "20f85df990ac81a99080bdc19ba831ff2601da813abe1bb0fd0e770b4de4957b"
+    },
+    {
+      "path": "registry/moru/time-utils.ts",
+      "sha256": "15710680ef8787c965614afd87b36c0bbe42b8920feb9ac60245649e252c006f"
     }
   ]
 }

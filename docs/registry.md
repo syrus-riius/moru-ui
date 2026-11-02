@@ -1,22 +1,23 @@
 # Selective installation
 
-Moru v0.3.3 distributes editable component sources through the shadcn CLI.
-The registry has 22 items: a shared core, 17 UI components and four reusable blocks.
-This release adds Tabs, Menu, Popover and Drawer alongside the Login, OTP,
-Search Filters and Settings blocks. Moru is not published as an npm library.
+Moru v0.3.4 distributes editable component sources through the shadcn CLI.
+The registry has 27 items: a shared core, 22 UI components and four reusable blocks.
+This release adds Calendar, DatePicker, DateRangePicker, TimePicker and
+TimeRangePicker. Tabs, Menu, Popover, Drawer and the four existing blocks remain
+available. Moru is not published as an npm library.
 
 The supported baseline is Node.js 24+, React 19, TypeScript, Vite and Tailwind CSS 4.
 Prepare Tailwind and `components.json` using the
 [shadcn Vite setup guide](https://ui.shadcn.com/docs/installation/vite), then run:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/search-filters.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/settings.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/settings.json
 ```
 
 Use `core.json` to install only the foundation. Other items resolve core and their
@@ -52,10 +53,10 @@ OTP uses `123456`. Replace the installed submit/resend handlers with your servic
 ## Tabs, menus and overlays
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/drawer.json
 ```
 
 Use these inside the existing `MoruProvider`, with the one-time stylesheet import
@@ -104,19 +105,81 @@ an optional trigger, footer and controlled or uncontrolled state. Popover and
 Drawer expose `initialFocus` and `finalFocus`; Menu exposes `finalFocus`.
 Their portals use the same Moru theme as their provider.
 
-Versioned HTTP items and dependencies use `/r/v0.3.3/`. GitHub registry items use
-`syrus-riius/moru-ui/button#v0.3.3` with independently pinned dependency refs.
-Published `/r/v0.3.1/` and `/r/v0.3.2/` remain unchanged; their existing installation
-URLs continue to select those versions. The four new items start at v0.3.3.
+## Calendars, dates and times
+
+```sh
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-range-picker.json
+```
+
+Each item includes its required calendar, popup, styles and helpers. Keep the
+shared stylesheet import and render inside `MoruProvider` as shown above.
+
+```tsx
+import { useState } from 'react'
+import { Calendar, type CalendarRange } from '@/components/ui/moru/calendar'
+import { DatePicker } from '@/components/ui/moru/date-picker'
+import { DateRangePicker } from '@/components/ui/moru/date-range-picker'
+import { TimePicker } from '@/components/ui/moru/time-picker'
+import { TimeRangePicker, type TimeRangeValue } from '@/components/ui/moru/time-range-picker'
+
+export function PlanningControls() {
+  const [day, setDay] = useState<Date | null>(null)
+  const [dates, setDates] = useState<CalendarRange>({ start: null, end: null })
+  const [time, setTime] = useState<string | null>(null)
+  const [times, setTimes] = useState<TimeRangeValue>({ start: '09:00', end: '10:00' })
+  return <div style={{ display: 'grid', gap: 24 }}>
+    <Calendar aria-label="Planning calendar" value={day} onValueChange={setDay}
+      variant="minimal" dayShape="circle" weekStartsOn={1} />
+    <DatePicker label="Due date" name="dueDate" value={day}
+      onValueChange={setDay} calendarOptions={{ variant: 'schedule', dayShape: 'rounded' }} />
+    <DateRangePicker label="Project period" name="period" value={dates}
+      onValueChange={setDates} required />
+    <TimePicker label="Reminder" name="reminder" value={time}
+      onValueChange={setTime} min="08:00" max="20:00" step={15} />
+    <TimeRangePicker label="Session" name="session" value={times}
+      onValueChange={setTimes} step={15} required />
+  </div>
+}
+```
+
+Calendar supports single-date selection or `mode="range"` with a `CalendarRange`.
+Its year/month headings open fast navigation. Display options include `variant`
+(`default`, `minimal`, `schedule`, `activity`), `dayShape`, `size`, `weekStartsOn`,
+`showOutsideDays`, `fixedWeeks` and date-keyed `dayData`. DatePicker and
+DateRangePicker accept these display options through `calendarOptions` while
+retaining their own value and form constraints.
+
+Dates use local calendar `Date` values; create fixed dates with
+`new Date(year, monthIndex, day)`. Calendar itself has no form submission field.
+DatePicker submits `name` as `YYYY-MM-DD`; DateRangePicker submits `name.start`
+and `name.end`. Its value is `{ start: Date | null, end: Date | null }`.
+TimePicker uses `HH:mm | null`, and TimeRangePicker uses
+`{ start: string | null, end: string | null }` with `name.start`/`name.end` entries.
+`step={15}` means 15 minutes, with `min` as the step base when supplied.
+Time values are wall-clock values without timezone conversion. Time ranges
+require an end after the start on the same day unless `allowOvernight` is enabled;
+equal start/end values are not a valid range. Pickers also accept `disabled`,
+`loading`, `readOnly` and `required`. Uncontrolled pickers restore `defaultValue`
+on a form reset; controlled callers update their values in the form's `onReset`.
+
+Versioned HTTP items and dependencies use `/r/v0.3.4/`. GitHub registry items use
+`syrus-riius/moru-ui/button#v0.3.4` with independently pinned dependency refs.
+Published `/r/v0.3.1/`, `/r/v0.3.2/` and `/r/v0.3.3/` remain unchanged; their existing
+installation URLs continue to select those versions. Tabs/Menu/Popover/Drawer
+start at v0.3.3; the five calendar/date/time items start at v0.3.4.
 Commit your local changes before upgrading, review diffs and avoid unconditional
 `--overwrite` when you have customized installed sources.
 
 Original sources remain in `src/`. Generate artifacts with `npm run registry:build`
 and check freshness with `npm run registry:check`. Do not edit generated files.
 The registry targets web React. Next.js SSR/hydration and Native/Expo consumption
-remain outside its supported baseline. The v0.3.3 release process is limited to
+remain outside its supported baseline. The v0.3.4 release process is limited to
 artifact generation and a production build; automated tests, CLI installation
-smoke checks and browser checks are skipped for the additions.
+smoke checks, browser checks and CI runs are skipped for the additions.
 
 See the [한국어 guide](registry.ko.md), [MIT license](../LICENSE) and
 [third-party notices](../NOTICE.md).

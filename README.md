@@ -95,22 +95,28 @@ Prepare a React + TypeScript + Tailwind CSS 4 project with shadcn's
 or block with the tested CLI version:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-range-picker.json
 ```
 
-The v0.3.3 registry contains 22 items, including the new Tabs, Menu, Popover and
-bottom-modal Drawer. Other entry items are `core`, `input`, `field`, `search-filters` and `settings`. Required supporting components
+The v0.3.4 registry contains 27 items, adding Calendar, DatePicker, DateRangePicker,
+TimePicker and TimeRangePicker to the existing components and blocks.
+Other entry items are `core`, `input`, `field`, `search-filters` and `settings`. Required supporting components
 are resolved automatically. Sources install under your UI alias's `moru/` folder.
 Import its `styles.css` once and wrap the area in `MoruProvider`.
-Published `/r/v0.3.1/` and `/r/v0.3.2/` URLs remain unchanged. This release uses
+Published `/r/v0.3.1/`, `/r/v0.3.2/` and `/r/v0.3.3/` URLs remain unchanged. This release uses
 artifact generation and a production build; new tests, installation smoke checks
-and browser checks are skipped for the v0.3.3 additions.
+and browser checks, as well as CI runs, are skipped for the v0.3.4 additions.
 
 See the [installation guide](docs/registry.md), [한국어 안내](docs/registry.ko.md)
 and [registry implementation notes](docs/registry-plan.ko.md). The web registry
@@ -135,6 +141,6 @@ starter's original license is preserved in `apps/moru-expo/LICENSE`.
 
 Moru UI는 **단단한 기본, 당신만의 UI**를 지향합니다. 웹 스타터를 받아
 실행하거나 이 저장소 전체를 실행할 수 있습니다. 현재는 소스를 가져와
-수정하는 방식이며, v0.3.3의 공통 기반·UI·블록 22개 항목을 레지스트리로 선택 설치할 수 있습니다.
-Tabs·Menu·Popover·하단 Drawer의 설치와 사용 예시는 [한국어 선택 설치 안내](docs/registry.ko.md)를 참고하세요.
+수정하는 방식이며, v0.3.4의 공통 기반·UI·블록 27개 항목을 레지스트리로 선택 설치할 수 있습니다.
+캘린더·날짜/날짜 범위·시간/시간 범위와 Tabs·Menu·Popover·하단 Drawer의 설치 및 API 예시는 [한국어 선택 설치 안내](docs/registry.ko.md)를 참고하세요.
 자세한 사용법은 [한국어 랩 가이드](docs/lab-guide.ko.md)를 참고하세요.

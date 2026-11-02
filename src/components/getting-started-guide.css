@@ -44,6 +44,11 @@
 .getting-started-base-link:focus-visible { outline: 2px solid var(--chrome-accent); outline-offset: 3px; }
 .getting-started-step-copy > p { max-inline-size:min(65ch,40ic); font-size:14px; line-height:1.75; letter-spacing:0; }
 .getting-started-actions > a { text-decoration:none; }
+.getting-started-registry { min-width: 0; margin-top: 28px; }
+.getting-started-registry h3 { margin: 0 0 10px; font-size: 15px; font-weight: 600; line-height: 1.6; letter-spacing: -.2px; }
+.getting-started-registry-items { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.getting-started-registry-items [aria-pressed='true'] { background: var(--chrome-action-bg); color: var(--chrome-action-foreground); }
+.getting-started-registry .ui-code-block { min-width: 0; max-width: 100%; }
 @container guide-content (max-width: 480px) {
   .getting-started-summary { gap: 14px; padding: 20px; }
   .getting-started-summary > .moru-mark { width: 32px; height: 32px; }

@@ -1,0 +1,15 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+/* Minimal layout utilities used by the selected original sources; no Tailwind reset. */
+:where([data-moru-registry]) .inline-flex { display: inline-flex; }
+:where([data-moru-registry]) .flex { display: flex; }
+:where([data-moru-registry]) .flex-col { flex-direction: column; }
+:where([data-moru-registry]) .items-center { align-items: center; }
+:where([data-moru-registry]) .items-start { align-items: flex-start; }
+:where([data-moru-registry]) .justify-center { justify-content: center; }
+:where([data-moru-registry]) .gap-2 { gap: 0.5rem; }
+:where([data-moru-registry]) .whitespace-nowrap { white-space: nowrap; }
+:where([data-moru-registry]) .w-full { width: 100%; }
+:where([data-moru-registry]) .min-w-0 { min-width: 0; }
+:where([data-moru-registry]) .shrink-0 { flex-shrink: 0; }
+:where([data-moru-registry]).ui-theme-scope, :where([data-moru-registry]) .ui-theme-scope, :where([data-moru-registry]) *, :where([data-moru-registry]) *::before, :where([data-moru-registry]) *::after { box-sizing: border-box; }
+:where([data-moru-registry]) button, :where([data-moru-registry]) input, :where([data-moru-registry]) textarea, :where([data-moru-registry]) select { font: inherit; }

@@ -113,3 +113,7 @@ Moru 자체 소스는 동봉된 `LICENSE`의 MIT 라이선스로 사용할 수 �
 ## Reusable blocks
 
 Four self-contained Moru blocks are included in `src/components/blocks`: `LoginBlock`, `OTPBlock`, `SearchFiltersBlock`, and `SettingsBlock`. Import a block into your page and render it inside the existing theme. The forms demonstrate local validation and feedback; connect authentication and persistence through your own application services. Login never stores its password, and the OTP demo uses `123456`.
+
+## 기존 앱에 선택 설치
+
+기존 React · TypeScript · Tailwind CSS 4 앱에는 [Moru 레지스트리](https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md)로 공통 기반·Button·Input·Field·로그인·OTP만 가져갈 수 있습니다. 이 ZIP의 전체 UI 소스와 선택 설치 경로는 별개이므로 같은 컴포넌트를 중복으로 넣지 않도록 사용 방식을 정하세요.

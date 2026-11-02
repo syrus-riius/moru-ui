@@ -1,0 +1,49 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-enhanced-input {
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-enhanced-height: var(--ui-control-height-md, 40px);
+  --ui-enhanced-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-enhanced-resolved-height: max(var(--ui-enhanced-height), calc(var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.5) + var(--ui-space, 4px) * 2));
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text, #171717);
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 14px);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, 0em);
+}
+:where([data-moru-registry]) .ui-enhanced-input[data-size='sm'] { --ui-size-icon: var(--ui-icon-size-sm, 14px); --ui-enhanced-height: var(--ui-control-height-sm, 32px); --ui-enhanced-padding: var(--ui-control-padding-x-sm, 10px); }
+:where([data-moru-registry]) .ui-enhanced-input[data-size='lg'] { --ui-size-icon: var(--ui-icon-size-lg, 18px); --ui-enhanced-height: var(--ui-control-height-lg, 48px); --ui-enhanced-padding: var(--ui-control-padding-x-lg, 18px); }
+:where([data-moru-registry]) .ui-number-input-group, :where([data-moru-registry]) .ui-multi-select { display: flex; align-items: center; width: 100%; min-height: var(--ui-enhanced-resolved-height); border: var(--ui-border-width, 1px) solid var(--ui-control-border, var(--ui-border, #8a8a86)); border-radius: var(--ui-radius, 6px); background: var(--ui-input-bg, #f0f0f0); transition: background-color var(--ui-duration, 160ms), border-color var(--ui-duration, 160ms); }
+:where([data-moru-registry]) .ui-number-input-group:hover:not(:has(input:disabled, [aria-invalid='true'])), :where([data-moru-registry]) .ui-multi-select:hover:not(:has(input:disabled, [aria-invalid='true'])) { border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86)); background: var(--ui-control-hover-bg, var(--ui-input-bg)); }
+:where([data-moru-registry]) .ui-number-input-group:focus-within, :where([data-moru-registry]) .ui-multi-select:focus-within { outline: 2px solid var(--ui-focus-ring, #181818); outline-offset: 2px; }
+:where([data-moru-registry]) .ui-number-input-group:has([aria-invalid='true']), :where([data-moru-registry]) .ui-multi-select:has([aria-invalid='true']) { border-color: var(--ui-danger, #b93d37); background: var(--ui-danger-soft, #f9efef); box-shadow: 0 0 0 1px var(--ui-error-ring, var(--ui-danger, #b93d37)); outline-color: var(--ui-error-ring, var(--ui-danger, #b93d37)); }
+:where([data-moru-registry]) .ui-number-input-group:has(input:disabled), :where([data-moru-registry]) .ui-multi-select:has(input:disabled) { background: var(--ui-disabled-bg); color: var(--ui-disabled-text); box-shadow: none; }
+:where([data-moru-registry]) .ui-number-input-group[data-loading], :where([data-moru-registry]) .ui-multi-select[data-loading] { background: var(--ui-loading-bg, #f3f3f1); color: var(--ui-loading-text, #303030); cursor: progress; }
+:where([data-moru-registry]) .ui-enhanced-input-loading { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: var(--ui-enhanced-height); min-height: var(--ui-enhanced-resolved-height); }
+:where([data-moru-registry]) .ui-number-input-group[data-loading] :is(input, button), :where([data-moru-registry]) .ui-multi-select[data-loading] :is(input, button) { cursor: progress; color: inherit; }
+:where([data-moru-registry]) .ui-enhanced-input-field { box-sizing: border-box; width: 100%; min-width: 0; min-height: var(--ui-enhanced-resolved-height); padding: var(--ui-space, 4px) var(--ui-enhanced-padding); border: 0; border-radius: inherit; outline: none; background: transparent; color: inherit; font: inherit; font-weight: var(--ui-type-body-weight, 400); font-variant-numeric: tabular-nums; }
+:where([data-moru-registry]) .ui-enhanced-input-field::placeholder, :where([data-moru-registry]) .ui-multi-select-input::placeholder { color: var(--ui-muted); opacity: 1; }
+:where([data-moru-registry]) .ui-enhanced-input-action { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; box-sizing: border-box; width: max(28px, var(--ui-enhanced-height)); min-height: var(--ui-enhanced-resolved-height); padding: 4px; border: 0; border-radius: inherit; background: transparent; color: var(--ui-muted); cursor: pointer; }
+:where([data-moru-registry]) .ui-enhanced-input-action:hover:not(:disabled):not([aria-disabled='true']) { color: var(--ui-text); background: var(--ui-control-hover-bg); }
+:where([data-moru-registry]) .ui-enhanced-input-action:focus-visible, :where([data-moru-registry]) .ui-multi-select-chip:focus-visible, :where([data-moru-registry]) .ui-multi-select-chip-remove:focus-visible { outline: 2px solid var(--ui-focus-ring); outline-offset: 2px; }
+:where([data-moru-registry]) .ui-enhanced-input-action:is(:disabled, [aria-disabled='true']), :where([data-moru-registry]) .ui-multi-select-chip-remove:is(:disabled, [aria-disabled='true']) { cursor: not-allowed; color: var(--ui-disabled-text); }
+:where([data-moru-registry]) .ui-enhanced-input-action svg { flex-shrink: 0; }
+:where([data-moru-registry]) .ui-password-input { position: relative; width: 100%; }
+:where([data-moru-registry]) .ui-password-input-field { padding-inline-end: calc(var(--ui-enhanced-height) + var(--ui-enhanced-padding)); }
+:where([data-moru-registry]) .ui-password-input-toggle { position: absolute; inset-inline-end: var(--ui-border-width, 1px); inset-block: var(--ui-border-width, 1px); min-height: 0; border-start-start-radius: 0; border-end-start-radius: 0; }
+:where([data-moru-registry]) .ui-password-input:has([aria-busy='true']) .ui-password-input-toggle { visibility: hidden; }
+:where([data-moru-registry]) .ui-multi-select-root { min-width: 0; width: 100%; }
+:where([data-moru-registry]) .ui-multi-select { align-items: flex-start; }
+:where([data-moru-registry]) .ui-multi-select-chips { display: flex; align-items: center; flex-wrap: wrap; flex: 1 1 auto; gap: calc(var(--ui-space, 4px) * 1.5); min-width: 0; min-height: var(--ui-enhanced-resolved-height); padding: var(--ui-space, 4px) var(--ui-enhanced-padding); }
+:where([data-moru-registry]) .ui-multi-select-chip { display: inline-flex; align-items: center; gap: var(--ui-space, 4px); max-width: 100%; min-height: 24px; padding: 2px 6px; border: var(--ui-border-width, 1px) solid var(--ui-border); border-radius: max(3px, calc(var(--ui-radius, 6px) - 2px)); background: var(--ui-surface); color: var(--ui-text); font-size: var(--ui-type-caption-size, 12px); line-height: var(--ui-type-caption-line-height, 1.5); letter-spacing: var(--ui-type-caption-letter-spacing, 0em); }
+:where([data-moru-registry]) .ui-multi-select-chip > span { overflow-wrap: anywhere; }
+:where([data-moru-registry]) .ui-multi-select-chip-remove { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 20px; min-height: 24px; margin: -2px -4px -2px 0; padding: 2px; border: 0; border-radius: 3px; background: transparent; color: var(--ui-muted); cursor: pointer; }
+:where([data-moru-registry]) .ui-multi-select-chip-remove:hover:not(:disabled):not([aria-disabled='true']) { background: var(--ui-control-hover-bg); color: var(--ui-text); }
+:where([data-moru-registry]) .ui-multi-select-input { flex: 1 1 100px; width: 0; min-width: 50px; min-height: calc(var(--ui-enhanced-resolved-height) - var(--ui-space, 4px) * 2); padding: 0; border: 0; outline: none; background: transparent; color: inherit; font: inherit; font-weight: var(--ui-type-body-weight, 400); }
+:where([data-moru-registry]) .ui-enhanced-input-hint { margin: var(--ui-field-gap, 8px) 0 0; color: var(--ui-muted); font-family: var(--ui-font-family, inherit); font-size: var(--ui-type-caption-size, 12px); font-weight: var(--ui-type-caption-weight, 400); line-height: var(--ui-type-caption-line-height, 1.5); letter-spacing: var(--ui-type-caption-letter-spacing, 0em); }
+@media (pointer: coarse) { :where([data-moru-registry]) .ui-enhanced-input-action, :where([data-moru-registry]) .ui-multi-select-chip-remove { min-width: 44px; min-height: 44px; } :where([data-moru-registry]) .ui-password-input-field { padding-inline-end: max(48px, calc(var(--ui-enhanced-height) + var(--ui-enhanced-padding))); } :where([data-moru-registry]) .ui-password-input-toggle { min-height: 0; } }
+@media (forced-colors: active) { :where([data-moru-registry]) .ui-number-input-group, :where([data-moru-registry]) .ui-multi-select { border: 1px solid ButtonText; } }
+@media (prefers-reduced-motion: reduce) { :where([data-moru-registry]) .ui-number-input-group, :where([data-moru-registry]) .ui-multi-select { transition: none; } }
+

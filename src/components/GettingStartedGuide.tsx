@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { ArrowRight, ArrowUpRight, Box, Columns2, Download, ExternalLink, Settings2, Upload } from 'lucide-react'
 import { MoruMark } from './brand'
+import { CodeBlock } from './ui/code-block'
+import { registryInstallCommand, registryInstallItems, registryRelease, type RegistryInstallItem } from '../lib/registry-install'
 import './getting-started-guide.css'
 
 export type GettingStartedGuideProps = {
@@ -26,11 +29,12 @@ const componentCode = [
 ].join('\n')
 
 export function GettingStartedGuide({ onExport, onImport, onExamples, onOpenEditor, onComparison }: GettingStartedGuideProps) {
+  const [registryItem, setRegistryItem] = useState<RegistryInstallItem>('button')
   return <div className="getting-started-guide">
     <section className="getting-started-summary" aria-label="Moru UI 프로젝트 정보">
       <MoruMark width={36} height={36} />
       <div className="getting-started-summary-copy">
-        <div className="getting-started-summary-title"><strong>Moru UI</strong><span>v0.3</span></div>
+        <div className="getting-started-summary-title"><strong>Moru UI</strong><span>v{registryRelease}</span></div>
         <p>React · TypeScript · Base UI · Tailwind CSS</p>
         <span className="getting-started-local">MIT LICENSE<span>소스를 직접 가져와 다듬는 오픈소스</span></span>
       </div>
@@ -63,7 +67,17 @@ export function GettingStartedGuide({ onExport, onImport, onExamples, onOpenEdit
             <pre><code>{componentCode}</code></pre>
           </div>
         </div>
-        <p className="getting-started-footnote">Moru 소스는 MIT 라이선스로 사용·수정·재배포할 수 있습니다. 스타터의 LICENSE·NOTICE 고지를 유지하세요. README에 실행 방법과 CSS·테마 연결을 안내합니다. npm 게시와 컴포넌트 선택 설치는 아직 제공하지 않습니다.</p>
+        <p className="getting-started-footnote">Moru 소스는 MIT 라이선스로 사용·수정·재배포할 수 있습니다. LICENSE·NOTICE 고지를 유지하세요. 전체 스타터 또는 아래의 선택 설치를 사용할 수 있습니다. Moru 자체의 npm 패키지는 게시하지 않았습니다.</p>
+        <div className="getting-started-registry" aria-labelledby="getting-started-registry-title">
+          <h3 id="getting-started-registry-title">필요한 컴포넌트만 설치하기</h3>
+          <p>React · TypeScript · Tailwind CSS 4 프로젝트에서 shadcn 초기 설정을 마친 뒤 실행하세요. 공통 기반과 필요한 Moru 컴포넌트를 함께 가져옵니다.</p>
+          <div className="getting-started-registry-items" role="group" aria-label="설치할 Moru 항목">
+            {registryInstallItems.map((item) => <button key={item.name} type="button" className="getting-started-button getting-started-button-quiet" aria-pressed={registryItem === item.name} onClick={() => setRegistryItem(item.name)}>{item.label}</button>)}
+          </div>
+          <CodeBlock key={registryItem} value={registryInstallCommand(registryItem)} filename={`${registryItem} · v${registryRelease}`} language="sh" size="sm" />
+          <p className="getting-started-footnote">설치 위치는 UI 폴더 아래 <code>moru/</code>입니다. <code>styles.css</code>를 한 번 가져오고 <code>MoruProvider</code>로 사용할 영역을 감싸세요. 로그인·OTP는 서버로 전송하지 않는 로컬 예제입니다.</p>
+          <div className="getting-started-actions"><a className="getting-started-button getting-started-button-quiet" href="https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md" target="_blank" rel="noreferrer">설치·테마 연결 가이드<ExternalLink size={14} aria-hidden="true" /></a></div>
+        </div>
       </div>
     </section>
 

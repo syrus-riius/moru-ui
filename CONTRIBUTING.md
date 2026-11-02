@@ -34,7 +34,7 @@ npm test
 npm run build
 ```
 
-`npm run build` checks the generated native web preview and both source starters before TypeScript and the Vite production build. If a check reports a stale artifact, regenerate it from its source as described below. CI runs the same tests and build; it does not automatically rewrite generated files. Documentation-only changes do not need new tests.
+`npm run build` checks the generated native web preview, both source starters and registry before TypeScript and the Vite production build. If a check reports a stale artifact, regenerate it from its source as described below. CI runs the same tests and build; it does not automatically rewrite generated files. Documentation-only changes do not need new tests.
 
 Report the checks you actually performed. A passing browser preview or platform bundle does not establish VoiceOver/TalkBack, physical-device, gesture, or OS keyboard compatibility. Mention any relevant verification limits in the PR.
 
@@ -42,6 +42,7 @@ Report the checks you actually performed. A passing browser preview or platform 
 
 Edit source files rather than the generated download or preview output.
 
+- After changing registry inputs (UI, blocks, tokens, helpers, dependency versions or the generator), run `npm run registry:build` and include `registry.json`, `registry/moru` and `public/r` output. Run `npm run registry:smoke` for changes that affect installation. It uses the real shadcn CLI against a temporary local registry, creates isolated consumer projects under `.qa`, and rewrites only registry dependency transport URLs for local validation. `--base-url https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1` verifies deployed payloads unchanged.
 - After changing web UI, theme, shared helpers, reusable block sources, dependencies, or starter templates, run `npm run web:starter:build` from the root. Include the updated ZIP and manifest in the PR. Packaging requires Python 3.
 - If changing the inputs that generate `src/theme/default.css`, run `npm run tokens:build`, then regenerate the web starter.
 - After changing native preview inputs, install the Expo app's dependencies with `npm ci` in `apps/moru-expo`, return to the root, and run `npm run mobile:build`. Include the resulting `public/native-preview` files and build information. After changing native sources, package metadata, starter templates, licenses or notices, run `npm run mobile:starter:build` from the root and include its ZIP and manifest. This packaging command requires Python 3 but does not build Expo.

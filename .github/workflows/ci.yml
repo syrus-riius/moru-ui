@@ -35,3 +35,24 @@ jobs:
         run: npm test
       - name: Check generated artifacts and build
         run: npm run build
+
+  registry:
+    name: Registry consumer installation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install generator dependencies
+        run: npm ci
+      - name: Check registry sources
+        run: npm run registry:check
+      - name: Install in a fresh consumer and build
+        run: npm run registry:smoke -- --single

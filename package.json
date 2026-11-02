@@ -1,13 +1,13 @@
 {
   "name": "moru-ui",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && tsc -b && vite build",
+    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && npm run registry:check && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "vitest run && node --test scripts/build-native-starter.test.mjs",
+    "test": "vitest run && node --test scripts/build-native-starter.test.mjs scripts/build-registry.test.mjs",
     "tokens:build": "node scripts/build-tokens.mjs",
     "mobile:build": "node scripts/build-native-preview.mjs",
     "mobile:check": "node scripts/build-native-preview.mjs --check",
@@ -15,7 +15,10 @@
     "web:starter:check": "node scripts/build-web-starter.mjs --check",
     "mobile:starter:build": "node scripts/build-native-starter.mjs",
     "mobile:starter:check": "node scripts/build-native-starter.mjs --check",
-    "public:prepare": "node scripts/prepare-public-repo.mjs"
+    "public:prepare": "node scripts/prepare-public-repo.mjs",
+    "registry:build": "node scripts/build-registry.mjs",
+    "registry:check": "node scripts/build-registry.mjs --check",
+    "registry:smoke": "node scripts/test-registry-install.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
@@ -31,11 +34,13 @@
     "recharts": "3.10.1"
   },
   "devDependencies": {
+    "@babel/parser": "7.29.12",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
+    "postcss": "8.5.31",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2",
     "vite": "8.3.4",

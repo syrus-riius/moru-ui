@@ -9,7 +9,7 @@ const allowed = [
   '.gitignore', '.github', 'LICENSE', 'NOTICE.md', 'README.md', 'CONTRIBUTING.md',
   'package.json', 'package-lock.json', 'index.html', 'vite.config.ts',
   'vitest.config.ts', 'tsconfig.json', 'tsconfig.app.json', 'tsconfig.node.json',
-  'src', 'scripts', 'docs', 'templates', 'packages/moru-native',
+  'src', 'scripts', 'docs', 'templates', 'registry', 'registry.json', 'packages/moru-native',
   'public', 'apps/moru-expo/src', 'apps/moru-expo/assets',
   ...['.gitignore', '.npmrc', 'AGENTS.md', 'LICENSE', 'NOTICE.md', 'README.md',
     'app.config.js', 'app.json', 'package.json', 'package-lock.json',

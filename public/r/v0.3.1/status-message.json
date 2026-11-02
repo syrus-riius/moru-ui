@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-message",
+  "type": "registry:ui",
+  "title": "Status Message",
+  "description": "Semantic status feedback using text and icons.",
+  "dependencies": [
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/status-message.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/status-message.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { CircleAlert, CircleCheck, Info, TriangleAlert } from 'lucide-react'\nimport type { HTMLAttributes, ReactNode } from 'react'\nimport { cn } from './_lib/cn'\nimport { semanticToneOptions, type SemanticTone } from './state'\n\nexport interface StatusMessageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'children'> {\n  tone?: SemanticTone\n  title?: string\n  children?: ReactNode\n  variant?: 'soft' | 'outline'\n}\n\nconst toneIcons = { success: CircleCheck, warning: TriangleAlert, info: Info, danger: CircleAlert }\n\n/** A textual message with an icon, so its meaning does not depend on color. */\nexport function StatusMessage({ tone = 'info', title, children, variant = 'soft', className, role = 'status', ...props }: StatusMessageProps) {\n  const Icon = toneIcons[tone]\n  const label = semanticToneOptions.find((option) => option.value === tone)?.label\n  return (\n    <div {...props} role={role} className={cn('ui-status-message', className)} data-tone={tone} data-variant={variant}>\n      <Icon className=\"ui-status-icon\" size={18} strokeWidth={1.8} aria-hidden=\"true\" />\n      <div className=\"ui-status-copy\">\n        <p className=\"ui-status-title\">{title ?? label}</p>\n        {children && <div className=\"ui-status-description\">{children}</div>}\n      </div>\n    </div>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.1",
+    "sourceHash": "0fcdeaa376efb8a5e6fe050b6fbe0d9c9df0777ed7aef4120b26c0b0315fb5cd",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

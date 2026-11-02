@@ -1,0 +1,818 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+@import './form-controls.css';
+@import './feedback.css';
+
+:where([data-moru-registry]).ui-theme-scope,
+:where([data-moru-registry]) .ui-theme-scope,
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-checkbox-label,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-dialog,
+:where([data-moru-registry]) .ui-menu,
+:where([data-moru-registry]) .ui-select-popup,
+:where([data-moru-registry]) .ui-tabs,
+:where([data-moru-registry]) .ui-card,
+:where([data-moru-registry]) .ui-field,
+:where([data-moru-registry]) .ui-status-message {
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, var(--ui-font-size, 14px));
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+}
+
+:where([data-moru-registry]).ui-theme-scope, :where([data-moru-registry]) .ui-theme-scope {
+  color-scheme: var(--ui-color-scheme, light);
+}
+
+/* The host stays in normal flow: fixed popups remain relative to the viewport. */
+:where([data-moru-registry]).ui-theme-portal, :where([data-moru-registry]) .ui-theme-portal {
+  position: static;
+}
+
+:where([data-moru-registry]) .ui-typography {
+  margin: 0;
+  font-family: var(--ui-font-family, inherit);
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='display'] {
+  font-size: var(--ui-type-display-size, 32px);
+  font-weight: var(--ui-type-display-weight, 650);
+  line-height: var(--ui-type-display-line-height, 1.25);
+  letter-spacing: var(--ui-type-display-letter-spacing, -0.035em);
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='heading'],
+:where([data-moru-registry]) .ui-dialog-title {
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  line-height: var(--ui-type-heading-line-height, 1.4);
+  letter-spacing: var(--ui-type-heading-letter-spacing, -0.025em);
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='body'],
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-dialog-description {
+  font-size: var(--ui-type-body-size, var(--ui-font-size, 14px));
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='label'],
+:where([data-moru-registry]) .ui-field-label,
+:where([data-moru-registry]) .ui-checkbox-text,
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-tabs-tab,
+:where([data-moru-registry]) .ui-select-item,
+:where([data-moru-registry]) .ui-menu-item {
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='caption'],
+:where([data-moru-registry]) .ui-field-description,
+:where([data-moru-registry]) .ui-field-error,
+:where([data-moru-registry]) .ui-checkbox-description {
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+
+:where([data-moru-registry]) .ui-typography[data-role='code'] {
+  font-family: var(--ui-font-family-code, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace);
+  font-size: var(--ui-type-code-size, 12px);
+  font-weight: var(--ui-type-code-weight, 450);
+  line-height: var(--ui-type-code-line-height, 1.6);
+  letter-spacing: var(--ui-type-code-letter-spacing, 0em);
+}
+
+/* Every component resets its local size, so a nested control keeps its own size. */
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-tabs-tab,
+:where([data-moru-registry]) .ui-select-popup,
+:where([data-moru-registry]) .ui-menu,
+:where([data-moru-registry]) .ui-checkbox-label {
+  --ui-size-height: var(--ui-control-height-md, var(--ui-control-height, 40px));
+  --ui-size-padding-x: var(--ui-control-padding-x-md, 12px);
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-size-checkbox: var(--ui-checkbox-size, 18px);
+  --ui-resolved-control-height: max(var(--ui-size-height), calc(var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.45) + var(--ui-border-width, 1px) * 2 + var(--ui-space, 4px)));
+  box-sizing: border-box;
+}
+
+:where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-tabs-tab, .ui-select-popup, .ui-menu, .ui-checkbox-label)[data-size='sm'] {
+  --ui-size-height: var(--ui-control-height-sm, 32px);
+  --ui-size-padding-x: var(--ui-control-padding-x-sm, 10px);
+  --ui-size-icon: var(--ui-icon-size-sm, 14px);
+  --ui-size-checkbox: calc(var(--ui-checkbox-size, 18px) - 2px);
+}
+
+:where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-tabs-tab, .ui-select-popup, .ui-menu, .ui-checkbox-label)[data-size='lg'] {
+  --ui-size-height: var(--ui-control-height-lg, 48px);
+  --ui-size-padding-x: var(--ui-control-padding-x-lg, 16px);
+  --ui-size-icon: var(--ui-icon-size-lg, 18px);
+  --ui-size-checkbox: calc(var(--ui-checkbox-size, 18px) + 2px);
+}
+
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-tabs-tab {
+  height: var(--ui-resolved-control-height);
+  min-height: var(--ui-resolved-control-height);
+  padding: 0 var(--ui-size-padding-x);
+}
+
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-select-item,
+:where([data-moru-registry]) .ui-menu-item {
+  gap: var(--ui-control-gap, 8px);
+}
+
+:where([data-moru-registry]) .ui-button > svg,
+:where([data-moru-registry]) .ui-select-icon > svg,
+:where([data-moru-registry]) .ui-select-item-indicator > svg,
+:where([data-moru-registry]) .ui-menu-icon > svg {
+  width: var(--ui-size-icon);
+  height: var(--ui-size-icon);
+  flex-shrink: 0;
+}
+
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-checkbox,
+:where([data-moru-registry]) .ui-dialog-close,
+:where([data-moru-registry]) .ui-tabs-tab {
+  transition: background-color var(--ui-duration, 150ms), border-color var(--ui-duration, 150ms),
+    color var(--ui-duration, 150ms), box-shadow var(--ui-duration, 150ms), transform var(--ui-duration, 150ms);
+}
+
+:where([data-moru-registry]) .ui-dialog-close:focus-visible,
+:where([data-moru-registry]) .ui-tabs-tab:focus-visible,
+:where([data-moru-registry]) .ui-tabs-panel:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
+  outline-offset: 3px;
+}
+
+:where([data-moru-registry]) .ui-button {
+  border: var(--ui-border-width, 1px) solid transparent;
+  border-radius: var(--ui-radius, 6px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--ui-type-label-weight, 550);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='primary'] {
+  color: var(--ui-primary-foreground, white);
+  background: var(--ui-primary, #181818);
+  border-color: color-mix(in srgb, var(--ui-primary, #181818) 90%, var(--ui-surface, #fff));
+  box-shadow: none;
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='secondary'] {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='ghost'] {
+  background: transparent;
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='danger'] {
+  color: var(--ui-danger-foreground, white);
+  background: var(--ui-danger, #c14b45);
+}
+
+:where([data-moru-registry]) .ui-loading-indicator {
+  box-sizing: border-box;
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--ui-size-icon);
+  height: var(--ui-size-icon);
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: moru-registry-ui-spin 0.7s linear infinite;
+}
+
+:where([data-moru-registry]) .ui-field {
+  gap: var(--ui-field-gap, 6px);
+}
+
+:where([data-moru-registry]) .ui-field-description,
+:where([data-moru-registry]) .ui-field-error,
+:where([data-moru-registry]) .ui-checkbox-description {
+  color: var(--ui-muted, #6e6e6b);
+}
+
+:where([data-moru-registry]) .ui-field-error {
+  color: var(--ui-danger, #c14b45);
+}
+
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-select {
+  border: var(--ui-border-width, 1px) solid var(--ui-control-border, var(--ui-border, #8a8a86));
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg, #f0f0ed);
+  font-weight: var(--ui-type-body-weight, 400);
+  box-shadow: none;
+}
+
+:where([data-moru-registry]) .ui-input::placeholder,
+:where([data-moru-registry]) .ui-textarea::placeholder,
+:where([data-moru-registry]) .ui-select [data-placeholder] {
+  color: var(--ui-muted, #6e6e6b);
+}
+
+:where([data-moru-registry]) .ui-textarea {
+  resize: vertical;
+  min-height: var(--ui-resolved-control-height);
+  padding: max(var(--ui-space, 4px), calc((var(--ui-resolved-control-height) - var(--ui-type-body-size, 14px) * var(--ui-type-body-line-height, 1.6) - var(--ui-border-width, 1px) * 2) / 2)) var(--ui-size-padding-x);
+}
+
+:where([data-moru-registry]) .ui-checkbox-label {
+  gap: var(--ui-control-gap, 8px);
+  cursor: pointer;
+}
+
+:where([data-moru-registry]) .ui-checkbox {
+  box-sizing: border-box;
+  width: var(--ui-size-checkbox);
+  height: var(--ui-size-checkbox);
+  margin-top: max(0px, calc((var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.45) - var(--ui-size-checkbox)) / 2));
+  padding: 0;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #d4d4d8);
+  border-radius: max(3px, calc(var(--ui-radius, 6px) * 0.45));
+  background: var(--ui-control-border, #8a8a86);
+  color: var(--ui-primary-foreground, white);
+  border-color: color-mix(in srgb, var(--ui-text, #171717) 22%, var(--ui-surface, #fff));
+}
+
+:where([data-moru-registry]) .ui-checkbox[data-checked] {
+  background: var(--ui-primary, #181818);
+  border-color: var(--ui-primary, #181818);
+}
+
+:where([data-moru-registry]) .ui-checkbox-indicator {
+  display: flex;
+}
+
+:where([data-moru-registry]) .ui-checkbox-indicator > svg {
+  width: calc(var(--ui-size-checkbox) - 4px);
+  height: calc(var(--ui-size-checkbox) - 4px);
+}
+
+:where([data-moru-registry]) .ui-checkbox-copy {
+  gap: calc(var(--ui-field-gap, 6px) / 2);
+}
+
+:where([data-moru-registry]) .ui-select {
+  text-align: start;
+  cursor: pointer;
+}
+
+:where([data-moru-registry]) .ui-select-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--ui-size-icon) + 2px);
+  height: calc(var(--ui-size-icon) + 2px);
+  margin-inline-start: auto;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) / 2));
+  background: color-mix(in srgb, var(--ui-text, #171717) 7%, transparent);
+  color: var(--ui-text, #171717);
+}
+
+:where([data-moru-registry]) .ui-select-positioner,
+:where([data-moru-registry]) .ui-menu-positioner {
+  /* Option lists and menus may open from controls inside a popover. */
+  z-index: 86;
+}
+
+:where([data-moru-registry]) .ui-select-popup,
+:where([data-moru-registry]) .ui-menu {
+  min-width: 170px;
+  padding: calc(var(--ui-space, 4px) * 1.5);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);
+  transform-origin: var(--transform-origin);
+  transition: opacity var(--ui-duration, 150ms), transform var(--ui-duration, 150ms);
+}
+
+:where([data-moru-registry]) .ui-select-popup {
+  width: var(--anchor-width);
+  max-height: min(320px, var(--available-height));
+  overflow-y: auto;
+}
+
+:where([data-moru-registry]) .ui-menu {
+  box-sizing: border-box;
+  min-width: min(170px, calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  max-width: min(calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  max-height: min(calc(100dvh - 24px), var(--available-height, calc(100dvh - 24px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-menu-icon { flex: none; }
+:where([data-moru-registry]) .ui-menu-anchor { display: inline-flex; min-width: 0; max-width: 100%; }
+:where([data-moru-registry]) .ui-menu-anchor:focus-visible { outline: 2px solid var(--ui-focus-ring, #181818); outline-offset: 2px; border-radius: var(--ui-radius, 6px); }
+
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-menu-item { min-height: max(44px, var(--ui-resolved-control-height)); }
+}
+
+:where([data-moru-registry]) .ui-select-popup[data-starting-style],
+:where([data-moru-registry]) .ui-select-popup[data-ending-style],
+:where([data-moru-registry]) .ui-menu[data-starting-style],
+:where([data-moru-registry]) .ui-menu[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97) translateY(-3px);
+}
+
+:where([data-moru-registry]) .ui-select-item,
+:where([data-moru-registry]) .ui-menu-item {
+  box-sizing: border-box;
+  min-height: var(--ui-resolved-control-height);
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 2px));
+  padding: var(--ui-space, 4px) var(--ui-size-padding-x);
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+:where([data-moru-registry]) .ui-select-item[data-highlighted],
+:where([data-moru-registry]) .ui-menu-item[data-highlighted] {
+  background: var(--ui-surface-hover, #f3f3f1);
+}
+
+:where([data-moru-registry]) .ui-select-item[data-selected] {
+  color: var(--ui-primary-foreground, #fff);
+  background: var(--ui-primary, #181818);
+}
+
+:where([data-moru-registry]) .ui-menu-item[data-destructive] {
+  color: var(--ui-danger, #c14b45);
+}
+
+:where([data-moru-registry]) .ui-menu-item[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+:where([data-moru-registry]) .ui-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #00000055;
+  backdrop-filter: blur(3px);
+  transition: opacity var(--ui-duration, 150ms);
+}
+
+:where([data-moru-registry]) .ui-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 71;
+  box-sizing: border-box;
+  width: min(460px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);
+  transform: translate(-50%, -50%);
+  transition: opacity var(--ui-duration, 150ms), scale var(--ui-duration, 150ms);
+}
+
+:where([data-moru-registry]) .ui-dialog-backdrop[data-starting-style],
+:where([data-moru-registry]) .ui-dialog-backdrop[data-ending-style],
+:where([data-moru-registry]) .ui-dialog[data-starting-style],
+:where([data-moru-registry]) .ui-dialog[data-ending-style] {
+  opacity: 0;
+}
+
+:where([data-moru-registry]) .ui-dialog[data-starting-style],
+:where([data-moru-registry]) .ui-dialog[data-ending-style] {
+  scale: 0.98;
+}
+
+:where([data-moru-registry]) .ui-dialog-header {
+  padding-right: var(--ui-control-height-sm, 32px);
+}
+
+:where([data-moru-registry]) .ui-dialog-title {
+  margin: 0;
+}
+
+:where([data-moru-registry]) .ui-dialog-description {
+  margin: var(--ui-field-gap, 6px) 0 0;
+  color: var(--ui-muted, #6e6e6b);
+  max-width: 48ch;
+}
+
+:where([data-moru-registry]) .ui-dialog-close {
+  position: absolute;
+  top: var(--ui-control-gap, 8px);
+  right: var(--ui-control-gap, 8px);
+  width: var(--ui-control-height-sm, 32px);
+  height: var(--ui-control-height-sm, 32px);
+  border: 0;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 1px));
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-muted, #6e6e6b);
+  cursor: pointer;
+}
+
+:where([data-moru-registry]) .ui-dialog-close > svg {
+  width: var(--ui-icon-size-md, 16px);
+  height: var(--ui-icon-size-md, 16px);
+}
+
+:where([data-moru-registry]) .ui-dialog-close:hover {
+  background: var(--ui-surface-hover, #f3f3f1);
+  color: var(--ui-text, #171717);
+}
+
+:where([data-moru-registry]) .ui-dialog-content {
+  margin-top: var(--ui-form-gap, 20px);
+}
+
+:where([data-moru-registry]) .ui-dialog-footer {
+  flex-wrap: wrap;
+  margin-top: var(--ui-section-gap, 24px);
+  gap: var(--ui-control-gap, 8px);
+  padding-top: var(--ui-form-gap, 24px);
+  border-top: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+}
+
+:where([data-moru-registry]) .ui-dialog-footer > .ui-button {
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-dialog:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: -3px;
+}
+
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-dialog-close {
+    width: max(44px, var(--ui-control-height-sm, 32px));
+    height: max(44px, var(--ui-control-height-sm, 32px));
+  }
+  :where([data-moru-registry]) .ui-dialog-header { padding-right: max(44px, var(--ui-control-height-sm, 32px)); }
+}
+
+:where([data-moru-registry]) .ui-tabs { min-width: 0; max-width: 100%; }
+
+:where([data-moru-registry]) .ui-tabs-list {
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  gap: calc(var(--ui-space, 4px) / 2);
+  padding: calc(var(--ui-space, 4px) * .75);
+  border-radius: calc(var(--ui-radius, 6px) + 2px);
+  background: var(--ui-surface-hover, #f3f3f1);
+}
+
+:where([data-moru-registry]) .ui-tabs-tab {
+  position: relative;
+  flex: none;
+  max-width: 100%;
+  height: auto;
+  padding-block: calc(var(--ui-space, 4px) / 2);
+  font-family: inherit;
+  border: var(--ui-border-width, 1px) solid transparent;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 1px));
+  background: transparent;
+  color: var(--ui-muted, #6e6e6b);
+  cursor: pointer;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-tabs-tab:focus-visible { outline-offset: -3px; }
+:where([data-moru-registry]) .ui-tabs-tab[data-active]:focus-visible { outline-color: var(--ui-primary-foreground, #fff); }
+:where([data-moru-registry]) .ui-tabs-tab[data-disabled] { opacity: .45; cursor: not-allowed; }
+
+:where([data-moru-registry]) .ui-tabs-tab[data-active] {
+  background: var(--ui-primary, #181818);
+  color: var(--ui-primary-foreground, #fff);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+:where([data-moru-registry]) .ui-tabs-panel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding-top: var(--ui-form-gap, 20px);
+  outline: none;
+}
+
+:where([data-moru-registry]) .ui-tabs[data-orientation='vertical'] { display: flex; align-items: flex-start; gap: var(--ui-form-gap, 20px); }
+:where([data-moru-registry]) .ui-tabs-list[data-orientation='vertical'] { flex: none; flex-direction: column; align-items: stretch; width: min(200px, 40%); }
+:where([data-moru-registry]) .ui-tabs-list[data-orientation='vertical'] .ui-tabs-tab { height: auto; padding-block: var(--ui-control-gap, 8px); white-space: normal; overflow-wrap: anywhere; }
+:where([data-moru-registry]) .ui-tabs-panel[data-orientation='vertical'] { flex: 1; padding-top: 0; }
+
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-tabs-tab { min-height: max(44px, var(--ui-resolved-control-height)); }
+}
+
+:where([data-moru-registry]) .ui-card {
+  padding: var(--ui-card-padding, 20px);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, none);
+  min-width: 0;
+}
+
+:where([data-moru-registry]) .ui-card > :is(h2, h3, h4) { margin-top: 0; font-weight: var(--ui-type-heading-weight, 600); }
+:where([data-moru-registry]) .ui-card > :last-child { margin-bottom: 0; }
+
+/* Forced previews and real interactions use the same state tokens. A preview
+   attribute locks pointer states without taking keyboard focus from the user. */
+:where([data-moru-registry]) .ui-button,
+:where([data-moru-registry]) .ui-input,
+:where([data-moru-registry]) .ui-textarea,
+:where([data-moru-registry]) .ui-select,
+:where([data-moru-registry]) .ui-checkbox {
+  outline: none;
+}
+
+:where([data-moru-registry]) .ui-button {
+  --ui-button-hover-bg: var(--ui-control-hover-bg, #f3f3f1);
+  --ui-button-pressed-bg: var(--ui-control-pressed-bg, #e8e8e4);
+  --ui-button-hover-text: var(--ui-text, #171717);
+  --ui-button-pressed-text: var(--ui-text, #171717);
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='primary'] {
+  --ui-button-hover-bg: var(--ui-primary-hover, #303030);
+  --ui-button-pressed-bg: var(--ui-primary-pressed, #0b0b0b);
+  --ui-button-hover-text: var(--ui-primary-hover-foreground, white);
+  --ui-button-pressed-text: var(--ui-primary-pressed-foreground, white);
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='secondary'] {
+  --ui-button-hover-bg: var(--ui-control-pressed-bg, #e9e9e6);
+  --ui-button-pressed-bg: color-mix(in srgb, var(--ui-text, #171717) 13%, var(--ui-surface, #fff));
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='danger'] {
+  --ui-button-hover-bg: var(--ui-danger-hover, #a63e38);
+  --ui-button-pressed-bg: var(--ui-danger-pressed, #8e302b);
+  --ui-button-hover-text: var(--ui-danger-hover-foreground, white);
+  --ui-button-pressed-text: var(--ui-danger-pressed-foreground, white);
+}
+
+:where([data-moru-registry]) .ui-button:not([data-ui-state]):hover:not(:disabled):not([data-disabled]),
+:where([data-moru-registry]) .ui-button[data-ui-state='hover']:not(:disabled):not([data-disabled]) {
+  background: var(--ui-button-hover-bg);
+  color: var(--ui-button-hover-text);
+}
+
+:where([data-moru-registry]) .ui-button:not([data-ui-state]):active:not(:disabled):not([data-disabled]),
+:where([data-moru-registry]) .ui-button[data-ui-state='pressed']:not(:disabled):not([data-disabled]) {
+  background: var(--ui-button-pressed-bg);
+  color: var(--ui-button-pressed-text);
+  box-shadow: inset 0 1px 2px #00000018;
+}
+
+:where([data-moru-registry]) .ui-button[data-variant='secondary']:is([data-ui-state='hover'], [data-ui-state='pressed']):not(:disabled):not([data-disabled]), :where([data-moru-registry]) .ui-button[data-variant='secondary']:not([data-ui-state]):is(:hover, :active):not(:disabled) {
+  border-color: var(--ui-control-hover-border, #c4c4ca);
+}
+
+:where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea)):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([aria-invalid='true']), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[data-ui-state='hover']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
+  background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
+  border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
+}
+
+:where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea)):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([aria-invalid='true']), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+  border-color: var(--ui-control-pressed-border, #a1a1aa);
+}
+
+:where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([aria-invalid='true']),
+:where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='hover']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
+  background: var(--ui-control-hover-border, #7c7c78);
+}
+
+:where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([aria-invalid='true']),
+:where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
+  background: var(--ui-control-pressed-border, #6e6e6b);
+}
+
+:where([data-moru-registry]) .ui-checkbox[data-checked]:not([data-ui-state]):hover:not([data-disabled]):not([aria-invalid='true']),
+:where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='hover']:not([data-disabled]):not([aria-invalid='true']) {
+  background: var(--ui-primary-hover, #303030);
+  border-color: var(--ui-primary-hover, #303030);
+  color: var(--ui-primary-hover-foreground, white);
+}
+
+:where([data-moru-registry]) .ui-checkbox[data-checked]:not([data-ui-state]):active:not([data-disabled]):not([aria-invalid='true']),
+:where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='pressed']:not([data-disabled]):not([aria-invalid='true']) {
+  background: var(--ui-primary-pressed, #0b0b0b);
+  border-color: var(--ui-primary-pressed, #0b0b0b);
+  color: var(--ui-primary-pressed-foreground, white);
+}
+
+:where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea)):focus-visible, :where([data-moru-registry]) .ui-checkbox[data-focused], :where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[data-ui-state='focus'] {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 3px;
+}
+
+:where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[aria-invalid='true'] {
+  border-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
+  box-shadow: 0 0 0 1px var(--ui-error-ring, #c14b45);
+}
+
+:where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[aria-invalid='true']:is(:focus-visible, [data-focused], [data-ui-state='focus']) {
+  outline-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
+}
+
+/* Disabled colors stay readable; loading has its own treatment and busy icon. */
+:where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea)):is(:disabled, [data-disabled], [aria-disabled='true']) {
+  opacity: 1;
+  cursor: not-allowed;
+  color: var(--ui-disabled-text, #a1a1aa);
+  background: var(--ui-disabled-bg, #f3f3f1);
+  border-color: var(--ui-disabled-border, #e8e8e4);
+  box-shadow: none;
+}
+
+:where([data-moru-registry]) .ui-checkbox-label[data-disabled] {
+  cursor: not-allowed;
+  color: var(--ui-disabled-text, #a1a1aa);
+}
+
+:where([data-moru-registry]) .ui-checkbox-label[data-disabled] .ui-checkbox-description {
+  color: inherit;
+}
+
+:where([data-moru-registry]) :is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(:not(.ui-input-group-input, .ui-input-group-textarea))[data-loading] {
+  cursor: progress;
+  background: var(--ui-loading-bg, #f3f3f1);
+  color: var(--ui-loading-text, #303030);
+  border-color: var(--ui-control-hover-border, #c4c4ca);
+}
+
+:where([data-moru-registry]) .ui-checkbox-label[data-loading] {
+  cursor: progress;
+  color: var(--ui-text, #171717);
+}
+
+:where([data-moru-registry]) .ui-checkbox-label[data-loading] .ui-checkbox-description {
+  color: var(--ui-muted, #6e6e6b);
+}
+
+:where([data-moru-registry]) .ui-control-loading-wrap {
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  color: inherit;
+}
+
+:where([data-moru-registry]) .ui-control-loading-wrap[data-size='sm'] { --ui-size-icon: var(--ui-icon-size-sm, 14px); }
+:where([data-moru-registry]) .ui-control-loading-wrap[data-size='lg'] { --ui-size-icon: var(--ui-icon-size-lg, 18px); }
+
+:where([data-moru-registry]) :is(.ui-input, .ui-textarea)[data-loading] {
+  padding-right: calc(var(--ui-size-padding-x) + var(--ui-size-icon) + var(--ui-control-gap, 8px));
+}
+
+:where([data-moru-registry]) .ui-control-loading-indicator {
+  position: absolute;
+  top: 50%;
+  right: var(--ui-control-gap, 8px);
+  margin-top: calc(var(--ui-size-icon) / -2);
+  color: var(--ui-loading-text, #303030);
+  pointer-events: none;
+}
+
+:where([data-moru-registry]) .ui-textarea-loading-wrap .ui-control-loading-indicator {
+  top: var(--ui-control-height-md, 40px);
+  margin-top: calc(var(--ui-size-icon) / -2 - var(--ui-control-height-md, 40px) / 2);
+}
+
+:where([data-moru-registry]) .ui-checkbox-loading-indicator {
+  width: calc(var(--ui-size-checkbox) - 6px);
+  height: calc(var(--ui-size-checkbox) - 6px);
+}
+
+:where([data-moru-registry]) .ui-field-error {
+  color: var(--ui-danger-surface-text, var(--ui-danger-text, #a73c37));
+}
+
+:where([data-moru-registry]) .ui-status-message {
+  --ui-status-bg: var(--ui-info-soft, #eef5fd);
+  --ui-status-text: var(--ui-info-text, #245ca8);
+  --ui-status-border: var(--ui-info-border, #c5d8f3);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-control-gap, 8px);
+  padding: calc(var(--ui-space, 4px) * 3) calc(var(--ui-space, 4px) * 4);
+  border: var(--ui-border-width, 1px) solid var(--ui-status-border);
+  border-radius: calc(var(--ui-radius, 6px) + 2px);
+  background: var(--ui-status-bg);
+  color: var(--ui-status-text);
+  border-color: transparent;
+}
+
+:where([data-moru-registry]) .ui-status-message[data-tone='success'] {
+  --ui-status-bg: var(--ui-success-soft, #eef6ef);
+  --ui-status-text: var(--ui-success-text, #286340);
+  --ui-status-border: var(--ui-success-border, #c7ddce);
+}
+
+:where([data-moru-registry]) .ui-status-message[data-tone='warning'] {
+  --ui-status-bg: var(--ui-warning-soft, #fcf5e8);
+  --ui-status-text: var(--ui-warning-text, #875b16);
+  --ui-status-border: var(--ui-warning-border, #ead6ad);
+}
+
+:where([data-moru-registry]) .ui-status-message[data-tone='danger'] {
+  --ui-status-bg: var(--ui-danger-soft, #fcf0ee);
+  --ui-status-text: var(--ui-danger-text, #a73c37);
+  --ui-status-border: var(--ui-danger-border, #edc8c5);
+}
+
+:where([data-moru-registry]) .ui-status-message[data-variant='outline'] { background: var(--ui-status-bg); border-color: var(--ui-status-border); }
+:where([data-moru-registry]) .ui-status-message[data-variant='outline'][data-tone='success'] { --ui-status-text: var(--ui-success-surface-text, var(--ui-success-text, #286340)); }
+:where([data-moru-registry]) .ui-status-message[data-variant='outline'][data-tone='warning'] { --ui-status-text: var(--ui-warning-surface-text, var(--ui-warning-text, #875b16)); }
+:where([data-moru-registry]) .ui-status-message[data-variant='outline'][data-tone='info'] { --ui-status-text: var(--ui-info-surface-text, var(--ui-info-text, #245ca8)); }
+:where([data-moru-registry]) .ui-status-message[data-variant='outline'][data-tone='danger'] { --ui-status-text: var(--ui-danger-surface-text, var(--ui-danger-text, #a73c37)); }
+:where([data-moru-registry]) .ui-status-icon { flex-shrink: 0; margin-top: 2px; }
+:where([data-moru-registry]) .ui-status-copy { display: flex; flex-direction: column; min-width: 0; gap: calc(var(--ui-field-gap, 6px) / 2); }
+:where([data-moru-registry]) .ui-status-title {
+  margin: 0;
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+}
+:where([data-moru-registry]) .ui-status-description {
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  overflow-wrap: anywhere;
+}
+
+@keyframes moru-registry-ui-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (forced-colors: active) {
+  :where([data-moru-registry]) .ui-input, :where([data-moru-registry]) .ui-textarea, :where([data-moru-registry]) .ui-select, :where([data-moru-registry]) .ui-checkbox { border: 1px solid ButtonText; }
+  :where([data-moru-registry]) .ui-checkbox[data-checked] { background: Highlight; color: HighlightText; forced-color-adjust: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-button, :where([data-moru-registry]) .ui-input, :where([data-moru-registry]) .ui-textarea, :where([data-moru-registry]) .ui-select, :where([data-moru-registry]) .ui-checkbox, :where([data-moru-registry]) .ui-dialog, :where([data-moru-registry]) .ui-dialog-backdrop, :where([data-moru-registry]) .ui-select-popup, :where([data-moru-registry]) .ui-menu, :where([data-moru-registry]) .ui-tabs-tab {
+  transition-duration: 0.01ms;
+}
+  :where([data-moru-registry]) .ui-loading-indicator { animation: none; }
+}
+
+/* Unavailable options remain visible without inviting selection. */
+:where([data-moru-registry]) .ui-select-item[data-disabled] { color:var(--ui-disabled-text,#a1a1aa); cursor:not-allowed; }
+
+:where([data-moru-registry]) .ui-select-value { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+:where([data-moru-registry]) .ui-select-item-text { min-width:0; overflow-wrap:anywhere; }
+

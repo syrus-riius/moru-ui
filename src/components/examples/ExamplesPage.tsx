@@ -21,7 +21,7 @@ const SchedulePlanner = lazy(() => import('./SchedulePlanner').then((module) => 
 const sceneLabels: Record<ExampleScene, string> = { projects: '프로젝트 운영', conversation: '팀 대화', release: '릴리스 준비', settings: '공간 설정', setup: '프로젝트 시작', schedule: '일정 계획' }
 const scenes = new Set<string>(Object.keys(sceneLabels))
 
-export function ExamplesPage({ workspace, name, standalone = false, onBlocks }: { workspace: ReactNode; name: string; standalone?: boolean; onBlocks?: (id?: BlockId) => void }) {
+export function ExamplesPage({ workspace, name, standalone = false, onBlocks, onProjectTemplate }: { workspace: ReactNode; name: string; standalone?: boolean; onBlocks?: (id?: BlockId) => void; onProjectTemplate?: () => void }) {
   const [showWorkspace, setShowWorkspace] = useState(!standalone)
   const [workspaceOpened, setWorkspaceOpened] = useState(!standalone)
   const { state, setScene } = useExampleSession()
@@ -38,7 +38,7 @@ export function ExamplesPage({ workspace, name, standalone = false, onBlocks }: 
     })
   }
   return <>
-    {!showWorkspace ? <ExamplesHub onWorkspace={() => changeWorkspace(true)} onBlocks={onBlocks} /> : null}
+    {!showWorkspace ? <ExamplesHub onWorkspace={() => changeWorkspace(true)} onBlocks={onBlocks} onProjectTemplate={onProjectTemplate} /> : null}
     {workspaceOpened ? <div hidden={!showWorkspace} className="examples-workspace-view">
     {standalone ? <nav className="examples-workspace-return" aria-label="예제 허브 이동"><Button variant="ghost" size="sm" onClick={() => changeWorkspace(false)}>← 예제 허브로</Button>{onBlocks ? <Button variant="secondary" size="sm" onClick={() => onBlocks()}>블록·패턴 살펴보기</Button> : null}</nav> : null}
     {standalone ? <h1 className="sr-only">Moru 작업 공간 예제</h1> : <header className="catalog-intro">

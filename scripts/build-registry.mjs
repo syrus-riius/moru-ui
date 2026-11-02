@@ -8,7 +8,7 @@ import { parse } from '@babel/parser'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultRoot = path.dirname(path.dirname(scriptPath))
-export const registryVersion = '0.3.1'
+export const registryVersion = '0.3.2'
 export const registryOrigin = 'https://moru-ui-lab.riius.chatgpt.site'
 export const registryRepository = 'syrus-riius/moru-ui'
 export const registryScope = ':where([data-moru-registry])'
@@ -28,8 +28,15 @@ export const registryDefinitions = [
   { name: 'password-input', entry: 'src/components/ui/password-input.tsx', title: 'Password Input', description: 'Password input with an accessible visibility toggle.' },
   { name: 'input-otp', entry: 'src/components/ui/input-otp.tsx', title: 'Input OTP', description: 'Single native input with visual slots and one-time-code autofill.' },
   { name: 'status-message', entry: 'src/components/ui/status-message.tsx', title: 'Status Message', description: 'Semantic status feedback using text and icons.' },
+  { name: 'select', entry: 'src/components/ui/select.tsx', title: 'Select', description: 'Accessible select with keyboard navigation and scoped popup theming.' },
+  { name: 'badge', entry: 'src/components/ui/badge.tsx', title: 'Badge', description: 'Compact status and category labels using semantic tokens.' },
+  { name: 'switch', entry: 'src/components/ui/switch.tsx', title: 'Switch', description: 'Accessible labelled switch with form and Field integration.' },
+  { name: 'dialog', entry: 'src/components/ui/dialog.tsx', title: 'Dialog', description: 'Modal dialog with managed focus and scoped portals.' },
+  { name: 'textarea', entry: 'src/components/ui/textarea.tsx', title: 'Textarea', description: 'Multiline input with Field integration and loading state.' },
   { name: 'login', entry: 'src/components/blocks/LoginBlock.tsx', type: 'registry:block', title: 'Login Block', description: 'Local login form demo. Connect your own authentication service.' },
   { name: 'otp', entry: 'src/components/blocks/OTPBlock.tsx', type: 'registry:block', title: 'OTP Block', description: 'Local OTP verification demo. The sample code is 123456.' },
+  { name: 'search-filters', entry: 'src/components/blocks/SearchFiltersBlock.tsx', type: 'registry:block', title: 'Search Filters Block', description: 'Composable query, status and assignee filters with local demo data and a controlled application API.' },
+  { name: 'settings', entry: 'src/components/blocks/SettingsBlock.tsx', type: 'registry:block', title: 'Settings Block', description: 'Workspace settings form with local demo feedback and controlled application save handlers.' },
 ]
 
 const coreEntries = [
@@ -146,6 +153,8 @@ const utilities = `/* Minimal layout utilities used by the selected original sou
 .items-center { align-items: center; }
 .items-start { align-items: flex-start; }
 .justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
 .gap-2 { gap: 0.5rem; }
 .whitespace-nowrap { white-space: nowrap; }
 .w-full { width: 100%; }

@@ -9,6 +9,7 @@ export type GettingStartedGuideProps = {
   onExport: () => void
   onImport: () => void
   onExamples: () => void
+  onProjectTemplate?: () => void
   onOpenEditor: () => void
   onComparison: () => void
 }
@@ -28,7 +29,7 @@ const componentCode = [
   '}',
 ].join('\n')
 
-export function GettingStartedGuide({ onExport, onImport, onExamples, onOpenEditor, onComparison }: GettingStartedGuideProps) {
+export function GettingStartedGuide({ onExport, onImport, onExamples, onProjectTemplate, onOpenEditor, onComparison }: GettingStartedGuideProps) {
   const [registryItem, setRegistryItem] = useState<RegistryInstallItem>('button')
   return <div className="getting-started-guide">
     <section className="getting-started-summary" aria-label="Moru UI 프로젝트 정보">
@@ -77,6 +78,7 @@ export function GettingStartedGuide({ onExport, onImport, onExamples, onOpenEdit
           <CodeBlock key={registryItem} value={registryInstallCommand(registryItem)} filename={`${registryItem} · v${registryRelease}`} language="sh" size="sm" />
           <p className="getting-started-footnote">설치 위치는 UI 폴더 아래 <code>moru/</code>입니다. <code>styles.css</code>를 한 번 가져오고 <code>MoruProvider</code>로 사용할 영역을 감싸세요. 로그인·OTP는 서버로 전송하지 않는 로컬 예제입니다.</p>
           <div className="getting-started-actions"><a className="getting-started-button getting-started-button-quiet" href="https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md" target="_blank" rel="noreferrer">설치·테마 연결 가이드<ExternalLink size={14} aria-hidden="true" /></a></div>
+          <div className="getting-started-template"><h3>프로젝트·할 일 앱으로 시작하기</h3><p>검색·필터와 설정 폼을 실제 데이터에 연결한 앱 템플릿입니다. 프로젝트·할 일을 만들고 수정하며, 설정과 함께 브라우저에 저장합니다.</p><div className="getting-started-actions">{onProjectTemplate ? <button type="button" className="getting-started-button" onClick={onProjectTemplate}>앱 템플릿 미리보기<ArrowRight size={14} aria-hidden="true" /></button> : <a className="getting-started-button" href="#project-template">앱 템플릿 미리보기<ArrowRight size={14} aria-hidden="true" /></a>}<a className="getting-started-button getting-started-button-quiet" href="/downloads/moru-project-starter.zip" download><Download size={14} aria-hidden="true" />앱 템플릿 소스 받기</a></div><p className="getting-started-footnote">압축을 풀고 <code>npm ci</code>, <code>npm run dev</code>로 실행하세요. 서버·인증 서비스는 필요한 앱에 맞춰 연결할 수 있습니다.</p></div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { after, before, test } from 'node:test'
 import { createHash } from 'node:crypto'
-import { cp, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -56,10 +56,12 @@ function hasKeyframeParent(rule) {
 
 test('the public catalog contains only the reviewed MVP items', () => {
   assert.deepEqual(github.items.map((entry) => entry.name), registryDefinitions.map((entry) => entry.name))
-  assert.equal(github.items.length, 11)
+  assert.equal(github.items.length, 18)
   assert.equal(item('core').type, 'registry:base')
   assert.equal(item('login').type, 'registry:block')
   assert.equal(item('otp').type, 'registry:block')
+  assert.equal(item('search-filters').type, 'registry:block')
+  assert.equal(item('settings').type, 'registry:block')
 })
 
 test('GitHub dependencies use full Moru addresses and explicit release pins', () => {
@@ -125,6 +127,19 @@ test('Login and OTP install their original Moru components and dedicated CSS', (
   assert.match(content('blocks/LoginBlock.tsx'), /Connect your authentication request/)
   assert.match(content('blocks/OTPBlock.tsx'), /123456/)
   assert.match(item('login').docs, /local demonstrations/)
+})
+
+test('search and settings blocks install the Moru controls used by the application template', () => {
+  for (const name of ['search-filters', 'settings']) {
+    const files = installedFiles(name)
+    assert.ok(files.has('registry/moru/select.tsx'))
+    assert.ok(files.has('registry/moru/theme-scope.tsx'))
+    assert.ok(files.has('registry/moru/overlay-portal.tsx'))
+  }
+  assert.ok(installedFiles('settings').has('registry/moru/switch.tsx'))
+  assert.ok(installedFiles('search-filters').has('registry/moru/badge.tsx'))
+  assert.ok(installedFiles('dialog').has('registry/moru/overlay-portal.tsx'))
+  assert.ok(installedFiles('textarea').has('registry/moru/field-context.ts'))
 })
 
 test('source import rewriting preserves the selected original code', async () => {
@@ -268,6 +283,15 @@ test('building a new current registry preserves old immutable HTTP release URLs'
   await buildRegistry(directory)
   assert.equal(await readFile(path.join(directory, 'public/r/v0.1.0/button.json'), 'utf8'), 'old release')
   await verifyRegistry(directory)
+})
+
+test('the published v0.3.1 HTTP release remains byte-for-byte unchanged', async () => {
+  const directory = path.join(root, 'public/r/v0.3.1')
+  const files = (await readdir(directory)).filter((file) => file.endsWith('.json')).sort()
+  assert.equal(files.length, 12)
+  const digest = createHash('sha256')
+  for (const file of files) { digest.update(file); digest.update('\0'); digest.update(await readFile(path.join(directory, file))); digest.update('\0') }
+  assert.equal(digest.digest('hex'), '718ed9b99fabdc894b0243a7aae07d6d01203f3622e4912c5949d4a0037b350f')
 })
 
 test('unresolved imports and symlinked sources cannot enter a published payload', async () => {

@@ -15,6 +15,8 @@
 .standalone-actions { gap:5px; flex:none; }
 .standalone-actions .icon-button { width:32px; height:32px; padding:8px; }
 .standalone-topbar button:focus-visible { outline:2px solid var(--chrome-text); outline-offset:2px; }
+.standalone-workspace-project-template { --pt-top-offset:44px; }
+.standalone-topbar a.icon-button { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
 
 /* Desktop simulator: the frame scrolls inside an edge-to-edge workbench. */
 .standalone-workspace-simulator .moru-simulator { display:flex; flex-direction:column; width:100%; height:calc(100dvh - var(--standalone-bar-height)); min-height:480px; }

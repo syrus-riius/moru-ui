@@ -1,19 +1,21 @@
 # Selective installation
 
-Moru v0.3.1 distributes editable component sources through the shadcn CLI.
+Moru v0.3.2 distributes editable component sources through the shadcn CLI.
 It includes a shared core, Button, Input, Field, Login and OTP blocks, and the
-supporting components used by those blocks. Moru is not published as an npm library.
+Search Filters and Settings blocks, plus the supporting components used by those blocks. Moru is not published as an npm library.
 
 The tested baseline is Node.js 24+, React 19, TypeScript, Vite and Tailwind CSS 4.
 Prepare Tailwind and `components.json` using the
 [shadcn Vite setup guide](https://ui.shadcn.com/docs/installation/vite), then run:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/settings.json
 ```
 
 Use `core.json` to install only the foundation. Other items resolve core and their
@@ -44,8 +46,8 @@ Login and OTP are local interaction examples, not authentication services. Login
 validates an email and an eight-character password without sending or storing it.
 OTP uses `123456`. Replace the installed submit/resend handlers with your service.
 
-Versioned HTTP items and dependencies use `/r/v0.3.1/`. GitHub registry items use
-`syrus-riius/moru-ui/button#v0.3.1` with independently pinned dependency refs.
+Versioned HTTP items and dependencies use `/r/v0.3.2/`. GitHub registry items use
+`syrus-riius/moru-ui/button#v0.3.2` with independently pinned dependency refs.
 Commit your local changes before upgrading, review diffs and avoid unconditional
 `--overwrite` when you have customized installed sources.
 
@@ -56,3 +58,5 @@ are not covered by this release's validation.
 
 See the [한국어 guide](registry.ko.md), [MIT license](../LICENSE) and
 [third-party notices](../NOTICE.md).
+
+SearchFiltersBlock accepts external items, controlled filters and an onSelect callback with the actual item ID. SettingsBlock accepts draft values and an async onSave; failed saves preserve the draft. See the [project/task app template](project-template.ko.md) for a complete local-persistence integration.

@@ -61,17 +61,19 @@ const MobileReadinessLab = lazy(() => import('./components/mobile/MobileReadines
 
 const BlocksPage = lazy(() => import('./components/blocks/BlocksPage').then((module) => ({ default: module.BlocksPage })))
 
+const ProjectTasksApp = lazy(() => import('./components/project-template/ProjectTasksApp').then((module) => ({ default: module.ProjectTasksApp })))
+
 const BrandStory = lazy(() => import('./components/BrandStory').then((module) => ({ default: module.BrandStory })))
 
-type View = 'blocks' | 'components' | 'examples' | 'tokens' | 'guide' | 'comparison' | 'states' | 'brand' | 'simulator' | 'mobile'
-const views: readonly View[] = ['blocks', 'components', 'examples', 'tokens', 'guide', 'comparison', 'states', 'brand', 'simulator', 'mobile']
+type View = 'blocks' | 'components' | 'examples' | 'project-template' | 'tokens' | 'guide' | 'comparison' | 'states' | 'brand' | 'simulator' | 'mobile'
+const views: readonly View[] = ['blocks', 'components', 'examples', 'project-template', 'tokens', 'guide', 'comparison', 'states', 'brand', 'simulator', 'mobile']
 function viewFromHash(hash: string): View {
   if (hash === '#blocks' || hash.startsWith('#blocks/')) return 'blocks'
   if (parseComponentPage(hash)) return 'components'
   const candidate = hash.slice(1) as View
   return views.includes(candidate) ? candidate : 'components'
 }
-function isStandaloneView(view: View) { return view === 'simulator' || view === 'examples' }
+function isStandaloneView(view: View) { return view === 'simulator' || view === 'examples' || view === 'project-template' }
 function viewUrl(view: View, page: ComponentPage = { kind: 'index' }) { return `${window.location.pathname}${window.location.search}${view === 'components' ? componentPageHash(page) : view === 'blocks' ? blockHash(blockIdFromHash(window.location.hash)) : `#${view}`}` }
 function libraryReturn() {
   const value = window.history.state?.moruStudioReturn
@@ -254,7 +256,7 @@ function Studio() {
   }, [view, componentRouteKey, blockId])
 
   useEffect(() => {
-    document.title = view === 'blocks' ? '블록·패턴 · Moru UI' : view === 'examples' ? '예제 허브 · Moru UI' : view === 'components' ? `${catalogTitle} · Moru UI` : 'Moru UI — 단단한 기본, 당신만의 UI.'
+    document.title = view === 'project-template' ? '프로젝트·할 일 템플릿 · Moru UI' : view === 'blocks' ? '블록·패턴 · Moru UI' : view === 'examples' ? '예제 허브 · Moru UI' : view === 'components' ? `${catalogTitle} · Moru UI` : 'Moru UI — 단단한 기본, 당신만의 UI.'
   }, [view, componentRouteKey])
 
   function navigateComponentPage(next: ComponentPage, search = false) {
@@ -433,17 +435,17 @@ function Studio() {
       </nav>
       <div className="nav-section-label component-list-label">COMPONENTS <span>{components.length}</span></div>
       <ComponentCategoryNavigation page={componentPage} active={view === 'components'} onNavigate={navigateComponentPage} onSelect={selectComponent} />
-      <div className="sidebar-bottom"><div className="sidebar-note"><span className="note-spark"><MoruMark width={19} height={19} /></span><strong>직접 다듬는 UI</strong><p>색상·글꼴·간격을 조절하며 나만의 UI를 만들어 보세요.</p><button onClick={() => go('brand')}>Moru의 이름에 담은 뜻 <ArrowRight size={12} /></button></div><div className="sidebar-status"><span><i />로컬 미리보기</span><span>v0.3.1</span></div></div>
+      <div className="sidebar-bottom"><div className="sidebar-note"><span className="note-spark"><MoruMark width={19} height={19} /></span><strong>직접 다듬는 UI</strong><p>색상·글꼴·간격을 조절하며 나만의 UI를 만들어 보세요.</p><button onClick={() => go('brand')}>Moru의 이름에 담은 뜻 <ArrowRight size={12} /></button></div><div className="sidebar-status"><span><i />로컬 미리보기</span><span>v0.3.2</span></div></div>
     </aside></> : null}
     <div className="workspace-main">
       {standalone ? <header className="standalone-topbar" inert={drawerOpen}>
-        <div className="standalone-location"><button className="standalone-back" onClick={returnToLibrary} aria-label="이전 · Moru UI로 돌아가기"><ArrowLeft size={15} aria-hidden="true" /><span>이전 <span className="standalone-back-name">· Moru UI</span></span></button><span className="standalone-divider" aria-hidden="true" /><div className="standalone-title">{view === 'simulator' ? <h1>시뮬레이터</h1> : <span>예제 화면</span>}</div></div>
-        <div className="standalone-actions">{view === 'examples' ? <button className="icon-button" aria-label="디자인 편집 열기" title="디자인 편집" onClick={() => openEditor()}><SlidersHorizontal size={16} /></button> : null}<button className="icon-button theme-toggle" onClick={() => theme.setMode(theme.mode === 'light' ? 'dark' : 'light')} aria-label={theme.mode === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}>{theme.mode === 'light' ? <Sun size={16} /> : <Moon size={16} />}</button></div>
+        <div className="standalone-location"><button className="standalone-back" onClick={returnToLibrary} aria-label="이전 · Moru UI로 돌아가기"><ArrowLeft size={15} aria-hidden="true" /><span>이전 <span className="standalone-back-name">· Moru UI</span></span></button><span className="standalone-divider" aria-hidden="true" /><div className="standalone-title">{view === 'simulator' ? <h1>시뮬레이터</h1> : <span>{view === 'project-template' ? '프로젝트·할 일 템플릿' : '예제 화면'}</span>}</div></div>
+        <div className="standalone-actions">{view === 'project-template' ? <><button className="icon-button" aria-label="예제 허브로 돌아가기" onClick={() => go('examples')}><LayoutGrid size={16} aria-hidden="true" /></button><a className="icon-button" href="/downloads/moru-project-starter.zip" download aria-label="프로젝트·할 일 템플릿 다운로드"><ArrowDownToLine size={16} aria-hidden="true" /></a></> : <>{view === 'examples' ? <button className="icon-button" aria-label="디자인 편집 열기" title="디자인 편집" onClick={() => openEditor()}><SlidersHorizontal size={16} /></button> : null}<button className="icon-button theme-toggle" onClick={() => theme.setMode(theme.mode === 'light' ? 'dark' : 'light')} aria-label={theme.mode === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}>{theme.mode === 'light' ? <Sun size={16} /> : <Moon size={16} />}</button></>}</div>
       </header> : <header className="topbar" inert={drawerOpen}>
         <nav className="breadcrumb" aria-label="현재 위치">
           <button className="icon-button mobile-nav-button" aria-label="탐색 메뉴 열기" aria-expanded={navDrawerOpen} aria-controls="workspace-navigation" onClick={openNavigation}><MenuIcon size={19} /></button>
           <span className="breadcrumb-root">Workspace</span><ChevronRight size={13} aria-hidden="true" />
-          <span className="breadcrumb-current" aria-current="page">{({ blocks: '블록·패턴', components: catalogTitle, examples: '예제 화면', tokens: '디자인 토큰', guide: '시작 가이드', comparison: '디자인 비교', states: '상태 표현', brand: 'Moru 이야기', simulator: '시뮬레이터', mobile: '모바일 UI' })[view]}</span>
+          <span className="breadcrumb-current" aria-current="page">{({ blocks: '블록·패턴', components: catalogTitle, examples: '예제 화면', 'project-template': '프로젝트·할 일 템플릿', tokens: '디자인 토큰', guide: '시작 가이드', comparison: '디자인 비교', states: '상태 표현', brand: 'Moru 이야기', simulator: '시뮬레이터', mobile: '모바일 UI' })[view]}</span>
         </nav>
         <div className="topbar-actions">
           <button className="icon-button" aria-label="빠른 실행 열기" title="빠른 실행 · ⌘⇧K / Ctrl+Shift+K" onClick={() => setCommandOpen(true)}><Search size={17} /></button>
@@ -475,7 +477,8 @@ function Studio() {
           {view === 'brand' ? <Suspense fallback={<p className="comparison-loading" role="status">Moru 이야기를 준비하고 있어요.</p>}><BrandStory onExplore={() => go('components')} /></Suspense> : null}
           {view === 'comparison' ? <Suspense fallback={<p className="comparison-loading" role="status">비교 화면을 준비하고 있어요.</p>}><FoundationComparison themes={theme.themes} activeMode={theme.mode} onApply={(font, density, mode) => { theme.setToken('fontFamily', font); theme.setToken('density', density); theme.setMode(mode) }} /></Suspense> : null}
           {view === 'states' ? <Suspense fallback={<p className="comparison-loading" role="status">상태 비교 화면을 준비하고 있어요.</p>}><StateComparison themes={theme.themes} activeMode={theme.mode} /></Suspense> : null}
-          {view === 'examples' ? <ExamplesPage standalone onBlocks={openBlocks} name={workspaceName} workspace={<WorkspaceExample embedded
+          {view === 'project-template' ? <Suspense fallback={<p className="comparison-loading" role="status">프로젝트 템플릿을 준비하고 있어요.</p>}><ProjectTasksApp embedded /></Suspense> : null}
+          {view === 'examples' ? <ExamplesPage standalone onBlocks={openBlocks} onProjectTemplate={() => go('project-template')} name={workspaceName} workspace={<WorkspaceExample embedded
             projectPlan={projectPlan} onProjectPlanChange={setProjectPlan}
             name={workspaceName} onNameChange={setWorkspaceName}
             description={workspaceDesc} onDescriptionChange={setWorkspaceDesc}
@@ -498,9 +501,10 @@ function Studio() {
           {view === 'guide' ? <GettingStartedGuide
             onExport={() => setExportOpen(true)} onImport={() => importRef.current?.click()}
             onExamples={() => go('examples')} onOpenEditor={() => openEditor()}
+            onProjectTemplate={() => go('project-template')}
             onComparison={() => go('comparison')}
           /> : null}
-          {!standalone ? <footer className="main-footer"><span><Mark small />Moru UI · 직접 다듬고, 오래 쓰는 UI.</span><span>Moru UI <i />v0.3.1</span></footer> : null}
+          {!standalone ? <footer className="main-footer"><span><Mark small />Moru UI · 직접 다듬고, 오래 쓰는 UI.</span><span>Moru UI <i />v0.3.2</span></footer> : null}
         </main>
         {editorOpen ? <button className="editor-scrim" aria-label="토큰 편집 패널 닫기" onClick={() => setEditorOpen(false)} /> : null}
         {view !== 'simulator' && (!standalone || editorOpen) ? <aside ref={inspectorRef} className={`inspector ${editorOpen ? 'inspector-open' : ''}`} inert={((compactViewport || standalone) && !editorOpen) || navDrawerOpen} role={editorDrawerOpen ? 'dialog' : undefined} aria-modal={editorDrawerOpen || undefined} aria-label="디자인 편집 패널"><div className="inspector-mobile-header"><strong>디자인 편집</strong><button className="icon-button" onClick={() => setEditorOpen(false)} aria-label="편집 패널 닫기"><X size={18} /></button></div><TokenEditor tokens={theme.tokens} focusRequest={tokenFocusRequest} spacingTarget={selected} onSpacingTargetChange={(target) => setSelected(target)} onChange={theme.setToken} onTokensChange={theme.setTokens} onTypographyChange={theme.setTypography} mode={theme.mode} onModeChange={theme.setMode} presetId={theme.presetId} onPresetChange={theme.applyPreset} onReset={theme.reset} onExport={() => { setEditorOpen(false); setExportOpen(true) }} />{view !== 'mobile' && view !== 'blocks' ? <section className="component-inspector-dock" aria-label="컴포넌트 설정"><button type="button" className="component-inspector-toggle" aria-expanded={componentDetailsOpen} aria-controls="component-details" onClick={() => setComponentDetailsOpen(!componentDetailsOpen)}><span>컴포넌트 세부 조정</span><span>{selectedMeta.name}<ChevronRight size={13} aria-hidden="true" /></span></button><div id="component-details" className="component-inspector" hidden={!componentDetailsOpen} tabIndex={-1} role="group" aria-label={`${selectedMeta.name} 세부 조정`}><div className="inspector-section-title"><span>COMPONENT DETAILS</span><span>{selectedMeta.name}</span></div>{selected === 'button' ? <><label htmlFor="button-label">버튼 텍스트</label><input id="button-label" value={buttonLabel} maxLength={30} onChange={(event) => setButtonLabel(event.target.value)} /><label htmlFor="button-size">크기</label><select id="button-size" value={buttonSize} onChange={(event) => setButtonSize(event.target.value as 'sm' | 'md' | 'lg')}><option value="sm">Small</option><option value="md">Medium</option><option value="lg">Large</option></select></> : <p>{selectedMeta.subtitle}. 예제에서 직접 조작해 보세요.</p>}{['switch', 'radio-group', 'slider', 'popover', 'tooltip', 'avatar', 'combobox', 'toggle-group', 'button-group', 'input-group', 'input-otp', 'item', 'native-select', 'spinner', 'toggle', 'breadcrumb', 'collapsible', 'context-menu', 'drawer', 'hover-card', 'menubar', 'navigation-menu', 'sidebar', 'attachment', 'questionnaire'].includes(selected) ? <><label htmlFor="demo-size">컴포넌트 크기</label><select id="demo-size" value={demoSize} onChange={(event) => setDemoSize(event.target.value as DemoSize)}><option value="sm">Small</option><option value="md">Medium</option><option value="lg">Large</option></select></> : null}{selected === 'badge' || selected === 'alert' ? <><label htmlFor="demo-tone">의미 색상</label><select id="demo-tone" value={demoTone} onChange={(event) => setDemoTone(event.target.value as SemanticTone)}><option value="info">정보 · Info</option><option value="success">성공 · Success</option><option value="warning">경고 · Warning</option><option value="danger">오류 · Danger</option></select></> : null}{selected === 'progress' ? <><label htmlFor="demo-progress">진행률 · {demoProgress}%</label><input id="demo-progress" type="range" min={0} max={100} step={10} value={demoProgress} onChange={(event) => setDemoProgress(Number(event.target.value))} /></> : null}{selected === 'skeleton' ? <label className="inspector-checkbox"><input type="checkbox" checked={demoLoading} onChange={(event) => setDemoLoading(event.target.checked)} /><span>로딩 모습 표시</span></label> : null}<label className="inspector-checkbox"><input type="checkbox" checked={disabled} onChange={(event) => setDisabled(event.target.checked)} /><span>입력·버튼 비활성 상태</span></label><button className="inspector-copy" onClick={() => void copy(snippets[selected], 'inspector')}>{copied === 'inspector' ? <Check size={13} /> : <Code2 size={13} />}{copied === 'inspector' ? '복사했어요' : `${selectedMeta.name} 코드 복사`}</button></div></section> : null}<div className="inspector-footer"><span>작은 변화도, 바로 확인하세요.</span><MoruMark width={16} height={16} /></div></aside> : null}
@@ -512,6 +516,7 @@ function Studio() {
       { id: 'components', label: '컴포넌트 둘러보기', group: '화면', keywords: ['components'], onSelect: () => go('components') },
       { id: 'blocks', label: '블록·패턴 둘러보기', group: '화면', keywords: ['blocks', 'patterns', '로그인', 'OTP', '검색', '설정'], onSelect: () => openBlocks() },
       { id: 'examples', label: '예제 화면 열기', group: '화면', keywords: ['workspace', 'team'], onSelect: () => go('examples') },
+      { id: 'project-template', label: '프로젝트·할 일 템플릿 열기', group: '화면', keywords: ['template', 'tasks', 'starter'], onSelect: () => go('project-template') },
       { id: 'simulator', label: '시뮬레이터 열기', group: '화면', keywords: ['simulator', 'wireframe', '와이어프레임'], onSelect: () => go('simulator') },
       { id: 'mobile', label: '모바일 UI · Expo', group: '화면', keywords: ['mobile', 'native', 'SwiftUI', 'iOS', 'Android'], onSelect: () => go('mobile') },
       { id: 'tokens', label: '디자인 토큰 보기', group: '화면', keywords: ['tokens'], onSelect: () => go('tokens') },

@@ -58,6 +58,16 @@ The checked-in native web preview and starter downloads allow the root build to
 run without installing Expo. After editing source files used in generated
 artifacts, rebuild those artifacts as described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Project and task app template
+
+[Run the template](https://moru-ui-lab.riius.chatgpt.site/#project-template) or
+[download its sources](https://moru-ui-lab.riius.chatgpt.site/downloads/moru-project-starter.zip).
+It connects Moru's Search Filters and Settings blocks to real project/task data:
+create, edit, complete, delete and undo, with versioned browser-local persistence.
+The standalone Vite app includes only the Moru sources and dependencies it needs.
+Authentication and shared-server persistence are integration points for your app.
+See the [template guide (한국어)](docs/project-template.ko.md).
+
 ## React Native / Expo
 
 Native components live in `packages/moru-native`; the example app lives in
@@ -85,12 +95,12 @@ Prepare a React + TypeScript + Tailwind CSS 4 project with shadcn's
 or block with the tested CLI version:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/otp.json
 ```
 
-Other entry items are `core`, `input` and `field`. Required supporting components
+Other entry items are `core`, `input`, `field`, `search-filters` and `settings`. Required supporting components
 are resolved automatically. Sources install under your UI alias's `moru/` folder.
 Import its `styles.css` once and wrap the area in `MoruProvider`.
 

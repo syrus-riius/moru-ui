@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Multiline input with Field integration and loading state.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/textarea.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/textarea.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type TextareaHTMLAttributes } from 'react'\nimport { Field as BaseField } from '@base-ui/react/field'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport type { UIState } from './state'\n\nexport type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}\n\nexport const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(\n  { className, size = 'md', id, 'aria-describedby': describedBy, 'aria-invalid': invalid, rows = 3,\n    value, defaultValue, disabled, name, loading = false, previewState, onChange, ...props },\n  ref,\n) {\n  const field = useFieldContext()\n  const busy = loading || previewState === 'loading'\n  const unavailable = disabled || busy || previewState === 'disabled'\n  const textarea = (\n    <textarea\n      {...props}\n      ref={ref}\n      id={id ?? field?.controlId}\n      rows={rows}\n      aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}\n      aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}\n      aria-busy={busy || undefined}\n      className={cn('ui-textarea w-full min-w-0', className)}\n      data-size={size}\n      data-ui-state={previewState}\n      data-loading={busy || undefined}\n      value={value}\n      defaultValue={defaultValue}\n      disabled={unavailable}\n      name={name}\n      onChange={(event) => { if (!unavailable) onChange?.(event) }}\n    />\n  )\n\n  const control = !field ? textarea : (\n    <BaseField.Control\n      id={id ?? field.controlId}\n      value={value}\n      defaultValue={defaultValue}\n      disabled={unavailable}\n      name={name}\n      render={textarea}\n    />\n  )\n  return (\n    <span className=\"ui-control-loading-wrap ui-textarea-loading-wrap\" data-size={size}>\n      {control}{busy && <span className=\"ui-control-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" />}\n    </span>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.2",
+    "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

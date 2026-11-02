@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin, type ViteDevServer } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { fileURLToPath, URL } from 'node:url'
 
 function nativePreviewPages(): Plugin {
   const setup = (server: Pick<ViteDevServer, 'middlewares'>) => {
@@ -17,4 +18,6 @@ function nativePreviewPages(): Plugin {
 
 export default defineConfig({
   plugins: [nativePreviewPages(), react(), tailwindcss()],
+  resolve: { alias: { '@/components/ui/moru': fileURLToPath(new URL('./registry/moru', import.meta.url)) } },
+  server: { watch: { ignored: ['**/.qa/**', '**/sites/**'] } },
 })

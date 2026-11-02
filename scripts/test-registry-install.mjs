@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url'
 // no parent node_modules or Moru source files are copied into the consumers.
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 const args = process.argv.slice(2)
-const options = { version: 'v0.3.1', cliVersion: '4.23.0', baseUrl: '', single: false }
+const options = { version: 'v0.3.2', cliVersion: '4.23.0', baseUrl: '', single: false }
 for (let index = 0; index < args.length; index += 1) {
   const argument = args[index]
   if (argument === '--single') options.single = true
@@ -19,13 +19,16 @@ for (let index = 0; index < args.length; index += 1) {
     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${argument}`)
     options[argument === '--base-url' ? 'baseUrl' : argument === '--registry-version' ? 'version' : 'cliVersion'] = value
   } else if (argument === '--help') {
-    console.log('node scripts/test-registry-install.mjs [--base-url https://host/r/v0.3.1] [--registry-version v0.3.1] [--cli-version 4.23.0] [--single]')
+    console.log('node scripts/test-registry-install.mjs [--base-url https://host/r/v0.3.2] [--registry-version v0.3.2] [--cli-version 4.23.0] [--single]')
     console.log('Without --base-url, serves public/r/<version> locally and rewrites only same-registry dependency URLs to that temporary server. A supplied URL is fetched unchanged.')
     process.exit(0)
   } else throw new Error(`Unknown argument: ${argument}`)
 }
 assert.match(options.version, /^v\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?$/)
 assert.match(options.cliVersion, /^(?:latest|\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)$/)
+// Keep the original published MVP consumable with --registry-version v0.3.1.
+const [major, minor, patch] = options.version.slice(1).split(/[.-]/).slice(0, 3).map(Number)
+const extendedBlocks = major > 0 || minor > 3 || (minor === 3 && patch >= 2)
 
 const qa = path.join(root, '.qa/registry-smoke')
 await mkdir(qa, { recursive: true })
@@ -187,7 +190,7 @@ async function runFixture({ name, alias, ui }) {
   const customCore = path.join(uiDirectory, 'moru/_lib/cn.ts')
   const customCoreContent = (await readFile(customCore, 'utf8')) + '\n// MORU_USER_CORE_SENTINEL: preserve local changes on repeated installation.\n'
   await writeFile(customCore, customCoreContent)
-  await install('04-login-otp', ['input', 'field', 'login', 'otp'])
+  await install('04-login-otp', ['input', 'field', 'login', 'otp', ...(extendedBlocks ? ['search-filters', 'settings'] : [])])
   await install('05-repeat-button-core', ['button', 'core'])
   assert.equal(await readFile(existingButton, 'utf8'), sentinel, 'Repeated installation overwrote the user button')
   assert.equal(await readFile(customCore, 'utf8'), customCoreContent, 'Repeated installation overwrote a modified core helper')
@@ -215,26 +218,42 @@ import { ThemeScope } from '${importPath('theme-scope')}'
 import { createDarkTokens, defaultTokens } from '${importPath('_theme/tokens')}'
 import { LoginBlock } from '${importPath('blocks/LoginBlock')}'
 import { OTPBlock } from '${importPath('blocks/OTPBlock')}'
-import '${importPath('styles.css')}'
+${extendedBlocks ? `import { SearchFiltersBlock, type SearchFiltersValue } from '${importPath('blocks/SearchFiltersBlock')}'
+import { SettingsBlock, type WorkspaceSettingsValue } from '${importPath('blocks/SettingsBlock')}'
+` : ''}import '${importPath('styles.css')}'
 
 export default function App() {
   const [mode, setMode] = useState<'light' | 'dark'>('light')
   const [value, setValue] = useState('')
-  const tokens = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
+${extendedBlocks ? `  const [filters, setFilters] = useState<SearchFiltersValue>({ query: '', status: 'all', mineOnly: false })
+  const [selectedId, setSelectedId] = useState('')
+  const [workspace, setWorkspace] = useState<WorkspaceSettingsValue>({ name: 'Installed workspace', email: 'workspace@example.com', visibility: 'team', updates: true, digest: false })
+  const [settingsStatus, setSettingsStatus] = useState('')
+  const items = [
+    { id: 'installed-task-one', name: 'Installed planning', summary: 'Custom application record', status: 'review', owner: 'member-one' },
+    { id: 'installed-task-two', name: 'Installed delivery', summary: 'Another application record', status: 'backlog', owner: 'member-two' },
+  ]
+` : ''}  const tokens = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
   return <MoruProvider mode={mode} style={{ minHeight: '100vh', background: 'var(--ui-background)', color: 'var(--ui-text)', padding: 'clamp(16px, 4vw, 48px)' }}>
     <main style={{ maxWidth: 1080, margin: 'auto', display: 'grid', gap: 24 }}>
-      <header><h1>Moru registry installation check</h1><p>Actual installed sources · light/dark · login/OTP local demos.</p></header>
+      <header><h1>Moru registry installation check</h1><p>Actual installed sources · light/dark · login/OTP${extendedBlocks ? '/search/settings' : ''} local demos.</p></header>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}><Button onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>Switch to {mode === 'light' ? 'dark' : 'light'}</Button><Button disabled>Disabled</Button><Button loading>Loading</Button></div>
       <ThemeScope tokens={tokens} mode={mode}><Field label="Installed Input" description="Standalone Field + Input composition"><Input value={value} onChange={(event) => setValue(event.target.value)} placeholder="Type here" /></Field><Field label="Error state" error="Example validation error"><Input aria-invalid defaultValue="Invalid example" /></Field></ThemeScope>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}><LoginBlock /><OTPBlock /></div>
-    </main>
+${extendedBlocks ? `      <section aria-label="Installed reusable application blocks" style={{ display: 'grid', gap: 24 }}>
+        <SearchFiltersBlock items={items} filters={filters} onFiltersChange={setFilters} currentOwner="member-one" onSelect={setSelectedId} statusOptions={[{ value: 'review', label: 'Review' }, { value: 'backlog', label: 'Backlog' }]} title="Installed search filters" searchLabel="Search installed records" mineLabel="Only my records" resultsLabel="Installed search results" selectLabel="Open" emptyActionLabel="View all records" />
+        <p aria-label="Selected record">{selectedId || 'No record selected'}</p>
+        <SettingsBlock defaultValue={workspace} title="Installed settings" onSave={async (next) => { await Promise.resolve(); setWorkspace(next); setSettingsStatus('Application received the saved workspace') }} onCancel={() => setSettingsStatus('Application received cancel')} />
+        <p aria-label="Saved workspace">{workspace.name}</p><p aria-label="Settings callback status">{settingsStatus}</p>
+      </section>
+` : ''}    </main>
   </MoruProvider>
 }
 `
   await write('src/App.tsx', app)
   await command(directory, '06-reproducible-install', 'npm', ['ci'])
   await command(directory, '07-build', 'npm', ['run', 'build'])
-  const fixtureReport = { name, directory, alias, ui, checks: { standaloneInstall: true, selectiveButtonDependencies: true, existingButtonPreserved: true, modifiedCorePreserved: true, coreTargetsUnique: true, applicationStylesPreserved: true, dependencyOriginsLocal: true, cleanInstall: true, typecheckAndViteBuild: true }, dependencies: consumerPackage.dependencies, installedSourceFiles: installedFiles.map((filename) => path.relative(directory, filename)).sort() }
+  const fixtureReport = { name, directory, alias, ui, checks: { standaloneInstall: true, selectiveButtonDependencies: true, existingButtonPreserved: true, modifiedCorePreserved: true, coreTargetsUnique: true, applicationStylesPreserved: true, dependencyOriginsLocal: true, cleanInstall: true, typecheckAndViteBuild: true, ...(extendedBlocks ? { searchAndSettingsInstalled: true, reusableBlockConsumerBuild: true } : {}) }, dependencies: consumerPackage.dependencies, installedSourceFiles: installedFiles.map((filename) => path.relative(directory, filename)).sort() }
   report.fixtures.push(fixtureReport)
   await writeFile(path.join(runDirectory, 'report.json'), JSON.stringify(report, null, 2) + '\n')
 }

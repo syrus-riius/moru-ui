@@ -56,3 +56,18 @@ jobs:
         run: npm run registry:check
       - name: Install in a fresh consumer and build
         run: npm run registry:smoke -- --single
+      - name: Install and build the downloadable project template
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, zipfile
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'moru-project-check'
+          with zipfile.ZipFile('public/downloads/moru-project-starter.zip') as archive:
+              for item in archive.infolist():
+                  destination = (target / item.filename).resolve()
+                  if not destination.is_relative_to(target.resolve()):
+                      raise RuntimeError('Unsafe starter archive path')
+              archive.extractall(target)
+          PY
+          npm --prefix "$RUNNER_TEMP/moru-project-check/moru-project-starter" ci
+          npm --prefix "$RUNNER_TEMP/moru-project-check/moru-project-starter" run build

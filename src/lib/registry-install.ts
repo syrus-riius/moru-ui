@@ -1,4 +1,4 @@
-export const registryRelease = '0.3.1'
+export const registryRelease = '0.3.2'
 export const registryCliVersion = '4.23.0'
 export const registryBaseUrl = `https://moru-ui-lab.riius.chatgpt.site/r/v${registryRelease}`
 
@@ -9,6 +9,8 @@ export const registryInstallItems = [
   { name: 'field', label: 'Field' },
   { name: 'login', label: '로그인' },
   { name: 'otp', label: 'OTP' },
+  { name: 'search-filters', label: '검색 필터' },
+  { name: 'settings', label: '설정 폼' },
 ] as const
 
 export type RegistryInstallItem = typeof registryInstallItems[number]['name']

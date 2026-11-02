@@ -1,8 +1,8 @@
 # Moru 선택 설치
 
-Moru v0.3.1은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
+Moru v0.3.2은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
 선택한 파일을 직접 수정할 수 있으며 Moru npm 라이브러리에 종속되지 않습니다.
-공통 기반과 Button·Input·Field, 로그인·OTP 블록을 제공합니다.
+공통 기반과 Button·Input·Field, 로그인·OTP·검색 필터·설정 폼 블록을 제공합니다.
 
 ## 준비
 
@@ -15,16 +15,18 @@ CLI 버전은 실제 검증한 `4.23.0`으로 고정합니다.
 ## 필요한 항목 설치
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json
 ```
 
 항목 이름만 바꿔 Input·Field와 블록을 설치할 수 있습니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.1/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/settings.json
 ```
 
 공통 기반만 필요하면 `core.json`을 설치합니다. 다른 항목은 core를 의존성으로 가져옵니다.
@@ -109,14 +111,32 @@ export function AuthenticationExamples() {
 비밀번호를 서버에 보내거나 저장하지 않습니다. OTP 예제 코드는 `123456`입니다.
 프로젝트에 맞게 설치된 블록의 submit·resend 함수를 실제 인증 서비스에 연결하세요.
 
+## 검색 필터·설정 폼을 앱 데이터에 연결하기
+
+`SearchFiltersBlock`은 외부 `items`와 `filters`·`onFiltersChange`를 받습니다.
+항목은 `id`, `name`, `summary`, `status`, `owner`를 가지며 선택 시 `onSelect`에 실제 ID를 전달합니다.
+`statusOptions`, `currentOwner`, 제목과 라벨을 프로젝트에 맞게 바꿀 수 있습니다.
+`SettingsBlock`은 `defaultValue` 또는 제어형 `value`·`onValueChange`, 비동기 `onSave`를 받습니다.
+설정 값은 `name`, `email`, `visibility`, `updates`, `digest`입니다.
+저장이 성공한 값이 취소 기준이 되며, 저장 콜백이 오류를 던지면 작성 값을 유지하고 오류를 표시합니다.
+
+```tsx
+<SearchFiltersBlock items={projects} filters={filters}
+  onFiltersChange={setFilters} onSelect={openProject} />
+<SettingsBlock defaultValue={workspace} onSave={saveWorkspace} />
+```
+
+전체 흐름은 [프로젝트·할 일 앱 템플릿](project-template.ko.md)을 참고하세요.
+무 props로 사용하면 기존 갤러리의 데모 데이터와 로컬 저장 동작을 확인할 수 있습니다.
+
 ## 버전과 업데이트
 
-HTTP 항목과 의존성은 `/r/v0.3.1/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
+HTTP 항목과 의존성은 `/r/v0.3.2/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
 다음 릴리스에는 새 버전 경로를 발행합니다. 사용자의 소스를 자동으로 갱신하지는 않습니다.
 새 버전을 설치하기 전에 현재 파일을 커밋하고 CLI의 diff·덮어쓰기 안내를 확인하세요.
 
 GitHub의 `registry.json`도 같은 항목을 제공합니다. GitHub 주소 형식은
-`syrus-riius/moru-ui/button#v0.3.1`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
+`syrus-riius/moru-ui/button#v0.3.2`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
 HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하지 않았습니다.
 
 ## 지원 범위

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.3.1",
-  "sourceHash": "0fcdeaa376efb8a5e6fe050b6fbe0d9c9df0777ed7aef4120b26c0b0315fb5cd",
+  "version": "0.3.2",
+  "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
   "sources": [
     {
       "path": "LICENSE",
@@ -13,11 +13,11 @@
     },
     {
       "path": "package.json",
-      "sha256": "b47da18cd366b7f7a90aa05a26698727f7d56937f677e16864bccc7ddd25ddcb"
+      "sha256": "b43aedaafefd2ddd5b1448d893ef4515afc6d061ed8031d576415231cbd1bb96"
     },
     {
       "path": "scripts/build-registry.mjs",
-      "sha256": "a959f6b33e2675362b66e6d7980287731f503305f6119fea4d414833e9388b21"
+      "sha256": "1afd526f909ff7011e6ae299a72353faad6a0e4b92dc8390ff25528104f72c91"
     },
     {
       "path": "src/components/blocks/LoginBlock.tsx",
@@ -26,6 +26,18 @@
     {
       "path": "src/components/blocks/OTPBlock.tsx",
       "sha256": "ecd5d85ce8d7314d5059920ec9a120d43327cf52e254d98e1223bff129d49f7e"
+    },
+    {
+      "path": "src/components/blocks/SearchFiltersBlock.tsx",
+      "sha256": "a5bc08ccb8648690cec6595c9d6c21ac0904f2a6b6eb95407d306c8024843c3c"
+    },
+    {
+      "path": "src/components/blocks/SettingsBlock.tsx",
+      "sha256": "bee7adfa88f51da822c03379d120c4bb4b81b33b907ce77822dc3ebcfe6ff0ae"
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "sha256": "65767514f012de9b9181b35fe4d50901198b5cf2eb9a7e924e4824baf42dd260"
     },
     {
       "path": "src/components/ui/button.tsx",
@@ -42,6 +54,10 @@
     {
       "path": "src/components/ui/controls-completion.css",
       "sha256": "aefd0e27a1c822a72aa7d21f200c7eafbab77f8117b95386f0746d9403b48b03"
+    },
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "sha256": "1e85ee18662bffae197e8dde3f0c2c0fd8156d89652695bea271e0258be7b615"
     },
     {
       "path": "src/components/ui/enhanced-inputs.css",
@@ -84,6 +100,10 @@
       "sha256": "c6a48ee0a4af978684248d61ad110b464afa6c33058f59864a0c56f789eef4d5"
     },
     {
+      "path": "src/components/ui/select.tsx",
+      "sha256": "a0d63483cdbc4510c240783c0c272cb1c5abcf893f641e17c001c5a3be1cee69"
+    },
+    {
       "path": "src/components/ui/state.ts",
       "sha256": "b573f0fdbcf6a85e456890d3e25d5be82e06e7c51f42dd2f1e8bc77be6a1e22b"
     },
@@ -94,6 +114,14 @@
     {
       "path": "src/components/ui/styles.css",
       "sha256": "77da9912af51cfcbd59a8add8afa2b1baf858c9468b2043f30147ea82c767586"
+    },
+    {
+      "path": "src/components/ui/switch.tsx",
+      "sha256": "c98d4cf2b19f8710f07e3f7b98398e1cd7d3ac220e89407f1aac574b0bb81d44"
+    },
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "sha256": "3e53c5ce8b72abb2949c5d4ccc00da740273979ed15582e684d7461ba907fc8e"
     },
     {
       "path": "src/components/ui/theme-scope.tsx",
@@ -119,59 +147,87 @@
   "files": [
     {
       "path": "public/r/registry.json",
-      "sha256": "f0f64279e0e7a811f3ad1ee44729d194436082eca4a13bbde68c7b1a19243e83"
+      "sha256": "9b92e94affbeee94a45b095d9d208aa0c06afdaac268cd5f554a4ef376f676ce"
     },
     {
-      "path": "public/r/v0.3.1/button.json",
-      "sha256": "2f59857b3169dd9e1609ff19c92a2c376b9fee5337e7dba734933cde80c399cc"
+      "path": "public/r/v0.3.2/badge.json",
+      "sha256": "c4ebe2f6da7a331e6332ac76fb8b7f8250faafa5ff281f5b574fc598cdc7f41f"
     },
     {
-      "path": "public/r/v0.3.1/card.json",
-      "sha256": "e6fa5ae482a2035e433e88a4350f4b1e8f9eeed8edb632a9ec2e98e70f8d9f39"
+      "path": "public/r/v0.3.2/button.json",
+      "sha256": "198baf63e8d32caa986b274bbe4c02a5bb6d55d7c7659b698911f85191abdb8c"
     },
     {
-      "path": "public/r/v0.3.1/checkbox.json",
-      "sha256": "39a01291279a62314b8c38cc1c229e86e3cc4db823bbb56b914b4c047bfeda8b"
+      "path": "public/r/v0.3.2/card.json",
+      "sha256": "f2f37fe9cfb20ca2f6b6164e3b22a0530bbd37ccb3aeff6c9767c4978df6e3fb"
     },
     {
-      "path": "public/r/v0.3.1/core.json",
-      "sha256": "dce5554b4a0041381c0363a67b5e21c88a548ed8726c84dceff0f0e0b175f936"
+      "path": "public/r/v0.3.2/checkbox.json",
+      "sha256": "029d3b692f84b3e3840cb5f11063eac9f56bb84222a8109b7cb20833f5ee8f4d"
     },
     {
-      "path": "public/r/v0.3.1/field.json",
-      "sha256": "a54e2835c0ca30f855dcbf5844679ebb828acb82b370c7703550fdbcfaa89143"
+      "path": "public/r/v0.3.2/core.json",
+      "sha256": "e8099c45dddf9e241e99d93c23a2b9a33e2ff517c67a46ed828d159259680cea"
     },
     {
-      "path": "public/r/v0.3.1/input-otp.json",
-      "sha256": "e385812dcfab89162a2d913b55f1f86cd9497d67b4cb5b69bfbff6304aa53a86"
+      "path": "public/r/v0.3.2/dialog.json",
+      "sha256": "acaea520df61e5105813556158bbbf349066acaf6b37de868c6acaf7a1473fb1"
     },
     {
-      "path": "public/r/v0.3.1/input.json",
-      "sha256": "908c9d5596f18b5cf56ef3c2cd8ee36a6ffe7ae0f24643814860476bff0265f2"
+      "path": "public/r/v0.3.2/field.json",
+      "sha256": "4ee835651de87c1fee6272445dc486f13ba7deee42b6e9101829d839d5036049"
     },
     {
-      "path": "public/r/v0.3.1/login.json",
-      "sha256": "895f6f5ccb2dbd8687f3a4b1bacfd6e601af656951c16417c677fe2524507a1c"
+      "path": "public/r/v0.3.2/input-otp.json",
+      "sha256": "bfaf461c64ea4415aea5789d60aae7e797aab13c1ba51480212c17d3516b0cd2"
     },
     {
-      "path": "public/r/v0.3.1/otp.json",
-      "sha256": "c78585db9dec2ed0cb6ba7ce2cc11ef6665adc094c4cc5b428540b6af18762d5"
+      "path": "public/r/v0.3.2/input.json",
+      "sha256": "3d95b106b00087dcf3f58e7f51aaa4e41ce90059e8f9d8423e4e6e32a7276f8c"
     },
     {
-      "path": "public/r/v0.3.1/password-input.json",
-      "sha256": "71a87db548f21c11dc46ff6c7a77f15c70684b7378ba5398d2f89343073ea204"
+      "path": "public/r/v0.3.2/login.json",
+      "sha256": "109e77a67aa7328dc28ebe463dd036aa59580fd0647b82716f5b10088d9800dd"
     },
     {
-      "path": "public/r/v0.3.1/registry.json",
-      "sha256": "f0f64279e0e7a811f3ad1ee44729d194436082eca4a13bbde68c7b1a19243e83"
+      "path": "public/r/v0.3.2/otp.json",
+      "sha256": "4898ced6bbe7c467f82d9776551392d5c799acc9adcea0ab1b9deb0d1359d250"
     },
     {
-      "path": "public/r/v0.3.1/status-message.json",
-      "sha256": "5d2120ad0a48be08506912c00d7779a61d07b4be9f82319a42a2f7eafd4fde8f"
+      "path": "public/r/v0.3.2/password-input.json",
+      "sha256": "e03d4d2059dc7fcfcb3aaf28b7983d48d3bff62a668fc611b0ab4aeead891b3c"
+    },
+    {
+      "path": "public/r/v0.3.2/registry.json",
+      "sha256": "9b92e94affbeee94a45b095d9d208aa0c06afdaac268cd5f554a4ef376f676ce"
+    },
+    {
+      "path": "public/r/v0.3.2/search-filters.json",
+      "sha256": "aa8cb0167cc62434e4255cfd1b619629a8c8c2679ad88b2a3d3427eb5b479a8f"
+    },
+    {
+      "path": "public/r/v0.3.2/select.json",
+      "sha256": "319cd1370256de6b36910d2e12834d19193ebea8d58e15c7d30b26a3278437c1"
+    },
+    {
+      "path": "public/r/v0.3.2/settings.json",
+      "sha256": "5d24f78e8ea6be820edc327294f4888534886155c6fe495797bc83030b7d2f56"
+    },
+    {
+      "path": "public/r/v0.3.2/status-message.json",
+      "sha256": "cf1b99b4d48b0887eac32d4000a6a02104d4c78eeed9b12927fc1e46fea89713"
+    },
+    {
+      "path": "public/r/v0.3.2/switch.json",
+      "sha256": "51239ddac482c2fa897a63db20dd7deb484d82bcf0ba9d61484614d06993404f"
+    },
+    {
+      "path": "public/r/v0.3.2/textarea.json",
+      "sha256": "034fe3dc69a9161f8568db11af1e5e3427a6f4e907b0d15dd7ac8105c7668242"
     },
     {
       "path": "registry.json",
-      "sha256": "da1a3ff34b9dd9e2fae713bfeb7fdb53fccd1823377aed1898f4001404f528ed"
+      "sha256": "09cd9179494eebcc11834619b89af0072fdba9f25505c12ce4113f1de0e7cf49"
     },
     {
       "path": "registry/moru/_lib/cn.ts",
@@ -203,7 +259,7 @@
     },
     {
       "path": "registry/moru/_styles/utilities.css",
-      "sha256": "f7b1e05e17c80399c1293ee7d66bee0b50ef61632c960e27da7f48bf624864c8"
+      "sha256": "378c0f53cb3de46a66f122cae24fc53200c124ace74cb91c03868757b4b8f6f8"
     },
     {
       "path": "registry/moru/_theme/component-spacing.ts",
@@ -214,12 +270,24 @@
       "sha256": "e812e2d55ef0a17b5a81aa7c6b0e953fd1fda36ec9738424440a01ff866059ea"
     },
     {
+      "path": "registry/moru/badge.tsx",
+      "sha256": "6b25fe72465d733d340c18155668e4a2b85d62dc9f42caa2c61144ada173bbdc"
+    },
+    {
       "path": "registry/moru/blocks/LoginBlock.tsx",
       "sha256": "78fde4c12d6ffbd28025d9f0fd871a5ae6a2bbfbe53cc9877a88e8eb1d667878"
     },
     {
       "path": "registry/moru/blocks/OTPBlock.tsx",
       "sha256": "1e93e47336b1b4bab664212f1fdff69e506dd58a627d1967a8795bfc43dd95dd"
+    },
+    {
+      "path": "registry/moru/blocks/SearchFiltersBlock.tsx",
+      "sha256": "6e1a28d3ad3233a49fabce7943f08f0d1d8d827e42b44e22c52c5779e542538a"
+    },
+    {
+      "path": "registry/moru/blocks/SettingsBlock.tsx",
+      "sha256": "30f731eea3256e1c270f6000b34d194a0dc3b97992891705eeb0deeb21accfb5"
     },
     {
       "path": "registry/moru/button.tsx",
@@ -236,6 +304,10 @@
     {
       "path": "registry/moru/controls-completion.css",
       "sha256": "4f33025c2dd5737ba2b254d2bd8de5d7f13d82749ba56ea5a0b34c107d7b35ac"
+    },
+    {
+      "path": "registry/moru/dialog.tsx",
+      "sha256": "bd8733e84fb964dfb92b71ff68c318fcd54e3e0d6e7bd064d97842864bb03e54"
     },
     {
       "path": "registry/moru/enhanced-inputs.css",
@@ -274,6 +346,10 @@
       "sha256": "cb4637c190e89d58637bf348e5f5027d9f917c4b0bf72417b1c02832ec60116a"
     },
     {
+      "path": "registry/moru/select.tsx",
+      "sha256": "3456a0e38626d7a773169f6bf6f040e5fed3045acd560e07372ebfb9d6029d2d"
+    },
+    {
       "path": "registry/moru/state.ts",
       "sha256": "54a50cbfc20e5b7e92b67534c1f7102491d506434ffebcc2ae67e9451d5071e1"
     },
@@ -284,6 +360,14 @@
     {
       "path": "registry/moru/styles.css",
       "sha256": "51b95e030bb063ba7af3f7ed0131e7f2ef8115f259b85f25f694ebe49ab8e2c6"
+    },
+    {
+      "path": "registry/moru/switch.tsx",
+      "sha256": "0fe3b4a109b3c18aa0db90064b898b2628b720a6df6b8f427779af3741366f3a"
+    },
+    {
+      "path": "registry/moru/textarea.tsx",
+      "sha256": "1921be344b2e9eea953bb517e7d856025613680f42f4d5172fbc81497f5634a4"
     },
     {
       "path": "registry/moru/theme-scope.tsx",

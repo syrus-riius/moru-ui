@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login",
+  "type": "registry:block",
+  "title": "Login Block",
+  "description": "Local login form demo. Connect your own authentication service.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/card.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/checkbox.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/password-input.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/blocks/LoginBlock.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/blocks/LoginBlock.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useId, useRef, useState, type FormEvent } from 'react'\nimport { Button } from '../button'\nimport { Card } from '../card'\nimport { Checkbox } from '../checkbox'\nimport { Field } from '../field'\nimport { Input } from '../input'\nimport { PasswordInput } from '../password-input'\n\nexport function validateLoginBlock(email: string, password: string) {\n  return {\n    email: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.trim()) ? '' : '올바른 이메일 주소를 입력해 주세요.',\n    password: password.length >= 8 ? '' : '비밀번호를 8자 이상 입력해 주세요.',\n  }\n}\n\n/** A local interaction example. Connect your authentication request in submit. */\nexport function LoginBlock() {\n  const id = useId()\n  const [email, setEmail] = useState('')\n  const [password, setPassword] = useState('')\n  const [remember, setRemember] = useState(false)\n  const [errors, setErrors] = useState({ email: '', password: '' })\n  const [busy, setBusy] = useState(false)\n  const [status, setStatus] = useState('')\n  const emailRef = useRef<HTMLInputElement>(null)\n  const passwordRef = useRef<HTMLInputElement>(null)\n  const statusRef = useRef<HTMLParagraphElement>(null)\n  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)\n  useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])\n\n  function submit(event: FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    if (busy) return\n    const next = validateLoginBlock(email, password)\n    setErrors(next)\n    setStatus('')\n    if (next.email || next.password) {\n      const target = next.email ? emailRef : passwordRef\n      target.current?.focus()\n      return\n    }\n    setBusy(true)\n    setStatus('로그인 정보를 확인하고 있어요.')\n    statusRef.current?.focus({ preventScroll: true })\n    // Simulate a local result; no credentials are sent or stored.\n    timer.current = setTimeout(() => {\n      setBusy(false)\n      setPassword('')\n      setStatus('로그인 정보를 확인했어요. 다음 화면을 연결할 준비가 됐어요.')\n    }, 600)\n  }\n\n  return <Card style={{ width: '100%', maxWidth: 420, margin: '0 auto', padding: 'var(--ui-card-padding, 24px)', boxSizing: 'border-box' }}>\n    <form onSubmit={submit} noValidate aria-labelledby={`${id}-title`} style={{ display: 'grid', gap: 'var(--ui-form-gap, 20px)' }}>\n      <header style={{ display: 'grid', gap: 'var(--ui-field-gap, 8px)' }}>\n        <span style={{ color: 'var(--ui-muted)', fontSize: 'var(--ui-type-caption-size, 12px)', letterSpacing: '.12em' }}>MORU WORKSPACE</span>\n        <h3 id={`${id}-title`} style={{ margin: 0, fontSize: 'var(--ui-type-heading-size, 24px)', fontWeight: 'var(--ui-type-heading-weight, 600)', lineHeight: 'var(--ui-type-heading-line-height, 1.35)', letterSpacing: 'var(--ui-type-heading-letter-spacing, -.025em)' }}>다시 만나 반가워요</h3>\n        <p style={{ margin: 0, color: 'var(--ui-muted)', fontSize: 'var(--ui-type-body-size, 14px)', lineHeight: 'var(--ui-type-body-line-height, 1.6)' }}>이메일로 나의 작업 공간을 이어가세요.</p>\n      </header>\n      <Field label=\"이메일\" error={errors.email}>\n        <Input ref={emailRef} name=\"email\" type=\"email\" autoComplete=\"username\" placeholder=\"you@example.com\" value={email} disabled={busy} required onChange={(event) => { setEmail(event.target.value); setErrors((current) => ({ ...current, email: '' })); setStatus('') }} />\n      </Field>\n      <Field label=\"비밀번호\" error={errors.password} description=\"8자 이상 입력하세요.\">\n        <PasswordInput ref={passwordRef} name=\"password\" autoComplete=\"current-password\" placeholder=\"비밀번호 입력\" value={password} disabled={busy} required onChange={(event) => { setPassword(event.target.value); setErrors((current) => ({ ...current, password: '' })); setStatus('') }} />\n      </Field>\n      <Checkbox label=\"로그인 상태 유지\" checked={remember} disabled={busy} onCheckedChange={setRemember} />\n      <Button type=\"submit\" loading={busy} style={{ width: '100%' }}>로그인</Button>\n      <p ref={statusRef} tabIndex={-1} role=\"status\" aria-live=\"polite\" style={{ minHeight: '1.6em', margin: 0, color: 'var(--ui-muted)', fontSize: 'var(--ui-type-caption-size, 12px)', lineHeight: 'var(--ui-type-caption-line-height, 1.5)', overflowWrap: 'anywhere' }}>{status}</p>\n    </form>\n  </Card>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+  "categories": [
+    "blocks"
+  ],
+  "meta": {
+    "version": "0.3.2",
+    "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

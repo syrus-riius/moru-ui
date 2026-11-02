@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Compact status and category labels using semantic tokens.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/badge.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/badge.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport type { SemanticTone } from './state'\n\nexport interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  variant?: 'primary' | 'secondary' | 'outline'\n  tone?: SemanticTone\n}\n\n/** A compact, non-interactive label for counts, categories, and status. */\nexport const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(\n  { className, variant = 'primary', tone, children, ...props },\n  ref,\n) {\n  return (\n    <span {...props} ref={ref} className={cn('ui-badge', className)} data-variant={variant} data-tone={tone}>\n      {children}\n    </span>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.2",
+    "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

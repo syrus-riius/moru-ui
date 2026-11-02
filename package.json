@@ -1,13 +1,13 @@
 {
   "name": "moru-ui",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && npm run registry:check && tsc -b && vite build",
+    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && npm run registry:check && npm run project:starter:check && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "vitest run && node --test scripts/build-native-starter.test.mjs scripts/build-registry.test.mjs",
+    "test": "vitest run && node --test scripts/build-native-starter.test.mjs scripts/build-registry.test.mjs scripts/build-project-starter.test.mjs",
     "tokens:build": "node scripts/build-tokens.mjs",
     "mobile:build": "node scripts/build-native-preview.mjs",
     "mobile:check": "node scripts/build-native-preview.mjs --check",
@@ -18,7 +18,9 @@
     "public:prepare": "node scripts/prepare-public-repo.mjs",
     "registry:build": "node scripts/build-registry.mjs",
     "registry:check": "node scripts/build-registry.mjs --check",
-    "registry:smoke": "node scripts/test-registry-install.mjs"
+    "registry:smoke": "node scripts/test-registry-install.mjs",
+    "project:starter:build": "node scripts/build-project-starter.mjs",
+    "project:starter:check": "node scripts/build-project-starter.mjs --check"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",

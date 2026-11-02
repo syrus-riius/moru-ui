@@ -6,6 +6,8 @@
 :where([data-moru-registry]) .items-center { align-items: center; }
 :where([data-moru-registry]) .items-start { align-items: flex-start; }
 :where([data-moru-registry]) .justify-center { justify-content: center; }
+:where([data-moru-registry]) .justify-between { justify-content: space-between; }
+:where([data-moru-registry]) .justify-end { justify-content: flex-end; }
 :where([data-moru-registry]) .gap-2 { gap: 0.5rem; }
 :where([data-moru-registry]) .whitespace-nowrap { white-space: nowrap; }
 :where([data-moru-registry]) .w-full { width: 100%; }

@@ -1,0 +1,63 @@
+.component-spacing-controls { display:grid; gap:10px; min-width:0; color:var(--editor-text); }
+.component-spacing-controls :is(button,input) { font:inherit; }
+.component-spacing-controls :is(button,input):focus-visible { outline:2px solid var(--editor-accent); outline-offset:2px; }
+.component-spacing-target-heading { display:flex; align-items:center; gap:8px; min-width:0; }
+.component-spacing-target-button { display:flex; align-items:center; justify-content:space-between; flex:1; gap:7px; min-width:0; min-height:43px; padding:8px 9px; border:0 solid var(--editor-border); border-radius:5px; background:var(--editor-bg); color:var(--editor-text); text-align:left; }
+.component-spacing-target-button > span { display:grid; gap:1px; min-width:0; }
+.component-spacing-target-button strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; font-weight:550; line-height:1.5; }
+.component-spacing-target-button small { color:var(--editor-muted); font-size:8px; line-height:1.5; }
+.component-spacing-target-button > svg { flex:none; color:var(--editor-muted); transition:transform .14s; }
+.component-spacing-target-button[aria-expanded='true'] > svg { transform:rotate(180deg); }
+.component-spacing-target-button:hover { background:var(--editor-subtle); }
+.component-spacing-reset { display:flex; align-items:center; justify-content:center; flex:none; gap:4px; min-height:28px; padding:4px 0 4px 4px; border:0; background:transparent; color:var(--editor-text); font-size:9px !important; }
+.component-spacing-reset:disabled { color:var(--editor-muted); opacity:.5; cursor:default; }
+.component-spacing-picker { display:grid; gap:7px; min-width:0; padding:9px; border:0 solid var(--editor-border); border-radius:5px; background:var(--editor-bg); }
+.component-spacing-search { display:flex; align-items:center; gap:6px; min-width:0; min-height:29px; padding:5px 7px; border:0 solid transparent; border-radius:4px; background:var(--editor-subtle); color:var(--editor-muted); }
+.component-spacing-search > svg { flex:none; }
+.component-spacing-search:focus-within { outline:2px solid var(--editor-accent); outline-offset:2px; }
+.component-spacing-search input { width:100%; min-width:0; padding:0; border:0; outline:0; background:transparent; color:var(--editor-text); font-size:10px; line-height:1.5; }
+.component-spacing-controls .component-spacing-search input:focus-visible { outline:0; }
+.component-spacing-target-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; max-height:116px; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:var(--editor-border) transparent; }
+.component-spacing-target-list > button { min-width:0; min-height:26px; padding:5px 6px; border:0; border-radius:3px; background:var(--editor-subtle); color:var(--editor-muted); font-size:9px; line-height:1.5; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.component-spacing-target-list > button:hover { color:var(--editor-text); }
+.component-spacing-target-list > button[aria-pressed='true'] { background:var(--editor-active); color:var(--chrome-action-foreground); }
+.component-spacing-no-results,.component-spacing-target-description { margin:0; color:var(--editor-muted); font-size:9px; line-height:1.6; overflow-wrap:anywhere; }
+.component-spacing-target-description { margin-top:-3px; }
+.component-spacing-kind-tabs { display:flex; gap:4px; padding:3px; border-radius:5px; background:var(--editor-subtle); }
+.component-spacing-kind-tabs > button { display:flex; align-items:baseline; justify-content:center; flex:1; gap:5px; min-width:0; min-height:28px; padding:5px 4px; border:0; border-radius:3px; background:transparent; color:var(--editor-muted); font-size:10px; line-height:1.5; }
+.component-spacing-kind-tabs > button > small { font-size:8px; font-weight:400; }
+.component-spacing-kind-tabs > button[aria-selected='true'] { background:var(--editor-bg); color:var(--editor-text); font-weight:500; box-shadow:0 1px 2px #00000008; }
+.component-spacing-box-panel { display:grid; gap:9px; min-width:0; }
+.component-spacing-box-panel[hidden] { display:none !important; }
+.component-spacing-unit-row { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; color:var(--editor-muted); font-size:9px; line-height:1.5; }
+.component-spacing-unit-row > div { display:flex; gap:2px; padding:2px; border-radius:4px; background:var(--editor-subtle); }
+.component-spacing-unit-row button { min-width:29px; min-height:24px; padding:3px 6px; border:0; border-radius:3px; background:transparent; color:var(--editor-muted); font-size:9px; line-height:1.5; }
+.component-spacing-unit-row button[aria-pressed='true'] { background:var(--editor-bg); color:var(--editor-text); box-shadow:0 1px 2px #00000008; }
+.component-spacing-linked { display:flex; align-items:center; gap:5px; min-width:0; color:var(--editor-muted); font-size:9px; line-height:1.5; cursor:pointer; }
+.component-spacing-linked > input { width:12px; height:12px; flex:none; margin:0; accent-color:var(--editor-text); }
+.component-spacing-linked > svg { flex:none; }
+.component-spacing-linked > small { margin-inline-start:auto; font-size:9px; }
+.component-spacing-diagram { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1fr); grid-template-rows:repeat(3,minmax(0,1fr)); gap:3px 7px; min-width:0; padding:8px; border:0 dashed var(--editor-border); border-radius:5px; background:var(--editor-subtle); }
+.component-spacing-diagram[data-box='padding'] { border-style:solid; }
+.component-spacing-side { display:grid; justify-items:center; gap:2px; min-width:0; color:var(--editor-muted); font-size:8px; line-height:1.4; }
+.component-spacing-side-top { grid-column:2; grid-row:1; }
+.component-spacing-side-right { grid-column:3; grid-row:2; }
+.component-spacing-side-bottom { grid-column:2; grid-row:3; }
+.component-spacing-side-left { grid-column:1; grid-row:2; }
+.component-spacing-controls .component-spacing-side input { display:block; width:100%; min-width:0; height:27px; padding:4px 3px; border:0 solid transparent; border-radius:3px; background:var(--editor-bg); color:var(--editor-text); font:10px/1.5 "SFMono-Regular",Consolas,monospace; text-align:center; appearance:textfield; font-variant-numeric:tabular-nums; }
+.component-spacing-side input::-webkit-inner-spin-button,.component-spacing-side input::-webkit-outer-spin-button { appearance:none; margin:0; }
+.component-spacing-side input::placeholder { color:var(--editor-muted); font-family:var(--font-sans); font-size:9px; }
+.component-spacing-controls .component-spacing-side input:hover { border-color:var(--editor-border); }
+.component-spacing-controls .component-spacing-side input[aria-invalid='true'] { border-color:var(--editor-error); }
+.component-spacing-side > small { display:block; min-height:11px; color:var(--editor-muted); font-size:8px; line-height:1.4; font-variant-numeric:tabular-nums; }
+.component-spacing-content { display:flex; flex-direction:column; align-items:center; justify-content:center; grid-column:2; grid-row:2; gap:3px; min-width:0; padding:5px 3px; border:0 solid var(--editor-border); border-radius:3px; background:var(--editor-bg); color:var(--editor-text); text-align:center; overflow-wrap:anywhere; }
+.component-spacing-content > strong { max-width:100%; font-size:8px; line-height:1.4; font-weight:500; }
+.component-spacing-content > small { color:var(--editor-muted); font-size:8px; line-height:1.4; }
+.component-spacing-quick { display:grid; gap:5px; min-width:0; }
+.component-spacing-quick > span { color:var(--editor-muted); font-size:9px; line-height:1.5; }
+.component-spacing-quick > div { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:4px; }
+.component-spacing-quick button { min-width:0; min-height:25px; padding:4px 2px; border:0 solid var(--editor-border); border-radius:3px; background:var(--editor-bg); color:var(--editor-text); font-size:9px; line-height:1.5; font-variant-numeric:tabular-nums; }
+.component-spacing-quick button:hover { background:var(--editor-subtle); }
+.component-spacing-note { margin:0; color:var(--editor-muted); font-size:9px; line-height:1.7; overflow-wrap:anywhere; }
+.component-spacing-note.is-error { color:var(--editor-error); }
+@media (prefers-reduced-motion:reduce) { .component-spacing-controls * { transition-duration:0s !important; } }

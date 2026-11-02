@@ -1,0 +1,10 @@
+.ui-date-range-picker { position:relative; }
+.ui-date-range-picker-trigger { --ui-range-height:var(--ui-control-height-md,40px); --ui-range-padding:var(--ui-control-padding-x-md,14px); min-height:max(var(--ui-range-height),calc(var(--ui-type-label-size,13px) * var(--ui-type-label-line-height,1.5) + var(--ui-space,4px) * 2 + var(--ui-border-width,1px) * 2)); padding-inline:var(--ui-range-padding); }
+.ui-date-range-picker-trigger[data-size=sm] { --ui-range-height:var(--ui-control-height-sm,32px); --ui-range-padding:var(--ui-control-padding-x-sm,10px); }
+.ui-date-range-picker-trigger[data-size=lg] { --ui-range-height:var(--ui-control-height-lg,48px); --ui-range-padding:var(--ui-control-padding-x-lg,18px); }
+.ui-date-range-picker-trigger > span { line-height:var(--ui-type-label-line-height,1.5); }
+.ui-date-range-picker-popup { width:304px; padding:var(--ui-control-gap,8px); }
+.ui-date-range-picker-popup .ui-calendar { padding:0; border:0; }
+.ui-date-range-picker-summary { margin-top:var(--ui-control-gap,8px); color:var(--ui-muted); font-size:var(--ui-type-caption-size,12px); line-height:var(--ui-type-caption-line-height,1.5); letter-spacing:var(--ui-type-caption-letter-spacing,0em); overflow-wrap:anywhere; }
+.ui-date-range-picker-popup .ui-date-picker-actions { margin-top:var(--ui-control-gap,8px); }
+@media (pointer:coarse) { .ui-date-range-picker-trigger { min-height:max(44px,var(--ui-range-height)); } }

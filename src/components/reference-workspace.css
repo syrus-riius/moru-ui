@@ -1,0 +1,2 @@
+.main-content.reference-workspace { container:catalog / inline-size; padding-top:28px; }
+@media (max-width:760px) { .main-content.reference-workspace { padding-top:24px; } }

@@ -1,0 +1,13 @@
+.sim-shortcut-help { width:32px; padding:7px!important; }
+.sim-shortcut-dialog { max-width:520px; }
+.sim-shortcut-list { display:grid; gap:0; margin:0; max-height:55dvh; overflow-y:auto; }
+.sim-shortcut-list > div { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:var(--ui-border-width,0px) solid var(--ui-border); }
+.sim-shortcut-list > div:last-child { border-bottom:0; }
+.sim-shortcut-list dt { color:var(--ui-text); font-size:var(--ui-type-label-size); font-weight:450; }
+.sim-shortcut-list dd { display:flex; align-items:center; gap:4px; flex:none; margin:0; color:var(--ui-muted); font-size:12px; }
+.sim-shortcut-list kbd { display:inline-flex; align-items:center; justify-content:center; min-width:25px; min-height:24px; padding:2px 6px; border:var(--ui-border-width,0px) solid var(--ui-border); border-radius:4px; background:var(--ui-background); color:var(--ui-text); font:11px/1.5 var(--ui-font-family); box-shadow:none; }
+.sim-shortcut-note { margin:14px 0 0; color:var(--ui-muted); font-size:var(--ui-type-caption-size); line-height:1.7; }
+.moru-simulator .sim-selection-tools { display:flex; align-items:center; gap:3px; }
+.moru-simulator .sim-selection-tools > button { width:30px; padding:6px; border-color:transparent; background:transparent; }
+.sim-selection-status { font-variant-numeric:tabular-nums; }
+@media (max-width:400px) { .moru-simulator .sim-selection-tools > button { width:28px; padding:5px; } .sim-shortcut-list > div { gap:10px; } }

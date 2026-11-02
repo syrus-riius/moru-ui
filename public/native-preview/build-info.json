@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "1e52c47f8dedb40d40400b1bf361db6f80b4892986556c8c86cc171261462b96",
+  "assetVersion": "1e52c47f8ded",
+  "assetDirectory": "assets/vendor",
+  "runtime": "expo-react-native-web",
+  "baseUrl": "/native-preview",
+  "appEntry": "apps/moru-expo/src/components/NativeLabHome.tsx",
+  "packageSource": "packages/moru-native/src",
+  "sharedScreens": [
+    "wallet",
+    "tasks",
+    "activity"
+  ],
+  "webImplementations": {
+    "NativePicker": "Expo UI Universal web",
+    "NativeSlider": "Expo UI Universal web",
+    "NativeDatePicker": "BrowserDatePicker explicit browser alternative",
+    "NativeTabs": "Expo Router NativeTabs web implementation"
+  }
+}

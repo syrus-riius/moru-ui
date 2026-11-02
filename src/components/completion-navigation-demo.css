@@ -1,0 +1,12 @@
+.completion-navigation-stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--ui-form-gap, 20px); width: 100%; min-width: 0; }
+.completion-navigation-caption { margin: 0; color: var(--ui-muted, #71717a); font-size: var(--ui-type-caption-size, 12px); font-weight: var(--ui-type-caption-weight, 400); line-height: var(--ui-type-caption-line-height, 1.5); letter-spacing: var(--ui-type-caption-letter-spacing, 0); overflow-wrap: anywhere; }
+.completion-navigation-label { color: var(--ui-text, #18181b); font-size: var(--ui-type-label-size, 13px); font-weight: var(--ui-type-label-weight, 550); line-height: var(--ui-type-label-line-height, 1.5); }
+.completion-navigation-file-list { display: grid; gap: var(--ui-field-gap, 8px); padding: 0; margin: 0; list-style: none; }
+.completion-navigation-file-list li { display: flex; align-items: center; gap: var(--ui-field-gap, 8px); }
+.completion-navigation-profile { display: inline-flex; align-items: center; gap: var(--ui-field-gap, 8px); min-height: var(--ui-control-height-md, 40px); border: 0; padding: var(--ui-space, 4px); border-radius: var(--ui-radius, 8px); background: transparent; color: var(--ui-text, #18181b); font: inherit; font-size: var(--ui-type-label-size, 13px); cursor: pointer; }
+.completion-navigation-profile > span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: min(var(--ui-radius, 8px), 8px); background: var(--ui-primary-soft, #f0f0ff); color: var(--ui-primary-surface-text, var(--ui-primary, #3d42c9)); }
+.completion-navigation-profile strong { font-weight: var(--ui-type-label-weight, 550); }
+.completion-navigation-profile:hover:not(:disabled) { background: var(--ui-control-hover-bg, #f4f4f5); }
+.completion-navigation-profile:focus-visible { outline: 2px solid var(--ui-focus-ring, #3d42c9); outline-offset: 2px; }
+.completion-navigation-profile:disabled { opacity: .45; cursor: not-allowed; }
+.completion-navigation-profile-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ui-field-gap, 8px); color: var(--ui-muted, #71717a); font-size: var(--ui-type-caption-size, 12px); font-weight: var(--ui-type-caption-weight, 400); }

@@ -1,0 +1,43 @@
+.ui-stepper,.ui-ring-progress { min-width:0; max-width:100%; color:var(--ui-text); font-family:var(--ui-font-family); font-size:var(--ui-type-body-size); font-weight:var(--ui-type-body-weight); line-height:var(--ui-type-body-line-height); letter-spacing:var(--ui-type-body-letter-spacing); }
+.ui-workflow-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.ui-stepper { --ui-stepper-marker-size:28px; }
+.ui-stepper-list { display:flex; flex-wrap:wrap; gap:var(--ui-control-gap); padding:0; margin:0; list-style:none; }
+.ui-stepper-item { flex:1 1 110px; min-width:0; position:relative; }
+.ui-stepper-button { display:flex; width:100%; min-height:max(44px,var(--ui-control-height-md)); align-items:flex-start; gap:var(--ui-control-gap); border:var(--ui-border-width) solid transparent; border-radius:var(--ui-radius); background:transparent; padding:calc(var(--ui-space) * 2); text-align:start; color:inherit; font:inherit; cursor:pointer; transition:background var(--ui-duration); }
+.ui-stepper-button:not(:disabled):hover { background:var(--ui-surface-hover); }
+.ui-stepper-button:focus-visible { outline:2px solid var(--ui-focus-ring); outline-offset:2px; }
+.ui-stepper-button:disabled { cursor:default; }
+.ui-stepper-item[data-status="pending"] .ui-stepper-button:disabled { color:var(--ui-muted); }
+.ui-stepper[data-disabled] .ui-stepper-button { opacity:.55; }
+.ui-stepper-marker { display:flex; flex-shrink:0; align-items:center; justify-content:center; width:var(--ui-stepper-marker-size); height:var(--ui-stepper-marker-size); border:var(--ui-border-width) solid var(--ui-control-hover-border); border-radius:50%; color:var(--ui-muted); background:var(--ui-surface); font-size:var(--ui-type-label-size); line-height:1; font-weight:600; font-variant-numeric:tabular-nums; }
+.ui-stepper-item[data-status="current"] .ui-stepper-marker { background:var(--ui-primary); border-color:var(--ui-primary); color:var(--ui-primary-foreground); }
+.ui-stepper-item[data-status="complete"] .ui-stepper-marker { background:var(--ui-primary-soft); border-color:var(--ui-primary-soft); color:var(--ui-primary-soft-text); }
+.ui-stepper-item[data-status="error"] .ui-stepper-marker { background:var(--ui-danger-soft); color:var(--ui-danger-text); border-color:var(--ui-danger-border); }
+.ui-stepper-copy { display:flex; flex-direction:column; min-width:0; gap:calc(var(--ui-space) * .5); }
+.ui-stepper-label,.ui-ring-progress-title { font-size:var(--ui-type-label-size); line-height:var(--ui-type-label-line-height); font-weight:var(--ui-type-label-weight); letter-spacing:var(--ui-type-label-letter-spacing); overflow-wrap:anywhere; }
+.ui-stepper-description,.ui-stepper-empty,.ui-ring-progress-key,.ui-ring-progress-empty { color:var(--ui-muted); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); letter-spacing:var(--ui-type-caption-letter-spacing); overflow-wrap:anywhere; }
+.ui-stepper-panel,.ui-stepper-completed { padding-block-start:var(--ui-form-gap); }
+.ui-stepper-panel[hidden] { display:none; }
+.ui-stepper[data-orientation="vertical"] .ui-stepper-list { flex-direction:column; }
+.ui-stepper[data-orientation="vertical"] .ui-stepper-item { flex-basis:auto; }
+.ui-stepper[data-orientation="vertical"] .ui-stepper-item:not(:last-child)::after { content:""; position:absolute; inset-inline-start:calc(var(--ui-space) * 2 + var(--ui-stepper-marker-size) / 2); top:calc(var(--ui-space) * 2 + var(--ui-stepper-marker-size)); bottom:calc(var(--ui-control-gap) * -1); border-inline-start:var(--ui-border-width) solid var(--ui-border); pointer-events:none; }
+.ui-stepper[data-size="sm"] { --ui-stepper-marker-size:24px; }
+.ui-stepper[data-size="lg"] { --ui-stepper-marker-size:32px; }
+.ui-ring-progress { display:flex; align-items:center; flex-wrap:wrap; gap:var(--ui-form-gap); margin:0; }
+.ui-ring-progress-diagram { position:relative; flex-shrink:0; max-width:100%; aspect-ratio:1; }
+.ui-ring-progress-diagram svg { display:block; width:100%; height:100%; overflow:visible; }
+.ui-ring-progress-track { stroke:var(--ui-border); }
+.ui-ring-progress-center { position:absolute; inset:22%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:0; text-align:center; gap:calc(var(--ui-space) * .5); }
+.ui-ring-progress-center strong { font-size:clamp(16px,var(--ui-type-heading-size),32px); font-weight:600; line-height:1.25; font-variant-numeric:tabular-nums; letter-spacing:var(--ui-type-heading-letter-spacing); }
+.ui-ring-progress-center strong span { font-size:.6em; margin-inline-start:.12em; }
+.ui-ring-progress-center > span { max-width:100%; font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); color:var(--ui-muted); overflow-wrap:anywhere; }
+.ui-ring-progress-caption { flex:1 1 170px; min-width:0; display:flex; flex-direction:column; gap:var(--ui-control-gap); }
+.ui-ring-progress-legend { display:flex; flex-direction:column; gap:var(--ui-control-gap); padding:0; margin:0; list-style:none; }
+.ui-ring-progress-legend li { display:flex; align-items:baseline; flex-wrap:wrap; justify-content:space-between; column-gap:var(--ui-control-gap); row-gap:calc(var(--ui-space) * .5); }
+.ui-ring-progress-key { display:inline-flex; align-items:center; gap:var(--ui-control-gap); }
+.ui-ring-progress-swatch { width:8px; height:8px; flex-shrink:0; border-radius:2px; }
+.ui-ring-progress-value { font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); font-variant-numeric:tabular-nums; }
+.ui-ring-progress-value > span { color:var(--ui-muted); }
+.ui-ring-progress-empty { margin:0; }
+@media (prefers-reduced-motion:reduce) { .ui-stepper-button { transition:none; } }
+@media (forced-colors:active) { .ui-stepper-marker { border-color:ButtonText; } .ui-stepper-item[data-status="current"] .ui-stepper-marker { border-width:3px; } .ui-ring-progress-section { stroke:CanvasText !important; } .ui-ring-progress-track { stroke:GrayText; } }

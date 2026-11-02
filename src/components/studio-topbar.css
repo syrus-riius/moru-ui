@@ -1,0 +1,27 @@
+/* A slim utility bar, independent of the editable preview density. */
+.studio-shell .topbar { min-width:0; height:var(--studio-topbar-height); padding-inline:28px; gap:20px; }
+.studio-shell .breadcrumb { display:flex; align-items:center; min-width:0; gap:10px; font-size:11px; line-height:1.5; }
+.studio-shell .breadcrumb-root { flex:none; color:var(--chrome-muted); }
+.studio-shell .breadcrumb > svg { flex:none; width:10px; height:10px; }
+.studio-shell .breadcrumb-current { min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:var(--chrome-text); font-size:12px; font-weight:550; }
+.studio-shell .topbar-actions { flex:none; gap:10px; }
+.studio-shell .saved-indicator { gap:6px; font-size:10px; line-height:1.5; white-space:nowrap; }
+.studio-shell .saved-indicator i { flex:none; width:4px; height:4px; background:var(--chrome-muted); }
+.studio-shell .topbar .icon-button { flex:none; width:30px; height:30px; padding:7px; border:0 solid transparent; border-radius:4px; }
+.studio-shell .topbar .icon-button > svg { width:16px; height:16px; stroke-width:1.6; }
+.studio-shell .topbar .theme-toggle { border-color:var(--chrome-border); background:var(--chrome-bg); }
+.studio-shell .toolbar-export { display:flex; align-items:center; justify-content:center; flex:none; gap:7px; min-height:32px; padding:6px 10px; border:0 solid transparent; border-radius:4px; background:var(--chrome-action-bg); color:var(--chrome-action-foreground); font-size:11px; line-height:1.5; font-weight:500; white-space:nowrap; }
+.studio-shell .toolbar-export:hover { opacity:.86; }
+.studio-shell .toolbar-export > svg { flex:none; width:13px; height:13px; }
+.studio-shell .topbar button:focus-visible { outline:2px solid var(--chrome-text); outline-offset:3px; }
+@media (min-width:1650px) { .studio-shell .topbar { padding-inline:36px; } }
+@media (max-width:900px) { .studio-shell .saved-indicator { display:none; } }
+@media (max-width:760px) {
+ .studio-shell .topbar { height:56px; padding-inline:18px; gap:12px; }
+ .studio-shell .breadcrumb-root,.studio-shell .breadcrumb > svg { display:none; }
+ .studio-shell .topbar-actions { gap:5px; }
+ .studio-shell .topbar .icon-button { width:36px; height:36px; padding:9px; }
+ .studio-shell .mobile-nav-button { margin-left:-8px; }
+ .studio-shell .toolbar-export { min-height:36px; padding:8px 9px; }
+}
+@media (max-width:380px) { .studio-shell .toolbar-export { width:36px; padding:9px; } .studio-shell .toolbar-export > span { display:none; } }

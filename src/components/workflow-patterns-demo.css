@@ -1,0 +1,8 @@
+.workflow-pattern-demo { width:100%; min-width:0; display:flex; flex-direction:column; gap:var(--ui-form-gap); }
+.workflow-pattern-demo-actions { display:flex; align-items:center; flex-wrap:wrap; gap:var(--ui-control-gap); }
+.workflow-pattern-demo-fields,.workflow-pattern-demo-review { display:flex; flex-direction:column; min-width:0; gap:var(--ui-field-gap); }
+.workflow-pattern-demo-review { padding:calc(var(--ui-space) * 4); border:var(--ui-border-width) solid var(--ui-border); border-radius:var(--ui-radius); background:var(--ui-surface); overflow-wrap:anywhere; }
+.workflow-pattern-demo-review > strong { font-size:var(--ui-type-body-size); line-height:var(--ui-type-body-line-height); font-weight:600; }
+.workflow-pattern-demo-review > span:not(.workflow-pattern-demo-caption) { font-size:var(--ui-type-body-size); line-height:var(--ui-type-body-line-height); }
+.workflow-pattern-demo-caption { margin:0; color:var(--ui-muted); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); letter-spacing:var(--ui-type-caption-letter-spacing); overflow-wrap:anywhere; }
+.workflow-pattern-demo-error { margin:0; color:var(--ui-danger-surface-text); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); }

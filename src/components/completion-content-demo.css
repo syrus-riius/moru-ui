@@ -1,0 +1,9 @@
+.completion-content-stack { width:100%; min-width:0; display:flex; flex-direction:column; gap:var(--ui-form-gap); }
+.completion-content-stack > .ui-button { align-self:flex-start; max-width:100%; white-space:normal; height:auto; min-height:var(--ui-control-height-md); padding-block:var(--ui-space); }
+.completion-content-row { display:flex; flex-wrap:wrap; align-items:center; gap:var(--ui-control-gap); }
+.completion-content-row > .ui-button { white-space:normal; max-width:100%; min-height:var(--ui-control-height-sm); height:auto; padding-block:var(--ui-space); }
+.completion-content-row > .ui-button[aria-pressed='true'] { color:var(--ui-primary-surface-text); border-color:var(--ui-primary); background:var(--ui-primary-soft); }
+.completion-content-caption { margin:0; color:var(--ui-muted); font-family:var(--ui-font-family); font-size:var(--ui-type-caption-size); font-weight:var(--ui-type-caption-weight); line-height:var(--ui-type-caption-line-height); letter-spacing:var(--ui-type-caption-letter-spacing); overflow-wrap:anywhere; }
+.completion-content-composer { display:flex; gap:var(--ui-control-gap); min-width:0; align-items:center; }
+.completion-content-composer > .ui-control-loading-wrap { flex:1; min-width:0; }
+.completion-content-composer > .ui-button { flex-shrink:0; padding-inline:calc(var(--ui-space) * 3); }

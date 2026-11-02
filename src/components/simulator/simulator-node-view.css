@@ -1,0 +1,63 @@
+.sim-component { width:100%; height:100%; min-width:0; min-height:0; box-sizing:border-box; color:var(--ui-text); font-family:var(--ui-font-family); overflow:hidden; }
+.sim-component :is(h3,p) { margin:0; }
+.sim-component :is(button,input,textarea,select) { font-family:inherit; }
+.sim-component-copy { white-space:pre-wrap; overflow-wrap:anywhere; }
+.sim-component-kind-text { display:flex; align-items:flex-start; }
+.sim-component .sim-component-button { width:100%; height:100%; min-height:0; white-space:normal; overflow-wrap:anywhere; line-height:var(--ui-type-label-line-height); padding-block:6px; }
+.sim-component .sim-component-button[data-outline='true'] { border-color:var(--ui-text); background:var(--ui-surface); }
+.sim-component-field { width:100%; height:100%; display:flex; flex-direction:column; gap:6px; min-width:0; min-height:0; }
+.sim-component-label { display:block; font-size:var(--ui-type-label-size); font-weight:var(--ui-type-label-weight); line-height:var(--ui-type-label-line-height); color:var(--ui-text); overflow-wrap:anywhere; }
+.sim-component-label > span { color:var(--ui-danger); }
+.sim-component-field > .ui-control-loading-wrap,.sim-component-field > .ui-native-select-wrap { width:100%; min-width:0; }
+.sim-component-kind-textarea .ui-control-loading-wrap { flex:1; min-height:36px; }
+.sim-component-kind-textarea .ui-textarea { height:100%; min-height:0; resize:none; }
+.sim-component-error { color:var(--ui-danger); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); overflow-wrap:anywhere; }
+.sim-component-check { display:flex; flex-direction:column; justify-content:center; gap:4px; height:100%; min-width:0; }
+.sim-component-check .ui-checkbox-label,.sim-component-check .ui-switch-label { max-width:100%; }
+.sim-component-check :is(.ui-checkbox-text,.ui-checkbox-description,.ui-switch-text,.ui-switch-description) { overflow-wrap:anywhere; }
+.sim-component-card-action,.sim-component-image-action,.sim-component-list-action { display:block; width:100%; padding:0; border:0; margin:0; color:inherit; background:transparent; text-align:start; }
+.sim-component-card-action,.sim-component-image-action { height:100%; border-radius:calc(var(--ui-radius) + 4px); }
+.sim-component .sim-component-card { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; gap:10px; padding:16px; border-radius:calc(var(--ui-radius) + 4px); box-shadow:none; }
+.sim-component-card-heading { display:flex; align-items:center; gap:10px; min-width:0; }
+.sim-component-card-heading > strong { flex:1; min-width:0; overflow-wrap:anywhere; }
+.sim-component-card-icon { flex:none; display:grid; place-items:center; width:30px; height:30px; background:var(--ui-background); color:var(--ui-text); border-radius:var(--ui-radius); }
+.sim-component-card p { color:var(--ui-muted); overflow-wrap:anywhere; }
+.sim-component-action-arrow { flex:none; color:var(--ui-muted); }
+.sim-component-card-action:hover .sim-component-card,.sim-component-list-action:hover .sim-component-list-item { border-color:var(--ui-control-hover-border); background:var(--ui-surface-hover); }
+.sim-component-image { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; padding:12px; border:var(--ui-border-width,0px) solid var(--ui-border); border-radius:calc(var(--ui-radius) + 4px); background:var(--ui-background); color:var(--ui-muted); font-size:var(--ui-type-label-size); line-height:var(--ui-type-label-line-height); text-align:center; overflow-wrap:anywhere; }
+.sim-component-image-caption { font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); }
+.sim-component-image-action:hover .sim-component-image { border-color:var(--ui-primary); }
+.sim-component-tabs-fieldset { border:0; padding:0; margin:0; min-width:0; height:100%; }
+.sim-component-tabs { min-width:0; height:100%; }
+.sim-component-tabs .ui-tabs-list { max-width:100%; overflow-x:auto; }
+.sim-component-tabs .ui-tabs-panel { padding:12px 0 0; min-width:0; }
+.sim-component-tabs .ui-tabs-panel p { overflow-wrap:anywhere; color:var(--ui-muted); }
+.sim-component-list { width:100%; height:100%; display:flex; flex-direction:column; gap:0; min-width:0; overflow:auto; border:var(--ui-border-width,0px) solid var(--ui-border); border-radius:calc(var(--ui-radius) + 4px); background:var(--ui-surface); }
+.sim-component-list > :not(:last-child) { border-bottom:var(--ui-border-width,0px) solid var(--ui-border); }
+.sim-component-list-item.ui-item { width:100%; padding:12px; border:0; min-height:58px; border-radius:0; gap:12px; }
+.sim-component-list-index { flex:none; align-self:center; color:var(--ui-muted); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); font-variant-numeric:tabular-nums; }
+.sim-component-list .ui-item-content { min-width:0; }
+.sim-component-list :is(.ui-item-title,.ui-item-description) { white-space:normal; overflow-wrap:anywhere; }
+.sim-component-list :is(.ui-item-title,.ui-item-description) { line-height:var(--ui-type-label-line-height); }
+.sim-component-list .ui-item-description { margin:4px 0 0; }
+.sim-component-list-item > svg { flex:none; color:var(--ui-muted); }
+.sim-component-table { width:100%; height:100%; min-width:0; min-height:0; }
+.sim-component-table .ui-table-scroll { width:100%; height:100%; overflow:auto; }
+.sim-component-table .ui-table { min-width:100%; }
+.sim-component-table :is(.ui-table-head,.ui-table-cell) { padding:10px 12px; font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); white-space:normal; overflow-wrap:anywhere; }
+.sim-component-table .ui-table-head { background:var(--ui-background); font-weight:500; }
+.sim-component-avatar { display:flex; align-items:center; gap:10px; width:100%; height:100%; overflow:hidden; }
+.sim-component-avatar .ui-avatar { flex:none; }
+.sim-component-avatar > span:last-child { overflow-wrap:anywhere; }
+.sim-component-badge { display:flex; align-items:center; width:100%; height:100%; }
+.sim-component-badge .ui-badge { max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+.sim-component-separator { display:flex; align-items:center; width:100%; height:100%; }
+.sim-component-separator .ui-separator { width:100%; }
+.sim-component[data-sim-state='disabled'] :is(.sim-component-copy,.sim-component-card,.sim-component-image,.sim-component-tabs,.sim-component-list,.sim-component-table,.sim-component-avatar,.sim-component-badge) { opacity:.5; }
+.sim-component :is(.sim-component-card-action,.sim-component-image-action,.sim-component-list-action):focus-visible { outline:2px solid var(--ui-focus-ring); outline-offset:-3px; }
+.sim-component :is(.sim-component-card-action,.sim-component-image-action,.sim-component-list-action):disabled { cursor:not-allowed; }
+@media (prefers-reduced-motion:reduce) { .sim-component * { scroll-behavior:auto; } }
+
+.sim-component-kind-container,.sim-component-container { width:100%; height:100%; }
+.sim-component-container { border-radius:var(--ui-radius); background:transparent; }
+.sim-component-container[data-variant='secondary'],.sim-component-container[data-variant='outline'] { background:var(--ui-background); }

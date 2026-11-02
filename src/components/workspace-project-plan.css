@@ -1,0 +1,178 @@
+.workspace-project-plan {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--ui-form-gap, 24px);
+  padding-top: var(--ui-form-gap, 24px);
+}
+
+.workspace-project-plan-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--ui-form-gap, 24px);
+}
+
+.workspace-project-plan-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--ui-form-gap, 24px);
+}
+
+.workspace-project-plan-fields > .ui-field { min-width: 0; }
+
+.workspace-project-plan-preview {
+  min-width: 0;
+  background: var(--ui-input-bg, #f6f6f4); border-radius: var(--ui-card-radius, 10px);
+}
+
+.workspace-project-plan-preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 16px;
+  margin-bottom: max(20px, var(--ui-form-gap, 24px));
+}
+
+.workspace-project-plan-preview-heading > div { min-width: 0; }
+
+.workspace-project-plan-eyebrow {
+  color: var(--ui-accent-surface-text, #ae3827);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: .08em;
+}
+
+.workspace-project-plan-preview-heading h4,
+.workspace-project-plan-summary-title h5 {
+  margin: 6px 0 0;
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  line-height: var(--ui-type-heading-line-height, 1.4);
+  letter-spacing: var(--ui-type-heading-letter-spacing, -.025em);
+  overflow-wrap: anywhere;
+}
+
+.workspace-project-plan-preview-body,
+.workspace-project-plan-summary,
+.workspace-project-plan-calendar-view {
+  min-width: 0;
+}
+
+.workspace-project-plan-summary-title {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: max(20px, var(--ui-form-gap, 24px));
+  border-top: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+}
+
+.workspace-project-plan-summary-title h5 {
+  flex: 1 1 180px;
+  margin: 0;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -.015em);
+}
+
+.workspace-project-plan-summary-title > .ui-badge { flex: none; }
+
+.workspace-project-plan-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-form-gap, 24px);
+  margin: max(20px, var(--ui-form-gap, 24px)) 0 0;
+}
+
+.workspace-project-plan-details > div {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.workspace-project-plan-details dt,
+.workspace-project-plan-details dd,
+.workspace-project-plan-calendar-copy strong {
+  margin: 0;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -.015em);
+  overflow-wrap: anywhere;
+}
+
+.workspace-project-plan-details dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ui-muted, #6e6e6b);
+}
+
+.workspace-project-plan-details dt > svg,
+.workspace-project-plan-selected-date > svg { flex: none; }
+
+.workspace-project-plan-owner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+
+.workspace-project-plan-owner > span:not(.ui-avatar, .ui-badge) { min-width: 0; overflow-wrap: anywhere; }
+
+.workspace-project-plan-calendar-view {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: max(16px, var(--ui-control-gap, 8px));
+}
+
+.workspace-project-plan-calendar-copy p,
+.workspace-project-plan-selected-date,
+.workspace-project-plan-footer p {
+  margin: 6px 0 0;
+  color: var(--ui-muted, #6e6e6b);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  overflow-wrap: anywhere;
+}
+
+.workspace-project-plan-calendar-view > .ui-calendar { width: min(100%, 360px); align-self: center; }
+.workspace-project-plan-selected-date { display: flex; align-items: flex-start; gap: 8px; margin: 0; }
+.workspace-project-plan-selected-date > svg { margin-top: 2px; }
+
+.workspace-project-plan-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+}
+
+.workspace-project-plan-footer p { flex: 1 1 200px; margin: 0; }
+.workspace-project-plan-footer > .ui-button { flex: none; margin-inline-start: auto; }
+
+@container catalog (max-width: 640px) {
+  .workspace-project-plan-fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+@container catalog (max-width: 480px) {
+  .workspace-project-plan-preview { padding: 20px 16px; }
+  .workspace-project-plan-details > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .workspace-project-plan-footer { align-items: stretch; flex-direction: column; }
+  .workspace-project-plan-footer p { flex-basis: auto; }
+  .workspace-project-plan-footer > .ui-button { width: 100%; margin-inline-start: 0; white-space: normal; height: auto; min-height: var(--ui-control-height-md, 40px); padding-block: var(--ui-space, 4px); }
+}

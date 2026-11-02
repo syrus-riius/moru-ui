@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a reproducible problem. 한국어로 작성해도 됩니다.
+title: "[Bug]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Name the affected component, block, or page and describe the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest code example or public reproduction URL and the steps needed to reproduce it.
+      placeholder: |
+        1. Open or render ...
+        2. Use these keys or actions ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - React web
+        - React Native / Expo on iOS
+        - React Native / Expo on Android
+        - Expo Web preview
+        - Shared tokens / source downloads
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Version and environment
+      description: Include the Moru commit or starter download date, browser/OS, and relevant React or Expo versions. For layout or input problems, include viewport size, theme, keyboard, and assistive technology details when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or additional details
+      description: Add useful screenshots, recordings, or error messages. Remove private data before sharing.

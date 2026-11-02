@@ -1,0 +1,13 @@
+.completion-demo-stack { display:flex; flex-direction:column; gap:var(--ui-form-gap); min-width:0; width:100%; }
+.completion-demo-caption { margin:0; color:var(--ui-muted); font-size:var(--ui-type-caption-size); font-weight:var(--ui-type-caption-weight); line-height:var(--ui-type-caption-line-height); letter-spacing:var(--ui-type-caption-letter-spacing); overflow-wrap:anywhere; }
+.completion-demo-slide { display:flex; min-height:180px; height:100%; flex-direction:column; justify-content:center; gap:var(--ui-field-gap); padding:var(--ui-card-padding); border:var(--ui-border-width) solid var(--ui-border); border-radius:var(--ui-radius); background:var(--ui-primary-soft); color:var(--ui-primary-soft-text); overflow-wrap:anywhere; }
+.completion-demo-slide > span { font-size:var(--ui-type-caption-size); letter-spacing:.08em; }
+.completion-demo-slide strong { font-size:var(--ui-type-heading-size); font-weight:var(--ui-type-heading-weight); line-height:var(--ui-type-heading-line-height); }
+.completion-demo-slide p { margin:0; font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); }
+.completion-demo-panels { height:210px; }
+.completion-demo-pane { display:flex; min-height:100%; align-items:center; justify-content:center; padding:var(--ui-card-padding); background:var(--ui-surface); font-size:var(--ui-type-label-size); line-height:var(--ui-type-label-line-height); overflow-wrap:anywhere; }
+.completion-demo-activity { list-style:none; margin:0; padding:0; }
+.completion-demo-activity li { display:flex; gap:var(--ui-control-gap); padding:calc(var(--ui-space) * 4); border-bottom:var(--ui-border-width) solid var(--ui-border); }
+.completion-demo-activity li > span { flex:none; font-size:var(--ui-type-code-size); font-variant-numeric:tabular-nums; color:var(--ui-muted); }
+.completion-demo-activity strong { font-size:var(--ui-type-label-size); font-weight:var(--ui-type-label-weight); line-height:var(--ui-type-label-line-height); }
+.completion-demo-activity p { margin:4px 0 0; color:var(--ui-muted); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); }

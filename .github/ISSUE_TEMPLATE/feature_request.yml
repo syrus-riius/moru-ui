@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a component or improvement. 한국어로 작성해도 됩니다.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What do you want to accomplish?
+      description: Describe the user task and what is missing from the current components or workflow.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the component, API, or interaction you would find useful. Identify whether it is for React web, React Native, or both.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Existing options and examples
+      description: Explain why current Moru components do not cover the task. Links, sketches, or examples can help communicate the behavior.

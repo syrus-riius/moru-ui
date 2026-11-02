@@ -1,0 +1,82 @@
+/* Graphite editorial panels frame Moru’s own mark and brand story. */
+.brand-story {
+  --brand-secondary: color-mix(in srgb, var(--chrome-muted) 75%, var(--chrome-text));
+  container: brand-content / inline-size;
+  min-width: 0;
+  color: var(--chrome-text);
+  font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.brand-story-hero { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 28px; align-items: center; padding: 28px; border: 0 solid var(--chrome-border); border-radius: 10px; background: var(--chrome-surface); }
+.brand-story .brand-story-intro.catalog-intro { min-width: 0; margin-bottom: 0; }
+.brand-story-intro h1 > span { white-space: nowrap; }
+.brand-explore { display: inline-flex; align-items: center; gap: 12px; min-height: 36px; max-width: 100%; margin-top: 24px; padding: 8px 0; border: 0; border-bottom: var(--ui-border-width,0px) solid var(--chrome-text); background: none; color: var(--chrome-text); font-family: inherit; font-size: 12px; font-weight: 550; line-height: 1.5; text-align: left; }
+.brand-explore > svg { flex: none; }
+.brand-explore:hover { border-color: var(--chrome-accent); }
+.brand-explore:focus-visible { outline: 2px solid var(--chrome-accent); outline-offset: 3px; }
+.brand-logo-stage { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; min-width: 0; min-height: 300px; padding: 28px; overflow: hidden; border: var(--ui-border-width,0px) solid #2c2c2a; border-radius: 8px; background: #111111; color: #f6f6f3; }
+.brand-logo-stage .moru-logo { max-width: 100%; font-size: 48px; }
+.brand-stage-label { color: #f2654e; position: absolute; top: 24px; left: 24px; right: 24px; font: 11px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .7px; opacity: .8; }
+.brand-logo-stage > p { margin: 0; font-size: 18px; font-weight: 400; line-height: 1.6; letter-spacing: -.2px; }
+.brand-stage-caption { position: absolute; bottom: 24px; left: 24px; right: 24px; font-size: 11px; line-height: 1.6; opacity: .8; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-symbol-story { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 28px; align-items: center; padding: 32px 0; border-top: 0 solid var(--chrome-border); }
+.brand-symbol-diagram { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; min-width: 0; min-height: 240px; padding: 24px; border: 0 solid var(--chrome-border); border-radius: 10px; background: var(--chrome-surface); color: var(--chrome-text); }
+.brand-symbol-diagram .moru-mark { width: 112px; height: 112px; }
+.brand-symbol-diagram > span { color: var(--brand-secondary); font-size: 12px; line-height: 1.6; letter-spacing: .1px; }
+.brand-symbol-copy { min-width: 0; }
+.brand-symbol-copy .eyebrow, .brand-assets-heading .eyebrow { font-size: 10px; font-weight: 550; line-height: 1.5; letter-spacing: 1.3px; }
+.brand-symbol-copy h2 { margin: 12px 0 16px; font-size: 20px; font-weight: 600; line-height: 1.5; letter-spacing: -.35px; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-symbol-copy p, .brand-principles p, .brand-assets-heading p, .brand-asset-guidance { margin: 0; color: var(--brand-secondary); font-size: 13px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-symbol-copy p { max-width: 64ch; }
+.brand-symbol-copy > p { max-inline-size:min(65ch,40ic); font-size:16px; line-height:1.75; letter-spacing:0; }
+.brand-symbol-copy p + p { margin-top: 16px; }
+.brand-symbol-break { display: none; }
+.brand-principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0; border: 0; }
+.brand-principles article { min-width: 0; padding: 20px; border: 0 solid var(--chrome-border); border-radius: 10px; background: var(--chrome-surface); }
+.brand-principle-number { color: var(--chrome-accent); font: 11px/1.6 "SFMono-Regular", Consolas, monospace; font-variant-numeric: tabular-nums; }
+.brand-principles h2 { margin: 12px 0 8px; font-size: 15px; font-weight: 600; line-height: 1.5; letter-spacing: -.15px; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-assets { padding-top: 32px; }
+.brand-assets-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.brand-assets-heading > div { min-width: 0; }
+.brand-assets-heading h2 { margin: 10px 0 0; font-size: 20px; font-weight: 600; line-height: 1.5; letter-spacing: -.35px; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-assets-heading p { max-width: 36ch; }
+.brand-assets-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.brand-asset { min-width: 0; padding: 24px; border: 0 solid var(--chrome-border); border-radius: 10px; }
+.brand-asset-light { background: #ffffff; color: #171717; }
+.brand-asset-dark { background: #111111; color: #f6f6f3; }
+.brand-asset-label { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; opacity: .8; }
+.brand-asset-label h3 { margin: 0; font-size: 12px; font-weight: 500; line-height: 1.5; }
+.brand-asset-label > span { font: 11px/1.6 "SFMono-Regular", Consolas, monospace; letter-spacing: .6px; }
+.brand-asset-preview { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; min-height: 144px; }
+.brand-asset-preview .moru-logo { max-width: 100%; font-size: 32px; }
+.brand-asset-preview > .moru-mark { flex: none; opacity: .8; }
+.brand-downloads { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; padding-top: 16px; border-top: var(--ui-border-width,0px) solid #77777740; }
+.brand-downloads a { display: inline-flex; align-items: center; gap: 8px; min-width: 0; min-height: 36px; padding: 8px 0; color: inherit; font-size: 12px; line-height: 1.5; text-decoration: none; }
+.brand-downloads a > svg { flex: none; }
+.brand-downloads a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.brand-downloads a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.brand-asset-guidance { margin-top: 20px; max-width: 80ch; }
+@container brand-content (max-width: 640px) {
+  .brand-story-hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 20px; }
+  .brand-desktop-break { display: none; }
+  .brand-logo-stage { min-height: 300px; padding: 20px; }
+  .brand-logo-stage .moru-logo { font-size: 40px; }
+  .brand-stage-label, .brand-stage-caption { left: 20px; right: 20px; }
+  .brand-stage-label { top: 20px; }
+  .brand-stage-caption { bottom: 20px; }
+  .brand-symbol-story { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 32px 0; }
+  .brand-symbol-diagram { min-height: 224px; padding: 20px; }
+  .brand-principles { grid-template-columns: minmax(0, 1fr); }
+  .brand-principles article { display: grid; grid-template-columns: 24px minmax(0, 1fr); column-gap: 12px; }
+  .brand-principle-number { padding-top: 2px; }
+  .brand-principles h2 { margin: 0 0 8px; }
+  .brand-principles p { grid-column: 2; }
+  .brand-assets { padding-top: 32px; }
+  .brand-assets-heading { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .brand-assets-heading p > br { display: none; }
+  .brand-assets-grid { grid-template-columns: minmax(0, 1fr); }
+  .brand-asset { padding: 20px; }
+}
+@container brand-content (max-width: 360px) {
+  .brand-asset-preview { flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; min-height: 180px; padding: 24px 0; }
+  .brand-downloads { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}

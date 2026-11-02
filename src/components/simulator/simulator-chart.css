@@ -1,0 +1,44 @@
+.sim-component-chart {
+  --sim-chart-color:var(--ui-accent);
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  padding:14px;
+  overflow:hidden;
+  border:var(--ui-border-width,0px) solid var(--ui-border);
+  border-radius:6px;
+  background:var(--ui-surface);
+  color:var(--ui-text);
+  box-sizing:border-box;
+}
+.sim-frame[data-style='wireframe'] .sim-component-chart {
+  --sim-chart-color:var(--ui-text);
+  --ui-accent:var(--ui-text);
+}
+.sim-component-chart .ui-chart { gap:8px; }
+.sim-component-chart .ui-chart figcaption {
+  font-size:var(--ui-type-label-size);
+  line-height:var(--ui-type-label-line-height);
+  overflow-wrap:anywhere;
+}
+.sim-component-chart .ui-chart-container { max-height:100%; }
+.sim-component-chart .recharts-cartesian-axis-tick text { font-size:10px; }
+.sim-component-chart .ui-data-table-empty,.sim-chart-loading {
+  display:grid;
+  align-content:center;
+  min-height:80px;
+  padding:16px 0;
+  color:var(--ui-muted);
+  font-size:var(--ui-type-caption-size);
+  line-height:var(--ui-type-caption-line-height);
+  text-align:center;
+}
+.sim-component .sim-chart-invalid {
+  margin-top:6px;
+  color:var(--ui-danger);
+  font-size:10px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+.sim-component[data-sim-state='disabled'] .sim-component-chart { opacity:.5; }

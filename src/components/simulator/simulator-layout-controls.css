@@ -1,0 +1,20 @@
+.sim-layout-controls { display:grid; gap:14px; min-width:0; }
+.sim-layout-modes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; padding:4px; border-radius:8px; background:var(--chrome-bg); }
+.moru-simulator .sim-layout-modes > button { display:flex; align-items:center; justify-content:flex-start; gap:6px; min-width:0; min-height:34px; padding:7px 8px; border:0; border-radius:5px; background:transparent; color:var(--chrome-muted); font-size:10px; line-height:1.5; }
+.moru-simulator .sim-layout-modes > button[aria-pressed='true'] { background:var(--chrome-surface); color:var(--chrome-text); box-shadow:0 1px 4px #00000008; }
+.moru-simulator .sim-layout-modes > button:hover { color:var(--chrome-text); }
+.sim-layout-modes > button > svg { flex:none; stroke-width:1.5; }
+.sim-inspector .sim-layout-active { display:flex; align-items:center; gap:6px; color:var(--chrome-muted); font-size:10px; line-height:1.6; }
+.sim-layout-active > span { width:5px; height:5px; flex:none; border-radius:50%; background:var(--chrome-accent); }
+.sim-layout-breakpoints { min-width:0; margin:0; padding:0; border:0; }
+.sim-layout-breakpoints > legend { margin:0 0 8px; padding:0; color:var(--chrome-muted); font-size:10px; line-height:1.5; }
+.sim-layout-column-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+.sim-layout-column-fields .sim-inspector-field > label { font-size:9px; }
+.sim-layout-column-fields .sim-inspector-number > input { padding-inline:7px 23px; }
+.sim-layout-column-fields .sim-inspector-number > span { right:7px; }
+.sim-inspector .sim-layout-hierarchy-hint { display:flex; align-items:flex-start; gap:6px; }
+.sim-layout-hierarchy-hint > svg { margin-top:2px; flex:none; }
+.sim-inspector .sim-layout-dimensions { margin:0; padding:9px 10px; border-radius:6px; background:var(--chrome-bg); color:var(--chrome-muted); font-size:10px; line-height:1.8; }
+.sim-layout-wrap-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
+.moru-simulator .sim-layout-wrap-actions > button { display:grid; justify-items:center; gap:5px; min-width:0; min-height:55px; padding:8px 5px; border:0; border-radius:6px; background:var(--chrome-hover); color:var(--chrome-text); font-size:10px; }
+.sim-layout-wrap-actions > button > svg { stroke-width:1.5; }

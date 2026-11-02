@@ -1,0 +1,4 @@
+.date-time-demo { display:grid; gap:var(--ui-form-gap,24px); min-width:0; width:100%; }
+.date-time-demo-toggle,.date-time-demo-actions { display:flex; align-items:center; flex-wrap:wrap; gap:var(--ui-control-gap,8px); }
+.date-time-demo-result { display:block; min-width:0; padding:12px; border:var(--ui-border-width,1px) solid var(--ui-border); border-radius:var(--ui-radius); background:var(--ui-surface); color:var(--ui-text); font-family:var(--ui-font-family-code,monospace); font-size:var(--ui-type-caption-size,12px); line-height:1.7; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.date-time-demo-caption { margin:0; color:var(--ui-muted); font-size:var(--ui-type-caption-size,12px); line-height:var(--ui-type-caption-line-height,1.6); overflow-wrap:anywhere; }

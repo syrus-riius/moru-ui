@@ -1,0 +1,37 @@
+.chart-variations-demo { display:grid; gap:16px; width:100%; min-width:0; font-family:var(--ui-font-family); }
+.chart-variations-intro { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; color:var(--ui-muted); font-size:10px; line-height:1.6; }
+.chart-variations-intro > span:first-child { font-size:9px; font-weight:500; letter-spacing:1px; }
+.chart-variation-picker { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; min-width:0; }
+.chart-variation-picker > button { display:grid; justify-items:center; align-content:start; gap:7px; min-width:0; padding:10px 6px; border:var(--ui-border-width,0px) solid var(--ui-border); border-radius:6px; background:var(--ui-surface); color:var(--ui-muted); text-align:center; font:inherit; cursor:pointer; }
+.chart-variation-picker > button:hover:not(:disabled) { background:var(--ui-background); }
+.chart-variation-picker > button[aria-pressed='true'] { color:var(--ui-text); border-color:var(--ui-text); background:var(--ui-background); }
+.chart-variation-picker > button:focus-visible { outline:2px solid var(--ui-accent); outline-offset:3px; }
+.chart-variation-picker > button:disabled { cursor:default; opacity:.5; }
+.chart-variation-picker > button > svg { display:block; width:100%; max-width:66px; height:29px; overflow:visible; }
+.chart-variation-picker > button > span { display:grid; gap:1px; }
+.chart-variation-picker strong { color:inherit; font-size:11px; font-weight:500; line-height:1.5; }
+.chart-variation-picker small { color:var(--ui-muted); font-size:9px; line-height:1.5; }
+.chart-variation-preview-baseline { fill:none; stroke:var(--ui-border); stroke-width:1; }
+.chart-variation-preview-neutral { fill:var(--ui-text); opacity:.65; }
+.chart-variation-preview-accent { fill:var(--ui-accent); }
+.chart-variation-preview-line { fill:none; stroke:var(--ui-accent); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.chart-variation-preview-fill { fill:var(--ui-accent); opacity:.12; }
+.chart-variation-preview-ring { fill:none; stroke:var(--ui-text); stroke-width:7; opacity:.3; }
+.chart-variation-preview-arc { fill:none; stroke:var(--ui-accent); stroke-width:7; stroke-dasharray:34 82; transform:rotate(-90deg); transform-origin:40px 19px; }
+.chart-variation-description { margin:0; min-height:36px; color:var(--ui-muted); font-size:11px; line-height:1.75; word-break:keep-all; overflow-wrap:anywhere; }
+.chart-variation-metric { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:8px 12px; padding-top:2px; }
+.chart-variation-metric > div { display:grid; gap:3px; }
+.chart-variation-metric > div > span { color:var(--ui-muted); font-size:10px; line-height:1.6; }
+.chart-variation-metric strong { display:flex; align-items:baseline; gap:5px; color:var(--ui-text); font-size:29px; font-weight:550; line-height:1.2; letter-spacing:-.8px; font-variant-numeric:tabular-nums; }
+.chart-variation-metric strong > small { color:var(--ui-muted); font-size:11px; font-weight:400; letter-spacing:0; }
+.chart-variation-metric > span { color:var(--ui-muted); font-size:10px; line-height:1.6; }
+.chart-variation-loading { display:grid; place-items:center; min-height:270px; color:var(--ui-muted); font-size:11px; line-height:1.7; }
+.chart-variations-demo .ui-chart { gap:10px; }
+.chart-variations-demo .ui-chart figcaption { font-size:11px; font-weight:500; }
+.chart-variations-demo .ui-chart-data { font-size:10px; }
+.chart-variation-options { display:flex; align-items:center; flex-wrap:wrap; gap:10px 14px; padding-top:12px; border-top:var(--ui-border-width,0px) solid var(--ui-border); font-size:10px; color:var(--ui-muted); line-height:1.6; }
+.chart-variation-options > label { display:flex; align-items:center; gap:5px; cursor:pointer; }
+.chart-variation-options input { width:12px; height:12px; margin:0; accent-color:var(--ui-text); }
+.chart-variation-options input:focus-visible { outline:2px solid var(--ui-accent); outline-offset:3px; }
+.chart-variation-options > span { margin-inline-start:auto; }
+@container specimen (max-width:300px) { .chart-variation-picker { grid-template-columns:repeat(2,minmax(0,1fr)); } .chart-variation-picker > button { grid-template-columns:54px minmax(0,1fr); justify-items:start; align-items:center; gap:5px; text-align:left; } .chart-variation-options > span { width:100%; margin:0; } }

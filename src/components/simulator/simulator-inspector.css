@@ -1,0 +1,46 @@
+.sim-inspector { min-width:0; color:var(--chrome-text); background:var(--chrome-surface); font-family:var(--font-sans); font-size:12px; line-height:1.6; }
+.sim-inspector :is(h2,h3,p) { margin:0; overflow-wrap:anywhere; }
+.sim-inspector-heading { display:grid; gap:4px; padding:18px; border-bottom:0; }
+.sim-inspector-heading > span { color:var(--chrome-muted); font-size:9px; font-weight:500; line-height:1.5; letter-spacing:1px; }
+.sim-inspector-heading h2 { color:var(--chrome-text); font-size:14px; font-weight:550; line-height:1.5; letter-spacing:-.25px; }
+.sim-inspector-heading > p { color:var(--chrome-muted); font-size:10px; line-height:1.6; }
+.sim-inspector-section { display:grid; align-content:start; gap:14px; padding:20px 18px; border-bottom:0; }
+.sim-inspector-section h3 { color:var(--chrome-text); font-size:11px; font-weight:550; line-height:1.5; letter-spacing:-.1px; }
+.sim-inspector-field { display:grid; gap:6px; min-width:0; }
+.sim-inspector-field > label { color:var(--chrome-muted); font-size:10px; font-weight:450; line-height:1.5; }
+.sim-inspector :is(input:not([type='checkbox']),select,textarea) { display:block; width:100%; max-width:100%; min-width:0; min-height:36px; padding:8px 10px; border:0; border-radius:6px; outline-offset:3px; background:var(--chrome-hover); color:var(--chrome-text); font-family:inherit; font-size:11px; line-height:1.6; }
+.sim-inspector textarea { resize:vertical; min-height:78px; }
+.sim-inspector :is(input:not([type='checkbox']),select,textarea):hover { background:var(--chrome-hover); }
+.sim-inspector :is(input,select,textarea,button):focus-visible { outline:2px solid var(--chrome-accent); outline-offset:2px; }
+.sim-inspector select { padding-inline-end:25px; }
+.sim-inspector .sim-inspector-hint { color:var(--chrome-muted); font-size:10px; font-weight:400; line-height:1.8; }
+.sim-inspector .sim-inspector-warning { color:var(--ui-danger); font-size:10px; line-height:1.8; }
+.sim-inspector :is(input:not([type='checkbox']),select,textarea)[aria-invalid='true'] { border-color:transparent; background:var(--ui-danger-soft); box-shadow:inset 0 0 0 1px var(--ui-danger); }
+.sim-inspector-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 10px; }
+.sim-inspector-selection-list { display:grid; gap:7px; margin:0; padding:0; list-style:none; min-width:0; }
+.sim-inspector-selection-list > li { display:grid; grid-template-columns:minmax(0,64px) minmax(0,1fr); align-items:baseline; gap:9px; min-width:0; padding:8px 9px; border-radius:5px; background:var(--chrome-hover); }
+.sim-inspector-selection-list > li > span { color:var(--chrome-muted); font-size:9px; line-height:1.5; overflow-wrap:anywhere; }
+.sim-inspector-selection-list strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--chrome-text); font-size:10px; font-weight:450; line-height:1.5; }
+.sim-inspector-selection-summary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:0; }
+.sim-inspector-selection-summary > div { min-width:0; padding:9px 10px; border-radius:6px; background:var(--chrome-hover); }
+.sim-inspector-selection-summary dt { margin:0 0 6px; color:var(--chrome-muted); font-size:9px; line-height:1.5; }
+.sim-inspector-selection-summary dd { display:flex; justify-content:space-between; align-items:baseline; gap:6px; margin:0; color:var(--chrome-text); font-size:12px; line-height:1.5; font-variant-numeric:tabular-nums; }
+.sim-inspector-selection-summary dd > span { color:var(--chrome-muted); font-size:9px; }
+.sim-inspector-number { position:relative; min-width:0; }
+.sim-inspector-number > input { padding-inline-end:27px; font-variant-numeric:tabular-nums; appearance:textfield; }
+.sim-inspector-number > input::-webkit-inner-spin-button,.sim-inspector-number > input::-webkit-outer-spin-button { appearance:none; margin:0; }
+.sim-inspector-number > span { position:absolute; inset-inline-end:9px; top:9px; pointer-events:none; color:var(--chrome-muted); font-size:10px; line-height:1.6; }
+.sim-inspector-check { display:flex; align-items:flex-start; gap:8px; min-height:28px; color:var(--chrome-text); font-size:11px; line-height:1.7; cursor:pointer; }
+.sim-inspector-check > input { width:13px; height:13px; flex:none; margin:3px 0 0; accent-color:var(--chrome-action-bg); }
+.sim-inspector-actions { display:flex; align-items:stretch; gap:8px; min-width:0; }
+.sim-inspector-actions > button,.sim-inspector-start { display:inline-flex; flex:1; align-items:center; justify-content:center; gap:6px; min-width:0; min-height:34px; padding:7px 8px; border:0; border-radius:6px; background:var(--chrome-surface); color:var(--chrome-text); font-family:inherit; font-size:10px; font-weight:450; line-height:1.6; text-align:center; overflow-wrap:anywhere; }
+.sim-inspector-actions > button:hover:not(:disabled),.sim-inspector-start:hover:not(:disabled) { background:var(--chrome-hover); }
+.sim-inspector-actions > button svg,.sim-inspector-start svg { flex:none; stroke-width:1.5; }
+.sim-inspector-actions > .sim-inspector-delete { color:var(--ui-danger); }
+.sim-inspector-start { width:100%; }
+.moru-simulator .sim-inspector-start:disabled { opacity:1; color:var(--chrome-muted); background:var(--chrome-bg); border-color:transparent; cursor:default; }
+.sim-inspector-empty { display:grid; justify-items:start; gap:9px; padding:24px 18px; color:var(--chrome-muted); font-size:11px; line-height:1.8; }
+.sim-inspector-empty > svg { width:18px; height:18px; margin-bottom:2px; color:var(--chrome-accent); stroke-width:1.5; }
+.sim-inspector-empty > strong { color:var(--chrome-text); font-size:11px; font-weight:500; }
+.sim-inspector-empty > p { font-size:10px; }
+@media (min-width:621px) and (max-width:1180px) { .sim-workbench > .sim-inspector { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); } .sim-inspector-heading { grid-column:1/-1; } .sim-inspector-section:nth-of-type(even) { border-inline-end:0; } .sim-inspector-empty { align-content:start; } }

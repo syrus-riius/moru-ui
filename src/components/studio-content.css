@@ -1,0 +1,16 @@
+/* Quiet page titles and generous work areas share one hierarchy. */
+.main-content.main-content-brand { container:catalog / inline-size; }
+.main-content .catalog-intro { position:relative; margin-bottom:24px; }
+.main-content .catalog-intro .eyebrow { color:var(--chrome-muted); font-size:9px; font-weight:500; letter-spacing:1px; }
+.main-content .catalog-intro .eyebrow::before { content:''; width:5px; height:5px; background:var(--ui-accent); border-radius:1px; }
+.main-content .catalog-intro h1 { font-size:30px; line-height:1.3; font-weight:600; letter-spacing:-1px; margin:10px 0; }
+.main-content .catalog-intro > p { max-width:620px; margin:0; color:var(--chrome-muted); font-size:12px; line-height:1.7; word-break:keep-all; overflow-wrap:anywhere; }
+.main-content .catalog-meta { display:flex; align-items:center; flex-wrap:wrap; gap:8px 16px; margin-top:14px; color:var(--chrome-muted); font-size:10px; line-height:1.5; }
+.main-content .catalog-meta > span:first-child { color:var(--chrome-text); font-size:10px; font-weight:550; letter-spacing:.3px; }
+.studio-shell .main-content .main-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px 20px; margin-top:28px; padding:20px 0; color:var(--chrome-muted); font-size:10px; line-height:1.6; }
+.studio-shell .main-content .main-footer > span { min-width:0; }
+.studio-shell .main-content .main-footer > span:last-child { font:9px/1.6 var(--font-sans); }
+.studio-shell .main-content .main-footer .moru-mark { flex:none; color:var(--chrome-text); }
+.studio-shell .skip-link:focus-visible,.studio-shell .floating-editor-button:focus-visible { outline:2px solid var(--chrome-text); outline-offset:3px; }
+@media (max-width:1100px) { .studio-shell .main-content:not(.main-content-brand) .main-footer { padding-bottom:88px; } }
+@media (max-width:540px) { .main-content .catalog-intro h1 { font-size:27px; letter-spacing:-.8px; } .main-content .catalog-meta { gap:8px 12px; margin-top:12px; } }

@@ -1,0 +1,8 @@
+.ui-date-picker { position:relative; }
+.ui-date-picker-native-input,.ui-date-picker-requirements { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.ui-date-picker-trigger:not(:disabled):not([aria-invalid='true']) { border-color:var(--ui-control-border,var(--ui-border,#8a8a86)); }
+.ui-date-picker-trigger:hover:not(:disabled):not([aria-disabled='true']):not([aria-invalid='true']) { border-color:var(--ui-control-hover-border,var(--ui-control-border,#8a8a86)); background:var(--ui-control-hover-bg,var(--ui-input-bg)); }
+.ui-date-picker-trigger[aria-disabled='true'] { cursor:default; }
+.ui-date-picker-validation { margin:0; color:var(--ui-danger-surface-text,var(--ui-danger)); font-size:var(--ui-type-caption-size,12px); line-height:var(--ui-type-caption-line-height,1.5); letter-spacing:var(--ui-type-caption-letter-spacing,0em); overflow-wrap:anywhere; }
+.ui-popover:is(.ui-date-picker-popup,.ui-date-range-picker-popup)[data-calendar-size=sm] { width:280px; }
+.ui-popover:is(.ui-date-picker-popup,.ui-date-range-picker-popup)[data-calendar-size=lg] { width:368px; }

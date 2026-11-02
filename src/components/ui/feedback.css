@@ -1,0 +1,259 @@
+.ui-badge,
+.ui-alert,
+.ui-avatar,
+.ui-progress {
+  box-sizing: border-box;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+}
+
+:is(.ui-badge, .ui-alert)[data-tone='success'] {
+  --ui-feedback-color: var(--ui-success, #23734d);
+  --ui-feedback-soft: var(--ui-success-soft, #edf4f1);
+  --ui-feedback-text: var(--ui-success-text, #23734d);
+  --ui-feedback-surface-text: var(--ui-success-surface-text, #23734d);
+  --ui-feedback-border: var(--ui-success-border, #bdd5ca);
+  --ui-feedback-foreground: var(--ui-success-foreground, #fff);
+}
+
+:is(.ui-badge, .ui-alert)[data-tone='warning'] {
+  --ui-feedback-color: var(--ui-warning, #9c620f);
+  --ui-feedback-soft: var(--ui-warning-soft, #f7f2ec);
+  --ui-feedback-text: var(--ui-warning-text, #9c620f);
+  --ui-feedback-surface-text: var(--ui-warning-surface-text, #9c620f);
+  --ui-feedback-border: var(--ui-warning-border, #e1d0b7);
+  --ui-feedback-foreground: var(--ui-warning-foreground, #fff);
+}
+
+:is(.ui-badge, .ui-alert)[data-tone='info'] {
+  --ui-feedback-color: var(--ui-info, #2869b5);
+  --ui-feedback-soft: var(--ui-info-soft, #eef3f9);
+  --ui-feedback-text: var(--ui-info-text, #2869b5);
+  --ui-feedback-surface-text: var(--ui-info-surface-text, #2869b5);
+  --ui-feedback-border: var(--ui-info-border, #bfd2e9);
+  --ui-feedback-foreground: var(--ui-info-foreground, #fff);
+}
+
+:is(.ui-badge, .ui-alert)[data-tone='danger'] {
+  --ui-feedback-color: var(--ui-danger, #c44747);
+  --ui-feedback-soft: var(--ui-danger-soft, #faf0f0);
+  --ui-feedback-text: var(--ui-danger-text, #be4545);
+  --ui-feedback-surface-text: var(--ui-danger-surface-text, #c44747);
+  --ui-feedback-border: var(--ui-danger-border, #edc8c8);
+  --ui-feedback-foreground: var(--ui-danger-foreground, #fff);
+}
+
+.ui-badge {
+  --ui-feedback-color: var(--ui-primary, #181818);
+  --ui-feedback-foreground: var(--ui-primary-foreground, #fff);
+  --ui-feedback-soft: var(--ui-surface-hover, #f5f5f5);
+  --ui-feedback-text: var(--ui-text, #171717);
+  --ui-feedback-surface-text: var(--ui-text, #171717);
+  --ui-feedback-border: var(--ui-border, #e8e8e4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--ui-control-gap, 8px) / 2);
+  max-width: 100%;
+  padding: calc(var(--ui-space, 4px) / 2) calc(var(--ui-space, 4px) * 2.5);
+  border: var(--ui-border-width, 1px) solid transparent;
+  border-radius: 999px;
+  background: var(--ui-feedback-color);
+  color: var(--ui-feedback-foreground);
+  font-size: max(10px, calc(var(--ui-type-caption-size, 12px) - 1px));
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+.ui-badge[data-variant='secondary'] {
+  background: var(--ui-feedback-soft);
+  color: var(--ui-feedback-text);
+}
+
+.ui-badge[data-variant='outline'] {
+  border-color: var(--ui-feedback-border);
+  background: var(--ui-feedback-soft);
+  color: var(--ui-feedback-surface-text);
+}
+
+.ui-badge > svg {
+  width: var(--ui-type-caption-size, 12px);
+  height: var(--ui-type-caption-size, 12px);
+  flex-shrink: 0;
+}
+
+.ui-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-control-gap, 8px);
+  padding: calc(var(--ui-space, 4px) * 3.5) calc(var(--ui-space, 4px) * 4);
+  border: var(--ui-border-width, 1px) solid var(--ui-feedback-border, #bfd2e9);
+  border-radius: calc(var(--ui-radius, 6px) + 3px);
+  background: var(--ui-feedback-soft, #eef3f9);
+  color: var(--ui-feedback-text, #2869b5);
+  border-color: transparent;
+}
+
+.ui-alert-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5));
+}
+
+.ui-alert-icon > svg {
+  width: var(--ui-icon-size-md, 16px);
+  height: var(--ui-icon-size-md, 16px);
+}
+
+.ui-alert-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ui-field-gap, 8px) / 2);
+  overflow-wrap: anywhere;
+}
+
+.ui-alert-title {
+  margin: 0;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+}
+
+.ui-alert-description {
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+
+.ui-alert-description > :first-child { margin-top: 0; }
+.ui-alert-description > :last-child { margin-bottom: 0; }
+
+.ui-avatar {
+  --ui-avatar-size: var(--ui-control-height-md, 40px);
+  display: inline-flex;
+  position: relative;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-avatar-size);
+  height: var(--ui-avatar-size);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 2px);
+  overflow: hidden;
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.ui-avatar[data-size='sm'] { --ui-avatar-size: var(--ui-control-height-sm, 32px); font-size: var(--ui-type-caption-size, 12px); }
+.ui-avatar[data-size='lg'] { --ui-avatar-size: var(--ui-control-height-lg, 48px); }
+
+.ui-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ui-avatar-fallback {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-avatar-fallback > svg { width: 45%; height: 45%; }
+
+.ui-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-field-gap, 8px);
+  width: 100%;
+  min-width: 0;
+}
+
+.ui-progress-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+
+.ui-progress-label { min-width: 0; font-weight: var(--ui-type-label-weight, 550); overflow-wrap: anywhere; }
+.ui-progress-value { margin-inline-start: auto; flex-shrink: 0; color: var(--ui-muted, #6e6e6b); font-variant-numeric: tabular-nums; }
+
+.ui-progress-track {
+  position: relative;
+  width: 100%;
+  height: max(3px, calc(var(--ui-space, 4px) * 1.25));
+  border-radius: var(--ui-radius, 6px);
+  overflow: hidden;
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+
+.ui-progress-indicator {
+  position: absolute;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ui-primary, #181818);
+  transition: width var(--ui-duration, 160ms) ease;
+}
+
+.ui-progress-indicator[data-indeterminate] {
+  width: 40%;
+  animation: ui-progress-indeterminate 1.6s ease-in-out infinite;
+}
+
+.ui-separator {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--ui-border, #e8e8e4);
+}
+
+.ui-separator[data-orientation='horizontal'] { width: 100%; height: max(var(--ui-border-width, 1px), 1px); }
+.ui-separator[data-orientation='vertical'] { align-self: stretch; width: max(var(--ui-border-width, 1px), 1px); min-height: 1em; }
+
+.ui-skeleton {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(var(--ui-type-body-size, 14px) * var(--ui-type-body-line-height, 1.6));
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-border, #e8e8e4);
+  animation: ui-skeleton-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ui-progress-indeterminate {
+  0% { inset-inline-start: -40%; }
+  100% { inset-inline-start: 100%; }
+}
+
+@keyframes ui-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-progress-indicator { transition: none; }
+  .ui-progress-indicator[data-indeterminate] { animation: none; inset-inline-start: 30%; }
+  .ui-skeleton { animation: none; }
+}

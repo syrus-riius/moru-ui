@@ -1,0 +1,165 @@
+.workspace-body.workspace-body-simulator { display:block; }
+.main-content.simulator-workspace { max-width:none; padding:30px 28px 0; }
+.moru-simulator { --sim-selection:var(--chrome-accent); font-family:var(--font-sans); color:var(--chrome-text); font-size:13px; line-height:1.6; min-width:0; }
+.moru-simulator * { box-sizing:border-box; }
+.sim-intro { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px; }
+.sim-overline { display:block; font-size:9px; font-weight:550; line-height:1.5; letter-spacing:1.2px; color:var(--chrome-muted); }
+.sim-intro h1 { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:5px 0 4px; font-size:25px; line-height:1.4; font-weight:600; letter-spacing:-.8px; }
+.sim-intro h1 > span { display:inline-flex; align-items:center; min-height:22px; padding:2px 7px; border:0; border-radius:4px; color:var(--chrome-muted); background:var(--chrome-surface); font-size:10px; line-height:1.5; font-weight:400; letter-spacing:0; }
+.sim-intro p { margin:0; font-size:12px; color:var(--chrome-muted); }
+.sim-local-label { display:flex; align-items:center; gap:7px; font-size:10px; color:var(--chrome-muted); }
+.sim-local-label > span { width:5px; height:5px; flex:none; border-radius:50%; background:var(--chrome-accent); }
+.moru-simulator :is(button,input,select,textarea):focus-visible { outline:2px solid var(--chrome-accent); outline-offset:3px; }
+.moru-simulator button:disabled { opacity:.38; }
+.sim-project-bar,.sim-toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; background:var(--chrome-surface); border:0; }
+.sim-project-bar { border-radius:10px 10px 0 0; }
+.sim-project-identity { display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
+.sim-project-icon { display:grid; place-items:center; flex:none; width:36px; height:36px; border:0; border-radius:8px; background:var(--chrome-bg); color:var(--chrome-text); }
+.sim-project-name { min-width:0; flex:1; }
+.sim-project-name > label { display:block; color:var(--chrome-muted); font-size:10px; line-height:1.4; }
+.sim-project-meta { display:flex; align-items:center; flex-wrap:wrap; gap:4px 14px; min-width:0; margin-top:2px; }
+.sim-project-meta > input { width:210px; max-width:100%; min-width:0; border:0; border-radius:4px; margin-inline-start:-4px; padding:2px 3px; color:var(--chrome-text); background:transparent; font-size:13px; line-height:1.5; font-weight:550; letter-spacing:-.15px; }
+.sim-project-meta > input:hover:not(:disabled) { background:var(--chrome-bg); }
+.sim-project-meta > input:focus-visible { background:var(--chrome-bg); }
+.sim-save-status { color:var(--chrome-muted); font-size:10px; line-height:1.6; }
+.sim-save-status::before { content:''; display:inline-block; width:4px; height:4px; background:var(--chrome-text); border-radius:50%; margin-inline-end:5px; vertical-align:middle; }
+.sim-save-status.sim-save-error { color:var(--ui-danger); }
+.sim-save-status.sim-save-error::before { background:currentColor; }
+.sim-toolbar { border-top:0; padding:12px 20px; }
+.sim-toolbar-group { display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-width:0; }
+.moru-simulator :is(.sim-toolbar,.sim-project-bar,.sim-canvas-bar,.sim-library,.sim-preview-dialog,.sim-runtime-notice) button { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:32px; padding:6px 10px; color:var(--chrome-text); background:var(--chrome-surface); border:0; border-radius:6px; font-size:11px; font-weight:450; line-height:1.5; }
+.moru-simulator :is(.sim-toolbar,.sim-project-bar,.sim-canvas-bar,.sim-library) button:hover:not(:disabled) { background:var(--chrome-hover); }
+.moru-simulator :is(.sim-toolbar,.sim-project-bar,.sim-canvas-bar,.sim-library) button > svg { flex:none; stroke-width:1.6; }
+.moru-simulator .sim-file-actions { gap:8px; }
+.moru-simulator .sim-file-actions > button { background:var(--chrome-surface); }
+.moru-simulator .sim-file-actions > button:first-child { border-color:transparent; color:var(--chrome-muted); }
+.moru-simulator .sim-primary,.moru-simulator :is(.sim-toolbar,.sim-preview-dialog) button.sim-primary { background:var(--chrome-action-bg); border-color:var(--chrome-action-bg); color:var(--chrome-action-foreground); font-weight:500; }
+.moru-simulator button.sim-primary:hover:not(:disabled) { background:var(--chrome-action-bg); color:var(--chrome-action-foreground); border-color:var(--chrome-action-bg); filter:brightness(.94); }
+.sim-toolbar-group > button[aria-label^='기획 변경'] { width:32px; padding:7px; border-color:transparent; }
+.sim-toolbar-divider { display:block; height:20px; border-inline-start:0; margin-inline:5px; }
+.sim-style-picker { display:flex; border:0; border-radius:6px; padding:3px; background:var(--chrome-bg); gap:3px; }
+.moru-simulator .sim-style-picker > button { min-height:28px; padding:4px 10px; border:0; border-radius:4px; background:transparent; color:var(--chrome-muted); }
+.moru-simulator .sim-style-picker > button[aria-pressed='true'] { background:var(--chrome-surface); color:var(--chrome-text); box-shadow:0 1px 2px #00000005; }
+.sim-snap { display:inline-flex; align-items:center; gap:6px; margin-inline:4px 8px; font-size:11px; color:var(--chrome-muted); white-space:nowrap; }
+.sim-snap input { width:13px; height:13px; margin:0; accent-color:var(--chrome-action-bg); }
+.sim-workbench { display:grid; grid-template-columns:208px minmax(0,1fr) 252px; align-items:stretch; border:0; border-top:0; border-radius:0 0 10px 10px; background:var(--chrome-surface); overflow:clip; min-width:0; }
+.sim-library { min-width:0; padding:16px 12px; background:var(--chrome-surface); border-inline-end:0; min-height:560px; }
+.sim-workbench > :is(.sim-library,.sim-inspector) { max-height:max(600px,calc(100dvh - 280px)); overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--chrome-border) transparent; overscroll-behavior:contain; }
+.sim-workbench > .sim-inspector { border-inline-start:0; }
+.sim-library-tabs { display:flex; gap:4px; margin:0 0 16px; padding:3px; border:0; border-radius:6px; background:var(--chrome-bg); }
+.moru-simulator .sim-library-tabs > button { flex:1; gap:6px; min-height:30px; padding:5px 4px; border-color:transparent; border-radius:4px; background:transparent; color:var(--chrome-muted); }
+.moru-simulator .sim-library-tabs > button[aria-pressed='true'] { border-color:var(--chrome-border); background:var(--chrome-surface); color:var(--chrome-text); font-weight:550; }
+.sim-library-tabs > button > span { min-width:16px; padding-inline:3px; color:var(--chrome-muted); font-size:9px; }
+.sim-palette-search { display:flex; align-items:center; gap:7px; padding:8px 9px; border:0; background:var(--chrome-hover); border-radius:6px; color:var(--chrome-muted); }
+.sim-palette-search:focus-within { outline:2px solid var(--chrome-accent); outline-offset:2px; }
+.sim-palette-search > svg { flex:none; stroke-width:1.5; }
+.sim-palette-search input { min-width:0; width:100%; height:18px; padding:0; border:0; outline:none!important; background:transparent; font-size:11px; color:var(--chrome-text); }
+.sim-panel-note { margin:9px 0 0; padding-inline:2px; font-size:10px; color:var(--chrome-muted); line-height:1.7; }
+.sim-palette-group { margin:20px 0 0; }
+.sim-palette-group h2,.sim-connections h2 { margin:0 0 8px; padding:0 3px; font-size:10px; font-weight:550; color:var(--chrome-muted); }
+.moru-simulator .sim-library .sim-palette-item { justify-content:flex-start; width:100%; min-width:0; gap:9px; min-height:51px; padding:8px; margin-bottom:6px; border:0; border-radius:7px; background:var(--chrome-surface); text-align:left; cursor:grab; touch-action:manipulation; }
+.moru-simulator .sim-library .sim-palette-item:hover { border-color:color-mix(in srgb,var(--chrome-text) 15%,var(--chrome-border)); background:var(--chrome-bg); }
+.sim-palette-item:active { cursor:grabbing; }
+.sim-palette-item > span:nth-child(2) { min-width:0; flex:1; display:grid; gap:2px; }
+.sim-palette-item strong { font-weight:500; font-size:11px; }
+.sim-palette-item small { font-size:9px; line-height:1.4; color:var(--chrome-muted); overflow-wrap:anywhere; }
+.sim-palette-icon { display:grid; place-items:center; flex:none; width:30px; height:30px; border:0; border-radius:6px; background:var(--chrome-bg); color:var(--chrome-text); }
+.sim-palette-item > svg:last-child { flex:none; color:var(--chrome-muted); opacity:.45; }
+.sim-screen-list { display:grid; gap:7px; }
+.moru-simulator .sim-library .sim-screen-list > button { justify-content:flex-start; gap:9px; min-width:0; padding:10px 8px; text-align:left; border-color:var(--chrome-border); border-radius:7px; background:var(--chrome-surface); }
+.moru-simulator .sim-library .sim-screen-list > button[aria-pressed='true'] { border-color:var(--chrome-text); background:var(--chrome-bg); color:var(--chrome-text); }
+.sim-screen-icon { display:grid; place-items:center; flex:none; width:30px; height:34px; border-radius:5px; background:var(--chrome-bg); }
+.sim-screen-list > button > span:nth-child(2) { display:grid; gap:3px; flex:1; min-width:0; }
+.sim-screen-list strong { font-size:11px; font-weight:550; overflow-wrap:anywhere; }
+.sim-screen-list small { font-size:9px; color:var(--chrome-muted); }
+.sim-start-dot { width:5px; height:5px; background:var(--chrome-accent); border-radius:50%; flex:none; }
+.moru-simulator .sim-library .sim-add-screen { width:100%; margin-top:14px; border-style:dashed; background:var(--chrome-bg); }
+.sim-screen-actions { display:flex; gap:6px; margin-top:8px; }
+.sim-screen-actions > button { flex:1; }
+.sim-connections { border-top:0; margin-top:22px; padding-top:18px; }
+.moru-simulator .sim-library .sim-connections > button { justify-content:flex-start; width:100%; padding:8px 3px; border:0; background:transparent; text-align:left; font-size:10px; }
+.sim-connections > button > span { flex:1; min-width:0; overflow-wrap:anywhere; }
+.sim-connections > button > svg { flex:none; color:var(--chrome-muted); }
+.sim-canvas-panel { min-width:0; display:flex; flex-direction:column; }
+.sim-canvas-bar { display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:6px; min-height:52px; padding:8px 14px; border-bottom:0; background:var(--chrome-surface); }
+.sim-screen-select { display:flex; align-items:center; gap:6px; min-width:0; color:var(--chrome-muted); }
+.sim-screen-select > svg { flex:none; stroke-width:1.5; }
+.sim-screen-select select { max-width:168px; min-width:0; padding:4px; border:0; background:transparent; color:var(--chrome-text); font-size:11px; }
+.moru-simulator .sim-canvas-bar .sim-dimensions { min-height:25px; padding:3px 6px; margin-inline-end:auto; border:0; background:var(--chrome-bg); color:var(--chrome-muted); font-size:9px; font-variant-numeric:tabular-nums; }
+.sim-zoom-controls { display:flex; align-items:center; gap:2px; margin-inline-start:auto; }
+.moru-simulator .sim-canvas-bar .sim-zoom-controls button { min-height:28px; padding:4px 6px; border:0; background:transparent; font-size:10px; font-variant-numeric:tabular-nums; }
+.sim-canvas-scroll { height:calc(100dvh - 350px); min-height:560px; max-height:1100px; overflow:auto; padding:40px 32px; background:var(--chrome-bg); overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:var(--chrome-border) transparent; }
+.sim-frame-stage { position:relative; margin:0 auto; flex:none; }
+.sim-frame { position:relative; transform-origin:top left; flex:none; outline:1px solid var(--ui-border); border-radius:10px; background:var(--ui-surface); color:var(--ui-text); box-shadow:0 4px 18px #00000006; font-family:var(--ui-font-family); font-size:14px; line-height:1.6; --ui-type-body-size:14px; --ui-type-body-line-height:1.65; --ui-type-body-weight:400; --ui-type-body-letter-spacing:0em; --ui-type-heading-size:25px; --ui-type-heading-line-height:1.4; --ui-type-heading-weight:600; --ui-type-heading-letter-spacing:-.035em; --ui-type-label-size:13px; --ui-type-label-line-height:1.5; --ui-type-label-weight:500; --ui-type-label-letter-spacing:-.015em; --ui-type-caption-size:12px; --ui-type-caption-line-height:1.6; --ui-type-caption-weight:400; --ui-type-caption-letter-spacing:0em; --ui-control-height:40px; --ui-control-height-md:40px; --ui-control-height-sm:32px; --ui-control-padding-x:12px; --ui-control-padding-x-md:12px; --ui-control-gap:8px; --ui-field-gap:6px; --ui-radius:6px; --ui-font-size:14px; --ui-border-width:0px; --ui-duration:140ms; --ui-font-family-code:ui-monospace,monospace; }
+.sim-frame[data-style='wireframe'] { --ui-primary:var(--chrome-text); --ui-primary-foreground:var(--chrome-surface); --ui-primary-hover:var(--chrome-text); --ui-primary-hover-foreground:var(--chrome-surface); --ui-primary-pressed:var(--chrome-text); --ui-primary-pressed-foreground:var(--chrome-surface); --ui-primary-soft:var(--chrome-hover); --ui-primary-soft-text:var(--chrome-text); --ui-primary-surface-text:var(--chrome-text); --ui-background:var(--chrome-bg); --ui-surface:var(--chrome-surface); --ui-text:var(--chrome-text); --ui-muted:var(--chrome-muted); --ui-border:var(--chrome-border); --ui-radius:3px; --ui-shadow:none; }
+.sim-frame[data-style='wireframe'] .ui-badge { color:var(--ui-text); border-color:var(--ui-border); background:var(--ui-background); }
+.sim-frame .sim-component :is(button,input,textarea,select,[role='checkbox'],[role='switch'],[role='tab']):focus-visible { outline-offset:-3px; }
+.sim-edit-frame[data-grid] { background-image:linear-gradient(to right,color-mix(in srgb,var(--ui-border) 16%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in srgb,var(--ui-border) 16%,transparent) 1px,transparent 1px); background-size:8px 8px; }
+.sim-drop-over { outline:2px solid var(--chrome-accent); outline-offset:4px; }
+.sim-node { position:absolute; touch-action:none; cursor:move; user-select:none; outline:1px solid transparent; }
+.sim-node:hover { outline-color:color-mix(in srgb,var(--sim-selection) 45%,transparent); }
+.sim-node-selected { outline:1.5px solid var(--sim-selection)!important; z-index:2; }
+.sim-node:focus-visible { outline:2px solid var(--sim-selection); outline-offset:3px; }
+.sim-node-content { height:100%; width:100%; pointer-events:none; overflow:hidden; }
+.sim-node-tag { position:absolute; display:flex; align-items:center; gap:4px; bottom:100%; left:-1px; max-width:calc(100% + 2px); padding:3px 6px; border-radius:4px 4px 0 0; background:var(--chrome-accent); color:var(--chrome-accent-foreground); font:10px/1.4 var(--font-sans); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; pointer-events:none; }
+.sim-selection-bounds { position:absolute; z-index:3; border:1px dashed var(--sim-selection); outline:3px solid color-mix(in srgb,var(--sim-selection) 7%,transparent); pointer-events:none; }
+.sim-selection-bounds > span { position:absolute; bottom:100%; left:-1px; display:inline-flex; align-items:center; gap:4px; padding:3px 6px; border-radius:4px 4px 0 0; background:var(--chrome-accent); color:var(--chrome-accent-foreground); font:10px/1.4 var(--font-sans); white-space:nowrap; }
+.sim-canvas-scroll:focus-visible { outline:2px solid var(--sim-selection); outline-offset:-3px; }
+.sim-resize-handle { position:absolute; right:-5px; bottom:-5px; width:10px; height:10px; border:1.5px solid var(--sim-selection); border-radius:2px; background:var(--chrome-surface); cursor:nwse-resize; touch-action:none; }
+.sim-empty-frame { position:absolute; inset:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:var(--chrome-muted); pointer-events:none; font-size:12px; text-align:center; }
+.sim-empty-frame strong { color:var(--chrome-text); font-weight:550; }
+.sim-empty-frame span { font-size:11px; }
+.sim-canvas-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 12px; padding:10px 14px; border-top:0; background:var(--chrome-surface); color:var(--chrome-muted); font-size:9px; }
+.sim-canvas-footer > span { min-width:0; overflow-wrap:anywhere; }
+.sim-bottom-note { display:flex; align-items:flex-start; gap:7px; margin:14px 0 0; font-size:10px; line-height:1.8; color:var(--chrome-muted); }
+.sim-bottom-note > svg { flex:none; margin-top:3px; }
+.sim-storage-warning { margin:0 0 12px; color:var(--ui-danger); font-size:12px; }
+.sim-is-playing .sim-workbench { grid-template-columns:1fr; }
+.sim-is-playing .sim-canvas-scroll { height:calc(100dvh - 340px); min-height:620px; }
+.sim-runtime-path { display:flex; align-items:center; gap:8px; min-width:0; }
+.sim-runtime-path h2 { margin:0; min-width:0; overflow-wrap:anywhere; font-size:12px; font-weight:550; }
+.sim-runtime-path > span { margin-inline-start:4px; padding:2px 5px; border-radius:4px; background:var(--chrome-bg); color:var(--chrome-muted); font-size:9px; white-space:nowrap; }
+.sim-runtime-form { position:absolute; inset:0; }
+.sim-runtime-node { position:absolute; overflow:hidden; }
+.sim-preview-scrim { position:absolute; inset:0; z-index:10; display:flex; align-items:center; justify-content:center; padding:24px; background:color-mix(in srgb,var(--ui-text) 24%,transparent); }
+.sim-preview-dialog { width:100%; max-width:360px; padding:24px; border:0; border-radius:10px; background:var(--chrome-surface); color:var(--chrome-text); box-shadow:0 8px 32px #00000014; }
+.sim-preview-dialog h3 { margin:12px 0; font-size:18px; font-weight:600; letter-spacing:-.4px; }
+.sim-preview-dialog p { margin:0 0 24px; font-size:13px; line-height:1.8; white-space:pre-wrap; overflow-wrap:anywhere; }
+.sim-preview-dialog > button { width:100%; }
+.sim-runtime-notice { position:absolute; display:flex; align-items:center; gap:8px; bottom:16px; left:16px; right:16px; z-index:12; padding:12px; border:0; border-radius:8px; background:var(--chrome-surface); color:var(--chrome-text); box-shadow:0 3px 20px #0000000a; font-size:12px; }
+.sim-runtime-notice > span { flex:1; overflow-wrap:anywhere; }
+.sim-runtime-notice > svg { flex:none; color:var(--chrome-accent); }
+.moru-simulator .sim-runtime-notice > button { padding:2px; min-height:20px; border:0; }
+@media (min-width:1700px) { .sim-workbench { grid-template-columns:228px minmax(0,1fr) 272px; } .main-content.simulator-workspace { padding-inline:36px; } }
+@media (max-width:1180px) { .sim-workbench { grid-template-columns:184px minmax(0,1fr); } .sim-workbench > .sim-inspector { grid-column:1/-1; border-top:0; border-inline-start:0; max-height:none; } .sim-library { min-height:560px; } .sim-project-meta { display:grid; gap:1px; } }
+@media (max-width:900px) { .main-content.simulator-workspace { padding:26px 22px 0; } .sim-project-bar { align-items:flex-start; } .sim-project-identity { flex-basis:100%; } .sim-file-actions { margin-inline-start:48px; } .sim-toolbar { gap:10px; padding:12px 16px; } .sim-workbench { grid-template-columns:170px minmax(0,1fr); } .sim-canvas-bar { padding-inline:10px; } .sim-screen-select select { max-width:125px; } .sim-palette-item small { display:none; } .moru-simulator .sim-library .sim-palette-item { min-height:44px; gap:8px; padding:6px; } .sim-palette-icon { width:26px; height:28px; } }
+@media (max-width:760px) { .main-content.simulator-workspace { padding:24px 16px 0; } .sim-intro { margin-bottom:20px; } .sim-intro h1 { font-size:23px; } .sim-project-bar { padding:16px; } .sim-project-meta > input { width:240px; } .sim-workbench { grid-template-columns:160px minmax(0,1fr); } .sim-canvas-scroll { padding:32px; } .sim-local-label { display:none; } .sim-library { padding:12px 10px; } .sim-library-tabs { margin-bottom:12px; } }
+@media (max-width:620px) { .sim-workbench { display:flex; flex-direction:column; } .sim-workbench > .sim-library { min-height:0; max-height:265px; border-inline-end:0; border-bottom:0; } .sim-palette-group { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 8px; margin-top:16px; } .sim-palette-group h2 { grid-column:1/-1; } .sim-palette-item small { display:block; } .sim-screen-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .sim-screen-actions { margin-bottom:8px; } .sim-canvas-scroll { min-height:480px; } .sim-is-playing .sim-canvas-scroll { min-height:560px; } .sim-connections { display:none; } }
+@media (max-width:400px) { .main-content.simulator-workspace { padding-inline:12px; } .sim-intro h1 { font-size:22px; } .sim-intro p { font-size:11px; } .sim-project-bar { padding:14px 12px; } .sim-project-icon { width:32px; height:32px; border-radius:6px; } .sim-project-identity { gap:10px; } .sim-project-meta > input { width:100%; } .sim-file-actions { width:100%; margin-inline-start:0; } .moru-simulator .sim-file-actions > button { flex:1; gap:4px; padding-inline:6px; font-size:10px; } .sim-toolbar { padding:10px; } .sim-toolbar-group { gap:4px; } .sim-toolbar-divider { margin-inline:2px; } .moru-simulator .sim-style-picker > button { padding-inline:7px; font-size:10px; } .sim-palette-item small { display:none; } .sim-palette-icon { width:24px; height:26px; } .sim-screen-select select { max-width:118px; } .sim-canvas-bar { gap:6px 4px; padding:8px; } .moru-simulator .sim-canvas-bar .sim-zoom-controls button { padding-inline:4px; } .sim-canvas-footer { padding-inline:10px; } }
+@media (prefers-reduced-motion:reduce) { .moru-simulator * { scroll-behavior:auto!important; } }
+
+/* One layout result drives the editor and playback inside a scrollable device viewport. */
+.sim-edit-frame { overflow:auto; scrollbar-width:none; overscroll-behavior:contain; }
+.sim-edit-frame::-webkit-scrollbar,.sim-runtime-viewport::-webkit-scrollbar { display:none; }
+.sim-layout-content { position:relative; width:100%; min-height:100%; }
+.sim-runtime-viewport { position:absolute; inset:0; overflow:auto; border-radius:inherit; overscroll-behavior:contain; scrollbar-width:none; }
+.sim-runtime-form { position:relative; inset:auto; width:100%; min-height:100%; margin:0; }
+.sim-node-container.sim-node-selected { z-index:auto; }
+.sim-node-container:not(.sim-node-selected):hover { outline-style:dashed; }
+.sim-node-container.sim-container-drop { outline:2px dashed var(--sim-selection); outline-offset:-3px; background:color-mix(in srgb,var(--sim-selection) 5%,transparent); }
+.sim-runtime-container { pointer-events:none; }
+.sim-frame-presets { display:flex; gap:2px; padding:3px; border-radius:6px; background:var(--chrome-bg); margin-inline-start:auto; }
+.moru-simulator .sim-frame-presets button { display:flex; gap:4px; min-height:27px; padding:4px 6px; border:0; background:transparent; color:var(--chrome-muted); font-size:10px; }
+.moru-simulator .sim-frame-presets button[aria-pressed='true'] { background:var(--chrome-surface); color:var(--chrome-text); box-shadow:0 1px 3px #00000008; }
+.sim-canvas-bar .sim-zoom-controls { margin-inline-start:8px; }
+.sim-layer-list { display:grid; gap:3px; }
+.moru-simulator .sim-layer-list button,.moru-simulator .sim-layer-screen { width:100%; display:flex; justify-content:flex-start; gap:7px; min-height:34px; padding:7px 10px; border:0; background:transparent; text-align:start; font-size:11px; }
+.sim-layer-list button > svg { flex:none; color:var(--chrome-muted); }
+.sim-layer-list button > span { min-width:0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.sim-layer-list button > small,.sim-layer-screen > small { margin-inline-start:auto; color:var(--chrome-muted); font-size:9px; white-space:nowrap; }
+.moru-simulator .sim-layer-list button[aria-pressed='true'] { background:var(--chrome-hover); color:var(--chrome-text); }
+.moru-simulator .sim-layer-screen { background:var(--chrome-bg); margin:12px 0 8px; }
+@media(max-width:900px) { .sim-frame-presets button > span { display:none; } }
+
+.moru-simulator .sim-library-tabs > button { white-space:nowrap; gap:3px; font-size:10px; }
+.sim-insertion-marker { position:absolute; z-index:5; height:3px; border-radius:2px; background:var(--sim-selection); pointer-events:none; }

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "context-menu",
+  "type": "registry:ui",
+  "title": "Context Menu",
+  "description": "Contextual action menu with nested actions and keyboard navigation.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/context-menu.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/context-menu.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useRef, useState, type ReactNode } from 'react'\nimport { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'\nimport { cn } from './_lib/cn'\nimport { NavigationMenuActions, type NavigationAction } from './navigation-menu-items'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './navigation-completion.css'\n\nexport type ContextMenuItem = NavigationAction\nexport interface ContextMenuProps {\n  children: ReactNode\n  items: ContextMenuItem[]\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\nexport function ContextMenu({ children, items, open, defaultOpen = false, onOpenChange, disabled, size = 'md', className, 'aria-label': label = '컨텍스트 메뉴 영역' }: ContextMenuProps) {\n  const portalContainer = useThemePortalContainer()\n  const triggerRef = useRef<HTMLDivElement>(null)\n  const [localOpen, setLocalOpen] = useState(defaultOpen)\n  const [keyboardAnchor, setKeyboardAnchor] = useState<HTMLElement | null>(null)\n  const shown = !disabled && (open ?? localOpen)\n  useEffect(() => {\n    if (disabled && open === undefined) setLocalOpen(false)\n  }, [disabled, open])\n  function changeOpen(next: boolean) {\n    if (next && disabled) return\n    if (open === undefined) setLocalOpen(next)\n    onOpenChange?.(next)\n  }\n  return <BaseContextMenu.Root open={shown} onOpenChange={changeOpen} disabled={disabled}>\n    <BaseContextMenu.Trigger ref={triggerRef} className={cn('ui-context-menu-trigger', className)} data-size={size} tabIndex={disabled ? -1 : 0} aria-disabled={disabled || undefined} aria-label={label} aria-haspopup=\"menu\" aria-expanded={shown} onContextMenu={() => setKeyboardAnchor(null)} onKeyDown={(event) => {\n      if (disabled || !(event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10'))) return\n      event.preventDefault()\n      setKeyboardAnchor(event.currentTarget)\n      changeOpen(true)\n    }}>{children}</BaseContextMenu.Trigger>\n    <OverlayPortal portal={BaseContextMenu.Portal} kind=\"menu\" container={portalContainer}><BaseContextMenu.Positioner positionMethod=\"fixed\" className=\"ui-navigation-positioner\" anchor={keyboardAnchor ?? undefined} align=\"start\" sideOffset={4} collisionPadding={12}><BaseContextMenu.Popup className=\"ui-navigation-popup\" data-size={size} aria-label={label} finalFocus={triggerRef}>\n      <NavigationMenuActions items={items} size={size} />\n    </BaseContextMenu.Popup></BaseContextMenu.Positioner></OverlayPortal>\n  </BaseContextMenu.Root>\n}\n"
+    },
+    {
+      "path": "registry/moru/navigation-menu-items.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/navigation-menu-items.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { ReactNode } from 'react'\nimport { Menu as BaseMenu } from '@base-ui/react/menu'\nimport { ChevronRight } from 'lucide-react'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\n\nexport interface NavigationAction {\n  id: string\n  label: string\n  icon?: ReactNode\n  shortcut?: string\n  disabled?: boolean\n  destructive?: boolean\n  onSelect?: () => void\n  children?: NavigationAction[]\n}\n\nexport function NavigationMenuActions({ items, size }: { items: NavigationAction[]; size: 'sm' | 'md' | 'lg' }) {\n  const portalContainer = useThemePortalContainer()\n  return items.map((item) => item.children?.length ? <BaseMenu.SubmenuRoot key={item.id}>\n    <BaseMenu.SubmenuTrigger className=\"ui-navigation-action\" disabled={item.disabled} label={item.label}>\n      {item.icon ? <span className=\"ui-navigation-action-icon\" aria-hidden=\"true\">{item.icon}</span> : null}<span>{item.label}</span><ChevronRight className=\"ui-navigation-action-end\" size={14} aria-hidden=\"true\" />\n    </BaseMenu.SubmenuTrigger>\n    <OverlayPortal portal={BaseMenu.Portal} kind=\"menu\" container={portalContainer}><BaseMenu.Positioner positionMethod=\"fixed\" className=\"ui-navigation-positioner\" side=\"right\" align=\"start\" sideOffset={4} collisionPadding={12}><BaseMenu.Popup className=\"ui-navigation-popup\" data-size={size}>\n      <NavigationMenuActions items={item.children} size={size} />\n    </BaseMenu.Popup></BaseMenu.Positioner></OverlayPortal>\n  </BaseMenu.SubmenuRoot> : <BaseMenu.Item key={item.id} className=\"ui-navigation-action\" disabled={item.disabled} label={item.label} data-destructive={item.destructive || undefined} onClick={item.onSelect}>\n    {item.icon ? <span className=\"ui-navigation-action-icon\" aria-hidden=\"true\">{item.icon}</span> : null}<span>{item.label}</span>{item.shortcut ? <kbd className=\"ui-navigation-shortcut\">{item.shortcut}</kbd> : null}\n  </BaseMenu.Item>)\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

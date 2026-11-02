@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "menu",
+  "type": "registry:ui",
+  "title": "Menu",
+  "description": "Dropdown actions with keyboard navigation, disabled items and scoped popup theming.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/menu.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/menu.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react'\nimport { Menu as BaseMenu } from '@base-ui/react/menu'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\n\nexport interface MenuProps {\n  trigger: ReactElement\n  items: Array<{\n    label: string\n    onClick?: () => void\n    destructive?: boolean\n    disabled?: boolean\n    icon?: ReactNode\n  }>\n  className?: string\n  disabled?: boolean\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseMenu.Popup>['finalFocus']\n  size?: 'sm' | 'md' | 'lg'\n}\n\nexport function Menu({ trigger, items, className, disabled, finalFocus, size = 'md' }: MenuProps) {\n  const portalContainer = useThemePortalContainer()\n  const anchorRef = useRef<HTMLSpanElement>(null)\n  const popupRef = useRef<HTMLDivElement>(null)\n  const [open, setOpen] = useState(false)\n  useEffect(() => { if (disabled) setOpen(false) }, [disabled])\n  return (\n    <BaseMenu.Root disabled={disabled} open={!disabled && open} onOpenChange={(next) => {\n      if (!disabled || !next) setOpen(next)\n    }}>\n      <span ref={anchorRef} className=\"ui-menu-anchor\" tabIndex={-1}>\n        <BaseMenu.Trigger render={trigger} disabled={disabled} />\n      </span>\n      <OverlayPortal portal={BaseMenu.Portal} kind=\"menu\" container={portalContainer}>\n        <BaseMenu.Positioner className=\"ui-menu-positioner\" positionMethod=\"fixed\" sideOffset={6} align=\"end\" collisionPadding={12}>\n          <BaseMenu.Popup ref={popupRef} className={cn('ui-menu', className)} data-size={size} finalFocus={finalFocus ?? (disabled ? () => {\n            const anchor = anchorRef.current\n            const active = anchor?.ownerDocument.activeElement\n            if (active && active !== anchor?.ownerDocument.body && !popupRef.current?.contains(active)) return false\n            return anchor\n          } : undefined)}>\n            {items.map((item, index) => (\n              <BaseMenu.Item\n                key={`${item.label}-${index}`}\n                className=\"ui-menu-item flex items-center gap-2\"\n                disabled={item.disabled}\n                label={item.label}\n                data-destructive={item.destructive || undefined}\n                onClick={item.onClick}\n              >\n                {item.icon && <span className=\"ui-menu-icon inline-flex items-center\" aria-hidden=\"true\">{item.icon}</span>}\n                {item.label}\n              </BaseMenu.Item>\n            ))}\n          </BaseMenu.Popup>\n        </BaseMenu.Positioner>\n      </OverlayPortal>\n    </BaseMenu.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

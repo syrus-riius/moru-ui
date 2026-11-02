@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:ui",
+  "title": "Empty",
+  "description": "Empty-state content with explanation and a next action.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/empty.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/empty.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type HTMLAttributes, type ReactNode } from 'react'\nimport { cn } from './_lib/cn'\nimport './advanced-controls.css'\n\nexport interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  title: string\n  description?: ReactNode\n  icon?: ReactNode\n}\n\nexport function Empty({ title, description, icon, children, className, 'aria-label': ariaLabel, 'aria-labelledby': labelledBy, 'aria-describedby': describedBy, ...props }: EmptyProps) {\n  const id = useId()\n  return <div role=\"region\" aria-label={ariaLabel} aria-labelledby={labelledBy ?? (ariaLabel ? undefined : `${id}-title`)} aria-describedby={describedBy ?? (description ? `${id}-description` : undefined)} {...props} className={cn('ui-empty', className)}>\n    {icon && <span className=\"ui-empty-icon\" aria-hidden=\"true\">{icon}</span>}\n    <h3 className=\"ui-empty-title\" id={`${id}-title`}>{title}</h3>\n    {description && <div className=\"ui-empty-description\" id={`${id}-description`}>{description}</div>}\n    {children && <div className=\"ui-empty-actions\">{children}</div>}\n  </div>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

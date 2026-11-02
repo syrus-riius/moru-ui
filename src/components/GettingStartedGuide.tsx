@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import { ArrowRight, ArrowUpRight, Box, Columns2, Download, ExternalLink, Settings2, Upload } from 'lucide-react'
 import { MoruMark } from './brand'
-import { CodeBlock } from './ui/code-block'
-import { registryInstallCommand, registryInstallItems, registryRelease, type RegistryInstallItem } from '../lib/registry-install'
+import { RegistryInstaller } from './RegistryInstaller'
+import { registryRelease } from '../lib/registry-install'
 import './getting-started-guide.css'
 
 export type GettingStartedGuideProps = {
@@ -30,7 +29,6 @@ const componentCode = [
 ].join('\n')
 
 export function GettingStartedGuide({ onExport, onImport, onExamples, onProjectTemplate, onOpenEditor, onComparison }: GettingStartedGuideProps) {
-  const [registryItem, setRegistryItem] = useState<RegistryInstallItem>('button')
   return <div className="getting-started-guide">
     <section className="getting-started-summary" aria-label="Moru UI 프로젝트 정보">
       <MoruMark width={36} height={36} />
@@ -71,11 +69,8 @@ export function GettingStartedGuide({ onExport, onImport, onExamples, onProjectT
         <p className="getting-started-footnote">Moru 소스는 MIT 라이선스로 사용·수정·재배포할 수 있습니다. LICENSE·NOTICE 고지를 유지하세요. 전체 스타터 또는 아래의 선택 설치를 사용할 수 있습니다. Moru 자체의 npm 패키지는 게시하지 않았습니다.</p>
         <div className="getting-started-registry" aria-labelledby="getting-started-registry-title">
           <h3 id="getting-started-registry-title">필요한 컴포넌트만 설치하기</h3>
-          <p>React · TypeScript · Tailwind CSS 4 프로젝트에서 shadcn 초기 설정을 마친 뒤 실행하세요. 캘린더와 날짜·시간 선택, 날짜 범위·시간 범위도 개별 설치할 수 있습니다. 공통 기반과 필요한 컴포넌트·스타일은 함께 가져옵니다.</p>
-          <div className="getting-started-registry-items" role="group" aria-label="설치할 Moru 항목">
-            {registryInstallItems.map((item) => <button key={item.name} type="button" className="getting-started-button getting-started-button-quiet" aria-pressed={registryItem === item.name} onClick={() => setRegistryItem(item.name)}>{item.label}</button>)}
-          </div>
-          <CodeBlock key={registryItem} value={registryInstallCommand(registryItem)} filename={`${registryItem} · v${registryRelease}`} language="sh" size="sm" />
+          <p>갤러리의 모든 컴포넌트와 재사용 블록을 선택 설치할 수 있습니다. React · TypeScript · Tailwind CSS 4 프로젝트에서 shadcn 초기 설정을 마친 뒤 실행하세요. 공통 기반과 필요한 컴포넌트·스타일은 함께 가져옵니다.</p>
+          <RegistryInstaller />
           <p className="getting-started-footnote">설치 위치는 UI 폴더 아래 <code>moru/</code>입니다. <code>styles.css</code>를 한 번 가져오고 <code>MoruProvider</code>로 사용할 영역을 감싸세요. 로그인·OTP는 서버로 전송하지 않는 로컬 예제입니다.</p>
           <div className="getting-started-actions"><a className="getting-started-button getting-started-button-quiet" href="https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md" target="_blank" rel="noreferrer">설치·테마 연결 가이드<ExternalLink size={14} aria-hidden="true" /></a></div>
           <div className="getting-started-template"><h3>프로젝트·할 일 앱으로 시작하기</h3><p>검색·필터와 설정 폼을 실제 데이터에 연결한 앱 템플릿입니다. 프로젝트·할 일을 만들고 수정하며, 설정과 함께 브라우저에 저장합니다.</p><div className="getting-started-actions">{onProjectTemplate ? <button type="button" className="getting-started-button" onClick={onProjectTemplate}>앱 템플릿 미리보기<ArrowRight size={14} aria-hidden="true" /></button> : <a className="getting-started-button" href="#project-template">앱 템플릿 미리보기<ArrowRight size={14} aria-hidden="true" /></a>}<a className="getting-started-button getting-started-button-quiet" href="/downloads/moru-project-starter.zip" download><Download size={14} aria-hidden="true" />앱 템플릿 소스 받기</a></div><p className="getting-started-footnote">압축을 풀고 <code>npm ci</code>, <code>npm run dev</code>로 실행하세요. 서버·인증 서비스는 필요한 앱에 맞춰 연결할 수 있습니다.</p></div>

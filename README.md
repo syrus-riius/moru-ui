@@ -84,7 +84,7 @@ are not proof of native runtime support.
 ## Supported baseline
 
 The web starter is tested with the versions pinned in `package-lock.json`, using
-React 19, TypeScript, Vite and Tailwind CSS 4 on Node.js 24+. Other frameworks,
+React 19.3, TypeScript, Vite and Tailwind CSS 4 on Node.js 24+. Other frameworks,
 React versions and SSR setups need separate validation. Native compatibility is
 documented in the Expo app guide.
 
@@ -95,28 +95,60 @@ Prepare a React + TypeScript + Tailwind CSS 4 project with shadcn's
 or block with the tested CLI version:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/drawer.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/date-range-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-range-picker.json
 ```
 
-The v0.3.4 registry contains 27 items, adding Calendar, DatePicker, DateRangePicker,
-TimePicker and TimeRangePicker to the existing components and blocks.
-Other entry items are `core`, `input`, `field`, `search-filters` and `settings`. Required supporting components
+The v0.4.0 registry contains **81 installable entries**: core, 76 UI entries and
+four blocks. It covers the full 75-component gallery plus StatusMessage, adding
+the remaining 54 UI entries. Required supporting components
 are resolved automatically. Sources install under your UI alias's `moru/` folder.
 Import its `styles.css` once and wrap the area in `MoruProvider`.
-Published `/r/v0.3.1/`, `/r/v0.3.2/` and `/r/v0.3.3/` URLs remain unchanged. This release uses
+
+| Category | UI entries | Examples |
+| --- | ---: | --- |
+| Forms and input | 25 | NumberInput, MultiSelect, FileInput, Calendar, Questionnaire |
+| Actions | 5 | Button, Command, ButtonGroup, Kbd, Toggle |
+| Overlays | 9 | Dialog, Menu, Tooltip, Sheet, ContextMenu, HoverCard |
+| Navigation | 7 | Tabs, Menubar, NavigationMenu, Sidebar, Stepper |
+| Layout | 12 | Card, DirectionProvider, Carousel, Resizable, ScrollArea |
+| Status and feedback | 10 | Toast, Alert, RingProgress, Marker, StatusMessage |
+| Data | 3 | Table, Chart, DataTable |
+| Conversation and content | 5 | Bubble, CodeBlock, Message, MessageScroller, Trace |
+
+For example:
+
+```sh
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/number-input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/command.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/context-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/navigation-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/carousel.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/toast.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/chart.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/code-block.json
+```
+
+Toast requires `ToastProvider` inside `MoruProvider`; DataTable requires Moru's
+column type and stable row IDs; Chart takes `data`, `config`, `xKey`, `title` and
+a visible chart height. The detailed guides include these APIs and the complete
+item-name table. Optional chart/table/carousel/panel packages follow selected
+dependencies rather than every installation. The supported React baseline is
+19.3, including DataTable's `useEffectEvent` dependency.
+
+Published `/r/v0.3.1/`, `/r/v0.3.2/`, `/r/v0.3.3/` and `/r/v0.3.4/` URLs remain unchanged. This release uses
 artifact generation and a production build; new tests, installation smoke checks
-and browser checks, as well as CI runs, are skipped for the v0.3.4 additions.
+and browser checks, as well as CI runs, are skipped for the v0.4.0 additions.
 
 See the [installation guide](docs/registry.md), [한국어 안내](docs/registry.ko.md)
 and [registry implementation notes](docs/registry-plan.ko.md). The web registry
@@ -141,6 +173,7 @@ starter's original license is preserved in `apps/moru-expo/LICENSE`.
 
 Moru UI는 **단단한 기본, 당신만의 UI**를 지향합니다. 웹 스타터를 받아
 실행하거나 이 저장소 전체를 실행할 수 있습니다. 현재는 소스를 가져와
-수정하는 방식이며, v0.3.4의 공통 기반·UI·블록 27개 항목을 레지스트리로 선택 설치할 수 있습니다.
-캘린더·날짜/날짜 범위·시간/시간 범위와 Tabs·Menu·Popover·하단 Drawer의 설치 및 API 예시는 [한국어 선택 설치 안내](docs/registry.ko.md)를 참고하세요.
+수정하는 방식이며, v0.4.0에서 갤러리 전체 75종과 StatusMessage를 포함한 UI 76개·공통 기반 1개·블록 4개,
+총 81개 항목을 선택 설치할 수 있습니다. 8개 분야의 전체 설치 이름과 Toast·DataTable·Chart 등의
+실제 API 예시는 [한국어 선택 설치 안내](docs/registry.ko.md)를 참고하세요.
 자세한 사용법은 [한국어 랩 가이드](docs/lab-guide.ko.md)를 참고하세요.

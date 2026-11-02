@@ -12,6 +12,7 @@
 :where([data-moru-registry]) .whitespace-nowrap { white-space: nowrap; }
 :where([data-moru-registry]) .w-full { width: 100%; }
 :where([data-moru-registry]) .min-w-0 { min-width: 0; }
+:where([data-moru-registry]) .ml-auto { margin-left: auto; }
 :where([data-moru-registry]) .shrink-0 { flex-shrink: 0; }
 :where([data-moru-registry]).ui-theme-scope, :where([data-moru-registry]) .ui-theme-scope, :where([data-moru-registry]) *, :where([data-moru-registry]) *::before, :where([data-moru-registry]) *::after { box-sizing: border-box; }
 :where([data-moru-registry]) button, :where([data-moru-registry]) input, :where([data-moru-registry]) textarea, :where([data-moru-registry]) select { font: inherit; }

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ring-progress",
+  "type": "registry:ui",
+  "title": "Ring Progress",
+  "description": "Circular progress presentation with optional sections and center content.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/ring-progress.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/ring-progress.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type HTMLAttributes, type ReactNode } from 'react'\nimport { cn } from './_lib/cn'\nimport type { SemanticTone } from './_theme/tokens'\nimport './workflow-patterns.css'\n\nexport interface RingProgressSection {\n  label: string\n  value: number\n  tone?: SemanticTone | 'primary' | 'accent'\n  color?: string\n}\n\nexport interface RingProgressProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {\n  label: string\n  value?: number\n  max?: number\n  sections?: readonly RingProgressSection[]\n  size?: number\n  thickness?: number\n  roundCaps?: boolean\n  showLegend?: boolean\n  centerLabel?: ReactNode\n}\n\nconst numberFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 })\nconst formatNumber = (value: number) => numberFormatter.format(value)\nexport function normalizeRingSections(sections: readonly RingProgressSection[], max = 100) {\n  const resolvedMax = Number.isFinite(max) && max > 0 ? max : 100\n  let remaining = resolvedMax\n  return sections.map((section) => {\n    const value = Number.isFinite(section.value) ? Math.min(remaining, Math.max(0, section.value)) : 0\n    remaining = Math.max(0, remaining - value)\n    return { ...section, value, percent: value / resolvedMax * 100 }\n  })\n}\n\n/** Goal/capacity progress with readable values; multi-segment totals never overlap. */\nexport function RingProgress({ label, value = 0, max = 100, sections, size = 144, thickness = 10, roundCaps, showLegend = true, centerLabel, className, ...props }: RingProgressProps) {\n  const id = useId()\n  const resolvedMax = Number.isFinite(max) && max > 0 ? max : 100\n  const data = normalizeRingSections(sections ?? [{ label, value, tone: 'primary' }], resolvedMax)\n  const multiple = sections !== undefined\n  const total = Math.min(resolvedMax, data.reduce((sum, section) => sum + section.value, 0))\n  const percent = total / resolvedMax * 100\n  const resolvedSize = Number.isFinite(size) ? Math.min(320, Math.max(80, size)) : 144\n  const resolvedThickness = Number.isFinite(thickness) ? Math.min(resolvedSize / 4, Math.max(2, thickness)) : 10\n  const svgThickness = resolvedThickness / resolvedSize * 100\n  const radius = (100 - svgThickness) / 2\n  let offset = 0\n  return <figure {...props} className={cn('ui-ring-progress', className)}>\n    <div className=\"ui-ring-progress-diagram\" style={{ width: resolvedSize }} role={multiple ? 'img' : 'progressbar'} aria-label={label} aria-describedby={`${id}-values`} {...(multiple ? {} : { 'aria-valuemin': 0, 'aria-valuemax': resolvedMax, 'aria-valuenow': total, 'aria-valuetext': `${formatNumber(total)} / ${formatNumber(resolvedMax)} · ${formatNumber(percent)}%` })}>\n      <svg viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\"><circle className=\"ui-ring-progress-track\" cx=\"50\" cy=\"50\" r={radius} fill=\"none\" strokeWidth={svgThickness} />{data.map((section, index) => {\n        const start = offset\n        offset += section.percent\n        return section.percent > 0 ? <circle key={index} className=\"ui-ring-progress-section\" cx=\"50\" cy=\"50\" r={radius} fill=\"none\" pathLength=\"100\" strokeWidth={svgThickness} strokeDasharray={`${section.percent} ${100 - section.percent}`} strokeDashoffset={-start} strokeLinecap={(roundCaps ?? !multiple) ? 'round' : 'butt'} transform=\"rotate(-90 50 50)\" style={{ stroke: section.color ?? `var(--ui-${section.tone ?? 'primary'})` }} /> : null\n      })}</svg>\n      <div className=\"ui-ring-progress-center\" aria-hidden=\"true\">{centerLabel ?? <><strong>{formatNumber(percent)}<span>%</span></strong><span>{label}</span></>}</div>\n    </div>\n    <figcaption id={`${id}-values`} className={showLegend ? 'ui-ring-progress-caption' : 'ui-workflow-sr-only'}>\n      <span className=\"ui-ring-progress-title\">{label}</span>\n      {data.length ? <ul className=\"ui-ring-progress-legend\">{data.map((section, index) => <li key={index}><span className=\"ui-ring-progress-key\"><span className=\"ui-ring-progress-swatch\" aria-hidden=\"true\" style={{ background: section.color ?? `var(--ui-${section.tone ?? 'primary'})` }} />{section.label}</span><span className=\"ui-ring-progress-value\">{formatNumber(section.value)} / {formatNumber(resolvedMax)} <span>({formatNumber(section.percent)}%)</span></span></li>)}</ul> : <p className=\"ui-ring-progress-empty\">표시할 항목이 없어요. 0%</p>}\n    </figcaption>\n  </figure>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

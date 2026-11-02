@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination",
+  "type": "registry:ui",
+  "title": "Pagination",
+  "description": "Page navigation with bounded values, compact ranges and accessible controls.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/pagination-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/moru/pagination-utils.ts",
+      "content": "// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nexport type PaginationItem = number | 'start-ellipsis' | 'end-ellipsis'\n\nexport function normalizePageCount(pageCount: number): number {\n  return Number.isFinite(pageCount) ? Math.max(0, Math.floor(pageCount)) : 0\n}\n\nexport function clampPage(page: number, pageCount: number): number {\n  const count = normalizePageCount(pageCount)\n  if (count === 0) return 0\n  return Math.min(count, Math.max(1, Number.isFinite(page) ? Math.floor(page) : 1))\n}\n\n/** Keep bounds visible, fill one-page gaps, and never emit duplicate pages or ellipses. */\nexport function getPaginationItems(page: number, pageCount: number, siblingCount = 1): PaginationItem[] {\n  const count = normalizePageCount(pageCount)\n  if (count === 0) return []\n  const current = clampPage(page, count)\n  const siblings = Number.isFinite(siblingCount) ? Math.min(4, Math.max(0, Math.floor(siblingCount))) : 1\n  const visible = new Set([1, count])\n  for (let candidate = Math.max(1, current - siblings); candidate <= Math.min(count, current + siblings); candidate += 1) visible.add(candidate)\n  const pages = [...visible].sort((a, b) => a - b)\n  const result: PaginationItem[] = []\n  for (let index = 0; index < pages.length; index += 1) {\n    const previous = pages[index - 1]\n    const next = pages[index]\n    if (previous !== undefined && next - previous === 2) result.push(previous + 1)\n    else if (previous !== undefined && next - previous > 2) result.push(next <= current ? 'start-ellipsis' : 'end-ellipsis')\n    result.push(next)\n  }\n  return result\n}\n"
+    },
+    {
+      "path": "registry/moru/pagination.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/pagination.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { cn } from './_lib/cn'\nimport { clampPage, getPaginationItems, normalizePageCount } from './pagination-utils'\nimport './advanced-controls.css'\n\nexport interface PaginationProps {\n  page: number\n  pageCount: number\n  onPageChange: (page: number) => void\n  siblingCount?: number\n  disabled?: boolean\n  'aria-label'?: string\n  className?: string\n}\n\nexport function Pagination({ page, pageCount, onPageChange, siblingCount = 1, disabled, 'aria-label': ariaLabel = '페이지 탐색', className }: PaginationProps) {\n  const count = normalizePageCount(pageCount)\n  const current = clampPage(page, count)\n  const changePage = (next: number) => {\n    if (!disabled && count > 0 && next !== current) onPageChange(clampPage(next, count))\n  }\n  return <nav className={cn('ui-pagination', className)} aria-label={ariaLabel}>\n    <ul className=\"ui-pagination-list\">\n      <li><button type=\"button\" className=\"ui-pagination-button\" aria-label=\"이전 페이지\" disabled={disabled || current <= 1} onClick={() => changePage(current - 1)}><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"m10 4-4 4 4 4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" /></svg></button></li>\n      {getPaginationItems(current, count, siblingCount).map((item) => <li key={item}>{typeof item === 'number'\n        ? <button type=\"button\" className=\"ui-pagination-button\" aria-label={`${item}페이지`} aria-current={item === current ? 'page' : undefined} disabled={disabled} onClick={() => changePage(item)}>{item}</button>\n        : <span className=\"ui-pagination-ellipsis\" aria-hidden=\"true\">…</span>}</li>)}\n      <li><button type=\"button\" className=\"ui-pagination-button\" aria-label=\"다음 페이지\" disabled={disabled || count === 0 || current >= count} onClick={() => changePage(current + 1)}><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"m6 4 4 4-4 4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" /></svg></button></li>\n    </ul>\n    <span className=\"ui-advanced-sr-only\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\">{count === 0 ? '페이지가 없습니다.' : `전체 ${count}페이지 중 ${current}페이지`}</span>\n  </nav>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "type": "registry:ui",
+  "title": "Dialog",
+  "description": "Modal dialog with managed focus and scoped portals.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/dialog.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/dialog.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'\nimport { Dialog as BaseDialog } from '@base-ui/react/dialog'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\n\nexport interface DialogProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  className?: string\n  /** Choose the initial target for forms or long content; Base UI keeps its touch-safe default when omitted. */\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  /** Restore focus to a stable destination when the opener is removed or the dialog has no trigger. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n\nexport function Dialog({ trigger, title, description, children, footer, open, onOpenChange, className, initialFocus, finalFocus }: DialogProps) {\n  const portalContainer = useThemePortalContainer()\n  return (\n    <BaseDialog.Root open={open} onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}>\n      {trigger && <BaseDialog.Trigger render={trigger} />}\n      <OverlayPortal portal={BaseDialog.Portal} kind=\"modal\" container={portalContainer}>\n        <BaseDialog.Backdrop className=\"ui-dialog-backdrop\" />\n        <BaseDialog.Popup className={cn('ui-dialog', className)} initialFocus={initialFocus} finalFocus={finalFocus}>\n          <div className=\"ui-dialog-header\">\n            <BaseDialog.Title className=\"ui-dialog-title\">{title}</BaseDialog.Title>\n            {description && <BaseDialog.Description className=\"ui-dialog-description\">{description}</BaseDialog.Description>}\n          </div>\n          <BaseDialog.Close className=\"ui-dialog-close inline-flex items-center justify-center\" aria-label=\"닫기\">\n            <svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\">\n              <path d=\"m4 4 8 8m0-8-8 8\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" />\n            </svg>\n          </BaseDialog.Close>\n          {children && <div className=\"ui-dialog-content\">{children}</div>}\n          {footer && <div className=\"ui-dialog-footer flex items-center justify-end gap-2\">{footer}</div>}\n        </BaseDialog.Popup>\n      </OverlayPortal>\n    </BaseDialog.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

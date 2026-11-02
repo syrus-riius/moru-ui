@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "attachment",
+  "type": "registry:ui",
+  "title": "Attachment",
+  "description": "File attachment presentation with metadata and optional removal actions.",
+  "dependencies": [
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/attachment.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/attachment.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes, type ReactNode } from 'react'\nimport { FileText, RotateCcw, X } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { Button } from './button'\nimport './content-completion.css'\n\nexport type AttachmentStatus = 'idle' | 'uploading' | 'processing' | 'error' | 'done'\nexport function formatFileSize(bytes: number, locale = 'ko-KR') {\n  if (!Number.isFinite(bytes) || bytes < 0) return '크기 알 수 없음'\n  if (bytes < 1024) return `${Math.round(bytes)} B`\n  const units = ['KB', 'MB', 'GB', 'TB']\n  const index = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)) - 1, units.length - 1)\n  return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(bytes / (1024 ** (index + 1)))} ${units[index]}`\n}\nexport function getFileExtension(name: string) {\n  const lastDot = name.lastIndexOf('.')\n  return lastDot > 0 && lastDot < name.length - 1 ? name.slice(lastDot + 1).toUpperCase() : 'FILE'\n}\nexport interface AttachmentProps extends HTMLAttributes<HTMLDivElement> {\n  fileName?: string\n  fileSize?: number\n  media?: ReactNode\n  status?: AttachmentStatus\n  progress?: number\n  size?: 'sm' | 'md' | 'lg'\n  orientation?: 'horizontal' | 'vertical'\n  disabled?: boolean\n  onRemove?: () => void\n  onRetry?: () => void\n}\nexport const Attachment = forwardRef<HTMLDivElement, AttachmentProps>(function Attachment({\n  fileName, fileSize, media, status = 'idle', progress, size = 'md', orientation = 'horizontal', disabled, onRemove, onRetry, className, children, ...props\n}, ref) {\n  const percent = typeof progress === 'number' && Number.isFinite(progress) ? Math.round(Math.max(0, Math.min(100, progress))) : undefined\n  const stateText = status === 'uploading' ? `업로드 중${percent === undefined ? '' : ` · ${percent}%`}` : status === 'processing' ? '처리 중' : status === 'error' ? '업로드 실패' : status === 'done' ? '완료' : null\n  return <div {...props} ref={ref} className={cn('ui-attachment', className)} data-status={status} data-size={size} data-orientation={orientation} aria-busy={status === 'uploading' || status === 'processing' || undefined}>\n    {fileName ? <>\n      <AttachmentMedia>{media ?? <FileText aria-hidden=\"true\" />}</AttachmentMedia>\n      <AttachmentContent>\n        <AttachmentTitle>{fileName}</AttachmentTitle>\n        <AttachmentDescription>{getFileExtension(fileName)}{fileSize === undefined ? '' : ` · ${formatFileSize(fileSize)}`}</AttachmentDescription>\n        {stateText && <span className=\"ui-attachment-state\" role={status === 'error' ? 'alert' : 'status'}>{stateText}</span>}\n        {status === 'uploading' && <progress className=\"ui-attachment-progress\" max={100} value={percent} aria-label={`${fileName} 업로드`} />}\n      </AttachmentContent>\n      {(onRemove || (status === 'error' && onRetry)) && <AttachmentActions>\n        {status === 'error' && onRetry && <Button variant=\"ghost\" size=\"sm\" aria-label={`${fileName} 다시 시도`} disabled={disabled} onClick={onRetry}><RotateCcw size={14} aria-hidden=\"true\" /></Button>}\n        {onRemove && <Button variant=\"ghost\" size=\"sm\" aria-label={`${fileName} 제거`} disabled={disabled} onClick={onRemove}><X size={14} aria-hidden=\"true\" /></Button>}\n      </AttachmentActions>}\n    </> : children}\n  </div>\n})\nexport function AttachmentMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-media', className)} /> }\nexport function AttachmentContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-content', className)} /> }\nexport function AttachmentTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-title', className)} /> }\nexport function AttachmentDescription({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-description', className)} /> }\nexport function AttachmentActions({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-actions', className)} /> }\nexport function AttachmentGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-group', className)} /> }\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

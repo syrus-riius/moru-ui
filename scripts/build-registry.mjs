@@ -8,7 +8,7 @@ import { parse } from '@babel/parser'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultRoot = path.dirname(path.dirname(scriptPath))
-export const registryVersion = '0.3.4'
+export const registryVersion = '0.4.0'
 export const registryOrigin = 'https://moru-ui-lab.riius.chatgpt.site'
 export const registryRepository = 'syrus-riius/moru-ui'
 export const registryScope = ':where([data-moru-registry])'
@@ -42,6 +42,60 @@ export const registryDefinitions = [
   { name: 'date-range-picker', entry: 'src/components/ui/date-range-picker.tsx', title: 'Date Range Picker', description: 'Start/end date field with range selection, calendar display options and native form integration.' },
   { name: 'time-picker', entry: 'src/components/ui/time-picker.tsx', title: 'Time Picker', description: 'Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.' },
   { name: 'time-range-picker', entry: 'src/components/ui/time-range-picker.tsx', title: 'Time Range Picker', description: 'Paired start/end time fields with duration feedback and optional overnight ranges.' },
+  { name: 'number-input', entry: 'src/components/ui/number-input.tsx', title: 'Number Input', description: 'Numeric field with step controls, bounds and localized formatting.' },
+  { name: 'multi-select', entry: 'src/components/ui/multi-select.tsx', title: 'Multi Select', description: 'Searchable multi-value selection with removable chips and native form values.' },
+  { name: 'radio-group', entry: 'src/components/ui/radio-group.tsx', title: 'Radio Group', description: 'Accessible single-choice group with labels, descriptions and Field integration.' },
+  { name: 'slider', entry: 'src/components/ui/slider.tsx', title: 'Slider', description: 'Keyboard-operable value slider with configurable range and step.' },
+  { name: 'combobox', entry: 'src/components/ui/combobox.tsx', title: 'Combobox', description: 'Searchable option selection with labelled results and scoped popup theming.' },
+  { name: 'toggle-group', entry: 'src/components/ui/toggle-group.tsx', title: 'Toggle Group', description: 'Grouped toggle options with single or multiple selection.' },
+  { name: 'input-group', entry: 'src/components/ui/input-group.tsx', title: 'Input Group', description: 'Composable input or textarea with connected addons and action buttons.' },
+  { name: 'label', entry: 'src/components/ui/label.tsx', title: 'Label', description: 'Text label for associating an accessible name with a form control.' },
+  { name: 'native-select', entry: 'src/components/ui/native-select.tsx', title: 'Native Select', description: 'Styled native select with standard browser form and keyboard behavior.' },
+  { name: 'file-input', entry: 'src/components/ui/file-input.tsx', title: 'File Input', description: 'File selection with client-side constraints and removable attachment feedback.' },
+  { name: 'attachment', entry: 'src/components/ui/attachment.tsx', title: 'Attachment', description: 'File attachment presentation with metadata and optional removal actions.' },
+  { name: 'questionnaire', entry: 'src/components/ui/questionnaire.tsx', title: 'Questionnaire', description: 'Step-by-step questions composed from Moru input and selection controls.' },
+  { name: 'command', entry: 'src/components/ui/command.tsx', title: 'Command', description: 'Searchable command dialog with grouped actions and keyboard navigation.' },
+  { name: 'button-group', entry: 'src/components/ui/button-group.tsx', title: 'Button Group', description: 'Horizontal or vertical grouping for related buttons and actions.' },
+  { name: 'kbd', entry: 'src/components/ui/kbd.tsx', title: 'Kbd', description: 'Compact visual representation of keyboard keys and shortcuts.' },
+  { name: 'toggle', entry: 'src/components/ui/toggle.tsx', title: 'Toggle', description: 'Accessible pressed-state action with token-based size and styling.' },
+  { name: 'tooltip', entry: 'src/components/ui/tooltip.tsx', title: 'Tooltip', description: 'Short supplementary information with optional shared TooltipProvider timing.' },
+  { name: 'alert-dialog', entry: 'src/components/ui/alert-dialog.tsx', title: 'Alert Dialog', description: 'Confirmation dialog with managed focus and asynchronous action feedback.' },
+  { name: 'sheet', entry: 'src/components/ui/sheet.tsx', title: 'Sheet', description: 'Side panel dialog with managed focus, title, content and footer actions.' },
+  { name: 'context-menu', entry: 'src/components/ui/context-menu.tsx', title: 'Context Menu', description: 'Contextual action menu with nested actions and keyboard navigation.' },
+  { name: 'hover-card', entry: 'src/components/ui/hover-card.tsx', title: 'Hover Card', description: 'Contextual preview content attached to a trigger with scoped popup theming.' },
+  { name: 'pagination', entry: 'src/components/ui/pagination.tsx', title: 'Pagination', description: 'Page navigation with bounded values, compact ranges and accessible controls.' },
+  { name: 'breadcrumb', entry: 'src/components/ui/breadcrumb.tsx', title: 'Breadcrumb', description: 'Current-location trail with links, actions and an accessible current item.' },
+  { name: 'menubar', entry: 'src/components/ui/menubar.tsx', title: 'Menubar', description: 'Application menu bar with nested actions and keyboard focus handling.' },
+  { name: 'navigation-menu', entry: 'src/components/ui/navigation-menu.tsx', title: 'Navigation Menu', description: 'Grouped navigation links and popup content with keyboard navigation.' },
+  { name: 'sidebar', entry: 'src/components/ui/sidebar.tsx', title: 'Sidebar', description: 'Collapsible application navigation with a mobile modal panel.' },
+  { name: 'stepper', entry: 'src/components/ui/stepper.tsx', title: 'Stepper', description: 'Step progress and navigation with completed, current and error states.' },
+  { name: 'accordion', entry: 'src/components/ui/accordion.tsx', title: 'Accordion', description: 'Expandable sections with accessible headings and keyboard interaction.' },
+  { name: 'avatar', entry: 'src/components/ui/avatar.tsx', title: 'Avatar', description: 'User image with a fallback representation.' },
+  { name: 'separator', entry: 'src/components/ui/separator.tsx', title: 'Separator', description: 'Horizontal or vertical separation of related content.' },
+  { name: 'aspect-ratio', entry: 'src/components/ui/aspect-ratio.tsx', title: 'Aspect Ratio', description: 'A responsive content frame that preserves a chosen aspect ratio.' },
+  { name: 'direction', entry: 'src/components/ui/direction-provider.tsx', title: 'Direction', description: 'Base UI DirectionProvider for LTR or RTL behavior; pair with dir on the DOM boundary.' },
+  { name: 'item', entry: 'src/components/ui/item.tsx', title: 'Item', description: 'Composable list item presentation for leading content, copy and trailing actions.' },
+  { name: 'collapsible', entry: 'src/components/ui/collapsible.tsx', title: 'Collapsible', description: 'Expandable content controlled by a keyboard-accessible disclosure trigger.' },
+  { name: 'carousel', entry: 'src/components/ui/carousel.tsx', title: 'Carousel', description: 'Embla-based content carousel with keyboard controls and selected-slide feedback.' },
+  { name: 'resizable', entry: 'src/components/ui/resizable.tsx', title: 'Resizable', description: 'Resizable panel groups, panels and handles with optional grip decoration.' },
+  { name: 'scroll-area', entry: 'src/components/ui/scroll-area.tsx', title: 'Scroll Area', description: 'Styled scrollable viewport with accessible native scrolling behavior.' },
+  { name: 'typography', entry: 'src/components/ui/typography.tsx', title: 'Typography', description: 'Role-based display, heading, body, label, caption and code text.' },
+  { name: 'alert', entry: 'src/components/ui/alert.tsx', title: 'Alert', description: 'Semantic inline notice with a title, description and meaning beyond color.' },
+  { name: 'progress', entry: 'src/components/ui/progress.tsx', title: 'Progress', description: 'Accessible progress indicator for known or indeterminate work.' },
+  { name: 'ring-progress', entry: 'src/components/ui/ring-progress.tsx', title: 'Ring Progress', description: 'Circular progress presentation with optional sections and center content.' },
+  { name: 'skeleton', entry: 'src/components/ui/skeleton.tsx', title: 'Skeleton', description: 'Placeholder surfaces for content that is still loading.' },
+  { name: 'toast', entry: 'src/components/ui/toast.tsx', title: 'Toast', description: 'ToastProvider and useToast for dismissible semantic application notifications.' },
+  { name: 'empty', entry: 'src/components/ui/empty.tsx', title: 'Empty', description: 'Empty-state content with explanation and a next action.' },
+  { name: 'spinner', entry: 'src/components/ui/spinner.tsx', title: 'Spinner', description: 'Loading indicator with an accessible status label.' },
+  { name: 'marker', entry: 'src/components/ui/marker.tsx', title: 'Marker', description: 'Small status, count or activity marker for surrounding content.' },
+  { name: 'table', entry: 'src/components/ui/table.tsx', title: 'Table', description: 'Semantic table, caption, header, row, cell and footer primitives.' },
+  { name: 'chart', entry: 'src/components/ui/chart.tsx', title: 'Chart', description: 'Recharts-based chart variations with Moru colors and supporting controls.' },
+  { name: 'data-table', entry: 'src/components/ui/data-table.tsx', title: 'Data Table', description: 'TanStack-based table with filtering, sorting, row selection, visible columns and pagination.' },
+  { name: 'bubble', entry: 'src/components/ui/bubble.tsx', title: 'Bubble', description: 'Message bubble presentation for conversational interfaces.' },
+  { name: 'code-block', entry: 'src/components/ui/code-block.tsx', title: 'Code Block', description: 'Readable code presentation with copy and line-wrap controls.' },
+  { name: 'message', entry: 'src/components/ui/message.tsx', title: 'Message', description: 'Composable message content, metadata and action presentation.' },
+  { name: 'message-scroller', entry: 'src/components/ui/message-scroller.tsx', title: 'Message Scroller', description: 'Message viewport that preserves reading position and offers a latest-message action.' },
+  { name: 'trace', entry: 'src/components/ui/trace.tsx', title: 'Trace', description: 'Expandable execution or workflow history with step status and details.' },
   { name: 'login', entry: 'src/components/blocks/LoginBlock.tsx', type: 'registry:block', title: 'Login Block', description: 'Local login form demo. Connect your own authentication service.' },
   { name: 'otp', entry: 'src/components/blocks/OTPBlock.tsx', type: 'registry:block', title: 'OTP Block', description: 'Local OTP verification demo. The sample code is 123456.' },
   { name: 'search-filters', entry: 'src/components/blocks/SearchFiltersBlock.tsx', type: 'registry:block', title: 'Search Filters Block', description: 'Composable query, status and assignee filters with local demo data and a controlled application API.' },
@@ -54,6 +108,17 @@ const coreEntries = [
   'src/components/ui/styles.css', 'src/theme/readability.css',
   // Shared by Popover and the date/time fields. Components import it on demand.
   'src/components/ui/overlays.css',
+  // Shared stylesheet files have no component JavaScript or npm dependencies.
+  // Keep one owner so CSS reuse does not install unrelated input/data widgets;
+  // the common entry does not auto-import these component-requested sheets.
+  'src/components/ui/controls-completion.css',
+  'src/components/ui/enhanced-inputs.css',
+  'src/components/ui/advanced-controls.css',
+  'src/components/ui/advanced-overlays.css',
+  'src/components/ui/navigation-completion.css',
+  'src/components/ui/content-completion.css',
+  'src/components/ui/data-completion.css',
+  'src/components/ui/workflow-patterns.css',
 ]
 // Calendar is the common foundation of both date fields. Keep their small shared
 // helpers here so a range field does not need the unused single-date component,
@@ -180,6 +245,7 @@ const utilities = `/* Minimal layout utilities used by the selected original sou
 .whitespace-nowrap { white-space: nowrap; }
 .w-full { width: 100%; }
 .min-w-0 { min-width: 0; }
+.ml-auto { margin-left: auto; }
 .shrink-0 { flex-shrink: 0; }
 .ui-theme-scope, *, *::before, *::after { box-sizing: border-box; }
 button, input, textarea, select { font: inherit; }
@@ -335,7 +401,7 @@ export async function generateRegistry(root = defaultRoot) {
     }
     return [...packages].sort()
   }
-  const docs = `Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode="dark" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/${registryRepository}/blob/main/docs/registry.ko.md`
+  const docs = `Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode="dark" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/${registryRepository}/blob/main/docs/registry.ko.md`
   function manifest(item, transport, includeContent = false) {
     const dependencies = [...itemDependencies.get(item.name)].sort().map((dependency) => transport === 'github'
       ? `${registryRepository}/${dependency}#v${registryVersion}`

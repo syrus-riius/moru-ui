@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "type": "registry:ui",
+  "title": "Input OTP",
+  "description": "Single native input with visual slots and one-time-code autofill.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/input-otp-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/moru/input-otp-utils.ts",
+      "content": "// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\n/** A bounded length avoids accidental, unrenderable slot counts. */\nexport function normalizeOTPLength(length: number) { return Number.isFinite(length) ? Math.max(1, Math.min(12, Math.trunc(length))) : 6 }\nexport function normalizeOTP(value: string, length = 6) { return value.replace(/[^0-9]/g, '').slice(0, normalizeOTPLength(length)) }\n/** Paste replaces the browser selection, keeping digits beyond separators. */\nexport function insertOTP(current: string, pasted: string, selectionStart: number, selectionEnd: number, length = 6) {\n  const start = Math.max(0, Math.min(current.length, selectionStart))\n  const end = Math.max(start, Math.min(current.length, selectionEnd))\n  const digits = normalizeOTP(pasted, length)\n  const value = normalizeOTP(current.slice(0, start) + digits + current.slice(end), length)\n  return { value, caret: Math.min(value.length, start + digits.length) }\n}\n\n/** Uncontrolled OTP state follows uncanceled native resets, including external forms. */\nexport function subscribeOTPFormReset(form: EventTarget, onReset: () => void, isControlled: () => boolean) {\n  let subscribed = true\n  function reset(event: Event) {\n    queueMicrotask(() => { if (subscribed && !event.defaultPrevented && !isControlled()) onReset() })\n  }\n  form.addEventListener('reset', reset)\n  return () => { subscribed = false; form.removeEventListener('reset', reset) }\n}\n"
+    },
+    {
+      "path": "registry/moru/input-otp.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/input-otp.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, useEffect, useRef, useState, type InputHTMLAttributes } from 'react'\nimport { Field as BaseField } from '@base-ui/react/field'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport { insertOTP, normalizeOTP, normalizeOTPLength, subscribeOTPFormReset } from './input-otp-utils'\nimport type { UIState } from './state'\nimport './controls-completion.css'\n\nexport type InputOTPProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'defaultValue' | 'onChange' | 'maxLength' | 'type' | 'inputMode' | 'pattern'> & {\n  length?: number\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  onComplete?: (value: string) => void\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}\n\n/** One real input preserves native selection, keyboard editing and one-time-code autofill. */\nexport const InputOTP = forwardRef<HTMLInputElement, InputOTPProps>(function InputOTP({ length = 6, value, defaultValue = '', onValueChange, onComplete, size = 'md', className, id, disabled, loading = false, previewState, readOnly, autoComplete = 'one-time-code', onSelect, onFocus, onBlur, onPaste, style, 'aria-describedby': describedBy, 'aria-invalid': invalid, ...props }, forwardedRef) {\n  const field = useFieldContext()\n  const count = normalizeOTPLength(length)\n  const busy = loading || previewState === 'loading'\n  const unavailable = disabled || busy || previewState === 'disabled'\n  const resolvedInvalid = previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))\n  const visuallyInvalid = resolvedInvalid !== undefined && resolvedInvalid !== false && resolvedInvalid !== 'false'\n  const [internalValue, setInternalValue] = useState(() => normalizeOTP(defaultValue, count))\n  const [focused, setFocused] = useState(false)\n  const [caret, setCaret] = useState(0)\n  const inputRef = useRef<HTMLInputElement | null>(null)\n  const current = normalizeOTP(value ?? internalValue, count)\n  const resetState = useRef({ value, defaultValue, count })\n  resetState.current = { value, defaultValue, count }\n  useEffect(() => {\n    const form = inputRef.current?.form\n    if (!form) return\n    return subscribeOTPFormReset(form, () => {\n      setInternalValue(normalizeOTP(resetState.current.defaultValue, resetState.current.count))\n      setCaret(0)\n    }, () => resetState.current.value !== undefined)\n  }, [props.form])\n  function change(next: string) {\n    if (unavailable || readOnly || next === current) return\n    if (value === undefined) setInternalValue(next)\n    onValueChange?.(next)\n    if (next.length === count) onComplete?.(next)\n  }\n  const input = <input {...props} ref={(node) => { inputRef.current = node; if (typeof forwardedRef === 'function') forwardedRef(node); else if (forwardedRef) forwardedRef.current = node }} {...(!field ? { id } : {})} className=\"ui-input-otp-control\" value={current} type=\"text\" inputMode=\"numeric\" autoComplete={autoComplete} pattern={`[0-9]{${count}}`} maxLength={count} disabled={unavailable} readOnly={readOnly} aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)} aria-invalid={resolvedInvalid} aria-busy={busy || undefined} onChange={(event) => { change(normalizeOTP(event.target.value, count)); setCaret(event.target.selectionStart ?? count) }} onSelect={(event) => { setCaret(event.currentTarget.selectionStart ?? 0); onSelect?.(event) }} onFocus={(event) => { setFocused(true); setCaret(event.currentTarget.selectionStart ?? current.length); onFocus?.(event) }} onBlur={(event) => { setFocused(false); onBlur?.(event) }} onPaste={(event) => {\n    onPaste?.(event)\n    if (event.defaultPrevented || unavailable || readOnly) return\n    event.preventDefault()\n    const next = insertOTP(current, event.clipboardData.getData('text'), event.currentTarget.selectionStart ?? current.length, event.currentTarget.selectionEnd ?? current.length, count)\n    change(next.value); setCaret(next.caret)\n    requestAnimationFrame(() => { inputRef.current?.setSelectionRange(next.caret, next.caret) })\n  }} />\n  return <div className={cn('ui-input-otp', className)} data-size={size} data-disabled={unavailable || undefined} data-invalid={visuallyInvalid || undefined} data-loading={busy || undefined} style={style}>\n    {field ? <BaseField.Control render={input} id={id ?? field.controlId} value={current} disabled={unavailable} /> : input}\n    {busy && <span className=\"ui-control-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" />}\n    <div className=\"ui-input-otp-slots\" aria-hidden=\"true\">{Array.from({ length: count }, (_, index) => <span key={index} className=\"ui-input-otp-slot\" data-active={focused && Math.min(caret, count - 1) === index || undefined}>{current[index] ?? (focused && Math.min(caret, count - 1) === index ? <span className=\"ui-input-otp-caret\" /> : null)}</span>)}</div>\n  </div>\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

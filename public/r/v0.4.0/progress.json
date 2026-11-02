@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Accessible progress indicator for known or indeterminate work.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/progress.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/progress.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { Progress as BaseProgress } from '@base-ui/react/progress'\nimport { forwardRef, type ComponentPropsWithoutRef } from 'react'\nimport { cn } from './_lib/cn'\n\nexport interface ProgressProps extends Omit<ComponentPropsWithoutRef<typeof BaseProgress.Root>, 'className' | 'children' | 'min' | 'max' | 'value'> {\n  value?: number | null\n  max?: number\n  label?: string\n  showValue?: boolean\n  className?: string\n}\n\n/** Pass null for work whose completion percentage is not yet known. */\nexport const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progress(\n  { value = 0, max = 100, label, showValue = false, className, ...props },\n  ref,\n) {\n  const resolvedMax = Number.isFinite(max) && max > 0 ? max : 100\n  const resolvedValue = value == null || !Number.isFinite(value) ? null : Math.min(resolvedMax, Math.max(0, value))\n  return (\n    <BaseProgress.Root\n      aria-label={label || props['aria-labelledby'] ? undefined : '진행률'}\n      {...(resolvedValue === null ? { 'aria-valuetext': '진행 중' } : {})}\n      {...props}\n      ref={ref}\n      value={resolvedValue}\n      max={resolvedMax}\n      className={cn('ui-progress', className)}\n    >\n      {(label || showValue) && (\n        <div className=\"ui-progress-heading\">\n          {label && <BaseProgress.Label className=\"ui-progress-label\">{label}</BaseProgress.Label>}\n          {showValue && (\n            <BaseProgress.Value className=\"ui-progress-value\">\n              {(formattedValue) => resolvedValue === null ? '진행 중' : formattedValue}\n            </BaseProgress.Value>\n          )}\n        </div>\n      )}\n      <BaseProgress.Track className=\"ui-progress-track\">\n        <BaseProgress.Indicator className=\"ui-progress-indicator\" />\n      </BaseProgress.Track>\n    </BaseProgress.Root>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

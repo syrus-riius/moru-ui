@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "type": "registry:ui",
+  "title": "Native Select",
+  "description": "Styled native select with standard browser form and keyboard behavior.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/native-select.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/native-select.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type SelectHTMLAttributes } from 'react'\nimport { Field as BaseField } from '@base-ui/react/field'\nimport { ChevronDown } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport type { UIState } from './state'\nimport './controls-completion.css'\n\nexport interface NativeSelectOption { value: string; label: string; disabled?: boolean }\nexport type NativeSelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'multiple'> & {\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n  items?: NativeSelectOption[]\n  onValueChange?: (value: string) => void\n}\nexport const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(function NativeSelect({ size = 'md', items, children, className, id, disabled, loading = false, previewState, onChange, onValueChange, 'aria-describedby': describedBy, 'aria-invalid': invalid, ...props }, ref) {\n  const field = useFieldContext()\n  const busy = loading || previewState === 'loading'\n  const unavailable = disabled || busy || previewState === 'disabled'\n  const select = <select {...props} disabled={unavailable} aria-busy={busy || undefined} data-loading={busy || undefined} ref={ref} {...(!field ? { id } : {})} className={cn('ui-native-select', className)} data-size={size} aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)} aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))} onChange={(event) => { if (unavailable) return; onChange?.(event); if (!event.defaultPrevented) onValueChange?.(event.target.value) }}>\n    {items ? items.map((item) => <option key={item.value} value={item.value} disabled={item.disabled}>{item.label}</option>) : children}\n  </select>\n  return <span className=\"ui-native-select-wrap ui-control-loading-wrap\" data-size={size}>{field ? <BaseField.Control render={select} id={id ?? field.controlId} disabled={unavailable} value={props.value} defaultValue={props.defaultValue} /> : select}{busy ? <span className=\"ui-control-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" /> : <ChevronDown aria-hidden=\"true\" />}</span>\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

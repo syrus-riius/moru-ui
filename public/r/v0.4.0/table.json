@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:ui",
+  "title": "Table",
+  "description": "Semantic table, caption, header, row, cell and footer primitives.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/table.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/table.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type ComponentPropsWithoutRef } from 'react'\nimport { cn } from './_lib/cn'\nimport './advanced-controls.css'\n\nexport type TableProps = ComponentPropsWithoutRef<'table'> & { scrollLabel?: string; wrapperClassName?: string }\n\n/** The focusable wrapper scrolls; refs and native table attributes stay on the table. */\nexport const Table = forwardRef<HTMLTableElement, TableProps>(function Table({ className, wrapperClassName, scrollLabel = '가로로 스크롤할 수 있는 데이터 표', ...props }, ref) {\n  return <div className={cn('ui-table-scroll', wrapperClassName)} tabIndex={0} role=\"region\" aria-label={scrollLabel}>\n    <table {...props} ref={ref} className={cn('ui-table', className)} />\n  </div>\n})\n\nexport const TableHeader = forwardRef<HTMLTableSectionElement, ComponentPropsWithoutRef<'thead'>>(function TableHeader({ className, ...props }, ref) {\n  return <thead {...props} ref={ref} className={cn('ui-table-header', className)} />\n})\nexport const TableBody = forwardRef<HTMLTableSectionElement, ComponentPropsWithoutRef<'tbody'>>(function TableBody({ className, ...props }, ref) {\n  return <tbody {...props} ref={ref} className={cn('ui-table-body', className)} />\n})\nexport const TableFooter = forwardRef<HTMLTableSectionElement, ComponentPropsWithoutRef<'tfoot'>>(function TableFooter({ className, ...props }, ref) {\n  return <tfoot {...props} ref={ref} className={cn('ui-table-footer', className)} />\n})\nexport const TableRow = forwardRef<HTMLTableRowElement, ComponentPropsWithoutRef<'tr'>>(function TableRow({ className, ...props }, ref) {\n  return <tr {...props} ref={ref} className={cn('ui-table-row', className)} />\n})\nexport const TableHead = forwardRef<HTMLTableCellElement, ComponentPropsWithoutRef<'th'>>(function TableHead({ className, scope = 'col', ...props }, ref) {\n  return <th {...props} scope={scope} ref={ref} className={cn('ui-table-head', className)} />\n})\nexport const TableCell = forwardRef<HTMLTableCellElement, ComponentPropsWithoutRef<'td'>>(function TableCell({ className, ...props }, ref) {\n  return <td {...props} ref={ref} className={cn('ui-table-cell', className)} />\n})\nexport const TableCaption = forwardRef<HTMLTableCaptionElement, ComponentPropsWithoutRef<'caption'>>(function TableCaption({ className, ...props }, ref) {\n  return <caption {...props} ref={ref} className={cn('ui-table-caption', className)} />\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

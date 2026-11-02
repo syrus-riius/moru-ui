@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawer",
+  "type": "registry:ui",
+  "title": "Drawer",
+  "description": "Bottom modal drawer with managed focus and keyboard or pointer dismissal.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/drawer-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/moru/drawer-utils.ts",
+      "content": "// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\n/** A deliberate pull or a short, quick downward gesture dismisses the drawer. */\nexport function shouldDismissDrawer(distance: number, elapsedMs: number): boolean {\n  if (!Number.isFinite(distance) || !Number.isFinite(elapsedMs) || distance < 0 || elapsedMs < 0) return false\n  return distance >= 88 || (distance >= 28 && distance / Math.max(elapsedMs, 1) >= 0.55)\n}\n\n/** Ignore a drag's synthesized pointer click, never a keyboard/assistive activation. */\nexport function shouldSuppressDrawerClick(dragged: boolean, clickDetail: number): boolean {\n  return dragged && clickDetail > 0\n}\n"
+    },
+    {
+      "path": "registry/moru/drawer.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/drawer.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useRef, useState, type ComponentPropsWithoutRef, type CSSProperties, type ReactElement, type ReactNode } from 'react'\nimport { Dialog as BaseDialog } from '@base-ui/react/dialog'\nimport { X } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { shouldDismissDrawer, shouldSuppressDrawerClick } from './drawer-utils'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './navigation-completion.css'\n\nexport interface DrawerProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n/** A bottom modal with a keyboard-operable pull handle and downward pointer dismissal. */\nexport function Drawer({ trigger, title, description, children, footer, open, defaultOpen = false, onOpenChange, disabled, size = 'md', className, initialFocus, finalFocus }: DrawerProps) {\n  const portalContainer = useThemePortalContainer()\n  const [localOpen, setLocalOpen] = useState(defaultOpen)\n  const [drag, setDrag] = useState(0)\n  const gesture = useRef<{ y: number; started: number; pointerId: number } | null>(null)\n  const suppressClick = useRef(false)\n  const isOpen = open ?? localOpen\n  useEffect(() => {\n    if (isOpen) return\n    // A controlled caller may close without going through changeOpen.\n    gesture.current = null\n    suppressClick.current = false\n    setDrag(0)\n  }, [isOpen])\n  function changeOpen(next: boolean) {\n    if (next && disabled) return\n    gesture.current = null\n    setDrag(0)\n    if (open === undefined) setLocalOpen(next)\n    onOpenChange?.(next)\n  }\n  return <BaseDialog.Root open={isOpen} onOpenChange={changeOpen}>\n    {trigger ? <BaseDialog.Trigger render={trigger} disabled={disabled} /> : null}\n    <OverlayPortal portal={BaseDialog.Portal} kind=\"modal\" container={portalContainer}>\n      <BaseDialog.Backdrop className=\"ui-navigation-backdrop\" />\n      <BaseDialog.Popup className={cn('ui-drawer', className)} data-size={size} data-dragging={gesture.current ? '' : undefined} style={{ '--ui-drawer-drag': `${drag}px` } as CSSProperties} initialFocus={initialFocus} finalFocus={finalFocus}>\n        <button className=\"ui-drawer-handle\" type=\"button\" aria-label=\"아래로 끌거나 눌러 닫기\" onClick={(event) => {\n          const suppress = shouldSuppressDrawerClick(suppressClick.current, event.detail)\n          suppressClick.current = false\n          if (!suppress) changeOpen(false)\n        }} onPointerDown={(event) => {\n          if (event.button !== 0 || !event.isPrimary) return\n          gesture.current = { y: event.clientY, started: event.timeStamp, pointerId: event.pointerId }\n          suppressClick.current = false\n          event.currentTarget.setPointerCapture(event.pointerId)\n        }} onPointerMove={(event) => {\n          if (gesture.current?.pointerId !== event.pointerId) return\n          const distance = Math.max(0, event.clientY - gesture.current.y)\n          if (distance > 5) suppressClick.current = true\n          setDrag(distance)\n        }} onPointerUp={(event) => {\n          const current = gesture.current\n          if (!current || current.pointerId !== event.pointerId) return\n          const distance = Math.max(0, event.clientY - current.y)\n          const dismiss = shouldDismissDrawer(distance, event.timeStamp - current.started)\n          gesture.current = null\n          setDrag(0)\n          if (dismiss) changeOpen(false)\n        }} onPointerCancel={() => { gesture.current = null; setDrag(0); suppressClick.current = false }} onLostPointerCapture={() => { gesture.current = null; setDrag(0) }}><span aria-hidden=\"true\" /></button>\n        <header className=\"ui-drawer-header\"><BaseDialog.Title className=\"ui-navigation-heading\">{title}</BaseDialog.Title>{description ? <BaseDialog.Description className=\"ui-navigation-description\">{description}</BaseDialog.Description> : null}</header>\n        <BaseDialog.Close className=\"ui-navigation-close\" aria-label=\"드로어 닫기\"><X size={18} aria-hidden=\"true\" /></BaseDialog.Close>\n        <div className=\"ui-drawer-content\">{children}</div>{footer ? <footer className=\"ui-drawer-footer\">{footer}</footer> : null}\n      </BaseDialog.Popup>\n    </OverlayPortal>\n  </BaseDialog.Root>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

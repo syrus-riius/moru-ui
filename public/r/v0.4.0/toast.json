@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast",
+  "type": "registry:ui",
+  "title": "Toast",
+  "description": "ToastProvider and useToast for dismissible semantic application notifications.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/toast.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/toast.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useCallback, useMemo, type ReactNode } from 'react'\nimport { Toast as BaseToast } from '@base-ui/react/toast'\nimport { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react'\nimport type { SemanticTone } from './state'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './advanced-overlays.css'\n\nexport interface ToastOptions {\n  title: string\n  description?: string\n  tone?: SemanticTone\n  action?: { label: string; onClick: () => void }\n  /** Time in milliseconds. Zero keeps the notification until it is dismissed. */\n  duration?: number\n}\n\ninterface ToastData { tone: SemanticTone }\n\n/** Wrap inside ThemeScope to carry the active design tokens into notifications. */\nexport function ToastProvider({ children }: { children: ReactNode }) {\n  return (\n    <BaseToast.Provider limit={3} timeout={5000}>\n      {children}\n      <ToastViewport />\n    </BaseToast.Provider>\n  )\n}\n\nexport function useToast() {\n  const { add, close } = BaseToast.useToastManager<ToastData>()\n  const toast = useCallback(({ title, description, tone = 'info', action, duration = 5000 }: ToastOptions) => {\n    let toastId = ''\n    toastId = add({\n      title,\n      description,\n      data: { tone },\n      type: tone,\n      priority: tone === 'danger' ? 'high' : 'low',\n      timeout: Number.isFinite(duration) && duration >= 0 ? duration : 5000,\n      actionProps: action ? {\n        children: action.label,\n        onClick: () => { action.onClick(); close(toastId) },\n      } : undefined,\n    })\n    return toastId\n  }, [add, close])\n  return useMemo(() => ({ toast, dismiss: close }), [toast, close])\n}\n\nconst toneIcons = { success: CircleCheck, warning: TriangleAlert, info: Info, danger: CircleAlert }\n\nfunction ToastViewport() {\n  const { toasts } = BaseToast.useToastManager<ToastData>()\n  const portalContainer = useThemePortalContainer()\n  return (\n    <OverlayPortal portal={BaseToast.Portal} kind=\"toast\" container={portalContainer}>\n      <BaseToast.Viewport className=\"ui-toast-viewport\" aria-label=\"알림 · F6 키로 이동\">\n        {toasts.map((toast) => {\n          const tone = toast.data?.tone ?? 'info'\n          const Icon = toneIcons[tone]\n          return (\n            <BaseToast.Root key={toast.id} toast={toast} className=\"ui-toast\" data-tone={tone}>\n              <Icon className=\"ui-toast-icon\" size={18} aria-hidden=\"true\" />\n              <BaseToast.Content className=\"ui-toast-content\">\n                <BaseToast.Title className=\"ui-toast-title\">{toast.title}</BaseToast.Title>\n                {toast.description && <BaseToast.Description className=\"ui-toast-description\">{toast.description}</BaseToast.Description>}\n                {toast.actionProps && <BaseToast.Action className=\"ui-toast-action\" />}\n              </BaseToast.Content>\n              <BaseToast.Close className=\"ui-overlay-close ui-toast-close\" aria-label=\"알림 닫기\">\n                <X size={16} aria-hidden=\"true\" />\n              </BaseToast.Close>\n            </BaseToast.Root>\n          )\n        })}\n      </BaseToast.Viewport>\n    </OverlayPortal>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

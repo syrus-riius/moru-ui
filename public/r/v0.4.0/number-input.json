@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "number-input",
+  "type": "registry:ui",
+  "title": "Number Input",
+  "description": "Numeric field with step controls, bounds and localized formatting.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/number-input.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/number-input.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, useEffect, useImperativeHandle, useRef, useState, type AriaAttributes, type ComponentPropsWithoutRef } from 'react'\nimport { NumberField as BaseNumberField } from '@base-ui/react/number-field'\nimport { Minus, Plus } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport './enhanced-inputs.css'\n\ntype RootProps = ComponentPropsWithoutRef<typeof BaseNumberField.Root>\nexport interface NumberInputProps extends Omit<RootProps, 'children' | 'className' | 'render' | 'defaultValue'> {\n  defaultValue?: number | null\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  placeholder?: string\n  /** Maximum fractional digits. Formatting and locale-aware parsing are handled by Base UI. */\n  precision?: number\n  hideControls?: boolean\n  loading?: boolean\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n  inputProps?: Omit<ComponentPropsWithoutRef<typeof BaseNumberField.Input>, 'value' | 'defaultValue' | 'id' | 'name' | 'type' | 'size' | 'render' | 'className'> & { className?: string }\n}\n\n/** @internal Base NumberField owns numeric/formatting state, so reset only uncontrolled roots. */\nexport function subscribeNumberInputFormReset(form: EventTarget, onReset: () => void, isControlled: () => boolean) {\n  let subscribed = true\n  function reset(event: Event) {\n    queueMicrotask(() => { if (subscribed && !event.defaultPrevented && !isControlled()) onReset() })\n  }\n  form.addEventListener('reset', reset)\n  return () => { subscribed = false; form.removeEventListener('reset', reset) }\n}\n\n/** A nullable numeric field. Empty input is `null`, never zero or NaN. */\nexport const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({\n  size = 'md', className, placeholder, precision, hideControls = false, loading = false, id,\n  value, defaultValue, format, disabled, readOnly, inputProps, form,\n  'aria-label': ariaLabel, 'aria-labelledby': labelledBy, 'aria-describedby': describedBy,\n  'aria-invalid': invalid, ...props\n}, ref) {\n  const field = useFieldContext()\n  const unavailable = disabled || loading || inputProps?.disabled\n  const resolvedReadOnly = readOnly || inputProps?.readOnly\n  const inputRef = useRef<HTMLInputElement>(null)\n  const controlled = useRef(value !== undefined)\n  controlled.current = value !== undefined\n  const [resetVersion, setResetVersion] = useState(0)\n  const restoreFocus = useRef(false)\n  const resolvedForm = form ?? inputProps?.form\n  useImperativeHandle(ref, () => inputRef.current!, [resetVersion])\n  useEffect(() => {\n    const ownerForm = inputRef.current?.form\n    if (!ownerForm) return\n    return subscribeNumberInputFormReset(ownerForm, () => {\n      restoreFocus.current = inputRef.current?.ownerDocument.activeElement === inputRef.current\n      setResetVersion((version) => version + 1)\n    }, () => controlled.current)\n  }, [resolvedForm, resetVersion])\n  useEffect(() => {\n    if (restoreFocus.current) { restoreFocus.current = false; inputRef.current?.focus() }\n  }, [resetVersion])\n  const digits = typeof precision === 'number' && Number.isFinite(precision) ? Math.min(20, Math.max(0, Math.floor(precision))) : undefined\n  const resolvedFormat = digits === undefined ? format : { ...format, minimumFractionDigits: Math.min(format?.minimumFractionDigits ?? 0, digits), maximumFractionDigits: digits }\n  return <BaseNumberField.Root {...props} key={resetVersion} id={id ?? field?.controlId} value={value} defaultValue={defaultValue ?? undefined} form={resolvedForm} format={resolvedFormat} disabled={unavailable} readOnly={resolvedReadOnly} className={cn('ui-number-input ui-enhanced-input', className)} data-size={size}>\n    <BaseNumberField.Group className=\"ui-number-input-group\" data-loading={loading || undefined}>\n      {!hideControls && <BaseNumberField.Decrement className=\"ui-enhanced-input-action\" aria-label=\"값 줄이기\" disabled={unavailable || resolvedReadOnly}><Minus aria-hidden=\"true\" size={14} /></BaseNumberField.Decrement>}\n      <BaseNumberField.Input {...inputProps} ref={inputRef} form={resolvedForm} disabled={unavailable} readOnly={resolvedReadOnly} className={cn('ui-enhanced-input-field', inputProps?.className)} placeholder={placeholder} aria-label={ariaLabel ?? inputProps?.['aria-label']} aria-labelledby={labelledBy ?? inputProps?.['aria-labelledby']} aria-describedby={mergeDescriptionIds(describedBy, inputProps?.['aria-describedby'], field?.describedBy)} aria-invalid={invalid ?? inputProps?.['aria-invalid'] ?? (field?.invalid || undefined)} aria-busy={loading || inputProps?.['aria-busy']} />\n      {loading && <span className=\"ui-enhanced-input-loading\" aria-hidden=\"true\"><span className=\"ui-loading-indicator\" /></span>}\n      {!hideControls && <BaseNumberField.Increment className=\"ui-enhanced-input-action\" aria-label=\"값 늘리기\" disabled={unavailable || resolvedReadOnly}><Plus aria-hidden=\"true\" size={14} /></BaseNumberField.Increment>}\n    </BaseNumberField.Group>\n  </BaseNumberField.Root>\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "data-table",
+  "type": "registry:ui",
+  "title": "Data Table",
+  "description": "TanStack-based table with filtering, sorting, row selection, visible columns and pagination.",
+  "dependencies": [
+    "@tanstack/react-table@9.3.1",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/checkbox.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/pagination.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/popover.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/table.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/data-table.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/data-table.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useEffectEvent } from 'react'\nimport {\n  columnFilteringFeature, columnVisibilityFeature, globalFilteringFeature, rowPaginationFeature,\n  rowSelectionFeature, rowSortingFeature, createFilteredRowModel, createPaginatedRowModel,\n  createSortedRowModel, filterFn_includesString, sortFn_alphanumeric, sortFn_text, sortFn_basic,\n  tableFeatures, useTable, type ColumnDef, type RowData,\n} from '@tanstack/react-table'\nimport { ArrowDown, ArrowUp, ArrowUpDown, Columns3 } from 'lucide-react'\nimport { Button } from './button'\nimport { Checkbox } from './checkbox'\nimport { Input } from './input'\nimport { Pagination } from './pagination'\nimport { Popover } from './popover'\nimport { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './table'\nimport { cn } from './_lib/cn'\nimport './data-completion.css'\n\nexport const dataTableFeatures = tableFeatures({\n  columnFilteringFeature, globalFilteringFeature, columnVisibilityFeature,\n  rowPaginationFeature, rowSelectionFeature, rowSortingFeature,\n  filteredRowModel: createFilteredRowModel(), paginatedRowModel: createPaginatedRowModel(),\n  sortedRowModel: createSortedRowModel(), filterFns: { includesString: filterFn_includesString },\n  sortFns: { alphanumeric: sortFn_alphanumeric, text: sortFn_text, basic: sortFn_basic },\n})\nexport type DataTableFeatures = typeof dataTableFeatures\nexport type DataTableColumn<T extends RowData> = ColumnDef<DataTableFeatures, T>\nexport interface DataTableProps<T extends RowData> {\n  data: T[]\n  columns: DataTableColumn<T>[]\n  getRowId: (row: T) => string\n  caption: string\n  pageSize?: number\n  selectable?: boolean\n  disabled?: boolean\n  searchPlaceholder?: string\n  onSelectionChange?: (ids: string[]) => void\n  className?: string\n}\n\n/** Client-side table composition. Stable row IDs keep selection attached after sorting. */\nexport function DataTable<T extends RowData>({ data, columns, getRowId, caption, pageSize = 5, selectable = true, disabled = false, searchPlaceholder = '목록 검색', onSelectionChange, className }: DataTableProps<T>) {\n  const table = useTable({ features: dataTableFeatures, data, columns, getRowId,\n    initialState: { pagination: { pageIndex: 0, pageSize: Math.max(1, Math.floor(pageSize) || 5) } },\n    globalFilterFn: 'includesString', enableRowSelection: selectable,\n    defaultColumn: { sortFn: 'alphanumeric' },\n  })\n  const selectedIds = table.getSelectedRowModel().rows.map((row) => row.id)\n  const selectionKey = JSON.stringify(selectedIds)\n  const notifySelection = useEffectEvent(() => onSelectionChange?.(selectedIds))\n  useEffect(() => { notifySelection() }, [selectionKey])\n  const rowCount = table.getFilteredRowModel().rows.length\n  const pageCount = table.getPageCount()\n  const visibleCount = table.getVisibleLeafColumns().length\n  const page = Math.min(table.state.pagination.pageIndex, Math.max(0, pageCount - 1))\n  // A parent may replace data while the last page is visible.\n  useEffect(() => { if (table.state.pagination.pageIndex !== page) table.setPageIndex(page) }, [table, page])\n  return <div className={cn('ui-data-table', className)}>\n    <div className=\"ui-data-table-toolbar\"><Input type=\"search\" aria-label={`${caption} 검색`} placeholder={searchPlaceholder} value={String(table.state.globalFilter ?? '')} disabled={disabled} onValueChange={(value) => { table.setGlobalFilter(value); table.setPageIndex(0) }} />\n      <Popover title=\"표시할 열\" trigger={<Button variant=\"secondary\" size=\"sm\" disabled={disabled}><Columns3 size={14} />열 선택</Button>}><div className=\"ui-data-table-columns\">{table.getAllLeafColumns().filter((column) => column.getCanHide()).map((column) => <Checkbox key={column.id} label={typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id} checked={column.getIsVisible()} disabled={disabled || (column.getIsVisible() && visibleCount === 1)} onCheckedChange={(checked) => column.toggleVisibility(checked)} />)}</div></Popover>\n    </div>\n    <Table aria-label={caption}><TableCaption>{caption}</TableCaption><TableHeader>{table.getHeaderGroups().map((group) => <TableRow key={group.id}>\n      {selectable && <TableHead><Checkbox aria-label=\"현재 페이지 전체 선택\" checked={table.getIsAllPageRowsSelected()} indeterminate={table.getIsSomePageRowsSelected()} disabled={disabled || !table.getRowModel().rows.length} onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked)} /></TableHead>}\n      {group.headers.map((header) => <TableHead key={header.id} colSpan={header.colSpan} aria-sort={header.column.getIsSorted() === 'asc' ? 'ascending' : header.column.getIsSorted() === 'desc' ? 'descending' : undefined}>{header.isPlaceholder ? null : header.column.getCanSort() ? <button type=\"button\" className=\"ui-data-table-sort\" disabled={disabled} onClick={() => { header.column.toggleSorting(); table.setPageIndex(0) }}><table.FlexRender header={header} />{header.column.getIsSorted() === 'asc' ? <ArrowUp size={13} aria-hidden=\"true\" /> : header.column.getIsSorted() === 'desc' ? <ArrowDown size={13} aria-hidden=\"true\" /> : <ArrowUpDown size={13} aria-hidden=\"true\" />}</button> : <table.FlexRender header={header} />}</TableHead>)}\n    </TableRow>)}</TableHeader><TableBody>{table.getRowModel().rows.length ? table.getRowModel().rows.map((row) => <TableRow key={row.id} aria-selected={selectable ? row.getIsSelected() : undefined}>\n      {selectable && <TableCell><Checkbox aria-label={`행 ${row.index + 1} 선택`} checked={row.getIsSelected()} disabled={disabled} onCheckedChange={(checked) => row.toggleSelected(checked)} /></TableCell>}\n      {row.getVisibleCells().map((cell) => <TableCell key={cell.id}><table.FlexRender cell={cell} /></TableCell>)}\n    </TableRow>) : <TableRow><TableCell colSpan={visibleCount + (selectable ? 1 : 0)} className=\"ui-data-table-empty\">일치하는 항목이 없습니다.</TableCell></TableRow>}</TableBody></Table>\n    <footer className=\"ui-data-table-footer\"><p className=\"ui-data-table-summary\" role=\"status\">{rowCount}개 표시{selectable ? ` · ${selectedIds.length}개 선택` : ''}</p><Pagination page={page + 1} pageCount={pageCount} disabled={disabled} aria-label={`${caption} 페이지`} onPageChange={(next) => table.setPageIndex(next - 1)} /></footer>\n  </div>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

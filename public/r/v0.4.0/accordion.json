@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "Expandable sections with accessible headings and keyboard interaction.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/accordion.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/accordion.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { HTMLAttributes, ReactNode } from 'react'\nimport { Accordion as BaseAccordion } from '@base-ui/react/accordion'\nimport { cn } from './_lib/cn'\nimport './overlays.css'\n\nexport interface AccordionItem {\n  value: string\n  title: ReactNode\n  content: ReactNode\n  disabled?: boolean\n}\n\nexport interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue'> {\n  items: AccordionItem[]\n  value?: string[]\n  defaultValue?: string[]\n  onValueChange?: (value: string[]) => void\n  multiple?: boolean\n  disabled?: boolean\n}\n\nexport function Accordion({\n  items, value, defaultValue, onValueChange, multiple = false, disabled = false,\n  className, ...props\n}: AccordionProps) {\n  return (\n    <BaseAccordion.Root<string>\n      {...props}\n      value={value}\n      defaultValue={defaultValue}\n      onValueChange={(nextValue) => onValueChange?.(nextValue)}\n      multiple={multiple}\n      disabled={disabled}\n      className={cn('ui-accordion', className)}\n    >\n      {items.map((item) => (\n        <BaseAccordion.Item key={item.value} value={item.value} disabled={item.disabled} className=\"ui-accordion-item\">\n          <BaseAccordion.Header className=\"ui-accordion-heading\">\n            <BaseAccordion.Trigger className=\"ui-accordion-trigger\">\n              <span className=\"ui-accordion-label\">{item.title}</span>\n              <svg className=\"ui-accordion-chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\">\n                <path d=\"m4 6 4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n              </svg>\n            </BaseAccordion.Trigger>\n          </BaseAccordion.Header>\n          <BaseAccordion.Panel className=\"ui-accordion-panel\">\n            <div className=\"ui-accordion-content\">{item.content}</div>\n          </BaseAccordion.Panel>\n        </BaseAccordion.Item>\n      ))}\n    </BaseAccordion.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

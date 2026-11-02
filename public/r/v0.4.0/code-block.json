@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-block",
+  "type": "registry:ui",
+  "title": "Code Block",
+  "description": "Readable code presentation with copy and line-wrap controls.",
+  "dependencies": [
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/code-block.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/code-block.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, useEffect, useId, useRef, useState, type HTMLAttributes } from 'react'\nimport { Check, Copy, WrapText } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { Button } from './button'\nimport './content-completion.css'\n\nexport interface CodeBlockProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onCopy'> {\n  value: string\n  language?: string\n  filename?: string\n  lineNumbers?: boolean\n  defaultWrap?: boolean\n  copyable?: boolean\n  disabled?: boolean\n  highlightLines?: number[]\n  onCopy?: () => void\n  onCopyError?: (error: unknown) => void\n  size?: 'sm' | 'md' | 'lg'\n}\nexport const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function CodeBlock({\n  value, language = 'text', filename, lineNumbers = false, defaultWrap = false, copyable = true, disabled, highlightLines = [], onCopy, onCopyError, size = 'md', className, ...props\n}, ref) {\n  const [copied, setCopied] = useState(false)\n  const [copyError, setCopyError] = useState(false)\n  const [wrap, setWrap] = useState(defaultWrap)\n  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)\n  const mounted = useRef(true)\n  const id = useId()\n  useEffect(() => { mounted.current = true; return () => { mounted.current = false; if (timer.current) clearTimeout(timer.current) } }, [])\n  async function copy() {\n    if (disabled) return\n    try {\n      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable')\n      await navigator.clipboard.writeText(value)\n      if (!mounted.current) return\n      setCopied(true); setCopyError(false); onCopy?.()\n      if (timer.current) clearTimeout(timer.current)\n      timer.current = setTimeout(() => setCopied(false), 2000)\n    } catch (error) { if (mounted.current) { setCopyError(true); setCopied(false); onCopyError?.(error) } }\n  }\n  const lines = value.split('\\n')\n  return <div {...props} ref={ref} className={cn('ui-code-block', className)} data-size={size}>\n    <div className=\"ui-code-block-header\">\n      <span id={`${id}-title`} className=\"ui-code-block-title\">{filename ?? language}</span>\n      {filename && <span className=\"ui-code-block-language\">{language}</span>}\n      <div className=\"ui-code-block-actions\">\n        <Button variant=\"ghost\" size=\"sm\" aria-label=\"코드 줄바꿈\" aria-pressed={wrap} disabled={disabled} onClick={() => setWrap(!wrap)}><WrapText size={14} aria-hidden=\"true\" /></Button>\n        {copyable && <Button variant=\"ghost\" size=\"sm\" aria-label={copied ? '코드 복사 완료' : '코드 복사'} disabled={disabled} onClick={copy}>{copied ? <Check size={14} aria-hidden=\"true\" /> : <Copy size={14} aria-hidden=\"true\" />}</Button>}\n      </div>\n    </div>\n    <pre tabIndex={0} role=\"region\" aria-labelledby={`${id}-title`} className=\"ui-code-block-pre\" dir=\"ltr\" data-wrap={wrap} data-line-numbers={lineNumbers}>\n      <code>{lines.map((line, index) => <span key={index} className=\"ui-code-block-line\" data-highlighted={highlightLines.includes(index + 1) || undefined}>{lineNumbers && <span className=\"ui-code-block-number\" aria-hidden=\"true\">{index + 1}</span>}<span>{line}</span></span>)}</code>\n    </pre>\n    <span className=\"ui-content-sr-only\" role=\"status\">{copied ? '코드를 복사했어요.' : copyError ? '복사하지 못했어요. 코드를 선택해서 복사해 주세요.' : ''}</span>\n  </div>\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

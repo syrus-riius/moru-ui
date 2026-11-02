@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navigation-menu",
+  "type": "registry:ui",
+  "title": "Navigation Menu",
+  "description": "Grouped navigation links and popup content with keyboard navigation.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/navigation-menu.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/navigation-menu.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useLayoutEffect, useRef, useState } from 'react'\nimport { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'\nimport { ChevronDown } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './navigation-completion.css'\n\nexport interface NavigationMenuLink { id: string; label: string; href: string; description?: string; disabled?: boolean; onSelect?: () => void }\nexport interface NavigationMenuItem {\n  id: string\n  label: string\n  href?: string\n  onSelect?: () => void\n  disabled?: boolean\n  active?: boolean\n  links?: NavigationMenuLink[]\n}\nexport interface NavigationMenuProps {\n  items: NavigationMenuItem[]\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string | null) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\nexport function NavigationMenu({ items, value, defaultValue = null, onValueChange, disabled, size = 'md', className, 'aria-label': label = '주요 탐색' }: NavigationMenuProps) {\n  const portalContainer = useThemePortalContainer()\n  const rootRef = useRef<HTMLElement>(null)\n  const popupRef = useRef<HTMLElement>(null)\n  const lastOpenId = useRef<string | null>(null)\n  const [localValue, setLocalValue] = useState<string | null>(defaultValue)\n  const requestedValue = value === undefined ? localValue : value\n  const available = !disabled && items.some((item) => item.id === requestedValue && !item.disabled && item.links?.length)\n  const shownValue = available ? requestedValue : null\n  useLayoutEffect(() => { if (shownValue !== null) lastOpenId.current = shownValue }, [shownValue])\n  useEffect(() => {\n    // Once an uncontrolled popup becomes unavailable, enabling it again must\n    // not unexpectedly reopen the last menu.\n    if (value === undefined && localValue !== null && !available) setLocalValue(null)\n  }, [value, localValue, available])\n  return <BaseNavigationMenu.Root ref={rootRef} tabIndex={-1} className={cn('ui-navigation-menu', className)} aria-label={label} data-size={size} value={shownValue} onValueChange={(next) => { if (disabled || (next !== null && !items.some((item) => item.id === next && !item.disabled && item.links?.length))) return; if (value === undefined) setLocalValue(next); onValueChange?.(next) }} onOpenChangeComplete={(open) => {\n    if (open) return\n    const previousId = lastOpenId.current\n    lastOpenId.current = null\n    if (previousId === null) return\n    const previous = items.find((item) => item.id === previousId)\n    if (!disabled && previous && !previous.disabled) return\n    const root = rootRef.current\n    // NavigationMenu has no finalFocus API. Its completion hook is the last\n    // opportunity after Base UI's own return target became unavailable.\n    if (!root) return\n    const active = root.ownerDocument.activeElement\n    if (active !== root.ownerDocument.body && !popupRef.current?.contains(active)) return\n    const next = root.querySelector<HTMLElement>('.ui-navigation-trigger:not(:disabled):not([aria-disabled=\"true\"])')\n    const target = next ?? root\n    target.focus({ preventScroll: true })\n  }}>\n    <BaseNavigationMenu.List className=\"ui-navigation-list\">\n      {items.map((item) => <BaseNavigationMenu.Item key={item.id} value={item.id}>\n        {item.links?.length ? <><BaseNavigationMenu.Trigger className=\"ui-navigation-trigger\" disabled={disabled || item.disabled}>{item.label}<ChevronDown size={14} aria-hidden=\"true\" /></BaseNavigationMenu.Trigger><BaseNavigationMenu.Content className=\"ui-navigation-content\">\n          {item.links.map((link) => <BaseNavigationMenu.Link key={link.id} className=\"ui-navigation-link-card\" href={link.href} closeOnClick aria-disabled={disabled || item.disabled || link.disabled || undefined} tabIndex={disabled || item.disabled || link.disabled ? -1 : undefined} onClick={(event) => {\n            if (disabled || item.disabled || link.disabled) { event.preventDefault(); event.preventBaseUIHandler(); return }\n            if (link.onSelect) { event.preventDefault(); link.onSelect() }\n          }}><strong>{link.label}</strong>{link.description ? <span>{link.description}</span> : null}</BaseNavigationMenu.Link>)}\n        </BaseNavigationMenu.Content></> : <BaseNavigationMenu.Link className=\"ui-navigation-trigger\" href={item.href ?? '#'} active={item.active} aria-disabled={disabled || item.disabled || undefined} tabIndex={disabled || item.disabled ? -1 : undefined} onClick={(event) => {\n          if (disabled || item.disabled) { event.preventDefault(); return }\n          if (item.onSelect) { event.preventDefault(); item.onSelect() }\n        }}>{item.label}</BaseNavigationMenu.Link>}\n      </BaseNavigationMenu.Item>)}\n    </BaseNavigationMenu.List>\n    <OverlayPortal portal={BaseNavigationMenu.Portal} kind=\"menu\" container={portalContainer}><BaseNavigationMenu.Positioner positionMethod=\"fixed\" className=\"ui-navigation-positioner\" sideOffset={8} align=\"start\" collisionPadding={12}><BaseNavigationMenu.Popup ref={popupRef} className=\"ui-navigation-popup ui-navigation-menu-popup\" data-size={size}><BaseNavigationMenu.Viewport /></BaseNavigationMenu.Popup></BaseNavigationMenu.Positioner></OverlayPortal>\n  </BaseNavigationMenu.Root>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

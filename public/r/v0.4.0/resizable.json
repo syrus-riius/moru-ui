@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "type": "registry:ui",
+  "title": "Resizable",
+  "description": "Resizable panel groups, panels and handles with optional grip decoration.",
+  "dependencies": [
+    "lucide-react@1.60.0",
+    "react-resizable-panels@4.14.8"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/resizable.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/resizable.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { Group, Panel, Separator, type GroupProps, type PanelProps, type SeparatorProps } from 'react-resizable-panels'\nimport { GripVertical } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport './data-completion.css'\n\nexport function ResizablePanelGroup({ className, ...props }: GroupProps) {\n  return <Group {...props} className={cn('ui-resizable-group', className)} />\n}\nexport function ResizablePanel({ className, ...props }: PanelProps) {\n  return <Panel {...props} className={cn('ui-resizable-panel', className)} />\n}\nexport function ResizableHandle({ className, withHandle = true, 'aria-label': label = '패널 크기 조절', ...props }: SeparatorProps & { withHandle?: boolean }) {\n  return <Separator {...props} aria-label={label} className={cn('ui-resizable-handle', className)}>{withHandle && <span><GripVertical size={14} aria-hidden=\"true\" /></span>}</Separator>\n}\nexport type { GroupProps as ResizablePanelGroupProps, PanelProps as ResizablePanelProps }\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-file-input { display:grid; gap:var(--ui-field-gap,8px); min-width:0; color:var(--ui-text); font-family:var(--ui-font-family); font-size:var(--ui-type-label-size); line-height:var(--ui-type-label-line-height); letter-spacing:var(--ui-type-label-letter-spacing); }
+:where([data-moru-registry]) .ui-file-input input[type="file"] { box-sizing:border-box; display:block; width:100%; min-width:0; min-height:var(--ui-control-height-md,40px); padding:4px; border:var(--ui-border-width,1px) solid var(--ui-control-border,var(--ui-border,#8a8a86)); border-radius:var(--ui-radius); background:var(--ui-input-bg); color:var(--ui-muted); overflow-wrap:anywhere; }
+:where([data-moru-registry]) .ui-file-input input[type="file"]:not(:disabled):not([aria-invalid=true]):hover { border-color:var(--ui-control-hover-border,var(--ui-control-border,#8a8a86)); background:var(--ui-control-hover-bg,var(--ui-input-bg)); }
+:where([data-moru-registry]) .ui-file-input[data-size=sm] input[type="file"] { min-height:var(--ui-control-height-sm,32px); }
+:where([data-moru-registry]) .ui-file-input[data-size=lg] input[type="file"] { min-height:var(--ui-control-height-lg,48px); }
+:where([data-moru-registry]) .ui-file-input input[type="file"]::file-selector-button { margin-inline-end:var(--ui-control-gap,8px); min-height:28px; padding:4px 12px; border:0; border-radius:max(2px,calc(var(--ui-radius) - 2px)); background:var(--ui-surface); color:var(--ui-text); font:inherit; cursor:pointer; }
+:where([data-moru-registry]) .ui-file-input input[type="file"]:not(:disabled):hover::file-selector-button { background:var(--ui-control-hover-bg); }
+:where([data-moru-registry]) .ui-file-input input[type="file"]:focus-visible { outline:2px solid var(--ui-focus-ring,var(--ui-primary,#181818)); outline-offset:2px; }
+:where([data-moru-registry]) .ui-file-input input[type="file"][aria-invalid=true] { outline-color:var(--ui-error-ring,var(--ui-danger)); border-color:var(--ui-danger); background:var(--ui-danger-soft,#f9efef); box-shadow:0 0 0 1px var(--ui-error-ring,var(--ui-danger)); }
+:where([data-moru-registry]) .ui-file-input input[type="file"]:disabled { background:var(--ui-disabled-bg); color:var(--ui-disabled-text); box-shadow:none; }
+:where([data-moru-registry]) .ui-file-input[data-disabled]:not([data-loading]) { opacity:.55; }
+:where([data-moru-registry]) .ui-file-input[data-loading] input[type="file"] { padding-inline-end:calc(var(--ui-icon-size-md,16px) + var(--ui-control-gap,8px) * 2); cursor:progress; }
+:where([data-moru-registry]) .ui-file-input-selection { display:flex; align-items:flex-start; gap:8px; min-width:0; }
+:where([data-moru-registry]) .ui-file-input-selection ul { display:grid; flex:1; gap:8px; min-width:0; margin:0; padding:0; list-style:none; }
+:where([data-moru-registry]) .ui-file-input-selection li { display:flex; align-items:baseline; flex-wrap:wrap; justify-content:space-between; gap:4px 12px; min-width:0; padding:8px 12px; border:var(--ui-border-width,1px) solid var(--ui-border); border-radius:var(--ui-radius); background:var(--ui-surface); }
+:where([data-moru-registry]) .ui-file-input-selection li > span { min-width:0; overflow-wrap:anywhere; }
+:where([data-moru-registry]) .ui-file-input-selection small { color:var(--ui-muted); font-size:var(--ui-type-caption-size); font-variant-numeric:tabular-nums; }
+:where([data-moru-registry]) .ui-file-input-selection button { display:grid; place-items:center; flex:none; width:32px; min-height:32px; border:0; border-radius:var(--ui-radius); background:transparent; color:var(--ui-muted); }
+:where([data-moru-registry]) .ui-file-input-selection button:hover:not(:disabled) { background:var(--ui-control-hover-bg); color:var(--ui-text); }
+:where([data-moru-registry]) .ui-file-input-error { margin:0; color:var(--ui-danger-surface-text,var(--ui-danger)); font-size:var(--ui-type-caption-size); line-height:var(--ui-type-caption-line-height); overflow-wrap:anywhere; }
+@media (pointer:coarse) { :where([data-moru-registry]) .ui-file-input-selection button { width:44px; min-height:44px; } :where([data-moru-registry]) .ui-file-input input[type="file"]::file-selector-button { min-height:40px; } }
+@media (forced-colors:active) { :where([data-moru-registry]) .ui-file-input input[type="file"] { border:1px solid ButtonText; } }
+
+:where([data-moru-registry]) .ui-file-input-selection button:disabled { color:var(--ui-disabled-text); cursor:not-allowed; }
+

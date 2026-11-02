@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "User image with a fallback representation.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/avatar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/avatar.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { Avatar as BaseAvatar } from '@base-ui/react/avatar'\nimport { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'\nimport { cn } from './_lib/cn'\n\nexport interface AvatarProps extends Omit<ComponentPropsWithoutRef<typeof BaseAvatar.Root>, 'className' | 'children'> {\n  src?: string\n  alt: string\n  fallback?: ReactNode\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}\n\nfunction initials(name: string) {\n  const words = name.trim().split(/\\s+/).filter(Boolean)\n  return (words.length > 1\n    ? words.slice(0, 2).map((word) => Array.from(word)[0]).join('')\n    : Array.from(words[0] ?? '').slice(0, 2).join('')).toLocaleUpperCase()\n}\n\n/** An image with a stable fallback, labelled once for assistive technology. */\nexport const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(\n  { src, alt, fallback, size = 'md', className, ...props },\n  ref,\n) {\n  return (\n    <BaseAvatar.Root\n      role=\"img\"\n      aria-label={alt || undefined}\n      aria-hidden={alt ? undefined : true}\n      {...props}\n      ref={ref}\n      className={cn('ui-avatar', className)}\n      data-size={size}\n    >\n      {src && <BaseAvatar.Image src={src} alt=\"\" aria-hidden=\"true\" className=\"ui-avatar-image\" />}\n      <BaseAvatar.Fallback className=\"ui-avatar-fallback\" aria-hidden=\"true\">\n        {fallback ?? initials(alt)}\n      </BaseAvatar.Fallback>\n    </BaseAvatar.Root>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

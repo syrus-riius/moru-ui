@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "title": "Alert Dialog",
+  "description": "Confirmation dialog with managed focus and asynchronous action feedback.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/alert-dialog.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/alert-dialog.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useLayoutEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactElement } from 'react'\nimport { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'\nimport { CircleAlert } from 'lucide-react'\nimport { Button } from './button'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './advanced-overlays.css'\n\nexport interface AlertDialogProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  confirmLabel?: string\n  cancelLabel?: string\n  onConfirm: () => void | Promise<void>\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  destructive?: boolean\n  loading?: boolean\n  /** Focus a stable destination after confirmation removes the original trigger. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>['finalFocus']\n}\n\n/** Explicit confirmation with safe initial focus and recoverable async errors. */\nexport function AlertDialog({\n  trigger, title, description, confirmLabel = '확인', cancelLabel = '취소', onConfirm,\n  open, onOpenChange, destructive = false, loading = false, finalFocus,\n}: AlertDialogProps) {\n  const portalContainer = useThemePortalContainer()\n  const [internalOpen, setInternalOpen] = useState(false)\n  const [confirming, setConfirming] = useState(false)\n  const [error, setError] = useState<string | null>(null)\n  const cancelRef = useRef<HTMLButtonElement>(null)\n  const popupRef = useRef<HTMLDivElement>(null)\n  const pendingRef = useRef(false)\n  const mountedRef = useRef(true)\n  const sessionRef = useRef(0)\n  const isOpen = open ?? internalOpen\n  const busy = loading || confirming\n\n  useLayoutEffect(() => {\n    const popup = popupRef.current\n    if (!isOpen || !busy || !popup) return\n    // Disabling the focused action can move browser focus to body. Keep it in\n    // the confirmation while all actions are unavailable, including on error.\n    const active = popup.ownerDocument.activeElement\n    if (active === popup.ownerDocument.body || (active && popup.contains(active))) {\n      popup.focus({ preventScroll: true })\n    }\n  }, [isOpen, busy])\n\n  useEffect(() => {\n    mountedRef.current = true\n    return () => { mountedRef.current = false }\n  }, [])\n\n  useEffect(() => {\n    if (!isOpen) {\n      sessionRef.current += 1\n      pendingRef.current = false\n      setConfirming(false)\n      setError(null)\n    }\n  }, [isOpen])\n\n  function changeOpen(nextOpen: boolean) {\n    if (!nextOpen && (pendingRef.current || loading)) return\n    if (open === undefined) setInternalOpen(nextOpen)\n    if (nextOpen) setError(null)\n    onOpenChange?.(nextOpen)\n  }\n\n  async function confirm() {\n    if (pendingRef.current || loading) return\n    pendingRef.current = true\n    setConfirming(true)\n    setError(null)\n    const session = sessionRef.current\n    try {\n      await onConfirm()\n      if (!mountedRef.current || session !== sessionRef.current) return\n      pendingRef.current = false\n      setConfirming(false)\n      changeOpen(false)\n    } catch (reason) {\n      if (!mountedRef.current || session !== sessionRef.current) return\n      pendingRef.current = false\n      setConfirming(false)\n      setError(reason instanceof Error && reason.message.trim() ? reason.message : '처리하지 못했습니다. 다시 시도해 주세요.')\n    }\n  }\n\n  return (\n    <BaseAlertDialog.Root open={isOpen} onOpenChange={(nextOpen, details) => {\n      if (!nextOpen && (pendingRef.current || loading)) { details.cancel(); return }\n      changeOpen(nextOpen)\n    }}>\n      {trigger && <BaseAlertDialog.Trigger render={trigger} />}\n      <OverlayPortal portal={BaseAlertDialog.Portal} kind=\"modal\" container={portalContainer}>\n        <BaseAlertDialog.Backdrop className=\"ui-overlay-backdrop\" />\n        <BaseAlertDialog.Popup ref={popupRef} className=\"ui-alert-dialog\" initialFocus={() => cancelRef.current && !cancelRef.current.disabled ? cancelRef.current : popupRef.current} finalFocus={finalFocus} aria-busy={busy || undefined}>\n          <div className=\"ui-alert-dialog-mark\" data-destructive={destructive || undefined}>\n            <CircleAlert size={20} aria-hidden=\"true\" />\n          </div>\n          <BaseAlertDialog.Title className=\"ui-overlay-title\">{title}</BaseAlertDialog.Title>\n          {description && <BaseAlertDialog.Description className=\"ui-overlay-description\">{description}</BaseAlertDialog.Description>}\n          {error && <p className=\"ui-confirmation-error\" role=\"alert\">{error}</p>}\n          <div className=\"ui-alert-dialog-actions\">\n            <BaseAlertDialog.Close render={<Button ref={cancelRef} variant=\"secondary\" disabled={busy} />}>{cancelLabel}</BaseAlertDialog.Close>\n            <Button variant={destructive ? 'danger' : 'primary'} loading={busy} onClick={() => { void confirm() }}>\n              {confirmLabel}\n            </Button>\n          </div>\n        </BaseAlertDialog.Popup>\n      </OverlayPortal>\n    </BaseAlertDialog.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,205 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-accordion,
+:where([data-moru-registry]) .ui-popover,
+:where([data-moru-registry]) .ui-tooltip {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-accordion {
+  width: 100%;
+}
+
+:where([data-moru-registry]) .ui-accordion-item {
+  border-bottom: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+}
+
+:where([data-moru-registry]) .ui-accordion-heading {
+  margin: 0;
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+  width: 100%;
+  min-height: var(--ui-control-height-md, 40px);
+  padding: calc(var(--ui-space, 4px) * 3) calc(var(--ui-space, 4px) * 2);
+  border: 0;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 4px));
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--ui-duration, 160ms), color var(--ui-duration, 160ms);
+}
+
+:where([data-moru-registry]) .ui-accordion-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger:hover:not([data-disabled]) {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger:active:not([data-disabled]) {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: -2px;
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger[data-open] {
+  color: var(--ui-primary-surface-text, var(--ui-primary, #181818));
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger[data-disabled] {
+  color: var(--ui-disabled-text, #a1a1aa);
+  cursor: not-allowed;
+}
+
+:where([data-moru-registry]) .ui-accordion-chevron {
+  flex: none;
+  width: var(--ui-icon-size-md, 16px);
+  height: var(--ui-icon-size-md, 16px);
+  transition: transform var(--ui-duration, 160ms);
+}
+
+:where([data-moru-registry]) .ui-accordion-trigger[data-open] .ui-accordion-chevron {
+  transform: rotate(180deg);
+}
+
+:where([data-moru-registry]) .ui-accordion-panel {
+  height: var(--accordion-panel-height);
+  overflow: hidden;
+  transition: height var(--ui-duration, 160ms) ease;
+}
+
+:where([data-moru-registry]) .ui-accordion-panel[data-starting-style],
+:where([data-moru-registry]) .ui-accordion-panel[data-ending-style] {
+  height: 0;
+}
+
+:where([data-moru-registry]) .ui-accordion-content {
+  padding: var(--ui-space, 4px) calc(var(--ui-space, 4px) * 2) calc(var(--ui-space, 4px) * 4);
+  color: var(--ui-muted, #6e6e6b);
+}
+
+:where([data-moru-registry]) .ui-accordion-content > :first-child {
+  margin-top: 0;
+}
+
+:where([data-moru-registry]) .ui-accordion-content > :last-child {
+  margin-bottom: 0;
+}
+
+:where([data-moru-registry]) .ui-popover-positioner {
+  z-index: 82;
+}
+
+:where([data-moru-registry]) .ui-tooltip-positioner {
+  z-index: 90;
+}
+
+:where([data-moru-registry]) .ui-popover,
+:where([data-moru-registry]) .ui-tooltip {
+  max-width: min(calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  max-height: min(calc(100dvh - 24px), var(--available-height, calc(100dvh - 24px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);
+  transform-origin: var(--transform-origin);
+  transition: opacity var(--ui-duration, 160ms), transform var(--ui-duration, 160ms);
+}
+
+:where([data-moru-registry]) .ui-popover {
+  width: 320px;
+  padding: var(--ui-card-padding, 24px);
+}
+
+:where([data-moru-registry]) .ui-popover:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: -3px;
+}
+
+:where([data-moru-registry]) .ui-popover-header {
+  margin-bottom: var(--ui-form-gap, 24px);
+}
+
+:where([data-moru-registry]) .ui-popover-title {
+  margin: 0;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+}
+
+:where([data-moru-registry]) .ui-popover-description {
+  margin: var(--ui-field-gap, 8px) 0 0;
+  color: var(--ui-muted, #6e6e6b);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+
+:where([data-moru-registry]) .ui-popover-content {
+  min-width: 0;
+}
+
+:where([data-moru-registry]) .ui-tooltip {
+  width: max-content;
+  max-width: min(280px, calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  padding: var(--ui-field-gap, 8px) var(--ui-control-padding-x-sm, 10px);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  border-color: transparent;
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-primary, #181818);
+  color: var(--ui-primary-foreground, #fff);
+}
+
+:where([data-moru-registry]) .ui-popover[data-starting-style],
+:where([data-moru-registry]) .ui-popover[data-ending-style],
+:where([data-moru-registry]) .ui-tooltip[data-starting-style],
+:where([data-moru-registry]) .ui-tooltip[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+:where([data-moru-registry]) .ui-tooltip[data-instant] {
+  transition-duration: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-accordion-trigger,
+  :where([data-moru-registry]) .ui-accordion-chevron,
+  :where([data-moru-registry]) .ui-accordion-panel,
+  :where([data-moru-registry]) .ui-popover,
+  :where([data-moru-registry]) .ui-tooltip {
+  transition: none;
+}
+}
+

@@ -1,39 +1,40 @@
 # Moru 선택 설치
 
-Moru v0.3.2은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
+Moru v0.3.3은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
 선택한 파일을 직접 수정할 수 있으며 Moru npm 라이브러리에 종속되지 않습니다.
-공통 기반과 Button·Input·Field, 로그인·OTP·검색 필터·설정 폼 블록을 제공합니다.
+공통 기반 1개·UI 컴포넌트 17개·재사용 블록 4개로 총 22개 항목을 제공합니다.
+이번 버전에는 Tabs·Menu·Popover·Drawer가 추가됩니다.
 
 ## 준비
 
-Node.js 24+, React 19, TypeScript, Vite, Tailwind CSS 4를 기준으로 검증합니다.
+지원 기준은 Node.js 24+, React 19, TypeScript, Vite, Tailwind CSS 4입니다.
 프로젝트의 Tailwind 설정과 `components.json`이 먼저 준비되어 있어야 합니다.
 새 앱을 만들 때는 [shadcn의 Vite 설치 가이드](https://ui.shadcn.com/docs/installation/vite)를
 따라 기본 설정을 완료하고, 아래 명령을 앱 폴더에서 실행하세요.
-CLI 버전은 실제 검증한 `4.23.0`으로 고정합니다.
+CLI 버전은 이전 릴리스에서 사용한 `4.23.0`으로 고정합니다.
 
 ## 필요한 항목 설치
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json
 ```
 
 항목 이름만 바꿔 Input·Field와 블록을 설치할 수 있습니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/search-filters.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/settings.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/settings.json
 ```
 
 공통 기반만 필요하면 `core.json`을 설치합니다. 다른 항목은 core를 의존성으로 가져옵니다.
 로그인·OTP 블록에는 Card·Checkbox·PasswordInput·InputOTP 등 실제로 필요한 보조 항목이
 함께 설치됩니다. 차트·표·캐러셀 등의 파일과 패키지는 이 범위에 포함하지 않습니다.
 
-사용자의 `components.json`에서 지정한 UI 경로 아래 `moru/`에 설치합니다.
+설치 대상 선언은 `@ui/moru/`이며 사용자의 `components.json`에서 지정한 UI 경로를 따릅니다.
 예를 들어 UI 경로가 `@/components/ui`라면 아래와 같습니다.
 
 ```text
@@ -129,14 +130,68 @@ export function AuthenticationExamples() {
 전체 흐름은 [프로젝트·할 일 앱 템플릿](project-template.ko.md)을 참고하세요.
 무 props로 사용하면 기존 갤러리의 데모 데이터와 로컬 저장 동작을 확인할 수 있습니다.
 
+## 탭·메뉴·팝오버·드로어
+
+```sh
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/drawer.json
+```
+
+앞에서 연결한 `MoruProvider` 안에서 사용하세요. 아래 트리거 예시는 별도 설치한 Button을 사용합니다.
+
+```tsx
+import { useState } from 'react'
+import { Button } from '@/components/ui/moru/button'
+import { Tabs } from '@/components/ui/moru/tabs'
+import { Menu } from '@/components/ui/moru/menu'
+import { Popover } from '@/components/ui/moru/popover'
+import { Drawer } from '@/components/ui/moru/drawer'
+
+export function WorkspaceNavigation() {
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  return <>
+    <Tabs aria-label="작업 공간 보기" defaultValue="projects" items={[
+      { value: 'projects', label: '프로젝트', content: <p>프로젝트 목록</p> },
+      { value: 'activity', label: '활동', content: <p>최근 활동</p> },
+    ]} />
+    <Menu trigger={<Button variant="secondary">작업 메뉴</Button>} items={[
+      { label: '프로젝트 만들기', onClick: () => setMessage('만들기를 선택했어요.') },
+      { label: '보관하기', disabled: true },
+    ]} />
+    <Popover trigger={<Button variant="secondary">자세히 보기</Button>}
+      title="작업 공간 정보" side="bottom" align="start">
+      <p>현재 화면에 필요한 보조 정보를 넣으세요.</p>
+    </Popover>
+    <Drawer trigger={<Button>편집 열기</Button>} title="프로젝트 편집"
+      open={open} onOpenChange={setOpen}
+      footer={<Button onClick={() => setOpen(false)}>완료</Button>}>
+      <p>프로젝트 편집 폼을 넣으세요.</p>
+    </Drawer>
+    <p role="status">{message}</p>
+  </>
+}
+```
+
+Tabs는 `value`·`onValueChange` 제어형 선택, 비활성 항목과 세로 배치를 지원합니다.
+기본은 방향키로 초점을 옮기고 Enter·Space로 선택합니다. 방향키 이동과 동시에 선택하려면
+`activateOnFocus`를 켜세요. Menu 항목에는 `onClick`, `disabled`, `destructive`, 아이콘을 지정합니다.
+Popover는 `open`·`defaultOpen`과 위치를, Drawer는 하단 모달의 열림 상태·트리거·푸터를 설정합니다.
+Popover·Drawer는 `initialFocus`·`finalFocus`, Menu는 `finalFocus`를 받습니다.
+화면 밖 portal로 이동한 팝업도 같은 Moru 테마를 따릅니다.
+
 ## 버전과 업데이트
 
-HTTP 항목과 의존성은 `/r/v0.3.2/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
+HTTP 항목과 의존성은 `/r/v0.3.3/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
 다음 릴리스에는 새 버전 경로를 발행합니다. 사용자의 소스를 자동으로 갱신하지는 않습니다.
 새 버전을 설치하기 전에 현재 파일을 커밋하고 CLI의 diff·덮어쓰기 안내를 확인하세요.
+이미 발행한 `/r/v0.3.1/`·`/r/v0.3.2/` 폴더와 설치 URL은 그대로 유지합니다.
+이번 네 항목의 선택 설치는 v0.3.3부터 제공하며 이전 버전에 추가하지 않습니다.
 
 GitHub의 `registry.json`도 같은 항목을 제공합니다. GitHub 주소 형식은
-`syrus-riius/moru-ui/button#v0.3.2`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
+`syrus-riius/moru-ui/button#v0.3.3`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
 HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하지 않았습니다.
 
 ## 지원 범위
@@ -144,6 +199,7 @@ HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하
 이 릴리스는 웹 React·Vite·TypeScript·Tailwind CSS 4를 대상으로 합니다.
 클라이언트 컴포넌트 경계는 생성 파일에 표시하지만 Next.js SSR·hydration은 별도 검증 범위입니다.
 React Native·Expo는 별도 구현이므로 이 웹 레지스트리로 설치하지 않습니다.
+v0.3.3은 산출물 생성과 프로덕션 빌드만 수행하며, 추가 항목의 자동 테스트·설치 스모크·브라우저 점검은 생략합니다.
 
 원본은 `src/components/ui`, `src/components/blocks`, `src/theme`입니다.
 `npm run registry:build`가 설치용 파일을 생성하고 `npm run registry:check`가 오래된 산출물을 검사합니다.

@@ -96,8 +96,8 @@
         "foundation"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -115,7 +115,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -129,8 +129,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -148,7 +148,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -162,8 +162,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -181,7 +181,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -195,8 +195,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -211,7 +211,7 @@
       "title": "Card",
       "description": "A quiet, token-based content surface.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -225,8 +225,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -244,7 +244,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -258,8 +258,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -277,8 +277,8 @@
         "lucide-react@1.60.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json"
       ],
       "files": [
         {
@@ -297,8 +297,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -316,7 +316,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -340,8 +340,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -359,7 +359,7 @@
         "lucide-react@1.60.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -373,8 +373,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -392,7 +392,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -406,8 +406,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -422,7 +422,7 @@
       "title": "Badge",
       "description": "Compact status and category labels using semantic tokens.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -436,8 +436,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -455,7 +455,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -469,8 +469,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -488,7 +488,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -502,8 +502,8 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -521,7 +521,7 @@
         "@base-ui/react@1.9.0"
       ],
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
       ],
       "files": [
         {
@@ -535,8 +535,156 @@
         "components"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/tabs.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "Dropdown actions with keyboard navigation, disabled items and scoped popup theming.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/menu.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Anchored popup with managed focus, collision handling and scoped portal styling.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/overlays.css",
+          "type": "registry:file",
+          "target": "@ui/moru/overlays.css"
+        },
+        {
+          "path": "registry/moru/popover.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/popover.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Bottom modal drawer with managed focus and keyboard or pointer dismissal.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/drawer-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/drawer-utils.ts"
+        },
+        {
+          "path": "registry/moru/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/drawer.tsx"
+        },
+        {
+          "path": "registry/moru/navigation-completion.css",
+          "type": "registry:file",
+          "target": "@ui/moru/navigation-completion.css"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -551,13 +699,13 @@
       "title": "Login Block",
       "description": "Local login form demo. Connect your own authentication service.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/card.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/checkbox.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/password-input.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/checkbox.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/password-input.json"
       ],
       "files": [
         {
@@ -571,8 +719,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -587,11 +735,11 @@
       "title": "OTP Block",
       "description": "Local OTP verification demo. The sample code is 123456.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/card.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input-otp.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input-otp.json"
       ],
       "files": [
         {
@@ -605,8 +753,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -621,14 +769,14 @@
       "title": "Search Filters Block",
       "description": "Composable query, status and assignee filters with local demo data and a controlled application API.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/badge.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/card.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/checkbox.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/select.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/badge.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/checkbox.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/select.json"
       ],
       "files": [
         {
@@ -642,8 +790,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -658,13 +806,13 @@
       "title": "Settings Block",
       "description": "Workspace settings form with local demo feedback and controlled application save handlers.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/button.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/card.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/field.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/input.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/select.json",
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/switch.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/select.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/switch.json"
       ],
       "files": [
         {
@@ -678,8 +826,8 @@
         "blocks"
       ],
       "meta": {
-        "version": "0.3.2",
-        "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+        "version": "0.3.3",
+        "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",

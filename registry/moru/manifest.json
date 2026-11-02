@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.3.2",
-  "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+  "version": "0.3.3",
+  "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
   "sources": [
     {
       "path": "LICENSE",
@@ -13,11 +13,11 @@
     },
     {
       "path": "package.json",
-      "sha256": "b43aedaafefd2ddd5b1448d893ef4515afc6d061ed8031d576415231cbd1bb96"
+      "sha256": "48d3255a466d961ce71ddd9871c3afb3e673a487a272b894e58e185b706162a1"
     },
     {
       "path": "scripts/build-registry.mjs",
-      "sha256": "1afd526f909ff7011e6ae299a72353faad6a0e4b92dc8390ff25528104f72c91"
+      "sha256": "c5abf6a0d3ffd867986c6e6a13e61b3bd43d69dbd8efc72e8926ea979e1ca730"
     },
     {
       "path": "src/components/blocks/LoginBlock.tsx",
@@ -60,6 +60,14 @@
       "sha256": "1e85ee18662bffae197e8dde3f0c2c0fd8156d89652695bea271e0258be7b615"
     },
     {
+      "path": "src/components/ui/drawer-utils.ts",
+      "sha256": "8c6f33c39f832669be9011ae8aca85ce1c3027aa5c048b2f3a3851e4379b8223"
+    },
+    {
+      "path": "src/components/ui/drawer.tsx",
+      "sha256": "229c63129e7e81191dc67904f35362418cb773eafa6b0fb464ddef506cb4258b"
+    },
+    {
       "path": "src/components/ui/enhanced-inputs.css",
       "sha256": "545d3870e6abddff58f87f20183fdbfbf1671b80e188aa0668a9ca152431d739"
     },
@@ -92,12 +100,28 @@
       "sha256": "f186ea2f66b338d2685c3a3e93ff2a9ed1e95fbf6a9aee72171086468280f444"
     },
     {
+      "path": "src/components/ui/menu.tsx",
+      "sha256": "bcaf8a3dd4c81d0d471fbf6c370a7d2a714877e87bbf35fe0f2b5a249cc87812"
+    },
+    {
+      "path": "src/components/ui/navigation-completion.css",
+      "sha256": "ec8ab4c5ee6c31073f51e482a1c68f1ca7f3245434d3ae894e186c7b3fc5460b"
+    },
+    {
       "path": "src/components/ui/overlay-portal.tsx",
       "sha256": "323a836b876a1262b7aa898c946a3b47df12319477150fb10b1cc945b01f5199"
     },
     {
+      "path": "src/components/ui/overlays.css",
+      "sha256": "cb6fb5d79f4cd4828679cec14c059681cbc9a493a341304e3229a14fafb79dc8"
+    },
+    {
       "path": "src/components/ui/password-input.tsx",
       "sha256": "c6a48ee0a4af978684248d61ad110b464afa6c33058f59864a0c56f789eef4d5"
+    },
+    {
+      "path": "src/components/ui/popover.tsx",
+      "sha256": "ae886c05a2e7ca531e0bd67bbfb8dfcd6368f2a9378427043bc89395e98ac3eb"
     },
     {
       "path": "src/components/ui/select.tsx",
@@ -118,6 +142,10 @@
     {
       "path": "src/components/ui/switch.tsx",
       "sha256": "c98d4cf2b19f8710f07e3f7b98398e1cd7d3ac220e89407f1aac574b0bb81d44"
+    },
+    {
+      "path": "src/components/ui/tabs.tsx",
+      "sha256": "486972febcbe2463da7ea196ada9666da77e89892b92cc8ee96370ae81076d51"
     },
     {
       "path": "src/components/ui/textarea.tsx",
@@ -147,87 +175,103 @@
   "files": [
     {
       "path": "public/r/registry.json",
-      "sha256": "9b92e94affbeee94a45b095d9d208aa0c06afdaac268cd5f554a4ef376f676ce"
+      "sha256": "487a3cdd27f4b590974806e6746b26c9fea73b67ca99e22de1dc975ee3057a6f"
     },
     {
-      "path": "public/r/v0.3.2/badge.json",
-      "sha256": "c4ebe2f6da7a331e6332ac76fb8b7f8250faafa5ff281f5b574fc598cdc7f41f"
+      "path": "public/r/v0.3.3/badge.json",
+      "sha256": "614585c299aefd46c32d06aa08f78820838244e305a98dc258bb2e913ec031fb"
     },
     {
-      "path": "public/r/v0.3.2/button.json",
-      "sha256": "198baf63e8d32caa986b274bbe4c02a5bb6d55d7c7659b698911f85191abdb8c"
+      "path": "public/r/v0.3.3/button.json",
+      "sha256": "9d75b96d88e937df64640ef279f0378f86f4856fdbdf894f703c42e84568ddd2"
     },
     {
-      "path": "public/r/v0.3.2/card.json",
-      "sha256": "f2f37fe9cfb20ca2f6b6164e3b22a0530bbd37ccb3aeff6c9767c4978df6e3fb"
+      "path": "public/r/v0.3.3/card.json",
+      "sha256": "17a83a1516c5b33c5582bcfc6501faa8f44408571e532513f2128453077662d9"
     },
     {
-      "path": "public/r/v0.3.2/checkbox.json",
-      "sha256": "029d3b692f84b3e3840cb5f11063eac9f56bb84222a8109b7cb20833f5ee8f4d"
+      "path": "public/r/v0.3.3/checkbox.json",
+      "sha256": "4b9cb90d276e8e4951588bf29ddf8adcd02dd2597581ff694ecdef1e30487b5a"
     },
     {
-      "path": "public/r/v0.3.2/core.json",
-      "sha256": "e8099c45dddf9e241e99d93c23a2b9a33e2ff517c67a46ed828d159259680cea"
+      "path": "public/r/v0.3.3/core.json",
+      "sha256": "c24680fd44e439d4813cac76de3dcfe9052c3af6b738f60ce3401a54b2c48123"
     },
     {
-      "path": "public/r/v0.3.2/dialog.json",
-      "sha256": "acaea520df61e5105813556158bbbf349066acaf6b37de868c6acaf7a1473fb1"
+      "path": "public/r/v0.3.3/dialog.json",
+      "sha256": "0eb29fd8ec5b922e46b2ef3e37262dda3ae647a8d3607c8779123412875e7410"
     },
     {
-      "path": "public/r/v0.3.2/field.json",
-      "sha256": "4ee835651de87c1fee6272445dc486f13ba7deee42b6e9101829d839d5036049"
+      "path": "public/r/v0.3.3/drawer.json",
+      "sha256": "af095a0471e8337a164dcf66d7c272509c42ba9e721ae0af81757486617a2a8f"
     },
     {
-      "path": "public/r/v0.3.2/input-otp.json",
-      "sha256": "bfaf461c64ea4415aea5789d60aae7e797aab13c1ba51480212c17d3516b0cd2"
+      "path": "public/r/v0.3.3/field.json",
+      "sha256": "a4942ddc74a3a5fcf07730743aee86d8f6798bd804e59d01a4b1063e9a5c9db7"
     },
     {
-      "path": "public/r/v0.3.2/input.json",
-      "sha256": "3d95b106b00087dcf3f58e7f51aaa4e41ce90059e8f9d8423e4e6e32a7276f8c"
+      "path": "public/r/v0.3.3/input-otp.json",
+      "sha256": "3f2a909a2fccc13eefd65d072e47e4d6f9199a526dd85f143a3892ce1acad31a"
     },
     {
-      "path": "public/r/v0.3.2/login.json",
-      "sha256": "109e77a67aa7328dc28ebe463dd036aa59580fd0647b82716f5b10088d9800dd"
+      "path": "public/r/v0.3.3/input.json",
+      "sha256": "347a50c493028c029c687b7772e344bb3835c60442fcf821d1fa1a5ee2a0dddf"
     },
     {
-      "path": "public/r/v0.3.2/otp.json",
-      "sha256": "4898ced6bbe7c467f82d9776551392d5c799acc9adcea0ab1b9deb0d1359d250"
+      "path": "public/r/v0.3.3/login.json",
+      "sha256": "4a044b47b74e5f42eb3d767a7e80c675ad2692de69e5fd9ad0ab81510646746e"
     },
     {
-      "path": "public/r/v0.3.2/password-input.json",
-      "sha256": "e03d4d2059dc7fcfcb3aaf28b7983d48d3bff62a668fc611b0ab4aeead891b3c"
+      "path": "public/r/v0.3.3/menu.json",
+      "sha256": "2068889bda2c50f3130975ef750d1f497469ad47e12f7d555143bde28bf8d3f8"
     },
     {
-      "path": "public/r/v0.3.2/registry.json",
-      "sha256": "9b92e94affbeee94a45b095d9d208aa0c06afdaac268cd5f554a4ef376f676ce"
+      "path": "public/r/v0.3.3/otp.json",
+      "sha256": "a08f979ccdd0443d43f470621c921ed3de0eccc16757521e534bf3be85cdf15b"
     },
     {
-      "path": "public/r/v0.3.2/search-filters.json",
-      "sha256": "aa8cb0167cc62434e4255cfd1b619629a8c8c2679ad88b2a3d3427eb5b479a8f"
+      "path": "public/r/v0.3.3/password-input.json",
+      "sha256": "d20780f89b8a2722932dd4ab9de8f965cbcefe696cd4008d55a6d44f15711d26"
     },
     {
-      "path": "public/r/v0.3.2/select.json",
-      "sha256": "319cd1370256de6b36910d2e12834d19193ebea8d58e15c7d30b26a3278437c1"
+      "path": "public/r/v0.3.3/popover.json",
+      "sha256": "55bab75f4a46393980b2773e79f885cd737c5a907058b5abebe74035f8df4286"
     },
     {
-      "path": "public/r/v0.3.2/settings.json",
-      "sha256": "5d24f78e8ea6be820edc327294f4888534886155c6fe495797bc83030b7d2f56"
+      "path": "public/r/v0.3.3/registry.json",
+      "sha256": "487a3cdd27f4b590974806e6746b26c9fea73b67ca99e22de1dc975ee3057a6f"
     },
     {
-      "path": "public/r/v0.3.2/status-message.json",
-      "sha256": "cf1b99b4d48b0887eac32d4000a6a02104d4c78eeed9b12927fc1e46fea89713"
+      "path": "public/r/v0.3.3/search-filters.json",
+      "sha256": "21c7c8a51867aaa1a24f7f31d02d14ea90b5c589179fff5528e6034083e91cad"
     },
     {
-      "path": "public/r/v0.3.2/switch.json",
-      "sha256": "51239ddac482c2fa897a63db20dd7deb484d82bcf0ba9d61484614d06993404f"
+      "path": "public/r/v0.3.3/select.json",
+      "sha256": "b317444d40f898d2d2b1c6b35ce4a856bec6d5ed1eab152ea526b8f755abee11"
     },
     {
-      "path": "public/r/v0.3.2/textarea.json",
-      "sha256": "034fe3dc69a9161f8568db11af1e5e3427a6f4e907b0d15dd7ac8105c7668242"
+      "path": "public/r/v0.3.3/settings.json",
+      "sha256": "b8f38ebdead84f28575aa4996785e0b79f5ad7e7dd319b3b47a68851ee650093"
+    },
+    {
+      "path": "public/r/v0.3.3/status-message.json",
+      "sha256": "773993eeaf9f0c9baedc0a0436d079148328bf45b457a2922565c16d9dfd6e29"
+    },
+    {
+      "path": "public/r/v0.3.3/switch.json",
+      "sha256": "09325df577b57cc7c7279e2f73ca2c3e5a57855c93c9c2d1dfb3e22da1bce7b0"
+    },
+    {
+      "path": "public/r/v0.3.3/tabs.json",
+      "sha256": "deb98d6110193f74b6b8a3999737246ccbc79ff8f4eefefb6ed30eb1a0f5c3fe"
+    },
+    {
+      "path": "public/r/v0.3.3/textarea.json",
+      "sha256": "dd802c1ba18ef01bb37d009fba3de701c88c010e32fea56c8fe18995a82f14a4"
     },
     {
       "path": "registry.json",
-      "sha256": "09cd9179494eebcc11834619b89af0072fdba9f25505c12ce4113f1de0e7cf49"
+      "sha256": "4d7fba338f21b480d127dc15df1d6fe82c8326a6b78fb4575fee0c24767c35e3"
     },
     {
       "path": "registry/moru/_lib/cn.ts",
@@ -310,6 +354,14 @@
       "sha256": "bd8733e84fb964dfb92b71ff68c318fcd54e3e0d6e7bd064d97842864bb03e54"
     },
     {
+      "path": "registry/moru/drawer-utils.ts",
+      "sha256": "fa6958368a1d8bf6ded4d6efa852afcb6c1912dc5c34d6b9a4a450a700568286"
+    },
+    {
+      "path": "registry/moru/drawer.tsx",
+      "sha256": "31f6cdd90552fcaa4f73b2766526932262db7b91539e9f70fa8b984c62bf9844"
+    },
+    {
       "path": "registry/moru/enhanced-inputs.css",
       "sha256": "f3c7ddd2cb394a5b421b699715e66b4183635c58a10b3428bc80d71c2f1a5b80"
     },
@@ -334,12 +386,28 @@
       "sha256": "4d6e74411e9645d471f47f801b27caabc1ba835d0aa79afc7c563a7c4d96f0e7"
     },
     {
+      "path": "registry/moru/menu.tsx",
+      "sha256": "e6dd77511958a776b9dba6a211ec80d1e295945fb38145b4a3b11e3b3bda0d83"
+    },
+    {
+      "path": "registry/moru/navigation-completion.css",
+      "sha256": "22201674a293e55a9634b6beb80ef791ab54e3b425a95b35a603cfb3bee7e6bf"
+    },
+    {
       "path": "registry/moru/overlay-portal.tsx",
       "sha256": "9aafa567dd33910af4dcd14b04844d1d0aa101e66b8553b7fd05980b2d587214"
     },
     {
+      "path": "registry/moru/overlays.css",
+      "sha256": "b4238b851e1f5eaa1c6ad8e9df535ce2a223e868b9b21d78f730e95f68a8190e"
+    },
+    {
       "path": "registry/moru/password-input.tsx",
       "sha256": "701c5e43333f3a82350b94a38881f7bb55cba6c0aeb97be926e5f23eaba26ca4"
+    },
+    {
+      "path": "registry/moru/popover.tsx",
+      "sha256": "5b7cf66c16bcba311e297a669b87c3c8bf084092d251bfea3a810e648fbd36b4"
     },
     {
       "path": "registry/moru/provider.tsx",
@@ -364,6 +432,10 @@
     {
       "path": "registry/moru/switch.tsx",
       "sha256": "0fe3b4a109b3c18aa0db90064b898b2628b720a6df6b8f427779af3741366f3a"
+    },
+    {
+      "path": "registry/moru/tabs.tsx",
+      "sha256": "1665d24150752cc2dd2c293556b7287adaec69a4657c5bbf197fb6e17c24c67e"
     },
     {
       "path": "registry/moru/textarea.tsx",

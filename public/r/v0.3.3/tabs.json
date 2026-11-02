@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/tabs.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/tabs.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { ReactNode } from 'react'\nimport { Tabs as BaseTabs } from '@base-ui/react/tabs'\nimport { cn } from './_lib/cn'\n\nexport interface TabsProps {\n  items: Array<{ value: string; label: string; content: ReactNode; disabled?: boolean }>\n  defaultValue?: string\n  value?: string\n  onValueChange?: (value: string) => void\n  className?: string\n  'aria-label'?: string\n  size?: 'sm' | 'md' | 'lg'\n  orientation?: 'horizontal' | 'vertical'\n  /** Arrow keys move focus; Enter/Space activates by default. */\n  activateOnFocus?: boolean\n  loopFocus?: boolean\n}\n\nexport function Tabs({ items, defaultValue, value, onValueChange, className, size = 'md', orientation = 'horizontal', activateOnFocus = false, loopFocus = true, 'aria-label': ariaLabel = '콘텐츠 보기' }: TabsProps) {\n  const initialValue = items.find((item) => item.value === defaultValue && !item.disabled)?.value ?? items.find((item) => !item.disabled)?.value ?? null\n  return (\n    <BaseTabs.Root\n      defaultValue={initialValue}\n      value={value}\n      orientation={orientation}\n      onValueChange={(nextValue) => { if (typeof nextValue === 'string') onValueChange?.(nextValue) }}\n      className={cn('ui-tabs', className)}\n    >\n      <BaseTabs.List className=\"ui-tabs-list inline-flex items-center\" aria-label={ariaLabel} activateOnFocus={activateOnFocus} loopFocus={loopFocus}>\n        {items.map((item) => <BaseTabs.Tab key={item.value} value={item.value} disabled={item.disabled} className=\"ui-tabs-tab\" data-size={size}>{item.label}</BaseTabs.Tab>)}\n      </BaseTabs.List>\n      {items.map((item) => (\n        <BaseTabs.Panel key={item.value} value={item.value} className=\"ui-tabs-panel\">\n          {item.content}\n        </BaseTabs.Panel>\n      ))}\n    </BaseTabs.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.3",
+    "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

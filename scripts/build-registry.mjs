@@ -8,7 +8,7 @@ import { parse } from '@babel/parser'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultRoot = path.dirname(path.dirname(scriptPath))
-export const registryVersion = '0.3.2'
+export const registryVersion = '0.3.3'
 export const registryOrigin = 'https://moru-ui-lab.riius.chatgpt.site'
 export const registryRepository = 'syrus-riius/moru-ui'
 export const registryScope = ':where([data-moru-registry])'
@@ -33,6 +33,10 @@ export const registryDefinitions = [
   { name: 'switch', entry: 'src/components/ui/switch.tsx', title: 'Switch', description: 'Accessible labelled switch with form and Field integration.' },
   { name: 'dialog', entry: 'src/components/ui/dialog.tsx', title: 'Dialog', description: 'Modal dialog with managed focus and scoped portals.' },
   { name: 'textarea', entry: 'src/components/ui/textarea.tsx', title: 'Textarea', description: 'Multiline input with Field integration and loading state.' },
+  { name: 'tabs', entry: 'src/components/ui/tabs.tsx', title: 'Tabs', description: 'Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.' },
+  { name: 'menu', entry: 'src/components/ui/menu.tsx', title: 'Menu', description: 'Dropdown actions with keyboard navigation, disabled items and scoped popup theming.' },
+  { name: 'popover', entry: 'src/components/ui/popover.tsx', title: 'Popover', description: 'Anchored popup with managed focus, collision handling and scoped portal styling.' },
+  { name: 'drawer', entry: 'src/components/ui/drawer.tsx', title: 'Drawer', description: 'Bottom modal drawer with managed focus and keyboard or pointer dismissal.' },
   { name: 'login', entry: 'src/components/blocks/LoginBlock.tsx', type: 'registry:block', title: 'Login Block', description: 'Local login form demo. Connect your own authentication service.' },
   { name: 'otp', entry: 'src/components/blocks/OTPBlock.tsx', type: 'registry:block', title: 'OTP Block', description: 'Local OTP verification demo. The sample code is 123456.' },
   { name: 'search-filters', entry: 'src/components/blocks/SearchFiltersBlock.tsx', type: 'registry:block', title: 'Search Filters Block', description: 'Composable query, status and assignee filters with local demo data and a controlled application API.' },

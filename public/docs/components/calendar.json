@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "id": "calendar",
+  "title": "Calendar",
+  "description": "기본·미니멀·일정·활동 달력",
+  "example": "import { useState } from 'react'\nimport { Calendar } from 'moru-ui'\n\nexport function PlanningCalendar() {\n  const [date, setDate] = useState<Date | null>(null)\n  return (\n    <Calendar\n      value={date}\n      onValueChange={setDate}\n      variant=\"minimal\"\n      dayShape=\"circle\"\n      aria-label=\"Planning date\"\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/calendar.tsx",
+  "api": "interface CalendarDayData {\n  label: string\n  tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'info'\n  icon?: ReactNode\n  count?: number\n  completed?: boolean\n}\n\ninterface CalendarCommonProps {\n  minDate?: Date\n  maxDate?: Date\n  disabled?: boolean\n  locale?: string\n  className?: string\n  variant?: 'default' | 'minimal' | 'schedule' | 'activity'\n  size?: 'sm' | 'md' | 'lg'\n  dayShape?: 'rounded' | 'square' | 'circle'\n  weekStartsOn?: 0 | 1\n  showOutsideDays?: boolean\n  fixedWeeks?: boolean\n  /** Local date keys (YYYY-MM-DD), independent of the displayed locale. */\n  dayData?: Record<string, CalendarDayData>\n  'aria-label'?: string\n  'aria-describedby'?: string\n}\n\ninterface CalendarSingleProps extends CalendarCommonProps {\n  mode?: 'single'\n  value?: Date | null\n  defaultValue?: Date | null\n  onValueChange?: (value: Date) => void\n}\n\ninterface CalendarRangeProps extends CalendarCommonProps {\n  mode: 'range'\n  value?: CalendarRange\n  defaultValue?: CalendarRange\n  onValueChange?: (value: CalendarRange) => void\n}\n\ntype CalendarProps = CalendarSingleProps | CalendarRangeProps\n\nexport type { CalendarRange } from './calendar-utils'\n\nfunction Calendar(props: CalendarProps);",
+  "props": [
+    {
+      "owner": "CalendarDayData",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "CalendarDayData",
+      "name": "tone",
+      "type": "'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'info'",
+      "required": false
+    },
+    {
+      "owner": "CalendarDayData",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "CalendarDayData",
+      "name": "count",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "CalendarDayData",
+      "name": "completed",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "minDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "maxDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "locale",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "variant",
+      "type": "'default' | 'minimal' | 'schedule' | 'activity'",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "dayShape",
+      "type": "'rounded' | 'square' | 'circle'",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "weekStartsOn",
+      "type": "0 | 1",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "showOutsideDays",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "fixedWeeks",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "dayData",
+      "type": "Record<string, CalendarDayData>",
+      "required": false,
+      "description": "Local date keys (YYYY-MM-DD), independent of the displayed locale."
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CalendarCommonProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CalendarSingleProps",
+      "name": "mode",
+      "type": "'single'",
+      "required": false
+    },
+    {
+      "owner": "CalendarSingleProps",
+      "name": "value",
+      "type": "Date | null",
+      "required": false
+    },
+    {
+      "owner": "CalendarSingleProps",
+      "name": "defaultValue",
+      "type": "Date | null",
+      "required": false
+    },
+    {
+      "owner": "CalendarSingleProps",
+      "name": "onValueChange",
+      "type": "(value: Date) => void",
+      "required": false
+    },
+    {
+      "owner": "CalendarRangeProps",
+      "name": "mode",
+      "type": "'range'",
+      "required": true
+    },
+    {
+      "owner": "CalendarRangeProps",
+      "name": "value",
+      "type": "CalendarRange",
+      "required": false
+    },
+    {
+      "owner": "CalendarRangeProps",
+      "name": "defaultValue",
+      "type": "CalendarRange",
+      "required": false
+    },
+    {
+      "owner": "CalendarRangeProps",
+      "name": "onValueChange",
+      "type": "(value: CalendarRange) => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Calendar",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "Calendar",
+      "prop": "locale",
+      "value": "formatLocale"
+    },
+    {
+      "component": "Calendar",
+      "prop": "variant",
+      "value": "'default'"
+    },
+    {
+      "component": "Calendar",
+      "prop": "size",
+      "value": "'sm'"
+    },
+    {
+      "component": "Calendar",
+      "prop": "dayShape",
+      "value": "'rounded'"
+    },
+    {
+      "component": "Calendar",
+      "prop": "weekStartsOn",
+      "value": "0"
+    },
+    {
+      "component": "Calendar",
+      "prop": "showOutsideDays",
+      "value": "true"
+    },
+    {
+      "component": "Calendar",
+      "prop": "fixedWeeks",
+      "value": "true"
+    },
+    {
+      "component": "Calendar",
+      "prop": "aria-label",
+      "value": "props.mode === 'range' ? t('날짜 범위 선택') : t('날짜 선택')"
+    }
+  ],
+  "notes": [
+    "Calendar uses mode=\"range\" with {start, end} dates, or the default single date mode. CalendarDisplayOptions do not replace its value API.",
+    "Use variant (default/minimal/schedule/activity), dayShape and dayData for presentation; keep the date grid keyboard behavior intact."
+  ]
+}

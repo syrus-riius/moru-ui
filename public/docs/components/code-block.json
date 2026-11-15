@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "id": "code-block",
+  "title": "Code Block",
+  "description": "복사와 줄번호가 있는 코드",
+  "example": "import { CodeBlock } from 'moru-ui'\n\nexport function InstallCommand() {\n  return <CodeBlock value=\"npm install moru-ui\" language=\"sh\" filename=\"Terminal\" defaultWrap />\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/code-block.tsx",
+  "api": "interface CodeBlockProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  'children' | 'onCopy'\n> {\n  value: string\n  language?: string\n  filename?: string\n  lineNumbers?: boolean\n  defaultWrap?: boolean\n  copyable?: boolean\n  disabled?: boolean\n  highlightLines?: number[]\n  onCopy?: () => void\n  onCopyError?: (error: unknown) => void\n  size?: 'sm' | 'md' | 'lg'\n}",
+  "props": [
+    {
+      "owner": "CodeBlockProps",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "language",
+      "type": "string",
+      "required": false,
+      "defaultValue": "'text'"
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "filename",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "lineNumbers",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "defaultWrap",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "copyable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "highlightLines",
+      "type": "number[]",
+      "required": false,
+      "defaultValue": "[]"
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "onCopy",
+      "type": "() => void",
+      "required": false
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "onCopyError",
+      "type": "(error: unknown) => void",
+      "required": false
+    },
+    {
+      "owner": "CodeBlockProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "CodeBlock",
+      "prop": "language",
+      "value": "'text'"
+    },
+    {
+      "component": "CodeBlock",
+      "prop": "lineNumbers",
+      "value": "false"
+    },
+    {
+      "component": "CodeBlock",
+      "prop": "defaultWrap",
+      "value": "false"
+    },
+    {
+      "component": "CodeBlock",
+      "prop": "copyable",
+      "value": "true"
+    },
+    {
+      "component": "CodeBlock",
+      "prop": "highlightLines",
+      "value": "[]"
+    },
+    {
+      "component": "CodeBlock",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

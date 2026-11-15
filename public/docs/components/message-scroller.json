@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "message-scroller",
+  "title": "Message Scroller",
+  "description": "읽던 위치를 지키는 대화",
+  "example": "import { useState } from 'react'\nimport { MessageScroller, MessageScrollerItem } from 'moru-ui'\nimport { Button } from 'moru-ui'\n\nexport function ActivityStream() {\n  const [messages, setMessages] = useState([{ id: 'message-1', text: 'Welcome to the project.' }])\n\n  return (\n    <div>\n      <MessageScroller aria-label=\"Project activity\" height={240} followOutput>\n        {messages.map((message) => (\n          <MessageScrollerItem key={message.id} messageId={message.id}>\n            <p>{message.text}</p>\n          </MessageScrollerItem>\n        ))}\n      </MessageScroller>\n      <Button\n        type=\"button\"\n        onClick={() =>\n          setMessages((current) => [\n            ...current,\n            { id: 'message-' + (current.length + 1), text: 'Activity update ' + current.length },\n          ])\n        }\n      >\n        Add activity\n      </Button>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/message-scroller.tsx",
+  "api": "interface MessageScrollerHandle {\n  scrollToLatest: () => void\n  scrollToMessage: (id: string) => boolean\n}\n\ninterface MessageScrollerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onScroll'> {\n  height?: CSSProperties['height']\n  initialPosition?: 'start' | 'end'\n  followOutput?: boolean\n  disabled?: boolean\n  'aria-label'?: string\n}\n\nfunction isMessageScrollerAtEnd(\n  scrollTop: number,\n  scrollHeight: number,\n  clientHeight: number,\n  threshold = 24,\n);\nfunction MessageScrollerItem({\n  messageId,\n  className,\n  ...props\n}: HTMLAttributes<HTMLDivElement> & { messageId: string });",
+  "props": [
+    {
+      "owner": "MessageScrollerHandle",
+      "name": "scrollToLatest",
+      "type": "() => void",
+      "required": true
+    },
+    {
+      "owner": "MessageScrollerHandle",
+      "name": "scrollToMessage",
+      "type": "(id: string) => boolean",
+      "required": true
+    },
+    {
+      "owner": "MessageScrollerProps",
+      "name": "height",
+      "type": "CSSProperties['height']",
+      "required": false,
+      "defaultValue": "320"
+    },
+    {
+      "owner": "MessageScrollerProps",
+      "name": "initialPosition",
+      "type": "'start' | 'end'",
+      "required": false,
+      "defaultValue": "'end'"
+    },
+    {
+      "owner": "MessageScrollerProps",
+      "name": "followOutput",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "MessageScrollerProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MessageScrollerProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "MessageScroller",
+      "prop": "height",
+      "value": "320"
+    },
+    {
+      "component": "MessageScroller",
+      "prop": "initialPosition",
+      "value": "'end'"
+    },
+    {
+      "component": "MessageScroller",
+      "prop": "followOutput",
+      "value": "true"
+    },
+    {
+      "component": "MessageScroller",
+      "prop": "aria-live",
+      "value": "'polite'"
+    }
+  ],
+  "notes": []
+}

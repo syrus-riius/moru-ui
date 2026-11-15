@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "item",
+  "title": "Item",
+  "description": "정보와 동작을 담은 목록 항목",
+  "example": "import { useState } from 'react'\nimport { Button } from 'moru-ui'\nimport { Item, ItemContent, ItemTitle, ItemDescription, ItemActions } from 'moru-ui'\n\nexport function ProjectItem() {\n  const [expanded, setExpanded] = useState(false)\n  return (\n    <Item variant=\"muted\">\n      <ItemContent>\n        <ItemTitle>Project brief</ItemTitle>\n        <ItemDescription>\n          {expanded\n            ? 'A shared outline of goals, milestones, and owners.'\n            : 'A quick introduction.'}\n        </ItemDescription>\n      </ItemContent>\n      <ItemActions>\n        <Button\n          type=\"button\"\n          size=\"sm\"\n          variant=\"secondary\"\n          aria-expanded={expanded}\n          onClick={() => setExpanded((value) => !value)}\n        >\n          {expanded ? 'Less' : 'More'}\n        </Button>\n      </ItemActions>\n    </Item>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/item.tsx",
+  "api": "type ItemProps = HTMLAttributes<HTMLDivElement> & {\n  variant?: 'default' | 'outline' | 'muted'\n  size?: 'sm' | 'md' | 'lg'\n}\n\nfunction ItemGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction ItemMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction ItemContent({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction ItemTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction ItemDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>);\nfunction ItemActions({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction ItemSeparator({ className, ...props }: HTMLAttributes<HTMLHRElement>);",
+  "props": [
+    {
+      "owner": "ItemProps",
+      "name": "variant",
+      "type": "'default' | 'outline' | 'muted'",
+      "required": false,
+      "defaultValue": "'default'"
+    },
+    {
+      "owner": "ItemProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Item",
+      "prop": "variant",
+      "value": "'default'"
+    },
+    {
+      "component": "Item",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

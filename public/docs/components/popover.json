@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "id": "popover",
+  "title": "Popover",
+  "description": "맥락 안에서 빠른 설정",
+  "example": "import { Button } from 'moru-ui'\nimport { Popover } from 'moru-ui'\n\nexport function Help() {\n  return (\n    <Popover\n      trigger={\n        <Button type=\"button\" variant=\"ghost\">\n          About visibility\n        </Button>\n      }\n      title=\"Team visibility\"\n    >\n      <p>Only invited teammates can open this project.</p>\n    </Popover>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/popover.tsx",
+  "api": "interface PopoverProps {\n  trigger: ReactElement\n  title?: string\n  description?: string\n  children: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  side?: ComponentPropsWithoutRef<typeof BasePopover.Positioner>['side']\n  align?: ComponentPropsWithoutRef<typeof BasePopover.Positioner>['align']\n  sideOffset?: number\n  className?: string\n  /** Override focus when opened; omitted values retain Base UI's touch-safe default. */\n  initialFocus?: ComponentPropsWithoutRef<typeof BasePopover.Popup>['initialFocus']\n  /** Override the return target when the trigger is removed or the workflow moves elsewhere. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BasePopover.Popup>['finalFocus']\n  'aria-label'?: string\n}\n\nfunction Popover({\n  trigger,\n  title,\n  description,\n  children,\n  open,\n  defaultOpen,\n  onOpenChange,\n  side = 'bottom',\n  align = 'start',\n  sideOffset = 8,\n  className,\n  initialFocus,\n  finalFocus,\n  'aria-label': ariaLabelProp,\n}: PopoverProps);",
+  "props": [
+    {
+      "owner": "PopoverProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": true
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "title",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "side",
+      "type": "ComponentPropsWithoutRef<typeof BasePopover.Positioner>['side']",
+      "required": false,
+      "defaultValue": "'bottom'"
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "align",
+      "type": "ComponentPropsWithoutRef<typeof BasePopover.Positioner>['align']",
+      "required": false,
+      "defaultValue": "'start'"
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "sideOffset",
+      "type": "number",
+      "required": false,
+      "defaultValue": "8"
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "initialFocus",
+      "type": "ComponentPropsWithoutRef<typeof BasePopover.Popup>['initialFocus']",
+      "required": false,
+      "description": "Override focus when opened; omitted values retain Base UI's touch-safe default."
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "finalFocus",
+      "type": "ComponentPropsWithoutRef<typeof BasePopover.Popup>['finalFocus']",
+      "required": false,
+      "description": "Override the return target when the trigger is removed or the workflow moves elsewhere."
+    },
+    {
+      "owner": "PopoverProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Popover",
+      "prop": "side",
+      "value": "'bottom'"
+    },
+    {
+      "component": "Popover",
+      "prop": "align",
+      "value": "'start'"
+    },
+    {
+      "component": "Popover",
+      "prop": "sideOffset",
+      "value": "8"
+    }
+  ],
+  "notes": [
+    "Use Popover for anchored supporting content. Keep its trigger focusable and give the popup a title or aria-label.",
+    "Positioning and portals are owned by Moru; do not move the popup outside the theme provider manually."
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "id": "date-range-picker",
+  "title": "Date Range Picker",
+  "description": "시작일과 종료일을 한 번에 선택",
+  "example": "import { useState } from 'react'\nimport type { CalendarRange } from 'moru-ui'\nimport { DateRangePicker } from 'moru-ui'\n\nexport function Schedule() {\n  const [range, setRange] = useState<CalendarRange>({ start: null, end: null })\n  return (\n    <DateRangePicker label=\"Project dates\" name=\"schedule\" value={range} onValueChange={setRange} />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/date-range-picker.tsx",
+  "api": "interface DateRangePickerProps {\n  value?: CalendarRange | null\n  defaultValue?: CalendarRange | null\n  onValueChange?: (value: CalendarRange) => void\n  /** Submits two values: `${name}.start` and `${name}.end`. */\n  name?: string\n  startName?: string\n  endName?: string\n  form?: string\n  label?: string\n  placeholder?: string\n  required?: boolean\n  minDate?: Date\n  maxDate?: Date\n  disabled?: boolean\n  loading?: boolean\n  readOnly?: boolean\n  locale?: string\n  clearable?: boolean\n  /** Display options for the shared calendar; range value and validation remain owned by this picker. */\n  calendarOptions?: CalendarDisplayOptions\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  id?: string\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n}\n\nfunction DateRangePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  name,\n  startName,\n  endName,\n  form,\n  label,\n  placeholder: placeholderProp,\n  required = false,\n  minDate,\n  maxDate,\n  disabled = false,\n  loading = false,\n  readOnly = false,\n  locale: localeProp,\n  clearable = true,\n  calendarOptions,\n  size = 'md',\n  className,\n  id,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n}: DateRangePickerProps);",
+  "props": [
+    {
+      "owner": "DateRangePickerProps",
+      "name": "value",
+      "type": "CalendarRange | null",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "defaultValue",
+      "type": "CalendarRange | null",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "onValueChange",
+      "type": "(value: CalendarRange) => void",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "description": "Submits two values: `${name}.start` and `${name}.end`."
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "startName",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "endName",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "minDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "maxDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "locale",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "calendarOptions",
+      "type": "CalendarDisplayOptions",
+      "required": false,
+      "description": "Display options for the shared calendar; range value and validation remain owned by this picker."
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DateRangePickerProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "DateRangePicker",
+      "prop": "required",
+      "value": "false"
+    },
+    {
+      "component": "DateRangePicker",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "DateRangePicker",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "DateRangePicker",
+      "prop": "readOnly",
+      "value": "false"
+    },
+    {
+      "component": "DateRangePicker",
+      "prop": "clearable",
+      "value": "true"
+    },
+    {
+      "component": "DateRangePicker",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": [
+    "A range is {start: Date|null, end: Date|null}; allow the intermediate state with only a start date.",
+    "name submits name.start and name.end. Do not substitute an array or shadcn’s from/to object."
+  ]
+}

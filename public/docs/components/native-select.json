@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "native-select",
+  "title": "Native Select",
+  "description": "기기의 기본 선택 목록",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { NativeSelect } from 'moru-ui'\n\nexport function VisibilityField() {\n  const [visibility, setVisibility] = useState('private')\n  return (\n    <Field label=\"Visibility\">\n      <NativeSelect name=\"visibility\" value={visibility} onValueChange={setVisibility}>\n        <option value=\"private\">Only me</option>\n        <option value=\"team\">My team</option>\n      </NativeSelect>\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/native-select.tsx",
+  "api": "interface NativeSelectOption {\n  value: string\n  label: string\n  disabled?: boolean\n}\n\ntype NativeSelectProps = Omit<\n  SelectHTMLAttributes<HTMLSelectElement>,\n  'size' | 'multiple'\n> & {\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n  items?: NativeSelectOption[]\n  onValueChange?: (value: string) => void\n}",
+  "props": [
+    {
+      "owner": "NativeSelectOption",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NativeSelectOption",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NativeSelectOption",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "NativeSelectProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "NativeSelectProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "NativeSelectProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    },
+    {
+      "owner": "NativeSelectProps",
+      "name": "items",
+      "type": "NativeSelectOption[]",
+      "required": false
+    },
+    {
+      "owner": "NativeSelectProps",
+      "name": "onValueChange",
+      "type": "(value: string) => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "NativeSelect",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "NativeSelect",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

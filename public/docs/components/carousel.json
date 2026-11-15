@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "id": "carousel",
+  "title": "Carousel",
+  "description": "넘기며 살펴보는 콘텐츠",
+  "example": "import { Carousel } from 'moru-ui/carousel'\nimport { Card } from 'moru-ui'\n\nexport function ProjectCarousel() {\n  return (\n    <Carousel\n      aria-label=\"Featured projects\"\n      items={[\n        { id: 'design', label: 'Design system', content: <Card>Design system</Card> },\n        { id: 'website', label: 'New website', content: <Card>New website</Card> },\n        { id: 'mobile', label: 'Mobile app', content: <Card>Mobile app</Card> },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui \"embla-carousel-react@^8.6.0\"",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/carousel.tsx",
+  "api": "interface CarouselItem {\n  id: string\n  content: ReactNode\n  label?: string\n}\n\ninterface CarouselProps {\n  items: CarouselItem[]\n  loop?: boolean\n  disabled?: boolean\n  orientation?: 'horizontal' | 'vertical'\n  direction?: 'ltr' | 'rtl'\n  onValueChange?: (index: number) => void\n  className?: string\n  'aria-label': string\n}\n\nfunction Carousel({\n  items,\n  loop = false,\n  disabled = false,\n  orientation = 'horizontal',\n  direction = 'ltr',\n  onValueChange,\n  className,\n  'aria-label': label,\n}: CarouselProps);",
+  "props": [
+    {
+      "owner": "CarouselItem",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "CarouselItem",
+      "name": "content",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "CarouselItem",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "items",
+      "type": "CarouselItem[]",
+      "required": true
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "loop",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "required": false,
+      "defaultValue": "'horizontal'"
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "direction",
+      "type": "'ltr' | 'rtl'",
+      "required": false,
+      "defaultValue": "'ltr'"
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "onValueChange",
+      "type": "(index: number) => void",
+      "required": false
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CarouselProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Carousel",
+      "prop": "loop",
+      "value": "false"
+    },
+    {
+      "component": "Carousel",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "Carousel",
+      "prop": "orientation",
+      "value": "'horizontal'"
+    },
+    {
+      "component": "Carousel",
+      "prop": "direction",
+      "value": "'ltr'"
+    }
+  ],
+  "notes": []
+}

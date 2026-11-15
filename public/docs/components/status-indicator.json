@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "status-indicator",
+  "title": "Status Indicator",
+  "description": "연결·동기화 상태를 읽는 작은 신호",
+  "example": "import { StatusIndicator } from 'moru-ui'\nexport function SyncStatus({ syncing }: { syncing: boolean }) {\n  return (\n    <StatusIndicator\n      label={syncing ? 'Syncing' : 'Saved'}\n      tone={syncing ? 'info' : 'success'}\n      pulse={syncing}\n      live=\"polite\"\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/status-indicator.tsx",
+  "api": "interface StatusIndicatorProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {\n  /** Always include readable text; a colored dot alone does not explain a status. */\n  label: string\n  tone?: 'neutral' | 'success' | 'warning' | 'danger' | 'info'\n  size?: 'sm' | 'md' | 'lg'\n  pulse?: boolean\n  paused?: boolean\n  /** Opt in for changing status text; static indicators do not need a live region. */\n  live?: 'off' | 'polite'\n}",
+  "props": [
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "Always include readable text; a colored dot alone does not explain a status."
+    },
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "tone",
+      "type": "'neutral' | 'success' | 'warning' | 'danger' | 'info'",
+      "required": false,
+      "defaultValue": "'neutral'"
+    },
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "pulse",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "paused",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "StatusIndicatorProps",
+      "name": "live",
+      "type": "'off' | 'polite'",
+      "required": false,
+      "description": "Opt in for changing status text; static indicators do not need a live region.",
+      "defaultValue": "'off'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "StatusIndicator",
+      "prop": "tone",
+      "value": "'neutral'"
+    },
+    {
+      "component": "StatusIndicator",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "StatusIndicator",
+      "prop": "pulse",
+      "value": "false"
+    },
+    {
+      "component": "StatusIndicator",
+      "prop": "paused",
+      "value": "false"
+    },
+    {
+      "component": "StatusIndicator",
+      "prop": "live",
+      "value": "'off'"
+    }
+  ],
+  "notes": [
+    "Always provide readable label text: color and an animated dot alone do not explain status. tone is neutral/success/warning/danger/info.",
+    "pulse is opt-in for ongoing activity; paused and system reduced-motion stop the animation. Use live=\"polite\" for changing status text; default static indicators do not announce themselves.",
+    "Use Spinner for a wait, Progress for a known amount, and StatusIndicator for persistent connectivity or synchronization state."
+  ]
+}

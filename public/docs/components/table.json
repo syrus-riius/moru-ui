@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "table",
+  "title": "Table",
+  "description": "비교하고 관리하는 데이터",
+  "example": "import {\n  Table,\n  TableHeader,\n  TableBody,\n  TableRow,\n  TableHead,\n  TableCell,\n  TableCaption,\n} from 'moru-ui'\n\nconst projects = [\n  { id: 'design', name: 'Design system', status: 'In progress' },\n  { id: 'docs', name: 'Documentation', status: 'Published' },\n]\n\nexport function ProjectTable() {\n  return (\n    <Table scrollLabel=\"Project list\">\n      <TableCaption>Current projects</TableCaption>\n      <TableHeader>\n        <TableRow>\n          <TableHead>Project</TableHead>\n          <TableHead>Status</TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        {projects.map((project) => (\n          <TableRow key={project.id}>\n            <TableHead scope=\"row\">{project.name}</TableHead>\n            <TableCell>{project.status}</TableCell>\n          </TableRow>\n        ))}\n      </TableBody>\n    </Table>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/table.tsx",
+  "api": "type TableProps = ComponentPropsWithoutRef<'table'> & {\n  scrollLabel?: string\n  wrapperClassName?: string\n}",
+  "props": [
+    {
+      "owner": "TableProps",
+      "name": "scrollLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TableProps",
+      "name": "wrapperClassName",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "TableHead",
+      "prop": "scope",
+      "value": "'col'"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "number-input",
+  "title": "Number Input",
+  "description": "숫자·소수·단위와 범위 조절",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { NumberInput } from 'moru-ui'\n\nexport function QuantityField() {\n  const [quantity, setQuantity] = useState<number | null>(1)\n  return (\n    <Field label=\"Quantity\" description=\"Choose between 1 and 20 items.\">\n      <NumberInput\n        name=\"quantity\"\n        min={1}\n        max={20}\n        step={1}\n        value={quantity}\n        onValueChange={setQuantity}\n      />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/number-input.tsx",
+  "api": "type RootProps = ComponentPropsWithoutRef<typeof BaseNumberField.Root>\n\ninterface NumberInputProps extends Omit<\n  RootProps,\n  'children' | 'className' | 'render' | 'defaultValue'\n> {\n  defaultValue?: number | null\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  placeholder?: string\n  /** Maximum fractional digits. Formatting and locale-aware parsing are handled by Base UI. */\n  precision?: number\n  hideControls?: boolean\n  loading?: boolean\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n  inputProps?: Omit<\n    ComponentPropsWithoutRef<typeof BaseNumberField.Input>,\n    'value' | 'defaultValue' | 'id' | 'name' | 'type' | 'size' | 'render' | 'className'\n  > & { className?: string }\n}\n\nfunction subscribeNumberInputFormReset(\n  form: EventTarget,\n  onReset: () => void,\n  isControlled: () => boolean,\n);",
+  "props": [
+    {
+      "owner": "NumberInputProps",
+      "name": "defaultValue",
+      "type": "number | null",
+      "required": false
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "precision",
+      "type": "number",
+      "required": false,
+      "description": "Maximum fractional digits. Formatting and locale-aware parsing are handled by Base UI."
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "hideControls",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    },
+    {
+      "owner": "NumberInputProps",
+      "name": "inputProps",
+      "type": "Omit<\n    ComponentPropsWithoutRef<typeof BaseNumberField.Input>,\n    'value' | 'defaultValue' | 'id' | 'name' | 'type' | 'size' | 'render' | 'className'\n  > & { className?: string }",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "NumberInput",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "NumberInput",
+      "prop": "hideControls",
+      "value": "false"
+    },
+    {
+      "component": "NumberInput",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

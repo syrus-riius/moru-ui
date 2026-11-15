@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "spinner",
+  "title": "Spinner",
+  "description": "링·점·막대 로더",
+  "example": "import { Spinner } from 'moru-ui'\nexport function SaveStatus() {\n  return (\n    <div role=\"status\">\n      <Spinner variant=\"dots\" decorative /> Saving changes\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/spinner.tsx",
+  "api": "type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'ring' | 'dots' | 'bars'\n  label?: string\n  paused?: boolean\n  /** Use inside an already labelled loading button or status to avoid duplicate announcements. */\n  decorative?: boolean\n}",
+  "props": [
+    {
+      "owner": "SpinnerProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "SpinnerProps",
+      "name": "variant",
+      "type": "'ring' | 'dots' | 'bars'",
+      "required": false,
+      "defaultValue": "'ring'"
+    },
+    {
+      "owner": "SpinnerProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SpinnerProps",
+      "name": "paused",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "SpinnerProps",
+      "name": "decorative",
+      "type": "boolean",
+      "required": false,
+      "description": "Use inside an already labelled loading button or status to avoid duplicate announcements.",
+      "defaultValue": "false"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Spinner",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Spinner",
+      "prop": "variant",
+      "value": "'ring'"
+    },
+    {
+      "component": "Spinner",
+      "prop": "paused",
+      "value": "false"
+    },
+    {
+      "component": "Spinner",
+      "prop": "decorative",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Variants are ring (default), dots and bars; sizes are sm/md/lg. Use for waiting whose percentage is unknown.",
+    "Provide a meaningful label for a standalone Spinner. Use decorative when a surrounding status message already announces the same operation, to avoid duplicate announcements.",
+    "paused stops repeating motion and reduced-motion is respected automatically. Do not leave users waiting indefinitely without a way to cancel or retry real work."
+  ]
+}

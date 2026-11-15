@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble",
+  "title": "Bubble",
+  "description": "대화의 표면과 반응",
+  "example": "import { Bubble, BubbleContent, BubbleFooter } from 'moru-ui'\n\nexport function SentMessage() {\n  return (\n    <Bubble align=\"end\" variant=\"secondary\">\n      <BubbleContent>The updated design is ready for review.</BubbleContent>\n      <BubbleFooter>\n        <time dateTime=\"2026-11-15T09:41:00+09:00\">09:41</time> · Sent\n      </BubbleFooter>\n    </Bubble>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/bubble.tsx",
+  "api": "interface BubbleProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: 'default' | 'secondary' | 'outline'\n  align?: 'start' | 'end'\n}\n\nfunction BubbleContent({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction BubbleFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction BubbleReactions({\n  className,\n  'aria-label': labelProp,\n  ...props\n}: HTMLAttributes<HTMLDivElement>);\nfunction BubbleGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>);",
+  "props": [
+    {
+      "owner": "BubbleProps",
+      "name": "variant",
+      "type": "'default' | 'secondary' | 'outline'",
+      "required": false,
+      "defaultValue": "'default'"
+    },
+    {
+      "owner": "BubbleProps",
+      "name": "align",
+      "type": "'start' | 'end'",
+      "required": false,
+      "defaultValue": "'start'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Bubble",
+      "prop": "variant",
+      "value": "'default'"
+    },
+    {
+      "component": "Bubble",
+      "prop": "align",
+      "value": "'start'"
+    }
+  ],
+  "notes": []
+}

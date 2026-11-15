@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "id": "combobox",
+  "title": "Combobox",
+  "description": "검색해서 고르는 목록",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { Combobox } from 'moru-ui'\n\nexport function AssigneePicker() {\n  const [assignee, setAssignee] = useState<string | null>(null)\n  return (\n    <Field label=\"Assignee\">\n      <Combobox\n        name=\"assignee\"\n        placeholder=\"Search people\"\n        value={assignee}\n        onValueChange={setAssignee}\n        items={[\n          { value: 'sara', label: 'Sara Kim', description: 'Design' },\n          { value: 'alex', label: 'Alex Lee', description: 'Engineering' },\n        ]}\n      />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/combobox.tsx",
+  "api": "interface ComboboxItem {\n  value: string\n  label: string\n  description?: string\n  disabled?: boolean\n}\n\ninterface ComboboxProps {\n  items: ComboboxItem[]\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string | null) => void\n  placeholder?: string\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n  disabled?: boolean\n  loading?: boolean\n  readOnly?: boolean\n  required?: boolean\n  clearable?: boolean\n  name?: string\n  form?: string\n  id?: string\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}",
+  "props": [
+    {
+      "owner": "ComboboxItem",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ComboboxItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ComboboxItem",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "items",
+      "type": "ComboboxItem[]",
+      "required": true
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "value",
+      "type": "string | null",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "defaultValue",
+      "type": "string | null",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "onValueChange",
+      "type": "(value: string | null) => void",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ComboboxProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Combobox",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "Combobox",
+      "prop": "clearable",
+      "value": "true"
+    },
+    {
+      "component": "Combobox",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

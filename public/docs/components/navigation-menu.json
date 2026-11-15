@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "id": "navigation-menu",
+  "title": "Navigation Menu",
+  "description": "주요 화면과 하위 탐색",
+  "example": "import { NavigationMenu } from 'moru-ui'\n\nexport function SiteNavigation() {\n  return (\n    <NavigationMenu\n      aria-label=\"Main navigation\"\n      items={[\n        { id: 'home', label: 'Home', href: '/', active: true },\n        {\n          id: 'product',\n          label: 'Product',\n          links: [\n            {\n              id: 'features',\n              label: 'Features',\n              href: '/features',\n              description: 'Explore the product.',\n            },\n            { id: 'pricing', label: 'Pricing', href: '/pricing', description: 'Choose a plan.' },\n          ],\n        },\n        { id: 'docs', label: 'Documentation', href: '/docs' },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/navigation-menu.tsx",
+  "api": "interface NavigationMenuLink {\n  id: string\n  label: string\n  href: string\n  description?: string\n  disabled?: boolean\n  onSelect?: () => void\n}\n\ninterface NavigationMenuItem {\n  id: string\n  label: string\n  href?: string\n  onSelect?: () => void\n  disabled?: boolean\n  active?: boolean\n  links?: NavigationMenuLink[]\n}\n\ninterface NavigationMenuProps {\n  items: NavigationMenuItem[]\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string | null) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\n\nfunction NavigationMenu({\n  items,\n  value,\n  defaultValue = null,\n  onValueChange,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: NavigationMenuProps);",
+  "props": [
+    {
+      "owner": "NavigationMenuLink",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuLink",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuLink",
+      "name": "href",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuLink",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuLink",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuLink",
+      "name": "onSelect",
+      "type": "() => void",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "href",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "onSelect",
+      "type": "() => void",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "active",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuItem",
+      "name": "links",
+      "type": "NavigationMenuLink[]",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "items",
+      "type": "NavigationMenuItem[]",
+      "required": true
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "value",
+      "type": "string | null",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "defaultValue",
+      "type": "string | null",
+      "required": false,
+      "defaultValue": "null"
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "onValueChange",
+      "type": "(value: string | null) => void",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "NavigationMenuProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "NavigationMenu",
+      "prop": "defaultValue",
+      "value": "null"
+    },
+    {
+      "component": "NavigationMenu",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

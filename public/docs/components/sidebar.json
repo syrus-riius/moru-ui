@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "sidebar",
+  "title": "Sidebar",
+  "description": "접을 수 있는 반응형 탐색",
+  "example": "import { useState } from 'react'\nimport { Sidebar } from 'moru-ui'\n\nconst sections = [\n  { id: 'overview', label: 'Overview' },\n  { id: 'projects', label: 'Projects', badge: 3 },\n  { id: 'settings', label: 'Settings' },\n]\n\nexport function WorkspaceNavigation() {\n  const [section, setSection] = useState('overview')\n\n  return (\n    <div style={{ display: 'flex', gap: 'var(--ui-section-gap)', flexWrap: 'wrap' }}>\n      <Sidebar title=\"Workspace\" items={sections} value={section} onValueChange={setSection} />\n      <section aria-live=\"polite\">\n        <h2>{sections.find((item) => item.id === section)?.label}</h2>\n        <p>Content for the selected workspace section.</p>\n      </section>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/sidebar.tsx",
+  "api": "interface SidebarItem {\n  id: string\n  label: string\n  icon?: ReactNode\n  badge?: string | number\n  disabled?: boolean\n}\n\ninterface SidebarProps {\n  title: string\n  items: SidebarItem[]\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  collapsed?: boolean\n  defaultCollapsed?: boolean\n  onCollapsedChange?: (collapsed: boolean) => void\n  mobileOpen?: boolean\n  onMobileOpenChange?: (open: boolean) => void\n  footer?: ReactNode\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\n\nfunction Sidebar({\n  title,\n  items,\n  value,\n  defaultValue,\n  onValueChange,\n  collapsed,\n  defaultCollapsed = false,\n  onCollapsedChange,\n  mobileOpen,\n  onMobileOpenChange,\n  footer,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': label,\n}: SidebarProps);",
+  "props": [
+    {
+      "owner": "SidebarItem",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "SidebarItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "SidebarItem",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "SidebarItem",
+      "name": "badge",
+      "type": "string | number",
+      "required": false
+    },
+    {
+      "owner": "SidebarItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "items",
+      "type": "SidebarItem[]",
+      "required": true
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "value",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "defaultValue",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "onValueChange",
+      "type": "(value: string) => void",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "collapsed",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "defaultCollapsed",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "onCollapsedChange",
+      "type": "(collapsed: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "mobileOpen",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "onMobileOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "footer",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SidebarProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Sidebar",
+      "prop": "defaultCollapsed",
+      "value": "false"
+    },
+    {
+      "component": "Sidebar",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

@@ -30,7 +30,7 @@
   outline-offset: 3px;
 }
 .moru-docs-content:has(.component-design-toolbar) [id^='component-'],
-.moru-docs-content:has(.component-design-toolbar) .moru-input-doc__body :is(section, h2)[id] {
+.moru-docs-content:has(.component-design-toolbar) .moru-component-doc__body :is(section, h2)[id] {
   scroll-margin-top: calc(var(--moru-public-header-offset) + 76px);
 }
 .inspector[hidden] {

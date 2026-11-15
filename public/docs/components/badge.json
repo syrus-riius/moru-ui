@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "badge",
+  "title": "Badge",
+  "description": "작은 상태와 분류",
+  "example": "import { Badge } from 'moru-ui'\n\nexport function ProjectStatus() {\n  return (\n    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--ui-control-gap)' }}>\n      <Badge tone=\"success\">Published</Badge>\n      <Badge tone=\"warning\" variant=\"secondary\">\n        In review\n      </Badge>\n      <Badge variant=\"outline\">Draft</Badge>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/badge.tsx",
+  "api": "interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  variant?: 'primary' | 'secondary' | 'outline'\n  tone?: SemanticTone\n}",
+  "props": [
+    {
+      "owner": "BadgeProps",
+      "name": "variant",
+      "type": "'primary' | 'secondary' | 'outline'",
+      "required": false,
+      "defaultValue": "'primary'"
+    },
+    {
+      "owner": "BadgeProps",
+      "name": "tone",
+      "type": "SemanticTone",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Badge",
+      "prop": "variant",
+      "value": "'primary'"
+    }
+  ],
+  "notes": []
+}

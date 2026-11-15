@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "toast",
+  "title": "Toast",
+  "description": "결과 알림과 실행 취소",
+  "example": "import { Button } from 'moru-ui'\nimport { ToastProvider, useToast } from 'moru-ui'\n\nfunction SaveAction() {\n  const { toast } = useToast()\n  return (\n    <Button\n      type=\"button\"\n      onClick={() =>\n        toast({\n          title: 'Example notification',\n          description: 'Your save action can show its result here.',\n          tone: 'success',\n          duration: 5000,\n        })\n      }\n    >\n      Show notification\n    </Button>\n  )\n}\n\nexport function ToastExample() {\n  return (\n    <ToastProvider>\n      <SaveAction />\n    </ToastProvider>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/toast.tsx",
+  "api": "interface ToastOptions {\n  title: string\n  description?: string\n  tone?: SemanticTone\n  action?: { label: string; onClick: () => void }\n  /** Time in milliseconds. Zero keeps the notification until it is dismissed. */\n  duration?: number\n}\n\nfunction ToastProvider({ children }: { children: ReactNode });\nfunction useToast();",
+  "props": [
+    {
+      "owner": "ToastOptions",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ToastOptions",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ToastOptions",
+      "name": "tone",
+      "type": "SemanticTone",
+      "required": false
+    },
+    {
+      "owner": "ToastOptions",
+      "name": "action",
+      "type": "{ label: string; onClick: () => void }",
+      "required": false
+    },
+    {
+      "owner": "ToastOptions",
+      "name": "duration",
+      "type": "number",
+      "required": false,
+      "description": "Time in milliseconds. Zero keeps the notification until it is dismissed."
+    }
+  ],
+  "defaults": [],
+  "notes": [
+    "ToastProvider must wrap consumers of useToast. Inspect the exported provider and hook signatures below before composing toast actions."
+  ]
+}

@@ -53,8 +53,6 @@ export function useStudioController() {
       : view === 'home' || view === 'components' || view === 'blocks'
         ? view
         : 'studio'
-  const inputDoc =
-    view === 'components' && componentPage.kind === 'detail' && componentPage.component === 'input'
   const navigationTarget = useRef<{
     scroll: number
     search?: boolean
@@ -338,7 +336,7 @@ export function useStudioController() {
   function focusComponent(id: ComponentId) {
     const element = document.getElementById(`component-${id}`)
     element?.focus({ preventScroll: true })
-    if (id === 'input') {
+    if (componentPage.kind === 'detail' && componentPage.component === id) {
       window.scrollTo({ top: 0, behavior: 'instant' })
       return
     }
@@ -398,7 +396,6 @@ export function useStudioController() {
     standalone,
     publicView,
     siteSection,
-    inputDoc,
     catalogTitle,
     newOnly,
     setNewOnly,

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "radio-group",
+  "title": "Radio Group",
+  "description": "하나의 옵션 선택",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { RadioGroup } from 'moru-ui'\n\nexport function PlanPicker() {\n  const [plan, setPlan] = useState('personal')\n  return (\n    <Field label=\"Plan\">\n      <RadioGroup\n        name=\"plan\"\n        value={plan}\n        onValueChange={setPlan}\n        items={[\n          { value: 'personal', label: 'Personal', description: 'For individual projects.' },\n          { value: 'team', label: 'Team', description: 'For shared workspaces.' },\n        ]}\n      />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/radio-group.tsx",
+  "api": "interface RadioGroupItem {\n  value: string\n  label: string\n  description?: string\n  disabled?: boolean\n}\n\ninterface RadioGroupProps extends Omit<\n  BaseRadioGroup.Props<string>,\n  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange'\n> {\n  items: RadioGroupItem[]\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n}\n\nfunction RadioGroup({\n  items,\n  value,\n  defaultValue,\n  onValueChange,\n  disabled,\n  readOnly,\n  className,\n  id,\n  size = 'md',\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n  ...props\n}: RadioGroupProps);",
+  "props": [
+    {
+      "owner": "RadioGroupItem",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "RadioGroupItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "RadioGroupItem",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "items",
+      "type": "RadioGroupItem[]",
+      "required": true
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "value",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "defaultValue",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "onValueChange",
+      "type": "(value: string) => void",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "RadioGroupProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "RadioGroup",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

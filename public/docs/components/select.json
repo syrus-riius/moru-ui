@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "select",
+  "title": "Select",
+  "description": "선택 목록",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { Select } from 'moru-ui'\n\nexport function Visibility() {\n  const [value, setValue] = useState('team')\n  return (\n    <Field label=\"Visibility\">\n      <Select\n        name=\"visibility\"\n        value={value}\n        onValueChange={setValue}\n        items={[\n          { value: 'private', label: 'Private' },\n          { value: 'team', label: 'Team' },\n        ]}\n      />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/select.tsx",
+  "api": "interface SelectProps {\n  items: Array<{ value: string; label: string; disabled?: boolean }>\n  /** Pass null for a controlled select with nothing chosen; the placeholder is shown. */\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string) => void\n  placeholder?: string\n  'aria-label'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n  disabled?: boolean\n  readOnly?: boolean\n  name?: string\n  form?: string\n  required?: boolean\n  id?: string\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "SelectProps",
+      "name": "items",
+      "type": "Array<{ value: string; label: string; disabled?: boolean }>",
+      "required": true
+    },
+    {
+      "owner": "SelectProps",
+      "name": "value",
+      "type": "string | null",
+      "required": false,
+      "description": "Pass null for a controlled select with nothing chosen; the placeholder is shown."
+    },
+    {
+      "owner": "SelectProps",
+      "name": "defaultValue",
+      "type": "string | null",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "onValueChange",
+      "type": "(value: string) => void",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SelectProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "SelectProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "SelectProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Select",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Select",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Moru Select accepts items; it has no SelectTrigger/SelectContent/SelectItem exports.",
+    "Use value/onValueChange for controlled selection; pass value={null} for a controlled select with nothing chosen (the placeholder is shown). Preserve keyboard navigation and disabled options."
+  ]
+}

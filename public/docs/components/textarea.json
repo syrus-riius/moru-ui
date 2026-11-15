@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "textarea",
+  "title": "Textarea",
+  "description": "여러 줄 입력",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { Textarea } from 'moru-ui'\n\nexport function Notes() {\n  const [notes, setNotes] = useState('')\n  return (\n    <Field label=\"Notes\">\n      <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={4} />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/textarea.tsx",
+  "api": "type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "TextareaProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "TextareaProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "TextareaProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Textarea",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Textarea",
+      "prop": "rows",
+      "value": "3"
+    },
+    {
+      "component": "Textarea",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Use native onChange(event), not onValueChange. Keep a visible label through Field.",
+    "Allow multiline text to grow or scroll; do not hide entered content behind a fixed clipped height.",
+    "loading makes the field read-only and busy instead of disabled, so focus and the submitted value are kept."
+  ]
+}

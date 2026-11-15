@@ -2,7 +2,7 @@
 
 Composable query, status and assignee filters with local demo data and a controlled application API.
 
-Version: 0.4.1. Source hash: 330cfc12106a86e9393b1d2a455d5a28d7d11fdeccfe17f602eda7db8f347a38.
+Version: 0.4.1. Source hash: 3d50d8d1c9951acff47d57ffd227011e1e268683be793d82d543261e48d83ef7.
 
 ## Discovery
 

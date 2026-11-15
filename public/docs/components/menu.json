@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "menu",
+  "title": "Dropdown Menu",
+  "description": "관련 동작",
+  "example": "import { Button } from 'moru-ui'\nimport { Menu } from 'moru-ui'\n\nexport function Actions() {\n  return (\n    <Menu\n      trigger={\n        <Button type=\"button\" variant=\"secondary\">\n          Actions\n        </Button>\n      }\n      items={[\n        {\n          label: 'Copy project name',\n          onClick: () => void navigator.clipboard.writeText('Moru project'),\n        },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/menu.tsx",
+  "api": "interface MenuProps {\n  trigger: ReactElement\n  items: Array<{\n    label: string\n    onClick?: () => void\n    destructive?: boolean\n    disabled?: boolean\n    icon?: ReactNode\n  }>\n  className?: string\n  disabled?: boolean\n  /** Controlled open state, matching Popover and Modal. Omit it to let the menu manage itself. */\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseMenu.Popup>['finalFocus']\n  size?: 'sm' | 'md' | 'lg'\n}\n\nfunction Menu({\n  trigger,\n  items,\n  className,\n  disabled,\n  open: openProp,\n  defaultOpen = false,\n  onOpenChange,\n  finalFocus,\n  size = 'md',\n}: MenuProps);",
+  "props": [
+    {
+      "owner": "MenuProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": true
+    },
+    {
+      "owner": "MenuProps",
+      "name": "items",
+      "type": "Array<{\n    label: string\n    onClick?: () => void\n    destructive?: boolean\n    disabled?: boolean\n    icon?: ReactNode\n  }>",
+      "required": true
+    },
+    {
+      "owner": "MenuProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MenuProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MenuProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "description": "Controlled open state, matching Popover and Modal. Omit it to let the menu manage itself."
+    },
+    {
+      "owner": "MenuProps",
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "MenuProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "MenuProps",
+      "name": "finalFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseMenu.Popup>['finalFocus']",
+      "required": false
+    },
+    {
+      "owner": "MenuProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Menu",
+      "prop": "defaultOpen",
+      "value": "false"
+    },
+    {
+      "component": "Menu",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": [
+    "Menu accepts a ReactElement trigger and items with onClick. The export is Menu, not DropdownMenu.",
+    "Use a trigger that forwards its props/ref (Moru Button does). Preserve focus restoration and keyboard activation.",
+    "Menu manages its own open state by default. open/defaultOpen/onOpenChange are available when the application needs to control it, as with Popover and Modal."
+  ]
+}

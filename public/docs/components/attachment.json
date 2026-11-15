@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "attachment",
+  "title": "Attachment",
+  "description": "파일 정보와 첨부 상태",
+  "example": "import { useState } from 'react'\nimport { Attachment } from 'moru-ui'\nimport { Button } from 'moru-ui'\n\nexport function AttachmentPreview() {\n  const [visible, setVisible] = useState(true)\n  return visible ? (\n    <Attachment\n      fileName=\"project-brief.pdf\"\n      fileSize={245760}\n      status=\"idle\"\n      onRemove={() => setVisible(false)}\n    />\n  ) : (\n    <Button type=\"button\" variant=\"secondary\" onClick={() => setVisible(true)}>\n      Restore sample attachment\n    </Button>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/attachment.tsx",
+  "api": "type AttachmentStatus = 'idle' | 'uploading' | 'processing' | 'error' | 'done'\n\ninterface AttachmentProps extends HTMLAttributes<HTMLDivElement> {\n  fileName?: string\n  fileSize?: number\n  media?: ReactNode\n  status?: AttachmentStatus\n  progress?: number\n  size?: 'sm' | 'md' | 'lg'\n  orientation?: 'horizontal' | 'vertical'\n  disabled?: boolean\n  onRemove?: () => void\n  onRetry?: () => void\n}\n\nfunction formatFileSize(bytes: number, locale = 'ko-KR');\nfunction getFileExtension(name: string);\nfunction AttachmentMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction AttachmentContent({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction AttachmentTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction AttachmentDescription({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction AttachmentActions({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction AttachmentGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>);",
+  "props": [
+    {
+      "owner": "AttachmentProps",
+      "name": "fileName",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "fileSize",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "media",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "status",
+      "type": "AttachmentStatus",
+      "required": false,
+      "defaultValue": "'idle'"
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "progress",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "required": false,
+      "defaultValue": "'horizontal'"
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "onRemove",
+      "type": "() => void",
+      "required": false
+    },
+    {
+      "owner": "AttachmentProps",
+      "name": "onRetry",
+      "type": "() => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Attachment",
+      "prop": "status",
+      "value": "'idle'"
+    },
+    {
+      "component": "Attachment",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Attachment",
+      "prop": "orientation",
+      "value": "'horizontal'"
+    }
+  ],
+  "notes": []
+}

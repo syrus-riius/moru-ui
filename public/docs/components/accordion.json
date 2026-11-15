@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "accordion",
+  "title": "Accordion",
+  "description": "차례로 펼치는 정보",
+  "example": "import { Accordion } from 'moru-ui'\n\nexport function ProjectQuestions() {\n  return (\n    <Accordion\n      defaultValue={['sharing']}\n      items={[\n        {\n          value: 'sharing',\n          title: 'Can I share a project?',\n          content: <p>Invite your team from project settings.</p>,\n        },\n        {\n          value: 'export',\n          title: 'Can I export my data?',\n          content: <p>Download a copy from the export menu.</p>,\n        },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/accordion.tsx",
+  "api": "interface AccordionItem {\n  value: string\n  title: ReactNode\n  content: ReactNode\n  disabled?: boolean\n}\n\ninterface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue'> {\n  items: AccordionItem[]\n  value?: string[]\n  defaultValue?: string[]\n  onValueChange?: (value: string[]) => void\n  multiple?: boolean\n  disabled?: boolean\n}\n\nfunction Accordion({\n  items,\n  value,\n  defaultValue,\n  onValueChange,\n  multiple = false,\n  disabled = false,\n  className,\n  ...props\n}: AccordionProps);",
+  "props": [
+    {
+      "owner": "AccordionItem",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "AccordionItem",
+      "name": "title",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "AccordionItem",
+      "name": "content",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "AccordionItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "items",
+      "type": "AccordionItem[]",
+      "required": true
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "value",
+      "type": "string[]",
+      "required": false
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "defaultValue",
+      "type": "string[]",
+      "required": false
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "onValueChange",
+      "type": "(value: string[]) => void",
+      "required": false
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "multiple",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "AccordionProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Accordion",
+      "prop": "multiple",
+      "value": "false"
+    },
+    {
+      "component": "Accordion",
+      "prop": "disabled",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "toggle",
+  "title": "Toggle",
+  "description": "하나의 옵션을 켜고 끄기",
+  "example": "import { useState } from 'react'\nimport { Toggle } from 'moru-ui'\n\nexport function BoldControl() {\n  const [bold, setBold] = useState(false)\n  return (\n    <div>\n      <Toggle aria-label=\"Bold text\" pressed={bold} onPressedChange={setBold}>\n        B\n      </Toggle>\n      <p style={{ fontWeight: bold ? 700 : 400 }}>Preview your text.</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/toggle.tsx",
+  "api": "type ToggleProps = Omit<\n  ComponentPropsWithoutRef<typeof BaseToggle>,\n  'className' | 'onPressedChange'\n> & {\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'default' | 'outline'\n  onPressedChange?: (pressed: boolean) => void\n}",
+  "props": [
+    {
+      "owner": "ToggleProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ToggleProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ToggleProps",
+      "name": "variant",
+      "type": "'default' | 'outline'",
+      "required": false,
+      "defaultValue": "'default'"
+    },
+    {
+      "owner": "ToggleProps",
+      "name": "onPressedChange",
+      "type": "(pressed: boolean) => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Toggle",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Toggle",
+      "prop": "variant",
+      "value": "'default'"
+    }
+  ],
+  "notes": []
+}

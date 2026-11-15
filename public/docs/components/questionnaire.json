@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "questionnaire",
+  "title": "Questionnaire",
+  "description": "단계별 질문과 답변 검증",
+  "example": "import { useState } from 'react'\nimport { Questionnaire, type QuestionnaireAnswers } from 'moru-ui'\n\nexport function ProjectQuestionnaire() {\n  const [answers, setAnswers] = useState<QuestionnaireAnswers | null>(null)\n  return (\n    <div>\n      <Questionnaire\n        aria-label=\"Project preferences\"\n        onComplete={setAnswers}\n        questions={[\n          { id: 'name', title: 'What is your project called?', type: 'text', required: true },\n          {\n            id: 'team',\n            title: 'Who will use it?',\n            type: 'single',\n            required: true,\n            options: [\n              { value: 'personal', label: 'Only me' },\n              { value: 'team', label: 'My team' },\n            ],\n          },\n        ]}\n      />\n      {answers && <pre aria-label=\"Your answers\">{JSON.stringify(answers, null, 2)}</pre>}\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/questionnaire.tsx",
+  "api": "interface QuestionnaireProps {\n  questions: QuestionnaireQuestion[]\n  value?: QuestionnaireAnswers\n  defaultValue?: QuestionnaireAnswers\n  onValueChange?: (answers: QuestionnaireAnswers) => void\n  onComplete?: (answers: QuestionnaireAnswers) => void | Promise<void>\n  submitLabel?: string\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\n\nexport type {\n  QuestionnaireAnswer,\n  QuestionnaireAnswers,\n  QuestionnaireOption,\n  QuestionnaireQuestion,\n} from './questionnaire-utils'\n\nfunction Questionnaire({\n  questions,\n  value,\n  defaultValue = {},\n  onValueChange,\n  onComplete,\n  submitLabel: submitLabelProp,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: QuestionnaireProps);",
+  "props": [
+    {
+      "owner": "QuestionnaireProps",
+      "name": "questions",
+      "type": "QuestionnaireQuestion[]",
+      "required": true
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "value",
+      "type": "QuestionnaireAnswers",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "defaultValue",
+      "type": "QuestionnaireAnswers",
+      "required": false,
+      "defaultValue": "{}"
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "onValueChange",
+      "type": "(answers: QuestionnaireAnswers) => void",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "onComplete",
+      "type": "(answers: QuestionnaireAnswers) => void | Promise<void>",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "submitLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "QuestionnaireProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Questionnaire",
+      "prop": "defaultValue",
+      "value": "{}"
+    },
+    {
+      "component": "Questionnaire",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

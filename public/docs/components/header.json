@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "header",
+  "title": "Header",
+  "description": "브랜드·탐색·작업 도구",
+  "example": "import { Header } from 'moru-ui'\n\nexport function SiteHeader() {\n  return (\n    <Header\n      brand={<a href=\"/\">Moru</a>}\n      navigationLabel=\"Primary navigation\"\n      navigation={\n        <>\n          <a href=\"/projects\" aria-current=\"page\">\n            Projects\n          </a>\n          <a href=\"/settings\">Settings</a>\n        </>\n      }\n      actions={<a href=\"/account\">Account</a>}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/header.tsx",
+  "api": "type HeaderProps = HTMLAttributes<HTMLElement> & {\n  brand: ReactNode\n  navigation?: ReactNode\n  actions?: ReactNode\n  variant?: 'navigation' | 'centered' | 'app'\n  size?: 'sm' | 'md' | 'lg'\n  navigationLabel?: string\n  menuLabel?: string\n  /** Control the narrow-screen navigation disclosure, for example when opening search. */\n  menuOpen?: boolean\n  defaultMenuOpen?: boolean\n  onMenuOpenChange?: (open: boolean) => void\n}",
+  "props": [
+    {
+      "owner": "HeaderProps",
+      "name": "brand",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "navigation",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "actions",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "variant",
+      "type": "'navigation' | 'centered' | 'app'",
+      "required": false,
+      "defaultValue": "'navigation'"
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "navigationLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "menuLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "menuOpen",
+      "type": "boolean",
+      "required": false,
+      "description": "Control the narrow-screen navigation disclosure, for example when opening search."
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "defaultMenuOpen",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "HeaderProps",
+      "name": "onMenuOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Header",
+      "prop": "variant",
+      "value": "'navigation'"
+    },
+    {
+      "component": "Header",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Header",
+      "prop": "defaultMenuOpen",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "brand is required. Compose navigation and actions as React nodes; Header does not invent routes or own authentication.",
+    "Variants are navigation, centered and app. The small-screen navigation is an inline disclosure; preserve its menu button, Escape handling and focus return.",
+    "Use ordinary links for page navigation and mark the current destination with aria-current=\"page\". Give separate navigation regions distinct navigationLabel values."
+  ]
+}

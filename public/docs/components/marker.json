@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "marker",
+  "title": "Marker",
+  "description": "대화 속 상태와 구분",
+  "example": "import { Marker, MarkerContent } from 'moru-ui'\n\nexport function ConversationBoundary() {\n  return (\n    <Marker variant=\"separator\">\n      <MarkerContent>Today · November 15</MarkerContent>\n    </Marker>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/marker.tsx",
+  "api": "interface MarkerProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: 'default' | 'border' | 'separator'\n  tone?: SemanticTone\n}\n\nfunction MarkerIcon({ className, ...props }: HTMLAttributes<HTMLSpanElement>);\nfunction MarkerContent({ className, ...props }: HTMLAttributes<HTMLSpanElement>);",
+  "props": [
+    {
+      "owner": "MarkerProps",
+      "name": "variant",
+      "type": "'default' | 'border' | 'separator'",
+      "required": false,
+      "defaultValue": "'default'"
+    },
+    {
+      "owner": "MarkerProps",
+      "name": "tone",
+      "type": "SemanticTone",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Marker",
+      "prop": "variant",
+      "value": "'default'"
+    }
+  ],
+  "notes": []
+}

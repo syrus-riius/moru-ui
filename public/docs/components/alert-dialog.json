@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "alert-dialog",
+  "title": "Alert Dialog",
+  "description": "중요한 동작 전 확인",
+  "example": "import { useState } from 'react'\nimport { AlertDialog } from 'moru-ui'\nimport { Button } from 'moru-ui'\n\nexport function ResetDraft() {\n  const [status, setStatus] = useState('Your draft is ready to edit.')\n\n  return (\n    <div>\n      <AlertDialog\n        trigger={\n          <Button type=\"button\" variant=\"danger\">\n            Reset draft\n          </Button>\n        }\n        title=\"Reset this draft?\"\n        description=\"This example resets the local draft status.\"\n        confirmLabel=\"Reset draft\"\n        cancelLabel=\"Keep editing\"\n        destructive\n        onConfirm={() => setStatus('The local draft was reset.')}\n      />\n      <p role=\"status\">{status}</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/alert-dialog.tsx",
+  "api": "interface AlertDialogProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  confirmLabel?: string\n  cancelLabel?: string\n  onConfirm: () => void | Promise<void>\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  destructive?: boolean\n  loading?: boolean\n  /** Focus a stable destination after confirmation removes the original trigger. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>['finalFocus']\n}\n\nfunction AlertDialog({\n  trigger,\n  title,\n  description,\n  confirmLabel: confirmLabelProp,\n  cancelLabel: cancelLabelProp,\n  onConfirm,\n  open,\n  onOpenChange,\n  destructive = false,\n  loading = false,\n  finalFocus,\n}: AlertDialogProps);",
+  "props": [
+    {
+      "owner": "AlertDialogProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "confirmLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "cancelLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "onConfirm",
+      "type": "() => void | Promise<void>",
+      "required": true
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "destructive",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "AlertDialogProps",
+      "name": "finalFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>['finalFocus']",
+      "required": false,
+      "description": "Focus a stable destination after confirmation removes the original trigger."
+    }
+  ],
+  "defaults": [
+    {
+      "component": "AlertDialog",
+      "prop": "destructive",
+      "value": "false"
+    },
+    {
+      "component": "AlertDialog",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

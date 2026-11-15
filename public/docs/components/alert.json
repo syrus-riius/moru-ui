@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "alert",
+  "title": "Alert",
+  "description": "놓치지 않아야 할 안내",
+  "example": "import { Alert } from 'moru-ui'\n\nexport function SavedNotice() {\n  return (\n    <Alert title=\"Changes saved\" tone=\"success\">\n      Your team can now see the updated project details.\n    </Alert>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/alert.tsx",
+  "api": "interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'children'> {\n  title: string\n  children?: ReactNode\n  tone?: SemanticTone\n  icon?: ReactNode\n}",
+  "props": [
+    {
+      "owner": "AlertProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "AlertProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "AlertProps",
+      "name": "tone",
+      "type": "SemanticTone",
+      "required": false,
+      "defaultValue": "'info'"
+    },
+    {
+      "owner": "AlertProps",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Alert",
+      "prop": "tone",
+      "value": "'info'"
+    }
+  ],
+  "notes": []
+}

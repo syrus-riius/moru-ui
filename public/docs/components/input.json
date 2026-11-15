@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "input",
+  "title": "Input",
+  "description": "결제·연락처·네트워크 등 12가지 입력",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { Input } from 'moru-ui'\n\nexport function ProjectName() {\n  const [name, setName] = useState('')\n  return (\n    <Field label=\"Project name\" description=\"Choose a recognizable name.\">\n      <Input name=\"projectName\" value={name} onValueChange={setName} autoComplete=\"off\" />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/input.tsx",
+  "api": "type InputProps = Omit<ComponentPropsWithoutRef<typeof BaseInput>, 'className' | 'size'> & {\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "InputProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "InputProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "InputProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "InputProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Input",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Input",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Use Field for the visible label, description and error connection. Placeholder text is not a label.",
+    "onValueChange receives the string; native onChange receives an event. Keep controlled values defined from the first render.",
+    "loading makes the field read-only and busy instead of disabled: it keeps focus and its value is still submitted with the form. Use disabled when the value must not be sent."
+  ]
+}

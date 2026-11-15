@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "button",
+  "title": "Button",
+  "description": "동작과 우선순위",
+  "example": "import { Button } from 'moru-ui'\n\nexport function SaveAction() {\n  return (\n    <Button type=\"button\" variant=\"primary\" onClick={() => window.alert('Saved')}>\n      Save changes\n    </Button>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/button.tsx",
+  "api": "type ButtonProps = Omit<ComponentPropsWithoutRef<typeof BaseButton>, 'className'> & {\n  className?: string\n  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'\n  size?: 'sm' | 'md' | 'lg'\n  /**\n   * A label wraps on its own when the container is too narrow. `wrap` marks a label that is\n   * expected to wrap and tightens its vertical padding; `nowrap` keeps it on one line.\n   */\n  textWrap?: 'nowrap' | 'wrap'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "ButtonProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ButtonProps",
+      "name": "variant",
+      "type": "'primary' | 'secondary' | 'ghost' | 'danger'",
+      "required": false,
+      "defaultValue": "'primary'"
+    },
+    {
+      "owner": "ButtonProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ButtonProps",
+      "name": "textWrap",
+      "type": "'nowrap' | 'wrap'",
+      "required": false,
+      "description": "A label wraps on its own when the container is too narrow. `wrap` marks a label that is\nexpected to wrap and tightens its vertical padding; `nowrap` keeps it on one line."
+    },
+    {
+      "owner": "ButtonProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ButtonProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Button",
+      "prop": "variant",
+      "value": "'primary'"
+    },
+    {
+      "component": "Button",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Button",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Use type=\"button\" for non-submit actions inside forms. loading locks activation and announces busy state while the button stays focusable (aria-disabled, not the disabled attribute), so keyboard focus is not lost; keep a meaningful text label.",
+    "Variants are primary, secondary, ghost, danger. Do not substitute shadcn variant names.",
+    "A label wraps on its own when its container is too narrow. textWrap=\"wrap\" marks a label that is expected to wrap and tightens its vertical padding while preserving the S/M/L minimum height; textWrap=\"nowrap\" forces a single line. Reflow the parent action row before truncating action text."
+  ]
+}

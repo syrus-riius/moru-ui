@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "footer",
+  "title": "Footer",
+  "description": "링크·정책·제품 정보",
+  "example": "import { Footer } from 'moru-ui'\n\nexport function SiteFooter() {\n  return (\n    <Footer\n      variant=\"columns\"\n      brand=\"Moru\"\n      description=\"Build with care.\"\n      columns={[\n        {\n          title: 'Product',\n          content: (\n            <>\n              <a href=\"/components\">Components</a>\n              <a href=\"/docs\">Documentation</a>\n            </>\n          ),\n        },\n        {\n          title: 'Company',\n          content: (\n            <>\n              <a href=\"/about\">About</a>\n              <a href=\"/contact\">Contact</a>\n            </>\n          ),\n        },\n      ]}\n      copyright=\"© Moru\"\n      meta={<a href=\"/privacy\">Privacy</a>}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/footer.tsx",
+  "api": "interface FooterColumn {\n  title: string\n  content: ReactNode\n  /** Distinguish repeated group titles when more than one footer is present. */\n  label?: string\n}\n\ntype FooterProps = HTMLAttributes<HTMLElement> & {\n  brand?: ReactNode\n  description?: ReactNode\n  navigation?: ReactNode\n  navigationLabel?: string\n  columns?: readonly FooterColumn[]\n  copyright?: ReactNode\n  meta?: ReactNode\n  variant?: 'simple' | 'columns' | 'compact'\n  size?: 'sm' | 'md' | 'lg'\n}",
+  "props": [
+    {
+      "owner": "FooterColumn",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "FooterColumn",
+      "name": "content",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "FooterColumn",
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "Distinguish repeated group titles when more than one footer is present."
+    },
+    {
+      "owner": "FooterProps",
+      "name": "brand",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "description",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "navigation",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "navigationLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "columns",
+      "type": "readonly FooterColumn[]",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "copyright",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "meta",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "FooterProps",
+      "name": "variant",
+      "type": "'simple' | 'columns' | 'compact'",
+      "required": false,
+      "defaultValue": "'simple'"
+    },
+    {
+      "owner": "FooterProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Footer",
+      "prop": "variant",
+      "value": "'simple'"
+    },
+    {
+      "component": "Footer",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": [
+    "Variants are simple, columns and compact. Use navigation for a flat group, or columns with title and content for grouped links.",
+    "columns is an array of {title, content, label?}; it is not a list of route objects. Each content value is a React node.",
+    "Use copyright and meta for supporting information; preserve semantic footer/nav landmarks and give repeated navigation groups distinct labels."
+  ]
+}

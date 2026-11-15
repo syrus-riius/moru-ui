@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "menubar",
+  "title": "Menubar",
+  "description": "연결된 애플리케이션 메뉴",
+  "example": "import { useState } from 'react'\nimport { Menubar } from 'moru-ui'\n\nexport function DocumentMenu() {\n  const [status, setStatus] = useState('Untitled document')\n\n  return (\n    <div>\n      <Menubar\n        aria-label=\"Document actions\"\n        menus={[\n          {\n            id: 'file',\n            label: 'File',\n            items: [\n              {\n                id: 'new',\n                label: 'New document',\n                onSelect: () => setStatus('New document created.'),\n              },\n              {\n                id: 'save',\n                label: 'Save draft',\n                onSelect: () => setStatus('Draft saved in this example.'),\n              },\n            ],\n          },\n          {\n            id: 'help',\n            label: 'Help',\n            items: [\n              {\n                id: 'about',\n                label: 'About',\n                onSelect: () => setStatus('Moru document menu example.'),\n              },\n            ],\n          },\n        ]}\n      />\n      <p role=\"status\">{status}</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/menubar.tsx",
+  "api": "interface MenubarMenu {\n  id: string\n  label: string\n  disabled?: boolean\n  items: NavigationAction[]\n}\n\ninterface MenubarProps {\n  menus: MenubarMenu[]\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\n\nfunction Menubar({\n  menus,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: MenubarProps);",
+  "props": [
+    {
+      "owner": "MenubarMenu",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "MenubarMenu",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "MenubarMenu",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MenubarMenu",
+      "name": "items",
+      "type": "NavigationAction[]",
+      "required": true
+    },
+    {
+      "owner": "MenubarProps",
+      "name": "menus",
+      "type": "MenubarMenu[]",
+      "required": true
+    },
+    {
+      "owner": "MenubarProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MenubarProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "MenubarProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MenubarProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Menubar",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

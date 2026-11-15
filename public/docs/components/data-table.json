@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "data-table",
+  "title": "Data Table",
+  "description": "검색·정렬·선택을 한곳에",
+  "example": "import { createColumnHelper } from '@tanstack/react-table'\nimport { DataTable, type DataTableFeatures } from 'moru-ui/data-table'\n\ntype Project = { id: string; name: string; progress: number }\n\nconst projects: Project[] = [\n  { id: 'design', name: 'Design system', progress: 80 },\n  { id: 'docs', name: 'Documentation', progress: 100 },\n  { id: 'website', name: 'Website', progress: 40 },\n]\n\nconst helper = createColumnHelper<DataTableFeatures, Project>()\nconst columns = helper.columns([\n  helper.accessor('name', { header: 'Project', sortFn: 'text' }),\n  helper.accessor('progress', { header: 'Progress', sortFn: 'basic' }),\n])\n\nexport function ProjectsDataTable() {\n  return (\n    <DataTable\n      caption=\"Projects\"\n      data={projects}\n      columns={columns}\n      getRowId={(project) => project.id}\n      pageSize={2}\n      searchPlaceholder=\"Search projects\"\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui \"@tanstack/react-table@^9.3.1\"",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/data-table.tsx",
+  "api": "type DataTableFeatures = typeof dataTableFeatures\n\ntype DataTableColumn<T extends RowData> = ColumnDef<DataTableFeatures, T>\n\ninterface DataTableProps<T extends RowData> {\n  data: T[]\n  columns: DataTableColumn<T>[]\n  getRowId: (row: T) => string\n  caption: string\n  pageSize?: number\n  selectable?: boolean\n  disabled?: boolean\n  searchPlaceholder?: string\n  onSelectionChange?: (ids: string[]) => void\n  className?: string\n}\n\nfunction DataTable<T extends RowData>({\n  data,\n  columns,\n  getRowId,\n  caption,\n  pageSize = 5,\n  selectable = true,\n  disabled = false,\n  searchPlaceholder: searchPlaceholderProp,\n  onSelectionChange,\n  className,\n}: DataTableProps<T>);",
+  "props": [
+    {
+      "owner": "DataTableProps",
+      "name": "data",
+      "type": "T[]",
+      "required": true
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "columns",
+      "type": "DataTableColumn<T>[]",
+      "required": true
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "getRowId",
+      "type": "(row: T) => string",
+      "required": true
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "caption",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "pageSize",
+      "type": "number",
+      "required": false,
+      "defaultValue": "5"
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "selectable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "searchPlaceholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "onSelectionChange",
+      "type": "(ids: string[]) => void",
+      "required": false
+    },
+    {
+      "owner": "DataTableProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "DataTable",
+      "prop": "pageSize",
+      "value": "5"
+    },
+    {
+      "component": "DataTable",
+      "prop": "selectable",
+      "value": "true"
+    },
+    {
+      "component": "DataTable",
+      "prop": "disabled",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

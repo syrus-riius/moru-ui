@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "modal",
+  "title": "Modal",
+  "description": "기본·확인·폼·결과·전체 화면",
+  "example": "import { Button } from 'moru-ui'\nimport { Modal } from 'moru-ui'\n\nexport function ProjectDetails() {\n  return (\n    <Modal\n      trigger={<Button type=\"button\">Project details</Button>}\n      title=\"Project details\"\n      description=\"Review the current milestone.\"\n      size=\"md\"\n    >\n      <p>The design review is ready.</p>\n    </Modal>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/modal.tsx",
+  "api": "interface ModalProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  size?: 'sm' | 'md' | 'lg' | 'full'\n  /** Visual presentation; the caller owns confirmation actions and validation. */\n  variant?: 'default' | 'confirmation' | 'form' | 'success' | 'danger'\n  /** Override the decorative variant icon. Pass null to omit it. */\n  icon?: ReactNode\n  defaultOpen?: boolean\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  className?: string\n  /** Choose the initial target for forms or long content; Base UI keeps its touch-safe default when omitted. */\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  /** Restore focus to a stable destination when the opener is removed or the dialog has no trigger. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n\nfunction Modal({\n  trigger,\n  title,\n  description,\n  children,\n  footer,\n  open,\n  defaultOpen,\n  size = 'md',\n  variant = 'default',\n  icon,\n  onOpenChange,\n  className,\n  initialFocus,\n  finalFocus,\n}: ModalProps);",
+  "props": [
+    {
+      "owner": "ModalProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ModalProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "footer",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg' | 'full'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ModalProps",
+      "name": "variant",
+      "type": "'default' | 'confirmation' | 'form' | 'success' | 'danger'",
+      "required": false,
+      "description": "Visual presentation; the caller owns confirmation actions and validation.",
+      "defaultValue": "'default'"
+    },
+    {
+      "owner": "ModalProps",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Override the decorative variant icon. Pass null to omit it."
+    },
+    {
+      "owner": "ModalProps",
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ModalProps",
+      "name": "initialFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']",
+      "required": false,
+      "description": "Choose the initial target for forms or long content; Base UI keeps its touch-safe default when omitted."
+    },
+    {
+      "owner": "ModalProps",
+      "name": "finalFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']",
+      "required": false,
+      "description": "Restore focus to a stable destination when the opener is removed or the dialog has no trigger."
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Modal",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Modal",
+      "prop": "variant",
+      "value": "'default'"
+    }
+  ],
+  "notes": [
+    "title is required. Use open/onOpenChange for controlled modals or defaultOpen for an initially open uncontrolled modal.",
+    "Variants are default, confirmation, form, success and danger. Sizes are sm, md, lg and full. A variant changes presentation; implement the actual confirmation, submission or deletion in the application.",
+    "Retain managed focus, Escape dismissal and focus return. Avoid nesting interactive elements inside the trigger."
+  ]
+}

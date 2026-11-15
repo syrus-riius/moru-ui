@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "field",
+  "title": "Field",
+  "description": "라벨·도움말·오류",
+  "example": "import { Field } from 'moru-ui'\nimport { Input } from 'moru-ui'\n\nexport function EmailField() {\n  return (\n    <Field label=\"Email\" description=\"We will send your invitation here.\">\n      <Input name=\"email\" type=\"email\" autoComplete=\"email\" required />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/field.tsx",
+  "api": "interface FieldProps {\n  label: string\n  description?: string\n  error?: string\n  children: ReactNode\n  className?: string\n}\n\nfunction Field({ label, description, error, children, className }: FieldProps);",
+  "props": [
+    {
+      "owner": "FieldProps",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "FieldProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "FieldProps",
+      "name": "error",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "FieldProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "FieldProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [],
+  "notes": [
+    "Field connects Moru inputs to labels, descriptions and errors. Put the field control inside its children.",
+    "Show an actionable error without deleting the entered value. Do not add a second competing aria-label to an already labelled field."
+  ]
+}

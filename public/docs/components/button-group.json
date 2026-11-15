@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "button-group",
+  "title": "Button Group",
+  "description": "연결된 동작을 한 묶음으로",
+  "example": "import { useState } from 'react'\nimport { Button } from 'moru-ui'\nimport { ButtonGroup, ButtonGroupText } from 'moru-ui'\n\nexport function PageActions() {\n  const [page, setPage] = useState(1)\n  return (\n    <ButtonGroup aria-label=\"Page navigation\">\n      <Button\n        type=\"button\"\n        variant=\"secondary\"\n        disabled={page === 1}\n        onClick={() => setPage((value) => Math.max(1, value - 1))}\n      >\n        Previous\n      </Button>\n      <ButtonGroupText aria-live=\"polite\">{page} / 5</ButtonGroupText>\n      <Button\n        type=\"button\"\n        variant=\"secondary\"\n        disabled={page === 5}\n        onClick={() => setPage((value) => Math.min(5, value + 1))}\n      >\n        Next\n      </Button>\n    </ButtonGroup>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/button-group.tsx",
+  "api": "type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & {\n  orientation?: 'horizontal' | 'vertical'\n}\n\nfunction ButtonGroupText({ className, ...props }: HTMLAttributes<HTMLSpanElement>);",
+  "props": [
+    {
+      "owner": "ButtonGroupProps",
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "required": false,
+      "defaultValue": "'horizontal'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "ButtonGroup",
+      "prop": "orientation",
+      "value": "'horizontal'"
+    },
+    {
+      "component": "ButtonGroup",
+      "prop": "role",
+      "value": "'group'"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "sheet",
+  "title": "Sheet",
+  "description": "맥락을 유지하는 편집 패널",
+  "example": "import { useState } from 'react'\nimport { Sheet } from 'moru-ui'\nimport { Button } from 'moru-ui'\nimport { Field } from 'moru-ui'\nimport { Input } from 'moru-ui'\n\nexport function ProfileSheet() {\n  const [open, setOpen] = useState(false)\n  const [name, setName] = useState('Moru')\n\n  return (\n    <Sheet\n      open={open}\n      onOpenChange={setOpen}\n      trigger={<Button type=\"button\">Edit profile</Button>}\n      title=\"Profile\"\n      description=\"Edit your display name in this local example.\"\n      side=\"right\"\n      footer={\n        <Button type=\"button\" onClick={() => setOpen(false)}>\n          Done\n        </Button>\n      }\n    >\n      <Field label=\"Display name\">\n        <Input value={name} onValueChange={setName} autoComplete=\"name\" />\n      </Field>\n    </Sheet>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/sheet.tsx",
+  "api": "interface SheetProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  side?: 'left' | 'right' | 'bottom'\n  className?: string\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n\nfunction Sheet({\n  trigger,\n  title,\n  description,\n  children,\n  footer,\n  open,\n  defaultOpen,\n  onOpenChange,\n  side = 'right',\n  className,\n  initialFocus,\n  finalFocus,\n}: SheetProps);",
+  "props": [
+    {
+      "owner": "SheetProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "SheetProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "footer",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "side",
+      "type": "'left' | 'right' | 'bottom'",
+      "required": false,
+      "defaultValue": "'right'"
+    },
+    {
+      "owner": "SheetProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "initialFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']",
+      "required": false
+    },
+    {
+      "owner": "SheetProps",
+      "name": "finalFocus",
+      "type": "ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Sheet",
+      "prop": "side",
+      "value": "'right'"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "kbd",
+  "title": "Kbd",
+  "description": "키보드 단축키의 표시",
+  "example": "import { Kbd, KbdGroup } from 'moru-ui'\n\nexport function ShortcutHint() {\n  return (\n    <p>\n      Quick search{' '}\n      <KbdGroup>\n        <Kbd>Ctrl</Kbd>\n        <Kbd>K</Kbd>\n      </KbdGroup>\n    </p>\n  )\n}\n// Kbd displays a shortcut. Register the matching keyboard handler in your app.",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/kbd.tsx",
+  "api": "function Kbd({ className, ...props }: HTMLAttributes<HTMLElement>);\nfunction KbdGroup({ className, ...props }: HTMLAttributes<HTMLSpanElement>);",
+  "props": [],
+  "defaults": [],
+  "notes": []
+}

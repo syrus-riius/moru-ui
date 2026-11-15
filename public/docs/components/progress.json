@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "progress",
+  "title": "Progress",
+  "description": "진행률·버퍼·대기 상태",
+  "example": "import { Progress } from 'moru-ui'\nexport function UploadProgress() {\n  return <Progress label=\"Uploading files\" value={42} bufferValue={68} showValue size=\"md\" />\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/progress.tsx",
+  "api": "interface ProgressProps extends Omit<\n  ComponentPropsWithoutRef<typeof BaseProgress.Root>,\n  'className' | 'children' | 'min' | 'max' | 'value'\n> {\n  value?: number | null\n  max?: number\n  label?: string\n  showValue?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  tone?: 'primary' | 'success' | 'warning' | 'danger' | 'info'\n  /** Amount prepared or buffered, in the same units as value. This does not change completion. */\n  bufferValue?: number\n  striped?: boolean\n  /** Animate stripes only when striped is enabled. Indeterminate progress moves by default. */\n  animated?: boolean\n  paused?: boolean\n  className?: string\n}",
+  "props": [
+    {
+      "owner": "ProgressProps",
+      "name": "value",
+      "type": "number | null",
+      "required": false,
+      "defaultValue": "0"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "defaultValue": "100"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "showValue",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "tone",
+      "type": "'primary' | 'success' | 'warning' | 'danger' | 'info'",
+      "required": false,
+      "defaultValue": "'primary'"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "bufferValue",
+      "type": "number",
+      "required": false,
+      "description": "Amount prepared or buffered, in the same units as value. This does not change completion."
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "striped",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "animated",
+      "type": "boolean",
+      "required": false,
+      "description": "Animate stripes only when striped is enabled. Indeterminate progress moves by default.",
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "paused",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ProgressProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Progress",
+      "prop": "value",
+      "value": "0"
+    },
+    {
+      "component": "Progress",
+      "prop": "max",
+      "value": "100"
+    },
+    {
+      "component": "Progress",
+      "prop": "showValue",
+      "value": "false"
+    },
+    {
+      "component": "Progress",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Progress",
+      "prop": "tone",
+      "value": "'primary'"
+    },
+    {
+      "component": "Progress",
+      "prop": "striped",
+      "value": "false"
+    },
+    {
+      "component": "Progress",
+      "prop": "animated",
+      "value": "false"
+    },
+    {
+      "component": "Progress",
+      "prop": "paused",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Use value=null for indeterminate work; never invent a completion percentage. max defaults to 100; invalid numeric values are normalized.",
+    "bufferValue uses the same units as value and describes work prepared ahead, not completed. It cannot be below the completion value. Use an adjacent description to explain buffering when needed.",
+    "size is sm/md/lg, tone is primary/success/warning/danger/info. striped adds a pattern; animated opts into moving stripes. paused stops repeating motion. System reduced-motion settings disable animation.",
+    "Keep cancel and retry buttons outside Progress: progressbar descendants are presentational. Announce start and completion in a separate status region, not every percentage change."
+  ]
+}

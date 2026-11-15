@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "empty",
+  "title": "Empty",
+  "description": "빈 화면의 다음 행동",
+  "example": "import { useState } from 'react'\nimport { Empty } from 'moru-ui'\nimport { Button } from 'moru-ui'\n\nexport function ProjectList() {\n  const [projects, setProjects] = useState<string[]>([])\n\n  if (projects.length) {\n    return (\n      <ul>\n        {projects.map((project) => (\n          <li key={project}>{project}</li>\n        ))}\n      </ul>\n    )\n  }\n\n  return (\n    <Empty title=\"No projects yet\" description=\"Create your first project to get started.\">\n      <Button type=\"button\" onClick={() => setProjects(['New project'])}>\n        Create project\n      </Button>\n    </Empty>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/empty.tsx",
+  "api": "interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  title: string\n  description?: ReactNode\n  icon?: ReactNode\n}\n\nfunction Empty({\n  title,\n  description,\n  icon,\n  children,\n  className,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  ...props\n}: EmptyProps);",
+  "props": [
+    {
+      "owner": "EmptyProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "EmptyProps",
+      "name": "description",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "EmptyProps",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false
+    }
+  ],
+  "defaults": [],
+  "notes": []
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "avatar",
+  "title": "Avatar",
+  "description": "사람과 팀의 표시",
+  "example": "import { Avatar } from 'moru-ui'\n\nexport function MemberAvatar() {\n  return <Avatar alt=\"Sara Kim\" fallback=\"SK\" size=\"lg\" />\n}\n// Add src with your own image URL. The fallback remains visible if the image fails.",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/avatar.tsx",
+  "api": "interface AvatarProps extends Omit<\n  ComponentPropsWithoutRef<typeof BaseAvatar.Root>,\n  'className' | 'children'\n> {\n  src?: string\n  alt: string\n  fallback?: ReactNode\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}",
+  "props": [
+    {
+      "owner": "AvatarProps",
+      "name": "src",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "AvatarProps",
+      "name": "alt",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "AvatarProps",
+      "name": "fallback",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "AvatarProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "AvatarProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Avatar",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

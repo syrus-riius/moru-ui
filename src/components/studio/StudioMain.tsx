@@ -10,6 +10,7 @@ import { MoruDocsLayout } from '../site/MoruDocsLayout'
 import { MoruHome } from '../site/MoruHome'
 import { MoruSiteFooter } from '../site/MoruSiteFooter'
 import { InputDocumentation } from '../site/InputDocumentation'
+import { ComponentDocumentation } from '../site/ComponentDocumentation'
 import { AiContextButton } from '../ai/AiContextButton'
 import { registryRelease } from '../../lib/registry-install'
 import { ComponentDemo } from './ComponentPlayground'
@@ -68,7 +69,6 @@ export function StudioMain() {
     componentPage,
     standalone,
     publicView,
-    inputDoc,
     newOnly,
     setNewOnly,
     query,
@@ -104,7 +104,7 @@ export function StudioMain() {
         code={code}
         copied={copied === id}
         onCopy={() => void copy(snippets[id], id)}
-        onOpenDocumentation={id === 'input' ? () => selectComponent(id) : undefined}
+        onOpenDocumentation={() => selectComponent(id)}
       >
         {children}
       </DemoCard>
@@ -216,9 +216,10 @@ export function StudioMain() {
                 />
               }
             />
-          ) : inputDoc ? (
+          ) : componentPage.kind === 'detail' && componentPage.component === 'input' ? (
             <InputDocumentation
               onOpenStudio={() => inspectComponent('input')}
+              onNavigate={navigateComponentPage}
               aiAction={
                 <AiContextButton
                   tokens={theme.tokens}
@@ -227,14 +228,27 @@ export function StudioMain() {
                 />
               }
             />
-          ) : (
-            <ComponentCatalogPage
+          ) : componentPage.kind === 'detail' ? (
+            <ComponentDocumentation
+              key={componentPage.component}
+              id={componentPage.component}
+              preview={componentDemo(componentPage.component)}
+              onOpenStudio={() => inspectComponent(componentPage.component)}
+              onNavigate={navigateComponentPage}
               aiAction={
                 <AiContextButton
                   tokens={theme.tokens}
                   mode={theme.mode}
-                  initialItems={componentPage.kind === 'detail' ? [componentPage.component] : []}
+                  initialItems={[
+                    componentPage.component === 'dialog' ? 'modal' : componentPage.component,
+                  ]}
                 />
+              }
+            />
+          ) : (
+            <ComponentCatalogPage
+              aiAction={
+                <AiContextButton tokens={theme.tokens} mode={theme.mode} initialItems={[]} />
               }
               page={componentPage}
               query={query}

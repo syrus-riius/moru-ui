@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "id": "chart",
+  "title": "Chart",
+  "description": "막대·선·영역·도넛의 기본",
+  "example": "import { Chart } from 'moru-ui/chart'\nexport function WeeklyActivity() {\n  return (\n    <Chart\n      title=\"Weekly activity\"\n      xKey=\"day\"\n      data={[\n        { day: 'Monday', tasks: 24 },\n        { day: 'Tuesday', tasks: 36 },\n        { day: 'Wednesday', tasks: 28 },\n      ]}\n      config={{ tasks: { label: 'Completed tasks', color: 'var(--ui-primary)' } }}\n      xAxisInterval={0}\n      xAxisTickFormatter={(value) => String(value).slice(0, 1)}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui \"recharts@^3.10.1\"",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/chart.tsx",
+  "api": "type ChartConfig = Record<string, { label: string; color: string }>\n\ntype ChartType = 'bar' | 'line' | 'area' | 'donut'\n\ntype ChartDatum = Record<string, string | number | null | undefined>\n\ninterface ChartContainerProps {\n  config: ChartConfig\n  children: ReactElement\n  className?: string\n  style?: CSSProperties\n}\n\ninterface ChartProps {\n  data: ChartDatum[]\n  config: ChartConfig\n  xKey: string\n  title: string\n  type?: ChartType\n  disabled?: boolean\n  className?: string\n  description?: string\n  chartHeight?: number\n  showLegend?: boolean\n  showDataTable?: boolean\n  /** Formats axis ticks only; tooltips and the data table retain the original category. */\n  xAxisTickFormatter?: (value: string | number, index: number) => string\n  /** Use 0 with compact tick labels to display every category in a small chart. */\n  xAxisInterval?: XAxisProps['interval']\n  style?: CSSProperties\n}\n\nfunction ChartContainer({ config, children, className, style }: ChartContainerProps);\nfunction ChartTooltipContent({\n  active,\n  label,\n  payload,\n}: {\n  active?: boolean\n  label?: ReactNode\n  payload?: ReadonlyArray<TooltipEntry>\n});\nfunction getDonutSlices(data: ChartDatum[], xKey: string, valueKey: string);\nfunction Chart({\n  data,\n  config,\n  xKey,\n  title,\n  type = 'bar',\n  disabled = false,\n  className,\n  description,\n  chartHeight = 240,\n  showLegend = true,\n  showDataTable = true,\n  xAxisTickFormatter,\n  xAxisInterval,\n  style,\n}: ChartProps);",
+  "props": [
+    {
+      "owner": "ChartContainerProps",
+      "name": "config",
+      "type": "ChartConfig",
+      "required": true
+    },
+    {
+      "owner": "ChartContainerProps",
+      "name": "children",
+      "type": "ReactElement",
+      "required": true
+    },
+    {
+      "owner": "ChartContainerProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ChartContainerProps",
+      "name": "style",
+      "type": "CSSProperties",
+      "required": false
+    },
+    {
+      "owner": "ChartProps",
+      "name": "data",
+      "type": "ChartDatum[]",
+      "required": true
+    },
+    {
+      "owner": "ChartProps",
+      "name": "config",
+      "type": "ChartConfig",
+      "required": true
+    },
+    {
+      "owner": "ChartProps",
+      "name": "xKey",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ChartProps",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ChartProps",
+      "name": "type",
+      "type": "ChartType",
+      "required": false,
+      "defaultValue": "'bar'"
+    },
+    {
+      "owner": "ChartProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ChartProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ChartProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ChartProps",
+      "name": "chartHeight",
+      "type": "number",
+      "required": false,
+      "defaultValue": "240"
+    },
+    {
+      "owner": "ChartProps",
+      "name": "showLegend",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "ChartProps",
+      "name": "showDataTable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "ChartProps",
+      "name": "xAxisTickFormatter",
+      "type": "(value: string | number, index: number) => string",
+      "required": false,
+      "description": "Formats axis ticks only; tooltips and the data table retain the original category."
+    },
+    {
+      "owner": "ChartProps",
+      "name": "xAxisInterval",
+      "type": "XAxisProps['interval']",
+      "required": false,
+      "description": "Use 0 with compact tick labels to display every category in a small chart."
+    },
+    {
+      "owner": "ChartProps",
+      "name": "style",
+      "type": "CSSProperties",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Chart",
+      "prop": "type",
+      "value": "'bar'"
+    },
+    {
+      "component": "Chart",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "Chart",
+      "prop": "chartHeight",
+      "value": "240"
+    },
+    {
+      "component": "Chart",
+      "prop": "showLegend",
+      "value": "true"
+    },
+    {
+      "component": "Chart",
+      "prop": "showDataTable",
+      "value": "true"
+    }
+  ],
+  "notes": [
+    "Keep full category names in data. xAxisTickFormatter abbreviates only visual tick labels; tooltips and the data table preserve the original values.",
+    "xAxisInterval={0} retains every category tick. Use it with compact labels and enough plot width; the default collision-aware behavior is unchanged."
+  ]
+}

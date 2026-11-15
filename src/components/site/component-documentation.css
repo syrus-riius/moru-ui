@@ -1,0 +1,500 @@
+.moru-component-doc {
+  --component-doc-accent: #3d42c9;
+  --component-doc-soft: color-mix(
+    in srgb,
+    var(--chrome-surface, #fff) 52%,
+    var(--chrome-bg, #f5f5f3)
+  );
+  container: component-documentation / inline-size;
+  min-width: 0;
+  color: var(--chrome-text, #171717);
+  scroll-margin-top: calc(var(--moru-public-header-offset, 64px) + 24px);
+}
+
+:root[data-theme='dark'] .moru-component-doc {
+  --component-doc-accent: #b0b5ff;
+}
+
+.moru-component-doc:focus,
+.moru-component-doc :is(section, h2)[tabindex='-1']:focus {
+  outline: none;
+}
+
+.moru-component-doc__layout {
+  display: grid;
+  grid-template: 'heading' auto 'outline' auto 'body' auto / minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.moru-component-doc__header {
+  grid-area: heading;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.moru-component-doc__category {
+  display: inline-block;
+  color: var(--component-doc-accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moru-component-doc__category:hover {
+  text-decoration: underline;
+}
+
+.moru-component-doc__header h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(36px, 6cqi, 48px);
+  font-weight: 650;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+  letter-spacing: -0.055em;
+}
+
+.moru-component-doc__description {
+  margin: 0;
+  color: var(--chrome-muted, #676763);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.moru-component-doc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.moru-component-doc__studio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding-inline: 12px;
+  border-radius: 7px;
+  background: var(--chrome-hover, #f0f0ed);
+  color: var(--chrome-text, #171717);
+  font-size: 12px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.moru-component-doc__studio:hover {
+  color: var(--component-doc-accent);
+}
+
+.moru-component-doc
+  :is(
+    .moru-component-doc__category,
+    .moru-component-doc__studio,
+    .moru-component-doc__outline button
+  ):focus-visible {
+  outline: 2px solid var(--component-doc-accent);
+  outline-offset: 2px;
+}
+
+.moru-component-doc__outline {
+  grid-area: outline;
+  min-width: 0;
+  align-self: start;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--component-doc-soft);
+}
+
+.moru-component-doc__outline p {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.moru-component-doc__outline ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moru-component-doc__outline button {
+  min-height: 32px;
+  color: var(--chrome-muted, #676763);
+  font-size: 12px;
+  text-align: start;
+}
+
+.moru-component-doc__outline button:hover {
+  color: var(--component-doc-accent);
+}
+
+.moru-component-doc__body {
+  grid-area: body;
+  display: grid;
+  min-width: 0;
+  gap: 42px;
+  padding-bottom: 28px;
+}
+
+.moru-component-doc__body section {
+  min-width: 0;
+}
+
+.moru-component-doc__body :is(section, h2)[id] {
+  scroll-margin-top: calc(var(--moru-public-header-offset, 64px) + 24px);
+}
+
+.moru-component-doc__body h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 640;
+  line-height: 1.3;
+  letter-spacing: -0.028em;
+}
+
+.moru-component-doc__body section > p {
+  max-width: 64ch;
+  margin: 0 0 14px;
+  color: var(--chrome-muted, #676763);
+  font-size: 14px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.moru-component-doc__body section > p.moru-component-doc__preview-note {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.moru-component-doc__body section > :is(.ui-code-block, .moru-component-doc__states) + p {
+  margin: 12px 0 0;
+}
+
+.moru-component-doc__body section > p a {
+  color: var(--component-doc-accent);
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.moru-component-doc__body section > p code {
+  color: var(--chrome-text, #171717);
+  font-size: 0.89em;
+  overflow-wrap: anywhere;
+}
+
+.moru-component-doc__tabs > .ui-tabs-list {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.moru-component-doc__tabs .ui-tabs-tab {
+  min-height: 42px;
+  padding: 8px 2px;
+  border-radius: 0;
+  color: var(--chrome-muted, #676763);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moru-component-doc__tabs .ui-tabs-tab[data-active] {
+  background: none;
+  box-shadow: inset 0 -2px var(--component-doc-accent);
+  color: var(--chrome-text, #171717);
+}
+
+.moru-component-doc__tabs .ui-tabs-tab[data-active]:focus-visible {
+  outline-color: var(--component-doc-accent);
+}
+
+.moru-component-doc__tabs .ui-tabs-panel {
+  padding-top: 12px;
+}
+
+.moru-component-doc__preview {
+  display: grid;
+  min-height: 224px;
+  padding: var(--ui-card-padding, 24px);
+  place-items: center;
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+
+.moru-component-doc__preview .moru-component-doc__example {
+  width: min(100%, 310px);
+}
+
+.moru-component-doc__example {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.moru-component-doc__example label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.moru-component-doc__example p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.moru-component-doc__example p[data-invalid] {
+  color: var(--ui-danger, #b93d37);
+}
+
+.moru-component-doc__states {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.moru-component-doc__state {
+  min-width: 0;
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+
+.moru-component-doc__state h3 {
+  margin: 0 0 12px;
+  color: var(--ui-muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.moru-component-doc__props {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.moru-component-doc__props :is(th, td) {
+  padding: 10px 8px;
+  text-align: start;
+  vertical-align: top;
+}
+
+.moru-component-doc__props thead {
+  background: var(--component-doc-soft);
+}
+.moru-component-doc__props thead th:first-child {
+  width: 25%;
+  border-radius: 7px 0 0 7px;
+}
+.moru-component-doc__props thead th:nth-child(2) {
+  width: 32%;
+}
+.moru-component-doc__props thead th:last-child {
+  border-radius: 0 7px 7px 0;
+}
+.moru-component-doc__props tbody th {
+  font-weight: 550;
+}
+.moru-component-doc__props tbody td {
+  color: var(--chrome-muted, #676763);
+}
+.moru-component-doc__props tbody tr:nth-child(even) {
+  background: var(--component-doc-soft);
+}
+.moru-component-doc__props code {
+  font-size: 0.9em;
+}
+.moru-component-doc__props small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--chrome-muted);
+}
+
+.moru-component-doc__defaults {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--component-doc-soft);
+  font-size: 12px;
+}
+
+.moru-component-doc__defaults > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  overflow-wrap: anywhere;
+}
+
+.moru-component-doc__defaults dd {
+  margin: 0;
+  color: var(--chrome-muted);
+}
+
+.moru-component-doc__live {
+  display: block;
+  padding: 0;
+}
+
+.moru-component-doc__live .specimen-content {
+  width: 100%;
+  min-width: 0;
+  min-height: 240px;
+  justify-content: center;
+}
+
+.moru-component-doc__load-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  min-height: 88px;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--component-doc-soft);
+  font-size: 13px;
+}
+
+.moru-component-doc__load-state p {
+  margin: 0;
+}
+
+.moru-component-doc__details {
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.moru-component-doc__details summary {
+  width: fit-content;
+  padding-block: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moru-component-doc__details:has(+ p) {
+  margin-bottom: 12px;
+}
+
+.moru-component-doc__neighbors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.moru-component-doc__neighbors a {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--component-doc-soft);
+  overflow-wrap: anywhere;
+}
+
+.moru-component-doc__neighbors a:hover {
+  color: var(--component-doc-accent);
+}
+
+.moru-component-doc__neighbors a > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--chrome-muted);
+  font-size: 12px;
+}
+
+.moru-component-doc__neighbors svg {
+  flex: none;
+}
+
+.moru-component-doc__neighbors strong {
+  font-size: 14px;
+}
+
+.moru-component-doc__neighbors a[data-direction='next'] {
+  text-align: end;
+}
+
+.moru-component-doc__neighbors a[data-direction='next'] > span {
+  justify-content: flex-end;
+}
+
+@container component-documentation (min-width: 440px) {
+  .moru-component-doc__states {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .moru-component-doc__props :is(th, td) {
+    padding-inline: 12px;
+  }
+}
+
+@container component-documentation (max-width: 540px) {
+  .moru-component-doc__props,
+  .moru-component-doc__props tbody {
+    display: block;
+  }
+  .moru-component-doc__props thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .moru-component-doc__props tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+    padding: 8px 0;
+    border-radius: 8px;
+  }
+  .moru-component-doc__props tbody td:last-child {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+  .moru-component-doc__props tbody td[data-empty] {
+    display: none;
+  }
+}
+
+@container component-documentation (min-width: 720px) {
+  .moru-component-doc__layout {
+    grid-template: 'heading outline' auto 'body outline' auto / minmax(0, 1fr) 128px;
+    gap: 22px 36px;
+  }
+
+  .moru-component-doc__outline {
+    position: sticky;
+    top: calc(var(--moru-public-header-offset, 64px) + 24px);
+    padding: 0;
+    background: none;
+  }
+
+  .moru-component-doc__outline ul {
+    display: grid;
+    gap: 0;
+  }
+}

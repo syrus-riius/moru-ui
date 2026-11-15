@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "콘텐츠의 비율을 일정하게",
+  "example": "import { AspectRatio } from 'moru-ui'\n\nexport function MediaPlaceholder() {\n  return (\n    <AspectRatio ratio={16 / 9} style={{ background: 'var(--ui-surface-hover)' }}>\n      <div style={{ display: 'grid', placeItems: 'center', height: '100%' }}>\n        16:9 media preview\n      </div>\n    </AspectRatio>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/aspect-ratio.tsx",
+  "api": "type AspectRatioProps = HTMLAttributes<HTMLDivElement> & { ratio?: number }",
+  "props": [
+    {
+      "owner": "AspectRatioProps",
+      "name": "ratio",
+      "type": "number",
+      "required": false,
+      "defaultValue": "16 / 9"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "AspectRatio",
+      "prop": "ratio",
+      "value": "16 / 9"
+    }
+  ],
+  "notes": []
+}

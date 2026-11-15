@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "id": "date-picker",
+  "title": "Date Picker",
+  "description": "필드에서 날짜 선택",
+  "example": "import { useState } from 'react'\nimport { DatePicker } from 'moru-ui'\n\nexport function DueDate() {\n  const [date, setDate] = useState<Date | null>(null)\n  return (\n    <DatePicker\n      label=\"Due date\"\n      name=\"dueDate\"\n      value={date}\n      onValueChange={setDate}\n      calendarOptions={{ variant: 'minimal', size: 'md' }}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/date-picker.tsx",
+  "api": "interface DatePickerProps {\n  value?: Date | null\n  defaultValue?: Date | null\n  onValueChange?: (value: Date | null) => void\n  label?: string\n  placeholder?: string\n  disabled?: boolean\n  loading?: boolean\n  readOnly?: boolean\n  required?: boolean\n  name?: string\n  form?: string\n  minDate?: Date\n  maxDate?: Date\n  locale?: string\n  clearable?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  /** Customize the popup calendar without replacing value, constraints, or selection behavior. */\n  calendarOptions?: CalendarDisplayOptions\n  className?: string\n  id?: string\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n}\n\nfunction DatePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  label,\n  placeholder: placeholderProp,\n  disabled = false,\n  loading = false,\n  readOnly = false,\n  required = false,\n  name,\n  form,\n  minDate,\n  maxDate,\n  locale: localeProp,\n  clearable = true,\n  size = 'md',\n  calendarOptions,\n  className,\n  id,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n}: DatePickerProps);",
+  "props": [
+    {
+      "owner": "DatePickerProps",
+      "name": "value",
+      "type": "Date | null",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "defaultValue",
+      "type": "Date | null",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "onValueChange",
+      "type": "(value: Date | null) => void",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "minDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "maxDate",
+      "type": "Date",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "locale",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "calendarOptions",
+      "type": "CalendarDisplayOptions",
+      "required": false,
+      "description": "Customize the popup calendar without replacing value, constraints, or selection behavior."
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "DatePickerProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "DatePicker",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "DatePicker",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "DatePicker",
+      "prop": "readOnly",
+      "value": "false"
+    },
+    {
+      "component": "DatePicker",
+      "prop": "required",
+      "value": "false"
+    },
+    {
+      "component": "DatePicker",
+      "prop": "clearable",
+      "value": "true"
+    },
+    {
+      "component": "DatePicker",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": [
+    "value/onValueChange use Date|null, not a date string. Name submits a local calendar date; handle timezone requirements in application logic.",
+    "DatePicker has no outer size prop. Set calendarOptions.size to adjust its calendar; use minDate/maxDate for bounds."
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "checkbox",
+  "title": "Checkbox",
+  "description": "다중 선택",
+  "example": "import { useState } from 'react'\nimport { Checkbox } from 'moru-ui'\n\nexport function EmailPreference() {\n  const [enabled, setEnabled] = useState(true)\n  return (\n    <Checkbox\n      name=\"emailUpdates\"\n      checked={enabled}\n      onCheckedChange={setEnabled}\n      label=\"Email updates\"\n      description=\"Receive project news by email.\"\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/checkbox.tsx",
+  "api": "type CheckboxProps = Omit<\n  ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,\n  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'\n> & {\n  label?: ReactNode\n  description?: string\n  checked?: boolean\n  defaultChecked?: boolean\n  onCheckedChange?: (checked: boolean) => void\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "CheckboxProps",
+      "name": "label",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "checked",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "defaultChecked",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "onCheckedChange",
+      "type": "(checked: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "CheckboxProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Checkbox",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Checkbox",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

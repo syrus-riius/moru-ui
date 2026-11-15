@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "pagination",
+  "title": "Pagination",
+  "description": "긴 목록의 페이지 이동",
+  "example": "import { useState } from 'react'\nimport { Pagination } from 'moru-ui'\n\nconst projects = ['Design system', 'Website', 'Mobile app', 'Documentation', 'Research']\nconst pageSize = 2\n\nexport function ProjectPages() {\n  const [page, setPage] = useState(1)\n  const visible = projects.slice((page - 1) * pageSize, page * pageSize)\n\n  return (\n    <div>\n      <ul>\n        {visible.map((project) => (\n          <li key={project}>{project}</li>\n        ))}\n      </ul>\n      <Pagination\n        aria-label=\"Project pages\"\n        page={page}\n        pageCount={Math.ceil(projects.length / pageSize)}\n        onPageChange={setPage}\n      />\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/pagination.tsx",
+  "api": "interface PaginationProps {\n  page: number\n  pageCount: number\n  onPageChange: (page: number) => void\n  siblingCount?: number\n  disabled?: boolean\n  'aria-label'?: string\n  className?: string\n}\n\nfunction Pagination({\n  page,\n  pageCount,\n  onPageChange,\n  siblingCount = 1,\n  disabled,\n  'aria-label': ariaLabelProp,\n  className,\n}: PaginationProps);",
+  "props": [
+    {
+      "owner": "PaginationProps",
+      "name": "page",
+      "type": "number",
+      "required": true
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "pageCount",
+      "type": "number",
+      "required": true
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "onPageChange",
+      "type": "(page: number) => void",
+      "required": true
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "siblingCount",
+      "type": "number",
+      "required": false,
+      "defaultValue": "1"
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "PaginationProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Pagination",
+      "prop": "siblingCount",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

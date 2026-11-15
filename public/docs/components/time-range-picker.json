@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "id": "time-range-picker",
+  "title": "Time Range Picker",
+  "description": "시작·종료와 다음 날 시간 범위",
+  "example": "import { useState } from 'react'\nimport { TimeRangePicker, type TimeRangeValue } from 'moru-ui'\n\nexport function MeetingTime() {\n  const [range, setRange] = useState<TimeRangeValue>({ start: '09:00', end: '10:00' })\n  return (\n    <TimeRangePicker\n      label=\"Meeting time\"\n      name=\"meeting\"\n      value={range}\n      onValueChange={setRange}\n      step={15}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/time-range-picker.tsx",
+  "api": "interface TimeRangePickerProps {\n  value?: TimeRangeValue\n  defaultValue?: TimeRangeValue\n  onValueChange?: (value: TimeRangeValue) => void\n  label?: string\n  startLabel?: string\n  endLabel?: string\n  /** A name produces `${name}.start` and `${name}.end` native form entries. */\n  name?: string\n  startName?: string\n  endName?: string\n  form?: string\n  required?: boolean\n  disabled?: boolean\n  loading?: boolean\n  readOnly?: boolean\n  min?: string\n  max?: string\n  step?: number\n  allowOvernight?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  clearable?: boolean\n  error?: string\n  className?: string\n  id?: string\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n}\n\nexport type { TimeRangeValue } from './time-utils'\n\nfunction TimeRangePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  label,\n  startLabel: startLabelProp,\n  endLabel: endLabelProp,\n  name,\n  startName,\n  endName,\n  form,\n  required,\n  disabled,\n  loading = false,\n  readOnly,\n  min,\n  max,\n  step = 1,\n  allowOvernight = false,\n  size = 'md',\n  clearable = true,\n  error,\n  className,\n  id,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n}: TimeRangePickerProps);",
+  "props": [
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "value",
+      "type": "TimeRangeValue",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "defaultValue",
+      "type": "TimeRangeValue",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "onValueChange",
+      "type": "(value: TimeRangeValue) => void",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "startLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "endLabel",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "description": "A name produces `${name}.start` and `${name}.end` native form entries."
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "startName",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "endName",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "min",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "max",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "step",
+      "type": "number",
+      "required": false,
+      "defaultValue": "1"
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "allowOvernight",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "error",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimeRangePickerProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "TimeRangePicker",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "TimeRangePicker",
+      "prop": "step",
+      "value": "1"
+    },
+    {
+      "component": "TimeRangePicker",
+      "prop": "allowOvernight",
+      "value": "false"
+    },
+    {
+      "component": "TimeRangePicker",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "TimeRangePicker",
+      "prop": "clearable",
+      "value": "true"
+    }
+  ],
+  "notes": [
+    "TimeRangeValue is {start: string|null, end: string|null}. name submits two form fields.",
+    "allowOvernight defaults to false. Opt in for ranges crossing midnight; application logic owns date/timezone interpretation."
+  ]
+}

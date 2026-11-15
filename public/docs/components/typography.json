@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "typography",
+  "title": "Typography",
+  "description": "역할이 분명한 글자",
+  "example": "import { Typography } from 'moru-ui'\n\nexport function ProjectIntroduction() {\n  return (\n    <section>\n      <Typography variant=\"heading\" as=\"h2\">\n        A thoughtful workspace\n      </Typography>\n      <Typography variant=\"body\">Start with the essentials and make it your own.</Typography>\n      <Typography variant=\"caption\" as=\"p\">\n        Updated today\n      </Typography>\n    </section>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/typography.tsx",
+  "api": "type TypographyElement =\n  | 'h1'\n  | 'h2'\n  | 'h3'\n  | 'h4'\n  | 'h5'\n  | 'h6'\n  | 'p'\n  | 'span'\n  | 'div'\n  | 'label'\n  | 'strong'\n  | 'small'\n  | 'code'\n\ntype TypographyProps = HTMLAttributes<HTMLElement> & {\n  variant?: TypographyRole\n  as?: TypographyElement\n}\n\nfunction Typography({\n  variant = 'body',\n  as,\n  className,\n  children,\n  ...props\n}: TypographyProps);",
+  "props": [
+    {
+      "owner": "TypographyProps",
+      "name": "variant",
+      "type": "TypographyRole",
+      "required": false,
+      "defaultValue": "'body'"
+    },
+    {
+      "owner": "TypographyProps",
+      "name": "as",
+      "type": "TypographyElement",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Typography",
+      "prop": "variant",
+      "value": "'body'"
+    }
+  ],
+  "notes": []
+}

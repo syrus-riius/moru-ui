@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "time-picker",
+  "title": "Time Picker",
+  "description": "시간 입력과 시·분 빠른 선택",
+  "example": "import { useState } from 'react'\nimport { TimePicker } from 'moru-ui'\n\nexport function StartTime() {\n  const [time, setTime] = useState<string | null>('09:00')\n  return (\n    <TimePicker label=\"Start time\" name=\"start\" value={time} onValueChange={setTime} step={15} />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/time-picker.tsx",
+  "api": "interface TimePickerProps extends Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  'type' | 'value' | 'defaultValue' | 'size' | 'step' | 'min' | 'max'\n> {\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string | null) => void\n  label?: string\n  min?: string\n  max?: string\n  /** Interval in minutes, from 1 to 60. The step base is min, or midnight. */\n  step?: number\n  size?: 'sm' | 'md' | 'lg'\n  clearable?: boolean\n  error?: string\n  loading?: boolean\n}",
+  "props": [
+    {
+      "owner": "TimePickerProps",
+      "name": "value",
+      "type": "string | null",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "defaultValue",
+      "type": "string | null",
+      "required": false,
+      "defaultValue": "null"
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "onValueChange",
+      "type": "(value: string | null) => void",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "min",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "max",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "step",
+      "type": "number",
+      "required": false,
+      "description": "Interval in minutes, from 1 to 60. The step base is min, or midnight.",
+      "defaultValue": "1"
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "error",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TimePickerProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "TimePicker",
+      "prop": "defaultValue",
+      "value": "null"
+    },
+    {
+      "component": "TimePicker",
+      "prop": "step",
+      "value": "1"
+    },
+    {
+      "component": "TimePicker",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "TimePicker",
+      "prop": "clearable",
+      "value": "true"
+    },
+    {
+      "component": "TimePicker",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Values are HH:mm wall-clock strings or null, not Date instances. step is a minute increment (1–60).",
+    "TimePicker does not convert timezones. Store a separate date/timezone when scheduling real events."
+  ]
+}

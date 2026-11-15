@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "switch",
+  "title": "Switch",
+  "description": "설정 켜고 끄기",
+  "example": "import { useState } from 'react'\nimport { Switch } from 'moru-ui'\n\nexport function Notifications() {\n  const [checked, setChecked] = useState(true)\n  return (\n    <Switch\n      label=\"Project updates\"\n      description=\"Notify me about new comments.\"\n      checked={checked}\n      onCheckedChange={setChecked}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/switch.tsx",
+  "api": "type SwitchProps = Omit<\n  ComponentPropsWithoutRef<typeof BaseSwitch.Root>,\n  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'\n> & {\n  label?: ReactNode\n  description?: string\n  checked?: boolean\n  defaultChecked?: boolean\n  onCheckedChange?: (checked: boolean) => void\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  /** Shows a busy indicator and locks the switch without taking it out of the tab order. */\n  loading?: boolean\n}",
+  "props": [
+    {
+      "owner": "SwitchProps",
+      "name": "label",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "checked",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "defaultChecked",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "onCheckedChange",
+      "type": "(checked: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "SwitchProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "description": "Shows a busy indicator and locks the switch without taking it out of the tab order.",
+      "defaultValue": "false"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Switch",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Switch",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "Web Switch uses checked/onCheckedChange, not value/onValueChange. Its label and description are part of the clickable label.",
+    "Use for independent on/off settings; provide clear text explaining the enabled state.",
+    "loading shows progress in the thumb and locks the switch as read-only, so it stays focusable while a change is being saved."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "loading-overlay",
+  "title": "Loading Overlay",
+  "description": "영역 로딩과 안전한 상호작용 잠금",
+  "example": "import { LoadingOverlay } from 'moru-ui'\nimport { Input } from 'moru-ui'\nexport function SavingForm({ saving }: { saving: boolean }) {\n  return (\n    <LoadingOverlay loading={saving} label=\"Saving settings\" spinnerVariant=\"dots\">\n      <label>\n        Project name\n        <Input name=\"name\" defaultValue=\"Moru\" />\n      </label>\n    </LoadingOverlay>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/loading-overlay.tsx",
+  "api": "interface LoadingOverlayProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  loading: boolean\n  label?: string\n  description?: string\n  spinnerVariant?: SpinnerProps['variant']\n  paused?: boolean\n  children: ReactNode\n}\n\nfunction LoadingOverlay({\n  loading,\n  label: labelProp,\n  description,\n  spinnerVariant = 'ring',\n  paused = false,\n  children,\n  className,\n  tabIndex = -1,\n  ...props\n}: LoadingOverlayProps);",
+  "props": [
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": true
+    },
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "spinnerVariant",
+      "type": "SpinnerProps['variant']",
+      "required": false,
+      "defaultValue": "'ring'"
+    },
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "paused",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "LoadingOverlayProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    }
+  ],
+  "defaults": [
+    {
+      "component": "LoadingOverlay",
+      "prop": "spinnerVariant",
+      "value": "'ring'"
+    },
+    {
+      "component": "LoadingOverlay",
+      "prop": "paused",
+      "value": "false"
+    },
+    {
+      "component": "LoadingOverlay",
+      "prop": "tabIndex",
+      "value": "-1"
+    }
+  ],
+  "notes": [
+    "Wrap content in LoadingOverlay and control loading from the actual request lifecycle. Content remains mounted and becomes inert while busy. The status lives outside the busy/inert content.",
+    "Keep cancel/retry/complete controls outside the covered content. Close already-open portaled menus before starting loading; inert covers only descendants.",
+    "If loading starts while a child owns focus, focus moves to the loading status without scrolling. It restores only if the status still owns focus. Focus elsewhere is not stolen. This is a local boundary, not a modal or focus trap.",
+    "label defaults to the localized loading text; description adds detail. spinnerVariant accepts ring/dots/bars and paused stops its motion."
+  ]
+}

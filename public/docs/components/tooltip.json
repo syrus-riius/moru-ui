@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "id": "tooltip",
+  "title": "Tooltip",
+  "description": "짧은 보충 설명",
+  "example": "import { Button } from 'moru-ui'\nimport { Tooltip } from 'moru-ui'\n\nexport function ExportHelp() {\n  return (\n    <Tooltip\n      trigger={\n        <Button type=\"button\" variant=\"secondary\">\n          Export options\n        </Button>\n      }\n    >\n      Choose a file format before downloading your report.\n    </Tooltip>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/tooltip.tsx",
+  "api": "interface TooltipProviderProps {\n  children: ReactNode\n  delay?: number\n  closeDelay?: number\n  timeout?: number\n}\n\ninterface TooltipProps {\n  trigger: ReactElement\n  children: ReactNode\n  side?: ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['side']\n  align?: ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['align']\n  className?: string\n  delay?: number\n}\n\nfunction TooltipProvider({\n  children,\n  delay = 400,\n  closeDelay = 100,\n  timeout = 400,\n}: TooltipProviderProps);\nfunction Tooltip({\n  trigger,\n  children,\n  side = 'top',\n  align = 'center',\n  className,\n  delay,\n}: TooltipProps);",
+  "props": [
+    {
+      "owner": "TooltipProviderProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "TooltipProviderProps",
+      "name": "delay",
+      "type": "number",
+      "required": false,
+      "defaultValue": "400"
+    },
+    {
+      "owner": "TooltipProviderProps",
+      "name": "closeDelay",
+      "type": "number",
+      "required": false,
+      "defaultValue": "100"
+    },
+    {
+      "owner": "TooltipProviderProps",
+      "name": "timeout",
+      "type": "number",
+      "required": false,
+      "defaultValue": "400"
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": true
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "side",
+      "type": "ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['side']",
+      "required": false,
+      "defaultValue": "'top'"
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "align",
+      "type": "ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['align']",
+      "required": false,
+      "defaultValue": "'center'"
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TooltipProps",
+      "name": "delay",
+      "type": "number",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "TooltipProvider",
+      "prop": "delay",
+      "value": "400"
+    },
+    {
+      "component": "TooltipProvider",
+      "prop": "closeDelay",
+      "value": "100"
+    },
+    {
+      "component": "TooltipProvider",
+      "prop": "timeout",
+      "value": "400"
+    },
+    {
+      "component": "Tooltip",
+      "prop": "side",
+      "value": "'top'"
+    },
+    {
+      "component": "Tooltip",
+      "prop": "align",
+      "value": "'center'"
+    }
+  ],
+  "notes": []
+}

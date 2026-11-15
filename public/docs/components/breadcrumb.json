@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "breadcrumb",
+  "title": "Breadcrumb",
+  "description": "현재 위치와 상위 단계",
+  "example": "import { Breadcrumb } from 'moru-ui'\n\nexport function ProjectBreadcrumb() {\n  return (\n    <Breadcrumb\n      aria-label=\"Project location\"\n      items={[\n        { label: 'Home', href: '/' },\n        { label: 'Projects', href: '/projects' },\n        { label: 'Design system' },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/breadcrumb.tsx",
+  "api": "interface BreadcrumbItem {\n  label: ReactNode\n  href?: string\n  onClick?: () => void\n  disabled?: boolean\n}\n\ninterface BreadcrumbProps {\n  items: BreadcrumbItem[]\n  'aria-label'?: string\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}\n\nfunction Breadcrumb({\n  items,\n  disabled = false,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: BreadcrumbProps);",
+  "props": [
+    {
+      "owner": "BreadcrumbItem",
+      "name": "label",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "BreadcrumbItem",
+      "name": "href",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "BreadcrumbItem",
+      "name": "onClick",
+      "type": "() => void",
+      "required": false
+    },
+    {
+      "owner": "BreadcrumbItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "BreadcrumbProps",
+      "name": "items",
+      "type": "BreadcrumbItem[]",
+      "required": true
+    },
+    {
+      "owner": "BreadcrumbProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "BreadcrumbProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "BreadcrumbProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "BreadcrumbProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Breadcrumb",
+      "prop": "disabled",
+      "value": "false"
+    },
+    {
+      "component": "Breadcrumb",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

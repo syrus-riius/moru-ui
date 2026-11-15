@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "id": "toggle-group",
+  "title": "Toggle Group",
+  "description": "보기와 옵션 전환",
+  "example": "import { ToggleGroup } from 'moru-ui'\nexport function ReportingPeriod() {\n  return (\n    <ToggleGroup\n      layout=\"segmented\"\n      aria-label=\"Reporting period\"\n      preventEmpty\n      defaultValue={['week']}\n      items={[\n        { value: 'week', label: 'Weekly' },\n        { value: 'month', label: 'Monthly' },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/toggle-group.tsx",
+  "api": "interface ToggleGroupItem {\n  value: string\n  label: string\n  icon?: ReactNode\n  disabled?: boolean\n}\n\ninterface ToggleGroupProps {\n  items: ToggleGroupItem[]\n  type?: 'single' | 'multiple'\n  value?: string[]\n  defaultValue?: string[]\n  onValueChange?: (value: string[]) => void\n  preventEmpty?: boolean\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  /** Segmented options share equal columns and stay together; long labels can wrap. */\n  layout?: 'wrap' | 'segmented'\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  className?: string\n}\n\nfunction ToggleGroup({\n  items,\n  type = 'single',\n  value,\n  defaultValue = [],\n  onValueChange,\n  preventEmpty = false,\n  disabled,\n  size = 'md',\n  layout = 'wrap',\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  className,\n}: ToggleGroupProps);",
+  "props": [
+    {
+      "owner": "ToggleGroupItem",
+      "name": "value",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ToggleGroupItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "ToggleGroupItem",
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "items",
+      "type": "ToggleGroupItem[]",
+      "required": true
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "type",
+      "type": "'single' | 'multiple'",
+      "required": false,
+      "defaultValue": "'single'"
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "value",
+      "type": "string[]",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "defaultValue",
+      "type": "string[]",
+      "required": false,
+      "defaultValue": "[]"
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "onValueChange",
+      "type": "(value: string[]) => void",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "preventEmpty",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "layout",
+      "type": "'wrap' | 'segmented'",
+      "required": false,
+      "description": "Segmented options share equal columns and stay together; long labels can wrap.",
+      "defaultValue": "'wrap'"
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "ToggleGroupProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "ToggleGroup",
+      "prop": "type",
+      "value": "'single'"
+    },
+    {
+      "component": "ToggleGroup",
+      "prop": "defaultValue",
+      "value": "[]"
+    },
+    {
+      "component": "ToggleGroup",
+      "prop": "preventEmpty",
+      "value": "false"
+    },
+    {
+      "component": "ToggleGroup",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "ToggleGroup",
+      "prop": "layout",
+      "value": "'wrap'"
+    }
+  ],
+  "notes": [
+    "layout=\"wrap\" is the default for groups that may use multiple rows. Use layout=\"segmented\" for equal-width choices that must stay together in one row.",
+    "In a narrow card, move the whole segmented group below neighboring content. Long labels can wrap inside each choice; keep a meaningful aria-label and the existing keyboard order."
+  ]
+}

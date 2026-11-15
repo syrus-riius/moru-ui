@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "input-otp",
+  "title": "Input OTP",
+  "description": "인증 번호 입력과 붙여넣기",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { InputOTP } from 'moru-ui'\n\nexport function VerificationCode() {\n  const [code, setCode] = useState('')\n  return (\n    <Field label=\"Verification code\" description=\"Enter the six-digit code.\">\n      <InputOTP name=\"code\" length={6} value={code} onValueChange={setCode} />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/input-otp.tsx",
+  "api": "type InputOTPProps = Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  'size' | 'value' | 'defaultValue' | 'onChange' | 'maxLength' | 'type' | 'inputMode' | 'pattern'\n> & {\n  length?: number\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  onComplete?: (value: string) => void\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}",
+  "props": [
+    {
+      "owner": "InputOTPProps",
+      "name": "length",
+      "type": "number",
+      "required": false,
+      "defaultValue": "6"
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "value",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "defaultValue",
+      "type": "string",
+      "required": false,
+      "defaultValue": "''"
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "onValueChange",
+      "type": "(value: string) => void",
+      "required": false
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "onComplete",
+      "type": "(value: string) => void",
+      "required": false
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "InputOTPProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "InputOTP",
+      "prop": "length",
+      "value": "6"
+    },
+    {
+      "component": "InputOTP",
+      "prop": "defaultValue",
+      "value": "''"
+    },
+    {
+      "component": "InputOTP",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "InputOTP",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "InputOTP",
+      "prop": "autoComplete",
+      "value": "'one-time-code'"
+    }
+  ],
+  "notes": [
+    "InputOTP uses one real input with visual slots. Preserve its paste, numeric filtering and one-time-code autofill behavior; do not rebuild separate slot inputs.",
+    "onComplete reports input completion, not successful authentication. Verify codes on your server and handle resend/rate limiting in the application."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "direction",
+  "title": "Direction",
+  "description": "읽기 방향과 키보드 이동",
+  "example": "import { DirectionProvider } from 'moru-ui'\nimport { Tabs } from 'moru-ui'\n\nexport function RightToLeftTabs() {\n  return (\n    <DirectionProvider direction=\"rtl\">\n      <div dir=\"rtl\" lang=\"ar\">\n        <Tabs\n          aria-label=\"المحتوى\"\n          defaultValue=\"overview\"\n          items={[\n            { value: 'overview', label: 'نظرة عامة', content: <p>نظرة عامة على المشروع</p> },\n            { value: 'settings', label: 'الإعدادات', content: <p>إعدادات المشروع</p> },\n          ]}\n        />\n      </div>\n    </DirectionProvider>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/direction-provider.tsx",
+  "api": "type DirectionProviderProps = BaseDirectionProvider.Props",
+  "props": [],
+  "defaults": [],
+  "notes": []
+}

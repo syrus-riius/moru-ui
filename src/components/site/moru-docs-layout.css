@@ -72,7 +72,7 @@
 .moru-docs-content {
   min-width: 0;
 }
-.moru-docs-content :is(.moru-start-doc, .moru-input-doc) .ui-code-block {
+.moru-docs-content :is(.moru-start-doc, .moru-component-doc) .ui-code-block {
   background: var(--chrome-bg);
 }
 .moru-docs-guide-link {

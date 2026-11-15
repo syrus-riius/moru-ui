@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "message",
+  "title": "Message",
+  "description": "사람과 내용을 묶는 메시지",
+  "example": "import { Message, MessageAvatar, MessageContent, MessageHeader, MessageFooter } from 'moru-ui'\n\nexport function TeamMessage() {\n  return (\n    <Message aria-label=\"Message from Alex Kim\">\n      <MessageAvatar aria-hidden=\"true\">AK</MessageAvatar>\n      <MessageContent>\n        <MessageHeader>\n          <strong>Alex Kim</strong>\n        </MessageHeader>\n        <p>The new component documentation is ready.</p>\n        <MessageFooter>\n          <time dateTime=\"2026-11-15T09:41:00+09:00\">09:41</time>\n        </MessageFooter>\n      </MessageContent>\n    </Message>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/message.tsx",
+  "api": "interface MessageProps extends HTMLAttributes<HTMLElement> {\n  align?: 'start' | 'end'\n}\n\nfunction MessageAvatar({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction MessageContent({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction MessageHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction MessageFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>);\nfunction MessageGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>);",
+  "props": [
+    {
+      "owner": "MessageProps",
+      "name": "align",
+      "type": "'start' | 'end'",
+      "required": false,
+      "defaultValue": "'start'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Message",
+      "prop": "align",
+      "value": "'start'"
+    }
+  ],
+  "notes": []
+}

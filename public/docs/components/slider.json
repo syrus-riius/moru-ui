@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "slider",
+  "title": "Slider",
+  "description": "범위 안의 값 조절",
+  "example": "import { useState } from 'react'\nimport { Slider } from 'moru-ui'\n\nexport function VolumeControl() {\n  const [volume, setVolume] = useState(50)\n  return (\n    <Slider\n      label=\"Volume\"\n      name=\"volume\"\n      min={0}\n      max={100}\n      step={5}\n      value={volume}\n      onValueChange={setVolume}\n      showValue\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/slider.tsx",
+  "api": "interface SliderProps extends Omit<\n  BaseSlider.Root.Props<number>,\n  | 'children'\n  | 'className'\n  | 'value'\n  | 'defaultValue'\n  | 'onValueChange'\n  | 'orientation'\n  | 'minStepsBetweenValues'\n  | 'thumbCollisionBehavior'\n> {\n  value?: number\n  defaultValue?: number\n  onValueChange?: (value: number) => void\n  label?: string\n  showValue?: boolean\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n}\n\nfunction Slider({\n  value,\n  defaultValue,\n  onValueChange,\n  label,\n  showValue = false,\n  className,\n  disabled,\n  id,\n  size = 'md',\n  min = 0,\n  max = 100,\n  step = 1,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n  'aria-valuetext': valueText,\n  ...props\n}: SliderProps);",
+  "props": [
+    {
+      "owner": "SliderProps",
+      "name": "value",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "SliderProps",
+      "name": "defaultValue",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "SliderProps",
+      "name": "onValueChange",
+      "type": "(value: number) => void",
+      "required": false
+    },
+    {
+      "owner": "SliderProps",
+      "name": "label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SliderProps",
+      "name": "showValue",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "SliderProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "SliderProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Slider",
+      "prop": "showValue",
+      "value": "false"
+    },
+    {
+      "component": "Slider",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "Slider",
+      "prop": "min",
+      "value": "0"
+    },
+    {
+      "component": "Slider",
+      "prop": "max",
+      "value": "100"
+    },
+    {
+      "component": "Slider",
+      "prop": "step",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

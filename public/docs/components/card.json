@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "card",
+  "title": "Card",
+  "description": "콘텐츠 묶음",
+  "example": "import { Card } from 'moru-ui'\n\nexport function Summary() {\n  return (\n    <Card style={{ display: 'grid', gap: 'var(--ui-field-gap)' }}>\n      <h2 style={{ margin: 0 }}>Project overview</h2>\n      <p style={{ margin: 0 }}>Your next milestone is ready to review.</p>\n    </Card>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/card.tsx",
+  "api": "type CardProps = HTMLAttributes<HTMLDivElement>",
+  "props": [],
+  "defaults": [],
+  "notes": [
+    "Card is a single HTML div surface. CardHeader/CardContent are not Moru exports.",
+    "Compose semantic content and use the common spacing tokens; avoid nested arbitrary padding that doubles the surface inset."
+  ]
+}

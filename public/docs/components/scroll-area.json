@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "scroll-area",
+  "title": "Scroll Area",
+  "description": "콘텐츠 안에서 이어지는 탐색",
+  "example": "import { ScrollArea } from 'moru-ui'\n\nexport function ActivityList() {\n  return (\n    <ScrollArea aria-label=\"Recent activity\" style={{ height: 200 }}>\n      <ol>\n        {Array.from({ length: 20 }, (_, index) => (\n          <li key={index} style={{ paddingBlock: 8 }}>\n            Activity {index + 1}\n          </li>\n        ))}\n      </ol>\n    </ScrollArea>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/scroll-area.tsx",
+  "api": "interface ScrollAreaProps extends ComponentPropsWithoutRef<'div'> {\n  orientation?: 'vertical' | 'horizontal' | 'both'\n  viewportClassName?: string\n}\n\nfunction ScrollBar({\n  className,\n  ...props\n}: Omit<ComponentPropsWithoutRef<typeof BaseScrollArea.Scrollbar>, 'className'> & {\n  className?: string\n});",
+  "props": [
+    {
+      "owner": "ScrollAreaProps",
+      "name": "orientation",
+      "type": "'vertical' | 'horizontal' | 'both'",
+      "required": false,
+      "defaultValue": "'vertical'"
+    },
+    {
+      "owner": "ScrollAreaProps",
+      "name": "viewportClassName",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "ScrollArea",
+      "prop": "orientation",
+      "value": "'vertical'"
+    }
+  ],
+  "notes": []
+}

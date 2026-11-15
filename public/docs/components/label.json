@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "label",
+  "title": "Label",
+  "description": "입력과 연결된 이름",
+  "example": "import { useId } from 'react'\nimport { Label } from 'moru-ui'\nimport { Input } from 'moru-ui'\n\nexport function ProjectNameField() {\n  const id = useId()\n  return (\n    <div style={{ display: 'grid', gap: 'var(--ui-field-gap, 8px)' }}>\n      <Label htmlFor={id}>Project name</Label>\n      <Input id={id} name=\"projectName\" placeholder=\"My project\" />\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/label.tsx",
+  "api": "type LabelProps = LabelHTMLAttributes<HTMLLabelElement>",
+  "props": [],
+  "defaults": [],
+  "notes": []
+}

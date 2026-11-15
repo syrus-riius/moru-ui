@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "separator",
+  "title": "Separator",
+  "description": "콘텐츠 사이의 구분",
+  "example": "import { Separator } from 'moru-ui'\n\nexport function AccountSections() {\n  return (\n    <div>\n      <h2>Profile</h2>\n      <p>Your name and contact details.</p>\n      <Separator decorative={false} />\n      <h2>Security</h2>\n      <p>Your password and sign-in preferences.</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/separator.tsx",
+  "api": "interface SeparatorProps extends Omit<\n  ComponentPropsWithoutRef<typeof BaseSeparator>,\n  'className'\n> {\n  decorative?: boolean\n  className?: string\n}",
+  "props": [
+    {
+      "owner": "SeparatorProps",
+      "name": "decorative",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "SeparatorProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Separator",
+      "prop": "orientation",
+      "value": "'horizontal'"
+    },
+    {
+      "component": "Separator",
+      "prop": "decorative",
+      "value": "true"
+    }
+  ],
+  "notes": []
+}

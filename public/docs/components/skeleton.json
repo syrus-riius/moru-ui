@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "skeleton",
+  "title": "Skeleton",
+  "description": "펄스·쉬머·정적 윤곽",
+  "example": "import { Skeleton } from 'moru-ui'\nexport function ContentPlaceholder() {\n  return (\n    <div aria-busy=\"true\">\n      <Skeleton animation=\"shimmer\" style={{ height: 120 }} />\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/skeleton.tsx",
+  "api": "type SkeletonProps = HTMLAttributes<HTMLDivElement> & {\n  animation?: 'pulse' | 'shimmer' | 'none'\n  paused?: boolean\n}",
+  "props": [
+    {
+      "owner": "SkeletonProps",
+      "name": "animation",
+      "type": "'pulse' | 'shimmer' | 'none'",
+      "required": false,
+      "defaultValue": "'pulse'"
+    },
+    {
+      "owner": "SkeletonProps",
+      "name": "paused",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Skeleton",
+      "prop": "animation",
+      "value": "'pulse'"
+    },
+    {
+      "component": "Skeleton",
+      "prop": "paused",
+      "value": "false"
+    }
+  ],
+  "notes": [
+    "animation is pulse (default), shimmer or none. paused stops motion. Skeleton is always decorative/aria-hidden.",
+    "Match the eventual content geometry to avoid layout shifts. Mark the containing content aria-busy and announce loading/completion once in a separate live status outside the busy region."
+  ]
+}

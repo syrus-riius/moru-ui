@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "collapsible",
+  "title": "Collapsible",
+  "description": "필요할 때 펼치는 내용",
+  "example": "import { Collapsible } from 'moru-ui'\n\nexport function ProjectDetails() {\n  return (\n    <Collapsible title=\"Project details\" defaultOpen>\n      <p>Design review is scheduled for Friday.</p>\n    </Collapsible>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/collapsible.tsx",
+  "api": "interface CollapsibleProps {\n  title: ReactNode\n  children: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}\n\nfunction Collapsible({\n  title,\n  children,\n  open,\n  defaultOpen,\n  onOpenChange,\n  disabled,\n  size = 'md',\n  className,\n}: CollapsibleProps);",
+  "props": [
+    {
+      "owner": "CollapsibleProps",
+      "name": "title",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "children",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "CollapsibleProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Collapsible",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

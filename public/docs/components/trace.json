@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "trace",
+  "title": "Trace",
+  "description": "단계별 실행 상태와 상세",
+  "example": "import { Trace } from 'moru-ui'\n\nexport function ImportSummary() {\n  return (\n    <Trace\n      aria-label=\"Import steps\"\n      defaultExpanded={['read']}\n      items={[\n        {\n          id: 'read',\n          title: 'Read file',\n          status: 'complete',\n          durationMs: 240,\n          details: <p>24 rows were read from the example file.</p>,\n        },\n        { id: 'validate', title: 'Validate rows', status: 'complete', durationMs: 180 },\n        {\n          id: 'save',\n          title: 'Save records',\n          status: 'pending',\n          description: 'Waiting for confirmation.',\n        },\n      ]}\n    />\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/trace.tsx",
+  "api": "type TraceStatus = 'pending' | 'running' | 'complete' | 'error'\n\ninterface TraceStep {\n  id: string\n  title: string\n  description?: string\n  status?: TraceStatus\n  durationMs?: number\n  details?: ReactNode\n}\n\ninterface TraceProps extends Omit<HTMLAttributes<HTMLOListElement>, 'children'> {\n  items: TraceStep[]\n  expanded?: string[]\n  defaultExpanded?: string[]\n  onExpandedChange?: (expanded: string[]) => void\n  disabled?: boolean\n}\n\nfunction formatTraceDuration(durationMs: number, t: Translator = koreanTranslator);\nfunction Trace({\n  items,\n  expanded,\n  defaultExpanded = [],\n  onExpandedChange,\n  disabled,\n  className,\n  'aria-label': labelProp,\n  ...props\n}: TraceProps);",
+  "props": [
+    {
+      "owner": "TraceStep",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "TraceStep",
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "TraceStep",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "TraceStep",
+      "name": "status",
+      "type": "TraceStatus",
+      "required": false
+    },
+    {
+      "owner": "TraceStep",
+      "name": "durationMs",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "TraceStep",
+      "name": "details",
+      "type": "ReactNode",
+      "required": false
+    },
+    {
+      "owner": "TraceProps",
+      "name": "items",
+      "type": "TraceStep[]",
+      "required": true
+    },
+    {
+      "owner": "TraceProps",
+      "name": "expanded",
+      "type": "string[]",
+      "required": false
+    },
+    {
+      "owner": "TraceProps",
+      "name": "defaultExpanded",
+      "type": "string[]",
+      "required": false,
+      "defaultValue": "[]"
+    },
+    {
+      "owner": "TraceProps",
+      "name": "onExpandedChange",
+      "type": "(expanded: string[]) => void",
+      "required": false
+    },
+    {
+      "owner": "TraceProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "Trace",
+      "prop": "defaultExpanded",
+      "value": "[]"
+    }
+  ],
+  "notes": []
+}

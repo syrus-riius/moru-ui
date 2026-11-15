@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "input-group",
+  "title": "Input Group",
+  "description": "아이콘과 버튼을 품은 입력",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from 'moru-ui'\n\nexport function WebsiteField() {\n  const [domain, setDomain] = useState('')\n  return (\n    <Field label=\"Website domain\" description=\"Enter the domain without https://.\">\n      <InputGroup>\n        <InputGroupAddon>https://</InputGroupAddon>\n        <InputGroupInput\n          name=\"domain\"\n          value={domain}\n          onValueChange={setDomain}\n          placeholder=\"example.com\"\n          autoCapitalize=\"none\"\n          spellCheck={false}\n        />\n      </InputGroup>\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/input-group.tsx",
+  "api": "type InputGroupProps = HTMLAttributes<HTMLDivElement>\n\ntype InputGroupAddonProps = HTMLAttributes<HTMLDivElement> & {\n  align?: 'inline-start' | 'inline-end' | 'block-start' | 'block-end'\n}\n\nfunction InputGroupAddon({\n  align = 'inline-start',\n  className,\n  ...props\n}: InputGroupAddonProps);",
+  "props": [
+    {
+      "owner": "InputGroupAddonProps",
+      "name": "align",
+      "type": "'inline-start' | 'inline-end' | 'block-start' | 'block-end'",
+      "required": false,
+      "defaultValue": "'inline-start'"
+    }
+  ],
+  "defaults": [
+    {
+      "component": "InputGroupAddon",
+      "prop": "align",
+      "value": "'inline-start'"
+    },
+    {
+      "component": "InputGroupButton",
+      "prop": "variant",
+      "value": "'ghost'"
+    },
+    {
+      "component": "InputGroupButton",
+      "prop": "size",
+      "value": "'sm'"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "file-input",
+  "title": "File Input",
+  "description": "실제 파일 선택과 형식·크기 검증",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { FileInput } from 'moru-ui'\n\nexport function DocumentPicker() {\n  const [files, setFiles] = useState<File[]>([])\n  return (\n    <div>\n      <Field\n        label=\"Attach documents\"\n        description=\"Up to 3 PDF files, 5 MB each. Selection only; files are not uploaded.\"\n      >\n        <FileInput\n          name=\"documents\"\n          accept=\".pdf\"\n          multiple\n          maxFiles={3}\n          maxSize={5 * 1024 * 1024}\n          onFilesChange={setFiles}\n        />\n      </Field>\n      <p role=\"status\">{files.length} files selected</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/file-input.tsx",
+  "api": "interface FileInputProps extends Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  'type' | 'value' | 'defaultValue' | 'size'\n> {\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n  maxSize?: number\n  maxFiles?: number\n  onFilesChange?: (files: File[]) => void\n}",
+  "props": [
+    {
+      "owner": "FileInputProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "FileInputProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "FileInputProps",
+      "name": "previewState",
+      "type": "UIState",
+      "required": false
+    },
+    {
+      "owner": "FileInputProps",
+      "name": "maxSize",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "FileInputProps",
+      "name": "maxFiles",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "FileInputProps",
+      "name": "onFilesChange",
+      "type": "(files: File[]) => void",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "FileInput",
+      "prop": "size",
+      "value": "'md'"
+    },
+    {
+      "component": "FileInput",
+      "prop": "loading",
+      "value": "false"
+    }
+  ],
+  "notes": []
+}

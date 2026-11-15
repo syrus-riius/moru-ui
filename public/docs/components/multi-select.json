@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "id": "multi-select",
+  "title": "Multi Select",
+  "description": "검색하고 여러 항목 선택",
+  "example": "import { useState } from 'react'\nimport { Field } from 'moru-ui'\nimport { MultiSelect } from 'moru-ui'\n\nexport function TeamPicker() {\n  const [members, setMembers] = useState<string[]>(['sara'])\n  return (\n    <Field label=\"Team members\" description=\"Choose up to three people.\">\n      <MultiSelect\n        name=\"members\"\n        value={members}\n        onValueChange={setMembers}\n        maxSelected={3}\n        items={[\n          { value: 'sara', label: 'Sara Kim' },\n          { value: 'alex', label: 'Alex Lee' },\n          { value: 'june', label: 'June Park' },\n        ]}\n      />\n    </Field>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/multi-select.tsx",
+  "api": "type MultiSelectItem = ComboboxItem\n\ninterface MultiSelectProps {\n  items: MultiSelectItem[]\n  value?: readonly string[]\n  defaultValue?: readonly string[]\n  onValueChange?: (value: string[]) => void\n  placeholder?: string\n  emptyMessage?: string\n  maxSelected?: number\n  clearable?: boolean\n  disabled?: boolean\n  loading?: boolean\n  readOnly?: boolean\n  required?: boolean\n  name?: string\n  form?: string\n  id?: string\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n  'aria-labelledby'?: string\n  'aria-describedby'?: string\n  'aria-invalid'?: AriaAttributes['aria-invalid']\n}\n\nfunction subscribeMultiSelectFormReset(form: EventTarget, onReset: () => void);\nfunction MultiSelect({\n  items,\n  value,\n  defaultValue = [],\n  onValueChange,\n  placeholder: placeholderProp,\n  emptyMessage: emptyMessageProp,\n  maxSelected,\n  clearable = true,\n  disabled,\n  loading = false,\n  readOnly,\n  required,\n  name,\n  form,\n  id,\n  size = 'md',\n  className,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  'aria-invalid': invalid,\n}: MultiSelectProps);",
+  "props": [
+    {
+      "owner": "MultiSelectProps",
+      "name": "items",
+      "type": "MultiSelectItem[]",
+      "required": true
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "value",
+      "type": "readonly string[]",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "defaultValue",
+      "type": "readonly string[]",
+      "required": false,
+      "defaultValue": "[]"
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "onValueChange",
+      "type": "(value: string[]) => void",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "emptyMessage",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "maxSelected",
+      "type": "number",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "true"
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "defaultValue": "false"
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "required",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "form",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "required": false,
+      "defaultValue": "'md'"
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "aria-label",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "aria-labelledby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "aria-describedby",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "MultiSelectProps",
+      "name": "aria-invalid",
+      "type": "AriaAttributes['aria-invalid']",
+      "required": false
+    }
+  ],
+  "defaults": [
+    {
+      "component": "MultiSelect",
+      "prop": "defaultValue",
+      "value": "[]"
+    },
+    {
+      "component": "MultiSelect",
+      "prop": "clearable",
+      "value": "true"
+    },
+    {
+      "component": "MultiSelect",
+      "prop": "loading",
+      "value": "false"
+    },
+    {
+      "component": "MultiSelect",
+      "prop": "size",
+      "value": "'md'"
+    }
+  ],
+  "notes": []
+}

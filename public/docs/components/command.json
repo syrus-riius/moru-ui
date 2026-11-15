@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "command",
+  "title": "Command",
+  "description": "빠르게 찾고 실행하기",
+  "example": "import { useState } from 'react'\nimport { Button } from 'moru-ui'\nimport { Command } from 'moru-ui'\n\nexport function QuickActions() {\n  const [view, setView] = useState('Projects')\n  return (\n    <div>\n      <Command\n        title=\"Go to\"\n        trigger={<Button type=\"button\">Open commands</Button>}\n        items={[\n          {\n            id: 'projects',\n            label: 'Projects',\n            keywords: ['work'],\n            onSelect: () => setView('Projects'),\n          },\n          { id: 'team', label: 'Team', keywords: ['people'], onSelect: () => setView('Team') },\n        ]}\n      />\n      <p role=\"status\">Current view: {view}</p>\n    </div>\n  )\n}",
+  "installCommand": "npm install moru-ui",
+  "sourceUrl": "https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/command.tsx",
+  "api": "interface CommandItem {\n  id: string\n  label: string\n  description?: string\n  keywords?: string[]\n  group?: string\n  disabled?: boolean\n  onSelect: () => void\n}\n\ninterface CommandProps {\n  items: CommandItem[]\n  trigger?: ReactElement\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  title?: string\n  placeholder?: string\n  className?: string\n}\n\nfunction Command({\n  items,\n  trigger,\n  open,\n  onOpenChange,\n  title: titleProp,\n  placeholder: placeholderProp,\n  className,\n}: CommandProps);",
+  "props": [
+    {
+      "owner": "CommandItem",
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "CommandItem",
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "owner": "CommandItem",
+      "name": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CommandItem",
+      "name": "keywords",
+      "type": "string[]",
+      "required": false
+    },
+    {
+      "owner": "CommandItem",
+      "name": "group",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CommandItem",
+      "name": "disabled",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CommandItem",
+      "name": "onSelect",
+      "type": "() => void",
+      "required": true
+    },
+    {
+      "owner": "CommandProps",
+      "name": "items",
+      "type": "CommandItem[]",
+      "required": true
+    },
+    {
+      "owner": "CommandProps",
+      "name": "trigger",
+      "type": "ReactElement",
+      "required": false
+    },
+    {
+      "owner": "CommandProps",
+      "name": "open",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "owner": "CommandProps",
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "required": false
+    },
+    {
+      "owner": "CommandProps",
+      "name": "title",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CommandProps",
+      "name": "placeholder",
+      "type": "string",
+      "required": false
+    },
+    {
+      "owner": "CommandProps",
+      "name": "className",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "defaults": [],
+  "notes": []
+}

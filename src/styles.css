@@ -616,7 +616,7 @@ h1 {
   justify-content: center;
   gap: 16px;
   color: var(--ui-text);
-  background: var(--ui-background);
+  background: var(--moru-preview-canvas, var(--ui-surface));
   font-family: var(--ui-font-family);
   font-size: var(--ui-font-size);
 }

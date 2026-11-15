@@ -308,7 +308,9 @@ export function InputDocumentation({
           {stateExamples.map(({ label, input, description }) => (
             <div className="moru-component-doc__state" key={label}>
               <h3>{t(label)}</h3>
-              <InputExample input={input} description={description} />
+              <div className="moru-component-doc__state-preview">
+                <InputExample input={input} description={description} />
+              </div>
             </div>
           ))}
         </div>

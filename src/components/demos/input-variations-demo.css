@@ -67,16 +67,28 @@
 .input-variations-card {
   display: flex;
   flex-direction: column;
-  gap: var(--ui-form-gap, 24px);
   min-width: 0;
-  padding: var(--ui-card-padding, 24px);
+  padding: 0;
   border: var(--ui-border-width, 1px) solid var(--ui-border);
   border-radius: var(--ui-card-radius, calc(var(--ui-radius, 6px) + 4px));
   background: var(--ui-surface);
   box-shadow: 0 2px 12px rgb(0 0 0 / 0.025);
 }
 
+.input-variations-card__preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-form-gap, 24px);
+  min-width: 0;
+  flex: 1;
+  padding: var(--ui-card-padding, 24px);
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+  background: var(--moru-preview-canvas, var(--ui-surface));
+}
+
 .input-variations-card__eyebrow {
+  padding: 16px var(--ui-card-padding, 24px);
   display: flex;
   justify-content: space-between;
   align-items: center;

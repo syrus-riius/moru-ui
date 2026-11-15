@@ -37,11 +37,11 @@
 }
 
 .doc-variation-example {
+  --moru-preview-inset: var(--ui-card-padding, 24px);
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: calc(var(--ui-control-gap, 8px) * 2);
-  padding: var(--ui-card-padding, 24px);
+  padding: 0;
   border: var(--ui-border-width, 0px) solid var(--ui-border);
   border-radius: var(--ui-card-radius);
   background: var(--ui-surface);
@@ -57,6 +57,7 @@
   display: grid;
   gap: 4px;
   min-width: 0;
+  padding: 16px var(--moru-preview-inset);
 }
 
 .doc-variation-example-heading h4 {
@@ -84,6 +85,10 @@
   gap: var(--ui-control-gap, 8px);
   flex: 1;
   min-height: 80px;
+  padding: var(--moru-preview-inset);
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+  background: var(--moru-preview-canvas, var(--ui-surface));
   font-family: var(--ui-font-family);
   font-size: var(--ui-type-body-size);
   line-height: var(--ui-type-body-line-height);
@@ -127,9 +132,9 @@
 /* Give large controls room without shrinking their actual size or touch targets. */
 @container component-documentation (max-width: 360px) {
   .doc-variation-example {
-    padding-inline: min(var(--ui-card-padding, 24px), 16px);
+    --moru-preview-inset: min(var(--ui-card-padding, 24px), 16px);
   }
   .doc-variation-example:has(> .doc-variation-preview > .ui-calendar) {
-    padding-inline: min(var(--ui-card-padding, 24px), 8px);
+    --moru-preview-inset: min(var(--ui-card-padding, 24px), 8px);
   }
 }

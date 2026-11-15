@@ -18,6 +18,7 @@ import './components/studio/studio-topbar.css'
 import './components/comparison/comparison-workspace.css'
 import './components/studio/reference-workspace.css'
 import './components/studio/standalone-workspace.css'
+import './components/site/preview-canvas.css'
 
 export default function App() {
   return (

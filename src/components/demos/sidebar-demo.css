@@ -1,0 +1,108 @@
+.sidebar-demo {
+  container: sidebar-demo / inline-size;
+  width: 100%;
+  min-width: 0;
+}
+
+.sidebar-demo-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: calc(var(--ui-control-gap, 8px) * 2);
+  min-width: 0;
+}
+
+.sidebar-demo-content {
+  display: grid;
+  align-content: start;
+  gap: calc(var(--ui-control-gap, 8px) * 2);
+  min-width: 0;
+  min-height: 240px;
+  padding: clamp(12px, 3cqi, 24px);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  color: var(--ui-text, #171717);
+}
+
+.sidebar-demo-content-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+
+.sidebar-demo-content-heading h3 {
+  margin: 0;
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  line-height: var(--ui-type-heading-line-height, 1.4);
+  overflow-wrap: anywhere;
+}
+
+.sidebar-demo-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-control-gap, 8px);
+}
+
+.sidebar-demo-metrics > div {
+  display: grid;
+  justify-items: start;
+  gap: var(--ui-space, 4px);
+  min-width: 0;
+  padding: calc(var(--ui-space, 4px) * 3);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+
+.sidebar-demo-metrics svg,
+.sidebar-demo-metrics span,
+.sidebar-demo-items > li > svg {
+  color: var(--ui-muted, #6e6e6b);
+}
+
+.sidebar-demo-metrics span {
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  overflow-wrap: anywhere;
+}
+
+.sidebar-demo-metrics strong {
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar-demo-items {
+  display: grid;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-demo-items > li {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  min-height: var(--ui-control-height-sm, 32px);
+  padding-block: var(--ui-space, 4px);
+}
+
+.sidebar-demo-items > li > svg {
+  flex: none;
+}
+
+.sidebar-demo-items > li > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@container sidebar-demo (min-width: 440px) {
+  .sidebar-demo-workspace {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+}

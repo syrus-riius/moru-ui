@@ -1,0 +1,52 @@
+/* Lab-only staging. Resolve colors here so nested ThemeScopes use their own palette.
+ * Controls keep their intended contrast on a surface. Surface-owning components
+ * sit on a separate neutral canvas; no component tokens or borders are changed.
+ */
+:where(
+  .specimen-content,
+  .moru-component-doc__preview,
+  .doc-variation-preview,
+  .moru-component-doc__state-preview,
+  .input-variations-card__preview,
+  .page-chrome-demo-canvas
+) {
+  --moru-preview-canvas: var(--ui-surface);
+  --moru-preview-neutral: light-dark(
+    color-mix(in srgb, var(--ui-surface) 92%, var(--ui-text)),
+    color-mix(in srgb, var(--ui-surface) 35%, #000)
+  );
+}
+
+:where(
+  .specimen-content,
+  .moru-component-doc__preview,
+  .doc-variation-preview,
+  .moru-component-doc__state-preview,
+  .input-variations-card__preview,
+  .page-chrome-demo-canvas
+):has(
+  :is(
+    .ui-card,
+    .ui-sidebar,
+    .ui-calendar,
+    .ui-code-block,
+    .ui-collapsible,
+    .ui-scroll-area,
+    .ui-resizable-group,
+    .ui-table-scroll,
+    .ui-message-scroller,
+    .ui-attachment,
+    .ui-command,
+    .ui-header,
+    .ui-footer,
+    .ui-dialog,
+    .ui-alert-dialog,
+    .ui-popover,
+    .ui-menu,
+    .ui-hover-card,
+    .ui-sheet,
+    .ui-drawer
+  )
+) {
+  --moru-preview-canvas: var(--moru-preview-neutral);
+}

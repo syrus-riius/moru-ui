@@ -15,6 +15,7 @@ import { Field } from '../ui/field'
 import { Input } from '../ui/input'
 import type { NavigationComponentId } from './completion-navigation-catalog'
 import './completion-navigation-demo.css'
+import './sidebar-demo.css'
 
 export interface CompletionNavigationDemoProps {
   id: NavigationComponentId
@@ -329,30 +330,76 @@ export function CompletionNavigationDemo({
       )
     case 'sidebar':
       return (
-        <div className="completion-navigation-stack">
-          <Sidebar
-            title="Moru Studio"
-            disabled={disabled}
-            size={size}
-            value={sidebarValue}
-            onValueChange={setSidebarValue}
-            items={[
-              { id: 'overview', label: t('개요'), icon: <Home /> },
-              { id: 'projects', label: t('프로젝트'), icon: <Folder />, badge: 4 },
-              { id: 'team', label: t('팀원'), icon: <Users />, badge: 5 },
-              { id: 'settings', label: t('설정'), icon: <Settings />, disabled: true },
-            ]}
-            footer={t('차근차근, 우리답게.')}
-          />
-          <p className="completion-navigation-caption" role="status">
-            {t('선택한 화면 ·')}{' '}
-            {t(
-              ({ overview: '개요', projects: '프로젝트', team: '팀원' } as Record<string, string>)[
-                sidebarValue
-              ] ?? sidebarValue,
-            )}
-          </p>
+        <div className="sidebar-demo">
+          <div className="sidebar-demo-workspace">
+            <Sidebar
+              title="Moru Studio"
+              disabled={disabled}
+              size={size}
+              value={sidebarValue}
+              onValueChange={setSidebarValue}
+              items={[
+                { id: 'overview', label: t('개요'), icon: <Home /> },
+                { id: 'projects', label: t('프로젝트'), icon: <Folder />, badge: 4 },
+                { id: 'team', label: t('팀원'), icon: <Users />, badge: 5 },
+                { id: 'settings', label: t('설정'), icon: <Settings />, disabled: true },
+              ]}
+              footer={t('차근차근, 우리답게.')}
+            />
+            <SidebarWorkspaceContent value={sidebarValue} />
+          </div>
         </div>
       )
   }
+}
+
+/** Show what navigation controls, without changing Sidebar's own layout or breakpoints. */
+function SidebarWorkspaceContent({ value }: { value: string }) {
+  const { t } = useI18n()
+  const title =
+    ({ overview: '개요', projects: '프로젝트', team: '팀원' } as Record<string, string>)[value] ??
+    '개요'
+  const items =
+    value === 'projects'
+      ? ['Moru UI', '디자인 시스템', '웹', '모바일']
+      : ['민지', '수현', '제이', '서연', '하은']
+  return (
+    <section className="sidebar-demo-content" aria-label={t(title)}>
+      <header className="sidebar-demo-content-heading">
+        <h3 aria-live="polite" aria-atomic="true">
+          {t(title)}
+        </h3>
+        {value !== 'overview' ? (
+          <Badge variant="secondary">{value === 'projects' ? 4 : 5}</Badge>
+        ) : null}
+      </header>
+      {value === 'overview' ? (
+        <div className="sidebar-demo-metrics">
+          <div>
+            <Folder size={18} aria-hidden="true" />
+            <span>{t('프로젝트')}</span>
+            <strong>4</strong>
+          </div>
+          <div>
+            <Users size={18} aria-hidden="true" />
+            <span>{t('팀원')}</span>
+            <strong>5</strong>
+          </div>
+        </div>
+      ) : (
+        <ul className="sidebar-demo-items">
+          {items.map((item) => (
+            <li key={item}>
+              {value === 'projects' ? (
+                <Folder size={16} aria-hidden="true" />
+              ) : (
+                <Users size={16} aria-hidden="true" />
+              )}
+              <span>{t(item)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
 }

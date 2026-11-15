@@ -31,7 +31,7 @@
   min-width: 0;
   padding: calc(var(--ui-space, 4px) * 3);
   border-radius: var(--ui-card-radius);
-  background: var(--ui-background);
+  background: var(--moru-preview-canvas, var(--ui-background));
 }
 
 .page-chrome-demo-brand {

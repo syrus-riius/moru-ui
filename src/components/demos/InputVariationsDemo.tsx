@@ -149,7 +149,7 @@ function VariationCard({
         </span>
         <Icon />
       </div>
-      {children}
+      <div className="input-variations-card__preview">{children}</div>
     </article>
   )
 }

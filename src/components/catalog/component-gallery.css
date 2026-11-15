@@ -314,7 +314,7 @@
   padding: var(--ui-card-padding, 24px);
   gap: 18px;
   border-radius: 0;
-  background: transparent;
+  background: var(--moru-preview-canvas, var(--ui-surface));
 }
 .component-workspace .specimen-footer {
   min-height: 44px;

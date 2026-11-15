@@ -21,7 +21,7 @@
     [aria-invalid='true']
   ) {
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
-  background: var(--ui-control-hover-bg, var(--ui-input-bg));
+  background-color: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
 /* Read-only only: a busy trigger is aria-disabled too and keeps its unavailable cursor. */
 :where([data-moru-registry]) .ui-date-picker-trigger[aria-disabled='true']:not([aria-busy='true']) {

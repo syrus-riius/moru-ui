@@ -18,8 +18,8 @@ export const stylePackOptions: { id: StylePackId; label: string; description: st
 
 const defaults: Record<StylePackId, StyleAppearance> = {
   default: { preset: 'default', surfaceOpacity: 1, blur: 0, glow: 0, highlight: 0 },
-  glass: { preset: 'glass', surfaceOpacity: 0.85, blur: 16, glow: 0, highlight: 0.4 },
-  neon: { preset: 'neon', surfaceOpacity: 1, blur: 0, glow: 12, highlight: 0.35 },
+  glass: { preset: 'glass', surfaceOpacity: 0.72, blur: 16, glow: 0, highlight: 0.4 },
+  neon: { preset: 'neon', surfaceOpacity: 1, blur: 0, glow: 18, highlight: 0.35 },
 }
 
 function bounded(value: unknown, fallback: number, min: number, max: number, step: number): number {
@@ -68,8 +68,12 @@ export function getStylePackVariables(
     '--ui-pack-glow': `${preset === 'neon' ? glow : 0}px`,
     '--ui-pack-highlight': String(preset === 'default' ? 0 : highlight),
     '--ui-pack-surface-bg': 'var(--ui-surface)',
+    '--ui-pack-surface-image': 'none',
     '--ui-pack-surface-filter': 'none',
     '--ui-pack-surface-shadow': 'var(--ui-shadow)',
+    '--ui-pack-sidebar-shadow': 'none',
+    '--ui-pack-control-image': 'none',
+    '--ui-pack-control-shadow': 'none',
     '--ui-pack-highlight-shadow': 'none',
     '--ui-pack-action-shadow': 'none',
     '--ui-pack-action-hover-shadow': 'none',
@@ -81,37 +85,58 @@ export function getStylePackVariables(
   const edgeColor = preset === 'glass' ? '#ffffff' : tokens.accent
   const edge =
     highlight > 0
-      ? `inset 0 1px 0 ${alpha(edgeColor, highlight * (mode === 'dark' ? 0.5 : 0.85))}`
+      ? `inset 0 0 0 1px ${alpha(edgeColor, highlight * (mode === 'dark' ? 0.8 : 1))}`
       : ''
   variables['--ui-pack-highlight-shadow'] = edge || 'none'
   if (preset === 'glass') {
     variables['--ui-pack-surface-bg'] = alpha(tokens.surface, surfaceOpacity)
+    if (highlight > 0) {
+      // A reflective tint remains visible on plain backdrops as well as imagery.
+      variables['--ui-pack-surface-image'] =
+        `linear-gradient(135deg, ${alpha('#ffffff', highlight * 0.65)}, transparent 45%, ${alpha(tokens.accent, highlight * 0.3)})`
+      variables['--ui-pack-control-image'] =
+        `linear-gradient(160deg, ${alpha('#ffffff', highlight * 0.45)}, transparent 55%, ${alpha(tokens.accent, highlight * 0.18)})`
+    }
     variables['--ui-pack-surface-filter'] = blur > 0 ? `blur(${blur}px) saturate(125%)` : 'none'
     variables['--ui-pack-surface-shadow'] = [
       edge,
-      `0 8px 28px ${alpha('#000000', mode === 'dark' ? 0.22 : 0.065)}`,
+      `0 8px 28px ${alpha('#000000', mode === 'dark' ? 0.28 : 0.1)}`,
     ]
       .filter(Boolean)
       .join(', ')
-    // Controls remain opaque; only their small inset highlight uses the material.
+    // Controls keep an opaque fill under their reflective sheen.
     variables['--ui-pack-action-shadow'] = edge || 'none'
     variables['--ui-pack-action-hover-shadow'] = edge || 'none'
     variables['--ui-pack-active-shadow'] = edge || 'none'
     variables['--ui-pack-pressed-shadow'] = [edge, 'inset 0 1px 2px #00000018']
       .filter(Boolean)
       .join(', ')
+    variables['--ui-pack-control-shadow'] = edge || 'none'
   } else {
     variables['--ui-pack-surface-shadow'] = edge || 'var(--ui-shadow)'
+    if (highlight > 0) {
+      variables['--ui-pack-surface-image'] =
+        `linear-gradient(135deg, ${alpha(tokens.accent, highlight * 0.2)}, transparent 60%)`
+    }
+    variables['--ui-pack-control-shadow'] = edge || 'none'
     if (glow > 0) {
-      const strength = mode === 'dark' ? 0.3 : 0.17
-      variables['--ui-pack-action-shadow'] = `0 0 ${glow}px ${alpha(tokens.accent, strength)}`
-      variables['--ui-pack-action-hover-shadow'] =
-        `0 0 ${Math.round(glow * 1.4)}px ${alpha(tokens.accent, strength + 0.1)}`
-      variables['--ui-pack-active-shadow'] =
-        `0 0 ${Math.round(glow * 0.7)}px ${alpha(tokens.accent, strength * 0.75)}`
+      const strength = mode === 'dark' ? 0.48 : 0.32
+      const glowShadow = (radius: number, opacity: number) =>
+        `0 0 ${radius}px ${alpha(tokens.accent, opacity)}`
+      const withEdge = (shadow: string) => [edge, shadow].filter(Boolean).join(', ')
+      variables['--ui-pack-surface-shadow'] = withEdge(glowShadow(glow, strength * 0.65))
+      variables['--ui-pack-control-shadow'] = withEdge(
+        glowShadow(Math.round(glow * 0.6), strength * 0.5),
+      )
+      variables['--ui-pack-action-shadow'] = withEdge(glowShadow(glow, strength))
+      variables['--ui-pack-action-hover-shadow'] = withEdge(
+        glowShadow(Math.round(glow * 1.4), strength + 0.1),
+      )
+      variables['--ui-pack-active-shadow'] = withEdge(glowShadow(glow, strength))
       variables['--ui-pack-pressed-shadow'] =
         `inset 0 1px 2px #00000018, ${variables['--ui-pack-active-shadow']}`
     }
   }
+  variables['--ui-pack-sidebar-shadow'] = variables['--ui-pack-surface-shadow']
   return variables
 }

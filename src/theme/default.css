@@ -129,8 +129,12 @@
   --ui-pack-glow: 0px;
   --ui-pack-highlight: 0;
   --ui-pack-surface-bg: var(--ui-surface);
+  --ui-pack-surface-image: none;
   --ui-pack-surface-filter: none;
   --ui-pack-surface-shadow: var(--ui-shadow);
+  --ui-pack-sidebar-shadow: none;
+  --ui-pack-control-image: none;
+  --ui-pack-control-shadow: none;
   --ui-pack-highlight-shadow: none;
   --ui-pack-action-shadow: none;
   --ui-pack-action-hover-shadow: none;
@@ -267,8 +271,12 @@
   --ui-pack-glow: 0px;
   --ui-pack-highlight: 0;
   --ui-pack-surface-bg: var(--ui-surface);
+  --ui-pack-surface-image: none;
   --ui-pack-surface-filter: none;
   --ui-pack-surface-shadow: var(--ui-shadow);
+  --ui-pack-sidebar-shadow: none;
+  --ui-pack-control-image: none;
+  --ui-pack-control-shadow: none;
   --ui-pack-highlight-shadow: none;
   --ui-pack-action-shadow: none;
   --ui-pack-action-hover-shadow: none;

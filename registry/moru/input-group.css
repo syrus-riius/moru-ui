@@ -162,7 +162,7 @@
       [aria-invalid='true']
     )
 ) {
-  background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
+  background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-control-hover-border, var(--ui-border));
 }
 :where([data-moru-registry]) .ui-input-group:has(
@@ -174,7 +174,7 @@
       [aria-invalid='true']
     )
 ) {
-  background: var(--ui-control-pressed-bg, #e8e8e4);
+  background-color: var(--ui-control-pressed-bg, #e8e8e4);
   border-color: var(--ui-control-pressed-border, #a1a1aa);
 }
 

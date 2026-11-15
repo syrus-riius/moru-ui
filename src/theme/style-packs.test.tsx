@@ -141,6 +141,45 @@ describe('style pack token compatibility', () => {
 })
 
 describe('style pack scope and exports', () => {
+  it('resets material images and control effects when returning to Default', () => {
+    const material = getStylePackVariables(applyStylePack(defaultTokens, 'glass'), 'light')
+    expect(material['--ui-pack-surface-image']).not.toBe('none')
+    expect(material['--ui-pack-control-image']).not.toBe('none')
+    const neutral = getStylePackVariables(defaultTokens, 'light')
+    for (const key of [
+      '--ui-pack-surface-image',
+      '--ui-pack-control-image',
+      '--ui-pack-control-shadow',
+      '--ui-pack-sidebar-shadow',
+    ])
+      expect(neutral[key]).toBe('none')
+  })
+
+  it('honors zero effects and preserves previously saved effect strengths', () => {
+    const legacy = {
+      ...defaultTokens,
+      appearance: {
+        preset: 'neon' as const,
+        surfaceOpacity: 1,
+        blur: 0,
+        glow: 12,
+        highlight: 0.35,
+      },
+    }
+    const restored = validateTokens(JSON.parse(JSON.stringify(legacy)))
+    expect(restored.appearance).toEqual(legacy.appearance)
+    const active = getStylePackVariables(restored, 'dark')
+    expect(active['--ui-pack-sidebar-shadow']).toContain('12px')
+    expect(active['--ui-pack-control-shadow']).not.toBe('none')
+    const off = getStylePackVariables(
+      { ...legacy, appearance: { ...legacy.appearance, glow: 0, highlight: 0 } },
+      'dark',
+    )
+    expect(off['--ui-pack-surface-image']).toBe('none')
+    expect(off['--ui-pack-control-shadow']).toBe('none')
+    expect(off['--ui-pack-active-shadow']).toBe('none')
+  })
+
   it('uses accent for neon and preserves readable opaque foreground/background tokens', () => {
     const tokens = applyStylePack({ ...defaultTokens, accent: '#123456' }, 'neon')
     const variables = getCssVariables(tokens, 'dark')

@@ -16,7 +16,7 @@
     :has(input:is(:disabled, [aria-busy='true']), [aria-invalid='true'])
   ) {
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
-  background: var(--ui-control-hover-bg, var(--ui-input-bg));
+  background-color: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
 :where([data-moru-registry]) .ui-number-input-group:focus-within {
   outline: 2px solid var(--ui-focus-ring, #181818);

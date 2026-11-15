@@ -2,7 +2,7 @@
 
 Workspace settings form with local demo feedback and controlled application save handlers.
 
-Version: 0.4.1. Source hash: 0b0b1530e773209ed6b6628a4168c3305b7342a1378da2b37377f96c1e54f293.
+Version: 0.4.1. Source hash: 5a0a4b244fa08e5ec114908231ad33098aa6646cb022935d28cab19340a90d48.
 
 ## Discovery
 

@@ -11,10 +11,10 @@ export const studioMessages: Record<string, { en: string; ja: string; 'zh-CN': s
     ja: 'カードとポップアップは半透明に、入力欄は鮮明に保ちます。',
     'zh-CN': '卡片和弹出层呈半透明，输入框保持清晰、不透明。',
   },
-  '주요 버튼과 선택 상태에 강조색의 빛을 더합니다.': {
-    en: 'Accent-colored glow on primary buttons and selected states.',
-    ja: '主要ボタンと選択状態にアクセントカラーの光を加えます。',
-    'zh-CN': '为主要按钮和选中状态添加强调色光晕。',
+  '표면·입력창·선택 상태에 강조색의 빛을 더합니다.': {
+    en: 'Accent-colored glow on surfaces, inputs and selected states.',
+    ja: '表面・入力欄・選択状態にアクセントカラーの光を加えます。',
+    'zh-CN': '为表面、输入框和选中状态添加强调色光晕。',
   },
   '프로젝트 작업': { en: 'Project work', ja: 'プロジェクト作業', 'zh-CN': '项目工作' },
   '{value0} 색상 선택': {

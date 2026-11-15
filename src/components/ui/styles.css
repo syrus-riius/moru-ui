@@ -774,7 +774,7 @@
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='hover']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
-  background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
+  background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
 }
 
@@ -786,7 +786,7 @@
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
-  background: var(--ui-control-pressed-bg, #e8e8e4);
+  background-color: var(--ui-control-pressed-bg, #e8e8e4);
   border-color: var(--ui-control-pressed-border, #a1a1aa);
 }
 

@@ -32,7 +32,7 @@ type EffectKey = 'surfaceOpacity' | 'blur' | 'glow' | 'highlight'
 const styleDescriptions = {
   default: '불투명한 표면과 기본 강조 표현을 사용합니다.',
   glass: '카드·팝업은 반투명하게, 입력창은 선명하게 유지합니다.',
-  neon: '주요 버튼과 선택 상태에 강조색의 빛을 더합니다.',
+  neon: '표면·입력창·선택 상태에 강조색의 빛을 더합니다.',
 }
 const effectControls: {
   key: EffectKey

@@ -1,11 +1,81 @@
-/*
- * Presentation recipes only. Each ThemeScope (including its portal) resolves
- * every pack variable, so an inner Default scope can reset an outer Glass or
- * Neon scope without specificity battles. Form controls retain opaque fills.
+/* Material recipes resolve independently in every ThemeScope and portal.
+ * Neutral variables preserve Default; no ancestor pack selector leaks through a
+ * nested Default scope. Fields retain opaque fills and their focus/error UI.
  */
 :is(
   .ui-card.ui-card,
   .ui-dialog.ui-dialog,
+  .ui-toast.ui-toast,
+  .ui-command.ui-command,
+  .ui-menu.ui-menu,
+  .ui-popover.ui-popover,
+  .ui-select-popup.ui-select-popup,
+  .ui-combobox-popup.ui-combobox-popup,
+  .ui-alert-dialog.ui-alert-dialog,
+  .ui-sheet.ui-sheet,
+  .ui-drawer.ui-drawer,
+  .ui-navigation-popup.ui-navigation-popup,
+  .ui-hover-card.ui-hover-card,
+  .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel,
+  .ui-sidebar.ui-sidebar,
+  .ui-calendar.ui-calendar,
+  .ui-code-block.ui-code-block,
+  .ui-collapsible.ui-collapsible,
+  .ui-scroll-area.ui-scroll-area,
+  .ui-resizable-group.ui-resizable-group,
+  .ui-table-scroll.ui-table-scroll,
+  .ui-message-scroller.ui-message-scroller,
+  .ui-attachment.ui-attachment,
+  .ui-header.ui-header,
+  .ui-footer.ui-footer
+):where(:not([data-variant='transparent'], [data-variant='ghost'], [data-variant='minimal'])) {
+  background-image: var(--ui-pack-surface-image, none);
+  -webkit-backdrop-filter: var(--ui-pack-surface-filter, none);
+  backdrop-filter: var(--ui-pack-surface-filter, none);
+}
+
+:is(
+    .ui-card.ui-card,
+    .ui-dialog.ui-dialog,
+    .ui-toast.ui-toast,
+    .ui-command.ui-command,
+    .ui-menu.ui-menu,
+    .ui-popover.ui-popover,
+    .ui-select-popup.ui-select-popup,
+    .ui-combobox-popup.ui-combobox-popup,
+    .ui-alert-dialog.ui-alert-dialog,
+    .ui-sheet.ui-sheet,
+    .ui-drawer.ui-drawer,
+    .ui-navigation-popup.ui-navigation-popup,
+    .ui-hover-card.ui-hover-card,
+    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel,
+    .ui-sidebar.ui-sidebar,
+    .ui-calendar.ui-calendar,
+    .ui-code-block.ui-code-block,
+    .ui-collapsible.ui-collapsible,
+    .ui-scroll-area.ui-scroll-area,
+    .ui-resizable-group.ui-resizable-group,
+    .ui-table-scroll.ui-table-scroll,
+    .ui-message-scroller.ui-message-scroller,
+    .ui-attachment.ui-attachment,
+    .ui-header.ui-header,
+    .ui-footer.ui-footer
+  ):where(
+    :not([data-variant='transparent'], [data-variant='ghost'], [data-variant='minimal'])
+  ):where(:not(.ui-header[data-variant='app'])) {
+  background-color: var(--ui-pack-surface-bg, var(--ui-surface, #fff));
+}
+
+/* The app Header deliberately retains its control fill instead of the surface. */
+.ui-header.ui-header[data-variant='app'] {
+  background-image: var(--ui-pack-surface-image, none);
+}
+
+:is(
+  .ui-card.ui-card,
+  .ui-dialog.ui-dialog,
+  .ui-toast.ui-toast,
+  .ui-command.ui-command,
   .ui-menu.ui-menu,
   .ui-popover.ui-popover,
   .ui-select-popup.ui-select-popup,
@@ -16,22 +86,78 @@
   .ui-navigation-popup.ui-navigation-popup,
   .ui-hover-card.ui-hover-card,
   .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
-) {
-  background-color: var(--ui-pack-surface-bg, var(--ui-surface, #fff));
-  -webkit-backdrop-filter: var(--ui-pack-surface-filter, none);
-  backdrop-filter: var(--ui-pack-surface-filter, none);
+):where(:not([data-variant='transparent'], [data-variant='ghost'], [data-variant='minimal'])) {
   box-shadow: var(--ui-pack-surface-shadow, var(--ui-shadow, none));
 }
 
-/* The regular sidebar has no baseline elevation; preserve that distinction. */
-.ui-sidebar.ui-sidebar {
-  background-color: var(--ui-pack-surface-bg, var(--ui-surface, #fff));
-  -webkit-backdrop-filter: var(--ui-pack-surface-filter, none);
-  backdrop-filter: var(--ui-pack-surface-filter, none);
-  box-shadow: var(--ui-pack-highlight-shadow, none);
+/* Flat surfaces, including the desktop sidebar, keep Default free of elevation. */
+:is(
+  .ui-sidebar.ui-sidebar,
+  .ui-calendar.ui-calendar,
+  .ui-code-block.ui-code-block,
+  .ui-collapsible.ui-collapsible,
+  .ui-scroll-area.ui-scroll-area,
+  .ui-resizable-group.ui-resizable-group,
+  .ui-table-scroll.ui-table-scroll,
+  .ui-message-scroller.ui-message-scroller,
+  .ui-attachment.ui-attachment,
+  .ui-header.ui-header,
+  .ui-footer.ui-footer
+):where(:not([data-variant='transparent'], [data-variant='ghost'], [data-variant='minimal'])) {
+  box-shadow: var(--ui-pack-sidebar-shadow, none);
 }
 
-/* Keep glow independent from the focus ring and from semantic error feedback. */
+/* Paint only the field's focus owner. Disabled addons do not disable an editable
+ * group; inner inputs never get a second rim. OTP retains its active-slot marker.
+ */
+:is(
+  .ui-input.ui-input,
+  .ui-textarea.ui-textarea,
+  .ui-select.ui-select,
+  .ui-native-select.ui-native-select,
+  .ui-date-picker-trigger.ui-date-picker-trigger,
+  .ui-input-group.ui-input-group,
+  .ui-combobox.ui-combobox,
+  .ui-number-input-group.ui-number-input-group,
+  .ui-multi-select.ui-multi-select,
+  .ui-time-picker-control.ui-time-picker-control
+):where(
+  :not(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true'],
+    [aria-invalid='true'],
+    [aria-busy='true'],
+    [data-invalid],
+    [data-loading],
+    [data-ui-state='error'],
+    [data-ui-state='disabled'],
+    [data-ui-state='loading'],
+    .ui-input-group-input,
+    .ui-input-group-textarea,
+    .ui-combobox-input,
+    .ui-enhanced-input-field,
+    .ui-time-picker-input
+  ):not(
+    :has(
+      :is(input, textarea, select):is(
+        :disabled,
+        [aria-disabled='true'],
+        [aria-invalid='true'],
+        [aria-busy='true'],
+        [data-loading],
+        [data-ui-state='error'],
+        [data-ui-state='disabled'],
+        [data-ui-state='loading']
+      )
+    )
+  )
+) {
+  background-image: var(--ui-pack-control-image, none);
+  box-shadow: var(--ui-pack-control-shadow, none);
+}
+
+/* Action glow stays independent of focus rings and semantic error feedback. */
 .ui-button.ui-button[data-variant='primary']:where(
     :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
   ) {
@@ -60,61 +186,170 @@
   box-shadow: var(--ui-pack-active-shadow, none);
 }
 
-/* Color/motion feedback may transition; expensive blur/glow effects do not. */
+/* Color feedback can transition; expensive blur/glow effects do not. */
 .ui-button.ui-button,
 .ui-tabs-tab.ui-tabs-tab {
   transition-property: background-color, border-color, color, transform;
 }
 
-/* Unsupported backdrop filtering always gets a solid, readable surface. */
+/* Reset recipe variables on painted components, not their ThemeScope whose
+ * inline token variables must remain intact. Error/disabled styles keep ownership.
+ */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :is(
-    .ui-card.ui-card,
-    .ui-dialog.ui-dialog,
-    .ui-menu.ui-menu,
-    .ui-popover.ui-popover,
-    .ui-select-popup.ui-select-popup,
-    .ui-combobox-popup.ui-combobox-popup,
-    .ui-alert-dialog.ui-alert-dialog,
-    .ui-sheet.ui-sheet,
-    .ui-drawer.ui-drawer,
-    .ui-navigation-popup.ui-navigation-popup,
-    .ui-hover-card.ui-hover-card,
-    .ui-sidebar.ui-sidebar,
-    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+  :where(
+    .ui-card,
+    .ui-dialog,
+    .ui-toast,
+    .ui-command,
+    .ui-menu,
+    .ui-popover,
+    .ui-select-popup,
+    .ui-combobox-popup,
+    .ui-alert-dialog,
+    .ui-sheet,
+    .ui-drawer,
+    .ui-navigation-popup,
+    .ui-hover-card,
+    .ui-sidebar-mobile-panel,
+    .ui-sidebar,
+    .ui-calendar,
+    .ui-code-block,
+    .ui-collapsible,
+    .ui-scroll-area,
+    .ui-resizable-group,
+    .ui-table-scroll,
+    .ui-message-scroller,
+    .ui-attachment,
+    .ui-header,
+    .ui-footer,
+    .ui-input,
+    .ui-textarea,
+    .ui-select,
+    .ui-native-select,
+    .ui-date-picker-trigger,
+    .ui-input-group,
+    .ui-combobox,
+    .ui-number-input-group,
+    .ui-multi-select,
+    .ui-time-picker-control
   ) {
-    background-color: var(--ui-surface, #fff);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+    --ui-pack-surface-bg: var(--ui-surface, #fff);
+    --ui-pack-surface-image: none;
+    --ui-pack-surface-filter: none;
+    --ui-pack-surface-shadow: var(--ui-shadow, none);
+    --ui-pack-sidebar-shadow: none;
+    --ui-pack-control-image: none;
+    --ui-pack-control-shadow: none;
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  :is(
-    .ui-card.ui-card,
-    .ui-dialog.ui-dialog,
-    .ui-menu.ui-menu,
-    .ui-popover.ui-popover,
-    .ui-select-popup.ui-select-popup,
-    .ui-combobox-popup.ui-combobox-popup,
-    .ui-alert-dialog.ui-alert-dialog,
-    .ui-sheet.ui-sheet,
-    .ui-drawer.ui-drawer,
-    .ui-navigation-popup.ui-navigation-popup,
-    .ui-hover-card.ui-hover-card,
-    .ui-sidebar.ui-sidebar,
-    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+  :where(
+    .ui-card,
+    .ui-dialog,
+    .ui-toast,
+    .ui-command,
+    .ui-menu,
+    .ui-popover,
+    .ui-select-popup,
+    .ui-combobox-popup,
+    .ui-alert-dialog,
+    .ui-sheet,
+    .ui-drawer,
+    .ui-navigation-popup,
+    .ui-hover-card,
+    .ui-sidebar-mobile-panel,
+    .ui-sidebar,
+    .ui-calendar,
+    .ui-code-block,
+    .ui-collapsible,
+    .ui-scroll-area,
+    .ui-resizable-group,
+    .ui-table-scroll,
+    .ui-message-scroller,
+    .ui-attachment,
+    .ui-header,
+    .ui-footer,
+    .ui-input,
+    .ui-textarea,
+    .ui-select,
+    .ui-native-select,
+    .ui-date-picker-trigger,
+    .ui-input-group,
+    .ui-combobox,
+    .ui-number-input-group,
+    .ui-multi-select,
+    .ui-time-picker-control
   ) {
-    background-color: var(--ui-surface, #fff);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+    --ui-pack-surface-bg: var(--ui-surface, #fff);
+    --ui-pack-surface-image: none;
+    --ui-pack-surface-filter: none;
+    --ui-pack-surface-shadow: var(--ui-shadow, none);
+    --ui-pack-sidebar-shadow: none;
+    --ui-pack-control-image: none;
+    --ui-pack-control-shadow: none;
   }
 }
 
 @media (forced-colors: active) {
+  :where(
+    .ui-card,
+    .ui-dialog,
+    .ui-toast,
+    .ui-command,
+    .ui-menu,
+    .ui-popover,
+    .ui-select-popup,
+    .ui-combobox-popup,
+    .ui-alert-dialog,
+    .ui-sheet,
+    .ui-drawer,
+    .ui-navigation-popup,
+    .ui-hover-card,
+    .ui-sidebar-mobile-panel,
+    .ui-sidebar,
+    .ui-calendar,
+    .ui-code-block,
+    .ui-collapsible,
+    .ui-scroll-area,
+    .ui-resizable-group,
+    .ui-table-scroll,
+    .ui-message-scroller,
+    .ui-attachment,
+    .ui-header,
+    .ui-footer,
+    .ui-input,
+    .ui-textarea,
+    .ui-select,
+    .ui-native-select,
+    .ui-date-picker-trigger,
+    .ui-input-group,
+    .ui-combobox,
+    .ui-number-input-group,
+    .ui-multi-select,
+    .ui-time-picker-control,
+    .ui-button,
+    .ui-tabs-tab,
+    .ui-navigation-trigger,
+    .ui-menubar-trigger,
+    .ui-sidebar-item
+  ) {
+    --ui-pack-surface-image: none;
+    --ui-pack-surface-filter: none;
+    --ui-pack-surface-shadow: none;
+    --ui-pack-sidebar-shadow: none;
+    --ui-pack-control-image: none;
+    --ui-pack-control-shadow: none;
+    --ui-pack-action-shadow: none;
+    --ui-pack-action-hover-shadow: none;
+    --ui-pack-pressed-shadow: none;
+    --ui-pack-active-shadow: none;
+  }
   :is(
     .ui-card.ui-card,
     .ui-dialog.ui-dialog,
+    .ui-toast.ui-toast,
+    .ui-command.ui-command,
     .ui-menu.ui-menu,
     .ui-popover.ui-popover,
     .ui-select-popup.ui-select-popup,
@@ -124,28 +359,23 @@
     .ui-drawer.ui-drawer,
     .ui-navigation-popup.ui-navigation-popup,
     .ui-hover-card.ui-hover-card,
+    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel,
     .ui-sidebar.ui-sidebar,
-    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
-  ) {
+    .ui-calendar.ui-calendar,
+    .ui-code-block.ui-code-block,
+    .ui-collapsible.ui-collapsible,
+    .ui-scroll-area.ui-scroll-area,
+    .ui-resizable-group.ui-resizable-group,
+    .ui-table-scroll.ui-table-scroll,
+    .ui-message-scroller.ui-message-scroller,
+    .ui-attachment.ui-attachment,
+    .ui-header.ui-header,
+    .ui-footer.ui-footer
+  ):where(:not([data-variant='transparent'], [data-variant='ghost'], [data-variant='minimal'])) {
     background-color: Canvas;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: none;
     border: 1px solid CanvasText;
   }
-
-  .ui-button.ui-button[data-variant='primary'],
-  :is(
-    .ui-tabs-tab.ui-tabs-tab[data-active],
-    .ui-navigation-trigger.ui-navigation-trigger[data-active],
-    .ui-navigation-trigger.ui-navigation-trigger[data-popup-open],
-    .ui-menubar-trigger.ui-menubar-trigger[data-popup-open],
-    .ui-sidebar-item.ui-sidebar-item[aria-current]
-  ) {
-    --ui-pack-action-shadow: none;
-    --ui-pack-action-hover-shadow: none;
-    --ui-pack-pressed-shadow: none;
-    --ui-pack-active-shadow: none;
-    box-shadow: none;
+  .ui-header.ui-header[data-variant='app'] {
+    background-color: Canvas;
   }
 }

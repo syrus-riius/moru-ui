@@ -57,7 +57,7 @@
     :has(input:is(:disabled, [aria-busy='true']), input[aria-invalid='true'])
   ) {
   border-color: var(--ui-control-hover-border);
-  background: var(--ui-control-hover-bg);
+  background-color: var(--ui-control-hover-bg);
 }
 .ui-time-picker-control:focus-within {
   outline: 2px solid var(--ui-focus-ring, #181818);

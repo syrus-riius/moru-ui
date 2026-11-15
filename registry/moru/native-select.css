@@ -80,7 +80,7 @@
   color: var(--ui-text, #171717);
 }
 :where([data-moru-registry]) .ui-native-select:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
+  background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-border, #e8e8e4);
 }
 :where([data-moru-registry]) .ui-native-select:focus-visible {

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "description": "Text label for associating an accessible name with a form control.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/label.css",
+      "type": "registry:file",
+      "target": "@ui/moru/label.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-label {\n  font-family: var(--ui-font-family, inherit);\n  color: var(--ui-text, #171717);\n  font-size: var(--ui-type-label-size, 14px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.45);\n  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);\n  box-sizing: border-box;\n}\n:where([data-moru-registry]) .ui-label {\n  display: inline-block;\n  cursor: default;\n  overflow-wrap: anywhere;\n}\n\n"
+    },
+    {
+      "path": "registry/moru/label.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/label.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type LabelHTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport { useFieldContext } from './field-context'\nimport './controls-shared.css'\nimport './label.css'\n\nexport type LabelProps = LabelHTMLAttributes<HTMLLabelElement>\nexport const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { htmlFor, className, ...props },\n  ref,\n) {\n  const field = useFieldContext()\n  return (\n    <label\n      {...props}\n      ref={ref}\n      htmlFor={htmlFor ?? field?.controlId}\n      className={cn('ui-label', className)}\n    />\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

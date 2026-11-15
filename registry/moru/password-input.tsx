@@ -6,7 +6,8 @@ import { Eye, EyeOff } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { Input, type InputProps } from './input'
 import { useFieldContext } from './field-context'
-import './enhanced-inputs.css'
+import './enhanced-input.css'
+import './password-input.css'
 
 export interface PasswordInputProps extends Omit<InputProps, 'type'> {
   visible?: boolean

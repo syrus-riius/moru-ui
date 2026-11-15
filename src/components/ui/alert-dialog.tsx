@@ -12,7 +12,8 @@ import { CircleAlert } from 'lucide-react'
 import { Button } from './button'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-overlays.css'
+import './overlay-shared.css'
+import './alert-dialog.css'
 
 export interface AlertDialogProps {
   trigger?: ReactElement

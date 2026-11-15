@@ -1,0 +1,70 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-data-table {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-data-table {
+  display: grid;
+  gap: var(--ui-form-gap);
+}
+:where([data-moru-registry]) .ui-data-table-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-data-table-toolbar > .ui-input {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-data-table-columns {
+  display: grid;
+  gap: var(--ui-field-gap);
+}
+:where([data-moru-registry]) .ui-data-table .ui-table {
+  min-width: 420px;
+}
+:where([data-moru-registry]) .ui-data-table-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+:where([data-moru-registry]) .ui-data-table-sort:disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-disabled-opacity);
+}
+:where([data-moru-registry]) .ui-data-table-sort:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+:where([data-moru-registry]) .ui-data-table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-data-table-summary {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+:where([data-moru-registry]) .ui-data-table-empty {
+  padding: var(--ui-card-padding);
+  text-align: center;
+  color: var(--ui-muted);
+}
+

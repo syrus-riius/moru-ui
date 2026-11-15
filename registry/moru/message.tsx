@@ -2,7 +2,8 @@
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from './_lib/cn'
-import './content-completion.css'
+import './content-shared.css'
+import './message.css'
 
 export interface MessageProps extends HTMLAttributes<HTMLElement> {
   align?: 'start' | 'end'

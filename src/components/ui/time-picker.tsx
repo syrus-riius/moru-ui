@@ -28,8 +28,9 @@ import {
   subscribeTimeFormReset,
   wrapTimeOptionIndex,
 } from './time-utils'
-import './overlays.css'
-import './time-controls.css'
+import './popover.css'
+import './time-shared.css'
+import './time-picker.css'
 
 export interface TimePickerProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -221,8 +222,10 @@ export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function
     ...props,
     id: controlId,
     form,
-    disabled: unavailable,
-    readOnly,
+    // Busy locks the field with readOnly, not disabled: it keeps keyboard focus and
+    // its value still takes part in form submission.
+    disabled,
+    readOnly: readOnly || loading,
     required,
     type: 'time',
     ref: inputRef,

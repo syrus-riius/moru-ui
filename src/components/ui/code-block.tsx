@@ -3,7 +3,8 @@ import { forwardRef, useEffect, useId, useRef, useState, type HTMLAttributes } f
 import { Check, Copy, WrapText } from 'lucide-react'
 import { cn } from '../../lib/cn'
 import { Button } from './button'
-import './content-completion.css'
+import './content-shared.css'
+import './code-block.css'
 
 export interface CodeBlockProps extends Omit<
   HTMLAttributes<HTMLDivElement>,

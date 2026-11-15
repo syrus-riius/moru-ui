@@ -70,7 +70,16 @@ test('the public catalog contains only the reviewed MVP items', () => {
     github.items.map((entry) => entry.name),
     registryDefinitions.map((entry) => entry.name),
   )
-  assert.equal(github.items.length, 89)
+  assert.equal(github.items.length, 90)
+  const byType = {}
+  for (const entry of github.items) byType[entry.type] = (byType[entry.type] ?? 0) + 1
+  // core, 82 UI entries (81 components and the Dialog alias), block copy, six blocks.
+  assert.deepEqual(byType, {
+    'registry:base': 1,
+    'registry:ui': 82,
+    'registry:lib': 1,
+    'registry:block': 6,
+  })
   assert.equal(item('core').type, 'registry:base')
   assert.equal(item('dashboard').type, 'registry:block')
   assert.equal(item('signup').type, 'registry:block')
@@ -78,6 +87,49 @@ test('the public catalog contains only the reviewed MVP items', () => {
   assert.equal(item('otp').type, 'registry:block')
   assert.equal(item('search-filters').type, 'registry:block')
   assert.equal(item('settings').type, 'registry:block')
+})
+
+test('block copy travels with the blocks instead of with core', () => {
+  const coreFiles = item('core').files.map((file) => file.target)
+  assert.ok(coreFiles.includes('@ui/moru/_lib/ui-messages.ts'))
+  assert.ok(!coreFiles.includes('@ui/moru/_lib/block-messages.ts'))
+  assert.doesNotMatch(content('_lib/i18n.tsx'), /block-messages/)
+  assert.equal(item('block-messages').type, 'registry:lib')
+  assert.deepEqual(
+    item('block-messages')
+      .files.map((file) => file.target)
+      .sort(),
+    ['@ui/moru/_lib/block-i18n.ts', '@ui/moru/_lib/block-messages.ts'],
+  )
+  const dependsOnBlockCopy = (entry) =>
+    (entry.registryDependencies ?? []).some((dependency) => dependency.includes('/block-messages#'))
+  for (const entry of github.items)
+    assert.equal(dependsOnBlockCopy(entry), entry.type === 'registry:block', entry.name)
+})
+
+test('the guides state the real item counts and list every UI item', async () => {
+  // These numbers and tables are written by hand; the registry is the source of truth.
+  const ui = github.items
+    .filter((entry) => entry.type === 'registry:ui' && entry.name !== 'dialog')
+    .map((entry) => entry.name)
+  const total = github.items.length
+  for (const file of ['docs/registry.md', 'docs/registry.ko.md']) {
+    const text = await readFile(path.join(root, file), 'utf8')
+    const listed = []
+    for (const row of text.split('\n').filter((line) => /^\|[^|]+\|\s*\d+\s*\|/.test(line))) {
+      const [, , count, names] = row.split('|')
+      const items = [...names.matchAll(/`([a-z-]+)`/g)].map((match) => match[1])
+      assert.equal(items.length, Number(count), `${file}: ${row.slice(0, 40)}`)
+      listed.push(...items)
+    }
+    assert.deepEqual(listed.sort(), [...ui].sort(), file)
+    assert.match(text, new RegExp(`\\b${total}\\b`), `${file} total`)
+    assert.match(text, new RegExp(`\\b${ui.length}\\b`), `${file} UI entries`)
+  }
+  const readme = await readFile(path.join(root, 'README.md'), 'utf8')
+  assert.match(readme, new RegExp(`\\*\\*${total} installable entries\\*\\*`))
+  assert.match(readme, new RegExp(`${ui.length} UI entries`))
+  assert.match(readme, new RegExp(`총 ${total}개 항목`))
 })
 
 test('GitHub dependencies use full Moru addresses and explicit release pins', () => {
@@ -161,7 +213,8 @@ test('Login and OTP install their original Moru components and dedicated CSS', (
     'card.tsx',
     'checkbox.tsx',
     'password-input.tsx',
-    'enhanced-inputs.css',
+    'password-input.css',
+    'enhanced-input.css',
   ])
     assert.ok(login.has(`registry/moru/${file}`), file)
   const otp = installedFiles('otp')
@@ -171,7 +224,7 @@ test('Login and OTP install their original Moru components and dedicated CSS', (
     'card.tsx',
     'input-otp.tsx',
     'input-otp-utils.ts',
-    'controls-completion.css',
+    'input-otp.css',
   ])
     assert.ok(otp.has(`registry/moru/${file}`), file)
   assert.match(content('blocks/LoginBlock.tsx'), /Connect your authentication request/)
@@ -218,16 +271,35 @@ test('Modal is canonical while existing Dialog installations retain their compat
   assert.match(item('dialog').description, /Use modal for new code/)
 })
 
-test('Header and Footer install shared page styling without installing each other', () => {
+test('Header and Footer install their own page styling without installing each other', () => {
   for (const [name, other] of [
     ['header', 'footer'],
     ['footer', 'header'],
   ]) {
     const files = installedFiles(name)
     assert.ok(files.has(`registry/moru/${name}.tsx`))
-    assert.ok(files.has('registry/moru/page-chrome.css'))
+    assert.ok(files.has(`registry/moru/${name}.css`))
     assert.equal(files.has(`registry/moru/${other}.tsx`), false)
+    assert.equal(files.has(`registry/moru/${other}.css`), false)
   }
+})
+
+test('a component installs its own stylesheet, not a bundle shared with unrelated ones', () => {
+  // Label and Kbd used to pull one 677-line sheet covering ten components.
+  for (const name of ['label', 'kbd', 'toggle', 'pagination', 'breadcrumb', 'bubble']) {
+    const own = item(name).files.map((file) => file.target)
+    assert.deepEqual(
+      own.filter((target) => target.endsWith('.css')),
+      [`@ui/moru/${name}.css`],
+      name,
+    )
+  }
+  // Chart reuses none of DataTable's styles, so it must not install TanStack Table.
+  assert.equal(installedFiles('chart').has('registry/moru/data-table.tsx'), false)
+  // Reusing another component's stylesheet makes that component a dependency, in this direction.
+  assert.ok(item('combobox').files.some((file) => file.target === '@ui/moru/combobox.css'))
+  assert.ok(installedFiles('multi-select').has('registry/moru/combobox.css'))
+  assert.equal(installedFiles('combobox').has('registry/moru/multi-select.tsx'), false)
 })
 
 test('source import rewriting preserves the selected original code', async () => {
@@ -353,6 +425,17 @@ test('minimal layout helpers work without importing a Tailwind reset or host CSS
   assert.match(utilities, /:where\(\[data-moru-registry\]\) \*::before/)
 })
 
+test('layout fallbacks stay below the host utilities in the cascade', () => {
+  const stylesheet = postcss.parse(content('_styles/utilities.css'))
+  // An unlayered `.flex` or `button { font: inherit }` beats every layered Tailwind
+  // utility inside the provider, e.g. `flex md:hidden` or `text-sm` on a host button.
+  stylesheet.walkRules((rule) => {
+    const layer = rule.parent?.type === 'atrule' ? `${rule.parent.name} ${rule.parent.params}` : ''
+    assert.equal(layer, 'layer base', rule.selector)
+  })
+  assert.ok(stylesheet.nodes.some((node) => node.type === 'atrule' && node.name === 'layer'))
+})
+
 test('generated modules need no allowImportingTsExtensions and carry client boundaries', () => {
   for (const [file, source] of generated.artifacts)
     if (file.startsWith('registry/moru/') && /\.tsx?$/.test(file)) {
@@ -446,6 +529,26 @@ test('the published v0.3.1 HTTP release remains byte-for-byte unchanged', async 
   assert.equal(
     digest.digest('hex'),
     '718ed9b99fabdc894b0243a7aae07d6d01203f3622e4912c5949d4a0037b350f',
+  )
+})
+
+test('the published v0.4.0 HTTP release remains byte-for-byte unchanged', async () => {
+  // v0.4.1 changed stylesheet names and item contents; v0.4.0 installs must keep resolving.
+  // The digest is of the files served by the live site (checked 2026-11-15), not of a
+  // local regeneration: the working tree's copy had drifted from what was published.
+  const directory = path.join(root, 'public/r/v0.4.0')
+  const files = (await readdir(directory)).filter((file) => file.endsWith('.json')).sort()
+  assert.equal(files.length, 90)
+  const digest = createHash('sha256')
+  for (const file of files) {
+    digest.update(file)
+    digest.update('\0')
+    digest.update(await readFile(path.join(directory, file)))
+    digest.update('\0')
+  }
+  assert.equal(
+    digest.digest('hex'),
+    '2628f76bb838cf4a321d3827e8fb340d0dd833b65a3ef7978e23727b973d0199',
   )
 })
 

@@ -7,7 +7,8 @@ import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react'
 import type { SemanticTone } from './state'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-overlays.css'
+import './overlay-shared.css'
+import './toast.css'
 
 export interface ToastOptions {
   title: string

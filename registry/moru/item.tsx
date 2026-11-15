@@ -2,7 +2,8 @@
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from './_lib/cn'
-import './controls-completion.css'
+import './controls-shared.css'
+import './item.css'
 
 export type ItemProps = HTMLAttributes<HTMLDivElement> & {
   variant?: 'default' | 'outline' | 'muted'

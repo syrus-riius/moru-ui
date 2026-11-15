@@ -3,7 +3,8 @@
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from './_lib/cn'
 import type { SemanticTone } from './state'
-import './content-completion.css'
+import './content-shared.css'
+import './marker.css'
 
 export interface MarkerProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'border' | 'separator'

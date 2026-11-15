@@ -47,7 +47,7 @@ import {
 import { ScrollArea } from '../ui/scroll-area'
 import { Toggle } from '../ui/toggle'
 import { useToast } from '../ui/toast'
-import { useWorkspaceMembers } from '../WorkspaceMembersContext'
+import { useWorkspaceMembers } from '../workspace-example/WorkspaceMembersContext'
 import { useExampleSession } from './ExampleSessionContext'
 import type { ConversationMessage, ExampleFile } from './example-session-state'
 import './team-conversation.css'

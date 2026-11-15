@@ -13,7 +13,8 @@ import {
 import { ArrowDown } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { Button } from './button'
-import './content-completion.css'
+import './content-shared.css'
+import './message-scroller.css'
 
 export function isMessageScrollerAtEnd(
   scrollTop: number,

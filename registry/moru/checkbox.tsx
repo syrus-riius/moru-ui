@@ -1,6 +1,6 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
-import { useId, type ComponentPropsWithoutRef, type ReactNode } from 'react'
+import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import { cn } from './_lib/cn'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
@@ -21,30 +21,37 @@ export type CheckboxProps = Omit<
   previewState?: UIState
 }
 
-export function Checkbox({
-  label,
-  description,
-  checked,
-  defaultChecked,
-  onCheckedChange,
-  className,
-  disabled,
-  id,
-  size = 'md',
-  loading = false,
-  previewState,
-  'aria-label': ariaLabel,
-  'aria-labelledby': labelledBy,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
-  ...props
-}: CheckboxProps) {
+export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox(
+  {
+    label,
+    description,
+    checked,
+    defaultChecked,
+    onCheckedChange,
+    className,
+    disabled,
+    readOnly,
+    id,
+    size = 'md',
+    loading = false,
+    previewState,
+    'aria-label': ariaLabel,
+    'aria-labelledby': labelledBy,
+    'aria-describedby': describedBy,
+    'aria-invalid': invalid,
+    ...props
+  },
+  ref,
+) {
   const generatedId = useId()
   const descriptionId = `${generatedId}-description`
   const labelId = `${generatedId}-label`
   const field = useFieldContext()
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks the box with readOnly, not disabled: toggling it and waiting for the
+  // result does not drop keyboard focus, and the value still submits with its form.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   return (
     <label
       className={cn('ui-checkbox-label inline-flex items-start', className)}
@@ -54,6 +61,7 @@ export function Checkbox({
     >
       <BaseCheckbox.Root
         {...props}
+        ref={ref}
         id={id ?? field?.controlId}
         className="ui-checkbox inline-flex shrink-0 items-center justify-center"
         checked={checked}
@@ -61,7 +69,8 @@ export function Checkbox({
         onCheckedChange={(value) => {
           if (!unavailable) onCheckedChange?.(value)
         }}
-        disabled={unavailable}
+        disabled={locked}
+        readOnly={readOnly || busy}
         aria-label={ariaLabel}
         aria-labelledby={labelledBy ?? (!ariaLabel && label ? labelId : undefined)}
         aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}
@@ -106,4 +115,4 @@ export function Checkbox({
       )}
     </label>
   )
-}
+})

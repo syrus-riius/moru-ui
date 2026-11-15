@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { MoruLocaleProvider } from './i18n'
@@ -86,12 +87,26 @@ describe('locale contracts', () => {
     )
     expect(html).toContain('パスワードを表示')
   })
-  it('ships block translations with the portable provider', () => {
+  it('translates blocks with copy that ships with the blocks, not with the provider', () => {
     const html = renderToStaticMarkup(
       <MoruLocaleProvider locale="en">
         <LoginBlock />
       </MoruLocaleProvider>,
     )
     expect(html).not.toContain('로그인')
+    expect(html).toContain(messagesFor(blockMessages, 'en')['다시 만나 반가워요'])
+    // A component-only installation must not bundle every block's text through the provider.
+    expect(readFileSync(new URL('./i18n.tsx', import.meta.url), 'utf8')).not.toContain(
+      'block-messages',
+    )
+  })
+  it('lets application messages override block copy', () => {
+    const html = renderToStaticMarkup(
+      <MoruLocaleProvider locale="en" messages={{ '다시 만나 반가워요': 'Good to see you' }}>
+        <LoginBlock />
+      </MoruLocaleProvider>,
+    )
+    expect(html).toContain('Good to see you')
+    expect(html).not.toContain(messagesFor(blockMessages, 'en')['다시 만나 반가워요'])
   })
 })

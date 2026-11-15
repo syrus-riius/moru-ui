@@ -21,7 +21,7 @@ describe('Selection input loading contracts', () => {
     ['MultiSelect', <MultiSelect items={items} name="team" value={['design']} loading />],
     ['NumberInput', <NumberInput name="team" value={2} loading />],
   ])(
-    '%s marks its visible field busy and disables every value-changing control',
+    '%s marks its visible field busy, keeps it focusable and blocks every value-changing control',
     (_, component) => {
       const markup = renderToStaticMarkup(
         <Field label="팀" error="값을 확인하세요.">
@@ -34,7 +34,10 @@ describe('Selection input loading contracts', () => {
       expect(visible).toBeDefined()
       expect(attribute(visible, 'aria-invalid')).toBe('true')
       expect(attribute(visible, 'aria-describedby')).toBeTruthy()
-      expect(inputs.every((tag) => attribute(tag, 'disabled') !== undefined)).toBe(true)
+      // Busy is read-only, not disabled: focus stays in the field and the value still submits.
+      expect(attribute(visible, 'disabled')).toBeUndefined()
+      expect(attribute(visible, 'readOnly')).toBeDefined()
+      expect(inputs.some((tag) => attribute(tag, 'disabled') !== undefined)).toBe(false)
       expect(
         tags(markup, 'button').every(
           (tag) =>
@@ -101,7 +104,6 @@ describe('Selection input form ownership and validation', () => {
   it.each([
     { disabled: true, inputProps: { disabled: false } },
     { inputProps: { disabled: true } },
-    { loading: true, inputProps: { disabled: false } },
   ])(
     'keeps NumberInput text, steppers and submitted value consistently unavailable: %j',
     (props) => {
@@ -119,6 +121,21 @@ describe('Selection input form ownership and validation', () => {
       ).toBe(true)
     },
   )
+
+  it('keeps a busy NumberInput focusable and submittable while its steppers are blocked', () => {
+    const markup = renderToStaticMarkup(
+      <NumberInput loading inputProps={{ disabled: false }} name="quantity" defaultValue={3} />,
+    )
+    const inputs = tags(markup, 'input')
+    expect(inputs.some((tag) => attribute(tag, 'disabled') !== undefined)).toBe(false)
+    expect(inputs.some((tag) => attribute(tag, 'readOnly') !== undefined)).toBe(true)
+    expect(
+      tags(markup, 'button').every(
+        (tag) =>
+          attribute(tag, 'disabled') !== undefined || attribute(tag, 'aria-disabled') === 'true',
+      ),
+    ).toBe(true)
+  })
 
   it.each([
     { readOnly: true, inputProps: { readOnly: false } },

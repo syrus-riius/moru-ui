@@ -6,7 +6,7 @@ import { Popover as BasePopover } from '@base-ui/react/popover'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './popover.css'
 
 export interface PopoverProps {
   trigger: ReactElement

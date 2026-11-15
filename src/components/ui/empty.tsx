@@ -1,6 +1,7 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './empty.css'
 
 export interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title: string

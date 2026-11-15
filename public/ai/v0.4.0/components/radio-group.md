@@ -2,7 +2,7 @@
 
 Accessible single-choice group with labels, descriptions and Field integration.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -30,10 +30,8 @@ interface RadioGroupItem {
   disabled?: boolean
 }
 
-interface RadioGroupProps extends Omit<
-  BaseRadioGroup.Props<string>,
-  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange'
-> {
+interface RadioGroupProps extends Omit<BaseRadioGroup.Props<string>,
+  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange'> {
   items: RadioGroupItem[]
   value?: string
   defaultValue?: string
@@ -47,18 +45,9 @@ Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
 function RadioGroup({
-  items,
-  value,
-  defaultValue,
-  onValueChange,
-  disabled,
-  readOnly,
-  className,
-  id,
-  size = 'md',
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
-  ...props
+  items, value, defaultValue, onValueChange, disabled, readOnly,
+  className, id, size = 'md',
+  'aria-describedby': describedBy, 'aria-invalid': invalid, ...props
 }: RadioGroupProps);
 ```
 

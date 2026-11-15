@@ -1,0 +1,49 @@
+.ui-carousel {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+.ui-carousel {
+  display: grid;
+  gap: var(--ui-field-gap);
+}
+.ui-carousel-viewport {
+  overflow: hidden;
+  border-radius: var(--ui-radius);
+  outline: none;
+}
+.ui-carousel-viewport:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+.ui-carousel-track {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+.ui-carousel-slide {
+  min-width: 0;
+  flex: 0 0 100%;
+}
+.ui-carousel[data-orientation='vertical'] .ui-carousel-viewport {
+  height: 200px;
+}
+.ui-carousel[data-orientation='vertical'] .ui-carousel-track {
+  flex-direction: column;
+  height: 100%;
+  touch-action: pan-x pinch-zoom;
+}
+.ui-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-control-gap);
+}
+.ui-carousel-controls > span {
+  font-size: var(--ui-type-caption-size);
+  color: var(--ui-muted);
+  font-variant-numeric: tabular-nums;
+}

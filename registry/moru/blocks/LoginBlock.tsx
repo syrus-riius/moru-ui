@@ -1,6 +1,6 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
-import { useI18n } from '../_lib/i18n'
+import { useBlockI18n } from '../_lib/block-i18n'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { Button } from '../button'
 import { Card } from '../card'
@@ -20,7 +20,7 @@ export function validateLoginBlock(email: string, password: string) {
 
 /** A local interaction example. Connect your authentication request in submit. */
 export function LoginBlock() {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const id = useId()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

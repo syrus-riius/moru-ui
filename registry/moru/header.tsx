@@ -3,7 +3,7 @@
 import { useI18n } from './_lib/i18n'
 import { forwardRef, useId, useRef, useState, type HTMLAttributes, type ReactNode } from 'react'
 import { cn } from './_lib/cn'
-import './page-chrome.css'
+import './header.css'
 
 export type HeaderProps = HTMLAttributes<HTMLElement> & {
   brand: ReactNode

@@ -5,12 +5,20 @@ import { lstat, mkdir, readFile, readdir, realpath, writeFile } from 'node:fs/pr
 import { createServer } from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { registryVersion } from './build-registry.mjs'
 
 // Real shadcn CLI integration test. Projects and command logs remain under .qa;
 // no parent node_modules or Moru source files are copied into the consumers.
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 const args = process.argv.slice(2)
-const options = { version: 'v0.3.2', cliVersion: '4.23.0', baseUrl: '', single: false }
+// The default is the release being built, so a plain run (and CI) checks the payloads that
+// are about to be published. Older published releases stay testable with --registry-version.
+const options = {
+  version: `v${registryVersion}`,
+  cliVersion: '4.23.0',
+  baseUrl: '',
+  single: false,
+}
 for (let index = 0; index < args.length; index += 1) {
   const argument = args[index]
   if (argument === '--single') options.single = true
@@ -26,10 +34,10 @@ for (let index = 0; index < args.length; index += 1) {
     ] = value
   } else if (argument === '--help') {
     console.log(
-      'node scripts/test-registry-install.mjs [--base-url https://host/r/v0.3.2] [--registry-version v0.3.2] [--cli-version 4.23.0] [--single]',
+      `node scripts/test-registry-install.mjs [--base-url https://host/r/v${registryVersion}] [--registry-version v0.3.2] [--cli-version 4.23.0] [--single]`,
     )
     console.log(
-      'Without --base-url, serves public/r/<version> locally and rewrites only same-registry dependency URLs to that temporary server. A supplied URL is fetched unchanged.',
+      `Without --registry-version, tests the current release (v${registryVersion}). Without --base-url, serves public/r/<version> locally and rewrites only same-registry dependency URLs to that temporary server. A supplied URL is fetched unchanged.`,
     )
     process.exit(0)
   } else throw new Error(`Unknown argument: ${argument}`)

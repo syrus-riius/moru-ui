@@ -4,7 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from './button'
 import { cn } from '../../lib/cn'
-import './data-completion.css'
+import './carousel.css'
 
 export interface CarouselItem {
   id: string

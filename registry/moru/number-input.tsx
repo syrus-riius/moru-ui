@@ -14,7 +14,8 @@ import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
 import { Minus, Plus } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
-import './enhanced-inputs.css'
+import './enhanced-input.css'
+import './number-input.css'
 
 type RootProps = ComponentPropsWithoutRef<typeof BaseNumberField.Root>
 export interface NumberInputProps extends Omit<
@@ -83,8 +84,12 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   const { t } = useI18n()
 
   const field = useFieldContext()
-  const unavailable = disabled || loading || inputProps?.disabled
+  const locked = disabled || inputProps?.disabled
+  const unavailable = locked || loading
   const resolvedReadOnly = readOnly || inputProps?.readOnly
+  // Busy locks the field with readOnly, not disabled: it keeps keyboard focus and its
+  // value still takes part in form submission.
+  const lockedReadOnly = resolvedReadOnly || loading
   const inputRef = useRef<HTMLInputElement>(null)
   const controlled = useRef(value !== undefined)
   controlled.current = value !== undefined
@@ -131,8 +136,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
       defaultValue={defaultValue ?? undefined}
       form={resolvedForm}
       format={resolvedFormat}
-      disabled={unavailable}
-      readOnly={resolvedReadOnly}
+      disabled={locked}
+      readOnly={lockedReadOnly}
       className={cn('ui-number-input ui-enhanced-input', className)}
       data-size={size}
     >
@@ -150,8 +155,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
           {...inputProps}
           ref={inputRef}
           form={resolvedForm}
-          disabled={unavailable}
-          readOnly={resolvedReadOnly}
+          disabled={locked}
+          readOnly={lockedReadOnly}
           className={cn('ui-enhanced-input-field', inputProps?.className)}
           placeholder={placeholder}
           aria-label={ariaLabel ?? inputProps?.['aria-label']}

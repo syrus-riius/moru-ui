@@ -1,0 +1,52 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-message-scroller {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-message-scroller-viewport:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -2px;
+}
+:where([data-moru-registry]) .ui-message-scroller {
+  position: relative;
+  border: var(--ui-border-width) solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  overflow: hidden;
+  background: var(--ui-surface);
+}
+:where([data-moru-registry]) .ui-message-scroller-viewport {
+  height: var(--message-scroller-height, 320px);
+  max-height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  overflow-anchor: none;
+  scrollbar-gutter: stable;
+}
+:where([data-moru-registry]) .ui-message-scroller-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-form-gap);
+  padding: calc(var(--ui-space) * 4);
+}
+:where([data-moru-registry]) .ui-message-scroller-item {
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-message-scroller-latest {
+  position: absolute;
+  bottom: calc(var(--ui-space) * 3);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 16px);
+  white-space: normal;
+  height: auto;
+  padding-block: var(--ui-space);
+  box-shadow: var(--ui-shadow);
+}
+

@@ -3,7 +3,8 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 import { Toggle as BaseToggle } from '@base-ui/react/toggle'
 import { cn } from './_lib/cn'
-import './controls-completion.css'
+import './controls-shared.css'
+import './toggle.css'
 
 export type ToggleProps = Omit<
   ComponentPropsWithoutRef<typeof BaseToggle>,

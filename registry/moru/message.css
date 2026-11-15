@@ -1,0 +1,61 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-message {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-message-header,
+:where([data-moru-registry]) .ui-message-footer {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-message-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-message[data-align='end'] {
+  flex-direction: row-reverse;
+}
+:where([data-moru-registry]) .ui-message-avatar {
+  flex-shrink: 0;
+}
+:where([data-moru-registry]) .ui-message-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ui-space);
+  min-width: 0;
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+:where([data-moru-registry]) .ui-message[data-align='end'] .ui-message-content {
+  align-items: flex-end;
+  margin-inline-start: auto;
+}
+:where([data-moru-registry]) .ui-message-header,
+:where([data-moru-registry]) .ui-message-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+  align-items: center;
+}
+:where([data-moru-registry]) .ui-message[data-align='end'] .ui-message-footer {
+  justify-content: flex-end;
+}
+

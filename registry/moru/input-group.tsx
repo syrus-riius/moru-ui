@@ -5,7 +5,8 @@ import { cn } from './_lib/cn'
 import { Input, type InputProps } from './input'
 import { Textarea, type TextareaProps } from './textarea'
 import { Button, type ButtonProps } from './button'
-import './controls-completion.css'
+import './controls-shared.css'
+import './input-group.css'
 
 export type InputGroupProps = HTMLAttributes<HTMLDivElement>
 export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(function InputGroup(

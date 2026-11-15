@@ -3,7 +3,8 @@
 import { useI18n } from './_lib/i18n'
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from './_lib/cn'
-import './controls-completion.css'
+import './controls-shared.css'
+import './spinner.css'
 
 export type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {
   size?: 'sm' | 'md' | 'lg'

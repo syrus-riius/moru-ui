@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "Accessible button with variants, loading and disabled states.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/button.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type ComponentPropsWithoutRef } from 'react'\nimport { Button as BaseButton } from '@base-ui/react/button'\nimport { cn } from './_lib/cn'\nimport type { UIState } from './state'\n\nexport type ButtonProps = Omit<ComponentPropsWithoutRef<typeof BaseButton>, 'className'> & {\n  className?: string\n  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'\n  size?: 'sm' | 'md' | 'lg'\n  /**\n   * A label wraps on its own when the container is too narrow. `wrap` marks a label that is\n   * expected to wrap and tightens its vertical padding; `nowrap` keeps it on one line.\n   */\n  textWrap?: 'nowrap' | 'wrap'\n  loading?: boolean\n  previewState?: UIState\n}\n\nexport const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(\n  {\n    className,\n    variant = 'primary',\n    size = 'md',\n    textWrap,\n    loading = false,\n    disabled,\n    focusableWhenDisabled,\n    children,\n    previewState,\n    onClick,\n    ...props\n  },\n  ref,\n) {\n  const busy = loading || previewState === 'loading'\n  const unavailable = disabled || busy || previewState === 'disabled'\n  return (\n    <BaseButton\n      {...props}\n      ref={ref}\n      className={cn('ui-button inline-flex items-center justify-center gap-2', className)}\n      data-variant={previewState === 'error' ? 'danger' : variant}\n      data-size={size}\n      data-text-wrap={textWrap}\n      data-ui-state={previewState}\n      data-loading={busy || undefined}\n      aria-busy={busy || undefined}\n      disabled={unavailable}\n      // A busy button stays in the tab order (aria-disabled instead of the native attribute),\n      // so keyboard focus is not dropped to <body> the moment an action starts.\n      focusableWhenDisabled={focusableWhenDisabled ?? busy}\n      onClick={(event) => {\n        if (!unavailable) onClick?.(event)\n      }}\n    >\n      {busy && <span className=\"ui-button-spinner ui-loading-indicator\" aria-hidden=\"true\" />}\n      {children}\n    </BaseButton>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

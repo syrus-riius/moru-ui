@@ -53,7 +53,7 @@ Browse the component examples and installation guide. [Component gallery](https:
 Use Moru's registry when you want to own and edit a component's source in your project.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/button.json
 ```
 
 ## License

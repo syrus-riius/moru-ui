@@ -2,7 +2,7 @@
 
 Styled native select with standard browser form and keyboard behavior.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -24,16 +24,9 @@ Referenced imported types/values:
 - `UIState` from `./state`
 
 ```ts
-interface NativeSelectOption {
-  value: string
-  label: string
-  disabled?: boolean
-}
+interface NativeSelectOption { value: string; label: string; disabled?: boolean }
 
-type NativeSelectProps = Omit<
-  SelectHTMLAttributes<HTMLSelectElement>,
-  'size' | 'multiple'
-> & {
+type NativeSelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'multiple'> & {
   size?: 'sm' | 'md' | 'lg'
   loading?: boolean
   previewState?: UIState

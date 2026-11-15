@@ -1,0 +1,36 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-navigation-menu {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+  --ui-navigation-height: var(--ui-control-height-md, 40px);
+  --ui-navigation-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-navigation-icon: var(--ui-icon-size-md, 16px);
+  --ui-navigation-close-size: var(--ui-control-height-sm, 32px);
+}
+:where([data-moru-registry]) [data-size='sm'].ui-navigation-menu {
+  --ui-navigation-height: var(--ui-control-height-sm, 32px);
+  --ui-navigation-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-navigation-icon: var(--ui-icon-size-sm, 14px);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+:where([data-moru-registry]) [data-size='lg'].ui-navigation-menu {
+  --ui-navigation-height: var(--ui-control-height-lg, 48px);
+  --ui-navigation-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-navigation-icon: var(--ui-icon-size-lg, 18px);
+}
+:where([data-moru-registry]) .ui-navigation-menu-popup {
+  width: 320px;
+  padding: var(--ui-field-gap, 8px);
+}
+:where([data-moru-registry]) .ui-navigation-menu:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}
+

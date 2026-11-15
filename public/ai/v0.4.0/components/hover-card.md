@@ -2,7 +2,7 @@
 
 Contextual preview content attached to a trigger with scoped popup theming.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -42,20 +42,7 @@ interface HoverCardProps {
 Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
-function HoverCard({
-  trigger,
-  title,
-  description,
-  children,
-  open,
-  defaultOpen = false,
-  onOpenChange,
-  disabled,
-  size = 'md',
-  side = 'bottom',
-  delay = 250,
-  className,
-}: HoverCardProps);
+function HoverCard({ trigger, title, description, children, open, defaultOpen = false, onOpenChange, disabled, size = 'md', side = 'bottom', delay = 250, className }: HoverCardProps);
 ```
 
 ## Declared defaults

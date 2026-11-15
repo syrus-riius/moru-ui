@@ -35,7 +35,7 @@ import {
   TableRow,
 } from './table'
 import { cn } from '../../lib/cn'
-import './data-completion.css'
+import './data-table.css'
 
 export const dataTableFeatures = tableFeatures({
   columnFilteringFeature,

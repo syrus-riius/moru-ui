@@ -2,7 +2,7 @@
 
 Accessible checkbox with label, description and loading state.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -25,10 +25,8 @@ Referenced imported types/values:
 - `UIState` from `./state`
 
 ```ts
-type CheckboxProps = Omit<
-  ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,
-  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'
-> & {
+type CheckboxProps = Omit<ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,
+  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'> & {
   label?: ReactNode
   description?: string
   checked?: boolean
@@ -45,22 +43,10 @@ Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
 function Checkbox({
-  label,
-  description,
-  checked,
-  defaultChecked,
-  onCheckedChange,
-  className,
-  disabled,
-  id,
-  size = 'md',
-  loading = false,
-  previewState,
-  'aria-label': ariaLabel,
-  'aria-labelledby': labelledBy,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
-  ...props
+  label, description, checked, defaultChecked, onCheckedChange, className,
+  disabled, id, size = 'md', loading = false, previewState,
+  'aria-label': ariaLabel, 'aria-labelledby': labelledBy,
+  'aria-describedby': describedBy, 'aria-invalid': invalid, ...props
 }: CheckboxProps);
 ```
 

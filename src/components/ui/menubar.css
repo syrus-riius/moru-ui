@@ -1,0 +1,80 @@
+.ui-menubar {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+  --ui-navigation-height: var(--ui-control-height-md, 40px);
+  --ui-navigation-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-navigation-icon: var(--ui-icon-size-md, 16px);
+  --ui-navigation-close-size: var(--ui-control-height-sm, 32px);
+}
+[data-size='sm'].ui-menubar {
+  --ui-navigation-height: var(--ui-control-height-sm, 32px);
+  --ui-navigation-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-navigation-icon: var(--ui-icon-size-sm, 14px);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+[data-size='lg'].ui-menubar {
+  --ui-navigation-height: var(--ui-control-height-lg, 48px);
+  --ui-navigation-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-navigation-icon: var(--ui-icon-size-lg, 18px);
+}
+.ui-menubar {
+  display: inline-flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  padding: calc(var(--ui-space, 4px) * 0.75);
+  gap: calc(var(--ui-space, 4px) / 2);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  border-color: transparent;
+}
+.ui-menubar-trigger {
+  display: inline-flex;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-field-gap, 8px);
+  min-height: var(--ui-navigation-height);
+  padding: var(--ui-space, 4px) var(--ui-navigation-padding);
+  border: 0;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 4px));
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ui-menubar-trigger[data-popup-open] {
+  background: var(--ui-primary, #181818);
+  color: var(--ui-primary-foreground, #fff);
+}
+.ui-menubar-trigger:hover:not([data-disabled]) {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+.ui-menubar-trigger[data-popup-open]:hover:not([data-disabled]) {
+  background: var(--ui-primary-hover, #303030);
+  color: var(--ui-primary-hover-foreground, #fff);
+}
+.ui-menubar-trigger[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.ui-menubar:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .ui-menubar-trigger {
+    min-height: max(44px, var(--ui-navigation-height, 40px));
+  }
+}

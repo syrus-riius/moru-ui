@@ -14,7 +14,7 @@
   white-space: nowrap;
   border: 0;
 }
-:where([data-moru-registry]) .ui-date-picker-trigger:not(:disabled):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-date-picker-trigger:not(:is(:disabled, [aria-busy='true'])):not([aria-invalid='true']) {
   border-color: var(--ui-control-border, var(--ui-border, #8a8a86));
 }
 :where([data-moru-registry]) .ui-date-picker-trigger:hover:not(:disabled):not([aria-disabled='true']):not(
@@ -23,7 +23,8 @@
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
   background: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
-:where([data-moru-registry]) .ui-date-picker-trigger[aria-disabled='true'] {
+/* Read-only only: a busy trigger is aria-disabled too and keeps its unavailable cursor. */
+:where([data-moru-registry]) .ui-date-picker-trigger[aria-disabled='true']:not([aria-busy='true']) {
   cursor: default;
 }
 :where([data-moru-registry]) .ui-date-picker-validation {

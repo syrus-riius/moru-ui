@@ -12,7 +12,7 @@
       "path": "registry/moru/button-group.tsx",
       "type": "registry:ui",
       "target": "@ui/moru/button-group.tsx",
-      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-completion.css'\n\nexport type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & {\n  orientation?: 'horizontal' | 'vertical'\n}\n\nexport const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(\n  { orientation = 'horizontal', className, role = 'group', ...props },\n  ref,\n) {\n  return (\n    <div\n      {...props}\n      ref={ref}\n      role={role}\n      className={cn('ui-button-group', className)}\n      data-orientation={orientation}\n    />\n  )\n})\n\nexport function ButtonGroupText({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {\n  return <span {...props} className={cn('ui-button-group-text', className)} />\n}\n"
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-completion.css'\n\nexport type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & { orientation?: 'horizontal' | 'vertical' }\n\nexport const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup({ orientation = 'horizontal', className, role = 'group', ...props }, ref) {\n  return <div {...props} ref={ref} role={role} className={cn('ui-button-group', className)} data-orientation={orientation} />\n})\n\nexport function ButtonGroupText({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {\n  return <span {...props} className={cn('ui-button-group-text', className)} />\n}\n"
     }
   ],
   "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
@@ -21,7 +21,7 @@
   ],
   "meta": {
     "version": "0.4.0",
-    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
     "license": "MIT",
     "testedWith": {
       "react": "19.3.1",

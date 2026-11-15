@@ -1,6 +1,6 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
-import { useI18n } from '../_lib/i18n'
+import { useBlockI18n } from '../_lib/block-i18n'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { Button } from '../button'
 import { Card } from '../card'
@@ -14,7 +14,7 @@ export function validateOTPBlock(value: string) {
 
 /** Replace the demo verification and resend handlers with your service. */
 export function OTPBlock() {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const id = useId()
   const [code, setCode] = useState('')
   const [error, setError] = useState('')

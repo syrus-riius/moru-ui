@@ -3,7 +3,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { cn } from './_lib/cn'
-import './overlays.css'
+import './accordion.css'
 
 export interface AccordionItem {
   value: string

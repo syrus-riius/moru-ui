@@ -1,0 +1,172 @@
+.ui-trace {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+.ui-trace-description,
+.ui-trace-meta {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+.ui-trace-title {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+.ui-trace-row:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -2px;
+}
+.ui-trace {
+  --ui-trace-icon-size: var(--ui-icon-size-md, 16px);
+  --ui-trace-line-height: calc(var(--ui-type-label-size) * var(--ui-type-label-line-height));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.ui-trace-item {
+  position: relative;
+  padding: 0 0 calc(var(--ui-space) * 2);
+  min-width: 0;
+}
+.ui-trace-item:not(:last-child)::after {
+  position: absolute;
+  content: '';
+  width: 1px;
+  background: var(--ui-border);
+  top: calc(
+    var(--ui-space) * 3 + max(var(--ui-trace-line-height), var(--ui-trace-icon-size)) / 2 +
+      var(--ui-trace-icon-size) / 2
+  );
+  bottom: 0;
+  inset-inline-start: calc(var(--ui-space) * 3 + var(--ui-trace-icon-size) / 2);
+  pointer-events: none;
+}
+.ui-trace-row {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  gap: var(--ui-control-gap);
+  align-items: flex-start;
+  text-align: start;
+  color: inherit;
+  padding: calc(var(--ui-space) * 3);
+  background: transparent;
+  border: 0;
+  border-radius: max(3px, calc(var(--ui-radius) / 2));
+  font: inherit;
+}
+button.ui-trace-row {
+  cursor: pointer;
+  transition: background var(--ui-duration);
+}
+button.ui-trace-row:hover:not(:disabled) {
+  background: var(--ui-control-hover-bg);
+}
+button.ui-trace-row:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.ui-trace-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--ui-trace-icon-size);
+  min-height: var(--ui-trace-line-height);
+}
+.ui-trace-icon > svg {
+  width: var(--ui-trace-icon-size);
+  height: var(--ui-trace-icon-size);
+}
+.ui-trace-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: var(--ui-space);
+}
+.ui-trace-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  flex: 0 0 auto;
+  max-width: 35%;
+}
+.ui-trace-status {
+  white-space: nowrap;
+}
+.ui-trace-chevron {
+  flex-shrink: 0;
+  width: var(--ui-trace-icon-size);
+  height: var(--ui-trace-icon-size);
+  margin-top: max(0px, calc((var(--ui-trace-line-height) - var(--ui-trace-icon-size)) / 2));
+  transition: transform var(--ui-duration);
+}
+.ui-trace-item[data-expanded] .ui-trace-chevron {
+  transform: rotate(180deg);
+}
+.ui-trace-item[data-status='complete'] .ui-trace-icon {
+  color: var(--ui-success-surface-text);
+}
+.ui-trace-item[data-status='error'] .ui-trace-icon,
+.ui-trace-item[data-status='error'] .ui-trace-status {
+  color: var(--ui-danger-surface-text);
+}
+.ui-trace-item[data-status='running'] .ui-trace-icon {
+  color: var(--ui-primary);
+}
+.ui-trace-item[data-status='running'] .ui-trace-icon svg {
+  animation: ui-content-spin 1s linear infinite;
+}
+.ui-trace-details {
+  margin: 0 calc(var(--ui-space) * 3) var(--ui-control-gap)
+    calc(var(--ui-space) * 3 + var(--ui-trace-icon-size) + var(--ui-control-gap));
+  font-size: var(--ui-type-caption-size);
+  overflow-wrap: anywhere;
+}
+.ui-trace-details[hidden] {
+  display: none;
+}
+@keyframes ui-content-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 380px) {
+  .ui-trace-row {
+    flex-wrap: wrap;
+  }
+  .ui-trace-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-inline-start: calc(var(--ui-trace-icon-size) + var(--ui-control-gap));
+    text-align: start;
+    max-width: 100%;
+  }
+  .ui-trace-chevron {
+    margin-inline-start: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-trace-item[data-status='running'] .ui-trace-icon svg {
+    animation: none;
+  }
+  .ui-trace-chevron,
+  button.ui-trace-row {
+    transition: none;
+  }
+}

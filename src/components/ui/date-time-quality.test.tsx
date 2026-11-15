@@ -24,14 +24,19 @@ describe('date and time loading contracts', () => {
       'TimeRangePicker',
       <TimeRangePicker loading name="times" defaultValue={{ start: '09:00', end: '10:00' }} />,
     ],
-  ])('%s blocks native submission and actions while exposing busy state', (_name, component) => {
+  ])('%s locks edits and actions while staying focusable and submittable', (_name, component) => {
     const html = renderToStaticMarkup(component)
     const inputs = tags(html, 'input')
     const buttons = tags(html, 'button')
     expect(inputs.length).toBeGreaterThan(0)
     expect(buttons.length).toBeGreaterThan(0)
-    expect(inputs.every((tag) => tag.includes('disabled=""'))).toBe(true)
-    expect(buttons.every((tag) => tag.includes('disabled=""'))).toBe(true)
+    // Busy is read-only, not disabled: the value still submits and focus is not dropped.
+    expect(inputs.every((tag) => tag.includes('readOnly=""'))).toBe(true)
+    expect(inputs.some((tag) => /\sdisabled=""/.test(tag))).toBe(false)
+    // Every action is blocked, either natively or with aria-disabled on the focusable trigger.
+    expect(
+      buttons.every((tag) => /\sdisabled=""/.test(tag) || tag.includes('aria-disabled="true"')),
+    ).toBe(true)
     expect(html).toContain('aria-busy="true"')
     expect(html).toContain('class="ui-loading-indicator"')
     expect(inputs.every((tag) => Boolean(attr(tag, 'value')))).toBe(true)

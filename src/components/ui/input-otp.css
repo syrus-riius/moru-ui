@@ -1,0 +1,151 @@
+.ui-input-otp {
+  font-family: var(--ui-font-family, inherit);
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+  box-sizing: border-box;
+}
+.ui-input-otp {
+  --ui-size-height: var(--ui-control-height-md, var(--ui-control-height, 40px));
+  --ui-size-padding-x: var(--ui-control-padding-x-md, 12px);
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-resolved-control-height: max(
+    var(--ui-size-height),
+    calc(
+      max(
+          var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.45),
+          var(--ui-size-icon)
+        ) +
+        var(--ui-border-width, 1px) * 2 + var(--ui-space, 4px) * 2
+    )
+  );
+}
+.ui-input-otp[data-size='sm'] {
+  --ui-size-height: var(--ui-control-height-sm, 32px);
+  --ui-size-padding-x: var(--ui-control-padding-x-sm, 10px);
+  --ui-size-icon: var(--ui-icon-size-sm, 14px);
+}
+.ui-input-otp[data-size='lg'] {
+  --ui-size-height: var(--ui-control-height-lg, 48px);
+  --ui-size-padding-x: var(--ui-control-padding-x-lg, 16px);
+  --ui-size-icon: var(--ui-icon-size-lg, 18px);
+}
+.ui-input-otp:focus-within {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
+  outline-offset: 3px;
+}
+.ui-input-otp[data-disabled] .ui-input-otp-slot {
+  opacity: 1;
+  color: var(--ui-disabled-text);
+  background: var(--ui-disabled-bg);
+  border-color: var(--ui-disabled-border);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.ui-input-otp {
+  position: relative;
+  max-width: 100%;
+  width: max-content;
+  border-radius: var(--ui-radius, 6px);
+}
+.ui-input-otp-control {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  opacity: 0.01;
+  color: transparent;
+  caret-color: transparent;
+  background: transparent;
+  font-size: 16px;
+  cursor: text;
+}
+.ui-input-otp-control:is(:disabled, [aria-busy='true']) {
+  cursor: not-allowed;
+}
+.ui-input-otp-slots {
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--ui-control-gap, 8px) / 2);
+  pointer-events: none;
+}
+.ui-input-otp-slot {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--ui-resolved-control-height);
+  min-width: 0;
+  min-height: var(--ui-resolved-control-height);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg, #f0f0ed);
+  font-family: var(--ui-font-family-code, monospace);
+  font-variant-numeric: tabular-nums;
+  border-color: transparent;
+}
+.ui-input-otp-slot[data-active] {
+  border-color: var(--ui-primary, #181818);
+  box-shadow: inset 0 0 0 1px var(--ui-primary, #181818);
+  background: var(--ui-surface, #fff);
+}
+.ui-input-otp[data-invalid]:not([data-disabled]) .ui-input-otp-slot {
+  border-color: var(--ui-danger, #c14b45);
+  background: var(--ui-danger-soft, #f9efef);
+  box-shadow: 0 0 0 1px var(--ui-error-ring, var(--ui-danger, #c14b45));
+}
+.ui-input-otp[data-invalid]:not([data-disabled]):focus-within {
+  outline-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
+}
+.ui-input-otp-caret {
+  display: block;
+  width: 1px;
+  height: 1.1em;
+  background: currentColor;
+  animation: ui-otp-blink 1s step-end infinite;
+}
+@keyframes ui-otp-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (pointer: coarse) {
+  .ui-input-otp {
+    --ui-resolved-control-height: max(
+      44px,
+      var(--ui-size-height),
+      calc(
+        max(
+            max(16px, var(--ui-type-label-size, 14px)) * var(--ui-type-label-line-height, 1.45),
+            var(--ui-size-icon)
+          ) +
+          var(--ui-border-width, 1px) * 2 + var(--ui-space, 4px) * 2
+      )
+    );
+  }
+  .ui-input-otp-control {
+    font-size: max(16px, var(--ui-type-label-size, 13px));
+  }
+}
+@media (forced-colors: active) {
+  .ui-input-otp-slot {
+    border: 1px solid ButtonText;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-input-otp-caret {
+    animation: none;
+  }
+}
+
+.ui-input-otp[data-loading] {
+  padding-inline-end: calc(var(--ui-size-icon, 16px) + var(--ui-control-gap, 8px) * 2);
+}

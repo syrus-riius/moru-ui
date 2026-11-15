@@ -4,7 +4,8 @@ import { useI18n } from './_lib/i18n'
 import { useId, useState, type HTMLAttributes, type ReactNode } from 'react'
 import { Check, X } from 'lucide-react'
 import { cn } from './_lib/cn'
-import './workflow-patterns.css'
+import './workflow-shared.css'
+import './stepper.css'
 
 export interface StepperItem {
   id: string

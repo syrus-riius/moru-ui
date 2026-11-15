@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message",
+  "type": "registry:ui",
+  "title": "Message",
+  "description": "Composable message content, metadata and action presentation.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/message.css",
+      "type": "registry:file",
+      "target": "@ui/moru/message.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-message {\n  min-width: 0;\n  max-width: 100%;\n  color: var(--ui-text);\n  font-family: var(--ui-font-family);\n  font-size: var(--ui-type-body-size);\n  font-weight: var(--ui-type-body-weight);\n  line-height: var(--ui-type-body-line-height);\n  letter-spacing: var(--ui-type-body-letter-spacing);\n}\n:where([data-moru-registry]) .ui-message-header,\n:where([data-moru-registry]) .ui-message-footer {\n  font-size: var(--ui-type-caption-size);\n  font-weight: var(--ui-type-caption-weight);\n  line-height: var(--ui-type-caption-line-height);\n  letter-spacing: var(--ui-type-caption-letter-spacing);\n  color: var(--ui-muted);\n  overflow-wrap: anywhere;\n}\n:where([data-moru-registry]) .ui-message-group {\n  display: flex;\n  flex-direction: column;\n  gap: var(--ui-control-gap);\n  min-width: 0;\n}\n:where([data-moru-registry]) .ui-message {\n  display: flex;\n  align-items: flex-start;\n  gap: var(--ui-control-gap);\n}\n:where([data-moru-registry]) .ui-message[data-align='end'] {\n  flex-direction: row-reverse;\n}\n:where([data-moru-registry]) .ui-message-avatar {\n  flex-shrink: 0;\n}\n:where([data-moru-registry]) .ui-message-content {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  gap: var(--ui-space);\n  min-width: 0;\n  flex: 0 1 auto;\n  max-width: 100%;\n}\n:where([data-moru-registry]) .ui-message[data-align='end'] .ui-message-content {\n  align-items: flex-end;\n  margin-inline-start: auto;\n}\n:where([data-moru-registry]) .ui-message-header,\n:where([data-moru-registry]) .ui-message-footer {\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--ui-control-gap);\n  align-items: center;\n}\n:where([data-moru-registry]) .ui-message[data-align='end'] .ui-message-footer {\n  justify-content: flex-end;\n}\n\n"
+    },
+    {
+      "path": "registry/moru/message.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/message.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './content-shared.css'\nimport './message.css'\n\nexport interface MessageProps extends HTMLAttributes<HTMLElement> {\n  align?: 'start' | 'end'\n}\nexport const Message = forwardRef<HTMLElement, MessageProps>(function Message(\n  { align = 'start', className, ...props },\n  ref,\n) {\n  return <article {...props} ref={ref} className={cn('ui-message', className)} data-align={align} />\n})\nexport function MessageAvatar({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-message-avatar', className)} />\n}\nexport function MessageContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-message-content', className)} />\n}\nexport function MessageHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-message-header', className)} />\n}\nexport function MessageFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-message-footer', className)} />\n}\nexport function MessageGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-message-group', className)} />\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

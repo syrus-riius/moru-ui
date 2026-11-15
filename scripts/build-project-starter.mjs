@@ -199,7 +199,7 @@ export async function projectStarterPlan(root = defaultRoot) {
     entries.set(
       target,
       source.startsWith(applicationDirectory + '/')
-        ? value.replaceAll("from '../../lib/i18n'", "from '@/components/ui/moru/_lib/i18n'")
+        ? value.replaceAll("from '../../lib/", "from '@/components/ui/moru/_lib/")
         : value,
     )
     records.push({ source, target, sha256: hash(value) })

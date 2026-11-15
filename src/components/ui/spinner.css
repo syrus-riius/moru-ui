@@ -1,0 +1,92 @@
+.ui-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-icon-size-md, 16px);
+  height: var(--ui-icon-size-md, 16px);
+  color: currentColor;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.ui-spinner[data-size='sm'] {
+  width: var(--ui-icon-size-sm, 14px);
+  height: var(--ui-icon-size-sm, 14px);
+}
+.ui-spinner[data-size='lg'] {
+  width: var(--ui-icon-size-lg, 18px);
+  height: var(--ui-icon-size-lg, 18px);
+}
+.ui-spinner > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: ui-completion-spin 0.8s linear infinite;
+}
+.ui-spinner-segments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12%;
+  width: 100%;
+  height: 100%;
+}
+.ui-spinner-segments > span {
+  flex: 1 1 0;
+  min-width: 0;
+  background: currentColor;
+  animation: ui-spinner-segment 1.2s ease-in-out infinite;
+}
+.ui-spinner[data-variant='dots'] .ui-spinner-segments > span {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.ui-spinner[data-variant='bars'] .ui-spinner-segments > span {
+  height: 80%;
+  border-radius: 999px;
+  animation-name: ui-spinner-bar;
+}
+.ui-spinner-segments > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.ui-spinner-segments > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.ui-spinner[data-paused] > svg,
+.ui-spinner[data-paused] .ui-spinner-segments > span {
+  animation-play-state: paused;
+}
+@keyframes ui-spinner-segment {
+  0%,
+  80%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes ui-spinner-bar {
+  0%,
+  80%,
+  100% {
+    opacity: 0.4;
+    transform: scaleY(0.45);
+  }
+  40% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+@keyframes ui-completion-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-spinner > svg,
+  .ui-spinner-segments > span {
+    animation: none;
+  }
+}

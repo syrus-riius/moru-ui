@@ -11,7 +11,7 @@ import {
 } from 'react-resizable-panels'
 import { GripVertical } from 'lucide-react'
 import { cn } from './_lib/cn'
-import './data-completion.css'
+import './resizable.css'
 
 export function ResizablePanelGroup({ className, ...props }: GroupProps) {
   return <Group {...props} className={cn('ui-resizable-group', className)} />

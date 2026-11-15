@@ -3,7 +3,8 @@ import { useI18n } from '../../lib/i18n'
 import { useId, useState, type HTMLAttributes, type ReactNode } from 'react'
 import { Check, ChevronDown, Circle, LoaderCircle, X } from 'lucide-react'
 import { cn } from '../../lib/cn'
-import './content-completion.css'
+import './content-shared.css'
+import './trace.css'
 
 export type TraceStatus = 'pending' | 'running' | 'complete' | 'error'
 export interface TraceStep {

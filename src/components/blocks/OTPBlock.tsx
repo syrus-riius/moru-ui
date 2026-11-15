@@ -1,4 +1,4 @@
-import { useI18n } from '../../lib/i18n'
+import { useBlockI18n } from '../../lib/block-i18n'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
@@ -12,7 +12,7 @@ export function validateOTPBlock(value: string) {
 
 /** Replace the demo verification and resend handlers with your service. */
 export function OTPBlock() {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const id = useId()
   const [code, setCode] = useState('')
   const [error, setError] = useState('')

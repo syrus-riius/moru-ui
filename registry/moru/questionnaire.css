@@ -1,0 +1,130 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-questionnaire {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-questionnaire-progress,
+:where([data-moru-registry]) .ui-questionnaire-summary dd {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-questionnaire legend,
+:where([data-moru-registry]) .ui-questionnaire-summary dt {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-questionnaire fieldset:focus-visible,
+:where([data-moru-registry]) .ui-questionnaire-summary:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -2px;
+}
+:where([data-moru-registry]) .ui-questionnaire {
+  --ui-questionnaire-inset: calc(var(--ui-space) * 4);
+  width: 100%;
+}
+:where([data-moru-registry]) .ui-questionnaire[data-size='sm'] {
+  --ui-questionnaire-inset: calc(var(--ui-space) * 2);
+}
+:where([data-moru-registry]) .ui-questionnaire[data-size='lg'] {
+  --ui-questionnaire-inset: calc(var(--ui-space) * 5);
+}
+:where([data-moru-registry]) .ui-questionnaire form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-form-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire legend {
+  margin-bottom: var(--ui-control-gap);
+  padding: 0;
+  color: var(--ui-text);
+}
+:where([data-moru-registry]) .ui-questionnaire fieldset > p {
+  margin: 0 0 var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire-progress > span {
+  flex-shrink: 0;
+}
+:where([data-moru-registry]) .ui-questionnaire-progress progress {
+  min-width: 0;
+  flex: 1;
+  height: 5px;
+  accent-color: var(--ui-primary);
+}
+:where([data-moru-registry]) .ui-questionnaire-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+  padding: var(--ui-questionnaire-inset);
+  border-radius: calc(var(--ui-radius) + 4px);
+  background: var(--ui-control-hover-bg);
+}
+:where([data-moru-registry]) .ui-questionnaire-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire-actions > .ui-button {
+  white-space: normal;
+  height: auto;
+  min-height: var(--ui-resolved-control-height);
+  padding-block: var(--ui-space);
+}
+:where([data-moru-registry]) .ui-questionnaire-actions > .ui-button:last-child {
+  margin-inline-start: auto;
+}
+:where([data-moru-registry]) .ui-questionnaire-error {
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  color: var(--ui-danger-surface-text);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-questionnaire-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-form-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire-summary dl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+  margin: 0;
+}
+:where([data-moru-registry]) .ui-questionnaire-summary dl > div {
+  border-bottom: var(--ui-border-width) solid var(--ui-border);
+  padding-bottom: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-questionnaire-summary dd {
+  margin: var(--ui-space) 0 0;
+  color: var(--ui-text);
+}
+:where([data-moru-registry]) .ui-questionnaire-summary .ui-button {
+  align-self: flex-start;
+}
+

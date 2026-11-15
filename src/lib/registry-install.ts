@@ -1,4 +1,4 @@
-export const registryRelease = '0.4.0'
+export const registryRelease = '0.4.1'
 export const registryCliVersion = '4.23.0'
 export const registryBaseUrl = `https://moru-ui-lab.riius.chatgpt.site/r/v${registryRelease}`
 

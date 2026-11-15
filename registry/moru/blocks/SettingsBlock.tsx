@@ -1,6 +1,6 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
-import { useI18n } from '../_lib/i18n'
+import { useBlockI18n } from '../_lib/block-i18n'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { Button } from '../button'
 import { Card } from '../card'
@@ -66,7 +66,7 @@ export function SettingsBlock({
   title: titleProp,
   description: descriptionProp,
 }: SettingsBlockProps = {}) {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const title = titleProp ?? t('작업 공간 설정')
   const description = descriptionProp ?? t('기본 정보와 팀에 필요한 알림을 정하세요.')
   const id = useId()

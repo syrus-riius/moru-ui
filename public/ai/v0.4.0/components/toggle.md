@@ -2,7 +2,7 @@
 
 Accessible pressed-state action with token-based size and styling.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -24,15 +24,7 @@ Referenced imported types/values:
 - `BaseToggle` from `@base-ui/react/toggle`
 
 ```ts
-type ToggleProps = Omit<
-  ComponentPropsWithoutRef<typeof BaseToggle>,
-  'className' | 'onPressedChange'
-> & {
-  className?: string
-  size?: 'sm' | 'md' | 'lg'
-  variant?: 'default' | 'outline'
-  onPressedChange?: (pressed: boolean) => void
-}
+type ToggleProps = Omit<ComponentPropsWithoutRef<typeof BaseToggle>, 'className' | 'onPressedChange'> & { className?: string; size?: 'sm' | 'md' | 'lg'; variant?: 'default' | 'outline'; onPressedChange?: (pressed: boolean) => void }
 ```
 
 Exported value type annotations / generic factory calls from source:

@@ -62,9 +62,9 @@ export function SyncStatus({ syncing }: { syncing: boolean }) {
   },
   button: {
     notes: [
-      'Use type="button" for non-submit actions inside forms. loading locks activation and announces busy state; keep a meaningful text label.',
+      'Use type="button" for non-submit actions inside forms. loading locks activation and announces busy state while the button stays focusable (aria-disabled, not the disabled attribute), so keyboard focus is not lost; keep a meaningful text label.',
       'Variants are primary, secondary, ghost, danger. Do not substitute shadcn variant names.',
-      'For long translated actions in narrow containers, textWrap="wrap" lets the label grow to multiple lines while preserving the S/M/L minimum height. The default remains nowrap; reflow the parent action row before truncating action text.',
+      'A label wraps on its own when its container is too narrow. textWrap="wrap" marks a label that is expected to wrap and tightens its vertical padding while preserving the S/M/L minimum height; textWrap="nowrap" forces a single line. Reflow the parent action row before truncating action text.',
     ],
     example: `import { Button } from '@/components/ui/moru/button'
 
@@ -100,6 +100,7 @@ export function WeeklyActivity() {
     notes: [
       'Use Field for the visible label, description and error connection. Placeholder text is not a label.',
       'onValueChange receives the string; native onChange receives an event. Keep controlled values defined from the first render.',
+      'loading makes the field read-only and busy instead of disabled: it keeps focus and its value is still submitted with the form. Use disabled when the value must not be sent.',
     ],
     example: `import { useState } from 'react'
 import { Field } from '@/components/ui/moru/field'
@@ -197,6 +198,7 @@ export function SiteFooter() {
     notes: [
       'Use native onChange(event), not onValueChange. Keep a visible label through Field.',
       'Allow multiline text to grow or scroll; do not hide entered content behind a fixed clipped height.',
+      'loading makes the field read-only and busy instead of disabled, so focus and the submitted value are kept.',
     ],
     example: `import { useState } from 'react'
 import { Field } from '@/components/ui/moru/field'
@@ -226,7 +228,7 @@ export function VerificationCode() {
   select: {
     notes: [
       'Moru Select accepts items; it has no SelectTrigger/SelectContent/SelectItem exports.',
-      'Use value/onValueChange for controlled selection. Preserve keyboard navigation and disabled options.',
+      'Use value/onValueChange for controlled selection; pass value={null} for a controlled select with nothing chosen (the placeholder is shown). Preserve keyboard navigation and disabled options.',
     ],
     example: `import { useState } from 'react'
 import { Field } from '@/components/ui/moru/field'
@@ -256,6 +258,7 @@ export function ProjectTabs() {
     notes: [
       'Menu accepts a ReactElement trigger and items with onClick. The export is Menu, not DropdownMenu.',
       'Use a trigger that forwards its props/ref (Moru Button does). Preserve focus restoration and keyboard activation.',
+      'Menu manages its own open state by default. open/defaultOpen/onOpenChange are available when the application needs to control it, as with Popover and Modal.',
     ],
     example: `import { Button } from '@/components/ui/moru/button'
 import { Menu } from '@/components/ui/moru/menu'
@@ -318,6 +321,7 @@ export function MobileDetails() {
     notes: [
       'Web Switch uses checked/onCheckedChange, not value/onValueChange. Its label and description are part of the clickable label.',
       'Use for independent on/off settings; provide clear text explaining the enabled state.',
+      'loading shows progress in the thumb and locks the switch as read-only, so it stays focusable while a change is being saved.',
     ],
     example: `import { useState } from 'react'
 import { Switch } from '@/components/ui/moru/switch'

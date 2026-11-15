@@ -1,4 +1,4 @@
-import { localizeCatalogItems } from '../catalog-search'
+import { localizeCatalogItems } from '../catalog/catalog-search'
 import { useI18n } from '../../i18n'
 import {
   lazy,
@@ -25,8 +25,8 @@ import {
 } from 'lucide-react'
 import { useExampleSession } from './ExampleSessionContext'
 import type { ExampleProject, ProjectStatus } from './example-session-state'
-import { useWorkspaceMembers } from '../WorkspaceMembersContext'
-import type { WorkspaceMember } from '../workspace-members-state'
+import { useWorkspaceMembers } from '../workspace-example/WorkspaceMembersContext'
+import type { WorkspaceMember } from '../workspace-example/workspace-members-state'
 import { MoruMark } from '../brand'
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Avatar } from '../ui/avatar'

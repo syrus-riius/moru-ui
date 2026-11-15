@@ -1,9 +1,9 @@
 # Moru 선택 설치
 
-Moru v0.4.0은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
+Moru v0.4.1은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
 선택한 파일을 직접 수정할 수 있으며 Moru npm 라이브러리에 종속되지 않습니다.
-공통 기반 1개·UI 항목 78개·재사용 블록 6개와 기존 Dialog 호환 별칭 1개로 총 86개 설치 항목을 제공합니다.
-8개 분야의 갤러리 77종과 StatusMessage를 포함합니다. 새 코드에서는 Modal을 사용하며 Header와 Footer도 개별 설치할 수 있습니다.
+공통 기반 1개·UI 항목 81개·재사용 블록 6개, 기존 Dialog 호환 별칭 1개, 블록이 함께 설치하는 번역 지원 항목(`block-messages`) 1개로 총 90개 설치 항목을 제공합니다.
+8개 분야의 갤러리 79종과 StatusMessage, FormattedInput을 포함합니다. 새 코드에서는 Modal을 사용하며 Header와 Footer도 개별 설치할 수 있습니다.
 항목 수는 설치 단위의 수이며 파일 수나 React export 수와는 다릅니다.
 
 ## 준비
@@ -17,18 +17,18 @@ CLI 버전은 이전 릴리스에서 사용한 `4.23.0`으로 고정합니다.
 ## 필요한 항목 설치
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/button.json
 ```
 
 항목 이름만 바꿔 Input·Field와 블록을 설치할 수 있습니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/search-filters.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/settings.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/settings.json
 ```
 
 공통 기반만 필요하면 `core.json`을 설치합니다. 다른 항목은 core를 의존성으로 가져옵니다.
@@ -37,31 +37,31 @@ npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/settings.j
 
 ## 8개 분야의 전체 UI 항목
 
-아래 이름을 `/r/v0.4.0/<이름>.json`에 넣어 설치하세요. 공통 `core`와 블록
+아래 이름을 `/r/v0.4.1/<이름>.json`에 넣어 설치하세요. 공통 `core`와 블록
 `dashboard`·`login`·`signup`·`settings`·`otp`·`search-filters` 여섯 항목은 이 표와 별도입니다.
 
 | 분야        | UI 항목 수 | 설치 이름                                                                                                                                                                                                                                                                                                                                                  |
 | ----------- | ---------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 폼·입력     |         25 | `field`, `input`, `number-input`, `password-input`, `textarea`, `checkbox`, `select`, `multi-select`, `switch`, `radio-group`, `slider`, `combobox`, `calendar`, `date-picker`, `date-range-picker`, `time-picker`, `time-range-picker`, `toggle-group`, `input-group`, `input-otp`, `label`, `native-select`, `file-input`, `attachment`, `questionnaire` |
+| 폼·입력     |         26 | `field`, `input`, `formatted-input`, `number-input`, `password-input`, `textarea`, `checkbox`, `select`, `multi-select`, `switch`, `radio-group`, `slider`, `combobox`, `calendar`, `date-picker`, `date-range-picker`, `time-picker`, `time-range-picker`, `toggle-group`, `input-group`, `input-otp`, `label`, `native-select`, `file-input`, `attachment`, `questionnaire` |
 | 버튼·동작   |          5 | `button`, `command`, `button-group`, `kbd`, `toggle`                                                                                                                                                                                                                                                                                                       |
 | 오버레이    |          9 | `modal`, `menu`, `popover`, `tooltip`, `alert-dialog`, `sheet`, `context-menu`, `drawer`, `hover-card`                                                                                                                                                                                                                                                     |
 | 탐색        |          7 | `tabs`, `pagination`, `breadcrumb`, `menubar`, `navigation-menu`, `sidebar`, `stepper`                                                                                                                                                                                                                                                                     |
 | 레이아웃    |         14 | `header`, `footer`, `card`, `accordion`, `avatar`, `separator`, `aspect-ratio`, `direction`, `item`, `collapsible`, `carousel`, `resizable`, `scroll-area`, `typography`                                                                                                                                                                                   |
-| 상태·피드백 |         10 | `badge`, `alert`, `progress`, `ring-progress`, `skeleton`, `toast`, `empty`, `spinner`, `marker`, `status-message`                                                                                                                                                                                                                                         |
+| 상태·피드백 |         12 | `badge`, `alert`, `progress`, `ring-progress`, `skeleton`, `toast`, `empty`, `spinner`, `loading-overlay`, `status-indicator`, `marker`, `status-message`                                                                                                                                                                                                                                         |
 | 데이터      |          3 | `table`, `chart`, `data-table`                                                                                                                                                                                                                                                                                                                             |
 | 대화·콘텐츠 |          5 | `bubble`, `code-block`, `message`, `message-scroller`, `trace`                                                                                                                                                                                                                                                                                             |
 
 분야별 선택 설치 예시입니다. 전체 레지스트리를 한꺼번에 설치하는 명령은 아닙니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/number-input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/command.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/context-menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/navigation-menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/carousel.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/toast.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/data-table.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/code-block.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/number-input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/command.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/context-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/navigation-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/carousel.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/toast.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/data-table.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/code-block.json
 ```
 
 대부분 설치 이름과 import 파일명이 같습니다. `direction`은 `direction-provider.tsx`에
@@ -72,9 +72,9 @@ npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/code-block
 Header·Footer와 Modal은 다음처럼 설치합니다.
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/header.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/footer.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/modal.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/header.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/footer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/modal.json
 ```
 
 Modal은 `variant="default|confirmation|form|success|danger"`와 `size="sm|md|lg|full"` 조합을 제공합니다.
@@ -136,6 +136,9 @@ export function ProjectForm() {
 core는 공통 CSS를 함께 설치합니다. 첫 버전은 컴포넌트별 CSS를 완전히 분리하지 않습니다.
 CSS는 Moru 표시가 있는 영역과 테마 portal로 범위를 제한하며, 호스트의 `:root` 토큰을
 설정하는 `default.css`는 설치하지 않습니다. Tailwind CSS 4는 레이아웃 utility에 필요합니다.
+Moru가 함께 넣는 작은 보조 utility는 `base` 캐스케이드 레이어에 있어서, Provider 안에서 쓰는
+호스트의 Tailwind 클래스(`flex md:hidden`, 버튼의 `text-sm` 등)가 그대로 적용됩니다.
+`styles.css`는 컴포넌트보다 먼저 import해도, 나중에 import해도 결과가 같습니다.
 개별 컴포넌트는 전용 CSS를 함께 가져옵니다. 복합 컴포넌트를 설치하면 실제로 import하는
 다른 Moru 항목도 설치됩니다. Chart의 Recharts, DataTable의 TanStack Table,
 Carousel의 Embla, Resizable의 React Resizable Panels는 해당 의존성이 필요할 때 설치합니다.
@@ -277,10 +280,10 @@ export function AuthenticationExamples() {
 ## 탭·메뉴·팝오버·드로어
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/drawer.json
 ```
 
 앞에서 연결한 `MoruProvider` 안에서 사용하세요. 아래 트리거 예시는 별도 설치한 Button을 사용합니다.
@@ -329,11 +332,11 @@ Popover·Drawer는 `initialFocus`·`finalFocus`, Menu는 `finalFocus`를 받습�
 ## 캘린더·날짜·시간 선택
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/calendar.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-range-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/time-range-picker.json
 ```
 
 필요한 캘린더·팝업·스타일·도우미도 함께 설치합니다.
@@ -388,14 +391,14 @@ picker는 `disabled`, `loading`, `readOnly`, `required`도 받습니다.
 
 ## 버전과 업데이트
 
-HTTP 항목과 의존성은 `/r/v0.4.0/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
+HTTP 항목과 의존성은 `/r/v0.4.1/` 버전 경로를 사용합니다. 기존 버전의 파일을 바꾸는 대신
 다음 릴리스에는 새 버전 경로를 발행합니다. 사용자의 소스를 자동으로 갱신하지는 않습니다.
 새 버전을 설치하기 전에 현재 파일을 커밋하고 CLI의 diff·덮어쓰기 안내를 확인하세요.
-이미 발행한 `/r/v0.3.1/`·`/r/v0.3.2/`·`/r/v0.3.3/`·`/r/v0.3.4/` 폴더와 설치 URL은 그대로 유지합니다.
+이미 발행한 `/r/v0.3.1/`·`/r/v0.3.2/`·`/r/v0.3.3/`·`/r/v0.3.4/`·`/r/v0.4.0/` 폴더와 설치 URL은 그대로 유지합니다.
 Tabs·Menu·Popover·Drawer는 v0.3.3부터, 날짜·시간 다섯 항목은 v0.3.4부터 제공하며 이전 버전에 추가하지 않습니다.
 
 GitHub의 `registry.json`도 같은 항목을 제공합니다. GitHub 주소 형식은
-`syrus-riius/moru-ui/button#v0.4.0`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
+`syrus-riius/moru-ui/button#v0.4.1`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
 HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하지 않았습니다.
 
 ## 지원 범위
@@ -403,7 +406,31 @@ HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하
 이 릴리스는 웹 React·Vite·TypeScript·Tailwind CSS 4를 대상으로 합니다.
 클라이언트 컴포넌트 경계는 생성 파일에 표시하지만 Next.js SSR·hydration은 별도 검증 범위입니다.
 React Native·Expo는 별도 구현이므로 이 웹 레지스트리로 설치하지 않습니다.
-v0.4.0은 산출물 생성과 프로덕션 빌드만 수행하며, 추가 항목의 자동 테스트·설치 스모크·브라우저 점검·CI 실행은 생략합니다.
+v0.4.1은 로컬에서 단위 테스트, 프로덕션 빌드, v0.4.1 결과물 대상 설치 스모크, 랩 화면의 수정 전후 브라우저 비교로 확인했습니다. CI는 실행하지 않았습니다.
+
+## v0.4.0에서 올릴 때
+
+v0.4.1은 캐스케이드와 포커스 문제를 고치고 설치되는 CSS 구성을 바꿨습니다.
+먼저 현재 파일을 커밋한 뒤, 쓰고 있는 항목을 다시 설치하세요.
+
+- **CSS가 컴포넌트별 파일이 됐습니다.** `controls-completion.css`, `advanced-controls.css`,
+  `navigation-completion.css`, `content-completion.css`, `data-completion.css`,
+  `enhanced-inputs.css`, `advanced-overlays.css`, `workflow-patterns.css`,
+  `page-chrome.css`, `overlays.css`, `time-controls.css`는 없어졌습니다. 각 컴포넌트는
+  `<컴포넌트>.css`를 import하고, 여러 컴포넌트가 함께 쓰는 규칙만 작은 `*-shared.css`에 있습니다.
+  다시 설치한 뒤 옛 파일은 지워도 됩니다. 어디서도 import하지 않습니다.
+- **Provider 안에서 호스트의 Tailwind 클래스가 이깁니다.** 보조 utility를 `base` 레이어로
+  내려서, 직접 쓴 `flex md:hidden`이나 `text-sm`이 더는 덮이지 않습니다.
+  `styles.css`는 컴포넌트보다 먼저 import해도, 나중에 import해도 됩니다.
+- **로딩 중에도 포커스를 유지합니다.** `loading`인 Button과 DatePicker·DateRangePicker의 트리거는
+  `disabled` 속성 대신 `aria-disabled`를 씁니다. Input·Textarea·Checkbox·Switch·Select·Combobox·MultiSelect·
+  NumberInput·InputOTP·시간 피커의 `loading`은 읽기 전용이 되어 폼 제출에 값이 포함됩니다.
+  값을 보내면 안 될 때는 `disabled`를 쓰세요. FileInput과 NativeSelect는 읽기 전용 상태가 없어 로딩 중 비활성으로 남습니다.
+- **Button 라벨은 기본으로 줄바꿈됩니다.** 실제 동작은 이전과 같고, `textWrap="nowrap"`이 이제 한 줄을 유지합니다.
+- **블록 문구가 별도 항목입니다.** 블록이 `block-messages`를 함께 설치하며 core에는 블록 번역이 없습니다.
+- **추가된 props.** Menu의 `open`·`defaultOpen`·`onOpenChange`, Select의 `value={null}`, Switch의 `loading`,
+  Select·Combobox·Checkbox·Switch의 ref 전달.
+- Chart의 빈 상태 클래스가 `ui-data-table-empty`에서 `ui-chart-empty`로 바뀌었습니다.
 
 원본은 `src/components/ui`, `src/components/blocks`, `src/theme`입니다.
 `npm run registry:build`가 설치용 파일을 생성하고 `npm run registry:check`가 오래된 산출물을 검사합니다.

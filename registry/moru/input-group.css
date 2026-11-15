@@ -1,0 +1,181 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-input-group {
+  font-family: var(--ui-font-family, inherit);
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+  box-sizing: border-box;
+}
+:where([data-moru-registry]) .ui-input-group {
+  --ui-group-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-group-icon: var(--ui-icon-size-md, 16px);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  min-width: 0;
+  width: 100%;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg, #f0f0ed);
+  transition:
+    border-color var(--ui-duration, 150ms),
+    box-shadow var(--ui-duration, 150ms);
+  border-color: transparent;
+}
+:where([data-moru-registry]) .ui-input-group:has(
+  .ui-input-group-input[data-size='sm'],
+  .ui-input-group-textarea[data-size='sm']
+) {
+  --ui-group-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-group-icon: var(--ui-icon-size-sm, 14px);
+}
+:where([data-moru-registry]) .ui-input-group:has(
+  .ui-input-group-input[data-size='lg'],
+  .ui-input-group-textarea[data-size='lg']
+) {
+  --ui-group-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-group-icon: var(--ui-icon-size-lg, 18px);
+}
+:where([data-moru-registry]) .ui-input-group:focus-within {
+  border-color: var(--ui-primary, #181818);
+  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
+  outline-offset: 2px;
+}
+:where([data-moru-registry]) .ui-input-group:has([aria-invalid='true']) {
+  border-color: var(--ui-danger, #c14b45);
+  background: var(--ui-danger-soft, #f9efef);
+  box-shadow: 0 0 0 1px var(--ui-error-ring, var(--ui-danger, #c14b45));
+  outline-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
+}
+:where([data-moru-registry]) .ui-input-group:has(:is(.ui-input-group-input, .ui-input-group-textarea):disabled) {
+  opacity: 1;
+  background: var(--ui-disabled-bg);
+  border-color: var(--ui-disabled-border);
+  color: var(--ui-disabled-text);
+  box-shadow: none;
+}
+/* Addon availability does not change the editable field's state. */
+:where([data-moru-registry]) .ui-input-group:has(:is(.ui-input-group-input, .ui-input-group-textarea)[data-loading]) {
+  background: var(--ui-loading-bg, #f3f3f1);
+  color: var(--ui-loading-text, #303030);
+  cursor: progress;
+}
+:where([data-moru-registry]) .ui-input-group:has([data-ui-state='focus']) {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
+  outline-offset: 2px;
+}
+:where([data-moru-registry]) .ui-input-group:has([aria-invalid='true']):has([data-ui-state='focus']) {
+  outline-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
+}
+:where([data-moru-registry]) .ui-input-group .ui-input-group-input:disabled,
+:where([data-moru-registry]) .ui-input-group .ui-input-group-textarea:disabled {
+  cursor: not-allowed;
+  color: var(--ui-disabled-text);
+}
+:where([data-moru-registry]) .ui-input-group .ui-input-group-input[data-loading],
+:where([data-moru-registry]) .ui-input-group .ui-input-group-textarea[data-loading] {
+  cursor: progress;
+  color: var(--ui-loading-text, #303030);
+}
+/* The group owns focus and errors, including when the field has its own UI classes. */
+:where([data-moru-registry]) .ui-input-group .ui-input-group-input.ui-input,
+:where([data-moru-registry]) .ui-input-group .ui-input-group-textarea.ui-textarea {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+:where([data-moru-registry]) .ui-input-group .ui-input-group-input.ui-input {
+  height: calc(var(--ui-resolved-control-height) - var(--ui-border-width, 1px) * 2);
+  min-height: calc(var(--ui-resolved-control-height) - var(--ui-border-width, 1px) * 2);
+}
+:where([data-moru-registry]) .ui-input-group-textarea.ui-textarea {
+  flex: 1 1 100%;
+  width: 100%;
+  order: 1;
+  border-radius: inherit;
+}
+:where([data-moru-registry]) .ui-input-group-addon {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+  color: var(--ui-muted, #6e6e6b);
+  padding-inline: var(--ui-group-padding);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-input-group-addon > svg {
+  width: var(--ui-group-icon);
+  height: var(--ui-group-icon);
+  flex-shrink: 0;
+}
+:where([data-moru-registry]) .ui-input-group-addon[data-align='inline-start'] {
+  order: 0;
+  padding-inline-end: 0;
+}
+:where([data-moru-registry]) .ui-input-group-addon[data-align='inline-end'] {
+  order: 2;
+  padding-inline-start: 0;
+}
+:where([data-moru-registry]) .ui-input-group-addon[data-align='block-start'],
+:where([data-moru-registry]) .ui-input-group-addon[data-align='block-end'] {
+  flex-basis: 100%;
+  padding: var(--ui-field-gap, 6px) var(--ui-group-padding);
+}
+:where([data-moru-registry]) .ui-input-group-addon[data-align='block-start'] {
+  order: 0;
+}
+:where([data-moru-registry]) .ui-input-group-addon[data-align='block-end'] {
+  order: 3;
+}
+:where([data-moru-registry]) .ui-input-group-button.ui-button {
+  margin: calc(var(--ui-space, 4px) / 2);
+  height: auto;
+  min-height: var(--ui-resolved-control-height);
+}
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-input-group .ui-input-group-input.ui-input {
+    min-height: calc(
+      max(44px, var(--ui-resolved-control-height)) - var(--ui-border-width, 1px) * 2
+    );
+    height: calc(max(44px, var(--ui-resolved-control-height)) - var(--ui-border-width, 1px) * 2);
+  }
+}
+@media (forced-colors: active) {
+  :where([data-moru-registry]) .ui-input-group {
+    border: 1px solid ButtonText;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-input-group {
+    transition: none;
+  }
+}
+
+/* Grouped controls own pointer and preview states as one surface. */
+:where([data-moru-registry]) .ui-input-group:has(
+    :is(.ui-input-group-input, .ui-input-group-textarea):not(:disabled):not([aria-invalid='true'])
+  ):is(:hover):not(:has([data-ui-state])), :where([data-moru-registry]) .ui-input-group:has(
+  :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='hover']:not(:disabled):not(
+      [aria-invalid='true']
+    )
+) {
+  background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
+  border-color: var(--ui-control-hover-border, var(--ui-border));
+}
+:where([data-moru-registry]) .ui-input-group:has(
+  :is(.ui-input-group-input, .ui-input-group-textarea):active:not(:disabled):not(
+      [aria-invalid='true']
+    ):not([data-ui-state])
+), :where([data-moru-registry]) .ui-input-group:has(
+  :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='pressed']:not(:disabled):not(
+      [aria-invalid='true']
+    )
+) {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+  border-color: var(--ui-control-pressed-border, #a1a1aa);
+}
+

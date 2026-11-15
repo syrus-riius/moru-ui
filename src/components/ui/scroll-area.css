@@ -1,0 +1,64 @@
+.ui-scroll-area {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+.ui-scroll-area {
+  position: relative;
+  overflow: hidden;
+  border: var(--ui-border-width) solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  background: var(--ui-surface);
+}
+.ui-scroll-viewport {
+  width: 100%;
+  height: 100%;
+  max-height: inherit;
+  border-radius: inherit;
+  outline: none;
+  overscroll-behavior: contain;
+}
+.ui-scroll-viewport:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -3px;
+}
+.ui-scroll-content {
+  min-width: 100%;
+}
+.ui-scroll-bar {
+  display: flex;
+  padding: 3px;
+  margin: 2px;
+  user-select: none;
+  opacity: 0;
+  transition: opacity var(--ui-duration);
+}
+.ui-scroll-bar[data-orientation='vertical'] {
+  width: 12px;
+}
+.ui-scroll-bar[data-orientation='horizontal'] {
+  height: 12px;
+}
+.ui-scroll-area:hover .ui-scroll-bar,
+.ui-scroll-area:focus-within .ui-scroll-bar,
+.ui-scroll-bar[data-scrolling] {
+  opacity: 1;
+}
+.ui-scroll-thumb {
+  flex: 1;
+  border-radius: 99px;
+  background: var(--ui-muted);
+  opacity: 0.65;
+}
+.ui-scroll-corner {
+  background: var(--ui-surface);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-scroll-bar {
+    transition: none;
+  }
+}

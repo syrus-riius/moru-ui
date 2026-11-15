@@ -1,7 +1,8 @@
 import { useI18n } from '../../lib/i18n'
 import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 import { cn } from '../../lib/cn'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './table.css'
 
 export type TableProps = ComponentPropsWithoutRef<'table'> & {
   scrollLabel?: string

@@ -1,6 +1,6 @@
 # Moru for Expo / React Native
 
-Version 0.4.0 · source e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6
+Version 0.4.0 · source c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc
 
 The web catalog is not a native component catalog. Use `apps/moru-expo` with the local `packages/moru-native` package. Its dependency is `file:../../packages/moru-native`; preserve that monorepo relation or deliberately relocate both. This is not an npm publication claim.
 
@@ -51,14 +51,7 @@ type MoruNativeProviderProps = {
   mode?: MoruNativeMode
   accent?: string
   /** Native overrides can be derived from exported Moru web tokens. */
-  tokens?: Partial<Pick<MoruNativeTheme, 'space' | 'radius' | 'borderWidth' | 'density'>> & {
-    colors?: Partial<MoruNativeColors>
-    metrics?: NativeMetricOverrides
-    typography?: NativeTypographyOverrides
-    componentSpacing?: NativeComponentSpacing
-    fontFamily?: string
-    webFontFamily?: string
-  }
+  tokens?: Partial<Pick<MoruNativeTheme, 'space' | 'radius' | 'borderWidth' | 'density'>> & { colors?: Partial<MoruNativeColors>; metrics?: NativeMetricOverrides; typography?: NativeTypographyOverrides; componentSpacing?: NativeComponentSpacing; fontFamily?: string; webFontFamily?: string }
 }
 
 type AppScreenProps = {
@@ -91,14 +84,7 @@ type TextFieldProps = Omit<TextInputProps, 'style'> & {
   size?: NativeSize
 }
 
-type NativeSwitchProps = {
-  label: string
-  description?: string
-  value: boolean
-  onValueChange: (value: boolean) => void
-  disabled?: boolean
-  style?: StyleProp<ViewStyle>
-}
+type NativeSwitchProps = { label: string; description?: string; value: boolean; onValueChange: (value: boolean) => void; disabled?: boolean; style?: StyleProp<ViewStyle> }
 ```
 
 
@@ -112,24 +98,9 @@ type NativePickerProps = {
   disabled?: boolean
 }
 
-type NativeSliderProps = {
-  label: string
-  value: number
-  onValueChange: (value: number) => void
-  min?: number
-  max?: number
-  step?: number
-  disabled?: boolean
-}
+type NativeSliderProps = { label: string; value: number; onValueChange: (value: number) => void; min?: number; max?: number; step?: number; disabled?: boolean }
 
-type NativeDatePickerProps = {
-  label: string
-  value: Date
-  onValueChange: (value: Date) => void
-  mode?: 'date' | 'time'
-  minimumDate?: Date
-  maximumDate?: Date
-}
+type NativeDatePickerProps = { label: string; value: Date; onValueChange: (value: Date) => void; mode?: 'date' | 'time'; minimumDate?: Date; maximumDate?: Date }
 ```
 
 Read [native README](https://github.com/syrus-riius/moru-ui/blob/main/packages/moru-native/README.md) and [native source](https://github.com/syrus-riius/moru-ui/tree/main/packages/moru-native/src) for the remaining component props. Use the source’s actual exports instead of assuming SwiftUI and web components have one-to-one wrappers.

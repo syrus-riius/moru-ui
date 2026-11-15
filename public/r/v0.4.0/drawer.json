@@ -16,7 +16,7 @@
       "path": "registry/moru/drawer-utils.ts",
       "type": "registry:ui",
       "target": "@ui/moru/drawer-utils.ts",
-      "content": "// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\n/** A deliberate pull or a short, quick downward gesture dismisses the drawer. */\nexport function shouldDismissDrawer(distance: number, elapsedMs: number): boolean {\n  if (!Number.isFinite(distance) || !Number.isFinite(elapsedMs) || distance < 0 || elapsedMs < 0)\n    return false\n  return distance >= 88 || (distance >= 28 && distance / Math.max(elapsedMs, 1) >= 0.55)\n}\n\n/** Ignore a drag's synthesized pointer click, never a keyboard/assistive activation. */\nexport function shouldSuppressDrawerClick(dragged: boolean, clickDetail: number): boolean {\n  return dragged && clickDetail > 0\n}\n"
+      "content": "// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\n/** A deliberate pull or a short, quick downward gesture dismisses the drawer. */\nexport function shouldDismissDrawer(distance: number, elapsedMs: number): boolean {\n  if (!Number.isFinite(distance) || !Number.isFinite(elapsedMs) || distance < 0 || elapsedMs < 0) return false\n  return distance >= 88 || (distance >= 28 && distance / Math.max(elapsedMs, 1) >= 0.55)\n}\n\n/** Ignore a drag's synthesized pointer click, never a keyboard/assistive activation. */\nexport function shouldSuppressDrawerClick(dragged: boolean, clickDetail: number): boolean {\n  return dragged && clickDetail > 0\n}\n"
     },
     {
       "path": "registry/moru/drawer.tsx",
@@ -31,7 +31,7 @@
   ],
   "meta": {
     "version": "0.4.0",
-    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
     "license": "MIT",
     "testedWith": {
       "react": "19.3.1",

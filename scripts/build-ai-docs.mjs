@@ -23,7 +23,9 @@ const sourceTarget = (item) =>
     ? 'registry/moru/provider.tsx'
     : item.type === 'registry:block'
       ? `registry/moru/blocks/${path.basename(item.entry)}`
-      : `registry/moru/${path.basename(item.entry)}`
+      : item.type === 'registry:lib'
+        ? `registry/moru/_lib/${path.basename(item.entry)}`
+        : `registry/moru/${path.basename(item.entry)}`
 
 function identifiers(node, result = new Set()) {
   if (!node || typeof node !== 'object') return result
@@ -297,6 +299,7 @@ In per-item examples replace \`@/components/ui/moru/NAME\` with the starter’s 
 - Choose semantic tokens for surfaces, text, accent and statuses. Reuse density, typography roles, control sizes, spacing and component spacing instead of scattering arbitrary pixel values.
 - Keep labels visible. Preserve Field’s ID/description/error connections, focus-visible styling, keyboard navigation, focus return and popup behavior.
 - Preserve OTP paste/autofill, loading locks, input values on errors and meaningful empty/success/error feedback. Do not replace robust controls with lookalikes.
+- loading locks a control without removing it from the tab order: buttons and date triggers become aria-disabled, fields become read-only, and their values are still submitted. Only FileInput and NativeSelect use the disabled attribute while busy. Use disabled, not loading, when a value must not be sent.
 - Compose screen blocks first: dashboard, login, signup or workspace settings. Signup includes email verification; Dashboard embeds project search and filters. OTP/search-filters remain supporting patterns. Authentication previews are local demos; server verification and persistence belong to the application.
 - Prefer responsive flow/grid, min-width: 0 for shrinking content and deliberate overflow. Respect reduced motion and keep text readable in light/dark and at narrow widths.
 - Keep imports, controlled callbacks and prop names from the selected item docs. Moru shares infrastructure with other libraries but does not share every public API. Never invent shadcn-style compound exports.
@@ -401,7 +404,7 @@ export async function generateAiDocs(root = defaultRoot) {
       title: item.title,
       description: item.description,
       kind:
-        item.name === 'core'
+        item.name === 'core' || item.type === 'registry:lib'
           ? 'foundation'
           : item.type === 'registry:block'
             ? 'block'

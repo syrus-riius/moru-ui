@@ -1,0 +1,134 @@
+.ui-drawer {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+  --ui-navigation-height: var(--ui-control-height-md, 40px);
+  --ui-navigation-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-navigation-icon: var(--ui-icon-size-md, 16px);
+  --ui-navigation-close-size: var(--ui-control-height-sm, 32px);
+}
+[data-size='sm'].ui-drawer {
+  --ui-navigation-height: var(--ui-control-height-sm, 32px);
+  --ui-navigation-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-navigation-icon: var(--ui-icon-size-sm, 14px);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+[data-size='lg'].ui-drawer {
+  --ui-navigation-height: var(--ui-control-height-lg, 48px);
+  --ui-navigation-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-navigation-icon: var(--ui-icon-size-lg, 18px);
+}
+.ui-drawer {
+  --ui-drawer-handle-size: max(32px, var(--ui-control-height-sm, 32px));
+  position: fixed;
+  z-index: 71;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: block;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  width: min(640px, 100%);
+  max-height: calc(100dvh - max(16px, env(safe-area-inset-top)));
+  margin-inline: auto;
+  padding: 0 max(var(--ui-card-padding, 24px), env(safe-area-inset-right))
+    max(var(--ui-card-padding, 24px), env(safe-area-inset-bottom))
+    max(var(--ui-card-padding, 24px), env(safe-area-inset-left));
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-bottom: 0;
+  border-radius: var(--ui-radius, 6px) var(--ui-radius, 6px) 0 0;
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 -8px 28px #00000016);
+  transform: translateY(var(--ui-drawer-drag, 0));
+  transition:
+    transform var(--ui-duration, 160ms),
+    opacity var(--ui-duration, 160ms);
+}
+.ui-drawer[data-starting-style],
+.ui-drawer[data-ending-style] {
+  transform: translateY(100%);
+  opacity: 0.5;
+}
+.ui-drawer[data-dragging] {
+  transition: none;
+}
+.ui-drawer-handle {
+  display: grid;
+  box-sizing: border-box;
+  place-items: center;
+  width: min(160px, 55%);
+  height: var(--ui-drawer-handle-size);
+  min-height: var(--ui-drawer-handle-size);
+  padding: var(--ui-space, 4px);
+  margin: 0 auto;
+  border: 0;
+  border-radius: 0 0 8px 8px;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  flex: none;
+}
+.ui-drawer-handle:active {
+  cursor: grabbing;
+}
+.ui-drawer-handle > span {
+  display: block;
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--ui-border, #d4d4d8);
+}
+.ui-drawer-header {
+  box-sizing: border-box;
+  min-height: calc(
+    var(--ui-navigation-close-size) + var(--ui-field-gap, 8px) + var(--ui-form-gap, 20px)
+  );
+  padding-inline-end: calc(var(--ui-navigation-close-size) + var(--ui-control-gap, 8px));
+  padding-block: var(--ui-field-gap, 8px) var(--ui-form-gap, 20px);
+  flex: none;
+}
+/* Scroll the complete drawer so tall headers/footers cannot squeeze the form to zero. */
+.ui-drawer-content {
+  min-width: 0;
+  overflow: visible;
+}
+.ui-drawer-content > :first-child {
+  margin-block-start: 0;
+}
+.ui-drawer-content > :last-child {
+  margin-block-end: 0;
+}
+.ui-drawer-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ui-field-gap, 8px);
+  padding-top: var(--ui-form-gap, 20px);
+}
+.ui-drawer-footer > :is(button, .ui-button) {
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-drawer {
+    transition: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .ui-drawer {
+    --ui-navigation-close-size: max(44px, var(--ui-control-height-sm, 32px));
+  }
+  .ui-drawer {
+    --ui-drawer-handle-size: max(44px, var(--ui-control-height-sm, 32px));
+  }
+}

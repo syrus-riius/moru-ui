@@ -2,7 +2,8 @@ import { useState, type ReactNode } from 'react'
 import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
 import { Toggle as BaseToggle } from '@base-ui/react/toggle'
 import { cn } from '../../lib/cn'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './toggle-group.css'
 
 export interface ToggleGroupItem {
   value: string

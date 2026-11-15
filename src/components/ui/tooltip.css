@@ -1,0 +1,60 @@
+.ui-tooltip {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+}
+
+.ui-tooltip-positioner {
+  z-index: 90;
+}
+
+.ui-tooltip {
+  max-width: min(calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  max-height: min(calc(100dvh - 24px), var(--available-height, calc(100dvh - 24px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);
+  transform-origin: var(--transform-origin);
+  transition:
+    opacity var(--ui-duration, 160ms),
+    transform var(--ui-duration, 160ms);
+}
+
+.ui-tooltip {
+  width: max-content;
+  max-width: min(280px, calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));
+  padding: var(--ui-field-gap, 8px) var(--ui-control-padding-x-sm, 10px);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  border-color: transparent;
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-primary, #181818);
+  color: var(--ui-primary-foreground, #fff);
+}
+
+.ui-tooltip[data-starting-style],
+.ui-tooltip[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.ui-tooltip[data-instant] {
+  transition-duration: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-tooltip {
+    transition: none;
+  }
+}

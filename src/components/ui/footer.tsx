@@ -1,7 +1,7 @@
 import { useI18n } from '../../lib/i18n'
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
-import './page-chrome.css'
+import './footer.css'
 
 export interface FooterColumn {
   title: string

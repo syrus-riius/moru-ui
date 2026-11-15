@@ -211,9 +211,13 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--ui-type-label-weight, 550);
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
+}
+/* Labels wrap by default (readability.css). Two classes keep this opt-out ahead of
+   that rule in any stylesheet order. */
+:where([data-moru-registry]) .ui-button[data-text-wrap='nowrap'] {
+  white-space: nowrap;
 }
 :where([data-moru-registry]) .ui-button[data-text-wrap='wrap'] {
   height: auto;
@@ -757,13 +761,17 @@
 
 :where([data-moru-registry]) .ui-button[data-variant='secondary']:is([data-ui-state='hover'], [data-ui-state='pressed']):not(
     :disabled
-  ):not([data-disabled]), :where([data-moru-registry]) .ui-button[data-variant='secondary']:not([data-ui-state]):is(:hover, :active):not(:disabled) {
+  ):not([data-disabled]), :where([data-moru-registry]) .ui-button[data-variant='secondary']:not([data-ui-state]):is(:hover, :active):not(:disabled):not(
+    [data-disabled]
+  ) {
   border-color: var(--ui-control-hover-border, #c4c4ca);
 }
 
 :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
-  ):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([aria-invalid='true']), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
+  ):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='hover']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
   background: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
@@ -772,7 +780,9 @@
 
 :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
-  ):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([aria-invalid='true']), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
+  ):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ), :where([data-moru-registry]) :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
   background: var(--ui-control-pressed-bg, #e8e8e4);
@@ -781,7 +791,7 @@
 
 :where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 :where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='hover']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
@@ -790,7 +800,7 @@
 
 :where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-ui-state]):active:not(:disabled):not(
     [data-disabled]
-  ):not([aria-invalid='true']),
+  ):not([aria-invalid='true']):not([data-loading]),
 :where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
@@ -799,7 +809,7 @@
 
 :where([data-moru-registry]) .ui-checkbox[data-checked]:not([data-ui-state]):hover:not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 :where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='hover']:not([data-disabled]):not([aria-invalid='true']) {
   background: var(--ui-primary-hover, #303030);
   border-color: var(--ui-primary-hover, #303030);
@@ -808,7 +818,7 @@
 
 :where([data-moru-registry]) .ui-checkbox[data-checked]:not([data-ui-state]):active:not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 :where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='pressed']:not([data-disabled]):not(
     [aria-invalid='true']
   ) {

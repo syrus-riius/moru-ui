@@ -28,7 +28,7 @@ import {
 } from 'recharts'
 import { Button } from './button'
 import { cn } from '../../lib/cn'
-import './data-completion.css'
+import './chart.css'
 import './chart-variations.css'
 
 export type ChartConfig = Record<string, { label: string; color: string }>
@@ -460,7 +460,7 @@ export function Chart({
           ) : null}
         </>
       ) : (
-        <p className="ui-data-table-empty">{t('표시할 데이터가 없습니다.')}</p>
+        <p className="ui-chart-empty">{t('표시할 데이터가 없습니다.')}</p>
       )}
     </figure>
   )

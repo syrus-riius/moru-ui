@@ -12,7 +12,8 @@ import {
   type QuestionnaireAnswers,
   type QuestionnaireQuestion,
 } from './questionnaire-utils'
-import './content-completion.css'
+import './content-shared.css'
+import './questionnaire.css'
 
 export type {
   QuestionnaireAnswer,

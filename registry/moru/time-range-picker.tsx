@@ -14,7 +14,8 @@ import {
   subscribeTimeFormReset,
   type TimeRangeValue,
 } from './time-utils'
-import './time-controls.css'
+import './time-shared.css'
+import './time-range-picker.css'
 
 export type { TimeRangeValue } from './time-utils'
 export interface TimeRangePickerProps {

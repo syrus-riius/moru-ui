@@ -593,7 +593,7 @@
 .ui-date-picker-trigger[aria-invalid='true']:focus-visible {
   outline-color: var(--ui-error-ring, #c14b45);
 }
-.ui-date-picker-trigger:disabled {
+.ui-date-picker-trigger:is(:disabled, [aria-busy='true']) {
   color: var(--ui-disabled-text, #a1a1aa);
   background: var(--ui-disabled-bg, #f3f3f1);
   border-color: var(--ui-disabled-border, #e8e8e4);

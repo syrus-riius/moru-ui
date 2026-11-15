@@ -1,7 +1,8 @@
 import { forwardRef, type LabelHTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
 import { useFieldContext } from './field-context'
-import './controls-completion.css'
+import './controls-shared.css'
+import './label.css'
 
 export type LabelProps = LabelHTMLAttributes<HTMLLabelElement>
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(

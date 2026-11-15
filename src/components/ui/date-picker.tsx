@@ -11,7 +11,7 @@ import { parseDatePickerFormValue, subscribeDatePickerFormReset } from './date-p
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './popover.css'
 import './calendar.css'
 import './date-picker-form.css'
 
@@ -132,8 +132,9 @@ export function DatePicker({
       {...(!field ? { id: controlId } : {})}
       className="ui-date-picker-trigger"
       data-size={size}
-      disabled={unavailable}
-      aria-disabled={readOnly || undefined}
+      // Busy uses aria-disabled like read-only does, so the trigger keeps keyboard focus.
+      disabled={disabled}
+      aria-disabled={readOnly || loading || undefined}
       aria-busy={loading || undefined}
       aria-label={
         ariaLabel ?? (!field && !visibleLabel && !labelledBy ? t('날짜 선택') : undefined)
@@ -174,8 +175,8 @@ export function DatePicker({
         value={selectedKey}
         min={minKey}
         max={maxKey}
-        disabled={unavailable}
-        readOnly={readOnly}
+        disabled={disabled}
+        readOnly={readOnly || loading}
         required={required}
         aria-hidden="true"
         tabIndex={-1}

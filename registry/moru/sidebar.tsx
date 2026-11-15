@@ -7,7 +7,8 @@ import { Menu, PanelLeftClose, PanelLeftOpen, X } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './sidebar.css'
 
 const mobileSidebarQuery = '(max-width: 640px)'
 function subscribeToSidebarViewport(onChange: () => void) {

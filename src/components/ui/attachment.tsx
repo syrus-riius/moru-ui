@@ -3,7 +3,8 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react'
 import { FileText, RotateCcw, X } from 'lucide-react'
 import { cn } from '../../lib/cn'
 import { Button } from './button'
-import './content-completion.css'
+import './content-shared.css'
+import './attachment.css'
 
 export type AttachmentStatus = 'idle' | 'uploading' | 'processing' | 'error' | 'done'
 export function formatFileSize(bytes: number, locale = 'ko-KR') {

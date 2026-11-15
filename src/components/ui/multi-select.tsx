@@ -7,8 +7,10 @@ import { mergeDescriptionIds, useFieldContext } from './field-context'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
 import type { ComboboxItem } from './combobox'
-import './advanced-controls.css'
-import './enhanced-inputs.css'
+import './advanced-controls-shared.css'
+import './combobox.css'
+import './enhanced-input.css'
+import './multi-select.css'
 
 export type MultiSelectItem = ComboboxItem
 export interface MultiSelectProps {
@@ -145,8 +147,10 @@ export function MultiSelect({
         name={name}
         form={form}
         required={required}
-        disabled={unavailable}
-        readOnly={readOnly}
+        // Busy locks the field with readOnly, not disabled: focus stays in the input
+        // while options load and the selected values still submit with the form.
+        disabled={disabled}
+        readOnly={readOnly || loading}
         itemToStringLabel={(item) => item.label}
         itemToStringValue={(item) => item.value}
         isItemEqualToValue={(item, selected) => item.value === selected.value}
@@ -175,6 +179,7 @@ export function MultiSelect({
                     <span>{item.label}</span>
                     {!readOnly && (
                       <BaseCombobox.ChipRemove
+                        disabled={unavailable}
                         className="ui-multi-select-chip-remove"
                         aria-label={t('{v0} 선택 해제', { v0: item.label })}
                       >

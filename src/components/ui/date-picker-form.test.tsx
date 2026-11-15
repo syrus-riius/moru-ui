@@ -4,7 +4,7 @@ import { DatePicker } from './date-picker'
 import { Field } from './field'
 import { calendarDateKey, createCalendarDate } from './calendar-utils'
 import { parseDatePickerFormValue, subscribeDatePickerFormReset } from './date-picker-form-utils'
-import { AdvancedComponentDemo } from '../AdvancedComponentDemo'
+import { AdvancedComponentDemo } from '../demos/AdvancedComponentDemo'
 import { ToastProvider } from './toast'
 
 const tags = (markup: string, tag: string) =>

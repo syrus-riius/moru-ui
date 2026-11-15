@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync, readdirSync } from 'node:fs'
-import { components } from '../components/component-catalog'
+import { components } from '../components/catalog/component-catalog'
 import {
   componentSpacingTargets,
   getComponentSpacingCss,

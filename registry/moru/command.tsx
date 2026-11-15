@@ -6,7 +6,8 @@ import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './command.css'
 
 export interface CommandItem {
   id: string

@@ -30,7 +30,7 @@
 .sim-component-chart .recharts-cartesian-axis-tick text {
   font-size: 10px;
 }
-.sim-component-chart .ui-data-table-empty,
+.sim-component-chart .ui-chart-empty,
 .sim-chart-loading {
   display: grid;
   align-content: center;

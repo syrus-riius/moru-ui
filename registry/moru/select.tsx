@@ -3,7 +3,7 @@
 import { useI18n } from './_lib/i18n'
 import { Select as BaseSelect } from '@base-ui/react/select'
 import { cn } from './_lib/cn'
-import { useEffect, useState, type AriaAttributes } from 'react'
+import { forwardRef, useEffect, useState, type AriaAttributes } from 'react'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
@@ -11,8 +11,9 @@ import type { UIState } from './state'
 
 export interface SelectProps {
   items: Array<{ value: string; label: string; disabled?: boolean }>
-  value?: string
-  defaultValue?: string
+  /** Pass null for a controlled select with nothing chosen; the placeholder is shown. */
+  value?: string | null
+  defaultValue?: string | null
   onValueChange?: (value: string) => void
   placeholder?: string
   'aria-label'?: string
@@ -30,26 +31,29 @@ export interface SelectProps {
   previewState?: UIState
 }
 
-export function Select({
-  items,
-  value,
-  defaultValue,
-  onValueChange,
-  placeholder: placeholderProp,
-  'aria-label': ariaLabel,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
-  disabled,
-  readOnly,
-  name,
-  form,
-  required,
-  id,
-  className,
-  size = 'md',
-  loading = false,
-  previewState,
-}: SelectProps) {
+export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select(
+  {
+    items,
+    value,
+    defaultValue,
+    onValueChange,
+    placeholder: placeholderProp,
+    'aria-label': ariaLabel,
+    'aria-describedby': describedBy,
+    'aria-invalid': invalid,
+    disabled,
+    readOnly,
+    name,
+    form,
+    required,
+    id,
+    className,
+    size = 'md',
+    loading = false,
+    previewState,
+  },
+  ref,
+) {
   const { t } = useI18n()
   const placeholder = placeholderProp ?? t('선택해주세요')
 
@@ -81,13 +85,16 @@ export function Select({
         }
         if (nextValue !== null) onValueChange?.(nextValue)
       }}
-      disabled={unavailable}
-      readOnly={readOnly}
+      // Busy locks the trigger with readOnly, not disabled, so it keeps keyboard focus
+      // and the selected value still takes part in form submission.
+      disabled={disabled || previewState === 'disabled'}
+      readOnly={readOnly || busy}
       name={name}
       form={form}
       required={required}
     >
       <BaseSelect.Trigger
+        ref={ref}
         id={id ?? field?.controlId}
         aria-label={ariaLabel}
         aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
@@ -155,4 +162,4 @@ export function Select({
       </OverlayPortal>
     </BaseSelect.Root>
   )
-}
+})

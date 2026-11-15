@@ -1,0 +1,74 @@
+.ui-table-scroll {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+}
+
+.ui-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+}
+.ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  caption-side: bottom;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+}
+.ui-table-head,
+.ui-table-cell {
+  height: max(40px, calc(var(--ui-control-height-md, 40px) + var(--ui-space, 4px)));
+  padding: calc(var(--ui-space, 4px) * 2)
+    calc(var(--ui-control-padding-x-md, 12px) + var(--ui-space, 4px));
+  border-bottom: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  vertical-align: middle;
+  text-align: start;
+}
+.ui-table-head {
+  color: var(--ui-muted, #6e6e6b);
+  background: var(--ui-surface, #fff);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-label-line-height, 1.45);
+}
+.ui-table-cell {
+  font-size: var(--ui-type-body-size, 14px);
+}
+.ui-table-body .ui-table-row:last-child .ui-table-cell {
+  border-bottom: 0;
+}
+.ui-table-body .ui-table-row:hover,
+.ui-table-row[data-state='selected'] {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+.ui-table-footer {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  font-weight: var(--ui-type-label-weight, 550);
+}
+.ui-table-caption {
+  padding: calc(var(--ui-space, 4px) * 3);
+  color: var(--ui-muted, #6e6e6b);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.ui-table-scroll:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}
+.ui-table-scroll:focus-visible {
+  outline-offset: -3px;
+}

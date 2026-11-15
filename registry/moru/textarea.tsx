@@ -23,6 +23,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     value,
     defaultValue,
     disabled,
+    readOnly,
     name,
     loading = false,
     previewState,
@@ -33,7 +34,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
 ) {
   const field = useFieldContext()
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks editing with readOnly, not disabled: the field keeps keyboard focus
+  // and its value still takes part in form submission.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   const textarea = (
     <textarea
       {...props}
@@ -49,7 +53,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       data-loading={busy || undefined}
       value={value}
       defaultValue={defaultValue}
-      disabled={unavailable}
+      disabled={locked}
+      readOnly={readOnly || busy}
       name={name}
       onChange={(event) => {
         if (!unavailable) onChange?.(event)
@@ -64,7 +69,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       id={id ?? field.controlId}
       value={value}
       defaultValue={defaultValue}
-      disabled={unavailable}
+      disabled={locked}
       name={name}
       render={textarea}
     />

@@ -1,0 +1,96 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-alert-dialog {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-alert-dialog {
+  position: fixed;
+  z-index: 71;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: min(440px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: var(--ui-card-padding, 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--ui-duration, 160ms),
+    scale var(--ui-duration, 160ms);
+}
+
+:where([data-moru-registry]) .ui-alert-dialog[data-starting-style],
+:where([data-moru-registry]) .ui-alert-dialog[data-ending-style] {
+  opacity: 0;
+  scale: 0.97;
+}
+
+:where([data-moru-registry]) .ui-alert-dialog:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: -3px;
+}
+
+:where([data-moru-registry]) .ui-alert-dialog-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-control-height-md, 40px);
+  height: var(--ui-control-height-md, 40px);
+  margin-block-end: var(--ui-form-gap, 24px);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: var(--ui-radius, 6px);
+  color: var(--ui-primary-surface-text, #181818);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  border-color: transparent;
+}
+
+:where([data-moru-registry]) .ui-alert-dialog-mark[data-destructive] {
+  color: var(--ui-danger-text, #be4545);
+  border-color: var(--ui-danger-border, #edc8c8);
+  background: var(--ui-danger-soft, #faf0f0);
+}
+
+:where([data-moru-registry]) .ui-alert-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap, 8px);
+  margin-block-start: var(--ui-form-gap, 24px);
+  padding-block-start: var(--ui-form-gap, 24px);
+  border-block-start: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+}
+
+:where([data-moru-registry]) .ui-alert-dialog-actions > .ui-button {
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 540px) {
+  :where([data-moru-registry]) .ui-alert-dialog-actions {
+    flex-direction: column-reverse;
+  }
+  :where([data-moru-registry]) .ui-alert-dialog-actions > button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-alert-dialog {
+    transition: none;
+  }
+}
+

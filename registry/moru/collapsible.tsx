@@ -4,7 +4,8 @@ import type { ReactNode } from 'react'
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import { ChevronDown } from 'lucide-react'
 import { cn } from './_lib/cn'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './collapsible.css'
 
 export interface CollapsibleProps {
   title: ReactNode

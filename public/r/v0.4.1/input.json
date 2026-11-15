@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Accessible text input with Field integration.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/input.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/input.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type ComponentPropsWithoutRef } from 'react'\nimport { Input as BaseInput } from '@base-ui/react/input'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport type { UIState } from './state'\n\nexport type InputProps = Omit<ComponentPropsWithoutRef<typeof BaseInput>, 'className' | 'size'> & {\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}\n\nexport const Input = forwardRef<HTMLInputElement, InputProps>(function Input(\n  {\n    className,\n    size = 'md',\n    id,\n    loading = false,\n    previewState,\n    disabled,\n    readOnly,\n    onValueChange,\n    onChange,\n    'aria-describedby': describedBy,\n    'aria-invalid': invalid,\n    ...props\n  },\n  ref,\n) {\n  const field = useFieldContext()\n  const busy = loading || previewState === 'loading'\n  // Busy locks editing with readOnly, not disabled: the field keeps keyboard focus\n  // and its value still takes part in form submission.\n  const locked = disabled || previewState === 'disabled'\n  const unavailable = locked || busy\n  const input = (\n    <BaseInput\n      {...props}\n      ref={ref}\n      id={id ?? field?.controlId}\n      aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}\n      aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}\n      aria-busy={busy || undefined}\n      className={cn('ui-input w-full min-w-0', className)}\n      data-size={size}\n      data-ui-state={previewState}\n      data-loading={busy || undefined}\n      disabled={locked}\n      readOnly={readOnly || busy}\n      onValueChange={(value, details) => {\n        if (!unavailable) onValueChange?.(value, details)\n      }}\n      onChange={(event) => {\n        if (!unavailable) onChange?.(event)\n      }}\n    />\n  )\n  return (\n    <span className=\"ui-control-loading-wrap\" data-size={size}>\n      {input}\n      {busy && (\n        <span className=\"ui-control-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" />\n      )}\n    </span>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

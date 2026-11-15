@@ -20,7 +20,7 @@ import {
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './popover.css'
 import './calendar.css'
 import './date-picker-form.css'
 import './date-range-picker.css'
@@ -173,8 +173,9 @@ export function DateRangePicker({
       {...(!field ? { id: controlId } : {})}
       className="ui-date-picker-trigger ui-date-range-picker-trigger"
       data-size={size}
-      disabled={unavailable}
-      aria-disabled={readOnly || undefined}
+      // Busy uses aria-disabled like read-only does, so the trigger keeps keyboard focus.
+      disabled={disabled}
+      aria-disabled={readOnly || loading || undefined}
       aria-busy={loading || undefined}
       aria-label={
         ariaLabel ?? (!field && !visibleLabel && !labelledBy ? t('날짜 범위 선택') : undefined)
@@ -215,8 +216,8 @@ export function DateRangePicker({
         value={keys.start}
         min={bounds.startMin}
         max={bounds.startMax}
-        disabled={unavailable}
-        readOnly={readOnly}
+        disabled={disabled}
+        readOnly={readOnly || loading}
         required={completeRequired}
         aria-hidden="true"
         tabIndex={-1}
@@ -234,8 +235,8 @@ export function DateRangePicker({
         value={keys.end}
         min={bounds.endMin}
         max={bounds.endMax}
-        disabled={unavailable}
-        readOnly={readOnly}
+        disabled={disabled}
+        readOnly={readOnly || loading}
         required={completeRequired}
         aria-hidden="true"
         tabIndex={-1}

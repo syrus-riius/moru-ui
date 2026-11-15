@@ -1,4 +1,4 @@
-import { useI18n } from '../../lib/i18n'
+import { useBlockI18n } from '../../lib/block-i18n'
 import {
   useEffect,
   useId,
@@ -144,7 +144,7 @@ export function ProjectTasksApp({
   onBack?: () => void
   embedded?: boolean
 }) {
-  const { t, formatLocale, locale } = useI18n()
+  const { t, formatLocale, locale } = useBlockI18n()
   const [boot] = useState(() => readProjectStore(browserStorage()))
   const [state, setState] = useState(boot.state)
   const [storageStatus, setStorageStatus] = useState<string>(boot.status)

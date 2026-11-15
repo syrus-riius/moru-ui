@@ -2,7 +2,7 @@
 
 Empty-state content with explanation and a next action.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -33,15 +33,5 @@ interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
 Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
-function Empty({
-  title,
-  description,
-  icon,
-  children,
-  className,
-  'aria-label': ariaLabel,
-  'aria-labelledby': labelledBy,
-  'aria-describedby': describedBy,
-  ...props
-}: EmptyProps);
+function Empty({ title, description, icon, children, className, 'aria-label': ariaLabel, 'aria-labelledby': labelledBy, 'aria-describedby': describedBy, ...props }: EmptyProps);
 ```

@@ -21,6 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     loading = false,
     previewState,
     disabled,
+    readOnly,
     onValueChange,
     onChange,
     'aria-describedby': describedBy,
@@ -31,7 +32,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   const field = useFieldContext()
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks editing with readOnly, not disabled: the field keeps keyboard focus
+  // and its value still takes part in form submission.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   const input = (
     <BaseInput
       {...props}
@@ -44,7 +48,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       data-size={size}
       data-ui-state={previewState}
       data-loading={busy || undefined}
-      disabled={unavailable}
+      disabled={locked}
+      readOnly={readOnly || busy}
       onValueChange={(value, details) => {
         if (!unavailable) onValueChange?.(value, details)
       }}

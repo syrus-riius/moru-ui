@@ -72,13 +72,10 @@
 
 /* Keep the visible S/M/L proportions, and enlarge the interactive area for touch. */
 @media (pointer: coarse) {
+  /* Only classes defined in the shared base live here. A component stylesheet may load
+     before or after this file, so each one carries its own touch font-size rule. */
   .ui-input,
-  .ui-textarea,
-  .ui-combobox-input,
-  .ui-native-select,
-  .ui-input-otp-control,
-  .ui-enhanced-input-field,
-  .ui-multi-select-input {
+  .ui-textarea {
     font-size: max(16px, var(--ui-type-label-size, 13px));
   }
   .ui-button,

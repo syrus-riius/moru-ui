@@ -2,8 +2,8 @@
 
 > Source-owned React UI: fundamentals, behavior, technology and visual refinement. Read only the platform guide and components needed for your task.
 
-- [Start here](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.0/start.md): registry vs starter setup, design and interaction rules.
-- [Catalog](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.0/catalog.json): version 0.4.0, actual exports, dependencies and per-item doc paths.
-- [Expo / React Native](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.0/expo.md): separate native source and APIs.
+- [Start here](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.1/start.md): registry vs starter setup, design and interaction rules.
+- [Catalog](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.1/catalog.json): version 0.4.1, actual exports, dependencies and per-item doc paths.
+- [Expo / React Native](https://moru-ui-lab.riius.chatgpt.site/ai/v0.4.1/expo.md): separate native source and APIs.
 
 Moru APIs are not interchangeable with shadcn/ui. Preserve the existing project setup; consult source-derived props before generating code.

@@ -3,7 +3,8 @@
 import { useI18n } from './_lib/i18n'
 import { cn } from './_lib/cn'
 import { clampPage, getPaginationItems, normalizePageCount } from './pagination-utils'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './pagination.css'
 
 export interface PaginationProps {
   page: number

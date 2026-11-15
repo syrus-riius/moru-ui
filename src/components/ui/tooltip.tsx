@@ -11,7 +11,7 @@ import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 import { cn } from '../../lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './tooltip.css'
 
 const TooltipProviderContext = createContext(false)
 

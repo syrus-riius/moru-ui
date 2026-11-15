@@ -1,6 +1,7 @@
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
-import './controls-completion.css'
+import './controls-shared.css'
+import './item.css'
 
 export type ItemProps = HTMLAttributes<HTMLDivElement> & {
   variant?: 'default' | 'outline' | 'muted'

@@ -1,4 +1,4 @@
-import { useI18n } from '../../lib/i18n'
+import { useBlockI18n } from '../../lib/block-i18n'
 import { useId, useRef, useState, type CSSProperties, type FormEvent } from 'react'
 import { ArrowLeft, Check, FolderKanban, Plus } from 'lucide-react'
 import { Badge } from '../ui/badge'
@@ -122,7 +122,7 @@ export function DashboardBlock({
   defaultProjects = initialProjects,
   onProjectsChange,
 }: DashboardBlockProps = {}) {
-  const { t, formatLocale } = useI18n()
+  const { t, formatLocale } = useBlockI18n()
   const title = titleProp ?? t('팀의 오늘을 한눈에.')
   const weekdayFormatter = new Intl.DateTimeFormat(formatLocale, { weekday: 'short' })
   const id = useId()

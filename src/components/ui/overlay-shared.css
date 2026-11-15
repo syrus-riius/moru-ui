@@ -1,0 +1,75 @@
+.ui-overlay-backdrop {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  background: #00000066;
+  transition: opacity var(--ui-duration, 160ms) ease;
+}
+
+.ui-overlay-backdrop[data-starting-style],
+.ui-overlay-backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.ui-overlay-title {
+  margin: 0;
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  line-height: var(--ui-type-heading-line-height, 1.35);
+  letter-spacing: var(--ui-type-heading-letter-spacing, -0.025em);
+}
+
+.ui-overlay-description {
+  margin: var(--ui-field-gap, 8px) 0 0;
+  color: var(--ui-muted, #6e6e6b);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+
+.ui-overlay-close {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--ui-control-height-sm, 32px);
+  height: var(--ui-control-height-sm, 32px);
+  padding: 0;
+  border: 0;
+  border-radius: min(var(--ui-radius, 6px), 6px);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-muted, #6e6e6b);
+  cursor: pointer;
+  transition:
+    background-color var(--ui-duration, 160ms),
+    color var(--ui-duration, 160ms);
+}
+
+.ui-overlay-close:hover {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-text, #171717);
+}
+.ui-overlay-close:active {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+}
+.ui-overlay-close:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}
+
+.ui-confirmation-error {
+  margin: var(--ui-field-gap, 8px) 0 0;
+  color: var(--ui-danger-text, #be4545);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-overlay-backdrop,
+  .ui-overlay-close {
+    transition: none;
+  }
+}

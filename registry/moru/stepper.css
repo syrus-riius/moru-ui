@@ -1,0 +1,177 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-stepper {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-stepper {
+  --ui-stepper-height: var(--ui-control-height-md, 40px);
+  --ui-stepper-marker-size: max(
+    calc(var(--ui-control-height-md, 40px) - var(--ui-space, 4px) * 3),
+    calc(var(--ui-type-label-size) * var(--ui-type-label-line-height) + var(--ui-border-width) * 2)
+  );
+}
+:where([data-moru-registry]) .ui-stepper-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+:where([data-moru-registry]) .ui-stepper-item {
+  flex: 1 1 110px;
+  min-width: 0;
+  position: relative;
+}
+:where([data-moru-registry]) .ui-stepper-button {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  min-height: var(--ui-stepper-height);
+  align-items: center;
+  gap: var(--ui-control-gap);
+  border: var(--ui-border-width) solid transparent;
+  border-radius: var(--ui-radius);
+  background: transparent;
+  padding: calc(var(--ui-space) * 2);
+  text-align: start;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background var(--ui-duration);
+}
+:where([data-moru-registry]) .ui-stepper-button:not(:disabled):hover {
+  background: var(--ui-surface-hover);
+}
+:where([data-moru-registry]) .ui-stepper-button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 2px;
+}
+:where([data-moru-registry]) .ui-stepper-button:disabled {
+  cursor: default;
+}
+:where([data-moru-registry]) .ui-stepper-item[data-status='pending'] .ui-stepper-button:disabled {
+  color: var(--ui-muted);
+}
+:where([data-moru-registry]) .ui-stepper[data-disabled] .ui-stepper-button {
+  opacity: 0.55;
+}
+:where([data-moru-registry]) .ui-stepper-marker {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-stepper-marker-size);
+  height: var(--ui-stepper-marker-size);
+  border: var(--ui-border-width) solid var(--ui-control-hover-border);
+  border-radius: 50%;
+  color: var(--ui-muted);
+  background: var(--ui-surface);
+  font-size: var(--ui-type-label-size);
+  line-height: 1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+:where([data-moru-registry]) .ui-stepper-item[data-status='current'] .ui-stepper-marker {
+  background: var(--ui-primary);
+  border-color: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+:where([data-moru-registry]) .ui-stepper-item[data-status='complete'] .ui-stepper-marker {
+  background: var(--ui-primary-soft);
+  border-color: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+:where([data-moru-registry]) .ui-stepper-item[data-status='error'] .ui-stepper-marker {
+  background: var(--ui-danger-soft);
+  color: var(--ui-danger-text);
+  border-color: var(--ui-danger-border);
+}
+:where([data-moru-registry]) .ui-stepper-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: calc(var(--ui-space) * 0.5);
+}
+:where([data-moru-registry]) .ui-stepper-label {
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  font-weight: var(--ui-type-label-weight);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-stepper-description,
+:where([data-moru-registry]) .ui-stepper-empty {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-stepper-panel,
+:where([data-moru-registry]) .ui-stepper-completed {
+  padding-block-start: var(--ui-form-gap);
+}
+:where([data-moru-registry]) .ui-stepper-panel[hidden] {
+  display: none;
+}
+:where([data-moru-registry]) .ui-stepper[data-orientation='vertical'] .ui-stepper-list {
+  flex-direction: column;
+}
+:where([data-moru-registry]) .ui-stepper[data-orientation='vertical'] .ui-stepper-item {
+  flex-basis: auto;
+}
+:where([data-moru-registry]) .ui-stepper[data-orientation='vertical'] .ui-stepper-button {
+  align-items: flex-start;
+}
+:where([data-moru-registry]) .ui-stepper[data-orientation='vertical'] .ui-stepper-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(
+    var(--ui-space) * 2 + var(--ui-border-width) + var(--ui-stepper-marker-size) / 2
+  );
+  top: calc(var(--ui-space) * 2 + var(--ui-border-width) + var(--ui-stepper-marker-size));
+  bottom: calc(var(--ui-control-gap) * -1);
+  border-inline-start: var(--ui-border-width) solid var(--ui-border);
+  pointer-events: none;
+}
+:where([data-moru-registry]) .ui-stepper[data-size='sm'] {
+  --ui-stepper-height: var(--ui-control-height-sm, 32px);
+  --ui-stepper-marker-size: max(
+    calc(var(--ui-control-height-sm, 32px) - var(--ui-space, 4px) * 2),
+    calc(var(--ui-type-label-size) * var(--ui-type-label-line-height) + var(--ui-border-width) * 2)
+  );
+}
+:where([data-moru-registry]) .ui-stepper[data-size='lg'] {
+  --ui-stepper-height: var(--ui-control-height-lg, 48px);
+  --ui-stepper-marker-size: max(
+    calc(var(--ui-control-height-lg, 48px) - var(--ui-space, 4px) * 4),
+    calc(var(--ui-type-label-size) * var(--ui-type-label-line-height) + var(--ui-border-width) * 2)
+  );
+}
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-stepper-button {
+    min-height: max(44px, var(--ui-stepper-height));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-stepper-button {
+    transition: none;
+  }
+}
+@media (forced-colors: active) {
+  :where([data-moru-registry]) .ui-stepper-marker {
+    border-color: ButtonText;
+  }
+  :where([data-moru-registry]) .ui-stepper-item[data-status='current'] .ui-stepper-marker {
+    border-width: 3px;
+  }
+}
+

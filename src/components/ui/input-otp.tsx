@@ -9,7 +9,8 @@ import {
   subscribeOTPFormReset,
 } from './input-otp-utils'
 import type { UIState } from './state'
-import './controls-completion.css'
+import './controls-shared.css'
+import './input-otp.css'
 
 export type InputOTPProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -55,7 +56,10 @@ export const InputOTP = forwardRef<HTMLInputElement, InputOTPProps>(function Inp
   const field = useFieldContext()
   const count = normalizeOTPLength(length)
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks the code with readOnly, not disabled: the field keeps keyboard focus
+  // (for example while a completed code is being verified) and still submits its value.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   const resolvedInvalid =
     previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))
   const visuallyInvalid =
@@ -101,8 +105,8 @@ export const InputOTP = forwardRef<HTMLInputElement, InputOTPProps>(function Inp
       autoComplete={autoComplete}
       pattern={`[0-9]{${count}}`}
       maxLength={count}
-      disabled={unavailable}
-      readOnly={readOnly}
+      disabled={locked}
+      readOnly={readOnly || busy}
       aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
       aria-invalid={resolvedInvalid}
       aria-busy={busy || undefined}
@@ -156,7 +160,7 @@ export const InputOTP = forwardRef<HTMLInputElement, InputOTPProps>(function Inp
           render={input}
           id={id ?? field.controlId}
           value={current}
-          disabled={unavailable}
+          disabled={locked}
         />
       ) : (
         input

@@ -3,7 +3,8 @@ import { PreviewCard as BasePreviewCard } from '@base-ui/react/preview-card'
 import { cn } from '../../lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './hover-card.css'
 
 export interface HoverCardProps {
   trigger: ReactElement

@@ -2,7 +2,8 @@ import { useI18n } from '../../lib/i18n'
 import { Fragment, type ReactNode } from 'react'
 import { ChevronRight } from 'lucide-react'
 import { cn } from '../../lib/cn'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './breadcrumb.css'
 
 export interface BreadcrumbItem {
   label: ReactNode

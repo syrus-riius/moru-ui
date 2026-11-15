@@ -1,0 +1,86 @@
+.ui-pagination {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+}
+
+.ui-pagination {
+  width: 100%;
+}
+.ui-pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--ui-space, 4px) / 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ui-pagination-button {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: max(36px, var(--ui-control-height-sm, 32px));
+  padding: var(--ui-space, 4px) calc(var(--ui-space, 4px) * 2);
+  border: var(--ui-border-width, 1px) solid transparent;
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 2px));
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  cursor: pointer;
+}
+.ui-pagination-button[aria-current='page'] {
+  background: var(--ui-primary, #181818);
+  border-color: transparent;
+  color: var(--ui-primary-foreground, #fff);
+}
+.ui-pagination-button:hover:not(:disabled) {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+.ui-pagination-button:active:not(:disabled) {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+}
+.ui-pagination-button[aria-current='page']:hover:not(:disabled) {
+  background: var(--ui-primary-hover, #303030);
+  color: var(--ui-primary-hover-foreground, #fff);
+}
+.ui-pagination-button[aria-current='page']:active:not(:disabled) {
+  background: var(--ui-primary-pressed, #0b0b0b);
+  color: var(--ui-primary-pressed-foreground, #fff);
+}
+.ui-pagination-button:disabled {
+  color: var(--ui-disabled-text, #a1a1aa);
+  cursor: not-allowed;
+}
+.ui-pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  min-height: 36px;
+  color: var(--ui-muted, #6e6e6b);
+}
+
+@media (pointer: coarse) {
+  .ui-pagination-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+.ui-pagination-button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}

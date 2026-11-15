@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Stepper, canSelectStep, normalizeStepperValue } from './stepper'
 import { RingProgress, normalizeRingSections } from './ring-progress'
-import { WorkflowPatternsDemo } from '../WorkflowPatternsDemo'
+import { WorkflowPatternsDemo } from '../demos/WorkflowPatternsDemo'
 
 const steps = [
   { id: 'name', label: '이름', content: '프로젝트 이름 입력' },

@@ -16,7 +16,8 @@ import { cn } from './_lib/cn'
 import { shouldDismissDrawer, shouldSuppressDrawerClick } from './drawer-utils'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './drawer.css'
 
 export interface DrawerProps {
   trigger?: ReactElement

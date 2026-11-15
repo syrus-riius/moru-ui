@@ -1,4 +1,4 @@
-import { useI18n } from '../../lib/i18n'
+import { useBlockI18n } from '../../lib/block-i18n'
 import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent } from 'react'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
@@ -52,7 +52,7 @@ const hint: CSSProperties = {
 
 /** A complete local signup flow. Replace its demo handlers with server-side signup and verification. */
 export function SignupBlock() {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const id = useId()
   const [step, setStep] = useState<SignupStep>('account')
   const [details, setDetails] = useState<SignupDetails>(emptyDetails)

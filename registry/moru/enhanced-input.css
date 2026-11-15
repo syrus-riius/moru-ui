@@ -1,0 +1,134 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-enhanced-input {
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-enhanced-height: var(--ui-control-height-md, 40px);
+  --ui-enhanced-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-enhanced-border: var(--ui-border-width, 1px);
+  --ui-enhanced-resolved-height: max(
+    var(--ui-enhanced-height),
+    calc(
+      max(
+          var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.5),
+          var(--ui-size-icon)
+        ) +
+        var(--ui-space, 4px) * 2 + var(--ui-enhanced-border) * 2
+    )
+  );
+  --ui-enhanced-inner-height: calc(
+    var(--ui-enhanced-resolved-height) - var(--ui-enhanced-border) * 2
+  );
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text, #171717);
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 14px);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, 0em);
+}
+:where([data-moru-registry]) .ui-enhanced-input[data-size='sm'] {
+  --ui-size-icon: var(--ui-icon-size-sm, 14px);
+  --ui-enhanced-height: var(--ui-control-height-sm, 32px);
+  --ui-enhanced-padding: var(--ui-control-padding-x-sm, 10px);
+}
+:where([data-moru-registry]) .ui-enhanced-input[data-size='lg'] {
+  --ui-size-icon: var(--ui-icon-size-lg, 18px);
+  --ui-enhanced-height: var(--ui-control-height-lg, 48px);
+  --ui-enhanced-padding: var(--ui-control-padding-x-lg, 18px);
+}
+:where([data-moru-registry]) .ui-enhanced-input-loading {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-enhanced-height);
+  min-height: var(--ui-enhanced-inner-height);
+}
+:where([data-moru-registry]) .ui-enhanced-input-field {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--ui-enhanced-inner-height);
+  padding: var(--ui-space, 4px) var(--ui-enhanced-padding);
+  border: 0;
+  border-radius: inherit;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--ui-type-body-weight, 400);
+  font-variant-numeric: tabular-nums;
+}
+:where([data-moru-registry]) .ui-enhanced-input-field::placeholder {
+  color: var(--ui-muted);
+  opacity: 1;
+}
+:where([data-moru-registry]) .ui-enhanced-input-action {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: max(28px, var(--ui-enhanced-height));
+  min-height: var(--ui-enhanced-inner-height);
+  padding: var(--ui-space, 4px);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--ui-muted);
+  cursor: pointer;
+}
+:where([data-moru-registry]) .ui-enhanced-input-action:hover:not(:disabled):not([aria-disabled='true']) {
+  color: var(--ui-text);
+  background: var(--ui-control-hover-bg);
+}
+:where([data-moru-registry]) .ui-enhanced-input-action:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 2px;
+}
+:where([data-moru-registry]) .ui-enhanced-input-action:disabled,
+:where([data-moru-registry]) .ui-enhanced-input-action[aria-disabled='true'] {
+  cursor: not-allowed;
+  color: var(--ui-disabled-text);
+}
+:where([data-moru-registry]) .ui-enhanced-input-action svg {
+  flex-shrink: 0;
+  width: var(--ui-size-icon);
+  height: var(--ui-size-icon);
+}
+:where([data-moru-registry]) .ui-enhanced-input-hint {
+  margin: var(--ui-field-gap, 8px) 0 0;
+  color: var(--ui-muted);
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-caption-weight, 400);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-enhanced-input {
+    --ui-enhanced-resolved-height: max(
+      44px,
+      var(--ui-enhanced-height),
+      calc(
+        max(
+            max(16px, var(--ui-type-label-size, 14px)) * var(--ui-type-label-line-height, 1.5),
+            var(--ui-size-icon)
+          ) +
+          var(--ui-space, 4px) * 2 + var(--ui-enhanced-border) * 2
+      )
+    );
+  }
+  :where([data-moru-registry]) .ui-enhanced-input-action {
+    min-width: 44px;
+  }
+  :where([data-moru-registry]) .ui-enhanced-input-field {
+    font-size: max(16px, var(--ui-type-label-size, 13px));
+  }
+}
+@media (forced-colors: active) {
+  :where([data-moru-registry]) .ui-enhanced-input {
+    --ui-enhanced-border: 1px;
+  }
+}
+

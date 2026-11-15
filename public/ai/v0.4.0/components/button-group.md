@@ -2,7 +2,7 @@
 
 Horizontal or vertical grouping for related buttons and actions.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -23,9 +23,7 @@ Referenced imported types/values:
 - `HTMLAttributes` from `react`
 
 ```ts
-type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & {
-  orientation?: 'horizontal' | 'vertical'
-}
+type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & { orientation?: 'horizontal' | 'vertical' }
 ```
 
 Exported value type annotations / generic factory calls from source:

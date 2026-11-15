@@ -2,7 +2,8 @@
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { cn } from './_lib/cn'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './empty.css'
 
 export interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title: string

@@ -2,7 +2,8 @@ import { useI18n } from '../../lib/i18n'
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
 import type { SemanticTone } from '../../theme/tokens'
-import './workflow-patterns.css'
+import './workflow-shared.css'
+import './ring-progress.css'
 
 export interface RingProgressSection {
   label: string

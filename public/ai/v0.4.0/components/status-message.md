@@ -2,7 +2,7 @@
 
 Semantic status feedback using text and icons.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -24,10 +24,7 @@ Referenced imported types/values:
 - `SemanticTone` from `./state`
 
 ```ts
-interface StatusMessageProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'title' | 'children'
-> {
+interface StatusMessageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'children'> {
   tone?: SemanticTone
   title?: string
   children?: ReactNode
@@ -38,15 +35,7 @@ interface StatusMessageProps extends Omit<
 Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
-function StatusMessage({
-  tone = 'info',
-  title,
-  children,
-  variant = 'soft',
-  className,
-  role = 'status',
-  ...props
-}: StatusMessageProps);
+function StatusMessage({ tone = 'info', title, children, variant = 'soft', className, role = 'status', ...props }: StatusMessageProps);
 ```
 
 ## Declared defaults

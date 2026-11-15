@@ -7,7 +7,8 @@ import { X } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-overlays.css'
+import './overlay-shared.css'
+import './sheet.css'
 
 export interface SheetProps {
   trigger?: ReactElement

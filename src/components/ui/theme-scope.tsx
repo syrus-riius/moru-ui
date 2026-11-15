@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useId,
+  useMemo,
   useRef,
   type CSSProperties,
   type HTMLAttributes,
@@ -36,10 +37,20 @@ export function ThemeScope({
 }: ThemeScopeProps) {
   const portalContainer = useRef<HTMLDivElement>(null)
   const spacingScope = useId()
-  const scopedStyle = { ...getCssVariables(tokens, mode), ...style } as CSSProperties
-  const portalStyle = Object.fromEntries(
-    Object.entries(scopedStyle).filter(([key]) => key.startsWith('--')),
-  ) as CSSProperties
+  // Deriving the variables walks every token and runs contrast searches. A parent
+  // re-render with the same tokens reuses the previous result.
+  const variables = useMemo(() => getCssVariables(tokens, mode), [tokens, mode])
+  const scopedStyle = useMemo(
+    () => ({ ...variables, ...style }) as CSSProperties,
+    [variables, style],
+  )
+  const portalStyle = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(scopedStyle).filter(([key]) => key.startsWith('--')),
+      ) as CSSProperties,
+    [scopedStyle],
+  )
   const attributes = {
     'data-mode': mode,
     'data-density': tokens.density,
@@ -47,9 +58,13 @@ export function ThemeScope({
     'data-style-pack': resolveAppearance(tokens.appearance).preset,
     'data-moru-spacing-scope': spacingScope,
   }
-  const componentCss = getComponentSpacingCss(
-    tokens.componentSpacing,
-    `[data-moru-spacing-scope=${JSON.stringify(spacingScope)}]`,
+  const componentCss = useMemo(
+    () =>
+      getComponentSpacingCss(
+        tokens.componentSpacing,
+        `[data-moru-spacing-scope=${JSON.stringify(spacingScope)}]`,
+      ),
+    [tokens.componentSpacing, spacingScope],
   )
 
   return (

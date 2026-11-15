@@ -6,7 +6,8 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 import type { UIState } from './state'
-import './controls-completion.css'
+import './controls-shared.css'
+import './native-select.css'
 
 export interface NativeSelectOption {
   value: string

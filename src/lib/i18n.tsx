@@ -8,13 +8,14 @@ import {
   type Translations,
 } from './locale'
 import { uiMessages } from './ui-messages'
-import { blockMessages } from './block-messages'
 export * from './locale'
 
 type I18nValue = {
   locale: Locale
   formatLocale: string
   t: Translator
+  /** Whether this provider (built-in labels or application `messages`) translates the text. */
+  has: (message: string) => boolean
   setLocale: (locale: Locale) => void
   pending: boolean
 }
@@ -22,12 +23,17 @@ const fallback: I18nValue = {
   locale: 'ko',
   formatLocale: 'ko-KR',
   t: (message, values) => translate(message, {}, values),
+  has: () => false,
   setLocale: () => {},
   pending: false,
 }
 const I18nContext = createContext<I18nValue>(fallback)
 
-/** Optional and isolated: components keep their Korean defaults without a locale provider. */
+/**
+ * Optional and isolated: components keep their Korean defaults without a locale provider.
+ * Only built-in component labels live here. Block copy ships with the blocks (block-i18n),
+ * so an application that installs a single component does not bundle every block's text.
+ */
 export function MoruLocaleProvider({
   locale: localeProp,
   messages,
@@ -45,7 +51,6 @@ export function MoruLocaleProvider({
   const locale = localeProp ?? parent.locale
   const value = useMemo<I18nValue>(() => {
     const dictionary = {
-      ...messagesFor(blockMessages, locale),
       ...messagesFor(uiMessages, locale),
       ...messages,
     }
@@ -53,6 +58,7 @@ export function MoruLocaleProvider({
       locale,
       formatLocale: formattingLocales[locale],
       t: (message, values) => translate(message, dictionary, values),
+      has: (message) => Object.prototype.hasOwnProperty.call(dictionary, message),
       setLocale: onLocaleChange ?? fallback.setLocale,
       pending,
     }

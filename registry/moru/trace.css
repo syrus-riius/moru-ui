@@ -1,0 +1,174 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-trace {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-trace-description,
+:where([data-moru-registry]) .ui-trace-meta {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-trace-title {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-trace-row:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -2px;
+}
+:where([data-moru-registry]) .ui-trace {
+  --ui-trace-icon-size: var(--ui-icon-size-md, 16px);
+  --ui-trace-line-height: calc(var(--ui-type-label-size) * var(--ui-type-label-line-height));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+:where([data-moru-registry]) .ui-trace-item {
+  position: relative;
+  padding: 0 0 calc(var(--ui-space) * 2);
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-trace-item:not(:last-child)::after {
+  position: absolute;
+  content: '';
+  width: 1px;
+  background: var(--ui-border);
+  top: calc(
+    var(--ui-space) * 3 + max(var(--ui-trace-line-height), var(--ui-trace-icon-size)) / 2 +
+      var(--ui-trace-icon-size) / 2
+  );
+  bottom: 0;
+  inset-inline-start: calc(var(--ui-space) * 3 + var(--ui-trace-icon-size) / 2);
+  pointer-events: none;
+}
+:where([data-moru-registry]) .ui-trace-row {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  gap: var(--ui-control-gap);
+  align-items: flex-start;
+  text-align: start;
+  color: inherit;
+  padding: calc(var(--ui-space) * 3);
+  background: transparent;
+  border: 0;
+  border-radius: max(3px, calc(var(--ui-radius) / 2));
+  font: inherit;
+}
+:where([data-moru-registry]) button.ui-trace-row {
+  cursor: pointer;
+  transition: background var(--ui-duration);
+}
+:where([data-moru-registry]) button.ui-trace-row:hover:not(:disabled) {
+  background: var(--ui-control-hover-bg);
+}
+:where([data-moru-registry]) button.ui-trace-row:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+:where([data-moru-registry]) .ui-trace-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--ui-trace-icon-size);
+  min-height: var(--ui-trace-line-height);
+}
+:where([data-moru-registry]) .ui-trace-icon > svg {
+  width: var(--ui-trace-icon-size);
+  height: var(--ui-trace-icon-size);
+}
+:where([data-moru-registry]) .ui-trace-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: var(--ui-space);
+}
+:where([data-moru-registry]) .ui-trace-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  flex: 0 0 auto;
+  max-width: 35%;
+}
+:where([data-moru-registry]) .ui-trace-status {
+  white-space: nowrap;
+}
+:where([data-moru-registry]) .ui-trace-chevron {
+  flex-shrink: 0;
+  width: var(--ui-trace-icon-size);
+  height: var(--ui-trace-icon-size);
+  margin-top: max(0px, calc((var(--ui-trace-line-height) - var(--ui-trace-icon-size)) / 2));
+  transition: transform var(--ui-duration);
+}
+:where([data-moru-registry]) .ui-trace-item[data-expanded] .ui-trace-chevron {
+  transform: rotate(180deg);
+}
+:where([data-moru-registry]) .ui-trace-item[data-status='complete'] .ui-trace-icon {
+  color: var(--ui-success-surface-text);
+}
+:where([data-moru-registry]) .ui-trace-item[data-status='error'] .ui-trace-icon,
+:where([data-moru-registry]) .ui-trace-item[data-status='error'] .ui-trace-status {
+  color: var(--ui-danger-surface-text);
+}
+:where([data-moru-registry]) .ui-trace-item[data-status='running'] .ui-trace-icon {
+  color: var(--ui-primary);
+}
+:where([data-moru-registry]) .ui-trace-item[data-status='running'] .ui-trace-icon svg {
+  animation: moru-registry-ui-content-spin 1s linear infinite;
+}
+:where([data-moru-registry]) .ui-trace-details {
+  margin: 0 calc(var(--ui-space) * 3) var(--ui-control-gap)
+    calc(var(--ui-space) * 3 + var(--ui-trace-icon-size) + var(--ui-control-gap));
+  font-size: var(--ui-type-caption-size);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-trace-details[hidden] {
+  display: none;
+}
+@keyframes moru-registry-ui-content-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 380px) {
+  :where([data-moru-registry]) .ui-trace-row {
+    flex-wrap: wrap;
+  }
+  :where([data-moru-registry]) .ui-trace-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-inline-start: calc(var(--ui-trace-icon-size) + var(--ui-control-gap));
+    text-align: start;
+    max-width: 100%;
+  }
+  :where([data-moru-registry]) .ui-trace-chevron {
+    margin-inline-start: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-trace-item[data-status='running'] .ui-trace-icon svg {
+    animation: none;
+  }
+  :where([data-moru-registry]) .ui-trace-chevron,
+  :where([data-moru-registry]) button.ui-trace-row {
+    transition: none;
+  }
+}
+

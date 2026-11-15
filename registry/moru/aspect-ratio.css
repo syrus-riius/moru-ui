@@ -1,0 +1,15 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-aspect-ratio {
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+:where([data-moru-registry]) .ui-aspect-ratio > img,
+:where([data-moru-registry]) .ui-aspect-ratio > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

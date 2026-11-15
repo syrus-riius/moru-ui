@@ -8,7 +8,7 @@ import { parse } from '@babel/parser'
 
 const scriptPath = fileURLToPath(import.meta.url)
 const defaultRoot = path.dirname(path.dirname(scriptPath))
-export const registryVersion = '0.4.0'
+export const registryVersion = '0.4.1'
 export const registryOrigin = 'https://moru-ui-lab.riius.chatgpt.site'
 export const registryRepository = 'syrus-riius/moru-ui'
 export const registryScope = ':where([data-moru-registry])'
@@ -534,6 +534,15 @@ export const registryDefinitions = [
     description: 'Expandable execution or workflow history with step status and details.',
   },
   {
+    // Not installed on its own: blocks depend on it, so core stays free of block copy.
+    name: 'block-messages',
+    entry: 'src/lib/block-i18n.ts',
+    type: 'registry:lib',
+    title: 'Block Messages',
+    description:
+      'Translations and the useBlockI18n hook shared by Moru blocks and the project template.',
+  },
+  {
     name: 'dashboard',
     entry: 'src/components/blocks/DashboardBlock.tsx',
     type: 'registry:block',
@@ -590,20 +599,17 @@ const coreEntries = [
   'src/components/ui/styles.css',
   'src/theme/readability.css',
   'src/components/ui/style-packs.css',
-  // Shared by Popover and the date/time fields. Components import it on demand.
-  'src/components/ui/overlays.css',
-  // Shared stylesheet files have no component JavaScript or npm dependencies.
-  // Keep one owner so CSS reuse does not install unrelated input/data widgets;
-  // the common entry does not auto-import these component-requested sheets.
-  'src/components/ui/controls-completion.css',
-  'src/components/ui/enhanced-inputs.css',
-  'src/components/ui/advanced-controls.css',
-  'src/components/ui/advanced-overlays.css',
-  'src/components/ui/navigation-completion.css',
-  'src/components/ui/content-completion.css',
-  'src/components/ui/data-completion.css',
-  'src/components/ui/workflow-patterns.css',
-  'src/components/ui/page-chrome.css',
+  // Styles shared by several components of one family. They carry no JavaScript or npm
+  // dependency, so core owns them; each component's own rules live in <component>.css
+  // and install with that component.
+  'src/components/ui/controls-shared.css',
+  'src/components/ui/advanced-controls-shared.css',
+  'src/components/ui/navigation-shared.css',
+  'src/components/ui/content-shared.css',
+  'src/components/ui/enhanced-input.css',
+  'src/components/ui/overlay-shared.css',
+  'src/components/ui/workflow-shared.css',
+  'src/components/ui/time-shared.css',
 ]
 // Calendar is the common foundation of both date fields. Keep their small shared
 // helpers here so a range field does not need the unused single-date component,
@@ -742,7 +748,13 @@ export function scopeRegistryCss(source, keyframeNames = new Set()) {
   return stylesheet.toString()
 }
 
-const utilities = `/* Minimal layout utilities used by the selected original sources; no Tailwind reset. */
+// These are fallbacks for hosts whose Tailwind build does not scan the installed
+// sources. They sit in Tailwind's own low-priority `base` layer: unlayered rules
+// with generic names such as `.flex` would beat every host utility inside the
+// provider (`flex md:hidden`, `text-sm` on a button), whatever its specificity.
+const utilities = `/* Minimal layout fallbacks used by the selected original sources; no Tailwind reset.
+   Kept in the base layer so the host's own utilities always win. */
+@layer base {
 .inline-flex { display: inline-flex; }
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -752,13 +764,13 @@ const utilities = `/* Minimal layout utilities used by the selected original sou
 .justify-between { justify-content: space-between; }
 .justify-end { justify-content: flex-end; }
 .gap-2 { gap: 0.5rem; }
-.whitespace-nowrap { white-space: nowrap; }
 .w-full { width: 100%; }
 .min-w-0 { min-width: 0; }
 .ml-auto { margin-left: auto; }
 .shrink-0 { flex-shrink: 0; }
 .ui-theme-scope, *, *::before, *::after { box-sizing: border-box; }
 button, input, textarea, select { font: inherit; }
+}
 `
 
 const providerSource = `'use client'
@@ -880,6 +892,12 @@ export async function generateRegistry(root = defaultRoot) {
   for (const entry of coreEntries) collectCore(entry)
   const primaryOwners = new Map([
     ...registryDefinitions.filter((item) => item.entry).map((item) => [item.entry, item.name]),
+    // A component owns the stylesheet named after it, whichever item imports it first
+    // (MultiSelect reuses combobox.css; the date and time fields reuse popover.css).
+    ...registryDefinitions
+      .filter((item) => item.entry?.startsWith('src/components/ui/'))
+      .map((item) => [item.entry.replace(/\.tsx$/, '.css'), item.name])
+      .filter(([stylesheet]) => graph.has(stylesheet)),
     ...Object.entries(itemSupportEntries).flatMap(([owner, files]) =>
       files.map((file) => [file, owner]),
     ),
@@ -1012,7 +1030,7 @@ export async function generateRegistry(root = defaultRoot) {
       categories: [
         item.type === 'registry:block'
           ? 'blocks'
-          : item.name === 'core'
+          : item.name === 'core' || item.type === 'registry:lib'
             ? 'foundation'
             : 'components',
       ],

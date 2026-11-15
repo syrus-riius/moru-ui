@@ -5,7 +5,7 @@ import { registryInstallCommand } from '../../lib/registry-install'
 import { CodeBlock } from '../ui/code-block'
 import { Input, type InputProps } from '../ui/input'
 import { Tabs } from '../ui/tabs'
-import { InputVariationsDemo } from '../InputVariationsDemo'
+import { InputVariationsDemo } from '../demos/InputVariationsDemo'
 import './input-documentation.css'
 
 const sections = [

@@ -6,7 +6,7 @@ import './styles.css'
 import './theme/fonts.css'
 import './theme/default.css'
 import './components/ui/styles.css'
-import './components/token-editor.css'
+import './components/token-editor/token-editor.css'
 import './theme/readability.css'
 
 createRoot(document.getElementById('root')!).render(

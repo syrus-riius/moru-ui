@@ -8,6 +8,7 @@ import {
   type MessageCatalog,
   type Translations,
 } from './index'
+import { blockMessages } from '../lib/block-messages'
 
 export const LANGUAGE_STORAGE_KEY = 'moru-ui-language'
 const dictionaries = new Map<Locale, Translations>([['ko', {}]])
@@ -36,6 +37,8 @@ function loadCatalog() {
         inputVariations,
         motionFeedback,
       ]) => ({
+        // Block copy is no longer part of the library provider; the lab keeps showing it.
+        ...blockMessages,
         ...app.appMessages,
         ...content.publicMessages,
         ...studio.studioMessages,

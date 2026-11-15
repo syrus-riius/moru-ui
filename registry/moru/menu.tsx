@@ -24,24 +24,46 @@ export interface MenuProps {
   }>
   className?: string
   disabled?: boolean
+  /** Controlled open state, matching Popover and Modal. Omit it to let the menu manage itself. */
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
   finalFocus?: ComponentPropsWithoutRef<typeof BaseMenu.Popup>['finalFocus']
   size?: 'sm' | 'md' | 'lg'
 }
 
-export function Menu({ trigger, items, className, disabled, finalFocus, size = 'md' }: MenuProps) {
+export function Menu({
+  trigger,
+  items,
+  className,
+  disabled,
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
+  finalFocus,
+  size = 'md',
+}: MenuProps) {
   const portalContainer = useThemePortalContainer()
   const anchorRef = useRef<HTMLSpanElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
-  const [open, setOpen] = useState(false)
+  const [internalOpen, setInternalOpen] = useState(defaultOpen)
+  const open = openProp ?? internalOpen
+  const latest = useRef({ open, onOpenChange })
+  latest.current = { open, onOpenChange }
+  // A menu that becomes disabled closes; a controlled owner is told so it can follow.
   useEffect(() => {
-    if (disabled) setOpen(false)
+    if (!disabled || !latest.current.open) return
+    setInternalOpen(false)
+    latest.current.onOpenChange?.(false)
   }, [disabled])
   return (
     <BaseMenu.Root
       disabled={disabled}
       open={!disabled && open}
       onOpenChange={(next) => {
-        if (!disabled || !next) setOpen(next)
+        if (disabled && next) return
+        if (openProp === undefined) setInternalOpen(next)
+        onOpenChange?.(next)
       }}
     >
       <span ref={anchorRef} className="ui-menu-anchor" tabIndex={-1}>

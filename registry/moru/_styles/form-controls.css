@@ -141,22 +141,42 @@
   translate: var(--ui-switch-offset) 0;
 }
 
+/* Busy: the switch stays focusable (read-only) and shows progress inside the thumb. */
+:where([data-moru-registry]) .ui-switch-label[data-loading],
+:where([data-moru-registry]) .ui-switch[data-loading] {
+  cursor: progress;
+}
+:where([data-moru-registry]) .ui-switch[data-loading] .ui-switch-thumb {
+  display: grid;
+  place-items: center;
+}
+:where([data-moru-registry]) .ui-switch-loading-indicator {
+  width: 64%;
+  height: 64%;
+  color: var(--ui-muted, #6e6e6b);
+}
+:where([data-moru-registry]) .ui-switch[data-checked] .ui-switch-loading-indicator {
+  color: var(--ui-primary, #181818);
+}
+
 :where([data-moru-registry]) .ui-switch:dir(rtl)[data-checked] .ui-switch-thumb {
   translate: calc(var(--ui-switch-offset) * -1) 0;
 }
 
-:where([data-moru-registry]) .ui-switch:hover:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
   background: var(--ui-control-hover-border);
   border-color: var(--ui-control-hover-border);
 }
 
-:where([data-moru-registry]) .ui-switch[data-checked]:hover:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch[data-checked]:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
   background: var(--ui-primary-hover);
   border-color: var(--ui-primary-hover);
   color: var(--ui-primary-hover-foreground);
 }
 
-:where([data-moru-registry]) .ui-switch[data-checked]:active:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch[data-checked]:active:not([data-disabled]):not([aria-invalid='true']):not(
+    [data-loading]
+  ) {
   background: var(--ui-primary-pressed);
   border-color: var(--ui-primary-pressed);
   color: var(--ui-primary-pressed-foreground);

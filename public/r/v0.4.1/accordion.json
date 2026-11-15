@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "Expandable sections with accessible headings and keyboard interaction.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/accordion.css",
+      "type": "registry:file",
+      "target": "@ui/moru/accordion.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-accordion {\n  box-sizing: border-box;\n  min-width: 0;\n  font-family: var(--ui-font-family, inherit);\n  font-size: var(--ui-type-body-size, 14px);\n  font-weight: var(--ui-type-body-weight, 400);\n  line-height: var(--ui-type-body-line-height, 1.6);\n  letter-spacing: var(--ui-type-body-letter-spacing, 0em);\n  color: var(--ui-text, #171717);\n  overflow-wrap: anywhere;\n}\n\n:where([data-moru-registry]) .ui-accordion {\n  width: 100%;\n}\n\n:where([data-moru-registry]) .ui-accordion-item {\n  border-bottom: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n}\n\n:where([data-moru-registry]) .ui-accordion-heading {\n  margin: 0;\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger {\n  display: flex;\n  box-sizing: border-box;\n  align-items: center;\n  justify-content: space-between;\n  gap: var(--ui-control-gap, 8px);\n  width: 100%;\n  min-height: var(--ui-control-height-md, 40px);\n  padding: calc(var(--ui-space, 4px) * 3) calc(var(--ui-space, 4px) * 2);\n  border: 0;\n  border-radius: max(3px, calc(var(--ui-radius, 6px) - 4px));\n  background: transparent;\n  color: inherit;\n  font-family: inherit;\n  font-size: var(--ui-type-label-size, 13px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.5);\n  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);\n  text-align: start;\n  cursor: pointer;\n  transition:\n    background-color var(--ui-duration, 160ms),\n    color var(--ui-duration, 160ms);\n}\n\n:where([data-moru-registry]) .ui-accordion-label {\n  min-width: 0;\n  overflow-wrap: anywhere;\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger:hover:not([data-disabled]) {\n  background: var(--ui-control-hover-bg, #f3f3f1);\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger:active:not([data-disabled]) {\n  background: var(--ui-control-pressed-bg, #e8e8e4);\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger:focus-visible {\n  outline: 2px solid var(--ui-focus-ring, #181818);\n  outline-offset: -2px;\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger[data-open] {\n  color: var(--ui-primary-surface-text, var(--ui-primary, #181818));\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger[data-disabled] {\n  color: var(--ui-disabled-text, #a1a1aa);\n  cursor: not-allowed;\n}\n\n:where([data-moru-registry]) .ui-accordion-chevron {\n  flex: none;\n  width: var(--ui-icon-size-md, 16px);\n  height: var(--ui-icon-size-md, 16px);\n  transition: transform var(--ui-duration, 160ms);\n}\n\n:where([data-moru-registry]) .ui-accordion-trigger[data-open] .ui-accordion-chevron {\n  transform: rotate(180deg);\n}\n\n:where([data-moru-registry]) .ui-accordion-panel {\n  height: var(--accordion-panel-height);\n  overflow: hidden;\n  transition: height var(--ui-duration, 160ms) ease;\n}\n\n:where([data-moru-registry]) .ui-accordion-panel[data-starting-style],\n:where([data-moru-registry]) .ui-accordion-panel[data-ending-style] {\n  height: 0;\n}\n\n:where([data-moru-registry]) .ui-accordion-content {\n  padding: var(--ui-space, 4px) calc(var(--ui-space, 4px) * 2) calc(var(--ui-space, 4px) * 4);\n  color: var(--ui-muted, #6e6e6b);\n}\n\n:where([data-moru-registry]) .ui-accordion-content > :first-child {\n  margin-top: 0;\n}\n\n:where([data-moru-registry]) .ui-accordion-content > :last-child {\n  margin-bottom: 0;\n}\n\n@media (pointer: coarse) {\n  :where([data-moru-registry]) .ui-accordion-trigger {\n    min-height: max(44px, var(--ui-control-height-md, 40px));\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :where([data-moru-registry]) .ui-accordion-trigger,\n  :where([data-moru-registry]) .ui-accordion-chevron,\n  :where([data-moru-registry]) .ui-accordion-panel {\n    transition: none;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/accordion.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/accordion.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { HTMLAttributes, ReactNode } from 'react'\nimport { Accordion as BaseAccordion } from '@base-ui/react/accordion'\nimport { cn } from './_lib/cn'\nimport './accordion.css'\n\nexport interface AccordionItem {\n  value: string\n  title: ReactNode\n  content: ReactNode\n  disabled?: boolean\n}\n\nexport interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue'> {\n  items: AccordionItem[]\n  value?: string[]\n  defaultValue?: string[]\n  onValueChange?: (value: string[]) => void\n  multiple?: boolean\n  disabled?: boolean\n}\n\nexport function Accordion({\n  items,\n  value,\n  defaultValue,\n  onValueChange,\n  multiple = false,\n  disabled = false,\n  className,\n  ...props\n}: AccordionProps) {\n  return (\n    <BaseAccordion.Root<string>\n      {...props}\n      value={value}\n      defaultValue={defaultValue}\n      onValueChange={(nextValue) => onValueChange?.(nextValue)}\n      multiple={multiple}\n      disabled={disabled}\n      className={cn('ui-accordion', className)}\n    >\n      {items.map((item) => (\n        <BaseAccordion.Item\n          key={item.value}\n          value={item.value}\n          disabled={item.disabled}\n          className=\"ui-accordion-item\"\n        >\n          <BaseAccordion.Header className=\"ui-accordion-heading\">\n            <BaseAccordion.Trigger className=\"ui-accordion-trigger\">\n              <span className=\"ui-accordion-label\">{item.title}</span>\n              <svg\n                className=\"ui-accordion-chevron\"\n                width=\"16\"\n                height=\"16\"\n                viewBox=\"0 0 16 16\"\n                fill=\"none\"\n                aria-hidden=\"true\"\n              >\n                <path\n                  d=\"m4 6 4 4 4-4\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"1.5\"\n                  strokeLinecap=\"round\"\n                  strokeLinejoin=\"round\"\n                />\n              </svg>\n            </BaseAccordion.Trigger>\n          </BaseAccordion.Header>\n          <BaseAccordion.Panel className=\"ui-accordion-panel\">\n            <div className=\"ui-accordion-content\">{item.content}</div>\n          </BaseAccordion.Panel>\n        </BaseAccordion.Item>\n      ))}\n    </BaseAccordion.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

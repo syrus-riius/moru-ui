@@ -1,11 +1,12 @@
 import { useI18n } from '../../lib/i18n'
-import { useEffect, useId, useState, type AriaAttributes } from 'react'
+import { forwardRef, useEffect, useId, useState, type AriaAttributes } from 'react'
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { cn } from '../../lib/cn'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-controls.css'
+import './advanced-controls-shared.css'
+import './combobox.css'
 
 export interface ComboboxItem {
   value: string
@@ -37,27 +38,30 @@ export interface ComboboxProps {
 }
 
 /** Searchable single selection. Public values remain stable strings, including in forms. */
-export function Combobox({
-  items,
-  value,
-  defaultValue,
-  onValueChange,
-  placeholder: placeholderProp,
-  'aria-label': ariaLabel,
-  'aria-labelledby': labelledBy,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
-  disabled,
-  loading = false,
-  readOnly,
-  required,
-  clearable = true,
-  name,
-  form,
-  id,
-  size = 'md',
-  className,
-}: ComboboxProps) {
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox(
+  {
+    items,
+    value,
+    defaultValue,
+    onValueChange,
+    placeholder: placeholderProp,
+    'aria-label': ariaLabel,
+    'aria-labelledby': labelledBy,
+    'aria-describedby': describedBy,
+    'aria-invalid': invalid,
+    disabled,
+    loading = false,
+    readOnly,
+    required,
+    clearable = true,
+    name,
+    form,
+    id,
+    size = 'md',
+    className,
+  },
+  ref,
+) {
   const { t } = useI18n()
   const placeholder = placeholderProp ?? t('검색해서 선택하세요')
 
@@ -105,8 +109,10 @@ export function Combobox({
           .includes(query.trim().toLocaleLowerCase())
       }
       autoHighlight
-      disabled={unavailable}
-      readOnly={readOnly}
+      // Busy locks the field with readOnly, not disabled, so typing focus is kept
+      // while options load and the value still submits with the form.
+      disabled={disabled}
+      readOnly={readOnly || loading}
       name={name}
       form={form}
       required={required}
@@ -117,6 +123,7 @@ export function Combobox({
         data-loading={loading || undefined}
       >
         <BaseCombobox.Input
+          ref={ref}
           aria-label={ariaLabel}
           aria-labelledby={labelledBy}
           aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
@@ -204,4 +211,4 @@ export function Combobox({
       </OverlayPortal>
     </BaseCombobox.Root>
   )
-}
+})

@@ -209,9 +209,13 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--ui-type-label-weight, 550);
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
+}
+/* Labels wrap by default (readability.css). Two classes keep this opt-out ahead of
+   that rule in any stylesheet order. */
+.ui-button[data-text-wrap='nowrap'] {
+  white-space: nowrap;
 }
 .ui-button[data-text-wrap='wrap'] {
   height: auto;
@@ -756,13 +760,17 @@
 .ui-button[data-variant='secondary']:is([data-ui-state='hover'], [data-ui-state='pressed']):not(
     :disabled
   ):not([data-disabled]),
-.ui-button[data-variant='secondary']:not([data-ui-state]):is(:hover, :active):not(:disabled) {
+.ui-button[data-variant='secondary']:not([data-ui-state]):is(:hover, :active):not(:disabled):not(
+    [data-disabled]
+  ) {
   border-color: var(--ui-control-hover-border, #c4c4ca);
 }
 
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
-  ):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([aria-invalid='true']),
+  ):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ),
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='hover']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
@@ -772,7 +780,9 @@
 
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
-  ):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([aria-invalid='true']),
+  ):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ),
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
     :not(.ui-input-group-input, .ui-input-group-textarea)
   )[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not([aria-invalid='true']) {
@@ -782,7 +792,7 @@
 
 .ui-checkbox:not([data-checked]):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 .ui-checkbox:not([data-checked])[data-ui-state='hover']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
@@ -791,7 +801,7 @@
 
 .ui-checkbox:not([data-checked]):not([data-ui-state]):active:not(:disabled):not(
     [data-disabled]
-  ):not([aria-invalid='true']),
+  ):not([aria-invalid='true']):not([data-loading]),
 .ui-checkbox:not([data-checked])[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
@@ -800,7 +810,7 @@
 
 .ui-checkbox[data-checked]:not([data-ui-state]):hover:not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 .ui-checkbox[data-checked][data-ui-state='hover']:not([data-disabled]):not([aria-invalid='true']) {
   background: var(--ui-primary-hover, #303030);
   border-color: var(--ui-primary-hover, #303030);
@@ -809,7 +819,7 @@
 
 .ui-checkbox[data-checked]:not([data-ui-state]):active:not([data-disabled]):not(
     [aria-invalid='true']
-  ),
+  ):not([data-loading]),
 .ui-checkbox[data-checked][data-ui-state='pressed']:not([data-disabled]):not(
     [aria-invalid='true']
   ) {

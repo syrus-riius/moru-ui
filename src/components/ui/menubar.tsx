@@ -6,7 +6,8 @@ import { cn } from '../../lib/cn'
 import { NavigationMenuActions, type NavigationAction } from './navigation-menu-items'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './menubar.css'
 
 export interface MenubarMenu {
   id: string

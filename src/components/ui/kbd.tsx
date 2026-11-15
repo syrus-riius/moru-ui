@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
-import './controls-completion.css'
+import './controls-shared.css'
+import './kbd.css'
 
 export function Kbd({ className, ...props }: HTMLAttributes<HTMLElement>) {
   return <kbd {...props} className={cn('ui-kbd', className)} />

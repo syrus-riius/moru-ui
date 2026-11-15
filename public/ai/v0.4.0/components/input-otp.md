@@ -2,7 +2,7 @@
 
 Single native input with visual slots and one-time-code autofill.
 
-Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+Version: 0.4.0. Source hash: c7657160432134a41ca0feec508cb24f0ded72c14d22567531868ef45f3e6dcc.
 
 ## Discovery
 
@@ -46,10 +46,7 @@ Referenced imported types/values:
 - `UIState` from `./state`
 
 ```ts
-type InputOTPProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'value' | 'defaultValue' | 'onChange' | 'maxLength' | 'type' | 'inputMode' | 'pattern'
-> & {
+type InputOTPProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'defaultValue' | 'onChange' | 'maxLength' | 'type' | 'inputMode' | 'pattern'> & {
   length?: number
   value?: string
   defaultValue?: string

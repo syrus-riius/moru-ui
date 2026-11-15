@@ -1,0 +1,64 @@
+.ui-marker {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+.ui-marker {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+.ui-marker {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  padding-block: calc(var(--ui-space) * 2);
+}
+.ui-marker-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+.ui-marker-icon > svg {
+  width: var(--ui-icon-size-md);
+  height: var(--ui-icon-size-md);
+}
+.ui-marker-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ui-marker[data-variant='border'] {
+  border-bottom: var(--ui-border-width) solid var(--ui-border);
+}
+.ui-marker[data-variant='separator'] {
+  justify-content: center;
+  text-align: center;
+}
+.ui-marker[data-variant='separator']::before,
+.ui-marker[data-variant='separator']::after {
+  content: '';
+  height: var(--ui-border-width);
+  background: var(--ui-border);
+  flex: 1;
+  min-width: 8px;
+}
+.ui-marker[data-tone='success'] {
+  color: var(--ui-success-surface-text);
+}
+.ui-marker[data-tone='warning'] {
+  color: var(--ui-warning-surface-text);
+}
+.ui-marker[data-tone='danger'] {
+  color: var(--ui-danger-surface-text);
+}
+.ui-marker[data-tone='info'] {
+  color: var(--ui-info-surface-text);
+}

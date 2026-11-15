@@ -1,4 +1,4 @@
-import { useI18n } from '../../lib/i18n'
+import { useBlockI18n } from '../../lib/block-i18n'
 import { useId, useRef, useState } from 'react'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
@@ -114,7 +114,7 @@ export function SearchFiltersBlock({
   emptyDescription: emptyDescriptionProp,
   emptyActionLabel: emptyActionLabelProp,
 }: SearchFiltersBlockProps = {}) {
-  const { t } = useI18n()
+  const { t } = useBlockI18n()
   const title = titleProp ?? t('프로젝트를 찾아보세요')
   const description = descriptionProp ?? t('검색과 필터를 조합해 필요한 작업만 모으세요.')
   const searchLabel = searchLabelProp ?? t('프로젝트 검색')

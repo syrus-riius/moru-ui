@@ -2,7 +2,7 @@ import { useI18n } from '../../lib/i18n'
 import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
 import { cn } from '../../lib/cn'
-import './data-completion.css'
+import './scroll-area.css'
 
 export interface ScrollAreaProps extends ComponentPropsWithoutRef<'div'> {
   orientation?: 'vertical' | 'horizontal' | 'both'

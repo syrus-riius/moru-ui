@@ -1,4 +1,4 @@
-import { localizeCatalogItems } from '../catalog-search'
+import { localizeCatalogItems } from '../catalog/catalog-search'
 import { useI18n } from '../../i18n'
 import { useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import {

@@ -3,7 +3,8 @@
 import { useI18n } from './_lib/i18n'
 import { forwardRef, type HTMLAttributes } from 'react'
 import { cn } from './_lib/cn'
-import './content-completion.css'
+import './content-shared.css'
+import './bubble.css'
 
 export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'secondary' | 'outline'

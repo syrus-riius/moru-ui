@@ -9,7 +9,7 @@ import {
   Settings2,
 } from 'lucide-react'
 import { MoruLogo } from '../brand'
-import { useWorkspaceMembers } from '../WorkspaceMembersContext'
+import { useWorkspaceMembers } from '../workspace-example/WorkspaceMembersContext'
 import { Avatar } from '../ui/avatar'
 import { Badge } from '../ui/badge'
 import { Breadcrumb } from '../ui/breadcrumb'

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "type": "registry:ui",
+  "title": "Button Group",
+  "description": "Horizontal or vertical grouping for related buttons and actions.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/button-group.css",
+      "type": "registry:file",
+      "target": "@ui/moru/button-group.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-button-group {\n  font-family: var(--ui-font-family, inherit);\n  color: var(--ui-text, #171717);\n  font-size: var(--ui-type-label-size, 14px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.45);\n  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);\n  box-sizing: border-box;\n}\n:where([data-moru-registry]) .ui-button-group {\n  display: inline-flex;\n  align-items: stretch;\n  max-width: 100%;\n  isolation: isolate;\n}\n:where([data-moru-registry]) .ui-button-group > * {\n  min-width: 0;\n  position: relative;\n}\n:where([data-moru-registry]) .ui-button-group > :focus-visible {\n  z-index: 1;\n}\n:where([data-moru-registry]) .ui-button-group[data-orientation='horizontal'] > :not(:first-child) {\n  margin-inline-start: calc(-1 * var(--ui-border-width, 1px));\n  border-start-start-radius: 0;\n  border-end-start-radius: 0;\n}\n:where([data-moru-registry]) .ui-button-group[data-orientation='horizontal'] > :not(:last-child) {\n  border-start-end-radius: 0;\n  border-end-end-radius: 0;\n}\n:where([data-moru-registry]) .ui-button-group[data-orientation='vertical'] {\n  flex-direction: column;\n}\n:where([data-moru-registry]) .ui-button-group[data-orientation='vertical'] > :not(:first-child) {\n  margin-block-start: calc(-1 * var(--ui-border-width, 1px));\n  border-start-start-radius: 0;\n  border-start-end-radius: 0;\n}\n:where([data-moru-registry]) .ui-button-group[data-orientation='vertical'] > :not(:last-child) {\n  border-end-start-radius: 0;\n  border-end-end-radius: 0;\n}\n:where([data-moru-registry]) .ui-button-group-text {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0 var(--ui-control-padding-x-md, 12px);\n  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n  border-radius: var(--ui-radius, 6px);\n  background: var(--ui-background, #fafafa);\n}\n\n"
+    },
+    {
+      "path": "registry/moru/button-group.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/button-group.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-shared.css'\nimport './button-group.css'\n\nexport type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & {\n  orientation?: 'horizontal' | 'vertical'\n}\n\nexport const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(\n  { orientation = 'horizontal', className, role = 'group', ...props },\n  ref,\n) {\n  return (\n    <div\n      {...props}\n      ref={ref}\n      role={role}\n      className={cn('ui-button-group', className)}\n      data-orientation={orientation}\n    />\n  )\n})\n\nexport function ButtonGroupText({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {\n  return <span {...props} className={cn('ui-button-group-text', className)} />\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

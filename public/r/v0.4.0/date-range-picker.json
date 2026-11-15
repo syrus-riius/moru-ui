@@ -23,7 +23,7 @@
       "path": "registry/moru/date-range-picker.css",
       "type": "registry:file",
       "target": "@ui/moru/date-range-picker.css",
-      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-date-range-picker {\n  position: relative;\n}\n:where([data-moru-registry]) .ui-date-range-picker-trigger > span {\n  line-height: var(--ui-type-label-line-height, 1.5);\n}\n:where([data-moru-registry]) .ui-date-range-picker-popup {\n  width: 304px;\n  padding: var(--ui-control-gap, 8px);\n}\n:where([data-moru-registry]) .ui-date-range-picker-popup .ui-calendar {\n  padding: 0;\n  border: 0;\n}\n:where([data-moru-registry]) .ui-date-range-picker-summary {\n  margin-top: var(--ui-control-gap, 8px);\n  color: var(--ui-muted);\n  font-size: var(--ui-type-caption-size, 12px);\n  line-height: var(--ui-type-caption-line-height, 1.5);\n  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);\n  overflow-wrap: anywhere;\n}\n:where([data-moru-registry]) .ui-date-range-picker-popup .ui-date-picker-actions {\n  margin-top: var(--ui-control-gap, 8px);\n}\n\n"
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-date-range-picker { position:relative; }\n:where([data-moru-registry]) .ui-date-range-picker-trigger > span { line-height:var(--ui-type-label-line-height,1.5); }\n:where([data-moru-registry]) .ui-date-range-picker-popup { width:304px; padding:var(--ui-control-gap,8px); }\n:where([data-moru-registry]) .ui-date-range-picker-popup .ui-calendar { padding:0; border:0; }\n:where([data-moru-registry]) .ui-date-range-picker-summary { margin-top:var(--ui-control-gap,8px); color:var(--ui-muted); font-size:var(--ui-type-caption-size,12px); line-height:var(--ui-type-caption-line-height,1.5); letter-spacing:var(--ui-type-caption-letter-spacing,0em); overflow-wrap:anywhere; }\n:where([data-moru-registry]) .ui-date-range-picker-popup .ui-date-picker-actions { margin-top:var(--ui-control-gap,8px); }\n\n"
     },
     {
       "path": "registry/moru/date-range-picker.tsx",
@@ -38,7 +38,7 @@
   ],
   "meta": {
     "version": "0.4.0",
-    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
     "license": "MIT",
     "testedWith": {
       "react": "19.3.1",

@@ -53,14 +53,15 @@ describe('FormattedInput native input contract', () => {
     expect(markup).not.toContain('99999')
   })
 
-  it('inherits Field errors, labels, size, and disabled loading behavior', () => {
+  it('inherits Field errors, labels, size, and read-only loading behavior', () => {
     const markup = renderToStaticMarkup(
       <Field label="Card" error="Check the card number">
         <FormattedInput format="card-number" loading size="lg" />
       </Field>,
     )
     const input = markup.match(/<input\b[^>]*>/)?.[0] ?? ''
-    expect(input).toContain('disabled=""')
+    expect(input).toContain('readOnly=""')
+    expect(input).not.toMatch(/\sdisabled=""/)
     expect(input).toContain('aria-busy="true"')
     expect(input).toContain('aria-invalid="true"')
     expect(input).toContain('aria-describedby=')

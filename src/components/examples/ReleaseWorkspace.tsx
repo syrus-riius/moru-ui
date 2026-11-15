@@ -1,4 +1,4 @@
-import { localizeCatalogItems } from '../catalog-search'
+import { localizeCatalogItems } from '../catalog/catalog-search'
 import { useI18n, translate, type Translator } from '../../i18n'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import {
@@ -14,7 +14,7 @@ import {
   Square,
   Terminal,
 } from 'lucide-react'
-import { useWorkspaceMembers } from '../WorkspaceMembersContext'
+import { useWorkspaceMembers } from '../workspace-example/WorkspaceMembersContext'
 import { Alert } from '../ui/alert'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'

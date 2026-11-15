@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { AspectRatio } from './aspect-ratio'
@@ -15,8 +16,8 @@ import { Label } from './label'
 import { NativeSelect } from './native-select'
 import { Spinner } from './spinner'
 import { Toggle } from './toggle'
-import { CompletionControlsDemo } from '../CompletionControlsDemo'
-import { controlsComponents } from '../completion-controls-catalog'
+import { CompletionControlsDemo } from '../demos/CompletionControlsDemo'
+import { controlsComponents } from '../demos/completion-controls-catalog'
 
 function tags(markup: string, element: string) {
   return [...markup.matchAll(new RegExp(`<${element}\\b[^>]*>`, 'g'))].map((match) => match[0])
@@ -26,12 +27,28 @@ function attribute(tag: string, name: string) {
 }
 
 describe('Button text layout and loading contracts', () => {
-  it('keeps the existing single-line presentation by default', () => {
+  it('leaves wrapping to the shared readability rule unless a mode is requested', () => {
     const markup = renderToStaticMarkup(<Button size="sm">Save changes</Button>)
     const button = tags(markup, 'button')[0]
-    expect(attribute(button, 'data-text-wrap')).toBe('nowrap')
-    expect(attribute(button, 'class')).toContain('whitespace-nowrap')
+    expect(attribute(button, 'data-text-wrap')).toBeUndefined()
+    expect(attribute(button, 'class')).not.toContain('whitespace-nowrap')
     expect(attribute(button, 'data-size')).toBe('sm')
+  })
+  it('keeps a single line only when nowrap is requested, with a rule that outranks the default', () => {
+    const markup = renderToStaticMarkup(<Button textWrap="nowrap">Save changes</Button>)
+    expect(attribute(tags(markup, 'button')[0], 'data-text-wrap')).toBe('nowrap')
+    const css = readFileSync(new URL('./styles.css', import.meta.url), 'utf8')
+    expect(css).toMatch(/\.ui-button\[data-text-wrap='nowrap'\]\s*\{\s*white-space:\s*nowrap;/)
+    expect(css).not.toMatch(/\.ui-button\s*\{[^}]*white-space:\s*nowrap/)
+  })
+  it('keeps a busy button focusable instead of using the native disabled attribute', () => {
+    const busy = tags(renderToStaticMarkup(<Button loading>Save</Button>), 'button')[0]
+    expect(attribute(busy, 'aria-disabled')).toBe('true')
+    expect(attribute(busy, 'aria-busy')).toBe('true')
+    expect(busy).not.toMatch(/\sdisabled=""/)
+    const off = tags(renderToStaticMarkup(<Button disabled>Save</Button>), 'button')[0]
+    expect(off).toMatch(/\sdisabled=""/)
+    expect(attribute(off, 'aria-disabled')).toBeUndefined()
   })
   it('retains the complete wrapped action label and loading semantics at every size', () => {
     for (const size of ['sm', 'md', 'lg'] as const) {
@@ -47,7 +64,7 @@ describe('Button text layout and loading contracts', () => {
       expect(attribute(button, 'class')).not.toContain('whitespace-nowrap')
       expect(attribute(button, 'data-size')).toBe(size)
       expect(attribute(button, 'aria-busy')).toBe('true')
-      expect(button).toContain('disabled=""')
+      expect(attribute(button, 'aria-disabled')).toBe('true')
       expect(button).not.toContain('textWrap=')
       expect(markup).toContain(label)
       expect(markup).toContain('ui-button-spinner ui-loading-indicator')

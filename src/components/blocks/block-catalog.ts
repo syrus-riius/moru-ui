@@ -16,7 +16,7 @@ const sources: Record<BlockId, string> = {
 /** Paste into src/BlockName.tsx in the Moru web starter; no gallery-only dependencies. */
 export function getBlockSource(id: BlockId): string {
   return sources[id]
-    .replace(/from '\.\.\/\.\.\/lib\/i18n'/g, "from './lib/i18n'")
+    .replace(/from '\.\.\/\.\.\/lib\//g, "from './lib/")
     .replace(/from '\.\.\/ui\//g, "from './components/ui/")
     .replace(/from '\.\/(OTPBlock|SearchFiltersBlock)'/g, "from './components/blocks/$1'")
 }

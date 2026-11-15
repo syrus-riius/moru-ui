@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:ui",
+  "title": "Spinner",
+  "description": "Ring, dots and bars loading indicators with accessible labels and motion controls.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/spinner.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/spinner.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-completion.css'\n\nexport type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'ring' | 'dots' | 'bars'\n  label?: string\n  paused?: boolean\n  /** Use inside an already labelled loading button or status to avoid duplicate announcements. */\n  decorative?: boolean\n}\nexport const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(function Spinner(\n  {\n    size = 'md',\n    variant = 'ring',\n    label: labelProp,\n    paused = false,\n    decorative = false,\n    className,\n    ...props\n  },\n  ref,\n) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('불러오는 중')\n\n  return (\n    <span\n      {...props}\n      ref={ref}\n      className={cn('ui-spinner', className)}\n      data-size={size}\n      data-variant={variant}\n      data-paused={paused || undefined}\n      role={decorative ? undefined : 'status'}\n      aria-hidden={decorative ? true : props['aria-hidden']}\n      aria-label={\n        decorative || props['aria-labelledby'] ? undefined : (props['aria-label'] ?? label)\n      }\n      aria-labelledby={decorative ? undefined : props['aria-labelledby']}\n      aria-live={decorative ? undefined : props['aria-live']}\n    >\n      {variant === 'ring' ? (\n        <svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\">\n          <circle cx=\"12\" cy=\"12\" r=\"9\" stroke=\"currentColor\" strokeWidth=\"2\" opacity=\".2\" />\n          <path\n            d=\"M12 3a9 9 0 0 1 9 9\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n          />\n        </svg>\n      ) : (\n        <span className=\"ui-spinner-segments\" aria-hidden=\"true\">\n          <span />\n          <span />\n          <span />\n        </span>\n      )}\n    </span>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

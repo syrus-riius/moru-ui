@@ -1,0 +1,55 @@
+{
+  "name": "@moru/native",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Moru design tokens and native React Native components for Expo apps",
+  "main": "src/index.ts",
+  "react-native": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "react-native": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./theme": {
+      "types": "./src/theme.tsx",
+      "react-native": "./src/theme.tsx",
+      "default": "./src/theme.tsx"
+    },
+    "./expo": {
+      "types": "./src/expo.tsx",
+      "react-native": "./src/expo.tsx",
+      "default": "./src/expo.tsx"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-native": ">=0.83",
+    "react-native-safe-area-context": ">=5",
+    "react-native-svg": ">=15",
+    "@expo/ui": ">=58"
+  },
+  "sideEffects": false,
+  "peerDependenciesMeta": {
+    "@expo/ui": {
+      "optional": true
+    }
+  },
+  "license": "MIT",
+  "homepage": "https://moru-ui-lab.riius.chatgpt.site/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syrus-riius/moru-ui.git",
+    "directory": "packages/moru-native"
+  },
+  "bugs": {
+    "url": "https://github.com/syrus-riius/moru-ui/issues"
+  }
+}

@@ -1,0 +1,91 @@
+.moru-site-footer.ui-footer {
+  max-width: var(--moru-site-max-width, 1320px);
+  margin-inline: auto;
+  padding: var(--ui-section-gap) clamp(16px, 4vw, 48px);
+  border: 0;
+  border-radius: 0;
+  background: var(--ui-surface);
+}
+
+.moru-site-footer .ui-footer-main {
+  gap: var(--ui-form-gap);
+}
+
+.moru-site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ui-control-height-md);
+  max-width: 100%;
+  border-radius: var(--ui-radius);
+  color: var(--ui-text);
+}
+
+.moru-site-footer__brand .moru-logo {
+  width: 114px;
+  max-width: 100%;
+  height: auto;
+}
+
+.moru-site-footer .ui-footer-navigation {
+  column-gap: var(--ui-control-gap);
+  row-gap: var(--ui-space);
+}
+
+.moru-site-footer .ui-footer-navigation a {
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  font-weight: var(--ui-type-label-weight);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+}
+
+.moru-site-footer .ui-footer-bottom {
+  column-gap: var(--ui-form-gap);
+  row-gap: var(--ui-field-gap);
+}
+
+.moru-site-footer__source {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ui-control-height-sm);
+  gap: var(--ui-space);
+  border-radius: var(--ui-radius);
+  color: inherit;
+  text-decoration: none;
+}
+
+.moru-site-footer__source:hover {
+  color: var(--ui-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.moru-site-footer.ui-footer[data-variant='compact'] {
+  padding: var(--ui-form-gap) 0;
+  background: transparent;
+}
+
+.moru-site-footer[data-variant='compact'] .ui-footer-main {
+  flex: 1;
+}
+
+.moru-site-footer[data-variant='compact'] .ui-footer-identity {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Leave the final links above the studio's fixed design-editor launcher. */
+@media (max-width: 1100px) {
+  .moru-site-footer.ui-footer[data-variant='compact'] {
+    padding-block-end: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 640px) {
+  .moru-site-footer .ui-footer-navigation {
+    width: 100%;
+  }
+
+  .moru-site-footer[data-variant='compact'] .ui-footer-main {
+    flex-basis: 100%;
+  }
+}

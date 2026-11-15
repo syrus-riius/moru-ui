@@ -1,0 +1,344 @@
+.moru-input-doc {
+  --input-doc-accent: #3d42c9;
+  --input-doc-soft: color-mix(in srgb, var(--chrome-surface, #fff) 52%, var(--chrome-bg, #f5f5f3));
+  container: input-documentation / inline-size;
+  min-width: 0;
+  color: var(--chrome-text, #171717);
+  scroll-margin-top: calc(var(--moru-public-header-offset, 64px) + 24px);
+}
+
+:root[data-theme='dark'] .moru-input-doc {
+  --input-doc-accent: #b0b5ff;
+}
+
+.moru-input-doc__layout {
+  display: grid;
+  grid-template: 'heading' auto 'outline' auto 'body' auto / minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.moru-input-doc__header {
+  grid-area: heading;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.moru-input-doc__category {
+  display: inline-block;
+  color: var(--input-doc-accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moru-input-doc__category:hover {
+  text-decoration: underline;
+}
+
+.moru-input-doc__header h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(36px, 6cqi, 48px);
+  font-weight: 650;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.moru-input-doc__description {
+  margin: 0;
+  color: var(--chrome-muted, #676763);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.moru-input-doc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.moru-input-doc__studio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding-inline: 12px;
+  border-radius: 7px;
+  background: var(--chrome-hover, #f0f0ed);
+  color: var(--chrome-text, #171717);
+  font-size: 12px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.moru-input-doc__studio:hover {
+  color: var(--input-doc-accent);
+}
+
+.moru-input-doc
+  :is(
+    .moru-input-doc__category,
+    .moru-input-doc__studio,
+    .moru-input-doc__outline button
+  ):focus-visible {
+  outline: 2px solid var(--input-doc-accent);
+  outline-offset: 2px;
+}
+
+.moru-input-doc__outline {
+  grid-area: outline;
+  min-width: 0;
+  align-self: start;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--input-doc-soft);
+}
+
+.moru-input-doc__outline p {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.moru-input-doc__outline ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moru-input-doc__outline button {
+  min-height: 32px;
+  color: var(--chrome-muted, #676763);
+  font-size: 12px;
+  text-align: start;
+}
+
+.moru-input-doc__outline button:hover {
+  color: var(--input-doc-accent);
+}
+
+.moru-input-doc__body {
+  grid-area: body;
+  display: grid;
+  min-width: 0;
+  gap: 42px;
+  padding-bottom: 28px;
+}
+
+.moru-input-doc__body section {
+  min-width: 0;
+}
+
+.moru-input-doc__body :is(section, h2)[id] {
+  scroll-margin-top: calc(var(--moru-public-header-offset, 64px) + 24px);
+}
+
+.moru-input-doc__body h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 640;
+  line-height: 1.3;
+  letter-spacing: -0.028em;
+}
+
+.moru-input-doc__body section > p {
+  max-width: 64ch;
+  margin: 0 0 14px;
+  color: var(--chrome-muted, #676763);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.moru-input-doc__body section > :is(.ui-code-block, .moru-input-doc__states) + p {
+  margin: 12px 0 0;
+}
+
+.moru-input-doc__body section > p a {
+  color: var(--input-doc-accent);
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.moru-input-doc__body section > p code {
+  color: var(--chrome-text, #171717);
+  font-size: 0.89em;
+  overflow-wrap: anywhere;
+}
+
+.moru-input-doc__tabs > .ui-tabs-list {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.moru-input-doc__tabs .ui-tabs-tab {
+  min-height: 42px;
+  padding: 8px 2px;
+  border-radius: 0;
+  color: var(--chrome-muted, #676763);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moru-input-doc__tabs .ui-tabs-tab[data-active] {
+  background: none;
+  box-shadow: inset 0 -2px var(--input-doc-accent);
+  color: var(--chrome-text, #171717);
+}
+
+.moru-input-doc__tabs .ui-tabs-tab[data-active]:focus-visible {
+  outline-color: var(--input-doc-accent);
+}
+
+.moru-input-doc__tabs .ui-tabs-panel {
+  padding-top: 12px;
+}
+
+.moru-input-doc__preview {
+  display: grid;
+  min-height: 224px;
+  padding: var(--ui-card-padding, 24px);
+  place-items: center;
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+
+.moru-input-doc__preview .moru-input-doc__example {
+  width: min(100%, 310px);
+}
+
+.moru-input-doc__example {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.moru-input-doc__example label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.moru-input-doc__example p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.moru-input-doc__example p[data-invalid] {
+  color: var(--ui-danger, #b93d37);
+}
+
+.moru-input-doc__states {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.moru-input-doc__state {
+  min-width: 0;
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+
+.moru-input-doc__state h3 {
+  margin: 0 0 12px;
+  color: var(--ui-muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.moru-input-doc__props {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.moru-input-doc__props :is(th, td) {
+  padding: 10px 8px;
+  text-align: start;
+  vertical-align: top;
+}
+
+.moru-input-doc__props thead {
+  background: var(--input-doc-soft);
+}
+.moru-input-doc__props thead th:first-child {
+  width: 25%;
+  border-radius: 7px 0 0 7px;
+}
+.moru-input-doc__props thead th:nth-child(2) {
+  width: 32%;
+}
+.moru-input-doc__props thead th:last-child {
+  border-radius: 0 7px 7px 0;
+}
+.moru-input-doc__props tbody th {
+  font-weight: 550;
+}
+.moru-input-doc__props tbody td {
+  color: var(--chrome-muted, #676763);
+}
+.moru-input-doc__props tbody tr:nth-child(even) {
+  background: var(--input-doc-soft);
+}
+.moru-input-doc__props code {
+  font-size: 0.9em;
+}
+.moru-input-doc__props small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+@container input-documentation (min-width: 440px) {
+  .moru-input-doc__states {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .moru-input-doc__props :is(th, td) {
+    padding-inline: 12px;
+  }
+}
+
+@container input-documentation (min-width: 720px) {
+  .moru-input-doc__layout {
+    grid-template: 'heading outline' auto 'body outline' auto / minmax(0, 1fr) 128px;
+    gap: 22px 36px;
+  }
+
+  .moru-input-doc__outline {
+    position: sticky;
+    top: calc(var(--moru-public-header-offset, 64px) + 24px);
+    padding: 0;
+    background: none;
+  }
+
+  .moru-input-doc__outline ul {
+    display: grid;
+    gap: 0;
+  }
+}

@@ -1,0 +1,495 @@
+/* Moru controls provide appearance and interaction; this sheet arranges the editor. */
+.token-editor {
+  --editor-bg: var(--ui-surface);
+  --editor-text: var(--ui-text);
+  --editor-muted: var(--ui-muted);
+  --editor-border: var(--ui-border);
+  --editor-subtle: var(--ui-input-bg);
+  --editor-active: var(--ui-primary);
+  --editor-accent: var(--ui-focus-ring);
+  --editor-error: var(--ui-danger);
+  --editor-inset: max(16px, calc(var(--ui-space) * 4));
+  --editor-gap: max(8px, var(--ui-control-gap));
+  --editor-section-gap: max(16px, var(--ui-form-gap));
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  background: var(--editor-bg);
+  color: var(--editor-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  text-align: start;
+}
+.token-editor-heading {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--editor-gap);
+  padding: var(--editor-inset);
+}
+.token-eyebrow,
+.token-section-heading > span {
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+}
+.token-editor-heading h2 {
+  margin: var(--ui-space) 0 0;
+  color: var(--editor-text);
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-heading-weight);
+  line-height: var(--ui-type-label-line-height);
+}
+.token-live-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: var(--ui-space);
+  padding: var(--ui-space) var(--editor-gap);
+  border-radius: var(--ui-radius);
+  color: var(--ui-success-text);
+  background: var(--ui-success-soft);
+  font-size: var(--ui-type-caption-size);
+}
+.token-live-badge > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.token-editor-tabs {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.token-editor-tabs > .ui-tabs-list {
+  display: grid;
+  flex: none;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
+  width: calc(100% - var(--editor-inset) * 2);
+  margin-inline: var(--editor-inset);
+  overflow: visible;
+}
+.token-editor-tabs > .ui-tabs-list > .ui-tabs-tab {
+  grid-column: span 3;
+  min-width: 0;
+  padding-inline: var(--ui-space);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+/* Keep all seven categories visible in two balanced rows (four, then three). */
+.token-editor-tabs > .ui-tabs-list > .ui-tabs-tab:nth-child(n + 5) {
+  grid-column: span 4;
+}
+.token-editor-tabs > .ui-tabs-panel {
+  flex: 1;
+  min-height: 0;
+  padding-top: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--editor-border) transparent;
+}
+.token-editor-body {
+  min-width: 0;
+}
+.token-editor .ui-tabs-panel:focus-visible {
+  outline-offset: -3px;
+}
+/* Keep focus rings on the controls, not around the entire settings scroller. */
+.token-editor-tabs > .ui-tabs-panel:focus-visible {
+  outline: none;
+}
+.token-editor-section {
+  min-width: 0;
+  padding: var(--editor-inset);
+}
+.token-section-heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--editor-gap);
+  margin-bottom: var(--editor-gap);
+}
+.token-section-heading h3 {
+  margin: 0;
+  color: var(--editor-text);
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+}
+.token-editor .token-mode-switch,
+.token-editor .token-density-switch {
+  width: 100%;
+}
+.token-editor .token-density-switch .ui-toggle-group-item {
+  padding-inline: var(--ui-space);
+}
+.token-editor .token-density-switch {
+  grid-auto-columns: auto;
+}
+.token-preset-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--editor-gap);
+  margin: var(--editor-section-gap) 0 var(--editor-gap);
+}
+.token-preset-label > span:last-child {
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.token-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--editor-gap);
+}
+.token-editor .token-preset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--editor-gap);
+  min-width: 0;
+  height: auto;
+  padding: var(--editor-gap) var(--ui-space);
+  white-space: normal;
+}
+.token-preset[aria-pressed='true'] {
+  background: var(--editor-subtle);
+}
+.token-preset small {
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  overflow-wrap: anywhere;
+}
+.token-preset > span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ui-radius);
+  background: var(--preset-color);
+  color: #fff;
+}
+.token-color-tabs {
+  padding: var(--editor-inset);
+}
+.token-color-tabs > .ui-tabs-list {
+  display: flex;
+  width: 100%;
+}
+.token-color-tabs > .ui-tabs-list > .ui-tabs-tab {
+  flex: 1 0 auto;
+}
+.token-color-tabs > .ui-tabs-panel {
+  padding-top: var(--editor-section-gap);
+}
+.token-color-tabs .token-editor-section {
+  padding: 0;
+}
+.token-color-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--editor-gap);
+}
+.token-color-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 1.15fr);
+  align-items: center;
+  gap: var(--editor-gap);
+}
+.token-color-label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ui-space) / 2);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.token-color-name {
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.token-color-value {
+  min-width: 0;
+}
+.token-color-swatch {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--ui-radius);
+}
+.token-color-swatch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.token-color-swatch:focus-within {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+.token-hex-input {
+  font-family: var(--ui-font-family-code);
+  font-variant-numeric: tabular-nums;
+}
+.token-color-error {
+  grid-column: 1 / -1;
+  color: var(--editor-error);
+  font-size: var(--ui-type-caption-size);
+  overflow-wrap: anywhere;
+}
+.token-range-list {
+  display: grid;
+  gap: var(--editor-section-gap);
+}
+.token-range-control {
+  min-width: 0;
+}
+.token-range-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--editor-gap);
+}
+.token-range-label label {
+  font-size: var(--ui-type-label-size);
+}
+.token-range-label output {
+  display: inline-flex;
+  flex: none;
+  align-items: baseline;
+  gap: var(--ui-space);
+  font-family: var(--ui-font-family-code);
+  font-size: var(--ui-type-caption-size);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.token-range-label output > span {
+  color: var(--editor-muted);
+}
+.token-font-control {
+  display: grid;
+  gap: var(--editor-gap);
+  margin-bottom: var(--editor-section-gap);
+}
+.token-role-picker {
+  display: grid;
+  gap: var(--editor-gap);
+}
+.token-role-picker > span {
+  color: var(--editor-muted);
+}
+.token-role-tabs > .ui-tabs-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-space);
+}
+.token-role-tabs > .ui-tabs-list > .ui-tabs-tab {
+  min-width: 0;
+  padding-inline: var(--ui-space);
+}
+.token-role-tabs > .ui-tabs-panel {
+  padding-top: var(--editor-gap);
+}
+.token-type-preview {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 72px;
+  max-height: 140px;
+  margin-bottom: var(--editor-section-gap);
+  padding: var(--editor-inset);
+  overflow: auto;
+  overflow-wrap: anywhere;
+  border-radius: var(--ui-radius);
+  background: var(--editor-subtle);
+}
+.token-type-controls,
+.token-geometry-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--editor-gap);
+}
+.token-section-note {
+  margin: var(--editor-gap) 0 0;
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+  overflow-wrap: anywhere;
+}
+.token-density-controls {
+  display: grid;
+  gap: var(--editor-section-gap);
+}
+.token-density-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--editor-gap);
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.token-density-status > span {
+  min-width: 0;
+}
+.token-density-status > button {
+  flex: none;
+}
+.token-density-ratio-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--editor-gap);
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.token-density-ratio-note > svg {
+  flex: none;
+  margin-top: var(--ui-space);
+}
+.token-density-ratio-note > span:last-child {
+  flex: none;
+  margin-inline-start: auto;
+  white-space: nowrap;
+}
+.token-density-size-table {
+  display: grid;
+  gap: var(--editor-gap);
+}
+.token-density-size-row {
+  display: grid;
+  grid-template-columns: minmax(50px, 1fr) repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--ui-space);
+  min-width: 0;
+}
+.token-density-size-row > span:first-child,
+.token-density-size-head > span {
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+  overflow-wrap: anywhere;
+}
+.token-density-size-head > span:not(:first-child) {
+  text-align: center;
+}
+.token-density-size-row .ui-input {
+  padding-inline: var(--ui-space);
+  text-align: center;
+}
+.token-density-controls input[type='number'] {
+  font-family: var(--ui-font-family-code);
+  font-variant-numeric: tabular-nums;
+  appearance: textfield;
+}
+.token-density-controls input[type='number']::-webkit-inner-spin-button,
+.token-density-controls input[type='number']::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.token-density-scalar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--editor-gap);
+}
+.token-density-scalar {
+  display: grid;
+  align-content: start;
+  gap: var(--editor-gap);
+  min-width: 0;
+  color: var(--editor-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.token-density-number-unit {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+.token-density-number-unit .ui-input {
+  padding-inline-end: 3em;
+}
+.token-density-number-unit > span:last-child {
+  position: absolute;
+  inset-inline-end: var(--ui-control-padding-x-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--editor-muted);
+  pointer-events: none;
+  font-size: var(--ui-type-caption-size);
+}
+.token-density-extra,
+.token-shape-details {
+  min-width: 0;
+}
+.token-density-extra > summary,
+.token-shape-details > summary {
+  min-height: var(--ui-control-height-sm);
+  padding-block: var(--ui-space);
+  color: var(--editor-text);
+  font-size: var(--ui-type-label-size);
+  cursor: pointer;
+}
+.token-density-extra .token-density-scalar-grid,
+.token-shape-details .token-geometry-controls {
+  padding-top: var(--editor-gap);
+}
+.token-shape-details {
+  margin-top: var(--editor-section-gap);
+}
+.token-editor-footer {
+  display: grid;
+  gap: var(--editor-gap);
+  padding: var(--editor-inset);
+}
+.token-editor-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--editor-gap);
+}
+.token-editor-actions > .ui-button {
+  min-width: 0;
+}
+.token-editor-footer > p {
+  margin: 0;
+  color: var(--editor-muted);
+  text-align: center;
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+@media (pointer: coarse) {
+  .token-editor
+    :is(
+      .ui-tabs-tab,
+      .ui-button,
+      .ui-toggle-group-item,
+      .ui-input,
+      .ui-native-select,
+      .ui-slider-control
+    ) {
+    min-height: max(44px, var(--ui-control-height-sm));
+  }
+  .token-editor :is(.ui-input, .ui-native-select) {
+    font-size: max(16px, var(--ui-type-label-size));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .token-editor *,
+  .token-editor *::before,
+  .token-editor *::after {
+    transition-duration: 0s !important;
+  }
+}

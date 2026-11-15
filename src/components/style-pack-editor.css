@@ -1,0 +1,465 @@
+.moru-style-editor {
+  display: grid;
+  gap: var(--ui-form-gap);
+  min-width: 0;
+  color: var(--chrome-text);
+}
+.moru-style-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-control-gap);
+}
+.moru-style-choice.ui-button {
+  display: grid;
+  align-content: start;
+  justify-content: stretch;
+  height: auto;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+  padding: calc(var(--ui-space) * 3);
+  border: 0;
+  border-radius: var(--ui-card-radius);
+  background: var(--chrome-surface);
+  color: var(--chrome-text);
+  font-family: var(--ui-font-family);
+  text-align: left;
+  cursor: pointer;
+}
+.moru-style-choice[aria-pressed='true'] {
+  background: var(--chrome-hover);
+  box-shadow: inset 0 -2px 0 var(--chrome-text);
+}
+.moru-style-choice:hover {
+  background: var(--chrome-hover);
+}
+.moru-style-choice:focus-visible,
+.moru-style-effects > summary:focus-visible,
+.moru-style-effects-reset:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+.moru-style-choice-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap);
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+}
+.moru-style-choice-title > svg {
+  flex: none;
+}
+.moru-style-choice small {
+  color: var(--chrome-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.moru-style-choice-art {
+  position: relative;
+  display: block;
+  height: 62px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 7px;
+  background: var(--chrome-code);
+}
+.moru-style-choice-art i {
+  position: absolute;
+  display: block;
+  width: 42%;
+  height: 30px;
+  inset: 16px auto auto 16%;
+  border-radius: 5px;
+  background: var(--chrome-surface);
+}
+.moru-style-choice-art i:nth-child(2) {
+  width: 22%;
+  height: 18px;
+  inset: 28px 12% auto auto;
+  background: var(--chrome-action-bg);
+}
+.moru-style-choice-art i:nth-child(3) {
+  width: 17%;
+  height: 4px;
+  inset: 25px auto auto 22%;
+  border-radius: 2px;
+  background: var(--chrome-muted);
+  opacity: 0.65;
+}
+.moru-style-choice[data-style='glass'] .moru-style-choice-art {
+  background:
+    radial-gradient(
+      ellipse at 70% 0%,
+      color-mix(in srgb, var(--ui-accent) 65%, transparent),
+      transparent 70%
+    ),
+    var(--chrome-code);
+}
+.moru-style-choice[data-style='glass'] .moru-style-choice-art i:first-child {
+  background: color-mix(in srgb, var(--chrome-surface) 55%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 1px 0 #ffffff80,
+    0 3px 10px #00000012;
+}
+.moru-style-choice[data-style='neon'] .moru-style-choice-art {
+  background: #111318;
+}
+.moru-style-choice[data-style='neon'] .moru-style-choice-art i:first-child {
+  background: #22242b;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ui-accent) 45%, transparent);
+}
+.moru-style-choice[data-style='neon'] .moru-style-choice-art i:nth-child(2) {
+  background: var(--ui-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ui-accent) 65%, transparent);
+}
+.moru-style-choice[data-style='neon'] .moru-style-choice-art i:nth-child(3) {
+  background: #d9dde7;
+}
+.moru-style-editor-note,
+.moru-style-preview-note {
+  margin: 0;
+  color: var(--chrome-muted);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-body-line-height);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.moru-style-effects {
+  min-width: 0;
+  padding: calc(var(--ui-space) * 3) calc(var(--ui-space) * 4);
+  border-radius: var(--ui-radius);
+  background: var(--chrome-surface);
+}
+.moru-style-effects > summary {
+  cursor: pointer;
+  color: var(--chrome-text);
+  font-size: var(--ui-type-label-size);
+  font-weight: 500;
+}
+.moru-style-effects > summary > span {
+  float: right;
+  color: var(--chrome-muted);
+  font-size: var(--ui-type-caption-size);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+.moru-style-effect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-form-gap);
+  margin-top: var(--ui-form-gap);
+}
+.moru-style-effect-control {
+  min-width: 0;
+}
+.moru-style-effect-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ui-control-gap);
+  color: var(--chrome-text);
+  font-size: var(--ui-type-caption-size);
+}
+.moru-style-effect-control output {
+  flex: none;
+  color: var(--chrome-muted);
+  font-variant-numeric: tabular-nums;
+}
+.moru-style-effects-reset.ui-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  min-height: var(--ui-control-height-sm);
+  margin-top: var(--ui-control-gap);
+  padding-inline: var(--ui-control-padding-x-sm);
+  border: 0;
+  background: transparent;
+  color: var(--chrome-muted);
+  font-size: var(--ui-type-label-size);
+  cursor: pointer;
+}
+.moru-style-effects-reset:hover {
+  color: var(--chrome-text);
+}
+.moru-style-preview-scope {
+  min-width: 0;
+  container: style-preview / inline-size;
+}
+.moru-style-stage {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  padding: clamp(20px, 5%, 44px);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 80% 14%,
+      color-mix(in srgb, var(--ui-accent) 65%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse at 8% 90%,
+      color-mix(in srgb, var(--ui-primary) 24%, transparent),
+      transparent 70%
+    ),
+    var(--ui-background);
+  color: var(--ui-text);
+}
+.moru-style-stage-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 550;
+  letter-spacing: 0.08em;
+}
+.moru-style-stage-heading > span:last-child {
+  letter-spacing: 0.03em;
+}
+.moru-style-stage-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+.moru-style-project-card {
+  display: grid;
+  gap: var(--ui-form-gap, 24px);
+  min-width: 0;
+}
+.moru-style-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: 1.5;
+}
+.moru-style-card-symbol {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+.moru-style-card-copy h3 {
+  margin: 0 0 8px;
+  font-size: var(--ui-type-heading-size, 20px);
+  line-height: var(--ui-type-heading-line-height, 1.4);
+  letter-spacing: var(--ui-type-heading-letter-spacing, -0.025em);
+  font-weight: var(--ui-type-heading-weight, 600);
+  text-wrap: balance;
+}
+.moru-style-card-copy p,
+.moru-style-progress-card > p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+.moru-style-project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-style-project-actions .ui-button {
+  max-width: 100%;
+}
+.moru-style-preview-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.moru-style-stage-side {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.moru-style-progress-card {
+  display: grid;
+  gap: var(--ui-form-gap, 24px);
+  min-width: 0;
+}
+.moru-style-progress-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.moru-style-progress-value > strong {
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.moru-style-progress-value > strong > span {
+  margin-inline-start: 3px;
+  font-size: 22px;
+}
+.moru-style-team-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.moru-style-team-card > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.moru-style-team-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+  font-size: 13px;
+}
+.moru-style-team-card strong {
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 500);
+}
+.moru-style-team-card p {
+  margin: 3px 0 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: 1.5;
+}
+/* Compact settings retain the same control rhythm as the rest of the editor. */
+.moru-style-editor[data-compact] {
+  gap: var(--ui-form-gap);
+  margin-top: var(--ui-form-gap);
+  color: var(--editor-text, var(--ui-text));
+}
+.moru-style-editor[data-compact] .moru-style-choices {
+  gap: var(--ui-control-gap);
+}
+.moru-style-editor[data-compact] .moru-style-choice.ui-button {
+  gap: var(--ui-control-gap);
+  min-height: 80px;
+  height: auto;
+  padding: var(--ui-control-gap);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+.moru-style-editor[data-compact] .moru-style-choice[aria-pressed='true'] {
+  box-shadow: inset 0 -2px 0 var(--ui-primary);
+}
+.moru-style-editor[data-compact] .moru-style-choice-art {
+  height: 35px;
+  border-radius: var(--ui-radius);
+}
+.moru-style-editor[data-compact] .moru-style-choice-art i {
+  height: 20px;
+  top: 9px;
+  left: 12%;
+}
+.moru-style-editor[data-compact] .moru-style-choice-art i:nth-child(2) {
+  height: 10px;
+  top: 21px;
+  left: auto;
+  right: 9%;
+}
+.moru-style-editor[data-compact] .moru-style-choice-art i:nth-child(3) {
+  height: 3px;
+  top: 16px;
+  left: 20%;
+}
+.moru-style-editor[data-compact] .moru-style-choice-title {
+  gap: var(--ui-space);
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-label-weight);
+}
+.moru-style-editor[data-compact] .moru-style-choice-title svg {
+  width: var(--ui-icon-size-sm);
+  height: var(--ui-icon-size-sm);
+}
+.moru-style-editor[data-compact] .moru-style-editor-note {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+}
+.moru-style-editor[data-compact] .moru-style-effects {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.moru-style-editor[data-compact] .moru-style-effects > summary {
+  min-height: var(--ui-control-height-sm);
+  padding-block: var(--ui-control-gap);
+  font-size: var(--ui-type-label-size);
+}
+.moru-style-editor[data-compact] .moru-style-effect-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ui-form-gap);
+  margin-top: var(--ui-control-gap);
+}
+.moru-style-editor[data-compact] .moru-style-effect-heading {
+  font-size: var(--ui-type-label-size);
+}
+.moru-style-editor[data-compact] .moru-style-effects-reset {
+  font-size: var(--ui-type-caption-size);
+}
+@container style-preview (max-width: 620px) {
+  .moru-style-stage-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moru-style-stage-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .moru-style-team-card {
+    align-content: start;
+  }
+}
+@container style-preview (max-width: 420px) {
+  .moru-style-stage-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moru-style-stage {
+    padding: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .moru-style-choices {
+    gap: var(--ui-control-gap);
+  }
+  .moru-style-choice.ui-button {
+    padding: var(--ui-control-gap);
+  }
+  .moru-style-choice small {
+    font-size: var(--ui-type-caption-size);
+  }
+  .moru-style-choice-art {
+    height: 48px;
+  }
+  .moru-style-effect-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ui-form-gap);
+  }
+  .moru-style-effects-reset.ui-button {
+    min-height: max(44px, var(--ui-control-height-sm));
+  }
+}

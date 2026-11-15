@@ -1,0 +1,182 @@
+/* Navigation is a site composition of Moru controls and semantic tokens. */
+.studio-shell .sidebar {
+  --navigation-inline: calc(var(--ui-space) * 3);
+  min-height: 0;
+  padding: var(--ui-form-gap) var(--navigation-inline) 0;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border) transparent;
+  scroll-padding-block: var(--ui-form-gap);
+  font-family: var(--ui-font-family);
+}
+.studio-shell .sidebar > * {
+  flex-shrink: 0;
+}
+.studio-shell .sidebar .sidebar-close {
+  display: none;
+}
+.studio-shell .sidebar button {
+  scroll-margin-block: var(--ui-form-gap);
+}
+.studio-shell .sidebar button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+.studio-shell .sidebar .brand {
+  min-height: var(--ui-control-height-md);
+  justify-content: flex-start;
+  padding: var(--ui-space) var(--ui-control-padding-x-sm);
+}
+.studio-shell .sidebar .brand .moru-logo {
+  width: 116px;
+}
+.studio-shell .sidebar .brand + .nav-section-label {
+  margin-top: var(--ui-form-gap);
+}
+.studio-shell .sidebar .nav-section-label {
+  padding: 0 var(--ui-control-padding-x-sm);
+  margin-bottom: var(--ui-control-gap);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+}
+.studio-shell .sidebar .primary-nav {
+  gap: var(--ui-space);
+}
+.studio-shell .sidebar .primary-nav > .ui-button {
+  justify-content: flex-start;
+  min-width: 0;
+  width: 100%;
+  min-height: var(--ui-control-height-md);
+  height: auto;
+  padding: calc(var(--ui-space) * 2) var(--ui-control-padding-x-sm);
+  gap: var(--ui-control-gap);
+  border-radius: var(--ui-radius);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  text-align: start;
+}
+.studio-shell .sidebar .primary-nav > .ui-button:hover {
+  color: var(--ui-text);
+  background: var(--ui-control-hover-bg);
+}
+.studio-shell .sidebar .primary-nav > .ui-button.active {
+  color: var(--ui-primary-foreground);
+  background: var(--ui-primary);
+}
+.studio-shell .sidebar .primary-nav > button > svg:first-child {
+  flex: none;
+  width: var(--ui-icon-size-md);
+  height: var(--ui-icon-size-md);
+}
+.studio-shell .sidebar .primary-nav .nav-end {
+  flex: none;
+  margin-left: auto;
+  color: inherit;
+}
+.studio-shell .sidebar .nav-count,
+.studio-shell .sidebar .nav-new {
+  flex: none;
+  margin-left: auto;
+  padding: 0 var(--ui-space);
+  border: 0;
+  border-radius: var(--ui-radius);
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ui-type-caption-size);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.studio-shell .sidebar .nav-new {
+  color: var(--ui-muted);
+}
+.studio-shell .sidebar .active .nav-new {
+  color: inherit;
+}
+.studio-shell .sidebar .component-list-label {
+  align-items: baseline;
+  gap: var(--ui-control-gap);
+  margin-top: var(--ui-section-gap);
+  padding-top: 0;
+}
+.studio-shell .sidebar .component-list-label > span {
+  font: inherit;
+  letter-spacing: 0;
+}
+.studio-shell .sidebar .sidebar-bottom {
+  margin-top: auto;
+  padding-top: var(--ui-section-gap);
+}
+.studio-shell .sidebar .sidebar-note {
+  padding: var(--ui-form-gap) var(--ui-control-padding-x-sm);
+}
+.studio-shell .sidebar .note-spark {
+  margin-bottom: var(--ui-control-gap);
+  color: var(--ui-text);
+}
+.studio-shell .sidebar .sidebar-note > strong {
+  display: block;
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+}
+.studio-shell .sidebar .sidebar-note p {
+  margin: var(--ui-control-gap) 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+  overflow-wrap: anywhere;
+}
+.studio-shell .sidebar .sidebar-note .ui-button {
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 0;
+  font-size: var(--ui-type-caption-size);
+  text-align: start;
+}
+.studio-shell .sidebar .sidebar-note button > svg {
+  flex: none;
+}
+.studio-shell .sidebar .sidebar-status {
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+  margin: 0;
+  padding: var(--ui-control-padding-x-sm) var(--ui-control-padding-x-sm)
+    max(var(--ui-control-padding-x-sm), env(safe-area-inset-bottom));
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.studio-shell .sidebar .sidebar-status > span:first-child {
+  min-width: 0;
+  gap: var(--ui-control-gap);
+}
+.studio-shell .sidebar .sidebar-status i {
+  flex: none;
+  background: var(--ui-success);
+}
+@media (max-width: 760px) {
+  .studio-shell .sidebar {
+    width: min(280px, 90vw);
+  }
+  .studio-shell .sidebar .brand {
+    max-width: calc(100% - 44px);
+  }
+  .studio-shell .sidebar .sidebar-close {
+    display: inline-flex;
+    top: var(--ui-form-gap);
+    right: var(--ui-control-padding-x-sm);
+    width: 44px;
+    height: 44px;
+    padding: var(--ui-control-padding-x-sm);
+  }
+  .studio-shell .sidebar .primary-nav > .ui-button {
+    min-height: max(44px, var(--ui-control-height-md));
+  }
+}

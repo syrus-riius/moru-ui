@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "item",
+  "type": "registry:ui",
+  "title": "Item",
+  "description": "Composable list item presentation for leading content, copy and trailing actions.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/item.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/item.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-completion.css'\n\nexport type ItemProps = HTMLAttributes<HTMLDivElement> & {\n  variant?: 'default' | 'outline' | 'muted'\n  size?: 'sm' | 'md' | 'lg'\n}\nexport const Item = forwardRef<HTMLDivElement, ItemProps>(function Item(\n  { variant = 'default', size = 'md', className, ...props },\n  ref,\n) {\n  return (\n    <div\n      {...props}\n      ref={ref}\n      className={cn('ui-item', className)}\n      data-variant={variant}\n      data-size={size}\n    />\n  )\n})\nexport function ItemGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-item-group', className)} />\n}\nexport function ItemMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-item-media', className)} />\n}\nexport function ItemContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-item-content', className)} />\n}\nexport function ItemTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-item-title', className)} />\n}\nexport function ItemDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {\n  return <p {...props} className={cn('ui-item-description', className)} />\n}\nexport function ItemActions({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-item-actions', className)} />\n}\nexport function ItemSeparator({ className, ...props }: HTMLAttributes<HTMLHRElement>) {\n  return <hr {...props} className={cn('ui-item-separator', className)} />\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

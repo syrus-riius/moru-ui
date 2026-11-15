@@ -1,0 +1,74 @@
+# Time Picker
+
+Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.
+
+Version: 0.4.0. Source hash: e068de2cd7d2d1f2f198a786dcd23f4fee5b398de94b2591cabeb3a5ceb100f6.
+
+## Discovery
+
+- Registry ID: `time-picker`
+- Import: `@/components/ui/moru/time-picker`
+- Runtime exports: `TimePicker`
+- Registry dependencies: [core](/ai/v0.4.0/core.md)
+- Install source: [time-picker.json](https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-picker.json)
+- Setup and import-path differences: [start](/ai/v0.4.0/start.md)
+- Source: [src/components/ui/time-picker.tsx](https://github.com/syrus-riius/moru-ui/blob/main/src/components/ui/time-picker.tsx)
+
+## Usage and interaction
+
+- Values are HH:mm wall-clock strings or null, not Date instances. step is a minute increment (1–60).
+- TimePicker does not convert timezones. Store a separate date/timezone when scheduling real events.
+
+## Minimal example
+
+```tsx
+import { useState } from 'react'
+import { TimePicker } from '@/components/ui/moru/time-picker'
+
+export function StartTime() {
+  const [time, setTime] = useState<string | null>('09:00')
+  return <TimePicker label="Start time" name="start" value={time} onValueChange={setTime} step={15} />
+}
+```
+
+## Source-derived API
+
+These are declarations from the installed source, not a replacement implementation. Inherited React/Base UI types stay inherited; resolve them from the installed dependency instead of assuming another library’s props.
+
+Referenced imported types/values:
+
+- `InputHTMLAttributes` from `react`
+
+```ts
+interface TimePickerProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'value' | 'defaultValue' | 'size' | 'step' | 'min' | 'max'
+> {
+  value?: string | null
+  defaultValue?: string | null
+  onValueChange?: (value: string | null) => void
+  label?: string
+  min?: string
+  max?: string
+  /** Interval in minutes, from 1 to 60. The step base is min, or midnight. */
+  step?: number
+  size?: 'sm' | 'md' | 'lg'
+  clearable?: boolean
+  error?: string
+  loading?: boolean
+}
+```
+
+Exported value type annotations / generic factory calls from source:
+
+- `TimePicker: forwardRef<HTMLInputElement, TimePickerProps>`
+
+## Declared defaults
+
+Extracted from exported component parameter/props destructuring. Identifier values refer to the installed source; omitted props are not necessarily unsupported.
+
+- `TimePicker.defaultValue`: `null`
+- `TimePicker.step`: `1`
+- `TimePicker.size`: `'md'`
+- `TimePicker.clearable`: `true`
+- `TimePicker.loading`: `false`

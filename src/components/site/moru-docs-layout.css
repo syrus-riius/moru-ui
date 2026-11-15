@@ -1,0 +1,171 @@
+.studio-shell-public {
+  --moru-site-max-width: 1320px;
+  --moru-public-header-offset: 64px;
+  background: var(--chrome-surface);
+  min-height: 100dvh;
+}
+.studio-shell-public > .workspace-main {
+  margin-inline: 0;
+}
+.studio-shell-public .workspace-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+.studio-shell-public .workspace-body > .moru-public-main {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+.moru-public-header {
+  position: sticky;
+  z-index: 45;
+  inset-block-start: 0;
+}
+.studio-shell-public .editor-scrim {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #0005;
+}
+.studio-shell-public .inspector {
+  position: fixed;
+  z-index: 100;
+  inset: 0 0 0 auto;
+  width: min(360px, 90vw);
+  height: 100dvh;
+  transform: none;
+  box-shadow: -8px 0 40px #0002;
+}
+.studio-shell-public .inspector-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+.moru-docs-layout {
+  display: grid;
+  grid-template-columns: 192px minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  max-width: var(--moru-site-max-width);
+  margin-inline: auto;
+  padding: 42px clamp(20px, 4vw, 48px) 64px;
+}
+.moru-docs-sidebar {
+  position: sticky;
+  top: calc(var(--moru-public-header-offset) + var(--ui-form-gap, 24px));
+  align-self: start;
+  max-height: calc(100dvh - var(--moru-public-header-offset) - var(--ui-section-gap, 32px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ui-space, 4px);
+  scrollbar-width: thin;
+}
+.moru-docs-sidebar-search {
+  margin-block-end: var(--ui-form-gap, 24px);
+}
+.moru-docs-sidebar-search .ui-input-group-addon[data-align='inline-end'] {
+  padding-inline-end: var(--ui-space, 4px);
+}
+.moru-docs-sidebar-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+.moru-docs-content {
+  min-width: 0;
+}
+.moru-docs-content :is(.moru-start-doc, .moru-input-doc) .ui-code-block {
+  background: var(--chrome-bg);
+}
+.moru-docs-guide-link {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  min-height: var(--ui-control-height-sm, 32px);
+  padding: var(--ui-space, 4px) var(--ui-control-padding-x-sm, 10px);
+  border-radius: var(--ui-radius, 6px);
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 500);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, 0em);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.moru-docs-guide-link > svg {
+  flex: none;
+  width: var(--ui-icon-size-sm, 14px);
+  height: var(--ui-icon-size-sm, 14px);
+}
+.moru-docs-guide-link:hover {
+  background: var(--ui-control-hover-bg);
+}
+.moru-docs-guide-link[aria-current='page'] {
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+.moru-docs-guide-link:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 2px;
+}
+.moru-docs-sidebar-label {
+  margin: var(--ui-form-gap, 24px) var(--ui-control-padding-x-sm, 10px) var(--ui-field-gap, 8px);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-weight: var(--ui-type-label-weight, 500);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+}
+.moru-docs-content [id^='component-'],
+.moru-start-doc [id] {
+  scroll-margin-top: calc(var(--moru-public-header-offset) + 24px);
+}
+.moru-docs-mobile-nav {
+  min-width: 0;
+  background: var(--ui-background);
+}
+.moru-docs-mobile-nav > .ui-collapsible-trigger {
+  min-height: max(44px, var(--ui-control-height-md, 40px));
+}
+.moru-docs-mobile-nav .moru-docs-sidebar-search {
+  background: var(--ui-surface);
+}
+.moru-docs-sidebar-inner {
+  min-width: 0;
+  padding: var(--ui-space, 4px);
+}
+
+@media (max-width: 860px) {
+  .moru-docs-sidebar-search .ui-input {
+    font-size: max(16px, var(--ui-type-body-size, 14px));
+  }
+  .moru-docs-guide-link,
+  .moru-docs-sidebar-search .ui-input-group-button {
+    min-height: 44px;
+  }
+  .studio-shell-public {
+    --moru-public-header-offset: 56px;
+  }
+  .moru-docs-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding-block: 20px 40px;
+  }
+}
+.studio-shell-public .workspace-body > .moru-public-main.moru-public-wide {
+  max-width: var(--moru-site-max-width);
+  padding: 38px clamp(20px, 4vw, 48px) 0;
+}
+.moru-docs-layout .specimen-footer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--chrome-text);
+  font-size: 12px;
+  text-underline-offset: 3px;
+}
+@media (max-width: 860px) {
+  .studio-shell-public .workspace-body > .moru-public-main.moru-public-wide {
+    padding-top: 24px;
+  }
+}

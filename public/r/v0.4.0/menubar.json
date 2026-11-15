@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "menubar",
+  "type": "registry:ui",
+  "title": "Menubar",
+  "description": "Application menu bar with nested actions and keyboard focus handling.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/context-menu.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/menubar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/menubar.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { useEffect, useRef, useState } from 'react'\nimport { Menubar as BaseMenubar } from '@base-ui/react/menubar'\nimport { Menu as BaseMenu } from '@base-ui/react/menu'\nimport { cn } from './_lib/cn'\nimport { NavigationMenuActions, type NavigationAction } from './navigation-menu-items'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './navigation-completion.css'\n\nexport interface MenubarMenu {\n  id: string\n  label: string\n  disabled?: boolean\n  items: NavigationAction[]\n}\nexport interface MenubarProps {\n  menus: MenubarMenu[]\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\nexport function Menubar({\n  menus,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: MenubarProps) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('애플리케이션 메뉴')\n\n  const portalContainer = useThemePortalContainer()\n  const rootRef = useRef<HTMLDivElement>(null)\n  const popupRefs = useRef(new Map<string, HTMLDivElement>())\n  const [openId, setOpenId] = useState<string | null>(null)\n  const available = !disabled && menus.some((menu) => menu.id === openId && !menu.disabled)\n  useEffect(() => {\n    if (openId !== null && !available) setOpenId(null)\n  }, [openId, available])\n  return (\n    <BaseMenubar\n      ref={rootRef}\n      tabIndex={-1}\n      className={cn('ui-menubar', className)}\n      aria-label={label}\n      disabled={disabled}\n      data-size={size}\n    >\n      {menus.map((menu) => (\n        <BaseMenu.Root\n          key={menu.id}\n          disabled={disabled || menu.disabled}\n          open={available && openId === menu.id}\n          onOpenChange={(next) => {\n            if (next && (disabled || menu.disabled)) return\n            setOpenId((current) => (next ? menu.id : current === menu.id ? null : current))\n          }}\n        >\n          <BaseMenu.Trigger className=\"ui-menubar-trigger\">{menu.label}</BaseMenu.Trigger>\n          <OverlayPortal portal={BaseMenu.Portal} kind=\"menu\" container={portalContainer}>\n            <BaseMenu.Positioner\n              className=\"ui-navigation-positioner\"\n              positionMethod=\"fixed\"\n              align=\"start\"\n              sideOffset={6}\n              collisionPadding={12}\n            >\n              <BaseMenu.Popup\n                ref={(node) => {\n                  if (node) popupRefs.current.set(menu.id, node)\n                  else popupRefs.current.delete(menu.id)\n                }}\n                className=\"ui-navigation-popup\"\n                data-size={size}\n                finalFocus={\n                  disabled || menu.disabled\n                    ? () => {\n                        const root = rootRef.current\n                        if (!root) return false\n                        const active = root.ownerDocument.activeElement\n                        if (\n                          active !== root.ownerDocument.body &&\n                          !popupRefs.current.get(menu.id)?.contains(active)\n                        )\n                          return false\n                        const triggers = Array.from(\n                          root.querySelectorAll<HTMLButtonElement>('.ui-menubar-trigger'),\n                        )\n                        const index = menus.findIndex((candidate) => candidate.id === menu.id)\n                        return (\n                          [...triggers.slice(index + 1), ...triggers.slice(0, index)].find(\n                            (trigger) => !trigger.disabled,\n                          ) ?? root\n                        )\n                      }\n                    : undefined\n                }\n              >\n                <NavigationMenuActions items={menu.items} size={size} />\n              </BaseMenu.Popup>\n            </BaseMenu.Positioner>\n          </OverlayPortal>\n        </BaseMenu.Root>\n      ))}\n    </BaseMenubar>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

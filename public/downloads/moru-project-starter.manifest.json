@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "version": "0.4.0",
+  "sourceHash": "f426f8bfc975c86b41143c9c9c5f32f6431e476f5a17fd17f47a6941692f4e5b",
+  "registrySourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+  "registryItems": [
+    "badge",
+    "button",
+    "card",
+    "checkbox",
+    "core",
+    "dialog",
+    "field",
+    "input",
+    "modal",
+    "search-filters",
+    "select",
+    "settings",
+    "switch",
+    "textarea"
+  ],
+  "archive": "/downloads/moru-project-starter.zip",
+  "archiveSha256": "06d424f052f5d3dd9a0500a689e3da245b7a1901163ec8fe8a5ce365bead5e5a",
+  "bytes": 145560,
+  "fileCount": 65,
+  "entry": "src/main.tsx"
+}

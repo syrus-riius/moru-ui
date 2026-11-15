@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "carousel",
+  "type": "registry:ui",
+  "title": "Carousel",
+  "description": "Embla-based content carousel with keyboard controls and selected-slide feedback.",
+  "dependencies": [
+    "embla-carousel-react@8.6.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/carousel.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/carousel.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { useCallback, useEffect, useId, useState, type ReactNode } from 'react'\nimport useEmblaCarousel from 'embla-carousel-react'\nimport { ArrowLeft, ArrowRight } from 'lucide-react'\nimport { Button } from './button'\nimport { cn } from './_lib/cn'\nimport './data-completion.css'\n\nexport interface CarouselItem {\n  id: string\n  content: ReactNode\n  label?: string\n}\nexport interface CarouselProps {\n  items: CarouselItem[]\n  loop?: boolean\n  disabled?: boolean\n  orientation?: 'horizontal' | 'vertical'\n  direction?: 'ltr' | 'rtl'\n  onValueChange?: (index: number) => void\n  className?: string\n  'aria-label': string\n}\n\nexport function Carousel({\n  items,\n  loop = false,\n  disabled = false,\n  orientation = 'horizontal',\n  direction = 'ltr',\n  onValueChange,\n  className,\n  'aria-label': label,\n}: CarouselProps) {\n  const { t } = useI18n()\n\n  const id = useId()\n  const [viewportRef, api] = useEmblaCarousel({\n    loop,\n    axis: orientation === 'vertical' ? 'y' : 'x',\n    direction,\n    watchDrag: !disabled,\n  })\n  const [selection, setSelection] = useState({ index: 0, previous: false, next: false })\n  const update = useCallback(() => {\n    if (!api) return\n    setSelection({\n      index: api.selectedScrollSnap(),\n      previous: api.canScrollPrev(),\n      next: api.canScrollNext(),\n    })\n  }, [api])\n  useEffect(() => {\n    if (!api) return\n    update()\n    const select = () => {\n      update()\n      onValueChange?.(api.selectedScrollSnap())\n    }\n    api.on('select', select).on('reInit', update)\n    return () => {\n      api.off('select', select).off('reInit', update)\n    }\n  }, [api, update, onValueChange])\n  return (\n    <section\n      className={cn('ui-carousel', className)}\n      role=\"region\"\n      aria-roledescription={t('캐러셀')}\n      aria-label={label}\n      data-orientation={orientation}\n      dir={direction}\n      onKeyDown={(event) => {\n        if (\n          disabled ||\n          event.defaultPrevented ||\n          (event.target instanceof HTMLElement &&\n            event.target.closest(\n              'input,textarea,select,[contenteditable]:not([contenteditable=\"false\"]),[role=\"combobox\"],[role=\"slider\"],[role=\"tab\"],[role=\"menuitem\"],[role=\"radio\"]',\n            ))\n        )\n          return\n        const previous =\n          orientation === 'vertical' ? 'ArrowUp' : direction === 'rtl' ? 'ArrowRight' : 'ArrowLeft'\n        const next =\n          orientation === 'vertical'\n            ? 'ArrowDown'\n            : direction === 'rtl'\n              ? 'ArrowLeft'\n              : 'ArrowRight'\n        if (event.key === previous) {\n          event.preventDefault()\n          api?.scrollPrev()\n        } else if (event.key === next) {\n          event.preventDefault()\n          api?.scrollNext()\n        }\n      }}\n    >\n      <div\n        ref={viewportRef}\n        className=\"ui-carousel-viewport\"\n        id={`${id}-viewport`}\n        tabIndex={disabled ? -1 : 0}\n      >\n        <div className=\"ui-carousel-track\">\n          {items.map((item, index) => (\n            <div\n              className=\"ui-carousel-slide\"\n              key={item.id}\n              role=\"group\"\n              aria-roledescription={t('슬라이드')}\n              aria-label={item.label ?? `${index + 1} / ${items.length}`}\n              inert={index !== selection.index}\n            >\n              {item.content}\n            </div>\n          ))}\n        </div>\n      </div>\n      <div className=\"ui-carousel-controls\">\n        <Button\n          size=\"sm\"\n          variant=\"secondary\"\n          aria-label={t('이전 슬라이드')}\n          aria-controls={`${id}-viewport`}\n          disabled={disabled || !selection.previous}\n          onClick={() => api?.scrollPrev()}\n        >\n          <ArrowLeft size={15} />\n        </Button>\n        <span role=\"status\" aria-live=\"polite\">\n          {items.length ? selection.index + 1 : 0} / {items.length}\n        </span>\n        <Button\n          size=\"sm\"\n          variant=\"secondary\"\n          aria-label={t('다음 슬라이드')}\n          aria-controls={`${id}-viewport`}\n          disabled={disabled || !selection.next}\n          onClick={() => api?.scrollNext()}\n        >\n          <ArrowRight size={15} />\n        </Button>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

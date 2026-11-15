@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sheet",
+  "type": "registry:ui",
+  "title": "Sheet",
+  "description": "Side panel dialog with managed focus, title, content and footer actions.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/sheet.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/sheet.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'\nimport { Dialog as BaseDialog } from '@base-ui/react/dialog'\nimport { X } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './advanced-overlays.css'\n\nexport interface SheetProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  side?: 'left' | 'right' | 'bottom'\n  className?: string\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n\n/** A modal edge panel; Base UI handles focus trapping, Escape, and scroll locking. */\nexport function Sheet({\n  trigger,\n  title,\n  description,\n  children,\n  footer,\n  open,\n  defaultOpen,\n  onOpenChange,\n  side = 'right',\n  className,\n  initialFocus,\n  finalFocus,\n}: SheetProps) {\n  const { t } = useI18n()\n\n  const portalContainer = useThemePortalContainer()\n  return (\n    <BaseDialog.Root\n      open={open}\n      defaultOpen={defaultOpen}\n      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}\n    >\n      {trigger && <BaseDialog.Trigger render={trigger} />}\n      <OverlayPortal portal={BaseDialog.Portal} kind=\"modal\" container={portalContainer}>\n        <BaseDialog.Backdrop className=\"ui-overlay-backdrop\" />\n        <BaseDialog.Popup\n          className={cn('ui-sheet', className)}\n          data-side={side}\n          initialFocus={initialFocus}\n          finalFocus={finalFocus}\n        >\n          <div className=\"ui-sheet-header\">\n            <BaseDialog.Title className=\"ui-overlay-title\">{title}</BaseDialog.Title>\n            {description && (\n              <BaseDialog.Description className=\"ui-overlay-description\">\n                {description}\n              </BaseDialog.Description>\n            )}\n          </div>\n          <BaseDialog.Close className=\"ui-overlay-close ui-sheet-close\" aria-label={t('패널 닫기')}>\n            <X size={18} aria-hidden=\"true\" />\n          </BaseDialog.Close>\n          <div className=\"ui-sheet-content\">{children}</div>\n          {footer && <div className=\"ui-sheet-footer\">{footer}</div>}\n        </BaseDialog.Popup>\n      </OverlayPortal>\n    </BaseDialog.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.ui-date-range-picker {
+  position: relative;
+}
+.ui-date-range-picker-trigger > span {
+  line-height: var(--ui-type-label-line-height, 1.5);
+}
+.ui-date-range-picker-popup {
+  width: 304px;
+  padding: var(--ui-control-gap, 8px);
+}
+.ui-date-range-picker-popup .ui-calendar {
+  padding: 0;
+  border: 0;
+}
+.ui-date-range-picker-summary {
+  margin-top: var(--ui-control-gap, 8px);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  overflow-wrap: anywhere;
+}
+.ui-date-range-picker-popup .ui-date-picker-actions {
+  margin-top: var(--ui-control-gap, 8px);
+}

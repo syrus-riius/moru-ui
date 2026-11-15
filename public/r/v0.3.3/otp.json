@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp",
+  "type": "registry:block",
+  "title": "OTP Block",
+  "description": "Local OTP verification demo. The sample code is 123456.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/button.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/card.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/field.json",
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/input-otp.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/blocks/OTPBlock.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/blocks/OTPBlock.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useEffect, useId, useRef, useState, type FormEvent } from 'react'\nimport { Button } from '../button'\nimport { Card } from '../card'\nimport { Field } from '../field'\nimport { InputOTP } from '../input-otp'\n\nexport function validateOTPBlock(value: string) {\n  if (!/^[0-9]{6}$/.test(value)) return '인증번호 6자리를 입력해 주세요.'\n  return value === '123456' ? '' : '인증번호가 일치하지 않아요. 다시 확인해 주세요.'\n}\n\n/** Replace the demo verification and resend handlers with your service. */\nexport function OTPBlock() {\n  const id = useId()\n  const [code, setCode] = useState('')\n  const [error, setError] = useState('')\n  const [busy, setBusy] = useState(false)\n  const [complete, setComplete] = useState(false)\n  const [status, setStatus] = useState('')\n  const inputRef = useRef<HTMLInputElement>(null)\n  const statusRef = useRef<HTMLParagraphElement>(null)\n  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)\n  useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])\n\n  function submit(event: FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    if (busy) return\n    const next = validateOTPBlock(code)\n    setError(next)\n    if (next) { setStatus(''); inputRef.current?.focus(); return }\n    setBusy(true)\n    setStatus('인증번호를 확인하고 있어요.')\n    statusRef.current?.focus({ preventScroll: true })\n    timer.current = setTimeout(() => {\n      setBusy(false)\n      setComplete(true)\n      setStatus('이메일 인증이 완료됐어요.')\n    }, 600)\n  }\n\n  return <Card style={{ width: '100%', maxWidth: 420, minWidth: 0, margin: '0 auto', padding: 'min(var(--ui-card-padding, 24px), 6%)', boxSizing: 'border-box', overflowWrap: 'anywhere' }}>\n    <form onSubmit={submit} noValidate aria-labelledby={`${id}-title`} style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', minWidth: 0, gap: 'var(--ui-form-gap, 20px)' }}>\n      <header style={{ display: 'grid', gap: 'var(--ui-field-gap, 8px)' }}>\n        <span style={{ color: 'var(--ui-muted)', fontSize: 'var(--ui-type-caption-size, 12px)', letterSpacing: '.12em' }}>VERIFY YOUR EMAIL</span>\n        <h3 id={`${id}-title`} style={{ margin: 0, fontSize: 'var(--ui-type-heading-size, 24px)', fontWeight: 'var(--ui-type-heading-weight, 600)', lineHeight: 'var(--ui-type-heading-line-height, 1.35)', letterSpacing: 'var(--ui-type-heading-letter-spacing, -.025em)' }}>인증번호를 입력하세요</h3>\n        <p style={{ margin: 0, color: 'var(--ui-muted)', fontSize: 'var(--ui-type-body-size, 14px)', lineHeight: 'var(--ui-type-body-line-height, 1.6)' }}>이메일로 받은 6자리 번호로 계속하세요.</p>\n      </header>\n      <Field label=\"인증번호\" error={error} description=\"미리보기 인증번호는 123456입니다.\">\n        <InputOTP ref={inputRef} name=\"verificationCode\" length={6} value={code} disabled={busy || complete} required style={{ width: '100%', minWidth: 0 }} onValueChange={(value) => { setCode(value); setError(''); setStatus('') }} />\n      </Field>\n      <Button type=\"submit\" loading={busy} disabled={complete} style={{ width: '100%' }}>{complete ? '인증 완료' : '인증하기'}</Button>\n      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 'var(--ui-control-gap, 8px)' }}>\n        <span style={{ color: 'var(--ui-muted)', fontSize: 'var(--ui-type-caption-size, 12px)' }}>번호를 받지 못했나요?</span>\n        <Button type=\"button\" variant=\"ghost\" size=\"sm\" disabled={busy} onClick={() => {\n          setCode(''); setError(''); setComplete(false)\n          setStatus('새 인증번호를 요청했어요. 미리보기에서는 123456을 사용하세요.')\n          requestAnimationFrame(() => inputRef.current?.focus())\n        }}>다시 보내기</Button>\n      </div>\n      <p ref={statusRef} tabIndex={-1} role=\"status\" aria-live=\"polite\" style={{ minHeight: '1.6em', margin: 0, color: 'var(--ui-muted)', fontSize: 'var(--ui-type-caption-size, 12px)', lineHeight: 'var(--ui-type-caption-line-height, 1.5)', overflowWrap: 'anywhere' }}>{status}</p>\n    </form>\n  </Card>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+  "categories": [
+    "blocks"
+  ],
+  "meta": {
+    "version": "0.3.3",
+    "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

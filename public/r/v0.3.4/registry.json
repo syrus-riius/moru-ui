@@ -1,0 +1,1057 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "moru-ui",
+  "homepage": "https://moru-ui-lab.riius.chatgpt.site",
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "core",
+      "type": "registry:base",
+      "title": "Moru Core",
+      "description": "Scoped styles, tokens, MoruProvider, and shared helpers.",
+      "files": [
+        {
+          "path": "registry/moru/_lib/cn.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_lib/cn.ts"
+        },
+        {
+          "path": "registry/moru/_licenses/Moru-LICENSE",
+          "type": "registry:file",
+          "target": "@ui/moru/_licenses/Moru-LICENSE"
+        },
+        {
+          "path": "registry/moru/_licenses/NOTICE.md",
+          "type": "registry:file",
+          "target": "@ui/moru/_licenses/NOTICE.md"
+        },
+        {
+          "path": "registry/moru/_styles/components.css",
+          "type": "registry:file",
+          "target": "@ui/moru/_styles/components.css"
+        },
+        {
+          "path": "registry/moru/_styles/feedback.css",
+          "type": "registry:file",
+          "target": "@ui/moru/_styles/feedback.css"
+        },
+        {
+          "path": "registry/moru/_styles/form-controls.css",
+          "type": "registry:file",
+          "target": "@ui/moru/_styles/form-controls.css"
+        },
+        {
+          "path": "registry/moru/_styles/readability.css",
+          "type": "registry:file",
+          "target": "@ui/moru/_styles/readability.css"
+        },
+        {
+          "path": "registry/moru/_styles/utilities.css",
+          "type": "registry:file",
+          "target": "@ui/moru/_styles/utilities.css"
+        },
+        {
+          "path": "registry/moru/_theme/component-spacing.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_theme/component-spacing.ts"
+        },
+        {
+          "path": "registry/moru/_theme/tokens.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_theme/tokens.ts"
+        },
+        {
+          "path": "registry/moru/field-context.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/field-context.ts"
+        },
+        {
+          "path": "registry/moru/overlay-portal.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/overlay-portal.tsx"
+        },
+        {
+          "path": "registry/moru/overlays.css",
+          "type": "registry:file",
+          "target": "@ui/moru/overlays.css"
+        },
+        {
+          "path": "registry/moru/provider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/provider.tsx"
+        },
+        {
+          "path": "registry/moru/state.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/state.ts"
+        },
+        {
+          "path": "registry/moru/styles.css",
+          "type": "registry:file",
+          "target": "@ui/moru/styles.css"
+        },
+        {
+          "path": "registry/moru/theme-scope.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/theme-scope.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "foundation"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Accessible button with variants, loading and disabled states.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/button.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Accessible text input with Field integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/input.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Connected labels, descriptions and validation messages.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/field.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/field.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A quiet, token-based content surface.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/card.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Accessible checkbox with label, description and loading state.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/checkbox.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "Password input with an accessible visibility toggle.",
+      "dependencies": [
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/enhanced-inputs.css",
+          "type": "registry:file",
+          "target": "@ui/moru/enhanced-inputs.css"
+        },
+        {
+          "path": "registry/moru/password-input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/password-input.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "Single native input with visual slots and one-time-code autofill.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/controls-completion.css",
+          "type": "registry:file",
+          "target": "@ui/moru/controls-completion.css"
+        },
+        {
+          "path": "registry/moru/input-otp-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/input-otp-utils.ts"
+        },
+        {
+          "path": "registry/moru/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/input-otp.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "status-message",
+      "type": "registry:ui",
+      "title": "Status Message",
+      "description": "Semantic status feedback using text and icons.",
+      "dependencies": [
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/status-message.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/status-message.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Accessible select with keyboard navigation and scoped popup theming.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/select.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/select.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Compact status and category labels using semantic tokens.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/badge.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Accessible labelled switch with form and Field integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/switch.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal dialog with managed focus and scoped portals.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/dialog.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Multiline input with Field integration and loading state.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/textarea.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/tabs.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "Dropdown actions with keyboard navigation, disabled items and scoped popup theming.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/menu.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Anchored popup with managed focus, collision handling and scoped portal styling.",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/popover.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/popover.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Bottom modal drawer with managed focus and keyboard or pointer dismissal.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/drawer-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/drawer-utils.ts"
+        },
+        {
+          "path": "registry/moru/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/drawer.tsx"
+        },
+        {
+          "path": "registry/moru/navigation-completion.css",
+          "type": "registry:file",
+          "target": "@ui/moru/navigation-completion.css"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Calendar with single-date or range selection, year/month navigation and display variants.",
+      "dependencies": [
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/calendar-options.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar-options.ts"
+        },
+        {
+          "path": "registry/moru/calendar-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar-utils.ts"
+        },
+        {
+          "path": "registry/moru/calendar.css",
+          "type": "registry:file",
+          "target": "@ui/moru/calendar.css"
+        },
+        {
+          "path": "registry/moru/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/calendar.tsx"
+        },
+        {
+          "path": "registry/moru/date-picker-form-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-picker-form-utils.ts"
+        },
+        {
+          "path": "registry/moru/date-picker-form.css",
+          "type": "registry:file",
+          "target": "@ui/moru/date-picker-form.css"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Single-date field with a calendar popup, date bounds and native form integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-range-picker",
+      "type": "registry:ui",
+      "title": "Date Range Picker",
+      "description": "Start/end date field with range selection, calendar display options and native form integration.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/calendar.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/date-range-picker-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-range-picker-utils.ts"
+        },
+        {
+          "path": "registry/moru/date-range-picker.css",
+          "type": "registry:file",
+          "target": "@ui/moru/date-range-picker.css"
+        },
+        {
+          "path": "registry/moru/date-range-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/date-range-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/time-controls.css",
+          "type": "registry:file",
+          "target": "@ui/moru/time-controls.css"
+        },
+        {
+          "path": "registry/moru/time-field-context.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-field-context.ts"
+        },
+        {
+          "path": "registry/moru/time-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-picker.tsx"
+        },
+        {
+          "path": "registry/moru/time-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-utils.ts"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "time-range-picker",
+      "type": "registry:ui",
+      "title": "Time Range Picker",
+      "description": "Paired start/end time fields with duration feedback and optional overnight ranges.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/time-picker.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/time-range-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/time-range-picker.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "login",
+      "type": "registry:block",
+      "title": "Login Block",
+      "description": "Local login form demo. Connect your own authentication service.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/checkbox.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/LoginBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/LoginBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "otp",
+      "type": "registry:block",
+      "title": "OTP Block",
+      "description": "Local OTP verification demo. The sample code is 123456.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input-otp.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/OTPBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/OTPBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "search-filters",
+      "type": "registry:block",
+      "title": "Search Filters Block",
+      "description": "Composable query, status and assignee filters with local demo data and a controlled application API.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/badge.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/checkbox.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/select.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/SearchFiltersBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/SearchFiltersBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "settings",
+      "type": "registry:block",
+      "title": "Settings Block",
+      "description": "Workspace settings form with local demo feedback and controlled application save handlers.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/select.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.4/switch.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/SettingsBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/SettingsBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.3.4",
+        "sourceHash": "70fefcca3be41bbdbd560cc23ba6a83ddd3b0894806a88dda94d07926d78d076",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "trace",
+  "type": "registry:ui",
+  "title": "Trace",
+  "description": "Expandable execution or workflow history with step status and details.",
+  "dependencies": [
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/trace.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/trace.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { koreanTranslator, type Translator } from './_lib/locale'\nimport { useI18n } from './_lib/i18n'\nimport { useId, useState, type HTMLAttributes, type ReactNode } from 'react'\nimport { Check, ChevronDown, Circle, LoaderCircle, X } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport './content-completion.css'\n\nexport type TraceStatus = 'pending' | 'running' | 'complete' | 'error'\nexport interface TraceStep {\n  id: string\n  title: string\n  description?: string\n  status?: TraceStatus\n  durationMs?: number\n  details?: ReactNode\n}\nexport interface TraceProps extends Omit<HTMLAttributes<HTMLOListElement>, 'children'> {\n  items: TraceStep[]\n  expanded?: string[]\n  defaultExpanded?: string[]\n  onExpandedChange?: (expanded: string[]) => void\n  disabled?: boolean\n}\nexport function formatTraceDuration(durationMs: number, t: Translator = koreanTranslator) {\n  if (!Number.isFinite(durationMs) || durationMs < 0) return t('시간 알 수 없음')\n  if (durationMs < 1000) return `${Math.round(durationMs)}ms`\n  if (durationMs < 60000) return t('{seconds}초', { seconds: Math.round(durationMs / 100) / 10 })\n  return t('{minutes}분 {seconds}초', {\n    minutes: Math.floor(durationMs / 60000),\n    seconds: Math.floor((durationMs % 60000) / 1000),\n  })\n}\nconst statusLabels: Record<TraceStatus, string> = {\n  pending: '대기',\n  running: '진행 중',\n  complete: '완료',\n  error: '오류',\n}\nconst statusIcons = { pending: Circle, running: LoaderCircle, complete: Check, error: X }\nexport function Trace({\n  items,\n  expanded,\n  defaultExpanded = [],\n  onExpandedChange,\n  disabled,\n  className,\n  'aria-label': labelProp,\n  ...props\n}: TraceProps) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('작업 단계')\n\n  const [localExpanded, setLocalExpanded] = useState(defaultExpanded)\n  const open = expanded ?? localExpanded\n  const id = useId()\n  function toggle(stepId: string) {\n    if (disabled) return\n    const next = open.includes(stepId) ? open.filter((item) => item !== stepId) : [...open, stepId]\n    if (expanded === undefined) setLocalExpanded(next)\n    onExpandedChange?.(next)\n  }\n  return (\n    <ol {...props} aria-label={label} className={cn('ui-trace', className)}>\n      {items.map((item, index) => {\n        const status = item.status ?? 'pending'\n        const Icon = statusIcons[status]\n        const isOpen = open.includes(item.id)\n        const copy = (\n          <>\n            <span className=\"ui-trace-icon\" aria-hidden=\"true\">\n              <Icon size={15} />\n            </span>\n            <span className=\"ui-trace-copy\">\n              <span className=\"ui-trace-title\">{item.title}</span>\n              {item.description && <span className=\"ui-trace-description\">{item.description}</span>}\n            </span>\n            <span className=\"ui-trace-meta\">\n              <span className=\"ui-trace-status\">{t(statusLabels[status])}</span>\n              {item.durationMs !== undefined && (\n                <span>{formatTraceDuration(item.durationMs, t)}</span>\n              )}\n            </span>\n            {item.details != null && (\n              <ChevronDown className=\"ui-trace-chevron\" size={14} aria-hidden=\"true\" />\n            )}\n          </>\n        )\n        return (\n          <li\n            key={item.id}\n            className=\"ui-trace-item\"\n            data-status={status}\n            data-expanded={isOpen || undefined}\n          >\n            {item.details != null ? (\n              <button\n                className=\"ui-trace-row\"\n                type=\"button\"\n                aria-expanded={isOpen}\n                aria-controls={`${id}-${index}-details`}\n                disabled={disabled}\n                onClick={() => toggle(item.id)}\n              >\n                {copy}\n              </button>\n            ) : (\n              <div className=\"ui-trace-row\">{copy}</div>\n            )}\n            {item.details != null && (\n              <div id={`${id}-${index}-details`} className=\"ui-trace-details\" hidden={!isOpen}>\n                {item.details}\n              </div>\n            )}\n          </li>\n        )\n      })}\n    </ol>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

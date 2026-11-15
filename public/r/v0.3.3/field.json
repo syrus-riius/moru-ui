@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:ui",
+  "title": "Field",
+  "description": "Connected labels, descriptions and validation messages.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.3/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/field.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/field.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type ReactNode } from 'react'\nimport { Field as BaseField } from '@base-ui/react/field'\nimport { cn } from './_lib/cn'\nimport { FieldContext } from './field-context'\n\nexport interface FieldProps {\n  label: string\n  description?: string\n  error?: string\n  children: ReactNode\n  className?: string\n}\n\nexport function Field({ label, description, error, children, className }: FieldProps) {\n  const id = useId()\n  const controlId = `field-${id}`\n  const describedBy = [description && `${id}-description`, error && `${id}-error`]\n    .filter(Boolean)\n    .join(' ') || undefined\n\n  return (\n    <FieldContext.Provider value={{ controlId, labelId: `${id}-label`, describedBy, invalid: Boolean(error) }}>\n      <BaseField.Root className={cn('ui-field flex flex-col', className)} invalid={Boolean(error)}>\n        <BaseField.Label className=\"ui-field-label\" id={`${id}-label`}>{label}</BaseField.Label>\n        {children}\n        {description && (\n          <BaseField.Description className=\"ui-field-description\" id={`${id}-description`}>\n            {description}\n          </BaseField.Description>\n        )}\n        {error && (\n          <BaseField.Error className=\"ui-field-error\" id={`${id}-error`} match>\n            {error}\n          </BaseField.Error>\n        )}\n      </BaseField.Root>\n    </FieldContext.Provider>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.3",
+    "sourceHash": "02e85d0d98efe6b20dc0837b46a6a70126f2347590d74fc4f356689ef2bb78e2",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

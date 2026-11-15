@@ -1,0 +1,86 @@
+.ui-dialog.ui-modal {
+  --ui-modal-width: 460px;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--ui-modal-width), calc(100vw - 32px));
+  /* A long heading or footer can exceed the viewport even when the body shrinks. */
+  overflow-y: auto;
+  color: var(--ui-text);
+}
+
+.ui-modal[data-size='sm'] {
+  --ui-modal-width: 360px;
+}
+.ui-modal[data-size='lg'] {
+  --ui-modal-width: 720px;
+}
+
+.ui-dialog.ui-modal[data-size='full'] {
+  inset: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  width: auto;
+  height: auto;
+  max-height: none;
+  transform: none;
+}
+
+.ui-modal > .ui-dialog-header,
+.ui-modal > .ui-dialog-footer {
+  flex: none;
+}
+
+.ui-modal > .ui-dialog-content {
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Keep outlines inside the scroll area without changing the content inset. */
+  padding: 3px;
+  margin-inline: -3px;
+}
+
+.ui-modal[data-size='full'] > .ui-dialog-content {
+  flex: 1;
+}
+
+.ui-modal-mark {
+  display: grid;
+  place-items: center;
+  width: calc(var(--ui-icon-size-lg, 20px) + var(--ui-space, 4px) * 6);
+  aspect-ratio: 1;
+  margin-bottom: var(--ui-field-gap, 8px);
+  border-radius: var(--ui-radius);
+  background: color-mix(in srgb, var(--ui-primary) 12%, transparent);
+  color: var(--ui-primary);
+}
+
+.ui-modal-mark > svg {
+  width: var(--ui-icon-size-lg, 20px);
+  height: var(--ui-icon-size-lg, 20px);
+}
+
+.ui-modal[data-variant='success'] .ui-modal-mark {
+  background: color-mix(in srgb, var(--ui-success) 12%, transparent);
+  color: var(--ui-success);
+}
+
+.ui-modal[data-variant='danger'] .ui-modal-mark {
+  background: color-mix(in srgb, var(--ui-danger) 12%, transparent);
+  color: var(--ui-danger);
+}
+
+@media (max-width: 480px) {
+  .ui-modal > .ui-dialog-footer > .ui-button {
+    flex: 1;
+  }
+}
+
+@media (max-height: 480px) {
+  .ui-dialog.ui-modal {
+    overflow-y: auto;
+  }
+  .ui-modal > .ui-dialog-content {
+    flex: none;
+    overflow: visible;
+  }
+}

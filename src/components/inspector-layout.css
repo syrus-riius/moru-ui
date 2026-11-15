@@ -1,0 +1,131 @@
+/* The inspector is a compact Moru composition, using the same control roles. */
+.inspector {
+  --inspector-inset: max(16px, calc(var(--ui-space) * 4));
+  --inspector-gap: max(8px, var(--ui-control-gap));
+  min-width: 0;
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+}
+.inspector > .token-editor {
+  flex: 1;
+  min-height: 0;
+}
+.inspector .component-inspector {
+  padding: var(--inspector-inset);
+  gap: var(--inspector-gap);
+}
+.inspector .inspector-section-title {
+  align-items: baseline;
+  gap: var(--inspector-gap);
+  margin-bottom: var(--inspector-gap);
+}
+.inspector .inspector-section-title > span:first-child {
+  color: var(--ui-text);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  font-weight: var(--ui-type-label-weight);
+}
+.inspector .inspector-section-title > span:last-child {
+  flex: none;
+  color: var(--ui-muted);
+  font-family: var(--ui-font-family-code);
+  font-size: var(--ui-type-caption-size);
+}
+.inspector .component-inspector > label {
+  font-size: var(--ui-type-label-size);
+}
+.inspector .component-inspector > label:not(.ui-checkbox-label):not(:first-child) {
+  margin-top: var(--inspector-gap);
+}
+.inspector .component-inspector .ui-checkbox-label {
+  margin-top: var(--inspector-gap);
+}
+.inspector .component-inspector p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+  overflow-wrap: anywhere;
+}
+.inspector .inspector-copy.ui-button {
+  margin-top: var(--inspector-gap);
+}
+.inspector .inspector-footer {
+  padding: var(--inspector-inset);
+  gap: var(--inspector-gap);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.inspector .inspector-footer > span {
+  min-width: 0;
+}
+.inspector .inspector-footer > .moru-mark {
+  flex: none;
+}
+.inspector .inspector-mobile-header {
+  flex: none;
+  min-height: max(64px, calc(var(--ui-control-height-sm) + var(--inspector-inset) * 2));
+  padding: var(--inspector-inset);
+  gap: var(--inspector-gap);
+}
+.inspector .inspector-mobile-header strong {
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  font-weight: var(--ui-type-heading-weight);
+}
+.inspector .inspector-mobile-header .icon-button {
+  flex: none;
+  width: var(--ui-control-height-sm);
+  height: var(--ui-control-height-sm);
+  padding: var(--ui-space);
+  border-radius: var(--ui-radius);
+}
+.component-inspector:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: -3px;
+}
+.inspector .component-inspector[hidden] {
+  display: none;
+}
+.inspector .component-inspector-toggle.ui-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--inspector-gap);
+  width: 100%;
+  min-height: var(--ui-control-height-md);
+  height: auto;
+  padding: var(--inspector-inset);
+  border-radius: 0;
+  text-align: start;
+}
+.component-inspector-toggle > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: var(--inspector-gap);
+  min-width: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.component-inspector-toggle svg {
+  flex: none;
+  transition: transform var(--ui-duration);
+}
+.component-inspector-toggle[aria-expanded='true'] svg {
+  transform: rotate(90deg);
+}
+.inspector .component-inspector-dock .component-inspector {
+  padding-top: var(--ui-space);
+}
+.inspector .component-inspector-dock .inspector-section-title {
+  display: none;
+}
+@media (pointer: coarse) {
+  .inspector .inspector-mobile-header .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:ui",
+  "title": "Empty",
+  "description": "Empty-state content with explanation and a next action.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/empty.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/empty.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type HTMLAttributes, type ReactNode } from 'react'\nimport { cn } from './_lib/cn'\nimport './advanced-controls.css'\n\nexport interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  title: string\n  description?: ReactNode\n  icon?: ReactNode\n}\n\nexport function Empty({\n  title,\n  description,\n  icon,\n  children,\n  className,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  ...props\n}: EmptyProps) {\n  const id = useId()\n  return (\n    <div\n      role=\"region\"\n      aria-label={ariaLabel}\n      aria-labelledby={labelledBy ?? (ariaLabel ? undefined : `${id}-title`)}\n      aria-describedby={describedBy ?? (description ? `${id}-description` : undefined)}\n      {...props}\n      className={cn('ui-empty', className)}\n    >\n      {icon && (\n        <span className=\"ui-empty-icon\" aria-hidden=\"true\">\n          {icon}\n        </span>\n      )}\n      <h3 className=\"ui-empty-title\" id={`${id}-title`}>\n        {title}\n      </h3>\n      {description && (\n        <div className=\"ui-empty-description\" id={`${id}-description`}>\n          {description}\n        </div>\n      )}\n      {children && <div className=\"ui-empty-actions\">{children}</div>}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

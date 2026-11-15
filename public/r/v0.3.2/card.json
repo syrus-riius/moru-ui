@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "A quiet, token-based content surface.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/card.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\n\nexport type CardProps = HTMLAttributes<HTMLDivElement>\n\nexport const Card = forwardRef<HTMLDivElement, CardProps>(function Card({ className, children, ...props }, ref) {\n  return <div ref={ref} className={cn('ui-card', className)} {...props}>{children}</div>\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta is tested with Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.3.2",
+    "sourceHash": "d96e1d3bf4a3c817918265eb097df22f970a86883a934b1f71f098c7a17c01ba",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

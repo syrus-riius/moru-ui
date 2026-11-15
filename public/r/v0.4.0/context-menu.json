@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "context-menu",
+  "type": "registry:ui",
+  "title": "Context Menu",
+  "description": "Contextual action menu with nested actions and keyboard navigation.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/context-menu.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/context-menu.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { useEffect, useRef, useState, type ReactNode } from 'react'\nimport { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'\nimport { cn } from './_lib/cn'\nimport { NavigationMenuActions, type NavigationAction } from './navigation-menu-items'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './navigation-completion.css'\n\nexport type ContextMenuItem = NavigationAction\nexport interface ContextMenuProps {\n  children: ReactNode\n  items: ContextMenuItem[]\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n  'aria-label'?: string\n}\nexport function ContextMenu({\n  children,\n  items,\n  open,\n  defaultOpen = false,\n  onOpenChange,\n  disabled,\n  size = 'md',\n  className,\n  'aria-label': labelProp,\n}: ContextMenuProps) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('컨텍스트 메뉴 영역')\n\n  const portalContainer = useThemePortalContainer()\n  const triggerRef = useRef<HTMLDivElement>(null)\n  const [localOpen, setLocalOpen] = useState(defaultOpen)\n  const [keyboardAnchor, setKeyboardAnchor] = useState<HTMLElement | null>(null)\n  const shown = !disabled && (open ?? localOpen)\n  useEffect(() => {\n    if (disabled && open === undefined) setLocalOpen(false)\n  }, [disabled, open])\n  function changeOpen(next: boolean) {\n    if (next && disabled) return\n    if (open === undefined) setLocalOpen(next)\n    onOpenChange?.(next)\n  }\n  return (\n    <BaseContextMenu.Root open={shown} onOpenChange={changeOpen} disabled={disabled}>\n      <BaseContextMenu.Trigger\n        ref={triggerRef}\n        className={cn('ui-context-menu-trigger', className)}\n        data-size={size}\n        tabIndex={disabled ? -1 : 0}\n        aria-disabled={disabled || undefined}\n        aria-label={label}\n        aria-haspopup=\"menu\"\n        aria-expanded={shown}\n        onContextMenu={() => setKeyboardAnchor(null)}\n        onKeyDown={(event) => {\n          if (disabled || !(event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10')))\n            return\n          event.preventDefault()\n          setKeyboardAnchor(event.currentTarget)\n          changeOpen(true)\n        }}\n      >\n        {children}\n      </BaseContextMenu.Trigger>\n      <OverlayPortal portal={BaseContextMenu.Portal} kind=\"menu\" container={portalContainer}>\n        <BaseContextMenu.Positioner\n          positionMethod=\"fixed\"\n          className=\"ui-navigation-positioner\"\n          anchor={keyboardAnchor ?? undefined}\n          align=\"start\"\n          sideOffset={4}\n          collisionPadding={12}\n        >\n          <BaseContextMenu.Popup\n            className=\"ui-navigation-popup\"\n            data-size={size}\n            aria-label={label}\n            finalFocus={triggerRef}\n          >\n            <NavigationMenuActions items={items} size={size} />\n          </BaseContextMenu.Popup>\n        </BaseContextMenu.Positioner>\n      </OverlayPortal>\n    </BaseContextMenu.Root>\n  )\n}\n"
+    },
+    {
+      "path": "registry/moru/navigation-menu-items.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/navigation-menu-items.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { ReactNode } from 'react'\nimport { Menu as BaseMenu } from '@base-ui/react/menu'\nimport { ChevronRight } from 'lucide-react'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\n\nexport interface NavigationAction {\n  id: string\n  label: string\n  icon?: ReactNode\n  shortcut?: string\n  disabled?: boolean\n  destructive?: boolean\n  onSelect?: () => void\n  children?: NavigationAction[]\n}\n\nexport function NavigationMenuActions({\n  items,\n  size,\n}: {\n  items: NavigationAction[]\n  size: 'sm' | 'md' | 'lg'\n}) {\n  const portalContainer = useThemePortalContainer()\n  return items.map((item) =>\n    item.children?.length ? (\n      <BaseMenu.SubmenuRoot key={item.id}>\n        <BaseMenu.SubmenuTrigger\n          className=\"ui-navigation-action\"\n          disabled={item.disabled}\n          label={item.label}\n        >\n          {item.icon ? (\n            <span className=\"ui-navigation-action-icon\" aria-hidden=\"true\">\n              {item.icon}\n            </span>\n          ) : null}\n          <span>{item.label}</span>\n          <ChevronRight className=\"ui-navigation-action-end\" size={14} aria-hidden=\"true\" />\n        </BaseMenu.SubmenuTrigger>\n        <OverlayPortal portal={BaseMenu.Portal} kind=\"menu\" container={portalContainer}>\n          <BaseMenu.Positioner\n            positionMethod=\"fixed\"\n            className=\"ui-navigation-positioner\"\n            side=\"right\"\n            align=\"start\"\n            sideOffset={4}\n            collisionPadding={12}\n          >\n            <BaseMenu.Popup className=\"ui-navigation-popup\" data-size={size}>\n              <NavigationMenuActions items={item.children} size={size} />\n            </BaseMenu.Popup>\n          </BaseMenu.Positioner>\n        </OverlayPortal>\n      </BaseMenu.SubmenuRoot>\n    ) : (\n      <BaseMenu.Item\n        key={item.id}\n        className=\"ui-navigation-action\"\n        disabled={item.disabled}\n        label={item.label}\n        data-destructive={item.destructive || undefined}\n        onClick={item.onSelect}\n      >\n        {item.icon ? (\n          <span className=\"ui-navigation-action-icon\" aria-hidden=\"true\">\n            {item.icon}\n          </span>\n        ) : null}\n        <span>{item.label}</span>\n        {item.shortcut ? <kbd className=\"ui-navigation-shortcut\">{item.shortcut}</kbd> : null}\n      </BaseMenu.Item>\n    ),\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

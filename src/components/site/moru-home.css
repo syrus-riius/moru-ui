@@ -1,0 +1,443 @@
+.moru-home {
+  position: relative;
+  isolation: isolate;
+  --moru-home-gutter: clamp(16px, 2.4vw, 40px);
+  --moru-home-accent: #3d42c9;
+  --moru-home-accent-soft: color-mix(in srgb, var(--moru-home-accent) 8%, var(--ui-surface));
+  width: min(100%, 1680px);
+  margin-inline: auto;
+  padding: 0 var(--moru-home-gutter) clamp(40px, 5vw, 72px);
+  color: var(--ui-text);
+  font-family: var(--ui-font-family, inherit);
+}
+
+:root[data-theme='dark'] .moru-home,
+[data-mode='dark'] .moru-home {
+  --moru-home-accent: #aab1ff;
+}
+
+.moru-home-scene {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  width: calc(100% + var(--moru-home-gutter) * 2);
+  margin: 0 calc(var(--moru-home-gutter) * -1) 32px;
+  overflow: clip;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--ui-text);
+}
+
+.moru-home-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(64px, 7vw, 100px) 28px 64px;
+  text-align: center;
+}
+
+.moru-home > .moru-token-showcase {
+  position: relative;
+  z-index: 1;
+}
+
+.moru-home-hero h1 {
+  max-width: 1040px;
+  margin: 0 auto;
+  color: var(--ui-text);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.062em;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+.moru-home-hero p {
+  max-width: 760px;
+  margin: 16px auto 0;
+  color: var(--ui-muted);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.68;
+  text-wrap: pretty;
+  word-break: keep-all;
+}
+
+.moru-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.moru-home-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  max-width: 100%;
+  padding-inline: 17px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.moru-home-action-primary {
+  background: var(--ui-text);
+  color: var(--ui-background);
+}
+
+.moru-home-action-primary:hover {
+  background: color-mix(in srgb, var(--ui-text) 85%, var(--ui-background));
+  color: var(--ui-background);
+}
+
+.moru-home-action-secondary {
+  background: var(--ui-surface-hover);
+  color: var(--ui-text);
+}
+
+.moru-home-action-secondary:hover {
+  background: color-mix(in srgb, var(--ui-text) 10%, var(--ui-surface-hover));
+  color: var(--ui-text);
+}
+
+.moru-home a:focus-visible {
+  outline: 2px solid var(--moru-home-accent);
+  outline-offset: 3px;
+}
+
+.moru-home-preview {
+  margin-block-start: 32px;
+}
+
+.moru-home-preview-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.moru-home-preview-heading h2 {
+  margin: 0;
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+
+.moru-home-preview-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--moru-home-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.moru-home-preview-heading a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.moru-home .moru-home-board {
+  display: grid;
+  grid-template-columns: 178px minmax(0, 1fr);
+  min-width: 0;
+  padding: 0;
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+}
+
+.moru-home-board-sidebar {
+  min-width: 0;
+  padding: 22px 12px;
+  border-inline-end: 0;
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: color-mix(in srgb, var(--ui-background) 76%, var(--ui-surface));
+}
+
+.moru-home-board-project {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 9px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.moru-home-board-project > svg {
+  flex-shrink: 0;
+  color: var(--moru-home-accent);
+}
+
+.moru-home-board-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.moru-home-board-filters .ui-button {
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding-inline: 9px;
+  color: var(--ui-muted);
+  font-size: 0.8125rem;
+}
+
+.moru-home-board-filters .ui-button[aria-pressed='true'] {
+  background: var(--moru-home-accent-soft);
+  color: var(--moru-home-accent);
+  font-weight: 650;
+}
+
+.moru-home-board-content {
+  min-width: 0;
+  padding: clamp(18px, 3vw, 32px);
+}
+
+.moru-home-board-header,
+.moru-home-task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.moru-home-board-header {
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.moru-home-board-header h3 {
+  margin: 0;
+  font-size: clamp(1.375rem, 2.6vw, 1.875rem);
+  font-weight: 680;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+.moru-home-board-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(184px, 27%);
+  align-items: start;
+  gap: 22px;
+}
+
+.moru-home-task-panel {
+  min-width: 0;
+}
+
+.moru-home-task-heading h4,
+.moru-home-progress-card h4 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.moru-home-task-search {
+  position: relative;
+  width: min(100%, 170px);
+}
+
+.moru-home-task-search > svg {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ui-muted);
+  pointer-events: none;
+}
+
+.moru-home-task-search .ui-input {
+  padding-inline-start: 31px;
+  font-size: 0.8125rem;
+}
+
+.moru-home-task-list {
+  margin: 7px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moru-home-task-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 45px;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--ui-border);
+}
+
+.moru-home-task-row:last-child {
+  border-bottom: 0;
+}
+
+.moru-home-task-row .ui-checkbox-label {
+  align-items: center;
+  min-width: 0;
+}
+
+.moru-home-task-row .ui-checkbox-text {
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.moru-home-task-row[data-completed='true'] .ui-checkbox-text {
+  color: var(--ui-muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--ui-muted) 66%, transparent);
+}
+
+.moru-home-task-area {
+  flex-shrink: 0;
+  color: var(--ui-muted);
+  font-size: 0.75rem;
+}
+
+.moru-home-empty {
+  display: grid;
+  place-items: center;
+  min-height: 112px;
+  margin: 7px 0 0;
+  padding: 12px;
+  color: var(--ui-muted);
+  font-size: 0.875rem;
+}
+
+.moru-home .moru-home-progress-card {
+  padding: 16px;
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  background: var(--moru-home-accent-soft);
+  box-shadow: none;
+}
+
+.moru-home-progress-count {
+  margin: 9px 0 12px;
+  color: var(--moru-home-accent);
+  font-size: 2rem;
+  font-weight: 680;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.moru-home-progress-count span {
+  color: var(--ui-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.moru-home-progress-card .ui-progress-track {
+  height: 5px;
+  background: color-mix(in srgb, var(--moru-home-accent) 14%, var(--ui-surface));
+}
+
+.moru-home-progress-card .ui-progress-indicator {
+  background: var(--moru-home-accent);
+}
+
+@media (max-width: 820px) {
+  .moru-home .moru-home-board {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+  .moru-home-board-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 17px;
+  }
+}
+
+@media (max-width: 560px) {
+  .moru-home {
+    --moru-home-gutter: 16px;
+  }
+  .moru-home-scene {
+    margin-block: 0 24px;
+  }
+  .moru-home-hero {
+    padding: 56px 20px 40px;
+  }
+  .moru-home-hero h1 {
+    font-size: clamp(1.9rem, 8vw, 2.65rem);
+    line-height: 1.23;
+    letter-spacing: -0.05em;
+  }
+  .moru-home-hero p {
+    margin-top: 18px;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  .moru-home-actions {
+    margin-top: 23px;
+  }
+  .moru-home .moru-home-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moru-home-board-sidebar {
+    padding: 11px 13px;
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--ui-border);
+    border-start-end-radius: inherit;
+    border-end-start-radius: 0;
+  }
+  .moru-home-board-project {
+    display: none;
+  }
+  .moru-home-board-filters {
+    flex-flow: row wrap;
+    margin-top: 0;
+  }
+  .moru-home-board-filters .ui-button {
+    gap: 5px;
+    padding-inline: 7px;
+  }
+  .moru-home-board-content {
+    padding: 16px;
+  }
+  .moru-home-board-header {
+    margin-bottom: 17px;
+  }
+  .moru-home-task-search {
+    width: min(65%, 150px);
+  }
+}
+
+@media (forced-colors: active) {
+  .moru-home-scene {
+    background: Canvas;
+    color: CanvasText;
+  }
+  .moru-home-hero h1,
+  .moru-home-hero p {
+    color: CanvasText;
+  }
+  .moru-home-action-primary,
+  .moru-home-action-secondary {
+    background: ButtonFace;
+    color: ButtonText;
+    outline: 1px solid ButtonText;
+  }
+  .moru-home-scene a:focus-visible {
+    outline-color: Highlight;
+  }
+}

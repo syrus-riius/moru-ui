@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bubble",
+  "type": "registry:ui",
+  "title": "Bubble",
+  "description": "Message bubble presentation for conversational interfaces.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/bubble.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/bubble.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './content-completion.css'\n\nexport interface BubbleProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: 'default' | 'secondary' | 'outline'\n  align?: 'start' | 'end'\n}\nexport const Bubble = forwardRef<HTMLDivElement, BubbleProps>(function Bubble(\n  { variant = 'default', align = 'start', className, ...props },\n  ref,\n) {\n  return (\n    <div\n      {...props}\n      ref={ref}\n      className={cn('ui-bubble', className)}\n      data-variant={variant}\n      data-align={align}\n    />\n  )\n})\nexport function BubbleContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-bubble-content', className)} />\n}\nexport function BubbleFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-bubble-footer', className)} />\n}\nexport function BubbleReactions({\n  className,\n  'aria-label': labelProp,\n  ...props\n}: HTMLAttributes<HTMLDivElement>) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('메시지 반응')\n\n  return (\n    <div\n      {...props}\n      role=\"group\"\n      aria-label={label}\n      className={cn('ui-bubble-reactions', className)}\n    />\n  )\n}\nexport function BubbleGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) {\n  return <div {...props} className={cn('ui-bubble-group', className)} />\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.0",
+    "sourceHash": "517d0f89d860ccce16d5655d272dc4ccf2dadef00e83f465c116f4ac8e013fb0",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

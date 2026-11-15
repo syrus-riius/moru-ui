@@ -1,0 +1,26 @@
+# Dependencies, local work, and build output
+**/node_modules/
+**/dist/
+**/coverage/
+**/.expo/
+**/ios/
+**/android/
+**/*.tsbuildinfo
+**/package-lock.json
+.qa/
+.openai/
+sites/
+output/
+design/archive/
+
+# Generated distribution files: update their source and run the generators.
+registry/
+registry.json
+public/
+src/theme/default.css
+
+# Documentation, notices, and design assets are outside the code formatter scope.
+**/*.md
+**/*.svg
+**/*.txt
+**/*.lock

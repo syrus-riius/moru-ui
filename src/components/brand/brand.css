@@ -1,0 +1,19 @@
+.moru-mark {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+}
+
+.moru-logo {
+  display: inline-block;
+  flex: none;
+  width: auto;
+  height: 1em;
+  font-size: 32px;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.moru-logo__symbol {
+  fill: var(--moru-symbol-color, currentColor);
+}

@@ -1,4 +1,21 @@
 export const studioMessages: Record<string, { en: string; ja: string; 'zh-CN': string }> = {
+  '스타일 미리보기': { en: 'Style preview', ja: 'スタイルのプレビュー', 'zh-CN': '样式预览' },
+  '{name} 적용 중': { en: '{name} applied', ja: '{name} 適用中', 'zh-CN': '已应用 {name}' },
+  '불투명한 표면과 기본 강조 표현을 사용합니다.': {
+    en: 'Opaque surfaces with standard emphasis.',
+    ja: '不透明な表面と標準の強調表示を使用します。',
+    'zh-CN': '使用不透明表面和默认强调样式。',
+  },
+  '카드·팝업은 반투명하게, 입력창은 선명하게 유지합니다.': {
+    en: 'Translucent cards and popups. Inputs stay opaque and clear.',
+    ja: 'カードとポップアップは半透明に、入力欄は鮮明に保ちます。',
+    'zh-CN': '卡片和弹出层呈半透明，输入框保持清晰、不透明。',
+  },
+  '주요 버튼과 선택 상태에 강조색의 빛을 더합니다.': {
+    en: 'Accent-colored glow on primary buttons and selected states.',
+    ja: '主要ボタンと選択状態にアクセントカラーの光を加えます。',
+    'zh-CN': '为主要按钮和选中状态添加强调色光晕。',
+  },
   '프로젝트 작업': { en: 'Project work', ja: 'プロジェクト作業', 'zh-CN': '项目工作' },
   '{value0} 색상 선택': {
     en: 'Choose {value0} color',

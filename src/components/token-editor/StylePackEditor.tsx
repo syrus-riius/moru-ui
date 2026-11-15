@@ -29,6 +29,11 @@ export interface StylePackEditorProps {
 }
 
 type EffectKey = 'surfaceOpacity' | 'blur' | 'glow' | 'highlight'
+const styleDescriptions = {
+  default: '불투명한 표면과 기본 강조 표현을 사용합니다.',
+  glass: '카드·팝업은 반투명하게, 입력창은 선명하게 유지합니다.',
+  neon: '주요 버튼과 선택 상태에 강조색의 빛을 더합니다.',
+}
 const effectControls: {
   key: EffectKey
   label: string
@@ -42,6 +47,34 @@ const effectControls: {
   { key: 'glow', label: '발광 강도', min: 0, max: 24, unit: 'px', factor: 1 },
   { key: 'highlight', label: '표면 하이라이트', min: 0, max: 100, unit: '%', factor: 100 },
 ]
+
+/** A real surface and action make the effect visible even on an Input-only page. */
+function CompactStylePreview({ tokens, mode }: Pick<StylePackEditorProps, 'tokens' | 'mode'>) {
+  const { t } = useI18n()
+  const [confirmed, setConfirmed] = useState(false)
+
+  return (
+    <ThemeScope tokens={tokens} mode={mode} className="moru-style-sample-scope">
+      <div className="moru-style-sample" role="region" aria-label={t('스타일 미리보기')}>
+        <Card className="moru-style-sample-card">
+          <div>
+            <span>{t('미리보기')}</span>
+            <strong>Moru UI</strong>
+          </div>
+          <Button
+            type="button"
+            size="sm"
+            aria-pressed={confirmed}
+            onClick={() => setConfirmed((previous) => !previous)}
+          >
+            {confirmed ? <Check size={14} aria-hidden="true" /> : null}
+            {t('확인')}
+          </Button>
+        </Card>
+      </div>
+    </ThemeScope>
+  )
+}
 
 function StylePreview({ tokens, mode }: Pick<StylePackEditorProps, 'tokens' | 'mode'>) {
   const { t } = useI18n()
@@ -219,6 +252,14 @@ export function StylePackEditor({
 
   return (
     <div className="moru-style-editor" data-compact={compact || undefined}>
+      <div className="moru-style-editor-heading">
+        <span>{t('컴포넌트 스타일 팩')}</span>
+        <span role="status">
+          {t('{name} 적용 중', {
+            name: stylePackOptions.find((option) => option.id === appearance.preset)!.label,
+          })}
+        </span>
+      </div>
       <div
         className="moru-style-choices"
         data-moru-editor
@@ -254,9 +295,8 @@ export function StylePackEditor({
           </Button>
         ))}
       </div>
-      <p className="moru-style-editor-note">
-        {t('컬러·글꼴·밀도를 유지하며 표면과 강조 표현만 바꿉니다.')}
-      </p>
+      <p className="moru-style-editor-note">{t(styleDescriptions[appearance.preset])}</p>
+      {compact ? <CompactStylePreview tokens={tokens} mode={mode} /> : null}
       {controls.length ? (
         <details className="moru-style-effects" data-moru-editor>
           <summary>

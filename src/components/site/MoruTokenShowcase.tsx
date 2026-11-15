@@ -61,12 +61,18 @@ function randomRecipe(previous: Recipe | null): Recipe {
   }
 }
 
-function recipeTokens(recipe: Recipe, mode: ThemeMode): ThemeTokens {
+function recipeTokens(
+  recipe: Recipe,
+  mode: ThemeMode,
+  appearance: ThemeTokens['appearance'],
+): ThemeTokens {
   const palette = palettes[recipe.palette]
   let tokens = applyFontFamily(
     applyDensity(
       {
         ...defaultTokens,
+        // Randomize the design tokens without replacing the selected material.
+        ...(appearance ? { appearance: { ...appearance } } : {}),
         radius: recipe.radius,
         shadow: recipe.shadow,
         borderWidth: recipe.borderWidth,
@@ -222,7 +228,7 @@ export function MoruTokenShowcase({
   const [selecting, setSelecting] = useState(false)
   const [detailsOpen, setDetailsOpen] = useState(false)
   const active = playing && visible && !interacting && !selecting && !detailsOpen && !reducedMotion
-  const previewTokens = recipe ? recipeTokens(recipe, mode) : tokens
+  const previewTokens = recipe ? recipeTokens(recipe, mode, tokens.appearance) : tokens
   const label = recipe ? palettes[recipe.palette].name : 'My Moru'
 
   useEffect(() => {

@@ -157,8 +157,8 @@
   padding: 0;
   border: var(--ui-border-width, 0px) solid var(--ui-border);
   border-radius: var(--ui-card-radius);
-  background: var(--ui-surface);
-  box-shadow: var(--ui-shadow);
+  background: var(--ui-pack-surface-bg, var(--ui-surface));
+  box-shadow: var(--ui-pack-surface-shadow, var(--ui-shadow));
 }
 
 .moru-home-board-sidebar {

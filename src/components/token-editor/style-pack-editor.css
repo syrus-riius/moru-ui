@@ -4,6 +4,49 @@
   min-width: 0;
   color: var(--chrome-text);
 }
+.moru-style-editor-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-body-line-height);
+}
+.moru-style-editor-heading [role='status'] {
+  color: var(--chrome-muted);
+}
+.moru-style-sample-scope {
+  min-width: 0;
+}
+.moru-style-sample {
+  padding: 20px 16px;
+  border-radius: var(--ui-card-radius);
+  background:
+    radial-gradient(ellipse at 85% 10%, var(--ui-accent), transparent 65%),
+    linear-gradient(135deg, var(--ui-background) 35%, var(--ui-primary));
+}
+.moru-style-sample-card.ui-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+  padding: 12px;
+}
+.moru-style-sample-card > div {
+  display: grid;
+  gap: var(--ui-space);
+  font-size: var(--ui-type-caption-size);
+}
+.moru-style-sample-card > div > span {
+  color: var(--ui-muted);
+}
+.moru-style-sample-card > div > strong {
+  color: var(--ui-text);
+  font-size: var(--ui-type-label-size);
+}
 .moru-style-choices {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

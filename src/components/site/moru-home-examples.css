@@ -36,8 +36,8 @@
   padding: var(--ui-card-padding, 24px);
   border: var(--ui-border-width, 0px) solid var(--ui-border);
   border-radius: var(--ui-card-radius);
-  background: var(--ui-surface);
-  box-shadow: var(--ui-shadow);
+  background: var(--ui-pack-surface-bg, var(--ui-surface));
+  box-shadow: var(--ui-pack-surface-shadow, var(--ui-shadow));
   color: var(--ui-text);
   font-family: var(--ui-font-family);
   container: moru-home-card / inline-size;

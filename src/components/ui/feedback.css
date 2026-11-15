@@ -78,8 +78,9 @@
 }
 
 .ui-badge[data-variant='outline'] {
+  border-width: var(--ui-outline-width, 1px);
   border-color: var(--ui-feedback-border);
-  background: var(--ui-feedback-soft);
+  background: var(--ui-surface, #fff);
   color: var(--ui-feedback-surface-text);
 }
 

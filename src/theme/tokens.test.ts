@@ -296,6 +296,19 @@ describe('mode and exported styles', () => {
     expect(Object.values(light).join(' ')).not.toMatch(/undefined|NaN|Infinity/)
   })
 
+  it.each([
+    [0, '1px'],
+    [0.5, '0.5px'],
+    [2, '2px'],
+  ] as const)('keeps explicit outlines visible with a %s px theme border', (borderWidth, width) => {
+    for (const mode of ['light', 'dark'] as const) {
+      const tokens = { ...defaultTokens, borderWidth }
+      const variables = getCssVariables(tokens, mode)
+      expect(variables['--ui-border-width']).toBe(`${borderWidth}px`)
+      expect(variables['--ui-outline-width']).toBe(width)
+    }
+  })
+
   it.each(['light', 'dark'] as const)(
     'keeps exported %s CSS consistent with live variables',
     (mode) => {

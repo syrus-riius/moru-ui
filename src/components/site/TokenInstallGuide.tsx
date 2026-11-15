@@ -3,7 +3,7 @@ import { ArrowDownToLine, Check, Copy, FileJson, SlidersHorizontal } from 'lucid
 import { useI18n } from '../../i18n'
 import { createTokenInstallGuide, type TokenInstallTarget } from './token-install'
 import { Button } from '../ui/button'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 import { ToggleGroup } from '../ui/toggle-group'
 import './token-install-guide.css'
 
@@ -174,7 +174,7 @@ export function TokenInstallGuide({ json, onEdit, embedded = false }: TokenInsta
               <p>{t('프로젝트 폴더의 터미널에서 실행하세요. Tailwind CSS는 필요하지 않습니다.')}</p>
             </div>
           </div>
-          <CodeBlock
+          <DocumentationCodeBlock
             filename={t('터미널')}
             language="sh"
             value={guide.command}
@@ -214,7 +214,7 @@ export function TokenInstallGuide({ json, onEdit, embedded = false }: TokenInsta
           </div>
           <details className="token-install-code-details">
             <summary>{t('JSON 확인 및 복사')}</summary>
-            <CodeBlock
+            <DocumentationCodeBlock
               filename={jsonFile.path}
               language="json"
               value={jsonFile.code}
@@ -254,7 +254,7 @@ export function TokenInstallGuide({ json, onEdit, embedded = false }: TokenInsta
                 <summary>
                   <code>{file.path}</code>
                 </summary>
-                <CodeBlock
+                <DocumentationCodeBlock
                   filename={file.path}
                   language={file.language}
                   value={file.code}

@@ -22,7 +22,6 @@
   transition:
     border-color var(--ui-duration, 150ms),
     box-shadow var(--ui-duration, 150ms);
-  border-color: transparent;
 }
 .ui-input-group:has(
   .ui-input-group-input[data-size='sm'],

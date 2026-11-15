@@ -972,7 +972,8 @@
 }
 
 .ui-status-message[data-variant='outline'] {
-  background: var(--ui-status-bg);
+  border-width: var(--ui-outline-width, 1px);
+  background: var(--ui-surface, #fff);
   border-color: var(--ui-status-border);
 }
 .ui-status-message[data-variant='outline'][data-tone='success'] {

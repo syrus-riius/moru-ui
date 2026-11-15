@@ -660,6 +660,8 @@ export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<st
     const name = key.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`)
     variables[`--ui-${name}`] = `${tokens[key]}${numericUnits[key]}`
   }
+  // An explicit outline remains visible in a borderless theme; positive widths stay exact.
+  variables['--ui-outline-width'] = `${tokens.borderWidth > 0 ? tokens.borderWidth : 1}px`
   for (const { value: role } of typographyRoleOptions) {
     const style = tokens.typography[role]
     variables[`--ui-type-${role}-size`] = `${style.size}px`

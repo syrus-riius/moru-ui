@@ -32,7 +32,8 @@
   padding-block: 6px;
 }
 .sim-component .sim-component-button[data-outline='true'] {
-  border-color: var(--ui-text);
+  border-width: var(--ui-outline-width, 1px);
+  border-color: var(--ui-border);
   background: var(--ui-surface);
 }
 .sim-component-field {
@@ -118,6 +119,17 @@
   padding: 16px;
   border-radius: calc(var(--ui-radius) + 4px);
   box-shadow: none;
+}
+.sim-component .sim-component-card[data-variant='secondary'] {
+  background: var(--ui-background);
+}
+.sim-component .sim-component-card[data-variant='outline'] {
+  border-width: var(--ui-outline-width, 1px);
+  background: transparent;
+}
+.sim-component .sim-component-card[data-variant='ghost'] {
+  border-color: transparent;
+  background: transparent;
 }
 .sim-component-card-heading {
   display: flex;
@@ -353,7 +365,11 @@
   border-radius: var(--ui-radius);
   background: transparent;
 }
-.sim-component-container[data-variant='secondary'],
+.sim-component-container[data-variant='secondary'] {
+  background: var(--ui-background);
+}
 .sim-component-container[data-variant='outline'] {
+  box-sizing: border-box;
+  border: var(--ui-outline-width, 1px) solid var(--ui-border);
   background: var(--ui-background);
 }

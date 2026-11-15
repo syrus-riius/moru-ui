@@ -230,7 +230,7 @@ export function SimulatorNodeView({
       break
     case 'card': {
       const card = (
-        <Card className="sim-component-card">
+        <Card className="sim-component-card" data-variant={props.variant}>
           <div className="sim-component-card-heading">
             <span className="sim-component-card-icon" aria-hidden="true">
               <Layers size={17} />

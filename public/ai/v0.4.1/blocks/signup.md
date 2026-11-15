@@ -2,7 +2,7 @@
 
 Account details, email verification and completion in one signup flow. Local demo; connect your authentication service.
 
-Version: 0.4.1. Source hash: 08414026dbe9c50ebadb9391b938ed8ed1e97050bc3c6b5f7c1b6fd190aa8ab2.
+Version: 0.4.1. Source hash: 0b0b1530e773209ed6b6628a4168c3305b7342a1378da2b37377f96c1e54f293.
 
 ## Discovery
 

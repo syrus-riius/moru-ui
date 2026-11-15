@@ -58,7 +58,6 @@
     background-color var(--ui-duration, 160ms),
     border-color var(--ui-duration, 160ms),
     box-shadow var(--ui-duration, 160ms);
-  border-color: transparent;
 }
 :where([data-moru-registry]) .ui-combobox:hover:not(:has(input:is(:disabled, [aria-busy='true']))):not(
     :has([aria-invalid='true'])

@@ -549,7 +549,6 @@
   transition:
     background-color var(--ui-duration, 160ms),
     border-color var(--ui-duration, 160ms);
-  border-color: transparent;
   font-weight: var(--ui-type-body-weight, 400);
 }
 

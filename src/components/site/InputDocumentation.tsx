@@ -1,6 +1,6 @@
 import { useI18n } from '../../i18n'
 import { useId, type ReactNode } from 'react'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 import { Input, type InputProps } from '../ui/input'
 import { Tabs } from '../ui/tabs'
 import { InputVariationsDemo } from '../demos/InputVariationsDemo'
@@ -210,7 +210,7 @@ export function InputDocumentation({
               value: 'code',
               label: t('코드'),
               content: (
-                <CodeBlock
+                <DocumentationCodeBlock
                   value={previewCode}
                   filename="email-input.tsx"
                   language="tsx"
@@ -265,7 +265,12 @@ export function InputDocumentation({
             '입력창에는 label로 이름을 붙입니다. 입력값을 다른 UI에서 사용하려면 value와 onValueChange를 연결하세요.',
           )}
         </p>
-        <CodeBlock value={usageCode} filename="project-name-input.tsx" language="tsx" defaultWrap />
+        <DocumentationCodeBlock
+          value={usageCode}
+          filename="project-name-input.tsx"
+          language="tsx"
+          defaultWrap
+        />
         <h3>{t('자동 서식과 선택적 검증')}</h3>
         <p>
           {t(
@@ -277,7 +282,7 @@ export function InputDocumentation({
             '서식이 적용된 값은 onValueChange로 받으세요. onChange는 브라우저의 기본 입력 이벤트만 전달하므로 구분자 삭제 같은 서식 동작에는 호출되지 않을 수 있습니다.',
           )}
         </p>
-        <CodeBlock
+        <DocumentationCodeBlock
           value={formattedUsageCode}
           filename="card-number-field.tsx"
           language="tsx"

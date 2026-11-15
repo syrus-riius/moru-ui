@@ -99,7 +99,7 @@
   align-self: flex-start;
 }
 
-.doc-variation-preview p {
+.doc-variation-preview > p:not([class]) {
   margin: 0;
 }
 

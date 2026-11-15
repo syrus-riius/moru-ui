@@ -32,13 +32,11 @@
   min-height: calc(var(--ui-navigation-height) * 2.5);
   gap: var(--ui-field-gap, 8px);
   padding: var(--ui-navigation-padding);
-  border: var(--ui-border-width, 1px) dashed var(--ui-border, #e8e8e4);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
   border-radius: calc(var(--ui-radius, 6px) + 4px);
   text-align: center;
   cursor: context-menu;
-  border-style: solid;
   background: var(--ui-control-hover-bg, #f3f3f1);
-  border-color: transparent;
 }
 :where([data-moru-registry]) .ui-context-menu-trigger[aria-disabled] {
   opacity: 0.5;

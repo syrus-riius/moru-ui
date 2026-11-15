@@ -2,7 +2,7 @@ import { useI18n } from '../../i18n'
 import { ArrowDownToLine, ArrowUpRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { RegistryInstaller } from './RegistryInstaller'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 import { registryInstallCommand, registryRelease } from '../../lib/registry-install'
 import './getting-started-guide.css'
 
@@ -40,7 +40,7 @@ export function GettingStartedGuide({
             '패키지를 설치하고, 스튜디오에서 만든 토큰을 Provider에 연결하세요. Tailwind는 필요하지 않습니다.',
           )}
         </p>
-        <CodeBlock
+        <DocumentationCodeBlock
           value="npm install moru-ui"
           filename="npm"
           language="sh"
@@ -98,7 +98,7 @@ export function GettingStartedGuide({
             '프로젝트 폴더에서 실행하세요. CLI가 Input과 공통 스타일·테마를 moru/ 폴더에 추가합니다.',
           )}
         </p>
-        <CodeBlock
+        <DocumentationCodeBlock
           value={registryInstallCommand('input')}
           filename={`Input · v${registryRelease}`}
           language="sh"
@@ -118,7 +118,7 @@ export function GettingStartedGuide({
             '앱에서 Moru의 스타일을 한 번 불러오고, 컴포넌트를 MoruProvider로 감싸세요. UI 경로는 프로젝트의 별칭에 맞춰 바꿉니다.',
           )}
         </p>
-        <CodeBlock
+        <DocumentationCodeBlock
           value={inputExample}
           filename="App.tsx"
           language="tsx"
@@ -138,7 +138,7 @@ export function GettingStartedGuide({
             'MoruProvider의 locale로 기본 안내와 날짜 표시를 바꿉니다. 한국어·영어·일본어·중국어 간체를 지원합니다.',
           )}
         </p>
-        <CodeBlock
+        <DocumentationCodeBlock
           value={`<MoruProvider locale="en">
   <DatePicker />
   <LoginBlock />

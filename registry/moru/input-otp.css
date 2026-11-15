@@ -91,7 +91,6 @@
   background: var(--ui-input-bg, #f0f0ed);
   font-family: var(--ui-font-family-code, monospace);
   font-variant-numeric: tabular-nums;
-  border-color: transparent;
 }
 :where([data-moru-registry]) .ui-input-otp-slot[data-active] {
   border-color: var(--ui-primary, #181818);

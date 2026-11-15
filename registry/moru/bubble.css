@@ -32,6 +32,7 @@
   opacity: 0.8;
 }
 :where([data-moru-registry]) .ui-bubble[data-variant='outline'] {
+  border-width: var(--ui-outline-width, 1px);
   background: var(--ui-surface);
   border-color: var(--ui-border);
 }

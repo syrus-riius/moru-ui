@@ -21,6 +21,7 @@
   --ui-control-height: 40px;
   --ui-border-width: 0px;
   --ui-duration: 160ms;
+  --ui-outline-width: 1px;
   --ui-type-display-size: 32px;
   --ui-type-display-line-height: 1.25;
   --ui-type-display-weight: 600;
@@ -158,6 +159,7 @@
   --ui-control-height: 40px;
   --ui-border-width: 0px;
   --ui-duration: 160ms;
+  --ui-outline-width: 1px;
   --ui-type-display-size: 32px;
   --ui-type-display-line-height: 1.25;
   --ui-type-display-weight: 600;

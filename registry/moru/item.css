@@ -44,8 +44,9 @@
   border-radius: calc(var(--ui-radius, 6px) + 4px);
 }
 :where([data-moru-registry]) .ui-item[data-variant='outline'] {
+  border-width: var(--ui-outline-width, 1px);
   border-color: var(--ui-border, #e8e8e4);
-  background: var(--ui-input-bg, #f0f0ed);
+  background: transparent;
 }
 :where([data-moru-registry]) .ui-item[data-variant='muted'] {
   background: var(--ui-surface-hover, #f3f3f1);

@@ -3,7 +3,7 @@ import { useI18n } from '../../i18n'
 import { components, type ComponentId } from '../catalog/component-catalog'
 import type { ComponentPage } from '../catalog/component-pages'
 import { Button } from '../ui/button'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 import { Spinner } from '../ui/spinner'
 import { Tabs } from '../ui/tabs'
 import { ComponentDocumentationLayout } from './ComponentDocumentationLayout'
@@ -92,7 +92,7 @@ export function ComponentDocumentation({
               value: 'code',
               label: t('코드'),
               content: reference ? (
-                <CodeBlock
+                <DocumentationCodeBlock
                   value={reference.example}
                   filename={`${registryId}-example.tsx`}
                   language="tsx"
@@ -131,7 +131,7 @@ export function ComponentDocumentation({
             <h2 id={`${id}-usage`} tabIndex={-1}>
               {t('사용법')}
             </h2>
-            <CodeBlock
+            <DocumentationCodeBlock
               value={reference.example}
               filename={`${registryId}-example.tsx`}
               language="tsx"

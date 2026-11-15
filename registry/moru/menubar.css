@@ -34,7 +34,6 @@
   border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
   border-radius: var(--ui-radius, 6px);
   background: var(--ui-control-hover-bg, #f3f3f1);
-  border-color: transparent;
 }
 :where([data-moru-registry]) .ui-menubar-trigger {
   display: inline-flex;

@@ -61,7 +61,6 @@
   transition:
     border-color var(--ui-duration, 150ms),
     box-shadow var(--ui-duration, 150ms);
-  border-color: transparent;
   font-weight: var(--ui-type-body-weight, 400);
 }
 .ui-native-select-wrap > svg {

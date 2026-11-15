@@ -1,5 +1,5 @@
 import { useI18n } from '../../i18n'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 import type { ComponentDocument, ComponentProp } from './component-document'
 
 function PropTable({ props, label }: { props: ComponentProp[]; label: string }) {
@@ -86,7 +86,7 @@ export function ComponentApiReference({
       ) : null}
       <details className="moru-component-doc__details">
         <summary>{t('전체 타입 정의')}</summary>
-        <CodeBlock
+        <DocumentationCodeBlock
           value={document.api}
           filename={`${document.id}.types.ts`}
           language="typescript"

@@ -1,0 +1,46 @@
+.moru-doc-code.ui-code-block {
+  --doc-code-divider: color-mix(in srgb, var(--chrome-text) 12%, var(--chrome-surface));
+  --ui-code-block-inset: 20px;
+  border: 1px solid var(--doc-code-divider);
+  border-radius: 10px;
+  background: var(--chrome-surface);
+  color: var(--chrome-text);
+}
+
+.moru-doc-code.ui-code-block > .ui-code-block-header {
+  min-height: 48px;
+  padding: 10px 16px;
+  gap: 8px;
+  border-bottom: 1px solid var(--doc-code-divider);
+  background: color-mix(in srgb, var(--chrome-text) 3%, var(--chrome-surface));
+}
+
+.moru-doc-code .ui-code-block-title {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.moru-doc-code .ui-code-block-language {
+  font-size: 11px;
+  color: var(--chrome-muted);
+}
+
+.moru-doc-code.ui-code-block > .ui-code-block-pre {
+  background: var(--chrome-surface);
+  color: var(--chrome-text);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.moru-doc-code .ui-code-block-line {
+  min-height: 1.7em;
+}
+
+@media (max-width: 600px) {
+  .moru-doc-code.ui-code-block {
+    --ui-code-block-inset: 14px;
+  }
+  .moru-doc-code.ui-code-block > .ui-code-block-header {
+    padding-inline: 12px;
+  }
+}

@@ -9,7 +9,7 @@ import {
   type RegistryInstallGroupId,
   type RegistryInstallItem,
 } from '../../lib/registry-install'
-import { CodeBlock } from '../ui/code-block'
+import { DocumentationCodeBlock } from './DocumentationCodeBlock'
 
 const normalizeSearch = (value: string) => value.toLocaleLowerCase().replace(/[\s-]+/g, '')
 
@@ -121,7 +121,7 @@ export function RegistryInstaller() {
           </p>
         )}
       </div>
-      <CodeBlock
+      <DocumentationCodeBlock
         key={selected}
         value={registryInstallCommand(selected)}
         filename={`${selected} · v${registryRelease}`}

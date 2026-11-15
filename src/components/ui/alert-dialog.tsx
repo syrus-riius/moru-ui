@@ -1,10 +1,19 @@
-import { useEffect, useLayoutEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactElement } from 'react'
+import { useI18n } from '../../lib/i18n'
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ReactElement,
+} from 'react'
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { CircleAlert } from 'lucide-react'
 import { Button } from './button'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-overlays.css'
+import './overlay-shared.css'
+import './alert-dialog.css'
 
 export interface AlertDialogProps {
   trigger?: ReactElement
@@ -23,9 +32,22 @@ export interface AlertDialogProps {
 
 /** Explicit confirmation with safe initial focus and recoverable async errors. */
 export function AlertDialog({
-  trigger, title, description, confirmLabel = '확인', cancelLabel = '취소', onConfirm,
-  open, onOpenChange, destructive = false, loading = false, finalFocus,
+  trigger,
+  title,
+  description,
+  confirmLabel: confirmLabelProp,
+  cancelLabel: cancelLabelProp,
+  onConfirm,
+  open,
+  onOpenChange,
+  destructive = false,
+  loading = false,
+  finalFocus,
 }: AlertDialogProps) {
+  const { t } = useI18n()
+  const confirmLabel = confirmLabelProp ?? t('확인')
+  const cancelLabel = cancelLabelProp ?? t('취소')
+
   const portalContainer = useThemePortalContainer()
   const [internalOpen, setInternalOpen] = useState(false)
   const [confirming, setConfirming] = useState(false)
@@ -51,7 +73,9 @@ export function AlertDialog({
 
   useEffect(() => {
     mountedRef.current = true
-    return () => { mountedRef.current = false }
+    return () => {
+      mountedRef.current = false
+    }
   }, [])
 
   useEffect(() => {
@@ -86,28 +110,64 @@ export function AlertDialog({
       if (!mountedRef.current || session !== sessionRef.current) return
       pendingRef.current = false
       setConfirming(false)
-      setError(reason instanceof Error && reason.message.trim() ? reason.message : '처리하지 못했습니다. 다시 시도해 주세요.')
+      setError(
+        reason instanceof Error && reason.message.trim()
+          ? reason.message
+          : t('처리하지 못했습니다. 다시 시도해 주세요.'),
+      )
     }
   }
 
   return (
-    <BaseAlertDialog.Root open={isOpen} onOpenChange={(nextOpen, details) => {
-      if (!nextOpen && (pendingRef.current || loading)) { details.cancel(); return }
-      changeOpen(nextOpen)
-    }}>
+    <BaseAlertDialog.Root
+      open={isOpen}
+      onOpenChange={(nextOpen, details) => {
+        if (!nextOpen && (pendingRef.current || loading)) {
+          details.cancel()
+          return
+        }
+        changeOpen(nextOpen)
+      }}
+    >
       {trigger && <BaseAlertDialog.Trigger render={trigger} />}
       <OverlayPortal portal={BaseAlertDialog.Portal} kind="modal" container={portalContainer}>
         <BaseAlertDialog.Backdrop className="ui-overlay-backdrop" />
-        <BaseAlertDialog.Popup ref={popupRef} className="ui-alert-dialog" initialFocus={() => cancelRef.current && !cancelRef.current.disabled ? cancelRef.current : popupRef.current} finalFocus={finalFocus} aria-busy={busy || undefined}>
+        <BaseAlertDialog.Popup
+          ref={popupRef}
+          className="ui-alert-dialog"
+          initialFocus={() =>
+            cancelRef.current && !cancelRef.current.disabled ? cancelRef.current : popupRef.current
+          }
+          finalFocus={finalFocus}
+          aria-busy={busy || undefined}
+        >
           <div className="ui-alert-dialog-mark" data-destructive={destructive || undefined}>
             <CircleAlert size={20} aria-hidden="true" />
           </div>
           <BaseAlertDialog.Title className="ui-overlay-title">{title}</BaseAlertDialog.Title>
-          {description && <BaseAlertDialog.Description className="ui-overlay-description">{description}</BaseAlertDialog.Description>}
-          {error && <p className="ui-confirmation-error" role="alert">{error}</p>}
+          {description && (
+            <BaseAlertDialog.Description className="ui-overlay-description">
+              {description}
+            </BaseAlertDialog.Description>
+          )}
+          {error && (
+            <p className="ui-confirmation-error" role="alert">
+              {error}
+            </p>
+          )}
           <div className="ui-alert-dialog-actions">
-            <BaseAlertDialog.Close render={<Button ref={cancelRef} variant="secondary" disabled={busy} />}>{cancelLabel}</BaseAlertDialog.Close>
-            <Button variant={destructive ? 'danger' : 'primary'} loading={busy} onClick={() => { void confirm() }}>
+            <BaseAlertDialog.Close
+              render={<Button ref={cancelRef} variant="secondary" disabled={busy} />}
+            >
+              {cancelLabel}
+            </BaseAlertDialog.Close>
+            <Button
+              variant={destructive ? 'danger' : 'primary'}
+              loading={busy}
+              onClick={() => {
+                void confirm()
+              }}
+            >
               {confirmLabel}
             </Button>
           </div>

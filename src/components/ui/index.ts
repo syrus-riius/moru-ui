@@ -4,7 +4,10 @@ export { Input, type InputProps } from './input'
 export { Textarea, type TextareaProps } from './textarea'
 export { Checkbox, type CheckboxProps } from './checkbox'
 export { Select, type SelectProps } from './select'
+export { Modal, type ModalProps } from './modal'
 export { Dialog, type DialogProps } from './dialog'
+export * from './header'
+export * from './footer'
 export { Menu, type MenuProps } from './menu'
 export { Tabs, type TabsProps } from './tabs'
 export { Card, type CardProps } from './card'
@@ -29,11 +32,27 @@ export { AlertDialog, type AlertDialogProps } from './alert-dialog'
 export { Sheet, type SheetProps } from './sheet'
 export { Combobox, type ComboboxProps, type ComboboxItem } from './combobox'
 export { Command, type CommandProps, type CommandItem } from './command'
-export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption, TableFooter } from './table'
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableCaption,
+  TableFooter,
+} from './table'
 export { Pagination, type PaginationProps } from './pagination'
 export { Empty, type EmptyProps } from './empty'
 export { ToggleGroup, type ToggleGroupProps, type ToggleGroupItem } from './toggle-group'
-export { Calendar, type CalendarProps, type CalendarRange, type CalendarRangeProps, type CalendarSingleProps, type CalendarDayData } from './calendar'
+export {
+  Calendar,
+  type CalendarProps,
+  type CalendarRange,
+  type CalendarRangeProps,
+  type CalendarSingleProps,
+  type CalendarDayData,
+} from './calendar'
 export type { CalendarDisplayOptions } from './calendar-options'
 export { DatePicker, type DatePickerProps } from './date-picker'
 
@@ -70,6 +89,7 @@ export * from './data-table'
 export * from './resizable'
 export * from './scroll-area'
 export { Menu as DropdownMenu, type MenuProps as DropdownMenuProps } from './menu'
+export * from './formatted-input'
 export * from './number-input'
 export * from './password-input'
 export * from './multi-select'
@@ -79,3 +99,6 @@ export * from './ring-progress'
 export * from './date-range-picker'
 export * from './time-picker'
 export * from './time-range-picker'
+
+export * from './loading-overlay'
+export * from './status-indicator'

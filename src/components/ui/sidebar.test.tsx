@@ -25,7 +25,9 @@ describe('Responsive Sidebar semantics', () => {
   })
 
   it('preserves the current destination and hides visual-only badges from a collapsed label', () => {
-    const markup = renderToStaticMarkup(<Sidebar title="Moru" value="team" collapsed items={items} />)
+    const markup = renderToStaticMarkup(
+      <Sidebar title="Moru" value="team" collapsed items={items} />,
+    )
     expect(markup).toMatch(/aria-current="page" aria-label="팀원"/)
     expect(markup).toContain('class="ui-sidebar-badge" aria-hidden="true">5</span>')
     expect(markup).toContain('tabindex="-1" class="ui-sidebar-root"')

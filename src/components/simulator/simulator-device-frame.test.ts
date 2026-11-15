@@ -19,7 +19,14 @@ describe('simulator device frame geometry', () => {
   it('adds a bezel without changing the saved screen dimensions or content origin', () => {
     const screen = Object.freeze({ width: 390, height: 844 })
     const metrics = getDeviceFrameMetrics(screen)
-    expect(metrics).toEqual({ kind: 'mobile', insetX: 12, insetY: 12, outerWidth: 414, outerHeight: 868, screenRadius: 28 })
+    expect(metrics).toEqual({
+      kind: 'mobile',
+      insetX: 12,
+      insetY: 12,
+      outerWidth: 414,
+      outerHeight: 868,
+      screenRadius: 28,
+    })
     expect(screen).toEqual({ width: 390, height: 844 })
     // The inner screen starts after exactly one bezel on each axis.
     expect(metrics.outerWidth - screen.width - metrics.insetX).toBe(metrics.insetX)
@@ -27,6 +34,13 @@ describe('simulator device frame geometry', () => {
   })
 
   it('keeps desktop canvas dimensions unchanged', () => {
-    expect(getDeviceFrameMetrics({ width: 1280, height: 800 })).toEqual({ kind: 'desktop', insetX: 0, insetY: 0, outerWidth: 1280, outerHeight: 800, screenRadius: 10 })
+    expect(getDeviceFrameMetrics({ width: 1280, height: 800 })).toEqual({
+      kind: 'desktop',
+      insetX: 0,
+      insetY: 0,
+      outerWidth: 1280,
+      outerHeight: 800,
+      screenRadius: 10,
+    })
   })
 })

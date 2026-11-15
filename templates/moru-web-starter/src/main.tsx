@@ -7,4 +7,8 @@ import './theme/default.css'
 import './components/ui/styles.css'
 import './theme/readability.css'
 
-createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)

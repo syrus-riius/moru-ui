@@ -12,8 +12,10 @@ export interface RadioGroupItem {
   disabled?: boolean
 }
 
-export interface RadioGroupProps extends Omit<BaseRadioGroup.Props<string>,
-  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange'> {
+export interface RadioGroupProps extends Omit<
+  BaseRadioGroup.Props<string>,
+  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange'
+> {
   items: RadioGroupItem[]
   value?: string
   defaultValue?: string
@@ -23,9 +25,18 @@ export interface RadioGroupProps extends Omit<BaseRadioGroup.Props<string>,
 }
 
 export function RadioGroup({
-  items, value, defaultValue, onValueChange, disabled, readOnly,
-  className, id, size = 'md',
-  'aria-describedby': describedBy, 'aria-invalid': invalid, ...props
+  items,
+  value,
+  defaultValue,
+  onValueChange,
+  disabled,
+  readOnly,
+  className,
+  id,
+  size = 'md',
+  'aria-describedby': describedBy,
+  'aria-invalid': invalid,
+  ...props
 }: RadioGroupProps) {
   const groupId = useId()
   const field = useFieldContext()
@@ -40,7 +51,9 @@ export function RadioGroup({
       data-size={size}
       value={value}
       defaultValue={defaultValue}
-      onValueChange={(nextValue) => { if (!disabled && !readOnly) onValueChange?.(nextValue) }}
+      onValueChange={(nextValue) => {
+        if (!disabled && !readOnly) onValueChange?.(nextValue)
+      }}
       disabled={disabled}
       readOnly={readOnly}
       aria-invalid={invalidState}
@@ -62,8 +75,14 @@ export function RadioGroup({
               <BaseRadio.Indicator className="ui-radio-indicator" />
             </BaseRadio.Root>
             <span className="ui-radio-copy">
-              <span id={labelId} className="ui-radio-text">{item.label}</span>
-              {item.description && <span id={descriptionId} className="ui-radio-description">{item.description}</span>}
+              <span id={labelId} className="ui-radio-text">
+                {item.label}
+              </span>
+              {item.description && (
+                <span id={descriptionId} className="ui-radio-description">
+                  {item.description}
+                </span>
+              )}
             </span>
           </>
         )

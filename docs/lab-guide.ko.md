@@ -215,10 +215,12 @@ export function ProjectForm() {
 | `Textarea` | `size`: `sm`, `md`, `lg` / `loading`, `previewState`, 네이티브 여러 줄 입력 속성과 `ref`, `rows`, `onChange` 지원 |
 | `Checkbox` | `size`: `sm`, `md`, `lg` / `label`, `description`, `checked`, `defaultChecked`, `onCheckedChange`, `disabled`, `loading`, `previewState` |
 | `Select` | `size`: `sm`, `md`, `lg` / `items: { value, label }[]`, `value`, `defaultValue`, `onValueChange`, `placeholder`, `disabled`, `readOnly`, `loading`, `previewState` |
-| `Dialog` | `trigger`, `title`, `description`, `children`, `footer`, `open`, `onOpenChange` |
+| `Modal` | `trigger`, `title`, `description`, `children`, `footer`, `open/defaultOpen`, `onOpenChange`, `icon` / `variant`: `default`, `confirmation`, `form`, `success`, `danger` / `size`: `sm`, `md`, `lg`, `full` / 기존 `Dialog`는 호환 별칭 |
 | `Menu` / `DropdownMenu` | 같은 구현과 API의 두 이름 / `size`: `sm`, `md`, `lg`(메뉴 항목 크기) / `trigger`, `items: { label, onClick?, icon?, destructive?, disabled? }[]` |
 | `Tabs` | `size`: `sm`, `md`, `lg` / `items: { value, label, content }[]`, `value`, `defaultValue`, `onValueChange` |
 | `Card` | 네이티브 `div` 속성과 `ref`, `children` 지원 |
+| `Header` | `brand`, `navigation`, `actions`, `children` / `variant`: `navigation`, `centered`, `app` / 좁은 화면의 메뉴 펼치기·Escape 닫기 지원 |
+| `Footer` | `brand`, `description`, `navigation`, `columns: { title, content, label? }[]`, `copyright`, `meta` / `variant`: `simple`, `columns`, `compact` |
 | `Switch` | `label`, `description`, `checked/defaultChecked`, `onCheckedChange`, `size`, `disabled`, `name` |
 | `RadioGroup` | `items: { value, label, description?, disabled? }[]`, `value/defaultValue`, `onValueChange`, `size`, `disabled`, `name` |
 | `Slider` | 단일 가로 슬라이더 / 숫자 `value/defaultValue`, `min/max/step`, `label`, `showValue`, `onValueChange`, `size`, `disabled` |
@@ -567,63 +569,79 @@ export function EditorPanels() {
 ```text
 src/
   index.ts                  공개 컴포넌트·토큰 API
-  App.tsx                   갤러리, 예제, 비교, 상태, 내보내기 화면
+  App.tsx                   공급자 구성과 랩 셸. 화면 상태와 동작은 studio/가 담당
   styles.css                데모 앱의 레이아웃
   components/
     brand/                  채택한 모노그램 로고·심벌과 브랜드 스타일
-    BrandStory.tsx          브랜드 소개·모노그램의 의미·공식 SVG 다운로드
-    studio-content.css      전체 화면의 소개 위계·푸터·공통 포커스
-    component-gallery.css   갤러리 카드·검색·코드 보기와 여백
-    component-catalog.ts    75개 항목·확장 구분·한글 검색어·사용 코드 통합
-    ExtendedComponentDemo.tsx 1차 확장 12개의 실제 조작 예제
-    extended-component-demo.css 1차 확장 표본·필터·로딩 예제 배치
-    AdvancedComponentDemo.tsx 이전 확장 11개의 조합·실패·선택 예제
-    advanced-component-demo.css 해당 컴포넌트의 반응형 표본 배치
-    completion-controls-catalog.ts 입력·보조 컴포넌트 11개 메타데이터·사용 코드
-    CompletionControlsDemo.tsx OTP·RTL·입력 조합·단축키 등 실제 조작
-    completion-navigation-catalog.ts 탐색·오버레이 8개 메타데이터·사용 코드
-    CompletionNavigationDemo.tsx 메뉴·드로어·탐색·사이드바 조작
-    completion-content-catalog.ts 대화·파일·질문·실행 기록 8개 메타데이터·사용 코드
-    CompletionContentDemo.tsx 첨부·메시지·코드·설문·실행 흐름 조작
-    completion-data-catalog.ts 데이터·패널 5개와 기존 Typography 메타데이터·사용 코드
-    CompletionDataDemo.tsx 차트·표·캐러셀·크기 조절·스크롤·글자 역할 조작
-    CompletionComponentDemo.tsx 최근 갤러리 42개를 담당 예제로 연결
-    reference-workspace.css 토큰·가이드의 공통 화면 여백
-    DesignTokensPage.tsx    기본색·의미색·규격 표본·현재 CSS
-    design-tokens-page.css  토큰 카드·수치·코드의 반응형 배치
-    GettingStartedGuide.tsx 네 단계 시작 가이드와 화면 이동
-    getting-started-guide.css 가이드 본문·단계·코드 스타일
-    comparison-workspace.css 비교·상태의 안내·필터·탭 공통 스타일
-    FoundationComparison.tsx 글꼴·밀도·모드·타이포그래피·크기 비교
-    foundation-comparison.css 디자인 비교 카드와 반응형 배치
-    StateComparison.tsx     상태·의미 색상·직접 조작 비교
-    state-comparison.css    상태 표·의미 색상·실제 조작 폼의 여백
-    studio-navigation.css   사이드바의 타이포그래피·여백·포커스
-    studio-topbar.css       상단바의 글자 위계와 반응형 도구 배치
-    WorkspaceExample.tsx    폼·알림·공개 범위·도움말 조합 예제
-    WorkspaceReadiness.tsx  체크리스트·배지·진행률 연동
-    WorkspaceTeamPreview.tsx 팀원 검색·필터·페이지·상세 수정·제거·실행 취소
-    WorkspaceMembersContext.tsx 팀원 예제 상태와 화면 간 공유
-    workspace-members-state.ts 초기 5명·수정·제거·복구 reducer
-    workspace-members-state.test.ts 중복·소유자·실행 취소·상태 독립성 검증
-    WorkspaceProjectPlan.tsx 담당자·마감일·요약·달력의 일정 연동
-    workspace-project-plan.css 프로젝트 입력·일정 미리보기 배치
-    WorkspaceAppearancePreview.tsx Slider로 간격을 조절하는 카드
-    workspace-example-settings.ts 예제 설정의 초기값과 타입
-    workspace-example.css   예제의 폼 구획·여백과 반응형 배치
-    brand-story.css         브랜드 소개 화면 스타일
-    TokenEditor.tsx         디자인 토큰 편집기
-    token-editor.css        편집기 스타일
-    inspector-layout.css    상세 설정·모바일 편집 패널의 위계와 여백
+    studio/                 랩 셸: 경로·서랍·검색 상태와 그 화면 조각
+      useStudioController.tsx 경로, 열린 서랍·대화상자, 갤러리 선택과 이동 동작
+      StudioSidebar.tsx     워크스페이스 탐색(좁은 화면에서는 서랍)
+      StudioTopbar.tsx      작업 화면과 단독 화면의 상단바
+      StudioMain.tsx        현재 뷰의 본문
+      StudioInspector.tsx   디자인 편집 패널
+      StudioOverlays.tsx    빠른 실행·내보내기·초대 대화상자
+      ComponentPlayground.tsx 갤러리 표본과 세부 조정이 공유하는 값
+      WorkspaceExampleState.tsx 작업 공간 예제에서 편집하는 값
+      studio-content.css    전체 화면의 소개 위계·푸터·공통 포커스
+      studio-navigation.css 사이드바의 타이포그래피·여백·포커스
+      studio-topbar.css     상단바의 글자 위계와 반응형 도구 배치
+      reference-workspace.css 토큰·가이드의 공통 화면 여백
+    catalog/                컴포넌트 목록·경로·검색과 갤러리 페이지
+      component-catalog.ts  75개 항목·확장 구분·한글 검색어·사용 코드 통합
+      component-gallery.css 갤러리 카드·검색·코드 보기와 여백
+    demos/                  갤러리 표본에 들어가는 조작 예제와 그 메타데이터
+      ExtendedComponentDemo.tsx 1차 확장 12개의 실제 조작 예제
+      extended-component-demo.css 1차 확장 표본·필터·로딩 예제 배치
+      AdvancedComponentDemo.tsx 이전 확장 11개의 조합·실패·선택 예제
+      advanced-component-demo.css 해당 컴포넌트의 반응형 표본 배치
+      completion-controls-catalog.ts 입력·보조 컴포넌트 11개 메타데이터·사용 코드
+      CompletionControlsDemo.tsx OTP·RTL·입력 조합·단축키 등 실제 조작
+      completion-navigation-catalog.ts 탐색·오버레이 8개 메타데이터·사용 코드
+      CompletionNavigationDemo.tsx 메뉴·드로어·탐색·사이드바 조작
+      completion-content-catalog.ts 대화·파일·질문·실행 기록 8개 메타데이터·사용 코드
+      CompletionContentDemo.tsx 첨부·메시지·코드·설문·실행 흐름 조작
+      completion-data-catalog.ts 데이터·패널 5개와 기존 Typography 메타데이터·사용 코드
+      CompletionDataDemo.tsx 차트·표·캐러셀·크기 조절·스크롤·글자 역할 조작
+      CompletionComponentDemo.tsx 최근 갤러리 42개를 담당 예제로 연결
+    site/                   공개 문서 화면(홈·시작 가이드·브랜드 소개)
+      GettingStartedGuide.tsx 네 단계 시작 가이드와 화면 이동
+      getting-started-guide.css 가이드 본문·단계·코드 스타일
+      BrandStory.tsx        브랜드 소개·모노그램의 의미·공식 SVG 다운로드
+      brand-story.css       브랜드 소개 화면 스타일
+    token-editor/           디자인 토큰 편집기와 토큰 화면
+      TokenEditor.tsx       디자인 토큰 편집기
+      token-editor.css      편집기 스타일
+      inspector-layout.css  상세 설정·모바일 편집 패널의 위계와 여백
+      DesignTokensPage.tsx  기본색·의미색·규격 표본·현재 CSS
+      design-tokens-page.css 토큰 카드·수치·코드의 반응형 배치
+    comparison/             디자인 비교·상태 표현 화면
+      comparison-workspace.css 비교·상태의 안내·필터·탭 공통 스타일
+      FoundationComparison.tsx 글꼴·밀도·모드·타이포그래피·크기 비교
+      foundation-comparison.css 디자인 비교 카드와 반응형 배치
+      StateComparison.tsx   상태·의미 색상·직접 조작 비교
+      state-comparison.css  상태 표·의미 색상·실제 조작 폼의 여백
+    workspace-example/      작업 공간 예제
+      WorkspaceExample.tsx  폼·알림·공개 범위·도움말 조합 예제
+      WorkspaceReadiness.tsx 체크리스트·배지·진행률 연동
+      WorkspaceTeamPreview.tsx 팀원 검색·필터·페이지·상세 수정·제거·실행 취소
+      WorkspaceMembersContext.tsx 팀원 예제 상태와 화면 간 공유
+      workspace-members-state.ts 초기 5명·수정·제거·복구 reducer
+      workspace-members-state.test.ts 중복·소유자·실행 취소·상태 독립성 검증
+      WorkspaceProjectPlan.tsx 담당자·마감일·요약·달력의 일정 연동
+      workspace-project-plan.css 프로젝트 입력·일정 미리보기 배치
+      WorkspaceAppearancePreview.tsx Slider로 간격을 조절하는 카드
+      workspace-example-settings.ts 예제 설정의 초기값과 타입
+      workspace-example.css 예제의 폼 구획·여백과 반응형 배치
     ui/                     75개 갤러리 대응 컴포넌트와 공개 내보내기
       styles.css            공통 외관·폼·피드백 스타일 진입점
       form-controls.css     Switch·RadioGroup·Slider
       feedback.css          Badge·Alert·Avatar·Progress·Separator·Skeleton
-      overlays.css          Accordion·Popover·Tooltip(TSX에서 자동 포함)
+      <컴포넌트>.css        컴포넌트 이름과 같은 CSS가 그 컴포넌트의 스타일(TSX에서 자동 포함)
+      *-shared.css          같은 계열 컴포넌트가 함께 쓰는 규칙만 모은 작은 공유 파일
       toast.tsx             ToastProvider·useToast·전역 알림 영역
       alert-dialog.tsx      위험 작업 확인·비동기 로딩·실패 복구
       sheet.tsx             화면 가장자리의 상세·편집 패널
-      advanced-overlays.css Toast·AlertDialog·Sheet(TSX에서 자동 포함)
+      overlay-shared.css    Toast·AlertDialog·Sheet가 함께 쓰는 배경·제목·닫기 버튼
       combobox.tsx          검색·선택·지우기와 Field 연결
       command.tsx           검색 가능한 작업 목록·그룹·키보드 실행
       table.tsx             네이티브 표 compound API와 스크롤 영역
@@ -631,17 +649,17 @@ src/
       pagination-utils.ts   페이지 범위 보정·생략 계산
       empty.tsx             빈 상태의 안내·아이콘·행동
       toggle-group.tsx      단일·다중 선택 토글
-      advanced-controls.css 선택·목록·검색·빈 상태(TSX에서 자동 포함)
+      advanced-controls-shared.css 화면 낭독기 전용 텍스트 등 공용 규칙
       calendar.tsx          단일 날짜·월 이동·그리드 키보드 탐색
       date-picker.tsx       Calendar 팝업·Field 연결·선택 지우기
       calendar-utils.ts     로컬 날짜 계산·범위·월 그리드
       calendar.css          Calendar·DatePicker(TSX에서 자동 포함)
-      controls-completion.css OTP·입력 조합·네이티브 선택·보조 컴포넌트 스타일
+      controls-shared.css   입력 조합·네이티브 선택이 쓰는 로딩 표시 공용 규칙
+      enhanced-input.css    NumberInput·PasswordInput·MultiSelect가 함께 쓰는 입력 틀
       input-otp-utils.ts    숫자 정규화·선택 구간 붙여넣기 계산
-      navigation-completion.css 탐색·메뉴·드로어·사이드바 스타일
+      navigation-shared.css ContextMenu·Menubar·NavigationMenu·HoverCard가 함께 쓰는 팝업·항목
       navigation-menu-items.tsx 중첩 메뉴 항목의 공유 동작
-      content-completion.css 첨부·대화·코드·질문·실행 기록 스타일
-      data-completion.css   차트·표·캐러셀·패널·스크롤 스타일
+      content-shared.css    첨부·대화·코드·질문·실행 기록의 공용 캡션·라벨
       data-table.tsx        TanStack Table v9 기반 데이터 표
       chart.tsx             Recharts 기반 Chart·조합 API·데이터 표
       carousel.tsx          Embla 기반 슬라이드와 키보드 이동

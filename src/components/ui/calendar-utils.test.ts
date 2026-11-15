@@ -2,10 +2,20 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import {
-  addCalendarDays, addCalendarMonths, calendarDateKey, calendarMonthHasAvailableDate,
-  clampCalendarDate, compareCalendarDates, createCalendarDate, endOfCalendarMonth,
-  getCalendarMonthDays, isCalendarDateInRange, isValidCalendarDate, normalizeCalendarDate,
-  resolveCalendarLocale, startOfCalendarMonth,
+  addCalendarDays,
+  addCalendarMonths,
+  calendarDateKey,
+  calendarMonthHasAvailableDate,
+  clampCalendarDate,
+  compareCalendarDates,
+  createCalendarDate,
+  endOfCalendarMonth,
+  getCalendarMonthDays,
+  isCalendarDateInRange,
+  isValidCalendarDate,
+  normalizeCalendarDate,
+  resolveCalendarLocale,
+  startOfCalendarMonth,
 } from './calendar-utils'
 import { Calendar } from './calendar'
 import { DatePicker } from './date-picker'
@@ -18,7 +28,7 @@ function attribute(tag: string | undefined, name: string): string | undefined {
   if (!tag) return undefined
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const match = tag.match(new RegExp(`(?:^|\\s)${escaped}(?:="([^"]*)")?(?=\\s|/?>|$)`))
-  return match ? match[1] ?? '' : undefined
+  return match ? (match[1] ?? '') : undefined
 }
 
 function buttons(markup: string) {
@@ -44,7 +54,10 @@ describe('Calendar local date arithmetic', () => {
   })
 
   it.each([
-    [2024, '2024-02-29'], [2025, '2025-02-28'], [1900, '1900-02-28'], [2000, '2000-02-29'],
+    [2024, '2024-02-29'],
+    [2025, '2025-02-28'],
+    [1900, '1900-02-28'],
+    [2000, '2000-02-29'],
   ])('uses the Gregorian leap-year rule for %s', (year, expected) => {
     expect(key(endOfCalendarMonth(date(year as number, 2, 1)))).toBe(expected)
   })
@@ -68,12 +81,15 @@ describe('Calendar local date arithmetic', () => {
     expect(compareCalendarDates(date(2026, 2, 1), date(2026, 1, 31))).toBe(1)
   })
 
-  it.each(['Asia/Seoul', 'America/Los_Angeles', 'Pacific/Auckland'])('serializes the local day in %s', (zone) => {
-    vi.stubEnv('TZ', zone)
-    const local = new Date(2026, 9, 24, 0, 15)
-    expect(key(local)).toBe('2026-10-24')
-    expect(key(normalizeCalendarDate(local))).toBe('2026-10-24')
-  })
+  it.each(['Asia/Seoul', 'America/Los_Angeles', 'Pacific/Auckland'])(
+    'serializes the local day in %s',
+    (zone) => {
+      vi.stubEnv('TZ', zone)
+      const local = new Date(2026, 9, 24, 0, 15)
+      expect(key(local)).toBe('2026-10-24')
+      expect(key(normalizeCalendarDate(local))).toBe('2026-10-24')
+    },
+  )
 
   it('moves by calendar day across spring and autumn daylight-saving boundaries', () => {
     vi.stubEnv('TZ', 'America/New_York')
@@ -131,59 +147,103 @@ describe('Calendar bounds and month layout', () => {
     expect(calendarMonthHasAvailableDate(date(2026, 9, 1), min, max)).toBe(false)
     expect(calendarMonthHasAvailableDate(date(2026, 10, 1), min, max)).toBe(true)
     expect(calendarMonthHasAvailableDate(date(2026, 11, 1), min, max)).toBe(false)
-    expect(calendarMonthHasAvailableDate(date(2026, 10, 1), undefined, date(2026, 10, 1))).toBe(true)
+    expect(calendarMonthHasAvailableDate(date(2026, 10, 1), undefined, date(2026, 10, 1))).toBe(
+      true,
+    )
   })
 
-  it.each([date(2026, 2, 1), date(2026, 8, 1), date(2024, 2, 1), date(2026, 12, 1)])('produces six complete Sunday-first weeks for %s', (month) => {
-    const days = getCalendarMonthDays(month)
-    expect(days).toHaveLength(42)
-    expect(days[0].getDay()).toBe(0)
-    expect(days[41].getDay()).toBe(6)
-    expect(new Set(days.map(key)).size).toBe(42)
-    expect(days.some((day) => key(day) === key(startOfCalendarMonth(month)))).toBe(true)
-    expect(days.some((day) => key(day) === key(endOfCalendarMonth(month)))).toBe(true)
-  })
+  it.each([date(2026, 2, 1), date(2026, 8, 1), date(2024, 2, 1), date(2026, 12, 1)])(
+    'produces six complete Sunday-first weeks for %s',
+    (month) => {
+      const days = getCalendarMonthDays(month)
+      expect(days).toHaveLength(42)
+      expect(days[0].getDay()).toBe(0)
+      expect(days[41].getDay()).toBe(6)
+      expect(new Set(days.map(key)).size).toBe(42)
+      expect(days.some((day) => key(day) === key(startOfCalendarMonth(month)))).toBe(true)
+      expect(days.some((day) => key(day) === key(endOfCalendarMonth(month)))).toBe(true)
+    },
+  )
 })
 
 describe('Calendar and DatePicker server-rendered accessibility', () => {
   it('renders one grid, 42 date cells, a selected day, and one roving tab stop', () => {
-    const markup = renderToStaticMarkup(createElement(Calendar, { defaultValue: date(2026, 10, 24) }))
+    const markup = renderToStaticMarkup(
+      createElement(Calendar, { defaultValue: date(2026, 10, 24) }),
+    )
     expect(markup.match(/role="grid"/g)).toHaveLength(1)
     expect(markup.match(/role="gridcell"/g)).toHaveLength(42)
     expect(markup.match(/role="columnheader"/g)).toHaveLength(7)
     expect(markup.match(/aria-selected="true"/g)).toHaveLength(1)
     expect(buttons(markup).filter((tag) => attribute(tag, 'tabindex') === '0')).toHaveLength(1)
-    expect(buttons(markup).find((tag) => attribute(tag, 'data-date') === '2026-10-24')).toContain('data-selected="true"')
+    expect(buttons(markup).find((tag) => attribute(tag, 'data-date') === '2026-10-24')).toContain(
+      'data-selected="true"',
+    )
     expect(markup).toContain('2026년 10월 24일 토요일')
     expect(markup).toContain('방향키로 이동')
-    expect(markup).toMatch(/data-date="2026-10-24"[^>]*>[\s\S]*?class="ui-calendar-day-number">24<\/span>/)
+    expect(markup).toMatch(
+      /data-date="2026-10-24"[^>]*>[\s\S]*?class="ui-calendar-day-number">24<\/span>/,
+    )
   })
 
   it('does not expose selectable dates or enabled navigation when disabled', () => {
-    const markup = renderToStaticMarkup(createElement(Calendar, { defaultValue: date(2026, 10, 24), disabled: true }))
+    const markup = renderToStaticMarkup(
+      createElement(Calendar, { defaultValue: date(2026, 10, 24), disabled: true }),
+    )
     expect(buttons(markup)).toHaveLength(46)
     expect(buttons(markup).every((tag) => attribute(tag, 'disabled') !== undefined)).toBe(true)
     expect(buttons(markup).every((tag) => attribute(tag, 'tabindex') !== '0')).toBe(true)
   })
 
   it('keeps bound dates enabled and previous/next month controls disabled for a one-month range', () => {
-    const markup = renderToStaticMarkup(createElement(Calendar, { defaultValue: date(2026, 10, 24), minDate: date(2026, 10, 10), maxDate: date(2026, 10, 20) }))
+    const markup = renderToStaticMarkup(
+      createElement(Calendar, {
+        defaultValue: date(2026, 10, 24),
+        minDate: date(2026, 10, 10),
+        maxDate: date(2026, 10, 20),
+      }),
+    )
     const tags = buttons(markup)
-    expect(attribute(tags.find((tag) => attribute(tag, 'aria-label') === '이전 달'), 'disabled')).toBeDefined()
-    expect(attribute(tags.find((tag) => attribute(tag, 'aria-label') === '다음 달'), 'disabled')).toBeDefined()
-    expect(tags.filter((tag) => attribute(tag, 'data-date') && attribute(tag, 'disabled') === undefined)).toHaveLength(11)
-    expect(attribute(tags.find((tag) => attribute(tag, 'tabindex') === '0')!, 'data-date')).toBe('2026-10-20')
+    expect(
+      attribute(
+        tags.find((tag) => attribute(tag, 'aria-label') === '이전 달'),
+        'disabled',
+      ),
+    ).toBeDefined()
+    expect(
+      attribute(
+        tags.find((tag) => attribute(tag, 'aria-label') === '다음 달'),
+        'disabled',
+      ),
+    ).toBeDefined()
+    expect(
+      tags.filter((tag) => attribute(tag, 'data-date') && attribute(tag, 'disabled') === undefined),
+    ).toHaveLength(11)
+    expect(
+      attribute(
+        tags.find((tag) => attribute(tag, 'tabindex') === '0')!,
+        'data-date',
+      ),
+    ).toBe('2026-10-20')
   })
 
   it('handles invalid values and locales with a usable fallback', () => {
-    const markup = renderToStaticMarkup(createElement(Calendar, { value: new Date('invalid'), minDate: new Date('invalid'), locale: 'bad_locale' }))
+    const markup = renderToStaticMarkup(
+      createElement(Calendar, {
+        value: new Date('invalid'),
+        minDate: new Date('invalid'),
+        locale: 'bad_locale',
+      }),
+    )
     expect(markup).not.toContain('Invalid Date')
     expect(markup.match(/aria-selected="true"/g) ?? []).toHaveLength(0)
     expect(buttons(markup).filter((tag) => attribute(tag, 'tabindex') === '0')).toHaveLength(1)
   })
 
   it('renders a standalone DatePicker label tied to its trigger', () => {
-    const markup = renderToStaticMarkup(createElement(DatePicker, { label: '마감일', defaultValue: date(2026, 10, 24) }))
+    const markup = renderToStaticMarkup(
+      createElement(DatePicker, { label: '마감일', defaultValue: date(2026, 10, 24) }),
+    )
     const label = markup.match(/<label\b[^>]*>/)![0]
     const trigger = buttons(markup)[0]
     expect(attribute(label, 'for')).toBe(attribute(trigger, 'id'))
@@ -193,10 +253,18 @@ describe('Calendar and DatePicker server-rendered accessibility', () => {
   })
 
   it('uses one Field label, merges descriptions/errors, and describes the selected value', () => {
-    const markup = renderToStaticMarkup(createElement(Field, {
-      label: '출시일', description: '팀의 일정을 선택합니다.', error: '날짜를 확인해주세요.',
-      children: createElement(DatePicker, { label: '중복 라벨', defaultValue: date(2026, 10, 24), 'aria-describedby': 'custom-description' }),
-    }))
+    const markup = renderToStaticMarkup(
+      createElement(Field, {
+        label: '출시일',
+        description: '팀의 일정을 선택합니다.',
+        error: '날짜를 확인해주세요.',
+        children: createElement(DatePicker, {
+          label: '중복 라벨',
+          defaultValue: date(2026, 10, 24),
+          'aria-describedby': 'custom-description',
+        }),
+      }),
+    )
     const labels = markup.match(/<label\b[^>]*>/g) ?? []
     const trigger = buttons(markup)[0]
     const descriptionIds = attribute(trigger, 'aria-describedby')?.split(' ') ?? []

@@ -1,0 +1,201 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-header {
+  --page-chrome-control-height: var(--ui-control-height-md, 40px);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+}
+
+:where([data-moru-registry]) .ui-header[data-size='sm'] {
+  --page-chrome-control-height: var(--ui-control-height-sm, 32px);
+}
+
+:where([data-moru-registry]) .ui-header[data-size='lg'] {
+  --page-chrome-control-height: var(--ui-control-height-lg, 48px);
+}
+
+:where([data-moru-registry]) .ui-header {
+  container: moru-header / inline-size;
+}
+
+:where([data-moru-registry]) .ui-header-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: 'brand navigation actions';
+  align-items: center;
+  gap: calc(var(--ui-space, 4px) * 4);
+  min-width: 0;
+}
+
+:where([data-moru-registry]) .ui-header-brand {
+  grid-area: brand;
+  min-width: 0;
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-heading-weight, 600);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  overflow-wrap: anywhere;
+}
+
+:where([data-moru-registry]) .ui-header-brand > a,
+:where([data-moru-registry]) .ui-header-brand > button {
+  color: inherit;
+}
+
+:where([data-moru-registry]) .ui-header-navigation {
+  grid-area: navigation;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+
+:where([data-moru-registry]) .ui-header-actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+
+:where([data-moru-registry]) .ui-header-navigation a,
+:where([data-moru-registry]) .ui-header-navigation button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--page-chrome-control-height);
+  max-width: 100%;
+  padding: calc(var(--ui-space, 4px) * 1.5) calc(var(--ui-space, 4px) * 2);
+  border: 0;
+  border-radius: var(--ui-radius);
+  background: transparent;
+  color: var(--ui-muted);
+  font: inherit;
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  text-align: start;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+:where([data-moru-registry]) .ui-header-navigation a:hover,
+:where([data-moru-registry]) .ui-header-navigation button:hover {
+  background: var(--ui-control-hover-bg);
+  color: var(--ui-text);
+}
+
+:where([data-moru-registry]) .ui-header-navigation button:disabled {
+  opacity: var(--ui-disabled-opacity, 0.45);
+  cursor: not-allowed;
+}
+
+:where([data-moru-registry]) .ui-header-navigation [aria-current='page'] {
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+
+:where([data-moru-registry]) .ui-header-menu {
+  grid-area: menu;
+  display: none;
+  place-items: center;
+  width: max(36px, var(--page-chrome-control-height));
+  min-height: max(36px, var(--page-chrome-control-height));
+  padding: var(--ui-space, 4px);
+  border: 0;
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+  color: var(--ui-text);
+  cursor: pointer;
+}
+
+:where([data-moru-registry]) .ui-header-menu:hover {
+  background: var(--ui-control-hover-bg);
+}
+
+:where([data-moru-registry]) .ui-header a:focus-visible,
+:where([data-moru-registry]) .ui-header button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-primary));
+  outline-offset: 3px;
+}
+
+:where([data-moru-registry]) .ui-header-content {
+  min-width: 0;
+  margin-top: var(--ui-form-gap, 24px);
+}
+
+:where([data-moru-registry]) .ui-header[data-variant='centered'] .ui-header-row {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas: 'navigation brand actions';
+}
+
+:where([data-moru-registry]) .ui-header[data-variant='centered'] .ui-header-navigation {
+  justify-content: flex-start;
+}
+
+:where([data-moru-registry]) .ui-header[data-variant='app'] {
+  background: var(--ui-input-bg);
+}
+
+:where([data-moru-registry]) .ui-header[data-variant='app'] .ui-header-navigation {
+  justify-content: flex-start;
+}
+
+@container moru-header (max-width: 640px) {
+  :where([data-moru-registry]) .ui-header-row,
+  :where([data-moru-registry]) .ui-header[data-variant='centered'] .ui-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-control-gap, 8px);
+  }
+
+  :where([data-moru-registry]) .ui-header-brand {
+    flex: 1;
+  }
+
+  :where([data-moru-registry]) .ui-header-menu {
+    order: 1;
+    flex: none;
+    display: grid;
+  }
+
+  :where([data-moru-registry]) .ui-header-navigation {
+    order: 3;
+    flex-basis: 100%;
+    display: none;
+  }
+
+  :where([data-moru-registry]) .ui-header-navigation[data-expanded='true'] {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: var(--ui-field-gap, 8px);
+  }
+
+  :where([data-moru-registry]) .ui-header-actions {
+    order: 2;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-header-menu,
+  :where([data-moru-registry]) .ui-header-navigation a,
+  :where([data-moru-registry]) .ui-header-navigation button {
+    min-height: 44px;
+  }
+
+  :where([data-moru-registry]) .ui-header-menu {
+    min-width: 44px;
+  }
+}
+

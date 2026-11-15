@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "title": "Status Indicator",
+  "description": "Readable connection or synchronization status with an optional pulse and polite announcement.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/status-indicator.css",
+      "type": "registry:file",
+      "target": "@ui/moru/status-indicator.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-status-indicator {\n  --ui-status-color: var(--ui-muted, #737373);\n  --ui-status-dot: calc(var(--ui-icon-size-md, 16px) / 2);\n  display: inline-flex;\n  align-items: center;\n  gap: var(--ui-control-gap, 8px);\n  min-width: 0;\n  font-family: var(--ui-font-family, inherit);\n  font-size: var(--ui-type-caption-size, 12px);\n  line-height: var(--ui-type-caption-line-height, 1.5);\n  color: var(--ui-text, #171717);\n  overflow-wrap: anywhere;\n}\n:where([data-moru-registry]) .ui-status-indicator[data-size='sm'] {\n  --ui-status-dot: calc(var(--ui-icon-size-sm, 14px) / 2);\n}\n:where([data-moru-registry]) .ui-status-indicator[data-size='lg'] {\n  --ui-status-dot: calc(var(--ui-icon-size-lg, 20px) / 2);\n}\n:where([data-moru-registry]) .ui-status-indicator[data-tone='success'] {\n  --ui-status-color: var(--ui-success, #23734d);\n}\n:where([data-moru-registry]) .ui-status-indicator[data-tone='warning'] {\n  --ui-status-color: var(--ui-warning, #9c620f);\n}\n:where([data-moru-registry]) .ui-status-indicator[data-tone='danger'] {\n  --ui-status-color: var(--ui-danger, #c44747);\n}\n:where([data-moru-registry]) .ui-status-indicator[data-tone='info'] {\n  --ui-status-color: var(--ui-info, #2869b5);\n}\n:where([data-moru-registry]) .ui-status-indicator-dot {\n  position: relative;\n  flex: none;\n  width: var(--ui-status-dot);\n  height: var(--ui-status-dot);\n  border-radius: 50%;\n  background: var(--ui-status-color);\n}\n:where([data-moru-registry]) .ui-status-indicator-dot::after {\n  content: '';\n  position: absolute;\n  inset: 0;\n  border-radius: inherit;\n  background: inherit;\n  opacity: 0;\n}\n:where([data-moru-registry]) .ui-status-indicator[data-pulse] .ui-status-indicator-dot::after {\n  animation: moru-registry-ui-status-pulse 1.8s ease-out infinite;\n}\n:where([data-moru-registry]) .ui-status-indicator[data-paused] .ui-status-indicator-dot::after {\n  animation-play-state: paused;\n}\n@keyframes moru-registry-ui-status-pulse {\n  0% {\n    transform: scale(1);\n    opacity: 0.45;\n  }\n  80%,\n  100% {\n    transform: scale(2.5);\n    opacity: 0;\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  :where([data-moru-registry]) .ui-status-indicator[data-pulse] .ui-status-indicator-dot::after {\n    animation: none;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/status-indicator.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/status-indicator.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, type HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './status-indicator.css'\n\nexport interface StatusIndicatorProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {\n  /** Always include readable text; a colored dot alone does not explain a status. */\n  label: string\n  tone?: 'neutral' | 'success' | 'warning' | 'danger' | 'info'\n  size?: 'sm' | 'md' | 'lg'\n  pulse?: boolean\n  paused?: boolean\n  /** Opt in for changing status text; static indicators do not need a live region. */\n  live?: 'off' | 'polite'\n}\n\nexport const StatusIndicator = forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  function StatusIndicator(\n    {\n      label,\n      tone = 'neutral',\n      size = 'md',\n      pulse = false,\n      paused = false,\n      live = 'off',\n      className,\n      ...props\n    },\n    ref,\n  ) {\n    return (\n      <span\n        {...props}\n        ref={ref}\n        role={live === 'polite' ? 'status' : undefined}\n        aria-live={live === 'polite' ? 'polite' : undefined}\n        aria-atomic={live === 'polite' ? true : undefined}\n        className={cn('ui-status-indicator', className)}\n        data-tone={tone}\n        data-size={size}\n        data-pulse={pulse || undefined}\n        data-paused={paused || undefined}\n      >\n        <span className=\"ui-status-indicator-dot\" aria-hidden=\"true\" />\n        <span>{label}</span>\n      </span>\n    )\n  },\n)\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

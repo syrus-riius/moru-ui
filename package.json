@@ -1,11 +1,13 @@
 {
   "name": "moru-ui",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "dev": "vite --host 127.0.0.1",
-    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && npm run registry:check && npm run project:starter:check && tsc -b && vite build",
+    "build": "npm run mobile:check && npm run mobile:starter:check && npm run web:starter:check && npm run registry:check && npm run ai:check && npm run project:starter:check && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run && node --test scripts/build-native-starter.test.mjs scripts/build-registry.test.mjs scripts/build-project-starter.test.mjs",
     "tokens:build": "node scripts/build-tokens.mjs",
@@ -20,7 +22,9 @@
     "registry:check": "node scripts/build-registry.mjs --check",
     "registry:smoke": "node scripts/test-registry-install.mjs",
     "project:starter:build": "node scripts/build-project-starter.mjs",
-    "project:starter:check": "node scripts/build-project-starter.mjs --check"
+    "project:starter:check": "node scripts/build-project-starter.mjs --check",
+    "ai:build": "node scripts/build-ai-docs.mjs",
+    "ai:check": "node scripts/build-ai-docs.mjs --check"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
@@ -43,6 +47,7 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
     "postcss": "8.5.31",
+    "prettier": "3.9.10",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2",
     "vite": "8.3.4",

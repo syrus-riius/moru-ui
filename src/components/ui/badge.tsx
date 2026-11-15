@@ -13,7 +13,13 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   ref,
 ) {
   return (
-    <span {...props} ref={ref} className={cn('ui-badge', className)} data-variant={variant} data-tone={tone}>
+    <span
+      {...props}
+      ref={ref}
+      className={cn('ui-badge', className)}
+      data-variant={variant}
+      data-tone={tone}
+    >
       {children}
     </span>
   )

@@ -1,0 +1,140 @@
+.component-design-toolbar {
+  position: sticky;
+  top: var(--moru-public-header-offset);
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap);
+  min-height: 52px;
+  margin: -10px 0 24px;
+  padding-block: 6px;
+  background: var(--chrome-surface);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.component-design-toolbar > .ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-control-gap);
+  flex: none;
+  min-height: var(--ui-control-height-md);
+}
+.component-design-toolbar > .ui-button[aria-expanded='true'] {
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+.component-design-toolbar > button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+.moru-docs-content:has(.component-design-toolbar) [id^='component-'],
+.moru-docs-content:has(.component-design-toolbar) .moru-input-doc__body :is(section, h2)[id] {
+  scroll-margin-top: calc(var(--moru-public-header-offset) + 76px);
+}
+.inspector[hidden] {
+  display: none;
+}
+body:has(.inspector[aria-modal='true']) {
+  overflow: hidden;
+}
+.studio-shell-public .component-design-inspector {
+  background: var(--chrome-surface);
+  overscroll-behavior: contain;
+}
+.component-design-inspector .token-editor {
+  --editor-bg: var(--chrome-surface);
+}
+.component-design-inspector .token-editor-heading {
+  display: none;
+}
+.studio-shell-public .component-design-inspector .inspector-mobile-header {
+  gap: var(--inspector-gap);
+  min-height: 76px;
+  padding: var(--inspector-inset);
+  background: var(--chrome-surface);
+}
+.component-design-inspector .inspector-mobile-header p {
+  margin: var(--ui-space) 0 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.component-design-inspector .token-editor-footer {
+  background: var(--chrome-surface);
+}
+.studio-shell-public .workspace-body-design-docked {
+  grid-template-columns: minmax(0, 1fr) 336px;
+}
+.workspace-body-design-docked .moru-docs-layout {
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 24px;
+  padding-inline: 24px;
+}
+.studio-shell-public .inspector.inspector-docked {
+  position: sticky;
+  inset: auto;
+  top: calc(var(--moru-public-header-offset) + 16px);
+  z-index: 10;
+  align-self: start;
+  width: auto;
+  min-height: 0;
+  height: calc(100dvh - var(--moru-public-header-offset) - 32px);
+  margin: 16px 16px 16px 0;
+  border-radius: var(--ui-card-radius);
+  box-shadow: none;
+  transform: none;
+}
+@media (max-width: 1279px) {
+  .studio-shell-public .workspace-body-design-docked {
+    grid-template-columns: minmax(0, 1fr) 304px;
+  }
+  .workspace-body-design-docked .moru-docs-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 24px 20px 40px;
+  }
+  .workspace-body-design-docked .component-design-toolbar {
+    margin-top: 0;
+  }
+}
+@media (max-width: 767px) {
+  /* Reserve a second workspace below the preview; neither pane is modal. */
+  html:has(.workspace-body-design-docked) {
+    --component-inspector-height: min(42dvh, 360px);
+    scroll-padding-bottom: calc(var(--component-inspector-height) + 16px);
+  }
+  .studio-shell-public .workspace-body-design-docked {
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: var(--component-inspector-height);
+  }
+  .studio-shell-public .inspector.inspector-docked {
+    position: fixed;
+    inset: auto 0 0;
+    width: 100%;
+    max-width: none;
+    height: var(--component-inspector-height);
+    margin: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-radius: 0;
+    box-shadow: 0 -6px 24px #0000000a;
+  }
+  .studio-shell-public .component-design-inspector .inspector-mobile-header {
+    min-height: 56px;
+    padding: var(--ui-control-gap) var(--inspector-inset);
+  }
+  .workspace-body-design-docked .moru-public-main :is(button, input, textarea, select, [tabindex]) {
+    scroll-margin-bottom: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .component-design-toolbar {
+    margin-bottom: 16px;
+    gap: var(--ui-control-gap);
+  }
+  .component-design-toolbar > button {
+    min-height: 44px;
+    padding-inline: var(--ui-control-padding-x-sm);
+  }
+}

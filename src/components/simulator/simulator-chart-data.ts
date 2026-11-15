@@ -1,9 +1,14 @@
 import type { ChartType } from '../ui/chart'
 
-export const SIM_CHART_TYPES = ['bar', 'line', 'area', 'donut'] as const satisfies readonly ChartType[]
+export const SIM_CHART_TYPES = [
+  'bar',
+  'line',
+  'area',
+  'donut',
+] as const satisfies readonly ChartType[]
 
 export function getSimChartType(value: string): ChartType {
-  return SIM_CHART_TYPES.includes(value as ChartType) ? value as ChartType : 'bar'
+  return SIM_CHART_TYPES.includes(value as ChartType) ? (value as ChartType) : 'bar'
 }
 
 export interface SimChartData {
@@ -16,7 +21,10 @@ const plainNumber = /^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/
 const groupedNumber = /^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/
 
 /** Reads the same portable label | value rows used by the inspector. */
-export function parseSimChartData(options: readonly string[], type: ChartType = 'bar'): SimChartData {
+export function parseSimChartData(
+  options: readonly string[],
+  type: ChartType = 'bar',
+): SimChartData {
   const result: SimChartData = { data: [], invalidRows: [] }
   options.forEach((source, index) => {
     if (!source.trim()) return
@@ -25,7 +33,14 @@ export function parseSimChartData(options: readonly string[], type: ChartType = 
     const rawValue = cells[1]?.trim() ?? ''
     const numeric = plainNumber.test(rawValue) || groupedNumber.test(rawValue)
     const value = numeric ? Number(rawValue.replaceAll(',', '')) : NaN
-    if (index >= 30 || cells.length !== 2 || !label || label.length > 100 || !Number.isFinite(value) || (type === 'donut' && value < 0)) {
+    if (
+      index >= 30 ||
+      cells.length !== 2 ||
+      !label ||
+      label.length > 100 ||
+      !Number.isFinite(value) ||
+      (type === 'donut' && value < 0)
+    ) {
       result.invalidRows.push(index + 1)
       return
     }

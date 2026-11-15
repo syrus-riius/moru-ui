@@ -1,0 +1,115 @@
+.ui-time-range-picker {
+  --ui-time-height: var(--ui-control-height-md, 40px);
+  --ui-time-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-time-icon: var(--ui-icon-size-md, 16px);
+  --ui-time-border: var(--ui-border-width, 1px);
+  --ui-time-resolved-height: max(
+    var(--ui-time-height),
+    calc(
+      max(
+          var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5),
+          var(--ui-time-icon)
+        ) +
+        var(--ui-space, 4px) * 2 + var(--ui-time-border) * 2
+    )
+  );
+  --ui-time-inner-height: calc(var(--ui-time-resolved-height) - var(--ui-time-border) * 2);
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ui-field-gap, 8px);
+  min-width: 0;
+  width: 100%;
+  color: var(--ui-text, #171717);
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 13px);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, 0em);
+}
+.ui-time-range-picker[data-size='sm'] {
+  --ui-time-height: var(--ui-control-height-sm, 32px);
+  --ui-time-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-time-icon: var(--ui-icon-size-sm, 14px);
+}
+.ui-time-range-picker[data-size='lg'] {
+  --ui-time-height: var(--ui-control-height-lg, 48px);
+  --ui-time-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-time-icon: var(--ui-icon-size-lg, 20px);
+}
+.ui-time-range-label {
+  font-weight: var(--ui-type-label-weight, 500);
+  overflow-wrap: anywhere;
+}
+.ui-time-range-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+.ui-time-range-divider {
+  align-self: start;
+  padding-block-start: calc(
+    var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) +
+      var(--ui-field-gap, 8px) +
+      (
+        var(--ui-time-resolved-height) - var(--ui-type-label-size, 13px) *
+          var(--ui-type-label-line-height, 1.5)
+      ) /
+      2
+  );
+  color: var(--ui-muted);
+}
+.ui-time-range-summary {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);
+  overflow-wrap: anywhere;
+}
+.ui-time-range-picker {
+  container: time-range / inline-size;
+}
+@supports (grid-template-rows: subgrid) {
+  /* Shared label/control/error rows keep both fields and the dash aligned when
+   either label wraps or only one endpoint has validation feedback. */
+  .ui-time-range-inputs {
+    grid-template-rows: auto auto;
+    row-gap: var(--ui-field-gap, 8px);
+  }
+  .ui-time-range-divider {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    padding-block-start: 0;
+  }
+}
+@container time-range (max-width:340px) {
+  .ui-time-range-inputs {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+  .ui-time-range-divider {
+    display: none;
+  }
+}
+@media (pointer: coarse) {
+  .ui-time-range-picker {
+    --ui-time-resolved-height: max(
+      44px,
+      var(--ui-time-height),
+      calc(
+        max(
+            max(16px, var(--ui-type-label-size, 13px)) * var(--ui-type-label-line-height, 1.5),
+            var(--ui-time-icon)
+          ) +
+          var(--ui-space, 4px) * 2 + var(--ui-time-border) * 2
+      )
+    );
+  }
+}
+@media (forced-colors: active) {
+  .ui-time-range-picker {
+    --ui-time-border: 1px;
+  }
+}

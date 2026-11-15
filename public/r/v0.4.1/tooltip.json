@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "Short supplementary information with optional shared TooltipProvider timing.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/tooltip.css",
+      "type": "registry:file",
+      "target": "@ui/moru/tooltip.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-tooltip {\n  box-sizing: border-box;\n  min-width: 0;\n  font-family: var(--ui-font-family, inherit);\n  font-size: var(--ui-type-body-size, 14px);\n  font-weight: var(--ui-type-body-weight, 400);\n  line-height: var(--ui-type-body-line-height, 1.6);\n  letter-spacing: var(--ui-type-body-letter-spacing, 0em);\n  color: var(--ui-text, #171717);\n  overflow-wrap: anywhere;\n}\n\n:where([data-moru-registry]) .ui-tooltip-positioner {\n  z-index: 90;\n}\n\n:where([data-moru-registry]) .ui-tooltip {\n  max-width: min(calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));\n  max-height: min(calc(100dvh - 24px), var(--available-height, calc(100dvh - 24px)));\n  overflow-y: auto;\n  overscroll-behavior: contain;\n  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n  border-radius: calc(var(--ui-radius, 6px) + 4px);\n  background: var(--ui-surface, #fff);\n  box-shadow: var(--ui-shadow, 0 8px 28px #00000016);\n  transform-origin: var(--transform-origin);\n  transition:\n    opacity var(--ui-duration, 160ms),\n    transform var(--ui-duration, 160ms);\n}\n\n:where([data-moru-registry]) .ui-tooltip {\n  width: max-content;\n  max-width: min(280px, calc(100vw - 24px), var(--available-width, calc(100vw - 24px)));\n  padding: var(--ui-field-gap, 8px) var(--ui-control-padding-x-sm, 10px);\n  font-size: var(--ui-type-caption-size, 12px);\n  font-weight: var(--ui-type-caption-weight, 400);\n  line-height: var(--ui-type-caption-line-height, 1.5);\n  letter-spacing: var(--ui-type-caption-letter-spacing, 0em);\n  border-color: transparent;\n  border-radius: var(--ui-radius, 6px);\n  background: var(--ui-primary, #181818);\n  color: var(--ui-primary-foreground, #fff);\n}\n\n:where([data-moru-registry]) .ui-tooltip[data-starting-style],\n:where([data-moru-registry]) .ui-tooltip[data-ending-style] {\n  opacity: 0;\n  transform: scale(0.97);\n}\n\n:where([data-moru-registry]) .ui-tooltip[data-instant] {\n  transition-duration: 0ms;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :where([data-moru-registry]) .ui-tooltip {\n    transition: none;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/tooltip.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/tooltip.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport {\n  createContext,\n  useContext,\n  useId,\n  useState,\n  type ComponentPropsWithoutRef,\n  type ReactElement,\n  type ReactNode,\n} from 'react'\nimport { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './tooltip.css'\n\nconst TooltipProviderContext = createContext(false)\n\nexport interface TooltipProviderProps {\n  children: ReactNode\n  delay?: number\n  closeDelay?: number\n  timeout?: number\n}\n\n/** Group nearby tooltips to share the opening delay after the first tooltip. */\nexport function TooltipProvider({\n  children,\n  delay = 400,\n  closeDelay = 100,\n  timeout = 400,\n}: TooltipProviderProps) {\n  return (\n    <TooltipProviderContext.Provider value={true}>\n      <BaseTooltip.Provider delay={delay} closeDelay={closeDelay} timeout={timeout}>\n        {children}\n      </BaseTooltip.Provider>\n    </TooltipProviderContext.Provider>\n  )\n}\n\nexport interface TooltipProps {\n  trigger: ReactElement\n  children: ReactNode\n  side?: ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['side']\n  align?: ComponentPropsWithoutRef<typeof BaseTooltip.Positioner>['align']\n  className?: string\n  delay?: number\n}\n\nexport function Tooltip({\n  trigger,\n  children,\n  side = 'top',\n  align = 'center',\n  className,\n  delay,\n}: TooltipProps) {\n  const portalContainer = useThemePortalContainer()\n  const hasProvider = useContext(TooltipProviderContext)\n  const tooltipId = useId()\n  const [open, setOpen] = useState(false)\n  const existingDescription = (trigger.props as { 'aria-describedby'?: string })['aria-describedby']\n  const describedBy =\n    [existingDescription, open ? tooltipId : undefined].filter(Boolean).join(' ') || undefined\n  const tooltip = (\n    <BaseTooltip.Root open={open} onOpenChange={setOpen}>\n      <BaseTooltip.Trigger render={trigger} delay={delay} aria-describedby={describedBy} />\n      <OverlayPortal portal={BaseTooltip.Portal} kind=\"tooltip\" container={portalContainer}>\n        <BaseTooltip.Positioner\n          className=\"ui-tooltip-positioner\"\n          side={side}\n          align={align}\n          sideOffset={8}\n          collisionPadding={12}\n          collisionAvoidance={{ side: 'flip', align: 'shift', fallbackAxisSide: 'end' }}\n        >\n          <BaseTooltip.Popup id={tooltipId} role=\"tooltip\" className={cn('ui-tooltip', className)}>\n            {children}\n          </BaseTooltip.Popup>\n        </BaseTooltip.Positioner>\n      </OverlayPortal>\n    </BaseTooltip.Root>\n  )\n\n  return hasProvider ? tooltip : <TooltipProvider>{tooltip}</TooltipProvider>\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "type": "registry:ui",
+  "title": "Resizable",
+  "description": "Resizable panel groups, panels and handles with optional grip decoration.",
+  "dependencies": [
+    "lucide-react@1.60.0",
+    "react-resizable-panels@4.14.8"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/resizable.css",
+      "type": "registry:file",
+      "target": "@ui/moru/resizable.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-resizable-group {\n  min-width: 0;\n  max-width: 100%;\n  color: var(--ui-text);\n  font-family: var(--ui-font-family);\n  font-size: var(--ui-type-body-size);\n  line-height: var(--ui-type-body-line-height);\n  letter-spacing: var(--ui-type-body-letter-spacing);\n}\n:where([data-moru-registry]) .ui-resizable-group {\n  display: flex;\n  width: 100%;\n  border: var(--ui-border-width) solid var(--ui-border);\n  border-radius: calc(var(--ui-radius) + 4px);\n  overflow: hidden;\n  background: var(--ui-surface);\n}\n:where([data-moru-registry]) .ui-resizable-group[aria-orientation='vertical'] {\n  flex-direction: column;\n}\n:where([data-moru-registry]) .ui-resizable-panel {\n  min-width: 0;\n  min-height: 0;\n  overflow: auto;\n}\n:where([data-moru-registry]) .ui-resizable-handle {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex: none;\n  width: 8px;\n  min-width: 8px;\n  background: var(--ui-control-hover-bg);\n  outline: none;\n}\n:where([data-moru-registry]) .ui-resizable-handle[aria-orientation='horizontal'] {\n  width: 100%;\n  min-width: 0;\n  height: 8px;\n  min-height: 8px;\n}\n:where([data-moru-registry]) .ui-resizable-handle > span {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 14px;\n  height: 26px;\n  flex: none;\n  border: var(--ui-border-width) solid var(--ui-border);\n  border-radius: 4px;\n  background: var(--ui-surface);\n  color: var(--ui-muted);\n  z-index: 1;\n}\n:where([data-moru-registry]) .ui-resizable-handle[aria-orientation='horizontal'] > span {\n  transform: rotate(90deg);\n}\n:where([data-moru-registry]) .ui-resizable-handle:focus-visible,\n:where([data-moru-registry]) .ui-resizable-handle[data-separator='active'] {\n  background: var(--ui-focus-ring);\n}\n\n"
+    },
+    {
+      "path": "registry/moru/resizable.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/resizable.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport {\n  Group,\n  Panel,\n  Separator,\n  type GroupProps,\n  type PanelProps,\n  type SeparatorProps,\n} from 'react-resizable-panels'\nimport { GripVertical } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport './resizable.css'\n\nexport function ResizablePanelGroup({ className, ...props }: GroupProps) {\n  return <Group {...props} className={cn('ui-resizable-group', className)} />\n}\nexport function ResizablePanel({ className, ...props }: PanelProps) {\n  return <Panel {...props} className={cn('ui-resizable-panel', className)} />\n}\nexport function ResizableHandle({\n  className,\n  withHandle = true,\n  'aria-label': labelProp,\n  ...props\n}: SeparatorProps & { withHandle?: boolean }) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('패널 크기 조절')\n\n  return (\n    <Separator {...props} aria-label={label} className={cn('ui-resizable-handle', className)}>\n      {withHandle && (\n        <span>\n          <GripVertical size={14} aria-hidden=\"true\" />\n        </span>\n      )}\n    </Separator>\n  )\n}\nexport type { GroupProps as ResizablePanelGroupProps, PanelProps as ResizablePanelProps }\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

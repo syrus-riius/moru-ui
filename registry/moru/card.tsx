@@ -5,6 +5,13 @@ import { cn } from './_lib/cn'
 
 export type CardProps = HTMLAttributes<HTMLDivElement>
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(function Card({ className, children, ...props }, ref) {
-  return <div ref={ref} className={cn('ui-card', className)} {...props}>{children}</div>
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
+  { className, children, ...props },
+  ref,
+) {
+  return (
+    <div ref={ref} className={cn('ui-card', className)} {...props}>
+      {children}
+    </div>
+  )
 })

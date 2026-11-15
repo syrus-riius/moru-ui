@@ -11,13 +11,31 @@ export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  { className, size = 'md', id, 'aria-describedby': describedBy, 'aria-invalid': invalid, rows = 3,
-    value, defaultValue, disabled, name, loading = false, previewState, onChange, ...props },
+  {
+    className,
+    size = 'md',
+    id,
+    'aria-describedby': describedBy,
+    'aria-invalid': invalid,
+    rows = 3,
+    value,
+    defaultValue,
+    disabled,
+    readOnly,
+    name,
+    loading = false,
+    previewState,
+    onChange,
+    ...props
+  },
   ref,
 ) {
   const field = useFieldContext()
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks editing with readOnly, not disabled: the field keeps keyboard focus
+  // and its value still takes part in form submission.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   const textarea = (
     <textarea
       {...props}
@@ -33,25 +51,33 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       data-loading={busy || undefined}
       value={value}
       defaultValue={defaultValue}
-      disabled={unavailable}
+      disabled={locked}
+      readOnly={readOnly || busy}
       name={name}
-      onChange={(event) => { if (!unavailable) onChange?.(event) }}
+      onChange={(event) => {
+        if (!unavailable) onChange?.(event)
+      }}
     />
   )
 
-  const control = !field ? textarea : (
+  const control = !field ? (
+    textarea
+  ) : (
     <BaseField.Control
       id={id ?? field.controlId}
       value={value}
       defaultValue={defaultValue}
-      disabled={unavailable}
+      disabled={locked}
       name={name}
       render={textarea}
     />
   )
   return (
     <span className="ui-control-loading-wrap ui-textarea-loading-wrap" data-size={size}>
-      {control}{busy && <span className="ui-control-loading-indicator ui-loading-indicator" aria-hidden="true" />}
+      {control}
+      {busy && (
+        <span className="ui-control-loading-indicator ui-loading-indicator" aria-hidden="true" />
+      )}
     </span>
   )
 })

@@ -14,8 +14,11 @@ export interface DeviceFrameMetrics {
 }
 
 /** Frame geometry includes the physical bezel while preserving screen coordinates. */
-export function getDeviceFrameMetrics(screen: Pick<SimScreen, 'width' | 'height'>): DeviceFrameMetrics {
-  const kind: DeviceFrameKind = screen.width <= 600 ? 'mobile' : screen.width < 1024 ? 'tablet' : 'desktop'
+export function getDeviceFrameMetrics(
+  screen: Pick<SimScreen, 'width' | 'height'>,
+): DeviceFrameMetrics {
+  const kind: DeviceFrameKind =
+    screen.width <= 600 ? 'mobile' : screen.width < 1024 ? 'tablet' : 'desktop'
   const inset = kind === 'mobile' ? 12 : kind === 'tablet' ? 16 : 0
   return {
     kind,
@@ -46,16 +49,23 @@ export function SimulatorDeviceFrame({ screen, zoom, children }: SimulatorDevice
     '--sim-device-screen-radius': `${metrics.screenRadius}px`,
   } as CSSProperties
 
-  return <div className="sim-frame-stage sim-device-stage" style={{ width: metrics.outerWidth * zoom, height: metrics.outerHeight * zoom }}>
-    <div className="sim-device-frame" data-device={metrics.kind} style={style}>
-      {metrics.kind !== 'desktop' && <div className="sim-device-hardware" aria-hidden="true">
-        <div className="sim-device-shell" />
-        <span className="sim-device-camera" />
-        <span className="sim-device-home-indicator" />
-        <span className="sim-device-button sim-device-button-volume" />
-        <span className="sim-device-button sim-device-button-power" />
-      </div>}
-      <div className="sim-device-viewport">{children}</div>
+  return (
+    <div
+      className="sim-frame-stage sim-device-stage"
+      style={{ width: metrics.outerWidth * zoom, height: metrics.outerHeight * zoom }}
+    >
+      <div className="sim-device-frame" data-device={metrics.kind} style={style}>
+        {metrics.kind !== 'desktop' && (
+          <div className="sim-device-hardware" aria-hidden="true">
+            <div className="sim-device-shell" />
+            <span className="sim-device-camera" />
+            <span className="sim-device-home-indicator" />
+            <span className="sim-device-button sim-device-button-volume" />
+            <span className="sim-device-button sim-device-button-power" />
+          </div>
+        )}
+        <div className="sim-device-viewport">{children}</div>
+      </div>
     </div>
-  </div>
+  )
 }

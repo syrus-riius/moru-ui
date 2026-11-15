@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "type": "registry:ui",
+  "title": "Scroll Area",
+  "description": "Styled scrollable viewport with accessible native scrolling behavior.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/scroll-area.css",
+      "type": "registry:file",
+      "target": "@ui/moru/scroll-area.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-scroll-area {\n  min-width: 0;\n  max-width: 100%;\n  color: var(--ui-text);\n  font-family: var(--ui-font-family);\n  font-size: var(--ui-type-body-size);\n  line-height: var(--ui-type-body-line-height);\n  letter-spacing: var(--ui-type-body-letter-spacing);\n}\n:where([data-moru-registry]) .ui-scroll-area {\n  position: relative;\n  overflow: hidden;\n  border: var(--ui-border-width) solid var(--ui-border);\n  border-radius: calc(var(--ui-radius) + 4px);\n  background: var(--ui-surface);\n}\n:where([data-moru-registry]) .ui-scroll-viewport {\n  width: 100%;\n  height: 100%;\n  max-height: inherit;\n  border-radius: inherit;\n  outline: none;\n  overscroll-behavior: contain;\n}\n:where([data-moru-registry]) .ui-scroll-viewport:focus-visible {\n  outline: 2px solid var(--ui-focus-ring);\n  outline-offset: -3px;\n}\n:where([data-moru-registry]) .ui-scroll-content {\n  min-width: 100%;\n}\n:where([data-moru-registry]) .ui-scroll-bar {\n  display: flex;\n  padding: 3px;\n  margin: 2px;\n  user-select: none;\n  opacity: 0;\n  transition: opacity var(--ui-duration);\n}\n:where([data-moru-registry]) .ui-scroll-bar[data-orientation='vertical'] {\n  width: 12px;\n}\n:where([data-moru-registry]) .ui-scroll-bar[data-orientation='horizontal'] {\n  height: 12px;\n}\n:where([data-moru-registry]) .ui-scroll-area:hover .ui-scroll-bar,\n:where([data-moru-registry]) .ui-scroll-area:focus-within .ui-scroll-bar,\n:where([data-moru-registry]) .ui-scroll-bar[data-scrolling] {\n  opacity: 1;\n}\n:where([data-moru-registry]) .ui-scroll-thumb {\n  flex: 1;\n  border-radius: 99px;\n  background: var(--ui-muted);\n  opacity: 0.65;\n}\n:where([data-moru-registry]) .ui-scroll-corner {\n  background: var(--ui-surface);\n}\n@media (prefers-reduced-motion: reduce) {\n  :where([data-moru-registry]) .ui-scroll-bar {\n    transition: none;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/scroll-area.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/scroll-area.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport { forwardRef, type ComponentPropsWithoutRef } from 'react'\nimport { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'\nimport { cn } from './_lib/cn'\nimport './scroll-area.css'\n\nexport interface ScrollAreaProps extends ComponentPropsWithoutRef<'div'> {\n  orientation?: 'vertical' | 'horizontal' | 'both'\n  viewportClassName?: string\n}\n\n/** Give the root a height (or max-height) to constrain its viewport. */\nexport const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea(\n  {\n    children,\n    className,\n    viewportClassName,\n    orientation = 'vertical',\n    onScroll,\n    'aria-label': labelProp,\n    ...props\n  },\n  ref,\n) {\n  const { t } = useI18n()\n  const label = labelProp ?? t('스크롤 영역')\n\n  return (\n    <BaseScrollArea.Root {...props} className={cn('ui-scroll-area', className)}>\n      <BaseScrollArea.Viewport\n        ref={ref}\n        className={cn('ui-scroll-viewport', viewportClassName)}\n        role=\"region\"\n        aria-label={label}\n        tabIndex={0}\n        onScroll={onScroll}\n      >\n        <BaseScrollArea.Content className=\"ui-scroll-content\">{children}</BaseScrollArea.Content>\n      </BaseScrollArea.Viewport>\n      {orientation !== 'horizontal' && <ScrollBar orientation=\"vertical\" />}\n      {orientation !== 'vertical' && <ScrollBar orientation=\"horizontal\" />}\n      {orientation === 'both' && <BaseScrollArea.Corner className=\"ui-scroll-corner\" />}\n    </BaseScrollArea.Root>\n  )\n})\n\nexport function ScrollBar({\n  className,\n  ...props\n}: Omit<ComponentPropsWithoutRef<typeof BaseScrollArea.Scrollbar>, 'className'> & {\n  className?: string\n}) {\n  return (\n    <BaseScrollArea.Scrollbar {...props} className={cn('ui-scroll-bar', className)}>\n      <BaseScrollArea.Thumb className=\"ui-scroll-thumb\" />\n    </BaseScrollArea.Scrollbar>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

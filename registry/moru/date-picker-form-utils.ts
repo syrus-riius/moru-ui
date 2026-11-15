@@ -13,8 +13,13 @@ export function parseDatePickerFormValue(value: string): Date | null {
 export function subscribeDatePickerFormReset(form: EventTarget, onReset: () => void) {
   let subscribed = true
   function reset(event: Event) {
-    queueMicrotask(() => { if (subscribed && !event.defaultPrevented) onReset() })
+    queueMicrotask(() => {
+      if (subscribed && !event.defaultPrevented) onReset()
+    })
   }
   form.addEventListener('reset', reset)
-  return () => { subscribed = false; form.removeEventListener('reset', reset) }
+  return () => {
+    subscribed = false
+    form.removeEventListener('reset', reset)
+  }
 }

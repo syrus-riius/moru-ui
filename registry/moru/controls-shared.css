@@ -1,0 +1,11 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-input-group > .ui-control-loading-wrap {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  order: 1;
+}
+:where([data-moru-registry]) .ui-native-select-wrap > .ui-control-loading-indicator {
+  inset-inline-end: var(--ui-native-padding);
+}
+

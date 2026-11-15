@@ -1,0 +1,138 @@
+.ui-toggle-group {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-body-size, 14px);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  letter-spacing: var(--ui-type-body-letter-spacing, 0em);
+  color: var(--ui-text, #171717);
+}
+
+.ui-toggle-group {
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-advanced-border: var(--ui-border-width, 1px);
+  --ui-advanced-height: var(--ui-control-height-md, 40px);
+  --ui-advanced-padding: var(--ui-control-padding-x-md, 12px);
+  --ui-advanced-resolved-height: max(
+    var(--ui-advanced-height),
+    calc(
+      max(
+          var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.45),
+          var(--ui-size-icon)
+        ) +
+        var(--ui-space, 4px) * 2 + var(--ui-advanced-border) * 2
+    )
+  );
+  --ui-advanced-inner-height: calc(
+    var(--ui-advanced-resolved-height) - var(--ui-advanced-border) * 2
+  );
+}
+
+.ui-toggle-group[data-size='sm'] {
+  --ui-size-icon: var(--ui-icon-size-sm, 14px);
+  --ui-advanced-height: var(--ui-control-height-sm, 32px);
+  --ui-advanced-padding: var(--ui-control-padding-x-sm, 10px);
+}
+.ui-toggle-group[data-size='lg'] {
+  --ui-size-icon: var(--ui-icon-size-lg, 18px);
+  --ui-advanced-height: var(--ui-control-height-lg, 48px);
+  --ui-advanced-padding: var(--ui-control-padding-x-lg, 16px);
+}
+
+.ui-toggle-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: calc(var(--ui-space, 4px) / 2);
+  padding: calc(var(--ui-space, 4px) * 0.75);
+  border-radius: calc(var(--ui-radius, 6px) + 2px);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+.ui-toggle-group[data-layout='segmented'] {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  inline-size: fit-content;
+  align-items: stretch;
+}
+.ui-toggle-group-item {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  min-height: var(--ui-advanced-resolved-height);
+  max-width: 100%;
+  padding: var(--ui-space, 4px) var(--ui-advanced-padding);
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: max(3px, calc(var(--ui-radius, 6px) - 2px));
+  background: transparent;
+  color: var(--ui-muted, #6e6e6b);
+  font-family: inherit;
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    color var(--ui-duration, 160ms),
+    background-color var(--ui-duration, 160ms),
+    border-color var(--ui-duration, 160ms);
+  border-color: transparent;
+}
+.ui-toggle-group-item > span:last-child {
+  min-width: 0;
+}
+.ui-toggle-group-icon {
+  display: inline-flex;
+  flex: none;
+}
+.ui-toggle-group-icon > svg {
+  width: var(--ui-size-icon);
+  height: var(--ui-size-icon);
+}
+.ui-toggle-group-item:hover:not(:disabled) {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-text, #171717);
+}
+.ui-toggle-group-item[data-pressed] {
+  background: var(--ui-primary, #181818);
+  color: var(--ui-primary-foreground, #fff);
+  border-color: transparent;
+}
+.ui-toggle-group-item:disabled {
+  background: var(--ui-disabled-bg, #f3f3f1);
+  color: var(--ui-disabled-text, #a1a1aa);
+  border-color: var(--ui-disabled-border, var(--ui-border, #e8e8e4));
+  cursor: not-allowed;
+}
+
+.ui-toggle-group-item:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #181818);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .ui-toggle-group {
+    --ui-advanced-resolved-height: max(
+      44px,
+      var(--ui-advanced-height),
+      calc(
+        max(
+            max(16px, var(--ui-type-label-size, 14px)) * var(--ui-type-label-line-height, 1.45),
+            var(--ui-size-icon)
+          ) +
+          var(--ui-space, 4px) * 2 + var(--ui-advanced-border) * 2
+      )
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-toggle-group-item {
+    transition: none;
+  }
+}

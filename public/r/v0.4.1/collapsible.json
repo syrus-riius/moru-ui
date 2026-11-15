@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "Expandable content controlled by a keyboard-accessible disclosure trigger.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/collapsible.css",
+      "type": "registry:file",
+      "target": "@ui/moru/collapsible.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-collapsible {\n  box-sizing: border-box;\n  min-width: 0;\n  font-family: var(--ui-font-family, inherit);\n  font-size: var(--ui-type-label-size, 13px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.5);\n  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);\n  color: var(--ui-text, #171717);\n  overflow-wrap: anywhere;\n  --ui-navigation-height: var(--ui-control-height-md, 40px);\n  --ui-navigation-padding: var(--ui-control-padding-x-md, 14px);\n  --ui-navigation-icon: var(--ui-icon-size-md, 16px);\n  --ui-navigation-close-size: var(--ui-control-height-sm, 32px);\n}\n:where([data-moru-registry]) [data-size='sm'].ui-collapsible {\n  --ui-navigation-height: var(--ui-control-height-sm, 32px);\n  --ui-navigation-padding: var(--ui-control-padding-x-sm, 10px);\n  --ui-navigation-icon: var(--ui-icon-size-sm, 14px);\n  font-size: var(--ui-type-caption-size, 12px);\n}\n:where([data-moru-registry]) [data-size='lg'].ui-collapsible {\n  --ui-navigation-height: var(--ui-control-height-lg, 48px);\n  --ui-navigation-padding: var(--ui-control-padding-x-lg, 18px);\n  --ui-navigation-icon: var(--ui-icon-size-lg, 18px);\n}\n:where([data-moru-registry]) .ui-collapsible {\n  width: 100%;\n  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n  border-radius: calc(var(--ui-radius, 6px) + 4px);\n  background: var(--ui-surface, #fff);\n}\n:where([data-moru-registry]) .ui-collapsible-trigger {\n  display: flex;\n  box-sizing: border-box;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  min-height: var(--ui-navigation-height);\n  gap: var(--ui-field-gap, 8px);\n  padding: var(--ui-space, 4px) var(--ui-navigation-padding);\n  border: 0;\n  border-radius: inherit;\n  background: transparent;\n  color: inherit;\n  font: inherit;\n  text-align: start;\n  cursor: pointer;\n}\n:where([data-moru-registry]) .ui-collapsible-trigger > span {\n  min-width: 0;\n}\n:where([data-moru-registry]) .ui-collapsible-trigger > svg {\n  flex: none;\n  transition: transform var(--ui-duration, 160ms);\n}\n:where([data-moru-registry]) .ui-collapsible-trigger[data-panel-open] > svg,\n:where([data-moru-registry]) .ui-collapsible-trigger[data-open] > svg {\n  transform: rotate(180deg);\n}\n:where([data-moru-registry]) .ui-collapsible-panel {\n  height: var(--collapsible-panel-height);\n  overflow: hidden;\n  transition: height var(--ui-duration, 160ms);\n}\n:where([data-moru-registry]) .ui-collapsible-panel[data-starting-style],\n:where([data-moru-registry]) .ui-collapsible-panel[data-ending-style] {\n  height: 0;\n}\n:where([data-moru-registry]) .ui-collapsible-content {\n  padding: var(--ui-field-gap, 8px) var(--ui-navigation-padding) var(--ui-navigation-padding);\n  color: var(--ui-muted, #6e6e6b);\n  font-weight: var(--ui-type-body-weight, 400);\n  line-height: var(--ui-type-body-line-height, 1.6);\n}\n:where([data-moru-registry]) .ui-collapsible-content > :first-child {\n  margin-top: 0;\n}\n:where([data-moru-registry]) .ui-collapsible-content > :last-child {\n  margin-bottom: 0;\n}\n:where([data-moru-registry]) .ui-collapsible-trigger:hover:not([data-disabled]) {\n  background: var(--ui-control-hover-bg, #f3f3f1);\n}\n:where([data-moru-registry]) .ui-collapsible-trigger[data-disabled] {\n  opacity: 0.45;\n  cursor: not-allowed;\n}\n@media (prefers-reduced-motion: reduce) {\n  :where([data-moru-registry]) .ui-collapsible-trigger > svg,\n  :where([data-moru-registry]) .ui-collapsible-panel {\n    transition: none;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/collapsible.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/collapsible.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { ReactNode } from 'react'\nimport { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'\nimport { ChevronDown } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport './navigation-shared.css'\nimport './collapsible.css'\n\nexport interface CollapsibleProps {\n  title: ReactNode\n  children: ReactNode\n  open?: boolean\n  defaultOpen?: boolean\n  onOpenChange?: (open: boolean) => void\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}\nexport function Collapsible({\n  title,\n  children,\n  open,\n  defaultOpen,\n  onOpenChange,\n  disabled,\n  size = 'md',\n  className,\n}: CollapsibleProps) {\n  return (\n    <BaseCollapsible.Root\n      className={cn('ui-collapsible', className)}\n      data-size={size}\n      open={open}\n      defaultOpen={defaultOpen}\n      onOpenChange={(next) => onOpenChange?.(next)}\n      disabled={disabled}\n    >\n      <BaseCollapsible.Trigger className=\"ui-collapsible-trigger\">\n        <span>{title}</span>\n        <ChevronDown size={16} aria-hidden=\"true\" />\n      </BaseCollapsible.Trigger>\n      <BaseCollapsible.Panel className=\"ui-collapsible-panel\">\n        <div className=\"ui-collapsible-content\">{children}</div>\n      </BaseCollapsible.Panel>\n    </BaseCollapsible.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

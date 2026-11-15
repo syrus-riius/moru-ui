@@ -17,7 +17,9 @@ describe('responsive mobile example', () => {
     expect(project.startScreenId).toBe('pocket-home')
     expect(project.screens.map((screen) => screen.id)).toEqual(['pocket-home', 'pocket-budget'])
     expect(parseSimProject(serializeSimProject(project))).toEqual(project)
-    expect(project.screens[0].nodes.find((node) => node.id === 'pocket-all-activity')?.action).toMatchObject({ type: 'navigate', targetScreenId: 'pocket-budget' })
+    expect(
+      project.screens[0].nodes.find((node) => node.id === 'pocket-all-activity')?.action,
+    ).toMatchObject({ type: 'navigate', targetScreenId: 'pocket-budget' })
     expect(project.screens[1].nodes.some((node) => node.action.type === 'back')).toBe(true)
     expect(project.screens[1].nodes.some((node) => node.type === 'switch')).toBe(true)
     expect(project.screens[1].nodes.some((node) => node.action.type === 'toast')).toBe(true)
@@ -25,9 +27,15 @@ describe('responsive mobile example', () => {
 
   it('uses one, two, and three summary columns at mobile, tablet, and web sizes', () => {
     const screen = createResponsiveExampleProject().screens[0]
-    for (const [presetId, columns] of [['mobile', 1], ['tablet', 2], ['desktop', 3]] as const) {
+    for (const [presetId, columns] of [
+      ['mobile', 1],
+      ['tablet', 2],
+      ['desktop', 3],
+    ] as const) {
       const { nodes } = resolved(screen, presetId)
-      const cards = ['pocket-balance', 'pocket-spend', 'pocket-saving'].map((id) => nodes.find((node) => node.id === id)!)
+      const cards = ['pocket-balance', 'pocket-spend', 'pocket-saving'].map((id) =>
+        nodes.find((node) => node.id === id)!,
+      )
       expect(new Set(cards.map((node) => node.x)).size).toBe(columns)
       expect(cards[1].y).toBe(columns === 1 ? cards[0].y + cards[0].height + 12 : cards[0].y)
       expect(cards[2].y).toBe(columns === 3 ? cards[0].y : cards[1].y + cards[1].height + 12)
@@ -57,8 +65,8 @@ describe('responsive mobile example', () => {
       for (const node of nodes) {
         expect(node.x).toBeGreaterThanOrEqual(0)
         expect(node.y).toBeGreaterThanOrEqual(0)
-        expect(node.x + node.width).toBeLessThanOrEqual(preset.width + .001)
-        expect(node.y + node.height).toBeLessThanOrEqual(contentHeight + .001)
+        expect(node.x + node.width).toBeLessThanOrEqual(preset.width + 0.001)
+        expect(node.y + node.height).toBeLessThanOrEqual(contentHeight + 0.001)
       }
     }
   })
@@ -78,7 +86,11 @@ describe('responsive mobile example', () => {
     first.screens[0].nodes.find((node) => node.id === 'pocket-summary')!.layout!.columns = 9
     first.screens[0].nodes.find((node) => node.id === 'pocket-chart')!.props.options[0] = '변경 | 1'
     expect(second.screens[0].layout!.gap).toBe(24)
-    expect(second.screens[0].nodes.find((node) => node.id === 'pocket-summary')!.layout!.columns).toBe(3)
-    expect(second.screens[0].nodes.find((node) => node.id === 'pocket-chart')!.props.options[0]).toBe('월 | 18000')
+    expect(
+      second.screens[0].nodes.find((node) => node.id === 'pocket-summary')!.layout!.columns,
+    ).toBe(3)
+    expect(
+      second.screens[0].nodes.find((node) => node.id === 'pocket-chart')!.props.options[0],
+    ).toBe('월 | 18000')
   })
 })

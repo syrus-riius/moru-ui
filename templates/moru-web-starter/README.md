@@ -24,6 +24,7 @@ Vite가 안내하는 로컬 주소를 여세요. 서버 연결이 없는 예제�
 
 - `src/App.tsx`: NumberInput, PasswordInput, MultiSelect, FileInput, Stepper, RingProgress를 조합한 예제.
 - `src/components/ui/`: Moru 웹 UI 전체 소스. 필요한 파일을 직접 수정하거나 제거할 수 있습니다.
+- `src/components/blocks/`: 대시보드·로그인·회원가입·워크스페이스 설정 화면과 OTP·검색 필터 보조 패턴.
 - `src/theme/`: 디자인 토큰·색상·밀도·간격 계산·역할별 타이포그래피·기본 CSS.
 - `src/lib/`: UI에서 사용하는 공통 도우미.
 - `src/main.tsx`: React 진입점과 필수 스타일 import.
@@ -51,6 +52,14 @@ export function ProjectName() {
 `Field`는 라벨·설명·오류와 입력 요소를 연결합니다. 라벨이 없는 독립 입력에는 `aria-label` 또는 `aria-labelledby`를 지정하세요. 단순히 placeholder만 넣으면 입력의 이름을 대신할 수 없습니다.
 
 ## 테마와 팝업
+
+스타일 팩은 기존 컴포넌트 API를 유지합니다. `src/theme/style-packs`의
+`applyStylePack(tokens, 'glass')` 또는 `'neon'`으로 만든 토큰을 기존 `ThemeScope`에
+전달하세요. `'default'`는 효과를 해제합니다. 컬러·타이포·밀도는 바뀌지 않습니다.
+`tokens.appearance`의 `surfaceOpacity`, `blur`, `glow`, `highlight`로 세부값을 조정할
+수 있습니다. 효과 스타일은 ThemeScope와 함께 불러오며 팝업에도 같은 설정을 적용합니다.
+글래스는 실제 배경 위에서 대비를 확인하세요. 미지원 환경과 투명도 감소 설정에는
+불투명 표면을 사용합니다. Expo의 스타일 효과는 별도 구현 영역입니다.
 
 `ThemeScope`에 `tokens`와 `mode`를 함께 전달하면 컴포넌트와 body로 이동하는 팝업에도 같은 CSS 변수가 적용됩니다. `mode="dark"`만 바꾸면 색 토큰이 자동 변환되지는 않습니다. 어두운 토큰도 함께 만드세요.
 

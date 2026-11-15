@@ -4,11 +4,13 @@ import { DatePicker } from './date-picker'
 import { Field } from './field'
 import { calendarDateKey, createCalendarDate } from './calendar-utils'
 import { parseDatePickerFormValue, subscribeDatePickerFormReset } from './date-picker-form-utils'
-import { AdvancedComponentDemo } from '../AdvancedComponentDemo'
+import { AdvancedComponentDemo } from '../demos/AdvancedComponentDemo'
 import { ToastProvider } from './toast'
 
-const tags = (markup: string, tag: string) => [...markup.matchAll(new RegExp(`<${tag}\\b[^>]*>`, 'g'))].map((match) => match[0])
-const attribute = (tag: string, name: string) => tag.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1]
+const tags = (markup: string, tag: string) =>
+  [...markup.matchAll(new RegExp(`<${tag}\\b[^>]*>`, 'g'))].map((match) => match[0])
+const attribute = (tag: string, name: string) =>
+  tag.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1]
 
 describe('DatePicker date-only form values', () => {
   it('preserves local calendar fields without UTC serialization', () => {
@@ -26,13 +28,31 @@ describe('DatePicker date-only form values', () => {
     expect(parseDatePickerFormValue('0001-01-01')?.getFullYear()).toBe(1)
   })
   it('treats empty, partial, locale-formatted and UTC timestamp values as no native date', () => {
-    for (const value of ['', '0000-01-01', '2026-1-2', '27/10/2026', '2026-10-27T00:00:00Z', 'not-a-date']) expect(parseDatePickerFormValue(value)).toBeNull()
+    for (const value of [
+      '',
+      '0000-01-01',
+      '2026-1-2',
+      '27/10/2026',
+      '2026-10-27T00:00:00Z',
+      'not-a-date',
+    ])
+      expect(parseDatePickerFormValue(value)).toBeNull()
   })
 })
 
 describe('DatePicker native form contracts', () => {
   it('uses a validating native date control rather than a nonvalidating hidden input', () => {
-    const markup = renderToStaticMarkup(<DatePicker label="마감일" name="due" required defaultValue={createCalendarDate(2026, 9, 27)} minDate={createCalendarDate(2026, 9, 1)} maxDate={createCalendarDate(2026, 10, 30)} form="project-form" />)
+    const markup = renderToStaticMarkup(
+      <DatePicker
+        label="마감일"
+        name="due"
+        required
+        defaultValue={createCalendarDate(2026, 9, 27)}
+        minDate={createCalendarDate(2026, 9, 1)}
+        maxDate={createCalendarDate(2026, 10, 30)}
+        form="project-form"
+      />,
+    )
     const input = tags(markup, 'input')[0]
     expect(input).toContain('type="date"')
     expect(attribute(input, 'name')).toBe('due')
@@ -44,7 +64,11 @@ describe('DatePicker native form contracts', () => {
     expect(input).not.toContain('type="hidden"')
   })
   it('retains visible trigger labelling while keeping the validation proxy out of the tab order', () => {
-    const markup = renderToStaticMarkup(<Field label="마감일"><DatePicker name="due" required /></Field>)
+    const markup = renderToStaticMarkup(
+      <Field label="마감일">
+        <DatePicker name="due" required />
+      </Field>,
+    )
     const trigger = tags(markup, 'button')[0]
     const input = tags(markup, 'input')[0]
     const label = tags(markup, 'label')[0]
@@ -56,7 +80,15 @@ describe('DatePicker native form contracts', () => {
     expect(attribute(trigger, 'aria-haspopup')).toBe('dialog')
   })
   it('keeps a read-only value submittable but makes opening the picker unavailable', () => {
-    const markup = renderToStaticMarkup(<DatePicker label="확정 일정" name="confirmed" readOnly required value={createCalendarDate(2026, 9, 27)} />)
+    const markup = renderToStaticMarkup(
+      <DatePicker
+        label="확정 일정"
+        name="confirmed"
+        readOnly
+        required
+        value={createCalendarDate(2026, 9, 27)}
+      />,
+    )
     const input = tags(markup, 'input')[0]
     const trigger = tags(markup, 'button')[0]
     expect(input).toContain('readOnly=""')
@@ -67,17 +99,25 @@ describe('DatePicker native form contracts', () => {
     expect(markup).toContain('읽기 전용.')
   })
   it('disables the native submitted control as well as the visible trigger', () => {
-    const markup = renderToStaticMarkup(<DatePicker name="due" disabled defaultValue={createCalendarDate(2026, 9, 27)} />)
+    const markup = renderToStaticMarkup(
+      <DatePicker name="due" disabled defaultValue={createCalendarDate(2026, 9, 27)} />,
+    )
     expect(tags(markup, 'input')[0]).toContain('disabled=""')
     expect(tags(markup, 'button')[0]).toContain('disabled=""')
   })
   it('distinguishes a controlled empty selection from an uncontrolled initial date', () => {
-    const markup = renderToStaticMarkup(<DatePicker name="due" value={null} defaultValue={createCalendarDate(2026, 9, 27)} />)
+    const markup = renderToStaticMarkup(
+      <DatePicker name="due" value={null} defaultValue={createCalendarDate(2026, 9, 27)} />,
+    )
     expect(attribute(tags(markup, 'input')[0], 'value')).toBe('')
     expect(markup).not.toContain('2026년 10월 27일')
   })
   it('starts the catalog example with a real empty required form, submit and reset actions', () => {
-    const markup = renderToStaticMarkup(<ToastProvider><AdvancedComponentDemo id="date-picker" disabled={false} size="md" /></ToastProvider>)
+    const markup = renderToStaticMarkup(
+      <ToastProvider>
+        <AdvancedComponentDemo id="date-picker" disabled={false} size="md" />
+      </ToastProvider>,
+    )
     const form = tags(markup, 'form')[0]
     const input = tags(markup, 'input').find((tag) => attribute(tag, 'name') === 'due')!
     expect(form).toContain('aria-label="마감일 제출 예제"')
@@ -104,7 +144,9 @@ describe('DatePicker reset event ordering', () => {
   it('honors a reset canceled later during propagation', async () => {
     const form = new EventTarget()
     let called = false
-    const unsubscribe = subscribeDatePickerFormReset(form, () => { called = true })
+    const unsubscribe = subscribeDatePickerFormReset(form, () => {
+      called = true
+    })
     form.addEventListener('reset', (event) => event.preventDefault())
     form.dispatchEvent(new Event('reset', { cancelable: true }))
     await Promise.resolve()
@@ -114,7 +156,9 @@ describe('DatePicker reset event ordering', () => {
   it('does not apply a queued reset after unmount', async () => {
     const form = new EventTarget()
     let called = false
-    const unsubscribe = subscribeDatePickerFormReset(form, () => { called = true })
+    const unsubscribe = subscribeDatePickerFormReset(form, () => {
+      called = true
+    })
     form.dispatchEvent(new Event('reset', { cancelable: true }))
     unsubscribe()
     await Promise.resolve()

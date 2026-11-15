@@ -1,11 +1,21 @@
-import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type CSSProperties, type ReactElement, type ReactNode } from 'react'
+import { useI18n } from '../../lib/i18n'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+} from 'react'
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { X } from 'lucide-react'
 import { cn } from '../../lib/cn'
 import { shouldDismissDrawer, shouldSuppressDrawerClick } from './drawer-utils'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './drawer.css'
 
 export interface DrawerProps {
   trigger?: ReactElement
@@ -23,7 +33,23 @@ export interface DrawerProps {
   finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']
 }
 /** A bottom modal with a keyboard-operable pull handle and downward pointer dismissal. */
-export function Drawer({ trigger, title, description, children, footer, open, defaultOpen = false, onOpenChange, disabled, size = 'md', className, initialFocus, finalFocus }: DrawerProps) {
+export function Drawer({
+  trigger,
+  title,
+  description,
+  children,
+  footer,
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  disabled,
+  size = 'md',
+  className,
+  initialFocus,
+  finalFocus,
+}: DrawerProps) {
+  const { t } = useI18n()
+
   const portalContainer = useThemePortalContainer()
   const [localOpen, setLocalOpen] = useState(defaultOpen)
   const [drag, setDrag] = useState(0)
@@ -44,38 +70,80 @@ export function Drawer({ trigger, title, description, children, footer, open, de
     if (open === undefined) setLocalOpen(next)
     onOpenChange?.(next)
   }
-  return <BaseDialog.Root open={isOpen} onOpenChange={changeOpen}>
-    {trigger ? <BaseDialog.Trigger render={trigger} disabled={disabled} /> : null}
-    <OverlayPortal portal={BaseDialog.Portal} kind="modal" container={portalContainer}>
-      <BaseDialog.Backdrop className="ui-navigation-backdrop" />
-      <BaseDialog.Popup className={cn('ui-drawer', className)} data-size={size} data-dragging={gesture.current ? '' : undefined} style={{ '--ui-drawer-drag': `${drag}px` } as CSSProperties} initialFocus={initialFocus} finalFocus={finalFocus}>
-        <button className="ui-drawer-handle" type="button" aria-label="아래로 끌거나 눌러 닫기" onClick={(event) => {
-          const suppress = shouldSuppressDrawerClick(suppressClick.current, event.detail)
-          suppressClick.current = false
-          if (!suppress) changeOpen(false)
-        }} onPointerDown={(event) => {
-          if (event.button !== 0 || !event.isPrimary) return
-          gesture.current = { y: event.clientY, started: event.timeStamp, pointerId: event.pointerId }
-          suppressClick.current = false
-          event.currentTarget.setPointerCapture(event.pointerId)
-        }} onPointerMove={(event) => {
-          if (gesture.current?.pointerId !== event.pointerId) return
-          const distance = Math.max(0, event.clientY - gesture.current.y)
-          if (distance > 5) suppressClick.current = true
-          setDrag(distance)
-        }} onPointerUp={(event) => {
-          const current = gesture.current
-          if (!current || current.pointerId !== event.pointerId) return
-          const distance = Math.max(0, event.clientY - current.y)
-          const dismiss = shouldDismissDrawer(distance, event.timeStamp - current.started)
-          gesture.current = null
-          setDrag(0)
-          if (dismiss) changeOpen(false)
-        }} onPointerCancel={() => { gesture.current = null; setDrag(0); suppressClick.current = false }} onLostPointerCapture={() => { gesture.current = null; setDrag(0) }}><span aria-hidden="true" /></button>
-        <header className="ui-drawer-header"><BaseDialog.Title className="ui-navigation-heading">{title}</BaseDialog.Title>{description ? <BaseDialog.Description className="ui-navigation-description">{description}</BaseDialog.Description> : null}</header>
-        <BaseDialog.Close className="ui-navigation-close" aria-label="드로어 닫기"><X size={18} aria-hidden="true" /></BaseDialog.Close>
-        <div className="ui-drawer-content">{children}</div>{footer ? <footer className="ui-drawer-footer">{footer}</footer> : null}
-      </BaseDialog.Popup>
-    </OverlayPortal>
-  </BaseDialog.Root>
+  return (
+    <BaseDialog.Root open={isOpen} onOpenChange={changeOpen}>
+      {trigger ? <BaseDialog.Trigger render={trigger} disabled={disabled} /> : null}
+      <OverlayPortal portal={BaseDialog.Portal} kind="modal" container={portalContainer}>
+        <BaseDialog.Backdrop className="ui-navigation-backdrop" />
+        <BaseDialog.Popup
+          className={cn('ui-drawer', className)}
+          data-size={size}
+          data-dragging={gesture.current ? '' : undefined}
+          style={{ '--ui-drawer-drag': `${drag}px` } as CSSProperties}
+          initialFocus={initialFocus}
+          finalFocus={finalFocus}
+        >
+          <button
+            className="ui-drawer-handle"
+            type="button"
+            aria-label={t('아래로 끌거나 눌러 닫기')}
+            onClick={(event) => {
+              const suppress = shouldSuppressDrawerClick(suppressClick.current, event.detail)
+              suppressClick.current = false
+              if (!suppress) changeOpen(false)
+            }}
+            onPointerDown={(event) => {
+              if (event.button !== 0 || !event.isPrimary) return
+              gesture.current = {
+                y: event.clientY,
+                started: event.timeStamp,
+                pointerId: event.pointerId,
+              }
+              suppressClick.current = false
+              event.currentTarget.setPointerCapture(event.pointerId)
+            }}
+            onPointerMove={(event) => {
+              if (gesture.current?.pointerId !== event.pointerId) return
+              const distance = Math.max(0, event.clientY - gesture.current.y)
+              if (distance > 5) suppressClick.current = true
+              setDrag(distance)
+            }}
+            onPointerUp={(event) => {
+              const current = gesture.current
+              if (!current || current.pointerId !== event.pointerId) return
+              const distance = Math.max(0, event.clientY - current.y)
+              const dismiss = shouldDismissDrawer(distance, event.timeStamp - current.started)
+              gesture.current = null
+              setDrag(0)
+              if (dismiss) changeOpen(false)
+            }}
+            onPointerCancel={() => {
+              gesture.current = null
+              setDrag(0)
+              suppressClick.current = false
+            }}
+            onLostPointerCapture={() => {
+              gesture.current = null
+              setDrag(0)
+            }}
+          >
+            <span aria-hidden="true" />
+          </button>
+          <header className="ui-drawer-header">
+            <BaseDialog.Title className="ui-navigation-heading">{title}</BaseDialog.Title>
+            {description ? (
+              <BaseDialog.Description className="ui-navigation-description">
+                {description}
+              </BaseDialog.Description>
+            ) : null}
+          </header>
+          <BaseDialog.Close className="ui-navigation-close" aria-label={t('드로어 닫기')}>
+            <X size={18} aria-hidden="true" />
+          </BaseDialog.Close>
+          <div className="ui-drawer-content">{children}</div>
+          {footer ? <footer className="ui-drawer-footer">{footer}</footer> : null}
+        </BaseDialog.Popup>
+      </OverlayPortal>
+    </BaseDialog.Root>
+  )
 }

@@ -11,9 +11,29 @@
       "description": "Scoped styles, tokens, MoruProvider, and shared helpers.",
       "files": [
         {
+          "path": "registry/moru/_lib/block-messages.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_lib/block-messages.ts"
+        },
+        {
           "path": "registry/moru/_lib/cn.ts",
           "type": "registry:lib",
           "target": "@ui/moru/_lib/cn.ts"
+        },
+        {
+          "path": "registry/moru/_lib/i18n.tsx",
+          "type": "registry:lib",
+          "target": "@ui/moru/_lib/i18n.tsx"
+        },
+        {
+          "path": "registry/moru/_lib/locale.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_lib/locale.ts"
+        },
+        {
+          "path": "registry/moru/_lib/ui-messages.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_lib/ui-messages.ts"
         },
         {
           "path": "registry/moru/_licenses/Moru-LICENSE",
@@ -54,6 +74,11 @@
           "path": "registry/moru/_theme/component-spacing.ts",
           "type": "registry:lib",
           "target": "@ui/moru/_theme/component-spacing.ts"
+        },
+        {
+          "path": "registry/moru/_theme/style-packs.ts",
+          "type": "registry:lib",
+          "target": "@ui/moru/_theme/style-packs.ts"
         },
         {
           "path": "registry/moru/_theme/tokens.ts",
@@ -111,6 +136,11 @@
           "target": "@ui/moru/overlays.css"
         },
         {
+          "path": "registry/moru/page-chrome.css",
+          "type": "registry:file",
+          "target": "@ui/moru/page-chrome.css"
+        },
+        {
           "path": "registry/moru/provider.tsx",
           "type": "registry:ui",
           "target": "@ui/moru/provider.tsx"
@@ -119,6 +149,11 @@
           "path": "registry/moru/state.ts",
           "type": "registry:ui",
           "target": "@ui/moru/state.ts"
+        },
+        {
+          "path": "registry/moru/style-packs.css",
+          "type": "registry:file",
+          "target": "@ui/moru/style-packs.css"
         },
         {
           "path": "registry/moru/styles.css",
@@ -142,7 +177,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -175,7 +210,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -208,7 +243,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -241,7 +276,43 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "formatted-input",
+      "type": "registry:ui",
+      "title": "Formatted Input",
+      "description": "Purpose-built input formats for cards, phone, email, URLs, IP addresses and Korean postal codes, with optional validation helpers.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/formatted-input-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/moru/formatted-input-utils.ts"
+        },
+        {
+          "path": "registry/moru/formatted-input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/formatted-input.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -271,7 +342,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -304,7 +375,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -338,7 +409,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -376,7 +447,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -409,7 +480,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -442,7 +513,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -472,7 +543,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -505,7 +576,46 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Modal dialog with managed focus, scoped portals, size options and purpose-based variants.",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/modal.css",
+          "type": "registry:file",
+          "target": "@ui/moru/modal.css"
+        },
+        {
+          "path": "registry/moru/modal.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/modal.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -517,13 +627,11 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "dialog",
       "type": "registry:ui",
-      "title": "Dialog",
-      "description": "Modal dialog with managed focus and scoped portals.",
-      "dependencies": [
-        "@base-ui/react@1.9.0"
-      ],
+      "title": "Modal (legacy alias)",
+      "description": "Compatibility export for existing Dialog imports. Use modal for new code.",
       "registryDependencies": [
-        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/modal.json"
       ],
       "files": [
         {
@@ -538,7 +646,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -571,7 +679,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -604,7 +712,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -637,7 +745,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -670,7 +778,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -709,7 +817,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -767,7 +875,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -802,7 +910,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -847,7 +955,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -896,7 +1004,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -927,7 +1035,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -961,7 +1069,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -996,7 +1104,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1029,7 +1137,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1062,7 +1170,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1095,7 +1203,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1128,7 +1236,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1161,7 +1269,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1191,7 +1299,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1225,7 +1333,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1270,7 +1378,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1304,7 +1412,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1346,7 +1454,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1379,7 +1487,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1409,7 +1517,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1439,7 +1547,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1472,7 +1580,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1505,7 +1613,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1540,7 +1648,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1574,7 +1682,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1613,7 +1721,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1646,7 +1754,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1681,7 +1789,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1714,7 +1822,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1748,7 +1856,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1782,7 +1890,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1816,7 +1924,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1849,7 +1957,67 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "header",
+      "type": "registry:ui",
+      "title": "Header",
+      "description": "Responsive page header with branding, navigation and action slots.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/header.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/header.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "footer",
+      "type": "registry:ui",
+      "title": "Footer",
+      "description": "Page footer with branding, grouped navigation and supporting content.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/footer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/footer.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1882,7 +2050,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1915,7 +2083,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1948,7 +2116,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -1978,7 +2146,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2011,7 +2179,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2041,7 +2209,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2075,7 +2243,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2110,7 +2278,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2144,7 +2312,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2177,7 +2345,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2207,7 +2375,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2240,7 +2408,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2273,7 +2441,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2303,7 +2471,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2333,7 +2501,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2367,7 +2535,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2397,7 +2565,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2410,7 +2578,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "Loading indicator with an accessible status label.",
+      "description": "Ring, dots and bars loading indicators with accessible labels and motion controls.",
       "registryDependencies": [
         "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
       ],
@@ -2427,7 +2595,78 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "loading-overlay",
+      "type": "registry:ui",
+      "title": "Loading Overlay",
+      "description": "Contained loading boundary that preserves content and safely blocks interaction while busy.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/spinner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/loading-overlay.css",
+          "type": "registry:file",
+          "target": "@ui/moru/loading-overlay.css"
+        },
+        {
+          "path": "registry/moru/loading-overlay.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/loading-overlay.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "status-indicator",
+      "type": "registry:ui",
+      "title": "Status Indicator",
+      "description": "Readable connection or synchronization status with an optional pulse and polite announcement.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/status-indicator.css",
+          "type": "registry:file",
+          "target": "@ui/moru/status-indicator.css"
+        },
+        {
+          "path": "registry/moru/status-indicator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/status-indicator.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+      "categories": [
+        "components"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2457,7 +2696,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2487,7 +2726,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2526,7 +2765,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2566,7 +2805,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2596,7 +2835,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2630,7 +2869,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2660,7 +2899,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2694,7 +2933,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2727,7 +2966,90 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dashboard",
+      "type": "registry:block",
+      "title": "Dashboard Block",
+      "description": "A complete project dashboard with metrics, activity and reusable project search. Local demo data; connect your service for persistence.",
+      "dependencies": [
+        "lucide-react@1.60.0"
+      ],
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/badge.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/chart.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/header.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/modal.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/progress.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/search-filters.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/textarea.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/toggle-group.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/DashboardBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/DashboardBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
+        "license": "MIT",
+        "testedWith": {
+          "react": "19.3.1",
+          "reactDom": "19.3.1"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "signup",
+      "type": "registry:block",
+      "title": "Signup Block",
+      "description": "Account details, email verification and completion in one signup flow. Local demo; connect your authentication service.",
+      "registryDependencies": [
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/card.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/checkbox.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/core.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/field.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input-otp.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/otp.json",
+        "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/password-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/moru/blocks/SignupBlock.tsx",
+          "type": "registry:ui",
+          "target": "@ui/moru/blocks/SignupBlock.tsx"
+        }
+      ],
+      "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md Authentication, code verification, resend, and persistence are local demonstrations; connect your own services.",
+      "categories": [
+        "blocks"
+      ],
+      "meta": {
+        "version": "0.4.0",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2763,7 +3085,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2797,7 +3119,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2834,7 +3156,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",
@@ -2870,7 +3192,7 @@
       ],
       "meta": {
         "version": "0.4.0",
-        "sourceHash": "05806b478dd7f73c719df8aa695c27f680231f0dab9d64a0fa906f0dc7cf39f7",
+        "sourceHash": "2a9dbdee4e9c10f8b1c172873c106b55b7de9e92484158c410913b3ded771417",
         "license": "MIT",
         "testedWith": {
           "react": "19.3.1",

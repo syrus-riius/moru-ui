@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { FRAME_PRESETS, createBlankScreen, createSimNode, createStarterProject } from './simulator-model'
+import {
+  FRAME_PRESETS,
+  createBlankScreen,
+  createSimNode,
+  createStarterProject,
+} from './simulator-model'
 import { resizeSimScreen } from './simulator-frame-resize'
 import type { SimNode, SimScreen } from './simulator-types'
 
@@ -8,7 +13,10 @@ function withNodes(nodes: SimNode[], width = 390, height = 844): SimScreen {
 }
 
 function freeze<T>(value: T): T {
-  if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value) }
+  if (value && typeof value === 'object') {
+    Object.values(value).forEach(freeze)
+    Object.freeze(value)
+  }
   return value
 }
 
@@ -35,8 +43,9 @@ describe('frame resize geometry', () => {
 
   it('preserves asymmetric margins on a wide content region', () => {
     const node = { ...createSimNode('card', 'card', 40, 100), width: 280 }
-    expect(resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0])
-      .toMatchObject({ x: 40, width: 658, y: 100, height: node.height })
+    expect(
+      resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0],
+    ).toMatchObject({ x: 40, width: 658, y: 100, height: node.height })
   })
 
   it('roundtrips a typical login from mobile to tablet and back without drift', () => {
@@ -47,29 +56,40 @@ describe('frame resize geometry', () => {
   })
 
   it('preserves left, center and right alignment of fixed size elements', () => {
-    const nodes = [0, 151, 302].map((x, index) => ({ ...createSimNode('badge', `badge-${index}`, x, 24), width: 88 }))
+    const nodes = [0, 151, 302].map((x, index) => ({
+      ...createSimNode('badge', `badge-${index}`, x, 24),
+      width: 88,
+    }))
     const changed = resizeSimScreen(withNodes(nodes), { width: 768, height: 1024 }, 'adapt')
     expect(changed.nodes.map(({ x, width }) => ({ x, width }))).toEqual([
-      { x: 0, width: 88 }, { x: 340, width: 88 }, { x: 680, width: 88 },
+      { x: 0, width: 88 },
+      { x: 340, width: 88 },
+      { x: 680, width: 88 },
     ])
   })
 
   it.each(['avatar', 'badge'] as const)('does not stretch a wide %s', (type) => {
     const node = { ...createSimNode(type, 'fixed', 24, 24), width: 342 }
-    expect(resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0])
-      .toMatchObject({ width: 342, x: 213 })
+    expect(
+      resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0],
+    ).toMatchObject({ width: 342, x: 213 })
   })
 
-  it.each(['checkbox', 'switch'] as const)('keeps a wide %s label aligned with other fields', (type) => {
-    const node = { ...createSimNode(type, 'field', 24, 24), width: 342 }
-    expect(resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0])
-      .toMatchObject({ width: 720, x: 24, height: node.height })
-  })
+  it.each(['checkbox', 'switch'] as const)(
+    'keeps a wide %s label aligned with other fields',
+    (type) => {
+      const node = { ...createSimNode(type, 'field', 24, 24), width: 342 }
+      expect(
+        resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0],
+      ).toMatchObject({ width: 720, x: 24, height: node.height })
+    },
+  )
 
   it('retains narrow component width and relative horizontal alignment', () => {
     const node = { ...createSimNode('button', 'button', 60, 100), width: 150 }
-    expect(resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0])
-      .toMatchObject({ x: 155, width: 150, y: 100, height: 44 })
+    expect(
+      resizeSimScreen(withNodes([node]), { width: 768, height: 1024 }, 'adapt').nodes[0],
+    ).toMatchObject({ x: 155, width: 150, y: 100, height: 44 })
   })
 
   it('clamps very narrow and short frames instead of producing out of bounds nodes', () => {
@@ -96,7 +116,9 @@ describe('frame resize geometry', () => {
 
   it('does not move horizontal geometry when only frame height changes', () => {
     const node = { ...createSimNode('card', 'card', 24, 100), width: 342 }
-    expect(resizeSimScreen(withNodes([node]), { width: 390, height: 1200 }, 'adapt').nodes[0]).toEqual(node)
+    expect(
+      resizeSimScreen(withNodes([node]), { width: 390, height: 1200 }, 'adapt').nodes[0],
+    ).toEqual(node)
   })
 
   it('does not mutate its source or change links and content', () => {

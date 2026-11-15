@@ -10,54 +10,98 @@ import { Skeleton } from './skeleton'
 function rootAttributes(markup: string) {
   const openingTag = markup.match(/^<(?:div|span)\b[^>]*>/)?.[0]
   if (!openingTag) throw new Error(`Expected a component root, received: ${markup}`)
-  return Object.fromEntries([...openingTag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], match[2]]))
+  return Object.fromEntries(
+    [...openingTag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], match[2]]),
+  )
 }
 
 describe('Progress value and accessible status', () => {
   it('starts at zero with a finite default range and accessible name', () => {
     const attrs = rootAttributes(renderToStaticMarkup(<Progress locale="en-US" />))
-    expect(attrs).toMatchObject({ role: 'progressbar', 'aria-label': '진행률', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': '0', 'aria-valuetext': '0%' })
+    expect(attrs).toMatchObject({
+      role: 'progressbar',
+      'aria-label': '진행률',
+      'aria-valuemin': '0',
+      'aria-valuemax': '100',
+      'aria-valuenow': '0',
+      'aria-valuetext': '0%',
+    })
   })
 
   it.each([
     { value: -20, expected: '0', text: '0%' },
     { value: 125, expected: '100', text: '100%' },
-  ])('clamps $value so the accessible value stays inside the range', ({ value, expected, text }) => {
-    const attrs = rootAttributes(renderToStaticMarkup(<Progress value={value} locale="en-US" />))
-    expect(attrs['aria-valuenow']).toBe(expected)
-    expect(attrs['aria-valuetext']).toBe(text)
-  })
+  ])(
+    'clamps $value so the accessible value stays inside the range',
+    ({ value, expected, text }) => {
+      const attrs = rootAttributes(renderToStaticMarkup(<Progress value={value} locale="en-US" />))
+      expect(attrs['aria-valuenow']).toBe(expected)
+      expect(attrs['aria-valuetext']).toBe(text)
+    },
+  )
 
   it('normalizes a custom maximum consistently for visible and accessible percentages', () => {
     const markup = renderToStaticMarkup(<Progress value={2} max={8} showValue locale="en-US" />)
-    expect(rootAttributes(markup)).toMatchObject({ 'aria-valuemax': '8', 'aria-valuenow': '2', 'aria-valuetext': '25%' })
+    expect(rootAttributes(markup)).toMatchObject({
+      'aria-valuemax': '8',
+      'aria-valuenow': '2',
+      'aria-valuetext': '25%',
+    })
     expect(markup).toContain('>25%</span>')
   })
 
   it('clamps completion to a custom maximum', () => {
-    const attrs = rootAttributes(renderToStaticMarkup(<Progress value={14} max={8} locale="en-US" />))
-    expect(attrs).toMatchObject({ 'aria-valuemax': '8', 'aria-valuenow': '8', 'aria-valuetext': '100%' })
+    const attrs = rootAttributes(
+      renderToStaticMarkup(<Progress value={14} max={8} locale="en-US" />),
+    )
+    expect(attrs).toMatchObject({
+      'aria-valuemax': '8',
+      'aria-valuenow': '8',
+      'aria-valuetext': '100%',
+    })
   })
 
-  it.each([0, -10, Number.NaN, Number.POSITIVE_INFINITY])('restores a valid range when max=%s', (max) => {
-    const attrs = rootAttributes(renderToStaticMarkup(<Progress value={45} max={max} locale="en-US" />))
-    expect(attrs).toMatchObject({ 'aria-valuemax': '100', 'aria-valuenow': '45', 'aria-valuetext': '45%' })
-  })
+  it.each([0, -10, Number.NaN, Number.POSITIVE_INFINITY])(
+    'restores a valid range when max=%s',
+    (max) => {
+      const attrs = rootAttributes(
+        renderToStaticMarkup(<Progress value={45} max={max} locale="en-US" />),
+      )
+      expect(attrs).toMatchObject({
+        'aria-valuemax': '100',
+        'aria-valuenow': '45',
+        'aria-valuetext': '45%',
+      })
+    },
+  )
 
-  it.each([null, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])('does not claim a numeric percentage when value=%s is indeterminate', (value) => {
-    const markup = renderToStaticMarkup(<Progress value={value} showValue locale="en-US" />)
-    const attrs = rootAttributes(markup)
-    expect(attrs).not.toHaveProperty('aria-valuenow')
-    expect(attrs['aria-valuetext']).toBe('진행 중')
-    expect(markup).toContain('>진행 중</span>')
-    expect(markup).not.toMatch(/NaN|Infinity/)
-  })
+  it.each([null, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    'does not claim a numeric percentage when value=%s is indeterminate',
+    (value) => {
+      const markup = renderToStaticMarkup(<Progress value={value} showValue locale="en-US" />)
+      const attrs = rootAttributes(markup)
+      expect(attrs).not.toHaveProperty('aria-valuenow')
+      expect(attrs['aria-valuetext']).toBe('진행 중')
+      expect(markup).toContain('>진행 중</span>')
+      expect(markup).not.toMatch(/NaN|Infinity/)
+    },
+  )
 
   it('preserves caller supplied accessible labels and human-readable progress text', () => {
-    const attrs = rootAttributes(renderToStaticMarkup(
-      <Progress value={3} max={5} aria-label="사진 업로드" getAriaValueText={(_, value) => `사진 5개 중 ${value}개 완료`} />,
-    ))
-    expect(attrs).toMatchObject({ 'aria-label': '사진 업로드', 'aria-valuetext': '사진 5개 중 3개 완료' })
+    const attrs = rootAttributes(
+      renderToStaticMarkup(
+        <Progress
+          value={3}
+          max={5}
+          aria-label="사진 업로드"
+          getAriaValueText={(_, value) => `사진 5개 중 ${value}개 완료`}
+        />,
+      ),
+    )
+    expect(attrs).toMatchObject({
+      'aria-label': '사진 업로드',
+      'aria-valuetext': '사진 5개 중 3개 완료',
+    })
   })
 })
 
@@ -73,16 +117,25 @@ describe('Alert announcement semantics', () => {
   })
 
   it.each(['success', 'warning', 'info'] as const)('keeps %s messages polite', (tone) => {
-    expect(rootAttributes(renderToStaticMarkup(<Alert title="상태 안내" tone={tone} />)).role).toBe('status')
+    expect(rootAttributes(renderToStaticMarkup(<Alert title="상태 안내" tone={tone} />)).role).toBe(
+      'status',
+    )
   })
 
   it('announces danger promptly while allowing the caller to choose a quieter role', () => {
-    expect(rootAttributes(renderToStaticMarkup(<Alert title="저장 실패" tone="danger" />)).role).toBe('alert')
-    expect(rootAttributes(renderToStaticMarkup(<Alert title="저장 실패" tone="danger" role="status" />)).role).toBe('status')
+    expect(
+      rootAttributes(renderToStaticMarkup(<Alert title="저장 실패" tone="danger" />)).role,
+    ).toBe('alert')
+    expect(
+      rootAttributes(renderToStaticMarkup(<Alert title="저장 실패" tone="danger" role="status" />))
+        .role,
+    ).toBe('status')
   })
 
   it('allows a custom accessible label without a competing title reference', () => {
-    const attrs = rootAttributes(renderToStaticMarkup(<Alert title="저장 실패" aria-label="문서 저장 오류" />))
+    const attrs = rootAttributes(
+      renderToStaticMarkup(<Alert title="저장 실패" aria-label="문서 저장 오류" />),
+    )
     expect(attrs['aria-label']).toBe('문서 저장 오류')
     expect(attrs).not.toHaveProperty('aria-labelledby')
   })
@@ -117,7 +170,9 @@ describe('Decorative loading and separators', () => {
   })
 
   it('exposes a structural separator and its vertical orientation', () => {
-    const attrs = rootAttributes(renderToStaticMarkup(<Separator decorative={false} orientation="vertical" />))
+    const attrs = rootAttributes(
+      renderToStaticMarkup(<Separator decorative={false} orientation="vertical" />),
+    )
     expect(attrs).toMatchObject({ role: 'separator', 'aria-orientation': 'vertical' })
     expect(attrs).not.toHaveProperty('aria-hidden')
   })

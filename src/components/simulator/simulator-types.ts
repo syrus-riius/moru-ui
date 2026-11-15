@@ -1,5 +1,25 @@
-export const nodeTypes = ['text', 'button', 'input', 'input-otp', 'textarea', 'select', 'checkbox', 'switch', 'card', 'image', 'tabs', 'list', 'table', 'avatar', 'badge', 'separator', 'dialog', 'chart', 'container'] as const
-export type SimNodeType = typeof nodeTypes[number]
+export const nodeTypes = [
+  'text',
+  'button',
+  'input',
+  'input-otp',
+  'textarea',
+  'select',
+  'checkbox',
+  'switch',
+  'card',
+  'image',
+  'tabs',
+  'list',
+  'table',
+  'avatar',
+  'badge',
+  'separator',
+  'dialog',
+  'chart',
+  'container',
+] as const
+export type SimNodeType = (typeof nodeTypes)[number]
 export type SimStyle = 'wireframe' | 'moru'
 export type SimNodeState = 'default' | 'disabled' | 'error' | 'loading'
 export interface SimLayout {
@@ -76,4 +96,7 @@ export interface SimComponentDefinition {
 }
 export type SimRuntimeValue = string | boolean
 export type SimRuntimeValues = Record<string, SimRuntimeValue>
-export type SimNodePatch = Partial<Omit<SimNode, 'id' | 'type' | 'props' | 'action'>> & { props?: Partial<SimProps>; action?: Partial<SimAction> }
+export type SimNodePatch = Partial<Omit<SimNode, 'id' | 'type' | 'props' | 'action'>> & {
+  props?: Partial<SimProps>
+  action?: Partial<SimAction>
+}

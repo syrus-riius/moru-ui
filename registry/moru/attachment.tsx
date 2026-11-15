@@ -1,10 +1,12 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
+import { useI18n } from './_lib/i18n'
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react'
 import { FileText, RotateCcw, X } from 'lucide-react'
 import { cn } from './_lib/cn'
 import { Button } from './button'
-import './content-completion.css'
+import './content-shared.css'
+import './attachment.css'
 
 export type AttachmentStatus = 'idle' | 'uploading' | 'processing' | 'error' | 'done'
 export function formatFileSize(bytes: number, locale = 'ko-KR') {
@@ -12,7 +14,7 @@ export function formatFileSize(bytes: number, locale = 'ko-KR') {
   if (bytes < 1024) return `${Math.round(bytes)} B`
   const units = ['KB', 'MB', 'GB', 'TB']
   const index = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)) - 1, units.length - 1)
-  return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(bytes / (1024 ** (index + 1)))} ${units[index]}`
+  return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(bytes / 1024 ** (index + 1))} ${units[index]}`
 }
 export function getFileExtension(name: string) {
   const lastDot = name.lastIndexOf('.')
@@ -30,30 +32,121 @@ export interface AttachmentProps extends HTMLAttributes<HTMLDivElement> {
   onRemove?: () => void
   onRetry?: () => void
 }
-export const Attachment = forwardRef<HTMLDivElement, AttachmentProps>(function Attachment({
-  fileName, fileSize, media, status = 'idle', progress, size = 'md', orientation = 'horizontal', disabled, onRemove, onRetry, className, children, ...props
-}, ref) {
-  const percent = typeof progress === 'number' && Number.isFinite(progress) ? Math.round(Math.max(0, Math.min(100, progress))) : undefined
-  const stateText = status === 'uploading' ? `업로드 중${percent === undefined ? '' : ` · ${percent}%`}` : status === 'processing' ? '처리 중' : status === 'error' ? '업로드 실패' : status === 'done' ? '완료' : null
-  return <div {...props} ref={ref} className={cn('ui-attachment', className)} data-status={status} data-size={size} data-orientation={orientation} aria-busy={status === 'uploading' || status === 'processing' || undefined}>
-    {fileName ? <>
-      <AttachmentMedia>{media ?? <FileText aria-hidden="true" />}</AttachmentMedia>
-      <AttachmentContent>
-        <AttachmentTitle>{fileName}</AttachmentTitle>
-        <AttachmentDescription>{getFileExtension(fileName)}{fileSize === undefined ? '' : ` · ${formatFileSize(fileSize)}`}</AttachmentDescription>
-        {stateText && <span className="ui-attachment-state" role={status === 'error' ? 'alert' : 'status'}>{stateText}</span>}
-        {status === 'uploading' && <progress className="ui-attachment-progress" max={100} value={percent} aria-label={`${fileName} 업로드`} />}
-      </AttachmentContent>
-      {(onRemove || (status === 'error' && onRetry)) && <AttachmentActions>
-        {status === 'error' && onRetry && <Button variant="ghost" size="sm" aria-label={`${fileName} 다시 시도`} disabled={disabled} onClick={onRetry}><RotateCcw size={14} aria-hidden="true" /></Button>}
-        {onRemove && <Button variant="ghost" size="sm" aria-label={`${fileName} 제거`} disabled={disabled} onClick={onRemove}><X size={14} aria-hidden="true" /></Button>}
-      </AttachmentActions>}
-    </> : children}
-  </div>
+export const Attachment = forwardRef<HTMLDivElement, AttachmentProps>(function Attachment(
+  {
+    fileName,
+    fileSize,
+    media,
+    status = 'idle',
+    progress,
+    size = 'md',
+    orientation = 'horizontal',
+    disabled,
+    onRemove,
+    onRetry,
+    className,
+    children,
+    ...props
+  },
+  ref,
+) {
+  const { t, formatLocale } = useI18n()
+
+  const percent =
+    typeof progress === 'number' && Number.isFinite(progress)
+      ? Math.round(Math.max(0, Math.min(100, progress)))
+      : undefined
+  const stateText =
+    status === 'uploading'
+      ? t('업로드 중{v0}', { v0: percent === undefined ? '' : ` · ${percent}%` })
+      : status === 'processing'
+        ? t('처리 중')
+        : status === 'error'
+          ? t('업로드 실패')
+          : status === 'done'
+            ? t('완료')
+            : null
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={cn('ui-attachment', className)}
+      data-status={status}
+      data-size={size}
+      data-orientation={orientation}
+      aria-busy={status === 'uploading' || status === 'processing' || undefined}
+    >
+      {fileName ? (
+        <>
+          <AttachmentMedia>{media ?? <FileText aria-hidden="true" />}</AttachmentMedia>
+          <AttachmentContent>
+            <AttachmentTitle>{fileName}</AttachmentTitle>
+            <AttachmentDescription>
+              {getFileExtension(fileName)}
+              {fileSize === undefined ? '' : ` · ${t(formatFileSize(fileSize, formatLocale))}`}
+            </AttachmentDescription>
+            {stateText && (
+              <span className="ui-attachment-state" role={status === 'error' ? 'alert' : 'status'}>
+                {stateText}
+              </span>
+            )}
+            {status === 'uploading' && (
+              <progress
+                className="ui-attachment-progress"
+                max={100}
+                value={percent}
+                aria-label={t('{v0} 업로드', { v0: fileName })}
+              />
+            )}
+          </AttachmentContent>
+          {(onRemove || (status === 'error' && onRetry)) && (
+            <AttachmentActions>
+              {status === 'error' && onRetry && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  aria-label={t('{v0} 다시 시도', { v0: fileName })}
+                  disabled={disabled}
+                  onClick={onRetry}
+                >
+                  <RotateCcw size={14} aria-hidden="true" />
+                </Button>
+              )}
+              {onRemove && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  aria-label={t('{v0} 제거', { v0: fileName })}
+                  disabled={disabled}
+                  onClick={onRemove}
+                >
+                  <X size={14} aria-hidden="true" />
+                </Button>
+              )}
+            </AttachmentActions>
+          )}
+        </>
+      ) : (
+        children
+      )}
+    </div>
+  )
 })
-export function AttachmentMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-media', className)} /> }
-export function AttachmentContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-content', className)} /> }
-export function AttachmentTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-title', className)} /> }
-export function AttachmentDescription({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-description', className)} /> }
-export function AttachmentActions({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-actions', className)} /> }
-export function AttachmentGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) { return <div {...props} className={cn('ui-attachment-group', className)} /> }
+export function AttachmentMedia({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-media', className)} />
+}
+export function AttachmentContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-content', className)} />
+}
+export function AttachmentTitle({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-title', className)} />
+}
+export function AttachmentDescription({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-description', className)} />
+}
+export function AttachmentActions({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-actions', className)} />
+}
+export function AttachmentGroup({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={cn('ui-attachment-group', className)} />
+}

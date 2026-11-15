@@ -1,0 +1,161 @@
+/* The site composes Moru's Header; these rules only place it in the page shell. */
+.moru-site-header.ui-header {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.moru-site-header .ui-header-row {
+  width: min(100%, var(--moru-site-max-width, 1320px));
+  min-height: max(
+    var(--moru-site-header-height, 64px),
+    calc(var(--ui-control-height-md, 40px) + var(--ui-space, 4px) * 4)
+  );
+  margin-inline: auto;
+  padding: calc(var(--ui-space, 4px) * 2) clamp(12px, 3vw, 32px);
+  gap: clamp(12px, 2vw, 32px);
+}
+
+.moru-site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: var(--ui-radius);
+  color: inherit;
+  text-decoration: none;
+}
+
+.moru-site-header__brand .moru-logo {
+  width: 106px;
+  height: auto;
+}
+
+.moru-site-header .ui-header-navigation {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: var(--ui-space, 4px);
+}
+
+.moru-site-header .ui-header-navigation a {
+  flex: none;
+  padding-inline: var(--ui-control-padding-x-sm, 10px);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 500);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, 0em);
+  white-space: nowrap;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ui-muted);
+  text-decoration: none;
+}
+
+.moru-site-header .ui-header-navigation a:is(:hover, [aria-current='page']) {
+  background: transparent;
+  color: var(--ui-text);
+}
+
+.moru-site-header .ui-header-navigation a[aria-current='page'] {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.55em;
+  text-decoration-skip-ink: none;
+}
+
+.moru-site-header .ui-header-actions {
+  flex-wrap: nowrap;
+  gap: var(--ui-space, 4px);
+}
+
+.moru-site-header__action.ui-button {
+  flex: none;
+  min-width: var(--ui-control-height-md, 40px);
+  min-height: var(--ui-control-height-md, 40px);
+  text-decoration: none;
+}
+
+.moru-site-header__github-icon {
+  display: none;
+}
+
+/* A documentation header needs more room than an app header's short menu.
+   em keeps the disclosure threshold proportional to the selected font size. */
+@container moru-header (max-width: 76em) {
+  .moru-site-header .ui-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-control-gap, 8px);
+  }
+
+  .moru-site-header .ui-header-brand {
+    flex: 1;
+  }
+
+  .moru-site-header .ui-header-menu {
+    order: 2;
+    display: grid;
+    flex: none;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .moru-site-header .ui-header-actions {
+    order: 1;
+    flex: none;
+  }
+
+  .moru-site-header .ui-header-navigation {
+    order: 3;
+    display: none;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    padding-block: var(--ui-field-gap, 8px);
+  }
+
+  .moru-site-header .ui-header-navigation[data-expanded='true'] {
+    display: flex;
+  }
+
+  .moru-site-header .ui-header-navigation a {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 600px) {
+  .moru-site-header .ui-header-row {
+    gap: var(--ui-space, 4px);
+  }
+
+  .moru-site-header .ui-header-actions {
+    gap: 0;
+  }
+
+  .moru-site-header__brand .moru-logo {
+    width: 92px;
+  }
+
+  .moru-site-header__action.ui-button {
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: var(--ui-space, 4px);
+  }
+
+  .moru-site-header__search span,
+  .moru-site-header__github span,
+  .moru-site-header__github-arrow {
+    display: none;
+  }
+
+  .moru-site-header__github-icon {
+    display: block;
+  }
+}
+
+@media (max-width: 390px) {
+  .moru-site-header__github.ui-button {
+    display: none;
+  }
+}

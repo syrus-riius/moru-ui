@@ -1,11 +1,24 @@
 import { describe, expect, it } from 'vitest'
-import { consumeBlockInsertion, insertSimBlock, requestBlockInsertion, type SimBlockId } from './block-simulator'
-import { createStarterProject, getRequiredFieldErrors, parseSimProject, serializeSimProject } from './simulator-model'
+import {
+  consumeBlockInsertion,
+  insertSimBlock,
+  requestBlockInsertion,
+  type SimBlockId,
+} from './block-simulator'
+import {
+  createStarterProject,
+  getRequiredFieldErrors,
+  parseSimProject,
+  serializeSimProject,
+} from './simulator-model'
 import { resolveSimLayout } from './simulator-layout'
 import { resizeSimScreen } from './simulator-frame-resize'
 
-const blocks: SimBlockId[] = ['login', 'otp', 'search-filters', 'settings']
-function ids() { let sequence = 0; return () => `block-${++sequence}` }
+const blocks: SimBlockId[] = ['dashboard', 'login', 'signup', 'otp', 'search-filters', 'settings']
+function ids() {
+  let sequence = 0
+  return () => `block-${++sequence}`
+}
 
 describe('Library blocks in editable simulator documents', () => {
   it.each(blocks)('appends %s without changing existing screens or the starting route', (id) => {
@@ -30,7 +43,7 @@ describe('Library blocks in editable simulator documents', () => {
       expect(layout.contentHeight).toBeGreaterThanOrEqual(844)
       for (const node of layout.nodes) {
         expect(node.x).toBeGreaterThanOrEqual(0)
-        expect(node.x + node.width).toBeLessThanOrEqual(width + .001)
+        expect(node.x + node.width).toBeLessThanOrEqual(width + 0.001)
       }
     }
   })
@@ -38,14 +51,18 @@ describe('Library blocks in editable simulator documents', () => {
   it('generates unique screen and node ids even when the id source repeats', () => {
     const first = insertSimBlock(createStarterProject(), 'otp', 'mobile', () => 'login')!
     const second = insertSimBlock(first.project, 'settings', 'web', () => 'login')!
-    const all = second.project.screens.flatMap((screen) => [screen.id, ...screen.nodes.map((node) => node.id)])
+    const all = second.project.screens.flatMap((screen) => [
+      screen.id,
+      ...screen.nodes.map((node) => node.id),
+    ])
     expect(new Set(all).size).toBe(all.length)
     expect(parseSimProject(serializeSimProject(second.project))).toEqual(second.project)
   })
 
   it('rejects a twenty-first screen without modifying the existing project', () => {
     let project = createStarterProject()
-    while (project.screens.length < 20) project = insertSimBlock(project, 'otp', 'mobile', ids())!.project
+    while (project.screens.length < 20)
+      project = insertSimBlock(project, 'otp', 'mobile', ids())!.project
     const before = JSON.stringify(project)
     expect(insertSimBlock(project, 'otp', 'mobile', ids())).toBeNull()
     expect(JSON.stringify(project)).toBe(before)
@@ -59,7 +76,12 @@ describe('Library blocks in editable simulator documents', () => {
   })
 
   it('renders a real OTP primitive and validates six numeric digits', () => {
-    const screen = insertSimBlock(createStarterProject(), 'otp', 'mobile', ids())!.project.screens.at(-1)!
+    const screen = insertSimBlock(
+      createStarterProject(),
+      'otp',
+      'mobile',
+      ids(),
+    )!.project.screens.at(-1)!
     const otp = screen.nodes.find((node) => node.type === 'input-otp')!
     expect(otp).toBeDefined()
     expect(getRequiredFieldErrors(screen, {})).toHaveProperty(otp.id)
@@ -69,22 +91,80 @@ describe('Library blocks in editable simulator documents', () => {
   })
 
   it('keeps the settings and search compositions aligned with the library blocks', () => {
-    const settings = insertSimBlock(createStarterProject(), 'settings', 'mobile', ids())!.project.screens.at(-1)!
+    const settings = insertSimBlock(
+      createStarterProject(),
+      'settings',
+      'mobile',
+      ids(),
+    )!.project.screens.at(-1)!
     expect(settings.name).toBe('작업 공간 설정')
-    expect(settings.nodes.find((node) => node.props.label === '작업 공간 이름')?.props.value).toBe('Moru Studio')
-    expect(settings.nodes.find((node) => node.props.label === '연락 이메일')?.props.value).toBe('hello@moru.example')
-    expect(settings.nodes.find((node) => node.props.label === '공개 범위')?.props.options).toEqual(['초대한 팀원만', '워크스페이스 전체', '링크를 가진 누구나'])
+    expect(settings.nodes.find((node) => node.props.label === '작업 공간 이름')?.props.value).toBe(
+      'Moru Studio',
+    )
+    expect(settings.nodes.find((node) => node.props.label === '연락 이메일')?.props.value).toBe(
+      'hello@moru.example',
+    )
+    expect(settings.nodes.find((node) => node.props.label === '공개 범위')?.props.options).toEqual([
+      '초대한 팀원만',
+      '워크스페이스 전체',
+      '링크를 가진 누구나',
+    ])
     expect(settings.nodes.some((node) => node.props.label === '변경 취소')).toBe(true)
-    const search = insertSimBlock(createStarterProject(), 'search-filters', 'mobile', ids())!.project.screens.at(-1)!
-    expect(search.nodes.some((node) => node.type === 'checkbox' && node.props.label === '내가 담당한 프로젝트만')).toBe(true)
+    const search = insertSimBlock(
+      createStarterProject(),
+      'search-filters',
+      'mobile',
+      ids(),
+    )!.project.screens.at(-1)!
+    expect(
+      search.nodes.some(
+        (node) => node.type === 'checkbox' && node.props.label === '내가 담당한 프로젝트만',
+      ),
+    ).toBe(true)
     expect(search.nodes.filter((node) => node.type === 'badge')).toHaveLength(4)
-    expect(search.nodes.filter((node) => node.type === 'button' && node.props.label === '선택')).toHaveLength(4)
+    expect(
+      search.nodes.filter((node) => node.type === 'button' && node.props.label === '선택'),
+    ).toHaveLength(4)
     expect(search.nodes.some((node) => node.props.label === '담당 팀')).toBe(false)
+  })
+
+  it('composes signup steps without transferring personal account values', () => {
+    const screen = insertSimBlock(
+      createStarterProject(),
+      'signup',
+      'mobile',
+      ids(),
+    )!.project.screens.at(-1)!
+    expect(screen.nodes.some((node) => node.type === 'input-otp')).toBe(true)
+    expect(screen.nodes.some((node) => node.props.label === '계정 정보 단계')).toBe(true)
+    expect(screen.nodes.some((node) => node.props.label === '이메일 인증 단계')).toBe(true)
+    expect(
+      screen.nodes.filter((node) => node.type === 'input').every((node) => node.props.value === ''),
+    ).toBe(true)
+    expect(screen.nodes.some((node) => node.type === 'checkbox' && node.props.required)).toBe(true)
+  })
+
+  it('composes dashboard metrics, activity and project search inside one editable screen', () => {
+    const screen = insertSimBlock(
+      createStarterProject(),
+      'dashboard',
+      'web',
+      ids(),
+    )!.project.screens.at(-1)!
+    expect(screen.nodes.some((node) => node.type === 'chart')).toBe(true)
+    expect(screen.nodes.some((node) => node.props.label === '팀 현황')).toBe(true)
+    expect(screen.nodes.some((node) => node.props.label === '프로젝트 검색')).toBe(true)
+    expect(screen.nodes.filter((node) => node.type === 'badge')).toHaveLength(4)
+    expect(screen.nodes.find((node) => node.props.label === '새 프로젝트')?.action.type).toBe(
+      'dialog',
+    )
   })
 
   it('never seeds a password into the appended login design', () => {
     const result = insertSimBlock(createStarterProject(), 'login', 'web', ids())!
-    const password = result.project.screens.at(-1)!.nodes.find((node) => node.props.inputType === 'password')!
+    const password = result.project.screens
+      .at(-1)!
+      .nodes.find((node) => node.props.inputType === 'password')!
     expect(password.props.value).toBe('')
     expect(serializeSimProject(result.project)).not.toContain('demo-password')
   })

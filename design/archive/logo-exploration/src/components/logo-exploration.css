@@ -1,0 +1,68 @@
+.logo-exploration { --concept-light-ink:#26312b; --concept-dark-ink:#edf1e8; }
+.logo-color-sage { --concept-light-ink:#356b55; --concept-dark-ink:#a6c6a5; }
+.logo-exploration-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:23px; }
+.logo-exploration-heading h2 { margin:9px 0; font-size:23px; line-height:1.5; font-weight:600; letter-spacing:-.7px; word-break:keep-all; }
+.logo-exploration-heading p,.logo-selected-heading p,.logo-use-case-copy p,.logo-review-note p { color:var(--chrome-muted); font-size:11px; line-height:1.9; margin:0; word-break:keep-all; overflow-wrap:anywhere; }
+.logo-color-control { display:flex; flex:none; gap:3px; border:1px solid var(--chrome-border); border-radius:6px; padding:3px; background:var(--chrome-surface); }
+.logo-color-control button { border:0; background:none; color:var(--chrome-muted); border-radius:3px; padding:6px 8px; display:flex; align-items:center; gap:5px; font-size:9px; }
+.logo-color-control button[aria-pressed="true"] { background:var(--chrome-hover); color:var(--chrome-text); }
+.logo-color-control i { width:7px; height:7px; background:#26312b; border:1px solid #ffffff33; border-radius:50%; }
+.logo-color-control button:last-child i { background:#6b9174; }
+.logo-concept-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:11px; }
+.logo-concept-card { min-width:0; display:flex; flex-direction:column; align-items:stretch; text-align:left; background:var(--chrome-surface); color:var(--chrome-text); border:1px solid var(--chrome-border); border-radius:7px; padding:12px; transition:border-color .15s,box-shadow .15s; }
+.logo-concept-card:hover { border-color:var(--chrome-accent); }
+.logo-concept-card[aria-pressed="true"] { border-color:var(--chrome-accent); box-shadow:0 0 0 1px var(--chrome-accent); }
+.logo-concept-meta { display:flex; justify-content:space-between; align-items:center; gap:3px; min-height:16px; font-size:7px; color:var(--chrome-muted); }
+.logo-concept-meta > span:first-child { font-family:ui-monospace,monospace; font-size:9px; }
+.logo-concept-meta > span:last-child:not(:first-child) { padding:1px 4px; border:1px solid var(--chrome-border); border-radius:3px; white-space:nowrap; }
+.logo-concept-symbol { display:grid; place-items:center; min-height:116px; color:var(--concept-light-ink); }
+:root[data-theme="dark"] .logo-concept-symbol { color:var(--concept-dark-ink); }
+.logo-concept-name { font-size:12px; font-weight:600; }
+.logo-concept-english { color:var(--chrome-muted); font-size:9px; margin-top:3px; }
+.logo-concept-traits { color:var(--chrome-muted); font-size:8px; margin-top:13px; line-height:1.7; min-height:28px; word-break:keep-all; }
+.logo-concept-action { display:flex; align-items:center; gap:4px; font-size:8px; color:var(--chrome-muted); border-top:1px solid var(--chrome-border); padding-top:10px; margin-top:9px; }
+.logo-concept-card[aria-pressed="true"] .logo-concept-action { color:var(--chrome-accent); }
+.logo-selection-note { display:flex; gap:6px; align-items:baseline; color:var(--chrome-muted); font-size:9px; line-height:1.8; margin:15px 0 30px; }
+.logo-note-dot { width:4px; height:4px; border-radius:50%; background:var(--chrome-accent); flex-shrink:0; }
+.logo-selected { border-top:1px solid var(--chrome-border); padding-top:25px; }
+.logo-selected-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:22px; }
+.logo-selected-heading > div:first-child { min-width:0; }
+.logo-selected-heading h3 { font-size:19px; font-weight:600; margin:9px 0; letter-spacing:-.4px; }
+.logo-selected-heading h3 > span { font-size:11px; font-weight:400; letter-spacing:0; margin-left:9px; color:var(--chrome-muted); }
+.logo-concept-downloads { flex:none; display:flex; flex-direction:column; gap:10px; padding-top:3px; }
+.logo-concept-downloads a { display:inline-flex; align-items:center; gap:6px; font-size:9px; color:var(--chrome-accent); text-decoration:none; border-bottom:1px solid var(--chrome-border); padding-bottom:5px; }
+.logo-concept-downloads a:hover { border-color:var(--chrome-accent); }
+.logo-background-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.logo-background-preview { min-width:0; padding:19px 21px; border-radius:7px; border:1px solid var(--chrome-border); }
+.logo-background-light { background:#f7f8f4; color:var(--concept-light-ink); }
+.logo-background-dark { background:#1c2721; color:var(--concept-dark-ink); }
+.logo-preview-label { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:7px; letter-spacing:1px; opacity:.65; }
+.logo-lockup-stage { display:grid; place-items:center; min-height:132px; padding:20px 0; }
+.logo-lockup { display:block; width:209px; max-width:100%; height:auto; }
+.logo-size-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; border-top:1px solid #81918530; padding-top:12px; text-align:center; }
+.logo-size-symbol { display:flex; justify-content:center; align-items:center; height:72px; }
+.logo-size-row span { display:block; font-family:ui-monospace,monospace; font-size:8px; opacity:.65; padding-top:7px; }
+.logo-use-case { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); align-items:center; gap:25px; margin:28px 0; }
+.logo-use-case-copy h3 { font-size:15px; font-weight:550; margin:10px 0; letter-spacing:-.3px; }
+.logo-use-case-copy p { font-size:10px; }
+.logo-mini-workspace { min-width:0; overflow:hidden; border:1px solid var(--chrome-border); border-radius:7px; background:var(--chrome-surface); color:var(--chrome-text); }
+.logo-mini-header { display:flex; justify-content:space-between; align-items:center; gap:15px; border-bottom:1px solid var(--chrome-border); padding:14px 16px; color:var(--chrome-accent); }
+.logo-mini-lockup { display:block; width:114px; height:24px; }
+.logo-mini-header > span { font-size:7px; letter-spacing:1px; color:var(--chrome-muted); }
+.logo-mini-body { display:grid; grid-template-columns:95px minmax(0,1fr); min-height:116px; }
+.logo-mini-sidebar { padding:15px 12px; border-right:1px solid var(--chrome-border); }
+.logo-mini-sidebar > span { display:flex; align-items:center; gap:5px; font-size:7px; color:var(--chrome-accent); }
+.logo-mini-sidebar > i { display:block; height:3px; margin-top:13px; background:var(--chrome-border); width:80%; }
+.logo-mini-sidebar > i:last-child { width:55%; }
+.logo-mini-canvas { padding:17px 15px; }
+.logo-mini-canvas > span { font-size:9px; font-weight:500; word-break:keep-all; }
+.logo-mini-canvas > div { display:flex; gap:7px; margin-top:13px; }
+.logo-mini-canvas > div > i { width:40%; height:30px; background:var(--chrome-hover); border:1px solid var(--chrome-border); border-radius:3px; }
+.logo-mini-canvas > i { display:block; height:3px; width:70%; background:var(--chrome-border); margin-top:12px; }
+.logo-review-note { display:flex; gap:20px; align-items:baseline; padding:18px 0; border-top:1px solid var(--chrome-border); }
+.logo-review-note strong { flex:none; font-size:10px; font-weight:550; }
+.logo-review-note p { font-size:10px; }
+@media (max-width:1320px) { .logo-concept-grid { gap:8px; } .logo-concept-card { padding:10px; } .logo-concept-traits { min-height:40px; } }
+@media (max-width:1000px) { .logo-concept-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:760px) { .logo-exploration-heading { align-items:flex-start; flex-direction:column; gap:15px; } .logo-concept-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; } .logo-concept-traits { min-height:28px; } }
+@media (max-width:540px) { .logo-exploration-heading h2 { font-size:22px; } .logo-exploration-heading p { font-size:10px; } .logo-concept-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .logo-concept-card { padding:12px; } .logo-concept-symbol { min-height:104px; } .logo-selected-heading { flex-direction:column; gap:15px; } .logo-concept-downloads { flex-direction:row; flex-wrap:wrap; gap:10px 18px; } .logo-selected-heading h3 > span { font-size:10px; } .logo-background-grid { grid-template-columns:minmax(0,1fr); } .logo-use-case { grid-template-columns:minmax(0,1fr); gap:18px; } .logo-review-note { flex-direction:column; gap:8px; } .logo-mini-sidebar { padding-left:10px; padding-right:10px; } }

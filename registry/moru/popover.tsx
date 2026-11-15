@@ -1,11 +1,12 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
+import { useI18n } from './_lib/i18n'
 import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './popover.css'
 
 export interface PopoverProps {
   trigger: ReactElement
@@ -27,13 +28,31 @@ export interface PopoverProps {
 }
 
 export function Popover({
-  trigger, title, description, children, open, defaultOpen, onOpenChange,
-  side = 'bottom', align = 'start', sideOffset = 8, className, initialFocus, finalFocus,
-  'aria-label': ariaLabel = '추가 정보',
+  trigger,
+  title,
+  description,
+  children,
+  open,
+  defaultOpen,
+  onOpenChange,
+  side = 'bottom',
+  align = 'start',
+  sideOffset = 8,
+  className,
+  initialFocus,
+  finalFocus,
+  'aria-label': ariaLabelProp,
 }: PopoverProps) {
+  const { t } = useI18n()
+  const ariaLabel = ariaLabelProp ?? t('추가 정보')
+
   const portalContainer = useThemePortalContainer()
   return (
-    <BasePopover.Root open={open} defaultOpen={defaultOpen} onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}>
+    <BasePopover.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
       <BasePopover.Trigger render={trigger} />
       <OverlayPortal portal={BasePopover.Portal} kind="popover" container={portalContainer}>
         <BasePopover.Positioner
@@ -44,11 +63,22 @@ export function Popover({
           collisionPadding={12}
           collisionAvoidance={{ side: 'flip', align: 'shift', fallbackAxisSide: 'end' }}
         >
-          <BasePopover.Popup className={cn('ui-popover', className)} aria-label={title ? undefined : ariaLabel} initialFocus={initialFocus} finalFocus={finalFocus}>
+          <BasePopover.Popup
+            className={cn('ui-popover', className)}
+            aria-label={title ? undefined : ariaLabel}
+            initialFocus={initialFocus}
+            finalFocus={finalFocus}
+          >
             {(title || description) && (
               <div className="ui-popover-header">
-                {title && <BasePopover.Title className="ui-popover-title">{title}</BasePopover.Title>}
-                {description && <BasePopover.Description className="ui-popover-description">{description}</BasePopover.Description>}
+                {title && (
+                  <BasePopover.Title className="ui-popover-title">{title}</BasePopover.Title>
+                )}
+                {description && (
+                  <BasePopover.Description className="ui-popover-description">
+                    {description}
+                  </BasePopover.Description>
+                )}
               </div>
             )}
             <div className="ui-popover-content">{children}</div>

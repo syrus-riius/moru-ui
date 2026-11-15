@@ -4,7 +4,20 @@ import { createElement, type HTMLAttributes } from 'react'
 import type { TypographyRole } from './_theme/tokens'
 import { cn } from './_lib/cn'
 
-type TypographyElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'label' | 'strong' | 'small' | 'code'
+type TypographyElement =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'p'
+  | 'span'
+  | 'div'
+  | 'label'
+  | 'strong'
+  | 'small'
+  | 'code'
 
 export type TypographyProps = HTMLAttributes<HTMLElement> & {
   variant?: TypographyRole
@@ -21,10 +34,20 @@ const defaultElements: Record<TypographyRole, TypographyElement> = {
 }
 
 /** Text styling is independent from document hierarchy; choose `as` for the context. */
-export function Typography({ variant = 'body', as, className, children, ...props }: TypographyProps) {
-  return createElement(as ?? defaultElements[variant], {
-    ...props,
-    className: cn('ui-typography', className),
-    'data-role': variant,
-  }, children)
+export function Typography({
+  variant = 'body',
+  as,
+  className,
+  children,
+  ...props
+}: TypographyProps) {
+  return createElement(
+    as ?? defaultElements[variant],
+    {
+      ...props,
+      className: cn('ui-typography', className),
+      'data-role': variant,
+    },
+    children,
+  )
 }

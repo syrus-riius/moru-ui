@@ -1,0 +1,487 @@
+.moru-home-examples {
+  --moru-example-inset: calc(var(--ui-space, 4px) * 3);
+  --moru-example-gap: calc(var(--ui-space, 4px) * 3);
+  --moru-example-row-gap: var(--ui-control-gap, 8px);
+  --moru-example-grid-gap: calc(var(--ui-space, 4px) * 4);
+  /* Reserve a readable text measure plus the current padding, with at most four columns. */
+  --moru-example-card-min: max(
+    280px,
+    calc(var(--ui-type-label-size, 14px) * 20 + var(--ui-card-padding, 24px) * 2)
+  );
+  container: moru-home-examples / inline-size;
+  margin-block-end: var(--ui-section-gap, 32px);
+}
+
+.moru-home-examples__grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(
+        100%,
+        max(var(--moru-example-card-min), calc((100% - var(--moru-example-grid-gap) * 3) / 4))
+      ),
+      1fr
+    )
+  );
+  gap: var(--moru-example-grid-gap);
+}
+
+.moru-home-examples .moru-home-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--moru-example-gap);
+  min-width: 0;
+  min-height: 300px;
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  container: moru-home-card / inline-size;
+}
+
+.moru-home-example__heading {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--moru-example-row-gap);
+  min-width: 0;
+}
+
+.moru-home-example__heading > h3 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: calc(var(--ui-type-label-size) + 2px);
+  font-weight: var(--ui-type-heading-weight);
+  line-height: var(--ui-type-heading-line-height);
+  letter-spacing: var(--ui-type-heading-letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.moru-home-example__detail {
+  min-width: 0;
+  max-width: 100%;
+}
+.moru-home-example__detail .ui-badge {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.moru-home-example__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ui-radius);
+  background: var(--moru-home-accent-soft, var(--ui-surface));
+  color: var(--moru-home-accent, var(--ui-primary));
+}
+
+.moru-home-example__member-list,
+.moru-home-example__switch-list {
+  display: grid;
+  gap: var(--moru-example-row-gap);
+  min-width: 0;
+  margin: 0;
+  padding: var(--moru-example-inset);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+
+.moru-home-example__member-list {
+  max-height: 132px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  list-style: none;
+}
+
+.moru-home-example__member-list > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--moru-example-row-gap);
+  padding: 0;
+}
+
+.moru-home-example__member-name {
+  min-width: 0;
+  font-size: var(--ui-type-label-size);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.moru-home-example__member-role,
+.moru-home-example__status {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+
+.moru-home-example__switch-list > .ui-switch-label {
+  min-height: var(--ui-control-height-sm, 32px);
+}
+
+.moru-home-example__booking-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: end;
+  gap: var(--moru-example-row-gap);
+  min-width: 0;
+}
+
+.moru-home-example__booking-fields > * {
+  min-width: 0;
+}
+
+.moru-home-example__booking-status.ui-alert {
+  padding: var(--moru-example-inset);
+}
+
+.moru-home-example__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--moru-example-row-gap);
+  margin-top: auto;
+  min-width: 0;
+}
+
+.moru-home-example__actions > .ui-button {
+  max-width: 100%;
+}
+
+.moru-home-example__actions > .moru-home-example__status {
+  margin-inline-end: auto;
+}
+
+.moru-home-example-member-form {
+  display: grid;
+  gap: var(--ui-form-gap, 24px);
+}
+
+.moru-home-example__verification {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--moru-example-gap);
+  min-width: 0;
+}
+.moru-home-example__verification .ui-input-otp {
+  width: 100%;
+}
+
+.moru-home-example__metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--moru-example-gap);
+}
+
+.moru-home-example__metric {
+  display: grid;
+  flex: 1 1 7em;
+  min-width: 0;
+  gap: 2px;
+}
+.moru-home-example__metric-row > .ui-toggle-group {
+  flex: 0 0 auto;
+}
+.moru-home-example__metric strong {
+  font-size: 2.15rem;
+  line-height: 1.15;
+  font-weight: var(--ui-type-display-weight);
+  letter-spacing: var(--ui-type-display-letter-spacing);
+  font-variant-numeric: tabular-nums;
+}
+.moru-home-example__metric > span {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  overflow-wrap: anywhere;
+}
+.moru-home-example__chart-scroll {
+  margin: auto 0 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.moru-home-example__chart-scroll:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 2px;
+}
+.moru-home-example__chart.ui-chart {
+  /* Keep seven enlarged category labels legible; only the plot scrolls at extreme widths. */
+  min-inline-size: calc(var(--ui-type-caption-size, 12px) * 9 + 40px);
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+.moru-home-example__chart > figcaption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.moru-home-example__chart .recharts-cartesian-grid-horizontal line {
+  stroke: var(--ui-border);
+}
+
+.moru-home-example__plans.ui-radio-group {
+  display: grid;
+  gap: var(--moru-example-row-gap);
+}
+.moru-home-example__plans .ui-radio-option {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--moru-example-inset);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+.moru-home-example__plans .ui-radio-option:has([data-checked]) {
+  background: var(--ui-primary-soft);
+}
+.moru-home-example__plans .ui-radio-description {
+  font-size: var(--ui-type-caption-size);
+}
+
+.moru-home-example__search {
+  position: relative;
+}
+.moru-home-example__search > svg {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: var(--ui-control-padding-x-sm, 10px);
+  width: var(--ui-icon-size-sm, 14px);
+  height: var(--ui-icon-size-sm, 14px);
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  color: var(--ui-muted);
+}
+.moru-home-example__search .ui-input {
+  padding-inline-start: calc(
+    var(--ui-control-padding-x-sm, 10px) + var(--ui-icon-size-sm, 14px) + var(--ui-control-gap, 8px)
+  );
+}
+.moru-home-example__results {
+  display: grid;
+  align-content: start;
+  gap: var(--moru-example-row-gap);
+  min-height: 88px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.moru-home-example__results li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--ui-type-label-size);
+}
+.moru-home-example__results li > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.moru-home-example__results li > span:last-child {
+  color: var(--ui-muted);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+.moru-home-example__results .moru-home-example__empty {
+  color: var(--ui-muted);
+}
+
+.moru-home-example__upload-art {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 62px;
+  border-radius: var(--ui-radius);
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+.moru-home-example__upload-art span {
+  font-size: var(--ui-type-caption-size);
+}
+.moru-home-example .ui-file-input-selection {
+  max-height: 90px;
+  overflow: auto;
+}
+.moru-home-example > p.moru-home-example__status {
+  margin: 0;
+}
+.moru-home-example__form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--moru-example-gap);
+  min-width: 0;
+}
+.moru-home-example__requirements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.moru-home-example__requirements li {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.moru-home-example__requirements li[data-valid='true'] {
+  color: var(--ui-success-surface-text);
+}
+.moru-home-example__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.moru-home-example__sound {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 65px;
+  margin-block: 3px;
+}
+.moru-home-example__sound-icon {
+  display: grid;
+  flex: 0 0 56px;
+  place-items: center;
+  height: 56px;
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+.moru-home-example__wave {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  height: 54px;
+  min-width: 0;
+}
+.moru-home-example__wave i {
+  flex: 1;
+  max-width: 7px;
+  min-width: 2px;
+  border-radius: 3px;
+  background: var(--ui-primary);
+}
+.moru-home-example__goal {
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+  align-items: center;
+  gap: 15px;
+  margin-block: auto;
+}
+.moru-home-example__goal .ui-ring-progress {
+  margin: 0;
+}
+.moru-home-example__goal > div > p {
+  margin: 9px 0 0;
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-body-line-height);
+  color: var(--ui-muted);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.moru-home-example__goal > div {
+  min-width: 0;
+}
+.moru-home-example__goal .ui-badge {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.moru-home-example__chat {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--moru-example-row-gap);
+}
+.moru-home-example__chat p {
+  margin: 0;
+  padding: var(--moru-example-inset);
+  max-height: 95px;
+  overflow: auto;
+  border-radius: var(--ui-radius);
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-body-line-height);
+  overflow-wrap: anywhere;
+}
+.moru-home-example__form > .ui-textarea-loading-wrap {
+  flex: 1;
+}
+.moru-home-example__form .ui-textarea {
+  min-height: calc(var(--ui-control-height-sm, 32px) * 2);
+}
+
+/* Composition follows each card's available content width, including token padding. */
+@container moru-home-card (max-width: 22em) {
+  .moru-home-example__metric-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .moru-home-example__metric {
+    flex-basis: auto;
+  }
+  .moru-home-example__metric-row > .ui-toggle-group {
+    width: 100%;
+  }
+  .moru-home-example__booking-fields,
+  .moru-home-example__goal {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moru-home-example__goal {
+    justify-items: start;
+  }
+}
+
+@container moru-home-card (max-width: 18em) {
+  .moru-home-example__heading {
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+  }
+  .moru-home-example__detail {
+    grid-column: 2;
+  }
+  .moru-home-example__member-list > li {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .moru-home-example__member-role {
+    grid-column: 2;
+  }
+  .moru-home-example__actions > .moru-home-example__status:not(:empty) {
+    flex-basis: 100%;
+  }
+}
+
+@container moru-home-examples (max-width: 545px) {
+  .moru-home-examples .moru-home-example {
+    min-height: 0;
+  }
+}

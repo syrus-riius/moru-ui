@@ -24,7 +24,11 @@ describe('file selection validation', () => {
 })
 describe('FileInput form semantics', () => {
   it('retains native file selection, form name and label/error association', () => {
-    const html = renderToStaticMarkup(<Field label="첨부" error="파일을 선택하세요."><FileInput name="brief" accept=".pdf" multiple required /></Field>)
+    const html = renderToStaticMarkup(
+      <Field label="첨부" error="파일을 선택하세요.">
+        <FileInput name="brief" accept=".pdf" multiple required />
+      </Field>,
+    )
     const input = html.match(/<input[^>]+>/)?.[0] ?? ''
     expect(input).toContain('type="file"')
     expect(input).toContain('name="brief"')
@@ -35,6 +39,8 @@ describe('FileInput form semantics', () => {
     expect(html).toContain(`for="${input.match(/ id="([^"]+)"/)?.[1]}"`)
   })
   it('passes disabled behavior to the actual input', () => {
-    expect(renderToStaticMarkup(<FileInput disabled aria-label="첨부" />)).toMatch(/<input[^>]*disabled=""/)
+    expect(renderToStaticMarkup(<FileInput disabled aria-label="첨부" />)).toMatch(
+      /<input[^>]*disabled=""/,
+    )
   })
 })

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceHash": "1e52c47f8dedb40d40400b1bf361db6f80b4892986556c8c86cc171261462b96",
-  "assetVersion": "1e52c47f8ded",
+  "sourceHash": "4b973f018162258184a43201439ee959b06f29a282d308050aeb371a0292c777",
+  "assetVersion": "4b973f018162",
   "assetDirectory": "assets/vendor",
   "runtime": "expo-react-native-web",
   "baseUrl": "/native-preview",

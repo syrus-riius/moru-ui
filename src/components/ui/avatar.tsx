@@ -2,7 +2,10 @@ import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
 
-export interface AvatarProps extends Omit<ComponentPropsWithoutRef<typeof BaseAvatar.Root>, 'className' | 'children'> {
+export interface AvatarProps extends Omit<
+  ComponentPropsWithoutRef<typeof BaseAvatar.Root>,
+  'className' | 'children'
+> {
   src?: string
   alt: string
   fallback?: ReactNode
@@ -12,9 +15,16 @@ export interface AvatarProps extends Omit<ComponentPropsWithoutRef<typeof BaseAv
 
 function initials(name: string) {
   const words = name.trim().split(/\s+/).filter(Boolean)
-  return (words.length > 1
-    ? words.slice(0, 2).map((word) => Array.from(word)[0]).join('')
-    : Array.from(words[0] ?? '').slice(0, 2).join('')).toLocaleUpperCase()
+  return (
+    words.length > 1
+      ? words
+          .slice(0, 2)
+          .map((word) => Array.from(word)[0])
+          .join('')
+      : Array.from(words[0] ?? '')
+          .slice(0, 2)
+          .join('')
+  ).toLocaleUpperCase()
 }
 
 /** An image with a stable fallback, labelled once for assistive technology. */

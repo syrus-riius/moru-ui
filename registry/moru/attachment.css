@@ -1,0 +1,136 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-attachment {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-attachment-description,
+:where([data-moru-registry]) .ui-attachment-state {
+  font-size: var(--ui-type-caption-size);
+  font-weight: var(--ui-type-caption-weight);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-attachment-title {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-attachment {
+  --ui-attachment-media-size: var(--ui-control-height-md, 40px);
+  --ui-attachment-icon-size: var(--ui-icon-size-md, 16px);
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--ui-control-gap);
+  align-items: center;
+  padding: calc(var(--ui-space) * 3);
+  border: var(--ui-border-width) solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  background: var(--ui-surface);
+}
+:where([data-moru-registry]) .ui-attachment[data-size='sm'] {
+  --ui-attachment-media-size: var(--ui-control-height-sm, 32px);
+  --ui-attachment-icon-size: var(--ui-icon-size-sm, 14px);
+  padding: calc(var(--ui-space) * 2);
+}
+:where([data-moru-registry]) .ui-attachment[data-size='lg'] {
+  --ui-attachment-media-size: var(--ui-control-height-lg, 48px);
+  --ui-attachment-icon-size: var(--ui-icon-size-lg, 18px);
+  padding: calc(var(--ui-space) * 4);
+}
+:where([data-moru-registry]) .ui-attachment-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--ui-attachment-media-size);
+  height: var(--ui-attachment-media-size);
+  border-radius: max(3px, calc(var(--ui-radius) / 2));
+  background: var(--ui-control-hover-bg);
+  color: var(--ui-muted);
+  overflow: hidden;
+}
+:where([data-moru-registry]) .ui-attachment-media > svg {
+  width: var(--ui-attachment-icon-size);
+  height: var(--ui-attachment-icon-size);
+}
+:where([data-moru-registry]) .ui-attachment-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+:where([data-moru-registry]) .ui-attachment-content {
+  flex: 1;
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-attachment-title {
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-attachment-actions {
+  display: flex;
+  gap: var(--ui-space);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+:where([data-moru-registry]) .ui-attachment-actions .ui-button {
+  padding-inline: var(--ui-space);
+  min-width: var(--ui-resolved-control-height, var(--ui-control-height-sm));
+}
+:where([data-moru-registry]) .ui-attachment-progress {
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin-top: var(--ui-space);
+  accent-color: var(--ui-primary);
+}
+:where([data-moru-registry]) .ui-attachment[data-status='error'] {
+  border-color: var(--ui-danger-border);
+}
+:where([data-moru-registry]) .ui-attachment[data-status='error'] .ui-attachment-state {
+  color: var(--ui-danger-surface-text);
+}
+:where([data-moru-registry]) .ui-attachment[data-status='done'] .ui-attachment-state {
+  color: var(--ui-success-surface-text);
+}
+:where([data-moru-registry]) .ui-attachment[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+:where([data-moru-registry]) .ui-attachment[data-orientation='vertical'] .ui-attachment-media {
+  width: 100%;
+  min-height: 100px;
+}
+:where([data-moru-registry]) .ui-attachment-group {
+  display: flex;
+  gap: var(--ui-control-gap);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  max-width: 100%;
+  padding-block: var(--ui-space);
+  scroll-snap-type: x proximity;
+}
+:where([data-moru-registry]) .ui-attachment-group > .ui-attachment {
+  flex: 0 0 min(100%, 280px);
+  scroll-snap-align: start;
+}
+@media (max-width: 380px) {
+  :where([data-moru-registry]) .ui-attachment {
+    flex-wrap: wrap;
+  }
+  :where([data-moru-registry]) .ui-attachment-actions {
+    margin-inline-start: auto;
+  }
+  :where([data-moru-registry]) .ui-attachment-content {
+    flex-basis: calc(100% - var(--ui-attachment-media-size) - var(--ui-control-gap));
+  }
+}
+

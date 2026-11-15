@@ -1,12 +1,14 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
+import { useI18n } from './_lib/i18n'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import { cn } from './_lib/cn'
 import { NavigationMenuActions, type NavigationAction } from './navigation-menu-items'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './navigation-completion.css'
+import './navigation-shared.css'
+import './context-menu.css'
 
 export type ContextMenuItem = NavigationAction
 export interface ContextMenuProps {
@@ -20,7 +22,20 @@ export interface ContextMenuProps {
   className?: string
   'aria-label'?: string
 }
-export function ContextMenu({ children, items, open, defaultOpen = false, onOpenChange, disabled, size = 'md', className, 'aria-label': label = '컨텍스트 메뉴 영역' }: ContextMenuProps) {
+export function ContextMenu({
+  children,
+  items,
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  disabled,
+  size = 'md',
+  className,
+  'aria-label': labelProp,
+}: ContextMenuProps) {
+  const { t } = useI18n()
+  const label = labelProp ?? t('컨텍스트 메뉴 영역')
+
   const portalContainer = useThemePortalContainer()
   const triggerRef = useRef<HTMLDivElement>(null)
   const [localOpen, setLocalOpen] = useState(defaultOpen)
@@ -34,15 +49,47 @@ export function ContextMenu({ children, items, open, defaultOpen = false, onOpen
     if (open === undefined) setLocalOpen(next)
     onOpenChange?.(next)
   }
-  return <BaseContextMenu.Root open={shown} onOpenChange={changeOpen} disabled={disabled}>
-    <BaseContextMenu.Trigger ref={triggerRef} className={cn('ui-context-menu-trigger', className)} data-size={size} tabIndex={disabled ? -1 : 0} aria-disabled={disabled || undefined} aria-label={label} aria-haspopup="menu" aria-expanded={shown} onContextMenu={() => setKeyboardAnchor(null)} onKeyDown={(event) => {
-      if (disabled || !(event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10'))) return
-      event.preventDefault()
-      setKeyboardAnchor(event.currentTarget)
-      changeOpen(true)
-    }}>{children}</BaseContextMenu.Trigger>
-    <OverlayPortal portal={BaseContextMenu.Portal} kind="menu" container={portalContainer}><BaseContextMenu.Positioner positionMethod="fixed" className="ui-navigation-positioner" anchor={keyboardAnchor ?? undefined} align="start" sideOffset={4} collisionPadding={12}><BaseContextMenu.Popup className="ui-navigation-popup" data-size={size} aria-label={label} finalFocus={triggerRef}>
-      <NavigationMenuActions items={items} size={size} />
-    </BaseContextMenu.Popup></BaseContextMenu.Positioner></OverlayPortal>
-  </BaseContextMenu.Root>
+  return (
+    <BaseContextMenu.Root open={shown} onOpenChange={changeOpen} disabled={disabled}>
+      <BaseContextMenu.Trigger
+        ref={triggerRef}
+        className={cn('ui-context-menu-trigger', className)}
+        data-size={size}
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled || undefined}
+        aria-label={label}
+        aria-haspopup="menu"
+        aria-expanded={shown}
+        onContextMenu={() => setKeyboardAnchor(null)}
+        onKeyDown={(event) => {
+          if (disabled || !(event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10')))
+            return
+          event.preventDefault()
+          setKeyboardAnchor(event.currentTarget)
+          changeOpen(true)
+        }}
+      >
+        {children}
+      </BaseContextMenu.Trigger>
+      <OverlayPortal portal={BaseContextMenu.Portal} kind="menu" container={portalContainer}>
+        <BaseContextMenu.Positioner
+          positionMethod="fixed"
+          className="ui-navigation-positioner"
+          anchor={keyboardAnchor ?? undefined}
+          align="start"
+          sideOffset={4}
+          collisionPadding={12}
+        >
+          <BaseContextMenu.Popup
+            className="ui-navigation-popup"
+            data-size={size}
+            aria-label={label}
+            finalFocus={triggerRef}
+          >
+            <NavigationMenuActions items={items} size={size} />
+          </BaseContextMenu.Popup>
+        </BaseContextMenu.Positioner>
+      </OverlayPortal>
+    </BaseContextMenu.Root>
+  )
 }

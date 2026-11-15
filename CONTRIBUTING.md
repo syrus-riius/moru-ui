@@ -30,9 +30,14 @@ For component behavior changes, add or update focused tests for the behavior tha
 Before submitting a code change, run:
 
 ```sh
+npm run format:check
 npm test
 npm run build
 ```
+
+Run `npm run format` from the repository root to format maintained web, native, template, and build-tool source with the pinned Prettier version. The shared rules use two-space indentation, single quotes in JavaScript/TypeScript, no optional semicolons, and a 100-column target. Embedded example strings are left unchanged. This command also covers the Expo source; it does not combine the web and Expo dependency installations.
+
+Formatting excludes generated registry files, public assets and downloads, `src/theme/default.css`, lockfiles, local build output, archived designs, and prose documentation. Regenerate affected distribution files after formatting their source. Do not format generated files by hand. CI checks formatting before tests and never rewrites source.
 
 `npm run build` checks the generated native web preview, all source starters and registry before TypeScript and the Vite production build. If a check reports a stale artifact, regenerate it from its source as described below. CI runs the same tests and build; it does not automatically rewrite generated files. Documentation-only changes do not need new tests.
 
@@ -42,8 +47,9 @@ Report the checks you actually performed. A passing browser preview or platform 
 
 Edit source files rather than the generated download or preview output.
 
-- After changing registry inputs (UI, blocks, tokens, helpers, dependency versions or the generator), run `npm run registry:build` and include `registry.json`, `registry/moru` and `public/r` output. Run `npm run registry:smoke` for changes that affect installation. It uses the real shadcn CLI against a temporary local registry, creates isolated consumer projects under `.qa`, and rewrites only registry dependency transport URLs for local validation. `--base-url https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2` verifies deployed payloads unchanged.
+- After changing registry inputs (UI, blocks, tokens, helpers, dependency versions or the generator), run `npm run registry:build` and include `registry.json`, `registry/moru` and `public/r` output. Run `npm run registry:smoke` for changes that affect installation. It uses the real shadcn CLI against a temporary local registry serving the current release, creates isolated consumer projects under `.qa`, and rewrites only registry dependency transport URLs for local validation. `--registry-version v0.3.2` selects an older published release, and `--base-url https://moru-ui-lab.riius.chatgpt.site/r/v0.3.2` verifies deployed payloads unchanged.
 - After changing web UI, theme, shared helpers, reusable block sources, dependencies, or starter templates, run `npm run web:starter:build` from the root. Include the updated ZIP and manifest in the PR. Packaging requires Python 3.
+- After registry/native API, starter setup or AI usage guidance changes, run `npm run ai:build` and include `public/llms.txt` and `public/ai`. The build runs `ai:check` to detect stale references. Edit `scripts/ai-docs-metadata.mjs` for curated examples; props and exports come from source. Keep the web and Expo guides distinct.
 - If changing the inputs that generate `src/theme/default.css`, run `npm run tokens:build`, then regenerate the web starter.
 - After changing native preview inputs, install the Expo app's dependencies with `npm ci` in `apps/moru-expo`, return to the root, and run `npm run mobile:build`. Include the resulting `public/native-preview` files and build information. After changing native sources, package metadata, starter templates, licenses or notices, run `npm run mobile:starter:build` from the root and include its ZIP and manifest. This packaging command requires Python 3 but does not build Expo.
 

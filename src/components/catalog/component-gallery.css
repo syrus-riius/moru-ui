@@ -1,0 +1,525 @@
+/* Match the home showcase: one token-driven surface on the background canvas. */
+.studio-shell-public.studio-shell-components,
+.studio-shell-components .component-design-toolbar {
+  background: var(--ui-background);
+}
+.studio-shell-components .moru-docs-mobile-nav {
+  background: var(--chrome-surface);
+}
+.main-content.component-workspace {
+  container: catalog / inline-size;
+  padding-top: 30px;
+}
+.library-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+}
+.library-overview > button {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: 0 solid var(--chrome-border);
+  border-radius: 9px;
+  background: var(--chrome-surface);
+  text-align: left;
+  transition:
+    border-color 0.15s,
+    transform 0.15s;
+}
+.library-overview > button:hover {
+  border-color: var(--chrome-muted);
+  transform: translateY(-1px);
+}
+.library-overview-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  color: var(--chrome-muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.library-overview-label > svg {
+  flex: none;
+  stroke-width: 1.5;
+}
+.library-overview strong {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 9px;
+  color: var(--chrome-text);
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.7px;
+}
+.library-overview strong > span {
+  font-size: 11px;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+.library-overview-caption {
+  color: var(--chrome-muted);
+  font-size: 10px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.library-overview > .library-overview-simulator {
+  background: var(--chrome-action-bg);
+  color: var(--chrome-action-foreground);
+  border-color: transparent;
+}
+.library-overview-simulator .library-overview-label,
+.library-overview-simulator .library-overview-caption {
+  color: inherit;
+  opacity: 0.7;
+}
+.library-overview-simulator .library-overview-label > svg {
+  color: var(--ui-accent);
+  opacity: 1;
+}
+.library-overview-simulator strong {
+  color: inherit;
+  font-size: 19px;
+  line-height: 1.7;
+  letter-spacing: -0.4px;
+}
+.component-workspace .component-additions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.component-workspace .component-additions > span {
+  border: 0;
+  border-radius: 3px;
+  padding: 3px 5px;
+  background: var(--chrome-accent-bg);
+  color: var(--chrome-accent);
+  font-size: 9px;
+  font-weight: 550;
+}
+.component-workspace .component-additions > p {
+  flex: 1;
+  min-width: 140px;
+  margin: 0;
+  color: var(--chrome-muted);
+  font-size: 11px;
+}
+.component-workspace .component-additions > button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 3px 0;
+  color: var(--chrome-text);
+  font-size: 10px;
+}
+.component-workspace .content-toolbar {
+  padding: 12px;
+  margin-bottom: 14px;
+  gap: 14px;
+  flex-wrap: wrap;
+  border: 0 solid var(--chrome-border);
+  border-radius: 8px;
+  background: var(--chrome-surface);
+}
+.component-workspace .category-tabs {
+  gap: 3px;
+  flex: none;
+}
+.component-workspace .category-tabs > button {
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.5;
+  box-shadow: none;
+}
+.component-workspace .category-tabs > button.active {
+  background: var(--chrome-action-bg);
+  color: var(--chrome-action-foreground);
+}
+.component-workspace .category-tabs > button > span {
+  font-size: 9px;
+  padding: 0 3px;
+  color: inherit;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.component-workspace .preview-controls {
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+}
+.component-workspace .component-search {
+  display: flex;
+  width: 176px;
+  max-width: 230px;
+  min-width: 100px;
+  min-height: 32px;
+  padding: 6px 9px;
+  border: 0 solid transparent;
+  border-radius: 4px;
+  background: var(--chrome-bg);
+}
+.component-workspace .component-search:focus-within {
+  border-color: var(--chrome-text);
+  outline: 2px solid color-mix(in srgb, var(--chrome-text) 14%, transparent);
+  outline-offset: 2px;
+}
+.component-workspace .component-search > svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.component-workspace .component-search input {
+  font-size: 11px;
+  width: 100%;
+  min-width: 0;
+  outline: none;
+}
+.component-workspace .component-search kbd {
+  font-size: 9px;
+  border: 0;
+}
+.component-workspace .view-toggle {
+  flex: none;
+  padding: 3px;
+  border: 0;
+  background: var(--chrome-bg);
+  border-radius: 4px;
+}
+.component-workspace .view-toggle button {
+  min-width: 26px;
+  min-height: 26px;
+  padding: 5px;
+}
+.component-workspace .view-toggle button.active {
+  color: var(--chrome-text);
+  background: var(--chrome-surface);
+  box-shadow: 0 1px 3px #0000000a;
+}
+.component-workspace .component-results {
+  margin: 0 0 12px;
+  font-size: 10px;
+  color: var(--chrome-muted);
+}
+.component-workspace .component-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--ui-space, 4px) * 4);
+}
+.component-workspace .specimen {
+  display: flex;
+  flex-direction: column;
+  container: specimen / inline-size;
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+.component-workspace #component-calendar {
+  grid-column: 1 / -1;
+}
+.component-workspace :is(.specimen-heading, .specimen-footer) {
+  flex: none;
+}
+.component-workspace :is(.specimen-content, .specimen-source) {
+  flex: 1;
+}
+.component-workspace .specimen.is-selected {
+  border-color: var(--ui-border);
+  box-shadow: var(--ui-shadow);
+}
+.component-workspace .specimen.is-selected .specimen-number {
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+.component-workspace .specimen-heading {
+  height: auto;
+  min-height: 76px;
+  padding: calc(var(--ui-card-padding, 24px) * 0.75) var(--ui-card-padding, 24px);
+  gap: 12px;
+  border: 0;
+}
+.component-workspace .specimen-title {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+  font-size: inherit;
+}
+.component-workspace .specimen-name {
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  line-height: 1.5;
+}
+.component-workspace .specimen-number {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  margin-top: 1px;
+  padding: 0;
+  border-radius: 4px;
+  background: var(--ui-input-bg);
+  color: var(--ui-muted);
+  font: 10px/1 var(--font-sans);
+}
+.component-workspace .specimen-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 3px;
+}
+.component-workspace .specimen-component-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+.component-workspace .specimen-subtitle {
+  color: var(--ui-muted);
+  display: block;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.component-workspace .specimen-code {
+  color: var(--ui-muted);
+  width: 28px;
+  height: 28px;
+  flex: none;
+  padding: 6px;
+}
+.component-workspace .specimen-content {
+  min-height: 190px;
+  margin: 0;
+  padding: var(--ui-card-padding, 24px);
+  gap: 18px;
+  border-radius: 0;
+  background: transparent;
+}
+.component-workspace .specimen-footer {
+  min-height: 44px;
+  height: auto;
+  padding: calc(var(--ui-card-padding, 24px) * 0.5) var(--ui-card-padding, 24px);
+  border: 0;
+  font-size: 11px;
+  color: var(--ui-muted);
+}
+.component-workspace .specimen-footer > span {
+  gap: 6px;
+}
+.component-workspace .specimen-footer button {
+  gap: 6px;
+  color: var(--ui-text);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.component-workspace .specimen-footer i {
+  background: var(--ui-muted);
+}
+.studio-shell-components .moru-docs-layout .specimen-footer > a {
+  color: var(--ui-text);
+}
+.component-workspace .specimen-source {
+  min-height: 190px;
+  margin: 0 12px;
+  padding: 20px;
+  border-radius: 8px;
+  color: var(--chrome-text);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.component-workspace
+  :is(
+    .library-overview button,
+    .content-toolbar button,
+    .specimen-heading button,
+    .specimen-footer button,
+    .playground-note button,
+    .example-invitation button,
+    .empty-state button
+  ):focus-visible {
+  outline: 2px solid var(--chrome-text);
+  outline-offset: 3px;
+}
+.component-workspace .specimen-source:focus-visible {
+  outline: 2px solid var(--chrome-text);
+  outline-offset: -3px;
+}
+.component-workspace .mini-dialog {
+  transform: none;
+  box-shadow: none;
+}
+.component-workspace .demo-row-secondary .demo-annotation {
+  display: none;
+}
+.component-workspace .playground-note {
+  padding: 20px 0 28px;
+  font-size: 10px;
+  line-height: 1.7;
+  align-items: flex-start;
+}
+.component-workspace .playground-note > span {
+  align-items: flex-start;
+  gap: 8px;
+}
+.component-workspace .playground-note > span > svg {
+  flex: none;
+  margin-top: 2px;
+}
+.component-workspace .playground-note > button {
+  font-size: 10px;
+  line-height: 1.7;
+}
+.component-workspace .example-invitation {
+  padding: 26px;
+  gap: 20px;
+  border-radius: 10px;
+  background: var(--chrome-surface);
+}
+.component-workspace .example-invitation .eyebrow {
+  color: var(--chrome-muted);
+  font-size: 9px;
+}
+.component-workspace .example-invitation h2 {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 1.4;
+  margin: 10px 0 8px;
+}
+.component-workspace .example-invitation p {
+  font-size: 11px;
+  line-height: 1.7;
+  max-width: 350px;
+}
+.component-workspace .example-invitation > button {
+  font-size: 11px;
+  padding: 9px 12px;
+  border: 0;
+  background: var(--chrome-action-bg);
+  color: var(--chrome-action-foreground);
+}
+.component-workspace .invitation-pattern {
+  display: block;
+  width: 112px;
+  height: 112px;
+  right: 25px;
+  top: auto;
+  bottom: -26px;
+  opacity: 0.04;
+  transform: none;
+  color: var(--chrome-text);
+}
+@container catalog (max-width:640px) {
+  .component-workspace .component-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .component-workspace .preview-controls {
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+  .component-workspace .component-search {
+    flex: 1;
+    width: auto;
+    max-width: none;
+  }
+  .component-workspace .component-search kbd {
+    display: inline;
+  }
+  .component-workspace .example-invitation {
+    display: block;
+  }
+  .component-workspace .example-invitation > button {
+    margin-top: 20px;
+  }
+  .library-overview {
+    gap: 8px;
+  }
+  .library-overview > button {
+    padding: 14px;
+  }
+  .library-overview-caption {
+    display: none;
+  }
+  .library-overview strong {
+    font-size: 23px;
+  }
+  .library-overview-simulator strong {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+}
+@container specimen (max-width:360px) {
+  .component-workspace .mini-dialog {
+    display: none;
+  }
+  .component-workspace .dialog-demo-layout {
+    justify-content: flex-start;
+  }
+  .component-workspace .demo-menu-layout {
+    padding: 13px 10px;
+    gap: 9px;
+  }
+}
+@media (max-width: 760px) {
+  .main-content.component-workspace {
+    padding-top: 24px;
+  }
+}
+@media (max-width: 540px) {
+  .component-workspace .content-toolbar {
+    gap: 10px;
+    padding: 10px;
+  }
+  .component-workspace .category-tabs {
+    gap: 1px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .component-workspace .category-tabs > button {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+  .component-workspace .component-search kbd {
+    display: none;
+  }
+  .library-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .library-overview > .library-overview-simulator {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+  }
+  .library-overview-simulator .library-overview-label {
+    width: auto;
+  }
+  .library-overview-simulator .library-overview-label > svg {
+    display: none;
+  }
+  .component-workspace .example-invitation {
+    padding: 24px;
+  }
+}

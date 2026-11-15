@@ -1,0 +1,34 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-kbd {
+  font-family: var(--ui-font-family, inherit);
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+  box-sizing: border-box;
+}
+:where([data-moru-registry]) .ui-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7em;
+  min-height: 1.7em;
+  padding: 0.1em 0.4em;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-bottom-width: var(--ui-border-width, 1px);
+  border-radius: max(3px, calc(var(--ui-radius, 6px) * 0.4));
+  background: var(--ui-control-hover-bg, #f3f3f1);
+  color: var(--ui-muted, #6e6e6b);
+  font-family: var(--ui-font-family-code, monospace);
+  font-size: var(--ui-type-code-size, 12px);
+  font-weight: var(--ui-type-code-weight, 450);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+:where([data-moru-registry]) .ui-kbd-group {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ui-space, 4px) / 2);
+}
+

@@ -3,7 +3,10 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import {
-  nativeComponentSources, nativeCrossPlatformComponents, nativeMobileComponents, nativeOSComponents,
+  nativeComponentSources,
+  nativeCrossPlatformComponents,
+  nativeMobileComponents,
+  nativeOSComponents,
   nativePlatformCapabilities,
 } from './mobile-coverage'
 
@@ -16,7 +19,9 @@ describe('native component source coverage', () => {
     expect(nativeOSComponents).toHaveLength(3)
     expect(nativeComponentSources).toHaveLength(31)
     expect(new Set(nativeComponentSources.map((entry) => entry.name)).size).toBe(31)
-    expect(nativeComponentSources.map((entry) => entry.name).sort()).toEqual([...nativeMobileComponents].sort())
+    expect(nativeComponentSources.map((entry) => entry.name).sort()).toEqual(
+      [...nativeMobileComponents].sort(),
+    )
     for (const entry of nativeComponentSources) {
       expect(sourceText(entry.sourceFile)).toMatch(new RegExp(`export function ${entry.name}\\b`))
       expect(entry.examples.length).toBeGreaterThan(0)
@@ -25,17 +30,30 @@ describe('native component source coverage', () => {
   })
 
   it('keeps reusable Expo Universal renderers separate from the date-picker browser adaptation', () => {
-    expect(nativeComponentSources.find((entry) => entry.name === 'NativePicker')?.browserImplementation).toBe('shared')
-    expect(nativeComponentSources.find((entry) => entry.name === 'NativeSlider')?.browserImplementation).toBe('shared')
-    expect(nativeComponentSources.find((entry) => entry.name === 'NativeDatePicker')?.browserImplementation).toBe('adapted')
+    expect(
+      nativeComponentSources.find((entry) => entry.name === 'NativePicker')?.browserImplementation,
+    ).toBe('shared')
+    expect(
+      nativeComponentSources.find((entry) => entry.name === 'NativeSlider')?.browserImplementation,
+    ).toBe('shared')
+    expect(
+      nativeComponentSources.find((entry) => entry.name === 'NativeDatePicker')
+        ?.browserImplementation,
+    ).toBe('adapted')
     for (const entry of nativeComponentSources) {
-      expect(entry.entryPoint).toBe(nativeOSComponents.some((name) => name === entry.name) ? '@moru/native/expo' : '@moru/native')
+      expect(entry.entryPoint).toBe(
+        nativeOSComponents.some((name) => name === entry.name)
+          ? '@moru/native/expo'
+          : '@moru/native',
+      )
     }
   })
 
   it('maps wallet, task and activity examples to components that the actual Expo home imports', () => {
     const home = sourceText('apps/moru-expo/src/components/NativeLabHome.tsx')
-    for (const entry of nativeComponentSources.filter((item) => item.examples.some((example) => ['wallet', 'tasks', 'activity'].includes(example)))) {
+    for (const entry of nativeComponentSources.filter((item) =>
+      item.examples.some((example) => ['wallet', 'tasks', 'activity'].includes(example)),
+    )) {
       expect(home).toMatch(new RegExp(`\\b${entry.name}\\b`))
     }
   })
@@ -43,7 +61,9 @@ describe('native component source coverage', () => {
 
 describe('mobile-specific capabilities', () => {
   it('separates implemented native patterns from unconnected device integrations', () => {
-    expect(new Set(nativePlatformCapabilities.map((entry) => entry.id)).size).toBe(nativePlatformCapabilities.length)
+    expect(new Set(nativePlatformCapabilities.map((entry) => entry.id)).size).toBe(
+      nativePlatformCapabilities.length,
+    )
     expect(nativePlatformCapabilities.some((entry) => entry.group === 'pattern')).toBe(true)
     expect(nativePlatformCapabilities.some((entry) => entry.group === 'system')).toBe(true)
     expect(nativePlatformCapabilities.some((entry) => entry.group === 'device')).toBe(true)

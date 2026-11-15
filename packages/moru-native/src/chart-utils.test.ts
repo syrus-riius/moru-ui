@@ -1,13 +1,36 @@
 import { describe, expect, it } from 'vitest'
-import { chartAreaPath, chartCoordinates, chartDomain, chartLinePath, donutArcPath, donutSegments, formatChartValue, normalizeChartData, scaleChartValue } from './chart-utils'
+import {
+  chartAreaPath,
+  chartCoordinates,
+  chartDomain,
+  chartLinePath,
+  donutArcPath,
+  donutSegments,
+  formatChartValue,
+  normalizeChartData,
+  scaleChartValue,
+} from './chart-utils'
 
 describe('native chart normalization', () => {
   it('retains zero/negative finite values, drops invalid values, and creates unique keys without mutation', () => {
-    const input = Object.freeze([{ id: 'a', label: '영', value: 0 }, { id: 'a', label: ' 음수 ', value: -4 }, { id: 'bad', label: '오류', value: NaN }, { id: 'a-2', label: '', value: 3 }].map(Object.freeze))
-    expect(normalizeChartData(input)).toEqual([{ id: 'a', label: '영', value: 0 }, { id: 'a-2', label: '음수', value: -4 }, { id: 'a-2-2', label: '4', value: 3 }])
+    const input = Object.freeze(
+      [
+        { id: 'a', label: '영', value: 0 },
+        { id: 'a', label: ' 음수 ', value: -4 },
+        { id: 'bad', label: '오류', value: NaN },
+        { id: 'a-2', label: '', value: 3 },
+      ].map(Object.freeze),
+    )
+    expect(normalizeChartData(input)).toEqual([
+      { id: 'a', label: '영', value: 0 },
+      { id: 'a-2', label: '음수', value: -4 },
+      { id: 'a-2-2', label: '4', value: 3 },
+    ])
     expect(input[1].id).toBe('a')
     expect(normalizeChartData(null)).toEqual([])
-    expect(normalizeChartData([Object.create({ value: 4 }), { value: Infinity }, { value: '3' }])).toEqual([])
+    expect(
+      normalizeChartData([Object.create({ value: 4 }), { value: Infinity }, { value: '3' }]),
+    ).toEqual([])
   })
 })
 
@@ -25,12 +48,17 @@ describe('native cartesian geometry', () => {
     expect(chartDomain([Number.MAX_VALUE], false).min).toBeLessThan(Number.MAX_VALUE)
   })
   it('keeps extreme finite domains and pixel coordinates finite', () => {
-    const data = normalizeChartData([{ id: 'min', label: '최저', value: -Number.MAX_VALUE }, { id: 'max', label: '최고', value: Number.MAX_VALUE }])
+    const data = normalizeChartData([
+      { id: 'min', label: '최저', value: -Number.MAX_VALUE },
+      { id: 'max', label: '최고', value: Number.MAX_VALUE },
+    ])
     const layout = chartCoordinates(data, 320, 200)
     expect(layout.points.map((point) => point.y)).toEqual([172, 12])
     expect(layout.baseline).toBe(92)
     expect(scaleChartValue(NaN, { min: 0, max: 1 }, 10, 20)).toBe(15)
-    expect(layout.points.every((point) => Number.isFinite(point.x) && Number.isFinite(point.y))).toBe(true)
+    expect(
+      layout.points.every((point) => Number.isFinite(point.x) && Number.isFinite(point.y)),
+    ).toBe(true)
   })
   it('centers a single point and makes a closed area anchored to the zero baseline', () => {
     const data = normalizeChartData([{ id: 'only', label: '하나', value: 4 }])
@@ -43,20 +71,36 @@ describe('native cartesian geometry', () => {
   it('fits a short sparkline to its actual viewport rather than forcing chart-sized height', () => {
     const data = normalizeChartData([{ value: 1 }, { value: 3 }])
     const layout = chartCoordinates(data, 48, 32, false, { left: 4, right: 4, top: 4, bottom: 4 })
-    expect(layout.points.map(({ x, y }) => ({ x, y }))).toEqual([{ x: 4, y: 28 }, { x: 44, y: 4 }])
+    expect(layout.points.map(({ x, y }) => ({ x, y }))).toEqual([
+      { x: 4, y: 28 },
+      { x: 44, y: 4 },
+    ])
   })
 })
 
 describe('native donut geometry', () => {
   it('excludes nonpositive values while preserving the exact positive shares', () => {
-    const data = normalizeChartData([{ id: 'a', label: 'A', value: 3 }, { id: 'b', label: 'B', value: 1 }, { id: 'zero', label: '영', value: 0 }, { id: 'negative', label: '음수', value: -2 }])
+    const data = normalizeChartData([
+      { id: 'a', label: 'A', value: 3 },
+      { id: 'b', label: 'B', value: 1 },
+      { id: 'zero', label: '영', value: 0 },
+      { id: 'negative', label: '음수', value: -2 },
+    ])
     const segments = donutSegments(data)
-    expect(segments.map(({ ratio, startAngle, endAngle }) => ({ ratio, startAngle, endAngle }))).toEqual([{ ratio: .75, startAngle: 0, endAngle: 270 }, { ratio: .25, startAngle: 270, endAngle: 360 }])
+    expect(
+      segments.map(({ ratio, startAngle, endAngle }) => ({ ratio, startAngle, endAngle })),
+    ).toEqual([
+      { ratio: 0.75, startAngle: 0, endAngle: 270 },
+      { ratio: 0.25, startAngle: 270, endAngle: 360 },
+    ])
     expect(donutSegments(data.slice(2))).toEqual([])
   })
   it('normalizes large totals without overflowing to Infinity or losing the full circle', () => {
-    const segments = donutSegments([{ id: 'a', label: 'A', value: Number.MAX_VALUE }, { id: 'b', label: 'B', value: Number.MAX_VALUE }])
-    expect(segments.map((segment) => segment.ratio)).toEqual([.5, .5])
+    const segments = donutSegments([
+      { id: 'a', label: 'A', value: Number.MAX_VALUE },
+      { id: 'b', label: 'B', value: Number.MAX_VALUE },
+    ])
+    expect(segments.map((segment) => segment.ratio)).toEqual([0.5, 0.5])
     expect(segments.at(-1)?.endAngle).toBe(360)
   })
   it('draws a full circle using two arcs and safely handles invalid or empty slices', () => {

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "type": "registry:ui",
+  "title": "Kbd",
+  "description": "Compact visual representation of keyboard keys and shortcuts.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/kbd.css",
+      "type": "registry:file",
+      "target": "@ui/moru/kbd.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-kbd {\n  font-family: var(--ui-font-family, inherit);\n  color: var(--ui-text, #171717);\n  font-size: var(--ui-type-label-size, 14px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.45);\n  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);\n  box-sizing: border-box;\n}\n:where([data-moru-registry]) .ui-kbd {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.7em;\n  min-height: 1.7em;\n  padding: 0.1em 0.4em;\n  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n  border-bottom-width: var(--ui-border-width, 1px);\n  border-radius: max(3px, calc(var(--ui-radius, 6px) * 0.4));\n  background: var(--ui-control-hover-bg, #f3f3f1);\n  color: var(--ui-muted, #6e6e6b);\n  font-family: var(--ui-font-family-code, monospace);\n  font-size: var(--ui-type-code-size, 12px);\n  font-weight: var(--ui-type-code-weight, 450);\n  line-height: 1.4;\n  white-space: nowrap;\n}\n:where([data-moru-registry]) .ui-kbd-group {\n  display: inline-flex;\n  align-items: center;\n  gap: calc(var(--ui-space, 4px) / 2);\n}\n\n"
+    },
+    {
+      "path": "registry/moru/kbd.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/kbd.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport type { HTMLAttributes } from 'react'\nimport { cn } from './_lib/cn'\nimport './controls-shared.css'\nimport './kbd.css'\n\nexport function Kbd({ className, ...props }: HTMLAttributes<HTMLElement>) {\n  return <kbd {...props} className={cn('ui-kbd', className)} />\n}\nexport function KbdGroup({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {\n  return <span {...props} className={cn('ui-kbd-group', className)} />\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

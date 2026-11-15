@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:ui",
+  "title": "Empty",
+  "description": "Empty-state content with explanation and a next action.",
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/empty.css",
+      "type": "registry:file",
+      "target": "@ui/moru/empty.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-empty {\n  box-sizing: border-box;\n  min-width: 0;\n  max-width: 100%;\n  font-family: var(--ui-font-family, inherit);\n  font-size: var(--ui-type-body-size, 14px);\n  font-weight: var(--ui-type-body-weight, 400);\n  line-height: var(--ui-type-body-line-height, 1.6);\n  letter-spacing: var(--ui-type-body-letter-spacing, 0em);\n  color: var(--ui-text, #171717);\n}\n\n:where([data-moru-registry]) .ui-empty {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: var(--ui-field-gap, 8px);\n  padding: var(--ui-card-padding, 24px);\n  text-align: center;\n  overflow-wrap: anywhere;\n}\n:where([data-moru-registry]) .ui-empty-icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex: none;\n  width: 40px;\n  height: 40px;\n  margin-bottom: var(--ui-space, 4px);\n  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);\n  border-radius: calc(var(--ui-radius, 6px) + 4px);\n  color: var(--ui-muted, #6e6e6b);\n  background: var(--ui-control-hover-bg, #f3f3f1);\n  border-color: transparent;\n}\n:where([data-moru-registry]) .ui-empty-icon > svg {\n  width: 20px;\n  height: 20px;\n}\n:where([data-moru-registry]) .ui-empty-title {\n  margin: 0;\n  font-size: var(--ui-type-label-size, 14px);\n  font-weight: var(--ui-type-label-weight, 550);\n  line-height: var(--ui-type-label-line-height, 1.45);\n}\n:where([data-moru-registry]) .ui-empty-description {\n  max-width: 360px;\n  color: var(--ui-muted, #6e6e6b);\n  font-size: var(--ui-type-caption-size, 12px);\n  font-weight: var(--ui-type-caption-weight, 400);\n  line-height: var(--ui-type-caption-line-height, 1.5);\n}\n:where([data-moru-registry]) .ui-empty-actions {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  gap: var(--ui-control-gap, 8px);\n  max-width: 100%;\n  margin-top: var(--ui-field-gap, 8px);\n}\n\n"
+    },
+    {
+      "path": "registry/moru/empty.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/empty.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useId, type HTMLAttributes, type ReactNode } from 'react'\nimport { cn } from './_lib/cn'\nimport './advanced-controls-shared.css'\nimport './empty.css'\n\nexport interface EmptyProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  title: string\n  description?: ReactNode\n  icon?: ReactNode\n}\n\nexport function Empty({\n  title,\n  description,\n  icon,\n  children,\n  className,\n  'aria-label': ariaLabel,\n  'aria-labelledby': labelledBy,\n  'aria-describedby': describedBy,\n  ...props\n}: EmptyProps) {\n  const id = useId()\n  return (\n    <div\n      role=\"region\"\n      aria-label={ariaLabel}\n      aria-labelledby={labelledBy ?? (ariaLabel ? undefined : `${id}-title`)}\n      aria-describedby={describedBy ?? (description ? `${id}-description` : undefined)}\n      {...props}\n      className={cn('ui-empty', className)}\n    >\n      {icon && (\n        <span className=\"ui-empty-icon\" aria-hidden=\"true\">\n          {icon}\n        </span>\n      )}\n      <h3 className=\"ui-empty-title\" id={`${id}-title`}>\n        {title}\n      </h3>\n      {description && (\n        <div className=\"ui-empty-description\" id={`${id}-description`}>\n          {description}\n        </div>\n      )}\n      {children && <div className=\"ui-empty-actions\">{children}</div>}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

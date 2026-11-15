@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest a component or improvement. 한국어로 작성해도 됩니다.
-title: "[Feature]: "
+title: '[Feature]: '
 body:
   - type: textarea
     id: need

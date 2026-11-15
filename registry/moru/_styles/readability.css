@@ -7,17 +7,36 @@
   min-inline-size: 0;
   block-size: auto;
   min-block-size: var(--ui-resolved-control-height, var(--ui-control-height-md, 40px));
-  padding-block: max(var(--ui-space, 4px), calc((var(--ui-size-height, 40px) - var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) - var(--ui-border-width, 1px) * 2) / 2));
+  padding-block: max(
+    var(--ui-space, 4px),
+    calc(
+      (
+          var(--ui-resolved-control-height, 40px) -
+            var(
+              --ui-control-content-height,
+              calc(var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5))
+            ) -
+            var(--ui-border-width, 1px) * 2
+        ) /
+        2
+    )
+  );
   white-space: normal;
   overflow-wrap: anywhere;
 }
 
-:where([data-moru-registry]) .ui-tabs-list { flex-wrap: wrap; }
+:where([data-moru-registry]) .ui-tabs-list {
+  flex-wrap: wrap;
+}
 
-:where([data-moru-registry]) .ui-select > :not(.ui-select-icon, .ui-select-loading-indicator) { min-inline-size: 0; }
+:where([data-moru-registry]) .ui-select > :not(.ui-select-icon, .ui-select-loading-indicator) {
+  min-inline-size: 0;
+}
 
 /* An unselected toggle still needs a visible shape on a quiet surface. */
-:where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-disabled]):not([data-loading]):not([aria-invalid='true']),
+:where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ),
 :where([data-moru-registry]) .ui-radio:not([data-checked]):not([data-disabled]):not([aria-invalid='true']) {
   border-color: var(--ui-control-border, #8a8a86);
 }
@@ -42,25 +61,32 @@
   overflow-wrap: anywhere;
 }
 
-:where([data-moru-registry]) .ui-prose > :first-child { margin-block-start: 0; }
-:where([data-moru-registry]) .ui-prose > :last-child { margin-block-end: 0; }
-:where([data-moru-registry]) .ui-prose > :is(p, ul, ol) + :is(p, ul, ol) { margin-block-start: 1em; }
+:where([data-moru-registry]) .ui-prose > :first-child {
+  margin-block-start: 0;
+}
+:where([data-moru-registry]) .ui-prose > :last-child {
+  margin-block-end: 0;
+}
+:where([data-moru-registry]) .ui-prose > :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-block-start: 1em;
+}
 
 /* Keep the visible S/M/L proportions, and enlarge the interactive area for touch. */
 @media (pointer: coarse) {
+  /* Only classes defined in the shared base live here. A component stylesheet may load
+     before or after this file, so each one carries its own touch font-size rule. */
   :where([data-moru-registry]) .ui-input,
-  :where([data-moru-registry]) .ui-textarea,
-  :where([data-moru-registry]) .ui-combobox-input,
-  :where([data-moru-registry]) .ui-native-select,
-  :where([data-moru-registry]) .ui-input-otp-control,
-  :where([data-moru-registry]) .ui-enhanced-input-field,
-  :where([data-moru-registry]) .ui-multi-select-input {
+  :where([data-moru-registry]) .ui-textarea {
     font-size: max(16px, var(--ui-type-label-size, 13px));
   }
   :where([data-moru-registry]) .ui-button,
   :where([data-moru-registry]) .ui-input,
   :where([data-moru-registry]) .ui-select,
   :where([data-moru-registry]) .ui-tabs-tab {
+    --ui-control-content-height: max(
+      calc(max(16px, var(--ui-type-label-size, 13px)) * var(--ui-type-label-line-height, 1.5)),
+      var(--ui-size-icon)
+    );
     min-block-size: max(44px, var(--ui-resolved-control-height, var(--ui-control-height-md, 40px)));
   }
 
@@ -68,12 +94,30 @@
   :where([data-moru-registry]) .ui-switch-label,
   :where([data-moru-registry]) .ui-radio-option {
     min-block-size: 44px;
-    align-items: center;
+    align-items: flex-start;
+    padding-block: max(
+      var(--ui-space, 4px),
+      calc(
+        (
+            44px -
+              max(
+                calc(var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5)),
+                var(--ui-choice-size)
+              )
+          ) /
+          2
+      )
+    );
   }
-
-  :where([data-moru-registry]) .ui-checkbox,
-  :where([data-moru-registry]) .ui-switch,
-  :where([data-moru-registry]) .ui-radio { margin-block-start: 0; }
+  :where([data-moru-registry]) .ui-checkbox-label {
+    --ui-choice-size: var(--ui-size-checkbox);
+  }
+  :where([data-moru-registry]) .ui-switch-label {
+    --ui-choice-size: calc(var(--ui-toggle-size) + var(--ui-space, 4px));
+  }
+  :where([data-moru-registry]) .ui-radio-option {
+    --ui-choice-size: var(--ui-toggle-size);
+  }
 }
 
 @media (forced-colors: active) {
@@ -82,6 +126,8 @@
   :where([data-moru-registry]) .ui-select,
   :where([data-moru-registry]) .ui-checkbox,
   :where([data-moru-registry]) .ui-radio,
-  :where([data-moru-registry]) .ui-switch { border-color: ButtonText; }
+  :where([data-moru-registry]) .ui-switch {
+    border-color: ButtonText;
+  }
 }
 

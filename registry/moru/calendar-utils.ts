@@ -21,15 +21,18 @@ export function normalizeCalendarDate(value: Date | null | undefined): Date | un
 
 export function compareCalendarDates(left: Date, right: Date): number {
   if (!isValidCalendarDate(left) || !isValidCalendarDate(right)) return Number.NaN
-  return Math.sign(left.getFullYear() - right.getFullYear())
-    || Math.sign(left.getMonth() - right.getMonth())
-    || Math.sign(left.getDate() - right.getDate())
+  return (
+    Math.sign(left.getFullYear() - right.getFullYear()) ||
+    Math.sign(left.getMonth() - right.getMonth()) ||
+    Math.sign(left.getDate() - right.getDate())
+  )
 }
 
 export function calendarDateKey(value: Date | null | undefined): string | undefined {
   if (!isValidCalendarDate(value)) return undefined
   const year = value.getFullYear()
-  const yearLabel = year < 0 ? `-${String(Math.abs(year)).padStart(4, '0')}` : String(year).padStart(4, '0')
+  const yearLabel =
+    year < 0 ? `-${String(Math.abs(year)).padStart(4, '0')}` : String(year).padStart(4, '0')
   return `${yearLabel}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`
 }
 
@@ -47,14 +50,20 @@ export function addCalendarDays(date: Date, amount: number): Date {
 
 export function addCalendarMonths(date: Date, amount: number): Date {
   const month = createCalendarDate(date.getFullYear(), date.getMonth() + amount, 1)
-  return createCalendarDate(month.getFullYear(), month.getMonth(), Math.min(date.getDate(), endOfCalendarMonth(month).getDate()))
+  return createCalendarDate(
+    month.getFullYear(),
+    month.getMonth(),
+    Math.min(date.getDate(), endOfCalendarMonth(month).getDate()),
+  )
 }
 
 export function isCalendarDateInRange(date: Date, minDate?: Date, maxDate?: Date): boolean {
   if (!isValidCalendarDate(date)) return false
   const min = normalizeCalendarDate(minDate)
   const max = normalizeCalendarDate(maxDate)
-  return (!min || compareCalendarDates(date, min) >= 0) && (!max || compareCalendarDates(date, max) <= 0)
+  return (
+    (!min || compareCalendarDates(date, min) >= 0) && (!max || compareCalendarDates(date, max) <= 0)
+  )
 }
 
 /** Reversed bounds deliberately produce no selectable date. */
@@ -69,13 +78,19 @@ export function clampCalendarDate(date: Date, minDate?: Date, maxDate?: Date): D
   return normalized
 }
 
-export function calendarMonthHasAvailableDate(month: Date, minDate?: Date, maxDate?: Date): boolean {
+export function calendarMonthHasAvailableDate(
+  month: Date,
+  minDate?: Date,
+  maxDate?: Date,
+): boolean {
   const min = normalizeCalendarDate(minDate)
   const max = normalizeCalendarDate(maxDate)
-  return isValidCalendarDate(month)
-    && !(min && max && compareCalendarDates(min, max) > 0)
-    && (!min || compareCalendarDates(endOfCalendarMonth(month), min) >= 0)
-    && (!max || compareCalendarDates(startOfCalendarMonth(month), max) <= 0)
+  return (
+    isValidCalendarDate(month) &&
+    !(min && max && compareCalendarDates(min, max) > 0) &&
+    (!min || compareCalendarDates(endOfCalendarMonth(month), min) >= 0) &&
+    (!max || compareCalendarDates(startOfCalendarMonth(month), max) <= 0)
+  )
 }
 
 /** Index within the displayed week; also shared by Home/End keyboard navigation. */
@@ -84,12 +99,18 @@ export function calendarWeekdayIndex(date: Date, weekStartsOn: 0 | 1 = 0): numbe
 }
 
 /** Complete calendar weeks, optionally trimmed to the four-to-six rows needed by a month. */
-export function getCalendarMonthDays(month: Date, weekStartsOn: 0 | 1 = 0, fixedWeeks = true): Date[] {
+export function getCalendarMonthDays(
+  month: Date,
+  weekStartsOn: 0 | 1 = 0,
+  fixedWeeks = true,
+): Date[] {
   if (!isValidCalendarDate(month)) return []
   const first = startOfCalendarMonth(month)
   const leadingDays = calendarWeekdayIndex(first, weekStartsOn)
   const start = addCalendarDays(first, -leadingDays)
-  const length = fixedWeeks ? 42 : Math.ceil((leadingDays + endOfCalendarMonth(month).getDate()) / 7) * 7
+  const length = fixedWeeks
+    ? 42
+    : Math.ceil((leadingDays + endOfCalendarMonth(month).getDate()) / 7) * 7
   return Array.from({ length }, (_, index) => addCalendarDays(start, index))
 }
 
@@ -115,7 +136,9 @@ export function selectCalendarRangeDate(value: CalendarRange, date: Date): Calen
   const current = normalizeCalendarRange(value)
   const selected = normalizeCalendarDate(date)
   if (!selected) return current
-  return !current.start || current.end ? { start: selected, end: null } : normalizeCalendarRange({ start: current.start, end: selected })
+  return !current.start || current.end
+    ? { start: selected, end: null }
+    : normalizeCalendarRange({ start: current.start, end: selected })
 }
 
 /** The interactive calendar has a finite, browser-form-compatible year domain. */
@@ -124,15 +147,24 @@ export function supportedCalendarBounds(minDate?: Date, maxDate?: Date) {
   const last = createCalendarDate(9999, 11, 31)
   const min = normalizeCalendarDate(minDate)
   const max = normalizeCalendarDate(maxDate)
-  return { minDate: min && compareCalendarDates(min, first) > 0 ? min : first, maxDate: max && compareCalendarDates(max, last) < 0 ? max : last }
+  return {
+    minDate: min && compareCalendarDates(min, first) > 0 ? min : first,
+    maxDate: max && compareCalendarDates(max, last) < 0 ? max : last,
+  }
 }
 
-export function calendarYearHasAvailableDate(year: number, minDate?: Date, maxDate?: Date): boolean {
+export function calendarYearHasAvailableDate(
+  year: number,
+  minDate?: Date,
+  maxDate?: Date,
+): boolean {
   if (!Number.isInteger(year) || year < 1 || year > 9999) return false
   const bounds = supportedCalendarBounds(minDate, maxDate)
-  return compareCalendarDates(bounds.minDate, bounds.maxDate) <= 0
-    && compareCalendarDates(createCalendarDate(year, 11, 31), bounds.minDate) >= 0
-    && compareCalendarDates(createCalendarDate(year, 0, 1), bounds.maxDate) <= 0
+  return (
+    compareCalendarDates(bounds.minDate, bounds.maxDate) <= 0 &&
+    compareCalendarDates(createCalendarDate(year, 11, 31), bounds.minDate) >= 0 &&
+    compareCalendarDates(createCalendarDate(year, 0, 1), bounds.maxDate) <= 0
+  )
 }
 
 export function calendarYearPageStart(year: number): number {

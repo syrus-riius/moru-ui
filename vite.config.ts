@@ -7,17 +7,26 @@ function nativePreviewPages(): Plugin {
   const setup = (server: Pick<ViteDevServer, 'middlewares'>) => {
     server.middlewares.use((request, _response, next) => {
       const [pathname, query] = (request.url ?? '').split('?', 2)
-      if ((pathname === '/native-preview' || pathname.startsWith('/native-preview/')) && !pathname.split('/').at(-1)?.includes('.')) {
+      if (
+        (pathname === '/native-preview' || pathname.startsWith('/native-preview/')) &&
+        !pathname.split('/').at(-1)?.includes('.')
+      ) {
         request.url = `/native-preview/index.html${query ? `?${query}` : ''}`
       }
       next()
     })
   }
-  return { name: 'moru-native-preview-pages', configureServer: setup, configurePreviewServer: setup }
+  return {
+    name: 'moru-native-preview-pages',
+    configureServer: setup,
+    configurePreviewServer: setup,
+  }
 }
 
 export default defineConfig({
   plugins: [nativePreviewPages(), react(), tailwindcss()],
-  resolve: { alias: { '@/components/ui/moru': fileURLToPath(new URL('./registry/moru', import.meta.url)) } },
+  resolve: {
+    alias: { '@/components/ui/moru': fileURLToPath(new URL('./registry/moru', import.meta.url)) },
+  },
   server: { watch: { ignored: ['**/.qa/**', '**/sites/**'] } },
 })

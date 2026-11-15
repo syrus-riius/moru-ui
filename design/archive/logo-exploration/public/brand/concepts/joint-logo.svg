@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="64" viewBox="0 0 152 32" fill="none" role="img" aria-labelledby="title">
+<title id="title">Moru UI — Joint logo concept</title>
+<g fill="currentColor"><path d="M3 6h12v6h-3v8l3 6H5l3-6v-8H3Z"/><path d="M29 6H17v6h3v8l-3 6h10l-3-6v-8h5Z"/></g>
+<g stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M43 26V16a5 5 0 0 1 10 0v10m0-10a5 5 0 0 1 10 0v10"/>
+  <circle cx="76" cy="18.5" r="7.5"/>
+  <path d="M91 26V11m0 6a7 7 0 0 1 10-5.4M108 11v8a7 7 0 0 0 14 0v-8"/>
+</g>
+<g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M135 17v5.5a3.5 3.5 0 0 0 7 0V17m6 0v9"/>
+</g>
+</svg>

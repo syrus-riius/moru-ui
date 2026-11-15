@@ -4,7 +4,10 @@ import { Separator as BaseSeparator } from '@base-ui/react/separator'
 import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 import { cn } from './_lib/cn'
 
-export interface SeparatorProps extends Omit<ComponentPropsWithoutRef<typeof BaseSeparator>, 'className'> {
+export interface SeparatorProps extends Omit<
+  ComponentPropsWithoutRef<typeof BaseSeparator>,
+  'className'
+> {
   decorative?: boolean
   className?: string
 }

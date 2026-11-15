@@ -1,0 +1,90 @@
+.page-chrome-demo {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: var(--ui-form-gap, 24px);
+}
+
+.page-chrome-demo-example {
+  display: grid;
+  gap: var(--ui-field-gap, 8px);
+  min-width: 0;
+}
+
+.page-chrome-demo-caption {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+
+.page-chrome-demo-caption strong {
+  color: var(--ui-text);
+  font-weight: var(--ui-type-label-weight, 500);
+}
+
+.page-chrome-demo-canvas {
+  min-width: 0;
+  padding: calc(var(--ui-space, 4px) * 3);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-background);
+}
+
+.page-chrome-demo-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+}
+
+.page-chrome-demo-brand > span {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--ui-control-height-sm, 32px);
+  height: var(--ui-control-height-sm, 32px);
+  border-radius: var(--ui-radius);
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+  font-weight: 650;
+}
+
+.page-chrome-demo-status,
+.page-chrome-demo-help,
+.page-chrome-demo-detail p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  overflow-wrap: anywhere;
+}
+
+.page-chrome-demo-detail {
+  min-width: 0;
+  padding: calc(var(--ui-space, 4px) * 3);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+
+.page-chrome-demo-detail strong {
+  display: block;
+  margin-bottom: var(--ui-space, 4px);
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 500);
+}
+
+.page-chrome-demo-system {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+}
+
+.page-chrome-demo-system i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ui-success);
+}

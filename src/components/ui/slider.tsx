@@ -3,8 +3,17 @@ import { cn } from '../../lib/cn'
 import { mergeDescriptionIds, useFieldContext } from './field-context'
 
 /** A horizontal, single-thumb slider. Range values deliberately use a separate API. */
-export interface SliderProps extends Omit<BaseSlider.Root.Props<number>,
-  'children' | 'className' | 'value' | 'defaultValue' | 'onValueChange' | 'orientation' | 'minStepsBetweenValues' | 'thumbCollisionBehavior'> {
+export interface SliderProps extends Omit<
+  BaseSlider.Root.Props<number>,
+  | 'children'
+  | 'className'
+  | 'value'
+  | 'defaultValue'
+  | 'onValueChange'
+  | 'orientation'
+  | 'minStepsBetweenValues'
+  | 'thumbCollisionBehavior'
+> {
   value?: number
   defaultValue?: number
   onValueChange?: (value: number) => void
@@ -15,10 +24,24 @@ export interface SliderProps extends Omit<BaseSlider.Root.Props<number>,
 }
 
 export function Slider({
-  value, defaultValue, onValueChange, label, showValue = false,
-  className, disabled, id, size = 'md', min = 0, max = 100, step = 1,
-  'aria-label': ariaLabel, 'aria-labelledby': labelledBy,
-  'aria-describedby': describedBy, 'aria-invalid': invalid, ...props
+  value,
+  defaultValue,
+  onValueChange,
+  label,
+  showValue = false,
+  className,
+  disabled,
+  id,
+  size = 'md',
+  min = 0,
+  max = 100,
+  step = 1,
+  'aria-label': ariaLabel,
+  'aria-labelledby': labelledBy,
+  'aria-describedby': describedBy,
+  'aria-invalid': invalid,
+  'aria-valuetext': valueText,
+  ...props
 }: SliderProps) {
   const field = useFieldContext()
   const invalidState = invalid ?? (field?.invalid || undefined)
@@ -31,7 +54,9 @@ export function Slider({
       data-size={size}
       value={value}
       defaultValue={defaultValue}
-      onValueChange={(nextValue) => { if (!disabled) onValueChange?.(nextValue) }}
+      onValueChange={(nextValue) => {
+        if (!disabled) onValueChange?.(nextValue)
+      }}
       disabled={disabled}
       min={min}
       max={max}
@@ -58,6 +83,7 @@ export function Slider({
           aria-labelledby={labelledBy}
           aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
           aria-invalid={invalidState}
+          aria-valuetext={valueText}
         />
       </BaseSlider.Control>
     </BaseSlider.Root>

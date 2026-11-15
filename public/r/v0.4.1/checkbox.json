@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Accessible checkbox with label, description and loading state.",
+  "dependencies": [
+    "@base-ui/react@1.9.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/checkbox.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/checkbox.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from 'react'\nimport { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'\nimport { cn } from './_lib/cn'\nimport { mergeDescriptionIds, useFieldContext } from './field-context'\nimport type { UIState } from './state'\n\nexport type CheckboxProps = Omit<\n  ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,\n  'children' | 'className' | 'checked' | 'defaultChecked' | 'onCheckedChange'\n> & {\n  label?: ReactNode\n  description?: string\n  checked?: boolean\n  defaultChecked?: boolean\n  onCheckedChange?: (checked: boolean) => void\n  className?: string\n  size?: 'sm' | 'md' | 'lg'\n  loading?: boolean\n  previewState?: UIState\n}\n\nexport const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox(\n  {\n    label,\n    description,\n    checked,\n    defaultChecked,\n    onCheckedChange,\n    className,\n    disabled,\n    readOnly,\n    id,\n    size = 'md',\n    loading = false,\n    previewState,\n    'aria-label': ariaLabel,\n    'aria-labelledby': labelledBy,\n    'aria-describedby': describedBy,\n    'aria-invalid': invalid,\n    ...props\n  },\n  ref,\n) {\n  const generatedId = useId()\n  const descriptionId = `${generatedId}-description`\n  const labelId = `${generatedId}-label`\n  const field = useFieldContext()\n  const busy = loading || previewState === 'loading'\n  // Busy locks the box with readOnly, not disabled: toggling it and waiting for the\n  // result does not drop keyboard focus, and the value still submits with its form.\n  const locked = disabled || previewState === 'disabled'\n  const unavailable = locked || busy\n  return (\n    <label\n      className={cn('ui-checkbox-label inline-flex items-start', className)}\n      data-size={size}\n      data-disabled={unavailable || undefined}\n      data-loading={busy || undefined}\n    >\n      <BaseCheckbox.Root\n        {...props}\n        ref={ref}\n        id={id ?? field?.controlId}\n        className=\"ui-checkbox inline-flex shrink-0 items-center justify-center\"\n        checked={checked}\n        defaultChecked={defaultChecked}\n        onCheckedChange={(value) => {\n          if (!unavailable) onCheckedChange?.(value)\n        }}\n        disabled={locked}\n        readOnly={readOnly || busy}\n        aria-label={ariaLabel}\n        aria-labelledby={labelledBy ?? (!ariaLabel && label ? labelId : undefined)}\n        aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}\n        aria-busy={busy || undefined}\n        data-ui-state={previewState}\n        data-loading={busy || undefined}\n        aria-describedby={mergeDescriptionIds(\n          describedBy,\n          field?.describedBy,\n          description ? descriptionId : undefined,\n        )}\n      >\n        {busy ? (\n          <span className=\"ui-checkbox-loading-indicator ui-loading-indicator\" aria-hidden=\"true\" />\n        ) : (\n          <BaseCheckbox.Indicator className=\"ui-checkbox-indicator\">\n            <svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\">\n              <path\n                d=\"m3 8 3.2 3.2L13 4.4\"\n                stroke=\"currentColor\"\n                strokeWidth=\"1.8\"\n                strokeLinecap=\"round\"\n                strokeLinejoin=\"round\"\n              />\n            </svg>\n          </BaseCheckbox.Indicator>\n        )}\n      </BaseCheckbox.Root>\n      {(label || description) && (\n        <span className=\"ui-checkbox-copy flex min-w-0 flex-col\">\n          {label && (\n            <span id={labelId} className=\"ui-checkbox-text\">\n              {label}\n            </span>\n          )}\n          {description && (\n            <span id={descriptionId} className=\"ui-checkbox-description\">\n              {description}\n            </span>\n          )}\n        </span>\n      )}\n    </label>\n  )\n})\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+.ui-toggle {
+  font-family: var(--ui-font-family, inherit);
+  color: var(--ui-text, #171717);
+  font-size: var(--ui-type-label-size, 14px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.45);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.01em);
+  box-sizing: border-box;
+}
+.ui-toggle {
+  --ui-size-height: var(--ui-control-height-md, var(--ui-control-height, 40px));
+  --ui-size-padding-x: var(--ui-control-padding-x-md, 12px);
+  --ui-size-icon: var(--ui-icon-size-md, 16px);
+  --ui-resolved-control-height: max(
+    var(--ui-size-height),
+    calc(
+      max(
+          var(--ui-type-label-size, 14px) * var(--ui-type-label-line-height, 1.45),
+          var(--ui-size-icon)
+        ) +
+        var(--ui-border-width, 1px) * 2 + var(--ui-space, 4px) * 2
+    )
+  );
+}
+.ui-toggle[data-size='sm'] {
+  --ui-size-height: var(--ui-control-height-sm, 32px);
+  --ui-size-padding-x: var(--ui-control-padding-x-sm, 10px);
+  --ui-size-icon: var(--ui-icon-size-sm, 14px);
+}
+.ui-toggle[data-size='lg'] {
+  --ui-size-height: var(--ui-control-height-lg, 48px);
+  --ui-size-padding-x: var(--ui-control-padding-x-lg, 16px);
+  --ui-size-icon: var(--ui-icon-size-lg, 18px);
+}
+.ui-toggle:hover:not(:disabled) {
+  background: var(--ui-surface-hover, #f3f3f1);
+}
+.ui-toggle:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
+  outline-offset: 3px;
+}
+.ui-toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.ui-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: var(--ui-control-gap, 8px);
+  min-height: var(--ui-resolved-control-height);
+  max-width: 100%;
+  min-width: 0;
+  padding: var(--ui-space, 4px) var(--ui-size-padding-x);
+  overflow-wrap: anywhere;
+  border: var(--ui-border-width, 1px) solid transparent;
+  border-radius: var(--ui-radius, 6px);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-duration, 150ms),
+    color var(--ui-duration, 150ms),
+    transform var(--ui-duration, 150ms);
+}
+.ui-toggle > svg {
+  width: var(--ui-size-icon);
+  height: var(--ui-size-icon);
+  flex: none;
+}
+.ui-toggle[data-variant='outline'] {
+  border-color: var(--ui-border, #e8e8e4);
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+.ui-toggle[data-pressed] {
+  color: var(--ui-primary-foreground, #fff);
+  background: var(--ui-primary, #181818);
+  border-color: transparent;
+}
+.ui-toggle:active:not(:disabled) {
+  transform: translateY(1px);
+}
+@media (pointer: coarse) {
+  .ui-toggle {
+    --ui-resolved-control-height: max(
+      44px,
+      var(--ui-size-height),
+      calc(
+        max(
+            max(16px, var(--ui-type-label-size, 14px)) * var(--ui-type-label-line-height, 1.45),
+            var(--ui-size-icon)
+          ) +
+          var(--ui-border-width, 1px) * 2 + var(--ui-space, 4px) * 2
+      )
+    );
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-toggle {
+    transition: none;
+  }
+}

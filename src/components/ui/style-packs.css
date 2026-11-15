@@ -1,0 +1,151 @@
+/*
+ * Presentation recipes only. Each ThemeScope (including its portal) resolves
+ * every pack variable, so an inner Default scope can reset an outer Glass or
+ * Neon scope without specificity battles. Form controls retain opaque fills.
+ */
+:is(
+  .ui-card.ui-card,
+  .ui-dialog.ui-dialog,
+  .ui-menu.ui-menu,
+  .ui-popover.ui-popover,
+  .ui-select-popup.ui-select-popup,
+  .ui-combobox-popup.ui-combobox-popup,
+  .ui-alert-dialog.ui-alert-dialog,
+  .ui-sheet.ui-sheet,
+  .ui-drawer.ui-drawer,
+  .ui-navigation-popup.ui-navigation-popup,
+  .ui-hover-card.ui-hover-card,
+  .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+) {
+  background-color: var(--ui-pack-surface-bg, var(--ui-surface, #fff));
+  -webkit-backdrop-filter: var(--ui-pack-surface-filter, none);
+  backdrop-filter: var(--ui-pack-surface-filter, none);
+  box-shadow: var(--ui-pack-surface-shadow, var(--ui-shadow, none));
+}
+
+/* The regular sidebar has no baseline elevation; preserve that distinction. */
+.ui-sidebar.ui-sidebar {
+  background-color: var(--ui-pack-surface-bg, var(--ui-surface, #fff));
+  -webkit-backdrop-filter: var(--ui-pack-surface-filter, none);
+  backdrop-filter: var(--ui-pack-surface-filter, none);
+  box-shadow: var(--ui-pack-highlight-shadow, none);
+}
+
+/* Keep glow independent from the focus ring and from semantic error feedback. */
+.ui-button.ui-button[data-variant='primary']:where(
+    :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
+  ) {
+  box-shadow: var(--ui-pack-action-shadow, none);
+}
+
+.ui-button.ui-button[data-variant='primary']:where(
+    :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
+  ):is(:not([data-ui-state]):hover, [data-ui-state='hover']) {
+  box-shadow: var(--ui-pack-action-hover-shadow, var(--ui-pack-action-shadow, none));
+}
+
+.ui-button.ui-button[data-variant='primary']:where(
+    :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
+  ):is(:not([data-ui-state]):active, [data-ui-state='pressed']) {
+  box-shadow: var(--ui-pack-pressed-shadow, inset 0 1px 2px #00000018);
+}
+
+:is(
+  .ui-tabs-tab.ui-tabs-tab[data-active],
+  .ui-navigation-trigger.ui-navigation-trigger[data-active],
+  .ui-navigation-trigger.ui-navigation-trigger[data-popup-open],
+  .ui-menubar-trigger.ui-menubar-trigger[data-popup-open],
+  .ui-sidebar-item.ui-sidebar-item[aria-current]
+):where(:not(:disabled, [data-disabled], [aria-disabled='true'], [aria-invalid='true'])) {
+  box-shadow: var(--ui-pack-active-shadow, none);
+}
+
+/* Color/motion feedback may transition; expensive blur/glow effects do not. */
+.ui-button.ui-button,
+.ui-tabs-tab.ui-tabs-tab {
+  transition-property: background-color, border-color, color, transform;
+}
+
+/* Unsupported backdrop filtering always gets a solid, readable surface. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :is(
+    .ui-card.ui-card,
+    .ui-dialog.ui-dialog,
+    .ui-menu.ui-menu,
+    .ui-popover.ui-popover,
+    .ui-select-popup.ui-select-popup,
+    .ui-combobox-popup.ui-combobox-popup,
+    .ui-alert-dialog.ui-alert-dialog,
+    .ui-sheet.ui-sheet,
+    .ui-drawer.ui-drawer,
+    .ui-navigation-popup.ui-navigation-popup,
+    .ui-hover-card.ui-hover-card,
+    .ui-sidebar.ui-sidebar,
+    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+  ) {
+    background-color: var(--ui-surface, #fff);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :is(
+    .ui-card.ui-card,
+    .ui-dialog.ui-dialog,
+    .ui-menu.ui-menu,
+    .ui-popover.ui-popover,
+    .ui-select-popup.ui-select-popup,
+    .ui-combobox-popup.ui-combobox-popup,
+    .ui-alert-dialog.ui-alert-dialog,
+    .ui-sheet.ui-sheet,
+    .ui-drawer.ui-drawer,
+    .ui-navigation-popup.ui-navigation-popup,
+    .ui-hover-card.ui-hover-card,
+    .ui-sidebar.ui-sidebar,
+    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+  ) {
+    background-color: var(--ui-surface, #fff);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :is(
+    .ui-card.ui-card,
+    .ui-dialog.ui-dialog,
+    .ui-menu.ui-menu,
+    .ui-popover.ui-popover,
+    .ui-select-popup.ui-select-popup,
+    .ui-combobox-popup.ui-combobox-popup,
+    .ui-alert-dialog.ui-alert-dialog,
+    .ui-sheet.ui-sheet,
+    .ui-drawer.ui-drawer,
+    .ui-navigation-popup.ui-navigation-popup,
+    .ui-hover-card.ui-hover-card,
+    .ui-sidebar.ui-sidebar,
+    .ui-sidebar-mobile-panel.ui-sidebar-mobile-panel
+  ) {
+    background-color: Canvas;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border: 1px solid CanvasText;
+  }
+
+  .ui-button.ui-button[data-variant='primary'],
+  :is(
+    .ui-tabs-tab.ui-tabs-tab[data-active],
+    .ui-navigation-trigger.ui-navigation-trigger[data-active],
+    .ui-navigation-trigger.ui-navigation-trigger[data-popup-open],
+    .ui-menubar-trigger.ui-menubar-trigger[data-popup-open],
+    .ui-sidebar-item.ui-sidebar-item[aria-current]
+  ) {
+    --ui-pack-action-shadow: none;
+    --ui-pack-action-hover-shadow: none;
+    --ui-pack-pressed-shadow: none;
+    --ui-pack-active-shadow: none;
+    box-shadow: none;
+  }
+}

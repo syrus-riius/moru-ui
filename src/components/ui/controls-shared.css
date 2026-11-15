@@ -1,0 +1,9 @@
+.ui-input-group > .ui-control-loading-wrap {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  order: 1;
+}
+.ui-native-select-wrap > .ui-control-loading-indicator {
+  inset-inline-end: var(--ui-native-padding);
+}

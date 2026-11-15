@@ -1,9 +1,10 @@
 # Selective installation
 
-Moru v0.4.0 distributes editable component sources through the shadcn CLI.
-The registry has 81 items: a shared core, 76 UI entries and four reusable blocks.
-It covers all 75 components in the eight gallery categories plus StatusMessage,
-adding the remaining 54 UI entries to the previous release. These are installation
+Moru v0.4.1 distributes editable component sources through the shadcn CLI.
+The registry has 90 items: a shared core, 81 UI entries, six reusable blocks, the
+legacy Dialog alias and one support entry (`block-messages`, the block translations
+that blocks install on their own). It covers all 79 components in the eight gallery
+categories plus StatusMessage and FormattedInput. These are installation
 entries, not the number of files or exported React components. Moru is not
 published as an npm library.
 
@@ -12,13 +13,13 @@ Prepare Tailwind and `components.json` using the
 [shadcn Vite setup guide](https://ui.shadcn.com/docs/installation/vite), then run:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/button.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/field.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/login.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/otp.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/search-filters.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/settings.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/button.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/field.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/login.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/otp.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/search-filters.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/settings.json
 ```
 
 Use `core.json` to install only the foundation. Other items resolve core and their
@@ -29,32 +30,38 @@ the consumer project's UI alias.
 
 ## Components by category
 
-Use any item name below in `/r/v0.4.0/<item>.json`. Core and the four blocks
-(`login`, `otp`, `search-filters`, `settings`) are additional entries.
+Use any item name below in `/r/v0.4.1/<item>.json`. Core and the six blocks
+(`dashboard`, `login`, `signup`, `settings`, `otp`, `search-filters`) are additional entries.
 
 | Category | UI entries | Item names |
 | --- | ---: | --- |
-| Forms and input | 25 | `field`, `input`, `number-input`, `password-input`, `textarea`, `checkbox`, `select`, `multi-select`, `switch`, `radio-group`, `slider`, `combobox`, `calendar`, `date-picker`, `date-range-picker`, `time-picker`, `time-range-picker`, `toggle-group`, `input-group`, `input-otp`, `label`, `native-select`, `file-input`, `attachment`, `questionnaire` |
+| Forms and input | 26 | `field`, `input`, `formatted-input`, `number-input`, `password-input`, `textarea`, `checkbox`, `select`, `multi-select`, `switch`, `radio-group`, `slider`, `combobox`, `calendar`, `date-picker`, `date-range-picker`, `time-picker`, `time-range-picker`, `toggle-group`, `input-group`, `input-otp`, `label`, `native-select`, `file-input`, `attachment`, `questionnaire` |
 | Actions | 5 | `button`, `command`, `button-group`, `kbd`, `toggle` |
-| Overlays | 9 | `dialog`, `menu`, `popover`, `tooltip`, `alert-dialog`, `sheet`, `context-menu`, `drawer`, `hover-card` |
+| Overlays | 9 | `modal`, `menu`, `popover`, `tooltip`, `alert-dialog`, `sheet`, `context-menu`, `drawer`, `hover-card` |
 | Navigation | 7 | `tabs`, `pagination`, `breadcrumb`, `menubar`, `navigation-menu`, `sidebar`, `stepper` |
-| Layout | 12 | `card`, `accordion`, `avatar`, `separator`, `aspect-ratio`, `direction`, `item`, `collapsible`, `carousel`, `resizable`, `scroll-area`, `typography` |
-| Status and feedback | 10 | `badge`, `alert`, `progress`, `ring-progress`, `skeleton`, `toast`, `empty`, `spinner`, `marker`, `status-message` |
+| Layout | 14 | `header`, `footer`, `card`, `accordion`, `avatar`, `separator`, `aspect-ratio`, `direction`, `item`, `collapsible`, `carousel`, `resizable`, `scroll-area`, `typography` |
+| Status and feedback | 12 | `badge`, `alert`, `progress`, `ring-progress`, `skeleton`, `toast`, `empty`, `spinner`, `loading-overlay`, `status-indicator`, `marker`, `status-message` |
 | Data | 3 | `table`, `chart`, `data-table` |
 | Conversation and content | 5 | `bubble`, `code-block`, `message`, `message-scroller`, `trace` |
+
+Use `modal.json` and `Modal` from `@/components/ui/moru/modal` for new code.
+Modal supports `default`, `confirmation`, `form`, `success` and `danger` variants,
+and `sm`, `md`, `lg` and `full` sizes. Existing `dialog.json`, `Dialog` and
+`DialogProps` imports remain available as compatibility aliases of Modal.
+Header and Footer install through `header.json` and `footer.json` respectively.
 
 For example, select one entry from each category; these commands do not install
 the entire registry:
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/number-input.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/command.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/context-menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/navigation-menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/carousel.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/toast.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/data-table.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/code-block.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/number-input.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/command.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/context-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/navigation-menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/carousel.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/toast.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/data-table.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/code-block.json
 ```
 
 Most imports use the item name as the filename. Exceptions and multi-export
@@ -82,7 +89,9 @@ already match the chosen mode. Fonts are optional and fall back to system sans.
 
 Shared CSS is included once and scoped to Moru's provider and theme portals. The
 host's `:root` tokens are not replaced. Tailwind CSS 4 remains required for layout
-utilities. Component-specific styles follow their sources. A composite component
+utilities. Moru's small fallback utilities sit in the `base` cascade layer, so your
+own Tailwind classes inside the provider (`flex md:hidden`, `text-sm` on a button)
+keep working. `styles.css` may be imported before or after the components. Component-specific styles follow their sources. A composite component
 may install other Moru entries that it imports. Recharts, TanStack Table, Embla and
 React Resizable Panels are installed only when the selected dependency graph needs
 them; installing Button does not install those features.
@@ -169,10 +178,10 @@ browser clipboard and exposes `onCopyError` for unavailable clipboard access.
 ## Tabs, menus and overlays
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/tabs.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/menu.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/popover.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/drawer.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/tabs.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/menu.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/popover.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/drawer.json
 ```
 
 Use these inside the existing `MoruProvider`, with the one-time stylesheet import
@@ -224,11 +233,11 @@ Their portals use the same Moru theme as their provider.
 ## Calendars, dates and times
 
 ```sh
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/calendar.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/date-range-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-picker.json
-npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.0/time-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/calendar.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/date-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/date-range-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/time-picker.json
+npx shadcn@4.23.0 add https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/time-range-picker.json
 ```
 
 Each item includes its required calendar, popup, styles and helpers. Keep the
@@ -282,9 +291,9 @@ equal start/end values are not a valid range. Pickers also accept `disabled`,
 `loading`, `readOnly` and `required`. Uncontrolled pickers restore `defaultValue`
 on a form reset; controlled callers update their values in the form's `onReset`.
 
-Versioned HTTP items and dependencies use `/r/v0.4.0/`. GitHub registry items use
-`syrus-riius/moru-ui/button#v0.4.0` with independently pinned dependency refs.
-Published `/r/v0.3.1/`, `/r/v0.3.2/`, `/r/v0.3.3/` and `/r/v0.3.4/` remain unchanged; their existing
+Versioned HTTP items and dependencies use `/r/v0.4.1/`. GitHub registry items use
+`syrus-riius/moru-ui/button#v0.4.1` with independently pinned dependency refs.
+Published `/r/v0.3.1/`, `/r/v0.3.2/`, `/r/v0.3.3/`, `/r/v0.3.4/` and `/r/v0.4.0/` remain unchanged; their existing
 installation URLs continue to select those versions. Tabs/Menu/Popover/Drawer
 start at v0.3.3; the five calendar/date/time items start at v0.3.4.
 Commit your local changes before upgrading, review diffs and avoid unconditional
@@ -293,9 +302,38 @@ Commit your local changes before upgrading, review diffs and avoid unconditional
 Original sources remain in `src/`. Generate artifacts with `npm run registry:build`
 and check freshness with `npm run registry:check`. Do not edit generated files.
 The registry targets web React. Next.js SSR/hydration and Native/Expo consumption
-remain outside its supported baseline. The v0.4.0 release process is limited to
-artifact generation and a production build; automated tests, CLI installation
-smoke checks, browser checks and CI runs are skipped for the additions.
+remain outside its supported baseline. v0.4.1 was checked locally with the unit
+tests, the production build, a CLI installation smoke test against the v0.4.1
+payloads and a before/after browser comparison of the lab; CI has not run for it.
+
+## Upgrading from v0.4.0
+
+v0.4.1 fixes cascade and focus problems and reorganizes the installed stylesheets.
+Commit your files first, then reinstall the items you use.
+
+- **Stylesheets are per component.** `controls-completion.css`, `advanced-controls.css`,
+  `navigation-completion.css`, `content-completion.css`, `data-completion.css`,
+  `enhanced-inputs.css`, `advanced-overlays.css`, `workflow-patterns.css`,
+  `page-chrome.css`, `overlays.css` and `time-controls.css` are gone. Each component
+  now imports `<component>.css`, plus a small `*-shared.css` where several components
+  share rules. Delete the old files after reinstalling; nothing imports them.
+- **Your Tailwind classes win inside the provider.** The fallback utilities moved to
+  the `base` cascade layer, so `flex md:hidden` or `text-sm` on your own elements
+  are no longer overridden. `styles.css` may be imported before or after components.
+- **Busy controls keep focus.** A `loading` Button uses `aria-disabled` instead of
+  the `disabled` attribute, and so do the DatePicker and DateRangePicker triggers.
+  `loading` on Input, Textarea, Checkbox, Switch, Select, Combobox, MultiSelect,
+  NumberInput, InputOTP and the time pickers makes the control read-only, so its
+  value is still submitted with the form. Use `disabled` when the value must not be
+  sent. FileInput and NativeSelect have no read-only mode and stay disabled while busy.
+- **Button labels wrap by default**, as they already did in practice.
+  `textWrap="nowrap"` now keeps a single line.
+- **Block copy is a separate item.** Blocks install `block-messages` automatically;
+  core no longer carries their translations.
+- **New props.** Menu accepts `open`, `defaultOpen` and `onOpenChange`; Select accepts
+  `value={null}`; Switch accepts `loading`; Select, Combobox, Checkbox and Switch
+  forward a ref.
+- Chart's empty state uses `ui-chart-empty` instead of `ui-data-table-empty`.
 
 See the [한국어 guide](registry.ko.md), [MIT license](../LICENSE) and
 [third-party notices](../NOTICE.md).

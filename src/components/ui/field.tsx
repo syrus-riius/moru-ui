@@ -14,14 +14,18 @@ export interface FieldProps {
 export function Field({ label, description, error, children, className }: FieldProps) {
   const id = useId()
   const controlId = `field-${id}`
-  const describedBy = [description && `${id}-description`, error && `${id}-error`]
-    .filter(Boolean)
-    .join(' ') || undefined
+  const describedBy =
+    [description && `${id}-description`, error && `${id}-error`].filter(Boolean).join(' ') ||
+    undefined
 
   return (
-    <FieldContext.Provider value={{ controlId, labelId: `${id}-label`, describedBy, invalid: Boolean(error) }}>
+    <FieldContext.Provider
+      value={{ controlId, labelId: `${id}-label`, describedBy, invalid: Boolean(error) }}
+    >
       <BaseField.Root className={cn('ui-field flex flex-col', className)} invalid={Boolean(error)}>
-        <BaseField.Label className="ui-field-label" id={`${id}-label`}>{label}</BaseField.Label>
+        <BaseField.Label className="ui-field-label" id={`${id}-label`}>
+          {label}
+        </BaseField.Label>
         {children}
         {description && (
           <BaseField.Description className="ui-field-description" id={`${id}-description`}>

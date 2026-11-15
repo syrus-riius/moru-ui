@@ -14,13 +14,28 @@ export type InputProps = Omit<ComponentPropsWithoutRef<typeof BaseInput>, 'class
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, size = 'md', id, loading = false, previewState, disabled, onValueChange, onChange,
-    'aria-describedby': describedBy, 'aria-invalid': invalid, ...props },
+  {
+    className,
+    size = 'md',
+    id,
+    loading = false,
+    previewState,
+    disabled,
+    readOnly,
+    onValueChange,
+    onChange,
+    'aria-describedby': describedBy,
+    'aria-invalid': invalid,
+    ...props
+  },
   ref,
 ) {
   const field = useFieldContext()
   const busy = loading || previewState === 'loading'
-  const unavailable = disabled || busy || previewState === 'disabled'
+  // Busy locks editing with readOnly, not disabled: the field keeps keyboard focus
+  // and its value still takes part in form submission.
+  const locked = disabled || previewState === 'disabled'
+  const unavailable = locked || busy
   const input = (
     <BaseInput
       {...props}
@@ -33,14 +48,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       data-size={size}
       data-ui-state={previewState}
       data-loading={busy || undefined}
-      disabled={unavailable}
-      onValueChange={(value, details) => { if (!unavailable) onValueChange?.(value, details) }}
-      onChange={(event) => { if (!unavailable) onChange?.(event) }}
+      disabled={locked}
+      readOnly={readOnly || busy}
+      onValueChange={(value, details) => {
+        if (!unavailable) onValueChange?.(value, details)
+      }}
+      onChange={(event) => {
+        if (!unavailable) onChange?.(event)
+      }}
     />
   )
   return (
     <span className="ui-control-loading-wrap" data-size={size}>
-      {input}{busy && <span className="ui-control-loading-indicator ui-loading-indicator" aria-hidden="true" />}
+      {input}
+      {busy && (
+        <span className="ui-control-loading-indicator ui-loading-indicator" aria-hidden="true" />
+      )}
     </span>
   )
 })

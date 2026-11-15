@@ -1,0 +1,110 @@
+/* The studio toolbar uses the same control and typography roles as the library. */
+.studio-shell .topbar {
+  min-width: 0;
+  min-height: var(--studio-topbar-height);
+  height: auto;
+  padding: calc(var(--ui-space) * 2) var(--ui-form-gap);
+  gap: var(--ui-form-gap);
+}
+.studio-shell .breadcrumb {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--ui-control-gap);
+}
+.studio-shell .breadcrumb .ui-breadcrumb {
+  min-width: 0;
+}
+.studio-shell .breadcrumb .ui-breadcrumb ol {
+  flex-wrap: nowrap;
+}
+.studio-shell .breadcrumb .ui-breadcrumb li:last-child {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.studio-shell .topbar-actions {
+  flex: none;
+  gap: var(--ui-control-gap);
+}
+.studio-shell .saved-indicator {
+  gap: var(--ui-control-gap);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  white-space: nowrap;
+}
+.studio-shell .saved-indicator i {
+  flex: none;
+  background: var(--ui-success);
+}
+.studio-shell .topbar .icon-button {
+  flex: none;
+  width: var(--ui-control-height-sm);
+  height: var(--ui-control-height-sm);
+  padding: var(--ui-space);
+  border-radius: var(--ui-radius);
+}
+.studio-shell .topbar .mobile-nav-button {
+  display: none;
+}
+.studio-shell .topbar .icon-button > svg {
+  width: var(--ui-icon-size-sm);
+  height: var(--ui-icon-size-sm);
+}
+.studio-shell .toolbar-export {
+  flex: none;
+  gap: var(--ui-control-gap);
+  min-height: var(--ui-control-height-sm);
+  padding: var(--ui-space) var(--ui-control-padding-x-sm);
+  border-radius: var(--ui-radius);
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+}
+.studio-shell .toolbar-export > svg {
+  flex: none;
+  width: var(--ui-icon-size-sm);
+  height: var(--ui-icon-size-sm);
+}
+.studio-shell .topbar button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 3px;
+}
+@media (max-width: 1100px) {
+  .studio-shell .saved-indicator {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .studio-shell .topbar {
+    padding-inline: calc(var(--ui-space) * 3);
+    gap: var(--ui-control-gap);
+  }
+  .studio-shell .breadcrumb .ui-breadcrumb li:not(:last-child) {
+    display: none;
+  }
+  .studio-shell .topbar-actions {
+    gap: var(--ui-space);
+  }
+  .studio-shell .topbar .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+  .studio-shell .topbar .mobile-nav-button {
+    display: inline-flex;
+  }
+  .studio-shell .toolbar-export {
+    min-height: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .studio-shell .toolbar-export {
+    width: 44px;
+    padding: var(--ui-space);
+  }
+  .studio-shell .toolbar-export > span {
+    display: none;
+  }
+}

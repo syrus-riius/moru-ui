@@ -31,6 +31,8 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Check source formatting
+        run: npm run format:check
       - name: Run tests
         run: npm test
       - name: Check generated artifacts and build

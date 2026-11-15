@@ -1,0 +1,131 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-ring-progress {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  font-weight: var(--ui-type-body-weight);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+:where([data-moru-registry]) .ui-ring-progress-title {
+  font-size: var(--ui-type-label-size);
+  line-height: var(--ui-type-label-line-height);
+  font-weight: var(--ui-type-label-weight);
+  letter-spacing: var(--ui-type-label-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-ring-progress-key,
+:where([data-moru-registry]) .ui-ring-progress-empty {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  letter-spacing: var(--ui-type-caption-letter-spacing);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-ring-progress {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-form-gap);
+  margin: 0;
+}
+:where([data-moru-registry]) .ui-ring-progress-diagram {
+  position: relative;
+  flex-shrink: 0;
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+:where([data-moru-registry]) .ui-ring-progress-diagram svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+:where([data-moru-registry]) .ui-ring-progress-track {
+  stroke: var(--ui-border);
+}
+:where([data-moru-registry]) .ui-ring-progress-center {
+  position: absolute;
+  inset: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  text-align: center;
+  gap: calc(var(--ui-space) * 0.5);
+}
+:where([data-moru-registry]) .ui-ring-progress-center strong {
+  font-size: clamp(16px, var(--ui-type-heading-size), 32px);
+  font-weight: 600;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ui-type-heading-letter-spacing);
+}
+:where([data-moru-registry]) .ui-ring-progress-center strong span {
+  font-size: 0.6em;
+  margin-inline-start: 0.12em;
+}
+:where([data-moru-registry]) .ui-ring-progress-center > span {
+  max-width: 100%;
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+:where([data-moru-registry]) .ui-ring-progress-caption {
+  flex: 1 1 170px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-ring-progress-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-control-gap);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+:where([data-moru-registry]) .ui-ring-progress-legend li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: var(--ui-control-gap);
+  row-gap: calc(var(--ui-space) * 0.5);
+}
+:where([data-moru-registry]) .ui-ring-progress-key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+}
+:where([data-moru-registry]) .ui-ring-progress-swatch {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+:where([data-moru-registry]) .ui-ring-progress-value {
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  font-variant-numeric: tabular-nums;
+}
+:where([data-moru-registry]) .ui-ring-progress-value > span {
+  color: var(--ui-muted);
+}
+:where([data-moru-registry]) .ui-ring-progress-empty {
+  margin: 0;
+}
+@media (forced-colors: active) {
+  :where([data-moru-registry]) .ui-ring-progress-section {
+    stroke: CanvasText !important;
+  }
+  :where([data-moru-registry]) .ui-ring-progress-track {
+    stroke: GrayText;
+  }
+}
+

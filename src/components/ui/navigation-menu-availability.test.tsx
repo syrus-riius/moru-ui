@@ -5,7 +5,12 @@ import { NavigationMenu } from './navigation-menu'
 
 const items = [
   { id: 'enabled', label: '리소스', links: [{ id: 'tokens', label: '토큰', href: '/tokens' }] },
-  { id: 'disabled', label: '비공개', disabled: true, links: [{ id: 'private', label: '비공개 문서', href: '/private' }] },
+  {
+    id: 'disabled',
+    label: '비공개',
+    disabled: true,
+    links: [{ id: 'private', label: '비공개 문서', href: '/private' }],
+  },
 ]
 
 describe('Navigation menu availability', () => {
@@ -31,13 +36,17 @@ describe('Navigation menu availability', () => {
   })
 
   it('disables a dropdown even when its supplied trigger remains enabled', () => {
-    const markup = renderToStaticMarkup(<Menu disabled trigger={<button>작업</button>} items={[{ label: '실행' }]} />)
+    const markup = renderToStaticMarkup(
+      <Menu disabled trigger={<button>작업</button>} items={[{ label: '실행' }]} />,
+    )
     expect(markup).toContain('disabled=""')
     expect(markup).toContain('aria-expanded="false"')
   })
 
   it('preserves an unavailable supplied trigger without an explicit root override', () => {
-    const markup = renderToStaticMarkup(<Menu trigger={<button disabled>작업</button>} items={[{ label: '실행' }]} />)
+    const markup = renderToStaticMarkup(
+      <Menu trigger={<button disabled>작업</button>} items={[{ label: '실행' }]} />,
+    )
     expect(markup).toContain('disabled=""')
   })
 })

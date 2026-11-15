@@ -2,11 +2,14 @@ import { describe, expect, it } from 'vitest'
 import { clampPage, getPaginationItems, normalizePageCount } from './pagination-utils'
 
 describe('Pagination boundary normalization', () => {
-  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, -8, 0])('treats page count %s as an empty collection', (count) => {
-    expect(normalizePageCount(count)).toBe(0)
-    expect(clampPage(4, count)).toBe(0)
-    expect(getPaginationItems(4, count)).toEqual([])
-  })
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, -8, 0])(
+    'treats page count %s as an empty collection',
+    (count) => {
+      expect(normalizePageCount(count)).toBe(0)
+      expect(clampPage(4, count)).toBe(0)
+      expect(getPaginationItems(4, count)).toEqual([])
+    },
+  )
   it('floors fractional totals and clamps invalid or stale current pages', () => {
     expect(normalizePageCount(6.9)).toBe(6)
     expect(clampPage(-2, 6)).toBe(1)
@@ -18,7 +21,15 @@ describe('Pagination boundary normalization', () => {
 
 describe('Pagination navigation windows', () => {
   it('keeps a large list navigable from the middle and both ends', () => {
-    expect(getPaginationItems(50, 100)).toEqual([1, 'start-ellipsis', 49, 50, 51, 'end-ellipsis', 100])
+    expect(getPaginationItems(50, 100)).toEqual([
+      1,
+      'start-ellipsis',
+      49,
+      50,
+      51,
+      'end-ellipsis',
+      100,
+    ])
     expect(getPaginationItems(1, 100)).toEqual([1, 2, 'end-ellipsis', 100])
     expect(getPaginationItems(100, 100)).toEqual([1, 'start-ellipsis', 99, 100])
   })

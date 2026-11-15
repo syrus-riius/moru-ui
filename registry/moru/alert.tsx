@@ -37,7 +37,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
         </span>
       )}
       <div className="ui-alert-copy">
-        <p id={titleId} className="ui-alert-title">{title}</p>
+        <p id={titleId} className="ui-alert-title">
+          {title}
+        </p>
         {children != null && <div className="ui-alert-description">{children}</div>}
       </div>
     </div>

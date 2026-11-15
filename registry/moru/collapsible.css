@@ -1,0 +1,96 @@
+/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */
+:where([data-moru-registry]) .ui-collapsible {
+  box-sizing: border-box;
+  min-width: 0;
+  font-family: var(--ui-font-family, inherit);
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+  letter-spacing: var(--ui-type-label-letter-spacing, -0.015em);
+  color: var(--ui-text, #171717);
+  overflow-wrap: anywhere;
+  --ui-navigation-height: var(--ui-control-height-md, 40px);
+  --ui-navigation-padding: var(--ui-control-padding-x-md, 14px);
+  --ui-navigation-icon: var(--ui-icon-size-md, 16px);
+  --ui-navigation-close-size: var(--ui-control-height-sm, 32px);
+}
+:where([data-moru-registry]) [data-size='sm'].ui-collapsible {
+  --ui-navigation-height: var(--ui-control-height-sm, 32px);
+  --ui-navigation-padding: var(--ui-control-padding-x-sm, 10px);
+  --ui-navigation-icon: var(--ui-icon-size-sm, 14px);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+:where([data-moru-registry]) [data-size='lg'].ui-collapsible {
+  --ui-navigation-height: var(--ui-control-height-lg, 48px);
+  --ui-navigation-padding: var(--ui-control-padding-x-lg, 18px);
+  --ui-navigation-icon: var(--ui-icon-size-lg, 18px);
+}
+:where([data-moru-registry]) .ui-collapsible {
+  width: 100%;
+  border: var(--ui-border-width, 1px) solid var(--ui-border, #e8e8e4);
+  border-radius: calc(var(--ui-radius, 6px) + 4px);
+  background: var(--ui-surface, #fff);
+}
+:where([data-moru-registry]) .ui-collapsible-trigger {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--ui-navigation-height);
+  gap: var(--ui-field-gap, 8px);
+  padding: var(--ui-space, 4px) var(--ui-navigation-padding);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+:where([data-moru-registry]) .ui-collapsible-trigger > span {
+  min-width: 0;
+}
+:where([data-moru-registry]) .ui-collapsible-trigger > svg {
+  flex: none;
+  transition: transform var(--ui-duration, 160ms);
+}
+:where([data-moru-registry]) .ui-collapsible-trigger[data-panel-open] > svg,
+:where([data-moru-registry]) .ui-collapsible-trigger[data-open] > svg {
+  transform: rotate(180deg);
+}
+:where([data-moru-registry]) .ui-collapsible-panel {
+  height: var(--collapsible-panel-height);
+  overflow: hidden;
+  transition: height var(--ui-duration, 160ms);
+}
+:where([data-moru-registry]) .ui-collapsible-panel[data-starting-style],
+:where([data-moru-registry]) .ui-collapsible-panel[data-ending-style] {
+  height: 0;
+}
+:where([data-moru-registry]) .ui-collapsible-content {
+  padding: var(--ui-field-gap, 8px) var(--ui-navigation-padding) var(--ui-navigation-padding);
+  color: var(--ui-muted, #6e6e6b);
+  font-weight: var(--ui-type-body-weight, 400);
+  line-height: var(--ui-type-body-line-height, 1.6);
+}
+:where([data-moru-registry]) .ui-collapsible-content > :first-child {
+  margin-top: 0;
+}
+:where([data-moru-registry]) .ui-collapsible-content > :last-child {
+  margin-bottom: 0;
+}
+:where([data-moru-registry]) .ui-collapsible-trigger:hover:not([data-disabled]) {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+:where([data-moru-registry]) .ui-collapsible-trigger[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([data-moru-registry]) .ui-collapsible-trigger > svg,
+  :where([data-moru-registry]) .ui-collapsible-panel {
+    transition: none;
+  }
+}
+

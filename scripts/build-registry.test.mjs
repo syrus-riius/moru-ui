@@ -7,9 +7,16 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import postcss from 'postcss'
 import {
-  buildRegistry, generateRegistry, moduleSpecifiers, registryDefinitions,
-  registryOrigin, registryRepository, registryScope, registryVersion,
-  scopeRegistryCss, verifyRegistry,
+  buildRegistry,
+  generateRegistry,
+  moduleSpecifiers,
+  registryDefinitions,
+  registryOrigin,
+  registryRepository,
+  registryScope,
+  registryVersion,
+  scopeRegistryCss,
+  verifyRegistry,
 } from './build-registry.mjs'
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
@@ -22,7 +29,9 @@ before(async () => {
   github = JSON.parse(generated.artifacts.get('registry.json'))
   http = JSON.parse(generated.artifacts.get('public/r/registry.json'))
 })
-after(async () => { for (const directory of temporary) await rm(directory, { recursive: true, force: true }) })
+after(async () => {
+  for (const directory of temporary) await rm(directory, { recursive: true, force: true })
+})
 
 async function fixture() {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'moru-registry-test-'))
@@ -43,38 +52,105 @@ function installedFiles(name, catalog = github) {
     const entry = catalog.items.find((value) => value.name === current)
     assert.ok(entry, `Missing registry item ${current}`)
     for (const file of entry.files) files.add(file.path)
-    for (const dependency of entry.registryDependencies ?? []) add(dependency.split('/').at(-1).split('#')[0].replace('.json', ''))
+    for (const dependency of entry.registryDependencies ?? [])
+      add(dependency.split('/').at(-1).split('#')[0].replace('.json', ''))
   }
   add(name)
   return files
 }
 
 function hasKeyframeParent(rule) {
-  for (let current = rule.parent; current; current = current.parent) if (current.type === 'atrule' && /keyframes$/.test(current.name)) return true
+  for (let current = rule.parent; current; current = current.parent)
+    if (current.type === 'atrule' && /keyframes$/.test(current.name)) return true
   return false
 }
 
 test('the public catalog contains only the reviewed MVP items', () => {
-  assert.deepEqual(github.items.map((entry) => entry.name), registryDefinitions.map((entry) => entry.name))
-  assert.equal(github.items.length, 81)
+  assert.deepEqual(
+    github.items.map((entry) => entry.name),
+    registryDefinitions.map((entry) => entry.name),
+  )
+  assert.equal(github.items.length, 90)
+  const byType = {}
+  for (const entry of github.items) byType[entry.type] = (byType[entry.type] ?? 0) + 1
+  // core, 82 UI entries (81 components and the Dialog alias), block copy, six blocks.
+  assert.deepEqual(byType, {
+    'registry:base': 1,
+    'registry:ui': 82,
+    'registry:lib': 1,
+    'registry:block': 6,
+  })
   assert.equal(item('core').type, 'registry:base')
+  assert.equal(item('dashboard').type, 'registry:block')
+  assert.equal(item('signup').type, 'registry:block')
   assert.equal(item('login').type, 'registry:block')
   assert.equal(item('otp').type, 'registry:block')
   assert.equal(item('search-filters').type, 'registry:block')
   assert.equal(item('settings').type, 'registry:block')
 })
 
-test('GitHub dependencies use full Moru addresses and explicit release pins', () => {
-  for (const entry of github.items) for (const dependency of entry.registryDependencies ?? []) {
-    assert.match(dependency, new RegExp(`^${registryRepository}/[a-z-]+#v${registryVersion.replaceAll('.', '\\.')}$$`))
-    assert.ok(item(dependency.split('/').at(-1).split('#')[0]))
+test('block copy travels with the blocks instead of with core', () => {
+  const coreFiles = item('core').files.map((file) => file.target)
+  assert.ok(coreFiles.includes('@ui/moru/_lib/ui-messages.ts'))
+  assert.ok(!coreFiles.includes('@ui/moru/_lib/block-messages.ts'))
+  assert.doesNotMatch(content('_lib/i18n.tsx'), /block-messages/)
+  assert.equal(item('block-messages').type, 'registry:lib')
+  assert.deepEqual(
+    item('block-messages')
+      .files.map((file) => file.target)
+      .sort(),
+    ['@ui/moru/_lib/block-i18n.ts', '@ui/moru/_lib/block-messages.ts'],
+  )
+  const dependsOnBlockCopy = (entry) =>
+    (entry.registryDependencies ?? []).some((dependency) => dependency.includes('/block-messages#'))
+  for (const entry of github.items)
+    assert.equal(dependsOnBlockCopy(entry), entry.type === 'registry:block', entry.name)
+})
+
+test('the guides state the real item counts and list every UI item', async () => {
+  // These numbers and tables are written by hand; the registry is the source of truth.
+  const ui = github.items
+    .filter((entry) => entry.type === 'registry:ui' && entry.name !== 'dialog')
+    .map((entry) => entry.name)
+  const total = github.items.length
+  for (const file of ['docs/registry.md', 'docs/registry.ko.md']) {
+    const text = await readFile(path.join(root, file), 'utf8')
+    const listed = []
+    for (const row of text.split('\n').filter((line) => /^\|[^|]+\|\s*\d+\s*\|/.test(line))) {
+      const [, , count, names] = row.split('|')
+      const items = [...names.matchAll(/`([a-z-]+)`/g)].map((match) => match[1])
+      assert.equal(items.length, Number(count), `${file}: ${row.slice(0, 40)}`)
+      listed.push(...items)
+    }
+    assert.deepEqual(listed.sort(), [...ui].sort(), file)
+    assert.match(text, new RegExp(`\\b${total}\\b`), `${file} total`)
+    assert.match(text, new RegExp(`\\b${ui.length}\\b`), `${file} UI entries`)
   }
-  assert.deepEqual(item('button').registryDependencies, [`${registryRepository}/core#v${registryVersion}`])
+  const readme = await readFile(path.join(root, 'README.md'), 'utf8')
+  assert.match(readme, new RegExp(`\\*\\*${total} installable entries\\*\\*`))
+  assert.match(readme, new RegExp(`${ui.length} UI entries`))
+  assert.match(readme, new RegExp(`총 ${total}개 항목`))
+})
+
+test('GitHub dependencies use full Moru addresses and explicit release pins', () => {
+  for (const entry of github.items)
+    for (const dependency of entry.registryDependencies ?? []) {
+      assert.match(
+        dependency,
+        new RegExp(`^${registryRepository}/[a-z-]+#v${registryVersion.replaceAll('.', '\\.')}$$`),
+      )
+      assert.ok(item(dependency.split('/').at(-1).split('#')[0]))
+    }
+  assert.deepEqual(item('button').registryDependencies, [
+    `${registryRepository}/core#v${registryVersion}`,
+  ])
 })
 
 test('HTTP payloads and catalog pin every Moru dependency to production version URLs', () => {
   for (const entry of http.items) {
-    const payload = JSON.parse(generated.artifacts.get(`public/r/v${registryVersion}/${entry.name}.json`))
+    const payload = JSON.parse(
+      generated.artifacts.get(`public/r/v${registryVersion}/${entry.name}.json`),
+    )
     assert.deepEqual(payload.registryDependencies, entry.registryDependencies)
     for (const dependency of entry.registryDependencies ?? []) {
       assert.ok(dependency.startsWith(`${registryOrigin}/r/v${registryVersion}/`))
@@ -86,12 +162,13 @@ test('HTTP payloads and catalog pin every Moru dependency to production version 
 
 test('each generated file has one owner and a namespaced target', () => {
   const targets = new Set()
-  for (const entry of github.items) for (const file of entry.files) {
-    assert.match(file.target, /^@ui\/moru\//)
-    assert.equal(targets.has(file.target), false, file.target)
-    targets.add(file.target)
-    assert.ok(generated.artifacts.has(file.path))
-  }
+  for (const entry of github.items)
+    for (const file of entry.files) {
+      assert.match(file.target, /^@ui\/moru\//)
+      assert.equal(targets.has(file.target), false, file.target)
+      targets.add(file.target)
+      assert.ok(generated.artifacts.has(file.path))
+    }
   assert.ok(item('core').files.some((file) => file.target === '@ui/moru/provider.tsx'))
   assert.ok(item('login').files.some((file) => file.target === '@ui/moru/blocks/LoginBlock.tsx'))
 })
@@ -102,10 +179,15 @@ test('every single-item installation contains its complete relative source and C
     for (const file of files) {
       if (!/\.(?:tsx?|css)$/.test(file)) continue
       const source = generated.artifacts.get(file)
-      const imports = file.endsWith('.css') ? [...source.matchAll(/@import\s+['"]([^'"]+)['"]/g)].map((match) => match[1]) : moduleSpecifiers(source, file).map((specifier) => specifier.value)
+      const imports = file.endsWith('.css')
+        ? [...source.matchAll(/@import\s+['"]([^'"]+)['"]/g)].map((match) => match[1])
+        : moduleSpecifiers(source, file).map((specifier) => specifier.value)
       for (const specifier of imports.filter((value) => value.startsWith('.'))) {
         const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
-        assert.ok(['', '.ts', '.tsx', '.css'].some((extension) => files.has(resolved + extension)), `${entry.name}: ${file} → ${specifier}`)
+        assert.ok(
+          ['', '.ts', '.tsx', '.css'].some((extension) => files.has(resolved + extension)),
+          `${entry.name}: ${file} → ${specifier}`,
+        )
       }
     }
   }
@@ -115,15 +197,36 @@ test('selecting Button does not install unrelated inputs, blocks, charts or font
   const buttonFiles = installedFiles('button')
   assert.equal(buttonFiles.has('registry/moru/input.tsx'), false)
   assert.equal(buttonFiles.has('registry/moru/blocks/LoginBlock.tsx'), false)
-  assert.equal([...buttonFiles].some((file) => /chart|table|carousel|fonts|calendar/.test(file)), false)
+  assert.equal(
+    [...buttonFiles].some((file) => /chart|table|carousel|fonts|calendar/.test(file)),
+    false,
+  )
   assert.deepEqual(item('button').dependencies, ['@base-ui/react@1.9.0'])
 })
 
 test('Login and OTP install their original Moru components and dedicated CSS', () => {
   const login = installedFiles('login')
-  for (const file of ['button.tsx', 'input.tsx', 'field.tsx', 'card.tsx', 'checkbox.tsx', 'password-input.tsx', 'enhanced-inputs.css']) assert.ok(login.has(`registry/moru/${file}`), file)
+  for (const file of [
+    'button.tsx',
+    'input.tsx',
+    'field.tsx',
+    'card.tsx',
+    'checkbox.tsx',
+    'password-input.tsx',
+    'password-input.css',
+    'enhanced-input.css',
+  ])
+    assert.ok(login.has(`registry/moru/${file}`), file)
   const otp = installedFiles('otp')
-  for (const file of ['button.tsx', 'field.tsx', 'card.tsx', 'input-otp.tsx', 'input-otp-utils.ts', 'controls-completion.css']) assert.ok(otp.has(`registry/moru/${file}`), file)
+  for (const file of [
+    'button.tsx',
+    'field.tsx',
+    'card.tsx',
+    'input-otp.tsx',
+    'input-otp-utils.ts',
+    'input-otp.css',
+  ])
+    assert.ok(otp.has(`registry/moru/${file}`), file)
   assert.match(content('blocks/LoginBlock.tsx'), /Connect your authentication request/)
   assert.match(content('blocks/OTPBlock.tsx'), /123456/)
   assert.match(item('login').docs, /local demonstrations/)
@@ -142,6 +245,63 @@ test('search and settings blocks install the Moru controls used by the applicati
   assert.ok(installedFiles('textarea').has('registry/moru/field-context.ts'))
 })
 
+test('screen blocks install their composed controls while retaining supporting pattern URLs', () => {
+  const signup = installedFiles('signup')
+  const dashboard = installedFiles('dashboard')
+  for (const file of [
+    'button.tsx',
+    'field.tsx',
+    'input.tsx',
+    'password-input.tsx',
+    'input-otp.tsx',
+  ])
+    assert.ok(signup.has(`registry/moru/${file}`), `signup requires ${file}`)
+  assert.ok(dashboard.has('registry/moru/blocks/SearchFiltersBlock.tsx'))
+  assert.ok(dashboard.has('registry/moru/header.tsx'))
+  assert.ok(dashboard.has('registry/moru/card.tsx'))
+  assert.ok(item('otp'))
+  assert.ok(item('search-filters'))
+})
+
+test('Modal is canonical while existing Dialog installations retain their compatibility export', () => {
+  assert.ok(installedFiles('modal').has('registry/moru/modal.css'))
+  assert.ok(installedFiles('modal').has('registry/moru/overlay-portal.tsx'))
+  assert.ok(installedFiles('dialog').has('registry/moru/modal.tsx'))
+  assert.match(content('dialog.tsx'), /Modal as Dialog/)
+  assert.match(item('dialog').description, /Use modal for new code/)
+})
+
+test('Header and Footer install their own page styling without installing each other', () => {
+  for (const [name, other] of [
+    ['header', 'footer'],
+    ['footer', 'header'],
+  ]) {
+    const files = installedFiles(name)
+    assert.ok(files.has(`registry/moru/${name}.tsx`))
+    assert.ok(files.has(`registry/moru/${name}.css`))
+    assert.equal(files.has(`registry/moru/${other}.tsx`), false)
+    assert.equal(files.has(`registry/moru/${other}.css`), false)
+  }
+})
+
+test('a component installs its own stylesheet, not a bundle shared with unrelated ones', () => {
+  // Label and Kbd used to pull one 677-line sheet covering ten components.
+  for (const name of ['label', 'kbd', 'toggle', 'pagination', 'breadcrumb', 'bubble']) {
+    const own = item(name).files.map((file) => file.target)
+    assert.deepEqual(
+      own.filter((target) => target.endsWith('.css')),
+      [`@ui/moru/${name}.css`],
+      name,
+    )
+  }
+  // Chart reuses none of DataTable's styles, so it must not install TanStack Table.
+  assert.equal(installedFiles('chart').has('registry/moru/data-table.tsx'), false)
+  // Reusing another component's stylesheet makes that component a dependency, in this direction.
+  assert.ok(item('combobox').files.some((file) => file.target === '@ui/moru/combobox.css'))
+  assert.ok(installedFiles('multi-select').has('registry/moru/combobox.css'))
+  assert.equal(installedFiles('combobox').has('registry/moru/multi-select.tsx'), false)
+})
+
 test('source import rewriting preserves the selected original code', async () => {
   const original = await readFile(path.join(root, 'src/components/ui/button.tsx'), 'utf8')
   const expected = original.replace("'../../lib/cn'", "'./_lib/cn'")
@@ -154,10 +314,13 @@ test('core installs scoped runtime tokens rather than default root CSS or the ed
   const files = item('core').files.map((file) => file.path)
   assert.ok(files.includes('registry/moru/_theme/tokens.ts'))
   assert.ok(files.includes('registry/moru/_theme/component-spacing.ts'))
-  assert.equal(files.some((file) => /default\.css|useTheme|\/index\.ts|fonts\.css/.test(file)), false)
+  assert.equal(
+    files.some((file) => /default\.css|useTheme|\/index\.ts|fonts\.css/.test(file)),
+    false,
+  )
   assert.match(content('theme-scope.tsx'), /'data-moru-registry': ''/)
-  assert.match(content('theme-scope.tsx'), /<div \{\.\.\.props\} \{\.\.\.attributes\}/)
-  assert.match(content('theme-scope.tsx'), /<div \{\.\.\.attributes\} ref=\{portalContainer\}/)
+  assert.match(content('theme-scope.tsx'), /<div\s+\{\.\.\.props\}\s+\{\.\.\.attributes\}/)
+  assert.match(content('theme-scope.tsx'), /<div\s+\{\.\.\.attributes\}\s+ref=\{portalContainer\}/)
 })
 
 test('every installation retains the full Moru MIT grant and repository notice reference', async () => {
@@ -165,9 +328,14 @@ test('every installation retains the full Moru MIT grant and repository notice r
   assert.equal(content('_licenses/Moru-LICENSE'), license)
   assert.match(license, /Copyright \(c\) 2026 SYRUS RIIUS/)
   assert.match(license, /Permission is hereby granted/)
-  assert.match(content('_licenses/NOTICE.md'), /https:\/\/github\.com\/syrus-riius\/moru-ui\/blob\/main\/NOTICE\.md/)
-  for (const entry of github.items) assert.ok(installedFiles(entry.name).has('registry/moru/_licenses/Moru-LICENSE'))
-  for (const file of item('core').files.filter((file) => file.path.includes('_licenses/'))) assert.equal(file.type, 'registry:file')
+  assert.match(
+    content('_licenses/NOTICE.md'),
+    /https:\/\/github\.com\/syrus-riius\/moru-ui\/blob\/main\/NOTICE\.md/,
+  )
+  for (const entry of github.items)
+    assert.ok(installedFiles(entry.name).has('registry/moru/_licenses/Moru-LICENSE'))
+  for (const file of item('core').files.filter((file) => file.path.includes('_licenses/')))
+    assert.equal(file.type, 'registry:file')
   assert.ok(generated.sources.some((file) => file.path === 'NOTICE.md'))
 })
 
@@ -184,9 +352,13 @@ test('MoruProvider gives both modes scoped defaults while allowing explicit toke
 test('entry styles import the shared layout, component and readability layers once', () => {
   const entry = content('styles.css')
   const imports = [...entry.matchAll(/@import ['"]([^'"]+)['"]/g)].map((match) => match[1])
-  assert.deepEqual(imports, ['./_styles/utilities.css', './_styles/components.css', './_styles/readability.css'])
-  assert.match(content('_styles/components.css'), /@import '\.\/form-controls\.css'/)
-  assert.match(content('_styles/components.css'), /@import '\.\/feedback\.css'/)
+  assert.deepEqual(imports, [
+    './_styles/utilities.css',
+    './_styles/components.css',
+    './_styles/readability.css',
+  ])
+  assert.match(content('_styles/components.css'), /@import ['"]\.\/form-controls\.css['"]/)
+  assert.match(content('_styles/components.css'), /@import ['"]\.\/feedback\.css['"]/)
 })
 
 test('all installed CSS selectors are confined to the Moru scope including media rules', () => {
@@ -194,51 +366,101 @@ test('all installed CSS selectors are confined to the Moru scope including media
     if (!file.startsWith('registry/moru/') || !file.endsWith('.css')) continue
     postcss.parse(source).walkRules((rule) => {
       if (hasKeyframeParent(rule)) return
-      for (const selector of rule.selectors) assert.ok(selector.startsWith(registryScope), `${file}: ${selector}`)
+      for (const selector of rule.selectors)
+        assert.ok(selector.startsWith(registryScope), `${file}: ${selector}`)
     })
     assert.doesNotMatch(source, /(?:^|[\n{,])\s*(?::root|html|body)\s*[{,]/)
   }
-  assert.match(content('_styles/components.css'), /:where\(\[data-moru-registry\]\)\.ui-theme-scope/)
-  assert.match(content('_styles/components.css'), /:where\(\[data-moru-registry\]\)\.ui-theme-portal/)
+  assert.match(
+    content('_styles/components.css'),
+    /:where\(\[data-moru-registry\]\)\.ui-theme-scope/,
+  )
+  assert.match(
+    content('_styles/components.css'),
+    /:where\(\[data-moru-registry\]\)\.ui-theme-portal/,
+  )
 })
 
 test('keyframes and their animation references do not collide with host animation names', () => {
   const names = new Set()
-  for (const [file, source] of generated.artifacts) if (file.startsWith('registry/moru/') && file.endsWith('.css')) {
-    postcss.parse(source).walkAtRules((rule) => {
-      if (/keyframes$/.test(rule.name)) {
-        assert.ok(rule.params.startsWith('moru-registry-'))
-        names.add(rule.params)
-        assert.ok(rule.nodes.every((node) => node.type !== 'rule' || !node.selector.includes('data-moru-registry')))
-      }
-    })
-    postcss.parse(source).walkDecls((declaration) => {
-      if (/^animation/.test(declaration.prop)) assert.doesNotMatch(declaration.value, /(?<![\w-])ui-(?:spin|otp-blink|completion-spin|skeleton-pulse|progress-indeterminate)(?![\w-])/)
-    })
-  }
+  for (const [file, source] of generated.artifacts)
+    if (file.startsWith('registry/moru/') && file.endsWith('.css')) {
+      postcss.parse(source).walkAtRules((rule) => {
+        if (/keyframes$/.test(rule.name)) {
+          assert.ok(rule.params.startsWith('moru-registry-'))
+          names.add(rule.params)
+          assert.ok(
+            rule.nodes.every(
+              (node) => node.type !== 'rule' || !node.selector.includes('data-moru-registry'),
+            ),
+          )
+        }
+      })
+      postcss.parse(source).walkDecls((declaration) => {
+        if (/^animation/.test(declaration.prop))
+          assert.doesNotMatch(
+            declaration.value,
+            /(?<![\w-])ui-(?:spin|otp-blink|completion-spin|skeleton-pulse|progress-indeterminate)(?![\w-])/,
+          )
+      })
+    }
   assert.ok(names.has('moru-registry-ui-spin'))
   assert.ok(names.has('moru-registry-ui-otp-blink'))
 })
 
 test('minimal layout helpers work without importing a Tailwind reset or host CSS variables', () => {
   const utilities = content('_styles/utilities.css')
-  for (const utility of ['inline-flex', 'flex-col', 'items-start', 'items-center', 'justify-center', 'w-full', 'min-w-0', 'shrink-0']) assert.ok(utilities.includes(`.${utility} `), utility)
+  for (const utility of [
+    'inline-flex',
+    'flex-col',
+    'items-start',
+    'items-center',
+    'justify-center',
+    'w-full',
+    'min-w-0',
+    'shrink-0',
+  ])
+    assert.ok(utilities.includes(`.${utility} `), utility)
   assert.doesNotMatch(utilities, /@import|:root|--color-|--spacing:/)
   assert.match(utilities, /:where\(\[data-moru-registry\]\) \*::before/)
 })
 
+test('layout fallbacks stay below the host utilities in the cascade', () => {
+  const stylesheet = postcss.parse(content('_styles/utilities.css'))
+  // An unlayered `.flex` or `button { font: inherit }` beats every layered Tailwind
+  // utility inside the provider, e.g. `flex md:hidden` or `text-sm` on a host button.
+  stylesheet.walkRules((rule) => {
+    const layer = rule.parent?.type === 'atrule' ? `${rule.parent.name} ${rule.parent.params}` : ''
+    assert.equal(layer, 'layer base', rule.selector)
+  })
+  assert.ok(stylesheet.nodes.some((node) => node.type === 'atrule' && node.name === 'layer'))
+})
+
 test('generated modules need no allowImportingTsExtensions and carry client boundaries', () => {
-  for (const [file, source] of generated.artifacts) if (file.startsWith('registry/moru/') && /\.tsx?$/.test(file)) {
-    for (const specifier of moduleSpecifiers(source, file)) assert.doesNotMatch(specifier.value, /\.tsx?$/)
-    if (file.endsWith('.tsx') || file.endsWith('/field-context.ts')) assert.ok(source.startsWith("'use client'"), file)
-  }
+  for (const [file, source] of generated.artifacts)
+    if (file.startsWith('registry/moru/') && /\.tsx?$/.test(file)) {
+      for (const specifier of moduleSpecifiers(source, file))
+        assert.doesNotMatch(specifier.value, /\.tsx?$/)
+      if (file.endsWith('.tsx') || file.endsWith('/field-context.ts'))
+        assert.ok(source.startsWith("'use client'"), file)
+    }
 })
 
 test('manifest checksums cover every source and generated output', async () => {
   const manifest = JSON.parse(content('manifest.json'))
   assert.equal(manifest.sourceHash, generated.sourceHash)
-  for (const file of manifest.files) assert.equal(file.sha256, createHash('sha256').update(generated.artifacts.get(file.path)).digest('hex'))
-  for (const source of manifest.sources) assert.equal(source.sha256, createHash('sha256').update(await readFile(path.join(root, source.path))).digest('hex'))
+  for (const file of manifest.files)
+    assert.equal(
+      file.sha256,
+      createHash('sha256').update(generated.artifacts.get(file.path)).digest('hex'),
+    )
+  for (const source of manifest.sources)
+    assert.equal(
+      source.sha256,
+      createHash('sha256')
+        .update(await readFile(path.join(root, source.path)))
+        .digest('hex'),
+    )
   assert.equal(manifest.files.length + 1, generated.artifacts.size)
 })
 
@@ -249,13 +471,18 @@ test('identical input produces byte-for-byte identical registry output', async (
 
 test('module parsing ignores strings and comments while retaining type imports and exports', () => {
   const source = `// import './fake-a'\nconst s = "import './fake-b'"\nimport type { X } from './types'\nexport { y } from './helper'\ntype Z = import('./more-types').Z\nconst dynamic = import('./lazy')\nconst node = <div>{s}</div>`
-  assert.deepEqual(moduleSpecifiers(source, 'example.tsx').map((entry) => entry.value), ['./types', './helper', './more-types', './lazy'])
+  assert.deepEqual(
+    moduleSpecifiers(source, 'example.tsx').map((entry) => entry.value),
+    ['./types', './helper', './more-types', './lazy'],
+  )
 })
 
 test('CSS scoping retains nested conditions and refuses root-level token injection', () => {
   assert.throws(() => scopeRegistryCss(':root { --ui-text: red }'), /Global host selector/)
   assert.throws(() => scopeRegistryCss('body .ui-button { color:red }'), /Global host selector/)
-  const css = scopeRegistryCss('@media (pointer: coarse) { .ui-button { min-height:44px } } @keyframes example { to { opacity: 1 } } .ui-button { animation:example 1s }')
+  const css = scopeRegistryCss(
+    '@media (pointer: coarse) { .ui-button { min-height:44px } } @keyframes example { to { opacity: 1 } } .ui-button { animation:example 1s }',
+  )
   assert.match(css, /@media \(pointer: coarse\)/)
   assert.match(css, /animation:moru-registry-example 1s/)
   assert.match(css, /@keyframes moru-registry-example \{ to/)
@@ -281,7 +508,10 @@ test('building a new current registry preserves old immutable HTTP release URLs'
   await mkdir(path.join(directory, 'public/r/v0.1.0'), { recursive: true })
   await writeFile(path.join(directory, 'public/r/v0.1.0/button.json'), 'old release')
   await buildRegistry(directory)
-  assert.equal(await readFile(path.join(directory, 'public/r/v0.1.0/button.json'), 'utf8'), 'old release')
+  assert.equal(
+    await readFile(path.join(directory, 'public/r/v0.1.0/button.json'), 'utf8'),
+    'old release',
+  )
   await verifyRegistry(directory)
 })
 
@@ -290,8 +520,36 @@ test('the published v0.3.1 HTTP release remains byte-for-byte unchanged', async 
   const files = (await readdir(directory)).filter((file) => file.endsWith('.json')).sort()
   assert.equal(files.length, 12)
   const digest = createHash('sha256')
-  for (const file of files) { digest.update(file); digest.update('\0'); digest.update(await readFile(path.join(directory, file))); digest.update('\0') }
-  assert.equal(digest.digest('hex'), '718ed9b99fabdc894b0243a7aae07d6d01203f3622e4912c5949d4a0037b350f')
+  for (const file of files) {
+    digest.update(file)
+    digest.update('\0')
+    digest.update(await readFile(path.join(directory, file)))
+    digest.update('\0')
+  }
+  assert.equal(
+    digest.digest('hex'),
+    '718ed9b99fabdc894b0243a7aae07d6d01203f3622e4912c5949d4a0037b350f',
+  )
+})
+
+test('the published v0.4.0 HTTP release remains byte-for-byte unchanged', async () => {
+  // v0.4.1 changed stylesheet names and item contents; v0.4.0 installs must keep resolving.
+  // The digest is of the files served by the live site (checked 2026-11-15), not of a
+  // local regeneration: the working tree's copy had drifted from what was published.
+  const directory = path.join(root, 'public/r/v0.4.0')
+  const files = (await readdir(directory)).filter((file) => file.endsWith('.json')).sort()
+  assert.equal(files.length, 90)
+  const digest = createHash('sha256')
+  for (const file of files) {
+    digest.update(file)
+    digest.update('\0')
+    digest.update(await readFile(path.join(directory, file)))
+    digest.update('\0')
+  }
+  assert.equal(
+    digest.digest('hex'),
+    '2628f76bb838cf4a321d3827e8fb340d0dd833b65a3ef7978e23727b973d0199',
+  )
 })
 
 test('unresolved imports and symlinked sources cannot enter a published payload', async () => {
@@ -308,7 +566,10 @@ test('unresolved imports and symlinked sources cannot enter a published payload'
 
 test('circular item dependencies fail before producing an installable registry', async () => {
   const directory = await fixture()
-  for (const [file, other] of [['button', 'input'], ['input', 'button']]) {
+  for (const [file, other] of [
+    ['button', 'input'],
+    ['input', 'button'],
+  ]) {
     const source = path.join(directory, `src/components/ui/${file}.tsx`)
     await writeFile(source, (await readFile(source, 'utf8')) + `\nimport './${other}'\n`)
   }

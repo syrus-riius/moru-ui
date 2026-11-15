@@ -1,0 +1,1414 @@
+{
+  "schemaVersion": 1,
+  "version": "0.4.1",
+  "sourceHash": "92d4b85e1d28cd9eda9391ef75e1e633fa26d884c86603172df42465b8fa832c",
+  "entries": [
+    {
+      "id": "core",
+      "title": "Moru Core",
+      "description": "Scoped styles, tokens, MoruProvider, and shared helpers.",
+      "kind": "foundation",
+      "exports": [
+        "MoruLocaleProvider",
+        "MoruProvider",
+        "useI18n"
+      ],
+      "docPath": "/ai/v0.4.1/core.md",
+      "dependencies": [],
+      "importPath": "@/components/ui/moru/provider"
+    },
+    {
+      "id": "button",
+      "title": "Button",
+      "description": "Accessible button with variants, loading and disabled states.",
+      "kind": "component",
+      "exports": [
+        "Button"
+      ],
+      "docPath": "/ai/v0.4.1/components/button.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/button"
+    },
+    {
+      "id": "input",
+      "title": "Input",
+      "description": "Accessible text input with Field integration.",
+      "kind": "component",
+      "exports": [
+        "Input"
+      ],
+      "docPath": "/ai/v0.4.1/components/input.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/input"
+    },
+    {
+      "id": "field",
+      "title": "Field",
+      "description": "Connected labels, descriptions and validation messages.",
+      "kind": "component",
+      "exports": [
+        "Field"
+      ],
+      "docPath": "/ai/v0.4.1/components/field.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/field"
+    },
+    {
+      "id": "formatted-input",
+      "title": "Formatted Input",
+      "description": "Purpose-built input formats for cards, phone, email, URLs, IP addresses and Korean postal codes, with optional validation helpers.",
+      "kind": "component",
+      "exports": [
+        "FormattedInput",
+        "validateFormattedInput"
+      ],
+      "docPath": "/ai/v0.4.1/components/formatted-input.md",
+      "dependencies": [
+        "core",
+        "input"
+      ],
+      "importPath": "@/components/ui/moru/formatted-input"
+    },
+    {
+      "id": "card",
+      "title": "Card",
+      "description": "A quiet, token-based content surface.",
+      "kind": "component",
+      "exports": [
+        "Card"
+      ],
+      "docPath": "/ai/v0.4.1/components/card.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/card"
+    },
+    {
+      "id": "checkbox",
+      "title": "Checkbox",
+      "description": "Accessible checkbox with label, description and loading state.",
+      "kind": "component",
+      "exports": [
+        "Checkbox"
+      ],
+      "docPath": "/ai/v0.4.1/components/checkbox.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/checkbox"
+    },
+    {
+      "id": "password-input",
+      "title": "Password Input",
+      "description": "Password input with an accessible visibility toggle.",
+      "kind": "component",
+      "exports": [
+        "PasswordInput"
+      ],
+      "docPath": "/ai/v0.4.1/components/password-input.md",
+      "dependencies": [
+        "core",
+        "input"
+      ],
+      "importPath": "@/components/ui/moru/password-input"
+    },
+    {
+      "id": "input-otp",
+      "title": "Input OTP",
+      "description": "Single native input with visual slots and one-time-code autofill.",
+      "kind": "component",
+      "exports": [
+        "InputOTP"
+      ],
+      "docPath": "/ai/v0.4.1/components/input-otp.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/input-otp"
+    },
+    {
+      "id": "status-message",
+      "title": "Status Message",
+      "description": "Semantic status feedback using text and icons.",
+      "kind": "component",
+      "exports": [
+        "StatusMessage"
+      ],
+      "docPath": "/ai/v0.4.1/components/status-message.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/status-message"
+    },
+    {
+      "id": "select",
+      "title": "Select",
+      "description": "Accessible select with keyboard navigation and scoped popup theming.",
+      "kind": "component",
+      "exports": [
+        "Select"
+      ],
+      "docPath": "/ai/v0.4.1/components/select.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/select"
+    },
+    {
+      "id": "badge",
+      "title": "Badge",
+      "description": "Compact status and category labels using semantic tokens.",
+      "kind": "component",
+      "exports": [
+        "Badge"
+      ],
+      "docPath": "/ai/v0.4.1/components/badge.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/badge"
+    },
+    {
+      "id": "switch",
+      "title": "Switch",
+      "description": "Accessible labelled switch with form and Field integration.",
+      "kind": "component",
+      "exports": [
+        "Switch"
+      ],
+      "docPath": "/ai/v0.4.1/components/switch.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/switch"
+    },
+    {
+      "id": "modal",
+      "title": "Modal",
+      "description": "Modal dialog with managed focus, scoped portals, size options and purpose-based variants.",
+      "kind": "component",
+      "exports": [
+        "Modal"
+      ],
+      "docPath": "/ai/v0.4.1/components/modal.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/modal"
+    },
+    {
+      "id": "dialog",
+      "title": "Modal (legacy alias)",
+      "description": "Compatibility export for existing Dialog imports. Use modal for new code.",
+      "kind": "component",
+      "exports": [
+        "Dialog"
+      ],
+      "docPath": "/ai/v0.4.1/components/dialog.md",
+      "dependencies": [
+        "core",
+        "modal"
+      ],
+      "importPath": "@/components/ui/moru/dialog"
+    },
+    {
+      "id": "textarea",
+      "title": "Textarea",
+      "description": "Multiline input with Field integration and loading state.",
+      "kind": "component",
+      "exports": [
+        "Textarea"
+      ],
+      "docPath": "/ai/v0.4.1/components/textarea.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/textarea"
+    },
+    {
+      "id": "tabs",
+      "title": "Tabs",
+      "description": "Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.",
+      "kind": "component",
+      "exports": [
+        "Tabs"
+      ],
+      "docPath": "/ai/v0.4.1/components/tabs.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/tabs"
+    },
+    {
+      "id": "menu",
+      "title": "Menu",
+      "description": "Dropdown actions with keyboard navigation, disabled items and scoped popup theming.",
+      "kind": "component",
+      "exports": [
+        "Menu"
+      ],
+      "docPath": "/ai/v0.4.1/components/menu.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/menu"
+    },
+    {
+      "id": "popover",
+      "title": "Popover",
+      "description": "Anchored popup with managed focus, collision handling and scoped portal styling.",
+      "kind": "component",
+      "exports": [
+        "Popover"
+      ],
+      "docPath": "/ai/v0.4.1/components/popover.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/popover"
+    },
+    {
+      "id": "drawer",
+      "title": "Drawer",
+      "description": "Bottom modal drawer with managed focus and keyboard or pointer dismissal.",
+      "kind": "component",
+      "exports": [
+        "Drawer"
+      ],
+      "docPath": "/ai/v0.4.1/components/drawer.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/drawer"
+    },
+    {
+      "id": "calendar",
+      "title": "Calendar",
+      "description": "Calendar with single-date or range selection, year/month navigation and display variants.",
+      "kind": "component",
+      "exports": [
+        "Calendar"
+      ],
+      "docPath": "/ai/v0.4.1/components/calendar.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/calendar"
+    },
+    {
+      "id": "date-picker",
+      "title": "Date Picker",
+      "description": "Single-date field with a calendar popup, date bounds and native form integration.",
+      "kind": "component",
+      "exports": [
+        "DatePicker"
+      ],
+      "docPath": "/ai/v0.4.1/components/date-picker.md",
+      "dependencies": [
+        "calendar",
+        "core",
+        "popover"
+      ],
+      "importPath": "@/components/ui/moru/date-picker"
+    },
+    {
+      "id": "date-range-picker",
+      "title": "Date Range Picker",
+      "description": "Start/end date field with range selection, calendar display options and native form integration.",
+      "kind": "component",
+      "exports": [
+        "DateRangePicker"
+      ],
+      "docPath": "/ai/v0.4.1/components/date-range-picker.md",
+      "dependencies": [
+        "calendar",
+        "core",
+        "popover"
+      ],
+      "importPath": "@/components/ui/moru/date-range-picker"
+    },
+    {
+      "id": "time-picker",
+      "title": "Time Picker",
+      "description": "Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.",
+      "kind": "component",
+      "exports": [
+        "TimePicker"
+      ],
+      "docPath": "/ai/v0.4.1/components/time-picker.md",
+      "dependencies": [
+        "core",
+        "popover"
+      ],
+      "importPath": "@/components/ui/moru/time-picker"
+    },
+    {
+      "id": "time-range-picker",
+      "title": "Time Range Picker",
+      "description": "Paired start/end time fields with duration feedback and optional overnight ranges.",
+      "kind": "component",
+      "exports": [
+        "TimeRangePicker"
+      ],
+      "docPath": "/ai/v0.4.1/components/time-range-picker.md",
+      "dependencies": [
+        "core",
+        "time-picker"
+      ],
+      "importPath": "@/components/ui/moru/time-range-picker"
+    },
+    {
+      "id": "number-input",
+      "title": "Number Input",
+      "description": "Numeric field with step controls, bounds and localized formatting.",
+      "kind": "component",
+      "exports": [
+        "NumberInput",
+        "subscribeNumberInputFormReset"
+      ],
+      "docPath": "/ai/v0.4.1/components/number-input.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/number-input"
+    },
+    {
+      "id": "multi-select",
+      "title": "Multi Select",
+      "description": "Searchable multi-value selection with removable chips and native form values.",
+      "kind": "component",
+      "exports": [
+        "MultiSelect",
+        "subscribeMultiSelectFormReset"
+      ],
+      "docPath": "/ai/v0.4.1/components/multi-select.md",
+      "dependencies": [
+        "combobox",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/multi-select"
+    },
+    {
+      "id": "radio-group",
+      "title": "Radio Group",
+      "description": "Accessible single-choice group with labels, descriptions and Field integration.",
+      "kind": "component",
+      "exports": [
+        "RadioGroup"
+      ],
+      "docPath": "/ai/v0.4.1/components/radio-group.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/radio-group"
+    },
+    {
+      "id": "slider",
+      "title": "Slider",
+      "description": "Keyboard-operable value slider with configurable range and step.",
+      "kind": "component",
+      "exports": [
+        "Slider"
+      ],
+      "docPath": "/ai/v0.4.1/components/slider.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/slider"
+    },
+    {
+      "id": "combobox",
+      "title": "Combobox",
+      "description": "Searchable option selection with labelled results and scoped popup theming.",
+      "kind": "component",
+      "exports": [
+        "Combobox"
+      ],
+      "docPath": "/ai/v0.4.1/components/combobox.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/combobox"
+    },
+    {
+      "id": "toggle-group",
+      "title": "Toggle Group",
+      "description": "Grouped toggle options with single or multiple selection.",
+      "kind": "component",
+      "exports": [
+        "ToggleGroup"
+      ],
+      "docPath": "/ai/v0.4.1/components/toggle-group.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/toggle-group"
+    },
+    {
+      "id": "input-group",
+      "title": "Input Group",
+      "description": "Composable input or textarea with connected addons and action buttons.",
+      "kind": "component",
+      "exports": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupButton",
+        "InputGroupInput",
+        "InputGroupTextarea"
+      ],
+      "docPath": "/ai/v0.4.1/components/input-group.md",
+      "dependencies": [
+        "button",
+        "core",
+        "input",
+        "textarea"
+      ],
+      "importPath": "@/components/ui/moru/input-group"
+    },
+    {
+      "id": "label",
+      "title": "Label",
+      "description": "Text label for associating an accessible name with a form control.",
+      "kind": "component",
+      "exports": [
+        "Label"
+      ],
+      "docPath": "/ai/v0.4.1/components/label.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/label"
+    },
+    {
+      "id": "native-select",
+      "title": "Native Select",
+      "description": "Styled native select with standard browser form and keyboard behavior.",
+      "kind": "component",
+      "exports": [
+        "NativeSelect"
+      ],
+      "docPath": "/ai/v0.4.1/components/native-select.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/native-select"
+    },
+    {
+      "id": "file-input",
+      "title": "File Input",
+      "description": "File selection with client-side constraints and removable attachment feedback.",
+      "kind": "component",
+      "exports": [
+        "FileInput"
+      ],
+      "docPath": "/ai/v0.4.1/components/file-input.md",
+      "dependencies": [
+        "attachment",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/file-input"
+    },
+    {
+      "id": "attachment",
+      "title": "Attachment",
+      "description": "File attachment presentation with metadata and optional removal actions.",
+      "kind": "component",
+      "exports": [
+        "Attachment",
+        "AttachmentActions",
+        "AttachmentContent",
+        "AttachmentDescription",
+        "AttachmentGroup",
+        "AttachmentMedia",
+        "AttachmentTitle",
+        "formatFileSize",
+        "getFileExtension"
+      ],
+      "docPath": "/ai/v0.4.1/components/attachment.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/attachment"
+    },
+    {
+      "id": "questionnaire",
+      "title": "Questionnaire",
+      "description": "Step-by-step questions composed from Moru input and selection controls.",
+      "kind": "component",
+      "exports": [
+        "Questionnaire"
+      ],
+      "docPath": "/ai/v0.4.1/components/questionnaire.md",
+      "dependencies": [
+        "button",
+        "checkbox",
+        "core",
+        "input",
+        "radio-group"
+      ],
+      "importPath": "@/components/ui/moru/questionnaire"
+    },
+    {
+      "id": "command",
+      "title": "Command",
+      "description": "Searchable command dialog with grouped actions and keyboard navigation.",
+      "kind": "component",
+      "exports": [
+        "Command"
+      ],
+      "docPath": "/ai/v0.4.1/components/command.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/command"
+    },
+    {
+      "id": "button-group",
+      "title": "Button Group",
+      "description": "Horizontal or vertical grouping for related buttons and actions.",
+      "kind": "component",
+      "exports": [
+        "ButtonGroup",
+        "ButtonGroupText"
+      ],
+      "docPath": "/ai/v0.4.1/components/button-group.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/button-group"
+    },
+    {
+      "id": "kbd",
+      "title": "Kbd",
+      "description": "Compact visual representation of keyboard keys and shortcuts.",
+      "kind": "component",
+      "exports": [
+        "Kbd",
+        "KbdGroup"
+      ],
+      "docPath": "/ai/v0.4.1/components/kbd.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/kbd"
+    },
+    {
+      "id": "toggle",
+      "title": "Toggle",
+      "description": "Accessible pressed-state action with token-based size and styling.",
+      "kind": "component",
+      "exports": [
+        "Toggle"
+      ],
+      "docPath": "/ai/v0.4.1/components/toggle.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/toggle"
+    },
+    {
+      "id": "tooltip",
+      "title": "Tooltip",
+      "description": "Short supplementary information with optional shared TooltipProvider timing.",
+      "kind": "component",
+      "exports": [
+        "Tooltip",
+        "TooltipProvider"
+      ],
+      "docPath": "/ai/v0.4.1/components/tooltip.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/tooltip"
+    },
+    {
+      "id": "alert-dialog",
+      "title": "Alert Dialog",
+      "description": "Confirmation dialog with managed focus and asynchronous action feedback.",
+      "kind": "component",
+      "exports": [
+        "AlertDialog"
+      ],
+      "docPath": "/ai/v0.4.1/components/alert-dialog.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/alert-dialog"
+    },
+    {
+      "id": "sheet",
+      "title": "Sheet",
+      "description": "Side panel dialog with managed focus, title, content and footer actions.",
+      "kind": "component",
+      "exports": [
+        "Sheet"
+      ],
+      "docPath": "/ai/v0.4.1/components/sheet.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/sheet"
+    },
+    {
+      "id": "context-menu",
+      "title": "Context Menu",
+      "description": "Contextual action menu with nested actions and keyboard navigation.",
+      "kind": "component",
+      "exports": [
+        "ContextMenu"
+      ],
+      "docPath": "/ai/v0.4.1/components/context-menu.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/context-menu"
+    },
+    {
+      "id": "hover-card",
+      "title": "Hover Card",
+      "description": "Contextual preview content attached to a trigger with scoped popup theming.",
+      "kind": "component",
+      "exports": [
+        "HoverCard"
+      ],
+      "docPath": "/ai/v0.4.1/components/hover-card.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/hover-card"
+    },
+    {
+      "id": "pagination",
+      "title": "Pagination",
+      "description": "Page navigation with bounded values, compact ranges and accessible controls.",
+      "kind": "component",
+      "exports": [
+        "Pagination"
+      ],
+      "docPath": "/ai/v0.4.1/components/pagination.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/pagination"
+    },
+    {
+      "id": "breadcrumb",
+      "title": "Breadcrumb",
+      "description": "Current-location trail with links, actions and an accessible current item.",
+      "kind": "component",
+      "exports": [
+        "Breadcrumb"
+      ],
+      "docPath": "/ai/v0.4.1/components/breadcrumb.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/breadcrumb"
+    },
+    {
+      "id": "menubar",
+      "title": "Menubar",
+      "description": "Application menu bar with nested actions and keyboard focus handling.",
+      "kind": "component",
+      "exports": [
+        "Menubar"
+      ],
+      "docPath": "/ai/v0.4.1/components/menubar.md",
+      "dependencies": [
+        "context-menu",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/menubar"
+    },
+    {
+      "id": "navigation-menu",
+      "title": "Navigation Menu",
+      "description": "Grouped navigation links and popup content with keyboard navigation.",
+      "kind": "component",
+      "exports": [
+        "NavigationMenu"
+      ],
+      "docPath": "/ai/v0.4.1/components/navigation-menu.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/navigation-menu"
+    },
+    {
+      "id": "sidebar",
+      "title": "Sidebar",
+      "description": "Collapsible application navigation with a mobile modal panel.",
+      "kind": "component",
+      "exports": [
+        "Sidebar"
+      ],
+      "docPath": "/ai/v0.4.1/components/sidebar.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/sidebar"
+    },
+    {
+      "id": "stepper",
+      "title": "Stepper",
+      "description": "Step progress and navigation with completed, current and error states.",
+      "kind": "component",
+      "exports": [
+        "Stepper",
+        "canSelectStep",
+        "normalizeStepperValue"
+      ],
+      "docPath": "/ai/v0.4.1/components/stepper.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/stepper"
+    },
+    {
+      "id": "header",
+      "title": "Header",
+      "description": "Responsive page header with branding, navigation and action slots.",
+      "kind": "component",
+      "exports": [
+        "Header"
+      ],
+      "docPath": "/ai/v0.4.1/components/header.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/header"
+    },
+    {
+      "id": "footer",
+      "title": "Footer",
+      "description": "Page footer with branding, grouped navigation and supporting content.",
+      "kind": "component",
+      "exports": [
+        "Footer"
+      ],
+      "docPath": "/ai/v0.4.1/components/footer.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/footer"
+    },
+    {
+      "id": "accordion",
+      "title": "Accordion",
+      "description": "Expandable sections with accessible headings and keyboard interaction.",
+      "kind": "component",
+      "exports": [
+        "Accordion"
+      ],
+      "docPath": "/ai/v0.4.1/components/accordion.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/accordion"
+    },
+    {
+      "id": "avatar",
+      "title": "Avatar",
+      "description": "User image with a fallback representation.",
+      "kind": "component",
+      "exports": [
+        "Avatar"
+      ],
+      "docPath": "/ai/v0.4.1/components/avatar.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/avatar"
+    },
+    {
+      "id": "separator",
+      "title": "Separator",
+      "description": "Horizontal or vertical separation of related content.",
+      "kind": "component",
+      "exports": [
+        "Separator"
+      ],
+      "docPath": "/ai/v0.4.1/components/separator.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/separator"
+    },
+    {
+      "id": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "description": "A responsive content frame that preserves a chosen aspect ratio.",
+      "kind": "component",
+      "exports": [
+        "AspectRatio"
+      ],
+      "docPath": "/ai/v0.4.1/components/aspect-ratio.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/aspect-ratio"
+    },
+    {
+      "id": "direction",
+      "title": "Direction",
+      "description": "Base UI DirectionProvider for LTR or RTL behavior; pair with dir on the DOM boundary.",
+      "kind": "component",
+      "exports": [
+        "DirectionProvider"
+      ],
+      "docPath": "/ai/v0.4.1/components/direction.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/direction-provider"
+    },
+    {
+      "id": "item",
+      "title": "Item",
+      "description": "Composable list item presentation for leading content, copy and trailing actions.",
+      "kind": "component",
+      "exports": [
+        "Item",
+        "ItemActions",
+        "ItemContent",
+        "ItemDescription",
+        "ItemGroup",
+        "ItemMedia",
+        "ItemSeparator",
+        "ItemTitle"
+      ],
+      "docPath": "/ai/v0.4.1/components/item.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/item"
+    },
+    {
+      "id": "collapsible",
+      "title": "Collapsible",
+      "description": "Expandable content controlled by a keyboard-accessible disclosure trigger.",
+      "kind": "component",
+      "exports": [
+        "Collapsible"
+      ],
+      "docPath": "/ai/v0.4.1/components/collapsible.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/collapsible"
+    },
+    {
+      "id": "carousel",
+      "title": "Carousel",
+      "description": "Embla-based content carousel with keyboard controls and selected-slide feedback.",
+      "kind": "component",
+      "exports": [
+        "Carousel"
+      ],
+      "docPath": "/ai/v0.4.1/components/carousel.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/carousel"
+    },
+    {
+      "id": "resizable",
+      "title": "Resizable",
+      "description": "Resizable panel groups, panels and handles with optional grip decoration.",
+      "kind": "component",
+      "exports": [
+        "ResizableHandle",
+        "ResizablePanel",
+        "ResizablePanelGroup"
+      ],
+      "docPath": "/ai/v0.4.1/components/resizable.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/resizable"
+    },
+    {
+      "id": "scroll-area",
+      "title": "Scroll Area",
+      "description": "Styled scrollable viewport with accessible native scrolling behavior.",
+      "kind": "component",
+      "exports": [
+        "ScrollArea",
+        "ScrollBar"
+      ],
+      "docPath": "/ai/v0.4.1/components/scroll-area.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/scroll-area"
+    },
+    {
+      "id": "typography",
+      "title": "Typography",
+      "description": "Role-based display, heading, body, label, caption and code text.",
+      "kind": "component",
+      "exports": [
+        "Typography"
+      ],
+      "docPath": "/ai/v0.4.1/components/typography.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/typography"
+    },
+    {
+      "id": "alert",
+      "title": "Alert",
+      "description": "Semantic inline notice with a title, description and meaning beyond color.",
+      "kind": "component",
+      "exports": [
+        "Alert"
+      ],
+      "docPath": "/ai/v0.4.1/components/alert.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/alert"
+    },
+    {
+      "id": "progress",
+      "title": "Progress",
+      "description": "Accessible progress indicator for known or indeterminate work.",
+      "kind": "component",
+      "exports": [
+        "Progress"
+      ],
+      "docPath": "/ai/v0.4.1/components/progress.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/progress"
+    },
+    {
+      "id": "ring-progress",
+      "title": "Ring Progress",
+      "description": "Circular progress presentation with optional sections and center content.",
+      "kind": "component",
+      "exports": [
+        "RingProgress",
+        "normalizeRingSections"
+      ],
+      "docPath": "/ai/v0.4.1/components/ring-progress.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/ring-progress"
+    },
+    {
+      "id": "skeleton",
+      "title": "Skeleton",
+      "description": "Placeholder surfaces for content that is still loading.",
+      "kind": "component",
+      "exports": [
+        "Skeleton"
+      ],
+      "docPath": "/ai/v0.4.1/components/skeleton.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/skeleton"
+    },
+    {
+      "id": "toast",
+      "title": "Toast",
+      "description": "ToastProvider and useToast for dismissible semantic application notifications.",
+      "kind": "component",
+      "exports": [
+        "ToastProvider",
+        "useToast"
+      ],
+      "docPath": "/ai/v0.4.1/components/toast.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/toast"
+    },
+    {
+      "id": "empty",
+      "title": "Empty",
+      "description": "Empty-state content with explanation and a next action.",
+      "kind": "component",
+      "exports": [
+        "Empty"
+      ],
+      "docPath": "/ai/v0.4.1/components/empty.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/empty"
+    },
+    {
+      "id": "spinner",
+      "title": "Spinner",
+      "description": "Ring, dots and bars loading indicators with accessible labels and motion controls.",
+      "kind": "component",
+      "exports": [
+        "Spinner"
+      ],
+      "docPath": "/ai/v0.4.1/components/spinner.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/spinner"
+    },
+    {
+      "id": "loading-overlay",
+      "title": "Loading Overlay",
+      "description": "Contained loading boundary that preserves content and safely blocks interaction while busy.",
+      "kind": "component",
+      "exports": [
+        "LoadingOverlay"
+      ],
+      "docPath": "/ai/v0.4.1/components/loading-overlay.md",
+      "dependencies": [
+        "core",
+        "spinner"
+      ],
+      "importPath": "@/components/ui/moru/loading-overlay"
+    },
+    {
+      "id": "status-indicator",
+      "title": "Status Indicator",
+      "description": "Readable connection or synchronization status with an optional pulse and polite announcement.",
+      "kind": "component",
+      "exports": [
+        "StatusIndicator"
+      ],
+      "docPath": "/ai/v0.4.1/components/status-indicator.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/status-indicator"
+    },
+    {
+      "id": "marker",
+      "title": "Marker",
+      "description": "Small status, count or activity marker for surrounding content.",
+      "kind": "component",
+      "exports": [
+        "Marker",
+        "MarkerContent",
+        "MarkerIcon"
+      ],
+      "docPath": "/ai/v0.4.1/components/marker.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/marker"
+    },
+    {
+      "id": "table",
+      "title": "Table",
+      "description": "Semantic table, caption, header, row, cell and footer primitives.",
+      "kind": "component",
+      "exports": [
+        "Table",
+        "TableBody",
+        "TableCaption",
+        "TableCell",
+        "TableFooter",
+        "TableHead",
+        "TableHeader",
+        "TableRow"
+      ],
+      "docPath": "/ai/v0.4.1/components/table.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/table"
+    },
+    {
+      "id": "chart",
+      "title": "Chart",
+      "description": "Recharts-based chart variations with Moru colors and supporting controls.",
+      "kind": "component",
+      "exports": [
+        "Chart",
+        "ChartContainer",
+        "ChartLegend",
+        "ChartTooltip",
+        "ChartTooltipContent",
+        "getDonutSlices"
+      ],
+      "docPath": "/ai/v0.4.1/components/chart.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/chart"
+    },
+    {
+      "id": "data-table",
+      "title": "Data Table",
+      "description": "TanStack-based table with filtering, sorting, row selection, visible columns and pagination.",
+      "kind": "component",
+      "exports": [
+        "DataTable",
+        "dataTableFeatures"
+      ],
+      "docPath": "/ai/v0.4.1/components/data-table.md",
+      "dependencies": [
+        "button",
+        "checkbox",
+        "core",
+        "input",
+        "pagination",
+        "popover",
+        "table"
+      ],
+      "importPath": "@/components/ui/moru/data-table"
+    },
+    {
+      "id": "bubble",
+      "title": "Bubble",
+      "description": "Message bubble presentation for conversational interfaces.",
+      "kind": "component",
+      "exports": [
+        "Bubble",
+        "BubbleContent",
+        "BubbleFooter",
+        "BubbleGroup",
+        "BubbleReactions"
+      ],
+      "docPath": "/ai/v0.4.1/components/bubble.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/bubble"
+    },
+    {
+      "id": "code-block",
+      "title": "Code Block",
+      "description": "Readable code presentation with copy and line-wrap controls.",
+      "kind": "component",
+      "exports": [
+        "CodeBlock"
+      ],
+      "docPath": "/ai/v0.4.1/components/code-block.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/code-block"
+    },
+    {
+      "id": "message",
+      "title": "Message",
+      "description": "Composable message content, metadata and action presentation.",
+      "kind": "component",
+      "exports": [
+        "Message",
+        "MessageAvatar",
+        "MessageContent",
+        "MessageFooter",
+        "MessageGroup",
+        "MessageHeader"
+      ],
+      "docPath": "/ai/v0.4.1/components/message.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/message"
+    },
+    {
+      "id": "message-scroller",
+      "title": "Message Scroller",
+      "description": "Message viewport that preserves reading position and offers a latest-message action.",
+      "kind": "component",
+      "exports": [
+        "MessageScroller",
+        "MessageScrollerItem",
+        "isMessageScrollerAtEnd"
+      ],
+      "docPath": "/ai/v0.4.1/components/message-scroller.md",
+      "dependencies": [
+        "button",
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/message-scroller"
+    },
+    {
+      "id": "trace",
+      "title": "Trace",
+      "description": "Expandable execution or workflow history with step status and details.",
+      "kind": "component",
+      "exports": [
+        "Trace",
+        "formatTraceDuration"
+      ],
+      "docPath": "/ai/v0.4.1/components/trace.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/trace"
+    },
+    {
+      "id": "block-messages",
+      "title": "Block Messages",
+      "description": "Translations and the useBlockI18n hook shared by Moru blocks and the project template.",
+      "kind": "foundation",
+      "exports": [
+        "useBlockI18n"
+      ],
+      "docPath": "/ai/v0.4.1/components/block-messages.md",
+      "dependencies": [
+        "core"
+      ],
+      "importPath": "@/components/ui/moru/_lib/block-i18n"
+    },
+    {
+      "id": "dashboard",
+      "title": "Dashboard Block",
+      "description": "A complete project dashboard with metrics, activity and reusable project search. Local demo data; connect your service for persistence.",
+      "kind": "block",
+      "exports": [
+        "DashboardBlock",
+        "validateDashboardProject"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/dashboard.md",
+      "dependencies": [
+        "badge",
+        "block-messages",
+        "button",
+        "card",
+        "chart",
+        "core",
+        "field",
+        "header",
+        "input",
+        "modal",
+        "progress",
+        "search-filters",
+        "textarea",
+        "toggle-group"
+      ],
+      "importPath": "@/components/ui/moru/blocks/DashboardBlock"
+    },
+    {
+      "id": "signup",
+      "title": "Signup Block",
+      "description": "Account details, email verification and completion in one signup flow. Local demo; connect your authentication service.",
+      "kind": "block",
+      "exports": [
+        "SignupBlock",
+        "validateSignupBlock"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/signup.md",
+      "dependencies": [
+        "block-messages",
+        "button",
+        "card",
+        "checkbox",
+        "core",
+        "field",
+        "input",
+        "input-otp",
+        "otp",
+        "password-input"
+      ],
+      "importPath": "@/components/ui/moru/blocks/SignupBlock"
+    },
+    {
+      "id": "login",
+      "title": "Login Block",
+      "description": "Local login form demo. Connect your own authentication service.",
+      "kind": "block",
+      "exports": [
+        "LoginBlock",
+        "validateLoginBlock"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/login.md",
+      "dependencies": [
+        "block-messages",
+        "button",
+        "card",
+        "checkbox",
+        "core",
+        "field",
+        "input",
+        "password-input"
+      ],
+      "importPath": "@/components/ui/moru/blocks/LoginBlock"
+    },
+    {
+      "id": "otp",
+      "title": "OTP Block",
+      "description": "Local OTP verification demo. The sample code is 123456.",
+      "kind": "block",
+      "exports": [
+        "OTPBlock",
+        "validateOTPBlock"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/otp.md",
+      "dependencies": [
+        "block-messages",
+        "button",
+        "card",
+        "core",
+        "field",
+        "input-otp"
+      ],
+      "importPath": "@/components/ui/moru/blocks/OTPBlock"
+    },
+    {
+      "id": "search-filters",
+      "title": "Search Filters Block",
+      "description": "Composable query, status and assignee filters with local demo data and a controlled application API.",
+      "kind": "block",
+      "exports": [
+        "SearchFiltersBlock",
+        "filterBlockItems"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/search-filters.md",
+      "dependencies": [
+        "badge",
+        "block-messages",
+        "button",
+        "card",
+        "checkbox",
+        "core",
+        "field",
+        "input",
+        "select"
+      ],
+      "importPath": "@/components/ui/moru/blocks/SearchFiltersBlock"
+    },
+    {
+      "id": "settings",
+      "title": "Settings Block",
+      "description": "Workspace settings form with local demo feedback and controlled application save handlers.",
+      "kind": "block",
+      "exports": [
+        "SettingsBlock",
+        "saveSettingsBlock",
+        "validateSettingsBlock"
+      ],
+      "docPath": "/ai/v0.4.1/blocks/settings.md",
+      "dependencies": [
+        "block-messages",
+        "button",
+        "card",
+        "core",
+        "field",
+        "input",
+        "select",
+        "switch"
+      ],
+      "importPath": "@/components/ui/moru/blocks/SettingsBlock"
+    }
+  ]
+}

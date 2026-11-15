@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal",
+  "type": "registry:ui",
+  "title": "Modal",
+  "description": "Modal dialog with managed focus, scoped portals, size options and purpose-based variants.",
+  "dependencies": [
+    "@base-ui/react@1.9.0",
+    "lucide-react@1.60.0"
+  ],
+  "registryDependencies": [
+    "https://moru-ui-lab.riius.chatgpt.site/r/v0.4.1/core.json"
+  ],
+  "files": [
+    {
+      "path": "registry/moru/modal.css",
+      "type": "registry:file",
+      "target": "@ui/moru/modal.css",
+      "content": "/* Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT */\n:where([data-moru-registry]) .ui-dialog.ui-modal {\n  --ui-modal-width: 460px;\n  display: flex;\n  flex-direction: column;\n  width: min(var(--ui-modal-width), calc(100vw - 32px));\n  /* A long heading or footer can exceed the viewport even when the body shrinks. */\n  overflow-y: auto;\n  color: var(--ui-text);\n}\n\n:where([data-moru-registry]) .ui-modal[data-size='sm'] {\n  --ui-modal-width: 360px;\n}\n:where([data-moru-registry]) .ui-modal[data-size='lg'] {\n  --ui-modal-width: 720px;\n}\n\n:where([data-moru-registry]) .ui-dialog.ui-modal[data-size='full'] {\n  inset: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))\n    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));\n  width: auto;\n  height: auto;\n  max-height: none;\n  transform: none;\n}\n\n:where([data-moru-registry]) .ui-modal > .ui-dialog-header,\n:where([data-moru-registry]) .ui-modal > .ui-dialog-footer {\n  flex: none;\n}\n\n:where([data-moru-registry]) .ui-modal > .ui-dialog-content {\n  min-height: 0;\n  min-width: 0;\n  overflow-y: auto;\n  overscroll-behavior: contain;\n  /* Keep outlines inside the scroll area without changing the content inset. */\n  padding: 3px;\n  margin-inline: -3px;\n}\n\n:where([data-moru-registry]) .ui-modal[data-size='full'] > .ui-dialog-content {\n  flex: 1;\n}\n\n:where([data-moru-registry]) .ui-modal-mark {\n  display: grid;\n  place-items: center;\n  width: calc(var(--ui-icon-size-lg, 20px) + var(--ui-space, 4px) * 6);\n  aspect-ratio: 1;\n  margin-bottom: var(--ui-field-gap, 8px);\n  border-radius: var(--ui-radius);\n  background: color-mix(in srgb, var(--ui-primary) 12%, transparent);\n  color: var(--ui-primary);\n}\n\n:where([data-moru-registry]) .ui-modal-mark > svg {\n  width: var(--ui-icon-size-lg, 20px);\n  height: var(--ui-icon-size-lg, 20px);\n}\n\n:where([data-moru-registry]) .ui-modal[data-variant='success'] .ui-modal-mark {\n  background: color-mix(in srgb, var(--ui-success) 12%, transparent);\n  color: var(--ui-success);\n}\n\n:where([data-moru-registry]) .ui-modal[data-variant='danger'] .ui-modal-mark {\n  background: color-mix(in srgb, var(--ui-danger) 12%, transparent);\n  color: var(--ui-danger);\n}\n\n@media (max-width: 480px) {\n  :where([data-moru-registry]) .ui-modal > .ui-dialog-footer > .ui-button {\n    flex: 1;\n  }\n}\n\n@media (max-height: 480px) {\n  :where([data-moru-registry]) .ui-dialog.ui-modal {\n    overflow-y: auto;\n  }\n  :where([data-moru-registry]) .ui-modal > .ui-dialog-content {\n    flex: none;\n    overflow: visible;\n  }\n}\n\n"
+    },
+    {
+      "path": "registry/moru/modal.tsx",
+      "type": "registry:ui",
+      "target": "@ui/moru/modal.tsx",
+      "content": "'use client'\n// Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT\nimport { useI18n } from './_lib/i18n'\nimport type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'\nimport { Dialog as BaseDialog } from '@base-ui/react/dialog'\nimport { CircleCheck, CircleHelp, TriangleAlert } from 'lucide-react'\nimport { cn } from './_lib/cn'\nimport { useThemePortalContainer } from './theme-scope'\nimport { OverlayPortal } from './overlay-portal'\nimport './modal.css'\n\nexport interface ModalProps {\n  trigger?: ReactElement\n  title: string\n  description?: string\n  children?: ReactNode\n  footer?: ReactNode\n  size?: 'sm' | 'md' | 'lg' | 'full'\n  /** Visual presentation; the caller owns confirmation actions and validation. */\n  variant?: 'default' | 'confirmation' | 'form' | 'success' | 'danger'\n  /** Override the decorative variant icon. Pass null to omit it. */\n  icon?: ReactNode\n  defaultOpen?: boolean\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  className?: string\n  /** Choose the initial target for forms or long content; Base UI keeps its touch-safe default when omitted. */\n  initialFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['initialFocus']\n  /** Restore focus to a stable destination when the opener is removed or the dialog has no trigger. */\n  finalFocus?: ComponentPropsWithoutRef<typeof BaseDialog.Popup>['finalFocus']\n}\n\nexport function Modal({\n  trigger,\n  title,\n  description,\n  children,\n  footer,\n  open,\n  defaultOpen,\n  size = 'md',\n  variant = 'default',\n  icon,\n  onOpenChange,\n  className,\n  initialFocus,\n  finalFocus,\n}: ModalProps) {\n  const { t } = useI18n()\n\n  const portalContainer = useThemePortalContainer()\n  const mark =\n    icon !== undefined ? (\n      icon\n    ) : variant === 'success' ? (\n      <CircleCheck aria-hidden=\"true\" />\n    ) : variant === 'danger' ? (\n      <TriangleAlert aria-hidden=\"true\" />\n    ) : variant === 'confirmation' ? (\n      <CircleHelp aria-hidden=\"true\" />\n    ) : null\n  return (\n    <BaseDialog.Root\n      open={open}\n      defaultOpen={defaultOpen}\n      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}\n    >\n      {trigger && <BaseDialog.Trigger render={trigger} />}\n      <OverlayPortal portal={BaseDialog.Portal} kind=\"modal\" container={portalContainer}>\n        <BaseDialog.Backdrop className=\"ui-dialog-backdrop\" />\n        <BaseDialog.Popup\n          className={cn('ui-dialog ui-modal', className)}\n          data-size={size}\n          data-variant={variant}\n          initialFocus={initialFocus}\n          finalFocus={finalFocus}\n        >\n          <div className=\"ui-dialog-header\">\n            {mark != null && (\n              <div className=\"ui-modal-mark\" aria-hidden=\"true\">\n                {mark}\n              </div>\n            )}\n            <BaseDialog.Title className=\"ui-dialog-title\">{title}</BaseDialog.Title>\n            {description && (\n              <BaseDialog.Description className=\"ui-dialog-description\">\n                {description}\n              </BaseDialog.Description>\n            )}\n          </div>\n          <BaseDialog.Close\n            className=\"ui-dialog-close inline-flex items-center justify-center\"\n            aria-label={t('닫기')}\n          >\n            <svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\">\n              <path\n                d=\"m4 4 8 8m0-8-8 8\"\n                stroke=\"currentColor\"\n                strokeWidth=\"1.5\"\n                strokeLinecap=\"round\"\n              />\n            </svg>\n          </BaseDialog.Close>\n          {children && <div className=\"ui-dialog-content\">{children}</div>}\n          {footer && (\n            <div className=\"ui-dialog-footer flex items-center justify-end gap-2\">{footer}</div>\n          )}\n        </BaseDialog.Popup>\n      </OverlayPortal>\n    </BaseDialog.Root>\n  )\n}\n"
+    }
+  ],
+  "docs": "Import the installed moru/styles.css once in your application entry. Wrap Moru components in MoruProvider from moru/provider. mode defaults to light; pass mode=\"dark\" for dark defaults. This beta targets Vite + React; Next.js SSR and React Native are not verified. Shared core CSS is installed once; fonts are optional and are not downloaded by this registry. Keep moru/_licenses/Moru-LICENSE when redistributing source. Guide: https://github.com/syrus-riius/moru-ui/blob/main/docs/registry.ko.md",
+  "categories": [
+    "components"
+  ],
+  "meta": {
+    "version": "0.4.1",
+    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "license": "MIT",
+    "testedWith": {
+      "react": "19.3.1",
+      "reactDom": "19.3.1"
+    }
+  }
+}

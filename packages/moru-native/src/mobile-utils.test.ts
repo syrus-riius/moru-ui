@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { calendarMonthCells, closestDetent, isLeapYear, progressValues, readableOn, sheetDetentHeights, steppedValue } from './mobile-utils'
+import {
+  calendarMonthCells,
+  closestDetent,
+  isLeapYear,
+  progressValues,
+  readableOn,
+  sheetDetentHeights,
+  steppedValue,
+} from './mobile-utils'
 
 describe('native activity calendar dates', () => {
   it('uses a Monday-first grid with complete weeks and exact date keys', () => {
@@ -17,7 +25,14 @@ describe('native activity calendar dates', () => {
     expect(calendarMonthCells(2000, 2).filter(Boolean)).toHaveLength(29)
     expect(calendarMonthCells(24, 2).filter(Boolean).at(-1)?.date).toBe('0024-02-29')
   })
-  it.each([[2026, 0], [2026, 13], [2026, 2.5], [NaN, 1], [0, 1], [10000, 1]])('rejects an invalid year/month %s/%s', (year, month) => {
+  it.each([
+    [2026, 0],
+    [2026, 13],
+    [2026, 2.5],
+    [NaN, 1],
+    [0, 1],
+    [10000, 1],
+  ])('rejects an invalid year/month %s/%s', (year, month) => {
     expect(calendarMonthCells(year, month)).toEqual([])
   })
 })
@@ -27,12 +42,12 @@ describe('native geometry and progress', () => {
     expect(progressValues(-4, 20)).toEqual({ value: 0, max: 20, fraction: 0 })
     expect(progressValues(25, 20)).toEqual({ value: 20, max: 20, fraction: 1 })
     expect(progressValues(Infinity, 0)).toEqual({ value: 0, max: 100, fraction: 0 })
-    expect(progressValues(5, 20).fraction).toBe(.25)
+    expect(progressValues(5, 20).fraction).toBe(0.25)
   })
   it('resolves fractions and px into sorted, bounded, unique detents', () => {
-    expect(sheetDetentHeights([.8, .4, 320, -3, Infinity, .4], 800)).toEqual([320, 640])
+    expect(sheetDetentHeights([0.8, 0.4, 320, -3, Infinity, 0.4], 800)).toEqual([320, 640])
     expect(sheetDetentHeights([2000, 1, 10], 500)).toEqual([160, 500])
-    expect(sheetDetentHeights([.4, .8], 120)).toEqual([120])
+    expect(sheetDetentHeights([0.4, 0.8], 120)).toEqual([120])
     expect(sheetDetentHeights([NaN], 800)).toEqual([360, 680])
     expect(sheetDetentHeights([NaN], 120)).toEqual([120])
   })
@@ -55,8 +70,8 @@ describe('native decimal steps', () => {
   it('preserves tiny steps and avoids ordinary decimal addition noise', () => {
     expect(steppedValue(0, 1e-9, 1, 0, 1)).toBe(1e-9)
     expect(steppedValue(0, 1e-101, 1, 0, 1)).toBe(1e-101)
-    expect(steppedValue(.1, .2, 1, 0, 1)).toBe(.3)
-    expect(steppedValue(.9, .2, 1, 0, 1)).toBe(1)
-    expect(steppedValue(.1, .2, -1, 0, 1)).toBe(0)
+    expect(steppedValue(0.1, 0.2, 1, 0, 1)).toBe(0.3)
+    expect(steppedValue(0.9, 0.2, 1, 0, 1)).toBe(1)
+    expect(steppedValue(0.1, 0.2, -1, 0, 1)).toBe(0)
   })
 })

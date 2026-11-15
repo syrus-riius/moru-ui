@@ -1,0 +1,237 @@
+.moru-ai-context-trigger {
+  flex-shrink: 0;
+}
+
+.moru-ai-context-dialog.ui-dialog {
+  width: min(760px, calc(100vw - 32px));
+  padding: clamp(20px, var(--ui-card-padding, 24px), 32px);
+}
+
+.moru-ai-content {
+  display: grid;
+  gap: var(--ui-form-gap, 24px);
+  min-width: 0;
+}
+.moru-ai-context-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+.moru-ai-context-summary > svg {
+  flex-shrink: 0;
+}
+.moru-ai-version {
+  margin-inline-start: auto;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.moru-ai-context-fields {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.4fr);
+  align-items: start;
+  gap: var(--ui-form-gap, 24px);
+}
+.moru-ai-context-fields > * {
+  min-width: 0;
+}
+.moru-ai-context-fields .ui-textarea {
+  min-height: 76px;
+}
+
+.moru-ai-picker {
+  display: grid;
+  gap: var(--ui-field-gap, 8px);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.moru-ai-picker legend {
+  padding: 0;
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+}
+.moru-ai-picker legend > span {
+  margin-inline-start: var(--ui-control-gap, 8px);
+  color: var(--ui-muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.moru-ai-picker > p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+.moru-ai-picker-list {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  min-height: 72px;
+  max-height: 184px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: calc(var(--ui-space, 4px) * 2);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg, #f4f4f4);
+}
+.moru-ai-picker-option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+  min-height: 44px;
+  padding: calc(var(--ui-space, 4px) * 2);
+  border-radius: max(3px, calc(var(--ui-radius, 6px) / 2));
+  cursor: pointer;
+}
+.moru-ai-picker-option[data-selected] {
+  background: var(--ui-surface, white);
+}
+.moru-ai-picker-option:has(input:focus-visible) {
+  outline: 2px solid var(--ui-focus-ring, var(--ui-primary));
+  outline-offset: -2px;
+}
+.moru-ai-picker-option:has(input:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.moru-ai-picker-option > input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--ui-primary);
+}
+.moru-ai-picker-option > span:not(.moru-ai-item-kind) {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+.moru-ai-picker-option strong {
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+  line-height: var(--ui-type-label-line-height, 1.5);
+}
+.moru-ai-picker-option small {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+  overflow-wrap: anywhere;
+}
+.moru-ai-item-kind {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  color: var(--ui-muted);
+  font-size: 10px;
+  line-height: 20px;
+}
+.moru-ai-picker-empty {
+  margin: 0;
+  padding: var(--ui-field-gap, 8px);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+}
+.moru-ai-context-note {
+  margin: 0;
+  padding: calc(var(--ui-space, 4px) * 3);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg);
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-body-line-height, 1.6);
+}
+
+.moru-ai-context-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+  color: var(--ui-danger-surface-text, var(--ui-danger));
+  font-size: var(--ui-type-label-size, 13px);
+}
+.moru-ai-preview {
+  display: grid;
+  gap: var(--ui-field-gap, 8px);
+  min-width: 0;
+}
+.moru-ai-preview-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-ai-preview-heading > label {
+  font-size: var(--ui-type-label-size, 13px);
+  font-weight: var(--ui-type-label-weight, 550);
+}
+.moru-ai-preview-heading > span {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  font-variant-numeric: tabular-nums;
+}
+.moru-ai-packet.ui-textarea {
+  height: 208px;
+  min-height: 120px;
+  max-height: 50dvh;
+  font-family: var(--ui-font-family-code, ui-monospace, SFMono-Regular, monospace);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
+}
+.moru-ai-context-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-ai-context-actions > p {
+  flex: 1 1 220px;
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+.moru-ai-context-actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ui-control-gap, 8px);
+  margin-inline-start: auto;
+}
+
+@media (max-width: 600px) {
+  .moru-ai-context-dialog.ui-dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    padding: 20px;
+  }
+  .moru-ai-context-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--ui-space, 4px) * 3);
+  }
+  .moru-ai-picker-list {
+    max-height: 160px;
+  }
+  .moru-ai-packet.ui-textarea {
+    height: 176px;
+  }
+  .moru-ai-context-actions > div {
+    flex: 1 1 100%;
+  }
+  .moru-ai-context-actions .ui-button {
+    min-height: 44px;
+  }
+}

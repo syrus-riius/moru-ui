@@ -1,9 +1,17 @@
-import { createContext, useContext, useId, useState, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useId,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ReactElement,
+  type ReactNode,
+} from 'react'
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 import { cn } from '../../lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './overlays.css'
+import './tooltip.css'
 
 const TooltipProviderContext = createContext(false)
 
@@ -15,7 +23,12 @@ export interface TooltipProviderProps {
 }
 
 /** Group nearby tooltips to share the opening delay after the first tooltip. */
-export function TooltipProvider({ children, delay = 400, closeDelay = 100, timeout = 400 }: TooltipProviderProps) {
+export function TooltipProvider({
+  children,
+  delay = 400,
+  closeDelay = 100,
+  timeout = 400,
+}: TooltipProviderProps) {
   return (
     <TooltipProviderContext.Provider value={true}>
       <BaseTooltip.Provider delay={delay} closeDelay={closeDelay} timeout={timeout}>
@@ -34,13 +47,21 @@ export interface TooltipProps {
   delay?: number
 }
 
-export function Tooltip({ trigger, children, side = 'top', align = 'center', className, delay }: TooltipProps) {
+export function Tooltip({
+  trigger,
+  children,
+  side = 'top',
+  align = 'center',
+  className,
+  delay,
+}: TooltipProps) {
   const portalContainer = useThemePortalContainer()
   const hasProvider = useContext(TooltipProviderContext)
   const tooltipId = useId()
   const [open, setOpen] = useState(false)
   const existingDescription = (trigger.props as { 'aria-describedby'?: string })['aria-describedby']
-  const describedBy = [existingDescription, open ? tooltipId : undefined].filter(Boolean).join(' ') || undefined
+  const describedBy =
+    [existingDescription, open ? tooltipId : undefined].filter(Boolean).join(' ') || undefined
   const tooltip = (
     <BaseTooltip.Root open={open} onOpenChange={setOpen}>
       <BaseTooltip.Trigger render={trigger} delay={delay} aria-describedby={describedBy} />
@@ -53,7 +74,9 @@ export function Tooltip({ trigger, children, side = 'top', align = 'center', cla
           collisionPadding={12}
           collisionAvoidance={{ side: 'flip', align: 'shift', fallbackAxisSide: 'end' }}
         >
-          <BaseTooltip.Popup id={tooltipId} role="tooltip" className={cn('ui-tooltip', className)}>{children}</BaseTooltip.Popup>
+          <BaseTooltip.Popup id={tooltipId} role="tooltip" className={cn('ui-tooltip', className)}>
+            {children}
+          </BaseTooltip.Popup>
         </BaseTooltip.Positioner>
       </OverlayPortal>
     </BaseTooltip.Root>

@@ -1,0 +1,94 @@
+.ui-chart {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  line-height: var(--ui-type-body-line-height);
+  letter-spacing: var(--ui-type-body-letter-spacing);
+}
+.ui-chart-container {
+  width: 100%;
+  min-width: 0;
+  height: 240px;
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-caption-size);
+}
+.ui-chart-container .recharts-cartesian-axis-tick text {
+  fill: var(--ui-muted);
+}
+.ui-chart-container .recharts-cartesian-grid line {
+  stroke: var(--ui-border);
+  stroke-dasharray: 2 4;
+}
+.ui-chart-container .recharts-surface {
+  overflow: visible;
+}
+.ui-chart {
+  display: grid;
+  gap: var(--ui-field-gap);
+  margin: 0;
+}
+.ui-chart figcaption {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+}
+.ui-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-control-gap);
+}
+.ui-chart-key {
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.ui-chart-tooltip {
+  display: grid;
+  gap: var(--ui-field-gap);
+  max-width: 240px;
+  padding: calc(var(--ui-space) * 3) calc(var(--ui-space) * 4);
+  border: var(--ui-border-width) solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  box-shadow: var(--ui-shadow);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.ui-chart-tooltip p {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  margin: 0;
+}
+.ui-chart-data {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.ui-chart-data summary {
+  cursor: pointer;
+}
+.ui-chart-data table {
+  width: 100%;
+  margin-top: var(--ui-control-gap);
+  border-collapse: collapse;
+}
+.ui-chart-data th,
+.ui-chart-data td {
+  padding: var(--ui-field-gap) var(--ui-control-padding-x-sm);
+  border-bottom: var(--ui-border-width) solid var(--ui-border);
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+/* Chart owns its empty state so installing it does not pull in the data table. */
+.ui-chart-empty {
+  padding: var(--ui-card-padding);
+  text-align: center;
+  color: var(--ui-muted);
+}

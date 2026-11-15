@@ -1,0 +1,245 @@
+/* The spacing diagram arranges real Moru controls without redefining their sizing. */
+.component-spacing-controls {
+  display: grid;
+  gap: var(--ui-form-gap);
+  min-width: 0;
+  color: var(--ui-text);
+}
+.component-spacing-target-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+}
+.component-spacing-target-heading .component-spacing-target-button {
+  justify-content: space-between;
+  flex: 1;
+  min-width: 0;
+  text-align: start;
+}
+.component-spacing-target-button > span {
+  display: grid;
+  gap: var(--ui-space);
+  min-width: 0;
+}
+.component-spacing-target-button strong {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  line-height: var(--ui-type-label-line-height);
+  overflow-wrap: anywhere;
+}
+.component-spacing-target-button small {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.component-spacing-target-button > svg,
+.component-spacing-reset {
+  flex: none;
+}
+.component-spacing-target-button > svg {
+  color: var(--ui-muted);
+  transition: transform var(--ui-duration);
+}
+.component-spacing-target-button[aria-expanded='true'] > svg {
+  transform: rotate(180deg);
+}
+.component-spacing-picker {
+  display: grid;
+  gap: var(--ui-field-gap);
+  min-width: 0;
+}
+.component-spacing-search {
+  min-width: 0;
+}
+.component-spacing-target-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space);
+  max-height: 180px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border) transparent;
+}
+.component-spacing-target-list > .ui-button {
+  justify-content: flex-start;
+  text-align: start;
+}
+.component-spacing-target-list > .ui-button[aria-pressed='true'] {
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+}
+.component-spacing-no-results,
+.component-spacing-target-description,
+.component-spacing-note {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  overflow-wrap: anywhere;
+}
+.component-spacing-kind-tabs {
+  min-width: 0;
+}
+.component-spacing-kind-tabs > .ui-tabs-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.component-spacing-kind-tabs > .ui-tabs-list > .ui-tabs-tab {
+  min-width: 0;
+}
+.component-spacing-kind-tabs > .ui-tabs-panel {
+  padding-top: var(--ui-form-gap);
+}
+.component-spacing-box-panel {
+  display: grid;
+  gap: var(--ui-field-gap);
+  min-width: 0;
+}
+.component-spacing-unit-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.component-spacing-linked,
+.component-spacing-linked-label {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap);
+  min-width: 0;
+}
+.component-spacing-linked .ui-checkbox-label {
+  flex: 1;
+}
+.component-spacing-linked-label > svg {
+  flex: none;
+}
+.component-spacing-linked > small {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+}
+.component-spacing-diagram {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
+  gap: var(--ui-space) var(--ui-control-gap);
+  min-width: 0;
+  padding: var(--ui-control-gap);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+.component-spacing-side {
+  display: grid;
+  justify-items: stretch;
+  align-content: center;
+  gap: var(--ui-space);
+  min-width: 0;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  text-align: center;
+}
+.component-spacing-side-top {
+  grid-column: 2;
+  grid-row: 1;
+}
+.component-spacing-side-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+.component-spacing-side-bottom {
+  grid-column: 2;
+  grid-row: 3;
+}
+.component-spacing-side-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.component-spacing-side .ui-input {
+  padding-inline: var(--ui-space);
+  background: var(--ui-surface);
+  text-align: center;
+  appearance: textfield;
+  font-variant-numeric: tabular-nums;
+}
+.component-spacing-side input::-webkit-inner-spin-button,
+.component-spacing-side input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.component-spacing-side > small {
+  min-height: 1lh;
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+  font-variant-numeric: tabular-nums;
+}
+.component-spacing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 2;
+  gap: var(--ui-space);
+  min-width: 0;
+  padding: var(--ui-space);
+  color: var(--ui-text);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.component-spacing-content > strong,
+.component-spacing-content > small {
+  max-width: 100%;
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.component-spacing-content > strong {
+  font-weight: var(--ui-type-label-weight);
+}
+.component-spacing-content > small {
+  color: var(--ui-muted);
+}
+.component-spacing-quick {
+  display: grid;
+  gap: var(--ui-field-gap);
+  min-width: 0;
+}
+.component-spacing-quick > span {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size);
+  line-height: var(--ui-type-caption-line-height);
+}
+.component-spacing-quick > div {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--ui-space);
+}
+.component-spacing-quick .ui-button {
+  padding-inline: var(--ui-space);
+  font-variant-numeric: tabular-nums;
+}
+.component-spacing-note.is-error {
+  color: var(--ui-danger-text, var(--ui-danger));
+}
+@media (prefers-reduced-motion: reduce) {
+  .component-spacing-target-button > svg {
+    transition: none;
+  }
+}
+@media (pointer: coarse) {
+  .component-spacing-target-list {
+    grid-template-columns: 1fr;
+  }
+  .component-spacing-quick > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

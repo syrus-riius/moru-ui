@@ -6,17 +6,36 @@
   min-inline-size: 0;
   block-size: auto;
   min-block-size: var(--ui-resolved-control-height, var(--ui-control-height-md, 40px));
-  padding-block: max(var(--ui-space, 4px), calc((var(--ui-size-height, 40px) - var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) - var(--ui-border-width, 1px) * 2) / 2));
+  padding-block: max(
+    var(--ui-space, 4px),
+    calc(
+      (
+          var(--ui-resolved-control-height, 40px) -
+            var(
+              --ui-control-content-height,
+              calc(var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5))
+            ) -
+            var(--ui-border-width, 1px) * 2
+        ) /
+        2
+    )
+  );
   white-space: normal;
   overflow-wrap: anywhere;
 }
 
-.ui-tabs-list { flex-wrap: wrap; }
+.ui-tabs-list {
+  flex-wrap: wrap;
+}
 
-.ui-select > :not(.ui-select-icon, .ui-select-loading-indicator) { min-inline-size: 0; }
+.ui-select > :not(.ui-select-icon, .ui-select-loading-indicator) {
+  min-inline-size: 0;
+}
 
 /* An unselected toggle still needs a visible shape on a quiet surface. */
-.ui-checkbox:not([data-checked]):not([data-disabled]):not([data-loading]):not([aria-invalid='true']),
+.ui-checkbox:not([data-checked]):not([data-disabled]):not([data-loading]):not(
+    [aria-invalid='true']
+  ),
 .ui-radio:not([data-checked]):not([data-disabled]):not([aria-invalid='true']) {
   border-color: var(--ui-control-border, #8a8a86);
 }
@@ -41,25 +60,32 @@
   overflow-wrap: anywhere;
 }
 
-.ui-prose > :first-child { margin-block-start: 0; }
-.ui-prose > :last-child { margin-block-end: 0; }
-.ui-prose > :is(p, ul, ol) + :is(p, ul, ol) { margin-block-start: 1em; }
+.ui-prose > :first-child {
+  margin-block-start: 0;
+}
+.ui-prose > :last-child {
+  margin-block-end: 0;
+}
+.ui-prose > :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-block-start: 1em;
+}
 
 /* Keep the visible S/M/L proportions, and enlarge the interactive area for touch. */
 @media (pointer: coarse) {
+  /* Only classes defined in the shared base live here. A component stylesheet may load
+     before or after this file, so each one carries its own touch font-size rule. */
   .ui-input,
-  .ui-textarea,
-  .ui-combobox-input,
-  .ui-native-select,
-  .ui-input-otp-control,
-  .ui-enhanced-input-field,
-  .ui-multi-select-input {
+  .ui-textarea {
     font-size: max(16px, var(--ui-type-label-size, 13px));
   }
   .ui-button,
   .ui-input,
   .ui-select,
   .ui-tabs-tab {
+    --ui-control-content-height: max(
+      calc(max(16px, var(--ui-type-label-size, 13px)) * var(--ui-type-label-line-height, 1.5)),
+      var(--ui-size-icon)
+    );
     min-block-size: max(44px, var(--ui-resolved-control-height, var(--ui-control-height-md, 40px)));
   }
 
@@ -67,12 +93,30 @@
   .ui-switch-label,
   .ui-radio-option {
     min-block-size: 44px;
-    align-items: center;
+    align-items: flex-start;
+    padding-block: max(
+      var(--ui-space, 4px),
+      calc(
+        (
+            44px -
+              max(
+                calc(var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5)),
+                var(--ui-choice-size)
+              )
+          ) /
+          2
+      )
+    );
   }
-
-  .ui-checkbox,
-  .ui-switch,
-  .ui-radio { margin-block-start: 0; }
+  .ui-checkbox-label {
+    --ui-choice-size: var(--ui-size-checkbox);
+  }
+  .ui-switch-label {
+    --ui-choice-size: calc(var(--ui-toggle-size) + var(--ui-space, 4px));
+  }
+  .ui-radio-option {
+    --ui-choice-size: var(--ui-toggle-size);
+  }
 }
 
 @media (forced-colors: active) {
@@ -81,5 +125,7 @@
   .ui-select,
   .ui-checkbox,
   .ui-radio,
-  .ui-switch { border-color: ButtonText; }
+  .ui-switch {
+    border-color: ButtonText;
+  }
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "sourceHash": "03f45e1348fc542cf6a5a4c2c6c8a71109b4726c085a16531d009e6e78579fa4",
+  "sourceHash": "ceeb7992c081a61ed30b18fe50b20a66091bc9c5c8b1117c0393b40d7ce348a9",
   "archive": "/downloads/moru-native-starter.zip",
-  "archiveSha256": "853daa29038b3febb242123a7c27e6bd85544dee26ed2a18ddde1fe8711bee03",
-  "bytes": 674999,
+  "archiveSha256": "dc9fa2ccb5d41b7a8cbd3032d8eeb167c0c4dbcfa5b00875d0835adc16bb6675",
+  "bytes": 679083,
   "fileCount": 50,
   "entry": "apps/moru-expo/src/app/_layout.tsx"
 }

@@ -1,16 +1,50 @@
-export type BlockId = 'login' | 'otp' | 'search-filters' | 'settings'
+export type BlockId = 'dashboard' | 'login' | 'signup' | 'settings'
 export interface BlockDefinition {
   id: BlockId
   title: string
   description: string
-  category: '인증' | '탐색' | '설정'
+  category: '업무' | '인증' | '설정'
+  fileName: string
+  flow: readonly string[]
   components: readonly string[]
 }
 
+/** Public blocks are complete screen starting points, composed from shared primitives and patterns. */
 export const BLOCKS: readonly BlockDefinition[] = [
-  { id: 'login', title: '로그인', description: '이메일과 비밀번호 입력부터 검증·처리 상태까지, 다시 방문한 사용자를 위한 시작점.', category: '인증', components: ['Card', 'Field', 'Input', 'PasswordInput', 'Checkbox', 'Button'] },
-  { id: 'otp', title: 'OTP 인증', description: '6자리 인증번호 입력, 오류 피드백과 재전송을 하나의 흐름으로.', category: '인증', components: ['Card', 'Field', 'InputOTP', 'Button'] },
-  { id: 'search-filters', title: '검색 필터', description: '검색어·진행 상태·담당자 필터를 조합하고 결과와 빈 상태를 확인하세요.', category: '탐색', components: ['Card', 'Field', 'Input', 'Select', 'Checkbox', 'Badge', 'Button'] },
-  { id: 'settings', title: '설정 폼', description: '기본 정보와 공개 범위, 알림 설정을 편집하고 저장하거나 되돌리세요.', category: '설정', components: ['Card', 'Field', 'Input', 'Select', 'Switch', 'Button'] },
+  {
+    id: 'dashboard',
+    title: '대시보드',
+    description: '팀의 현황을 살펴보고, 필요한 프로젝트를 찾아 다음 작업으로 이어가세요.',
+    category: '업무',
+    fileName: 'DashboardBlock.tsx',
+    flow: ['현황 지표', '활동 추이', '프로젝트 관리'],
+    components: ['Header', 'Card', 'Chart', 'SearchFiltersBlock', 'Progress', 'Modal', 'Button'],
+  },
+  {
+    id: 'login',
+    title: '로그인',
+    description: '이메일과 비밀번호를 확인하고 작업 공간으로 돌아오는 로그인 화면.',
+    category: '인증',
+    fileName: 'LoginBlock.tsx',
+    flow: ['계정 입력', '검증', '로그인 완료'],
+    components: ['Card', 'Field', 'Input', 'PasswordInput', 'Checkbox', 'Button'],
+  },
+  {
+    id: 'signup',
+    title: '회원가입',
+    description: '계정 정보 입력부터 이메일 인증과 가입 완료까지 이어지는 시작 화면.',
+    category: '인증',
+    fileName: 'SignupBlock.tsx',
+    flow: ['정보 입력', '이메일 인증', '가입 완료'],
+    components: ['Card', 'Field', 'Input', 'PasswordInput', 'Checkbox', 'InputOTP', 'Button'],
+  },
+  {
+    id: 'settings',
+    title: '워크스페이스 설정',
+    description: '팀의 기본 정보와 공개 범위, 알림을 한곳에서 편집하고 변경 사항을 저장하세요.',
+    category: '설정',
+    fileName: 'SettingsBlock.tsx',
+    flow: ['기본 정보', '공개 범위·알림', '변경 저장'],
+    components: ['Card', 'Field', 'Input', 'Select', 'Switch', 'Button'],
+  },
 ]
-

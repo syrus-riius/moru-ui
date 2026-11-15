@@ -1,6 +1,13 @@
 'use client'
 // Generated from Moru UI source. Do not edit. SPDX-License-Identifier: MIT
-import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ReactElement,
+  type ReactNode,
+} from 'react'
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { cn } from './_lib/cn'
 import { useThemePortalContainer } from './theme-scope'
@@ -17,31 +24,80 @@ export interface MenuProps {
   }>
   className?: string
   disabled?: boolean
+  /** Controlled open state, matching Popover and Modal. Omit it to let the menu manage itself. */
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
   finalFocus?: ComponentPropsWithoutRef<typeof BaseMenu.Popup>['finalFocus']
   size?: 'sm' | 'md' | 'lg'
 }
 
-export function Menu({ trigger, items, className, disabled, finalFocus, size = 'md' }: MenuProps) {
+export function Menu({
+  trigger,
+  items,
+  className,
+  disabled,
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
+  finalFocus,
+  size = 'md',
+}: MenuProps) {
   const portalContainer = useThemePortalContainer()
   const anchorRef = useRef<HTMLSpanElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
-  const [open, setOpen] = useState(false)
-  useEffect(() => { if (disabled) setOpen(false) }, [disabled])
+  const [internalOpen, setInternalOpen] = useState(defaultOpen)
+  const open = openProp ?? internalOpen
+  const latest = useRef({ open, onOpenChange })
+  latest.current = { open, onOpenChange }
+  // A menu that becomes disabled closes; a controlled owner is told so it can follow.
+  useEffect(() => {
+    if (!disabled || !latest.current.open) return
+    setInternalOpen(false)
+    latest.current.onOpenChange?.(false)
+  }, [disabled])
   return (
-    <BaseMenu.Root disabled={disabled} open={!disabled && open} onOpenChange={(next) => {
-      if (!disabled || !next) setOpen(next)
-    }}>
+    <BaseMenu.Root
+      disabled={disabled}
+      open={!disabled && open}
+      onOpenChange={(next) => {
+        if (disabled && next) return
+        if (openProp === undefined) setInternalOpen(next)
+        onOpenChange?.(next)
+      }}
+    >
       <span ref={anchorRef} className="ui-menu-anchor" tabIndex={-1}>
         <BaseMenu.Trigger render={trigger} disabled={disabled} />
       </span>
       <OverlayPortal portal={BaseMenu.Portal} kind="menu" container={portalContainer}>
-        <BaseMenu.Positioner className="ui-menu-positioner" positionMethod="fixed" sideOffset={6} align="end" collisionPadding={12}>
-          <BaseMenu.Popup ref={popupRef} className={cn('ui-menu', className)} data-size={size} finalFocus={finalFocus ?? (disabled ? () => {
-            const anchor = anchorRef.current
-            const active = anchor?.ownerDocument.activeElement
-            if (active && active !== anchor?.ownerDocument.body && !popupRef.current?.contains(active)) return false
-            return anchor
-          } : undefined)}>
+        <BaseMenu.Positioner
+          className="ui-menu-positioner"
+          positionMethod="fixed"
+          sideOffset={6}
+          align="end"
+          collisionPadding={12}
+        >
+          <BaseMenu.Popup
+            ref={popupRef}
+            className={cn('ui-menu', className)}
+            data-size={size}
+            finalFocus={
+              finalFocus ??
+              (disabled
+                ? () => {
+                    const anchor = anchorRef.current
+                    const active = anchor?.ownerDocument.activeElement
+                    if (
+                      active &&
+                      active !== anchor?.ownerDocument.body &&
+                      !popupRef.current?.contains(active)
+                    )
+                      return false
+                    return anchor
+                  }
+                : undefined)
+            }
+          >
             {items.map((item, index) => (
               <BaseMenu.Item
                 key={`${item.label}-${index}`}
@@ -51,7 +107,11 @@ export function Menu({ trigger, items, className, disabled, finalFocus, size = '
                 data-destructive={item.destructive || undefined}
                 onClick={item.onClick}
               >
-                {item.icon && <span className="ui-menu-icon inline-flex items-center" aria-hidden="true">{item.icon}</span>}
+                {item.icon && (
+                  <span className="ui-menu-icon inline-flex items-center" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                )}
                 {item.label}
               </BaseMenu.Item>
             ))}

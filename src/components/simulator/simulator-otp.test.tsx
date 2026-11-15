@@ -2,6 +2,8 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { createSimNode } from './simulator-model'
 import { SimulatorNodeView } from './SimulatorNodeView'
+import { MoruLocaleProvider, messagesFor } from '../../i18n'
+import { simulatorMessages } from '../../i18n/messages/simulator'
 
 describe('Simulator OTP uses the shared accessible control', () => {
   it('renders one labeled numeric control rather than six unrelated inputs', () => {
@@ -15,10 +17,27 @@ describe('Simulator OTP uses the shared accessible control', () => {
   })
 
   it('connects an invalid OTP error to the control and keeps design mode read-only', () => {
-    const html = renderToStaticMarkup(<SimulatorNodeView node={createSimNode('input-otp', 'code')} error="6자리 코드를 입력하세요." />)
+    const html = renderToStaticMarkup(
+      <SimulatorNodeView
+        node={createSimNode('input-otp', 'code')}
+        error="6자리 코드를 입력하세요."
+      />,
+    )
     expect(html).toContain('aria-invalid="true"')
     expect(html).toContain('aria-describedby=')
     expect(html).toContain('readOnly=""')
     expect(html).toContain('6자리 코드를 입력하세요.')
+  })
+  it('keeps authored labels and values unchanged when the editor language changes', () => {
+    const node = createSimNode('input-otp', 'localized-code')
+    node.props.label = '선택해 주세요.'
+    const html = renderToStaticMarkup(
+      <MoruLocaleProvider locale="en" messages={messagesFor(simulatorMessages, 'en')}>
+        <SimulatorNodeView node={node} interactive value="123456" />
+      </MoruLocaleProvider>,
+    )
+    expect(html).toContain('aria-label="선택해 주세요."')
+    expect(html).toContain('value="123456"')
+    expect(node.props.label).toBe('선택해 주세요.')
   })
 })

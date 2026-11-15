@@ -32,26 +32,36 @@ describe('Tabs availability and accessible initial content', () => {
   })
 
   it('renders no panel when all tabs are unavailable', () => {
-    const html = renderToStaticMarkup(<Tabs items={items.map((item) => ({ ...item, disabled: true }))} />)
+    const html = renderToStaticMarkup(
+      <Tabs items={items.map((item) => ({ ...item, disabled: true }))} />,
+    )
     expect(html).not.toContain('role="tabpanel"')
     expect(html).not.toContain('aria-selected="true"')
   })
 
   it('exposes vertical orientation to assistive technology and keeps the caller label', () => {
-    const html = renderToStaticMarkup(<Tabs items={items} orientation="vertical" aria-label="프로젝트 영역" />)
+    const html = renderToStaticMarkup(
+      <Tabs items={items} orientation="vertical" aria-label="프로젝트 영역" />,
+    )
     expect(html).toContain('aria-orientation="vertical"')
     expect(html).toContain('aria-label="프로젝트 영역"')
     expect(html).toContain('data-orientation="vertical"')
   })
 
   it('leaves a controlled selection under the caller’s ownership', () => {
-    const html = renderToStaticMarkup(<Tabs items={items} value="activity" defaultValue="overview" />)
+    const html = renderToStaticMarkup(
+      <Tabs items={items} value="activity" defaultValue="overview" />,
+    )
     expect(html).toContain('활동 콘텐츠')
     expect(html).not.toContain('개요 콘텐츠')
   })
 
   it('keeps tab triggers non-submitting inside a form', () => {
-    const html = renderToStaticMarkup(<form><Tabs items={items} /></form>)
+    const html = renderToStaticMarkup(
+      <form>
+        <Tabs items={items} />
+      </form>,
+    )
     expect(html.match(/type="button"/g)).toHaveLength(items.length)
   })
 })

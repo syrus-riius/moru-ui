@@ -1,0 +1,50 @@
+.ui-time-picker-action .ui-loading-indicator {
+  flex: none;
+  width: var(--ui-time-icon);
+  height: var(--ui-time-icon);
+}
+@supports (grid-template-rows: subgrid) {
+  .ui-time-range-inputs > .ui-time-picker {
+    grid-row: 1 / 3;
+    grid-template-rows: subgrid;
+  }
+  .ui-time-range-inputs:has(.ui-time-picker-error) {
+    grid-template-rows: auto auto auto;
+  }
+  .ui-time-range-inputs:has(.ui-time-picker-error) > .ui-time-picker {
+    grid-row: 1 / 4;
+  }
+  .ui-time-range-inputs > .ui-time-picker:first-child {
+    grid-column: 1;
+  }
+  .ui-time-range-inputs > .ui-time-picker:last-child {
+    grid-column: 3;
+  }
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-label {
+    grid-row: 1;
+  }
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-control {
+    grid-row: 2;
+  }
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-error {
+    grid-row: 3;
+  }
+}
+@container time-range (max-width:340px) {
+  .ui-time-range-inputs:has(.ui-time-picker-error) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+  .ui-time-range-inputs > .ui-time-picker:first-child,
+  .ui-time-range-inputs > .ui-time-picker:last-child,
+  .ui-time-range-inputs:has(.ui-time-picker-error) > .ui-time-picker {
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-label,
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-control,
+  .ui-time-range-inputs > .ui-time-picker > .ui-time-picker-error {
+    grid-row: auto;
+  }
+}

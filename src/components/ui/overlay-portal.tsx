@@ -1,4 +1,11 @@
-import { createContext, useContext, type ComponentType, type CSSProperties, type ReactNode, type RefObject } from 'react'
+import {
+  createContext,
+  useContext,
+  type ComponentType,
+  type CSSProperties,
+  type ReactNode,
+  type RefObject,
+} from 'react'
 
 // Keep the existing order of unrelated overlays. A nested overlay always sits
 // above its parent, even when its default kind normally has a lower priority.
@@ -36,6 +43,8 @@ const OverlayLayerContext = createContext(0)
  * Apply the stacking context to the original Base UI portal, including its
  * internal backdrop and focus guards. React context follows nested portals
  * even when ThemeScope sends their DOM to separate body-level theme hosts.
+ * The zero-height viewport host keeps initial focus from scrolling the page to
+ * the body-end portal before an anchored popup has measured its position.
  */
 export function OverlayPortal({ portal: Portal, kind, container, children }: OverlayPortalProps) {
   const parentLayer = useContext(OverlayLayerContext)
@@ -46,7 +55,15 @@ export function OverlayPortal({ portal: Portal, kind, container, children }: Ove
       <Portal
         container={container}
         className="ui-overlay-portal"
-        style={{ position: 'relative', isolation: 'isolate', zIndex: layer }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 0,
+          isolation: 'isolate',
+          zIndex: layer,
+        }}
         data-moru-overlay-layer={layer}
       >
         {children}

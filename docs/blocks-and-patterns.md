@@ -1,39 +1,32 @@
-# Blocks and patterns — 2026-10-30
+# Screen blocks — 2026-11-12
 
-## Pages and reusable source
+## Screen-first library
 
-`#blocks` provides four compositions of existing Moru UI components: login, OTP verification, search filters and workspace settings. Deep links use `#blocks/login`, `#blocks/otp`, `#blocks/search-filters` and `#blocks/settings`. The sidebar and command menu expose the library.
+`#blocks` opens the dashboard by default and offers four complete screen starting points:
 
-The page offers category filters, one interactive preview, mobile/web dimensions, reset, a keyboard-operable code tab, clipboard feedback and simulator insertion. Mobile starts with a mobile preview; web uses an actual 880px scrollable frame, not a scaled mobile image. The global token editor applies to the live components. The preview frame establishes a positioned containing block so hidden named form controls cannot expand the page outside its scroll region.
+- `#blocks/dashboard`: team metrics, weekly/monthly activity, project search and filters, project details and creation.
+- `#blocks/login`: returning-user sign-in with validation and local completion feedback.
+- `#blocks/signup`: account details, email verification and completion in one flow.
+- `#blocks/settings`: workspace information, visibility, notifications and save/cancel.
 
-Each reusable `src/components/blocks/*Block.tsx` is self-contained and depends only on React and existing Moru UI components. `getBlockSource` reads the real source and rewrites imports for a paste into `src/BlockName.tsx` in the web starter. The starter also includes all four original block files in `src/components/blocks`. Gallery metadata is separate from raw source so the example hub does not eagerly load code snippets.
+The category menu groups screens as work, authentication and settings. Selector cards describe the tasks in each screen. The examples hub uses the same metadata and links. Old `#blocks/otp` bookmarks open signup; `#blocks/search-filters` opens the dashboard. OTPBlock and SearchFiltersBlock remain reusable supporting patterns and keep their registry installation URLs.
 
-## Interactions
+## Preview and reusable source
 
-- Login validates email and an eight-character password, shows local processing/completion feedback and clears the password. It does not send or persist credentials.
-- OTP validates six digits and the demo code `123456`, shows errors and completion, and clears/refocuses on resend. It does not send email.
-- Search combines text, project status and the assignee checkbox; zero results can reset to all projects.
-- Settings tracks dirty values, validates workspace name/email, supports cancellation and local save feedback.
+Each screen uses real Moru components and shared design tokens. The gallery retains mobile/web preview, reset, keyboard-operable code tabs, clipboard feedback and simulator insertion. Mobile starts with a mobile preview; web uses an actual 880px scrollable frame.
 
-## Example hub
+The source viewer reads the actual block implementation. It rewrites UI and supporting-block imports so the copied file can live at `src/BlockName.tsx` in the downloadable web starter. The starter includes all six block sources, including the OTP and search-filter helpers. Registry users can install `dashboard`, `signup`, `login` or `settings` with their dependencies resolved automatically.
 
-`#examples` opens a full-window hub with a six-flow workspace launcher and direct links to all four patterns. The workspace returns to the hub, keeps launched schedule/setup components mounted so draft data survives a hub round trip, and restores main-content focus and top scroll on these transitions. Example sidebar CSS uses the same 640px threshold as the shared Sidebar modal.
+The signup and login flows are local interaction examples. They do not create accounts, send emails or persist credentials. Verification uses the disclosed demo code `123456`. Signup retains a draft when going back to account details and clears the password after completion. Production authentication and verification belong to the host application.
+
+The dashboard maintains local example project records, derives its metrics from those records and composes SearchFiltersBlock for text/status/owner filtering. Its project creation and task-completion actions update the example. The host application supplies persistence if needed.
 
 ## Simulator transfer
 
-`requestBlockInsertion` passes only a block ID and chosen device through a one-shot in-memory request. The simulator appends a new auto-layout screen, preserves existing screens/start screen/style and records the insertion as one undo transaction. Existing 20-screen limits apply. Imported values start from design defaults; preview-entered passwords and OTP values are never transferred.
+`requestBlockInsertion` transfers only a design ID and device choice. It never copies preview-entered account details, passwords or verification codes. Existing project screens, start screen and style are preserved, and insertion is recorded as one undo transaction with the existing screen limit.
 
-Blocks expand into editable primitives and containers. The OTP primitive uses the real Moru InputOTP and round-trips through schemaVersion 1 documents. Required-field validation now applies to validated actions as well as navigation. The imported screen can run immediately without replacing the original project start screen.
+Imported screens expand into editable primitives and responsive auto-layout containers. They provide a prototype of the screen; service authentication and the dashboard's data/filter logic are exercised in the live block preview. Connect subsequent screens and actions in the simulator. Legacy OTP/search-filter insertion IDs remain compatible.
 
-The preview provides the domain-specific filtering, dirty-state and demo verification logic. Simulator transfer provides an editable screen composition, basic input validation and prototype actions; users connect subsequent screens/actions in the simulator.
+## Verification scope
 
-## Validation
-
-- 996 tests across 65 files pass, including 25 new block and simulator regressions.
-- TypeScript, production build and web-starter source/hash checks pass.
-- Actual clipboard output for all four blocks was pasted into the generated starter and compiled successfully, alongside the included reusable source.
-- Browser checks cover login error/processing, OTP wrong/correct code and resend focus, combined search/empty reset, settings interaction, deep links, hub/workspace draft and focus preservation.
-- All four block transfers append and undo successfully. OTP transfer was edited, resized to web, run with required errors, then completed with six digits. Original saved screens were preserved.
-- 48 layout combinations (4 blocks × mobile/web preview × 320/820/1440px × light/dark) pass document and block-content overflow checks. The 680px example navigation regression was reproduced and fixed.
-
-The forms are local UI examples; production authentication, email and persistence are supplied by the host application. Physical devices and assistive technology were not part of these browser checks.
+Route tests cover new screens, legacy bookmarks and unknown routes. Block tests cover signup validation and portable source imports; simulator tests cover preservation, serialization and responsive insertion. Browser checks and build results for a release are recorded in its task report. Physical-device and assistive-technology testing are separate from browser checks.

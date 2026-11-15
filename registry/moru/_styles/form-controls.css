@@ -38,6 +38,32 @@
   overflow-wrap: anywhere;
 }
 
+/* Align the first text line with the control in either size direction. */
+:where([data-moru-registry]) .ui-switch-copy {
+  padding-block-start: max(
+    0px,
+    calc(
+      (
+          var(--ui-toggle-size) + var(--ui-space, 4px) - var(--ui-type-label-size, 13px) *
+            var(--ui-type-label-line-height, 1.5)
+        ) /
+        2
+    )
+  );
+}
+:where([data-moru-registry]) .ui-radio-copy {
+  padding-block-start: max(
+    0px,
+    calc(
+      (
+          var(--ui-toggle-size) - var(--ui-type-label-size, 13px) *
+            var(--ui-type-label-line-height, 1.5)
+        ) /
+        2
+    )
+  );
+}
+
 :where([data-moru-registry]) .ui-switch-text,
 :where([data-moru-registry]) .ui-radio-text,
 :where([data-moru-registry]) .ui-slider-label {
@@ -66,8 +92,11 @@
   padding: 0;
   outline: none;
   cursor: inherit;
-  transition: background-color var(--ui-duration, 160ms), border-color var(--ui-duration, 160ms),
-    color var(--ui-duration, 160ms), box-shadow var(--ui-duration, 160ms);
+  transition:
+    background-color var(--ui-duration, 160ms),
+    border-color var(--ui-duration, 160ms),
+    color var(--ui-duration, 160ms),
+    box-shadow var(--ui-duration, 160ms);
 }
 
 :where([data-moru-registry]) .ui-switch {
@@ -76,7 +105,16 @@
   --ui-switch-offset: calc(var(--ui-switch-width) - var(--ui-switch-height));
   width: var(--ui-switch-width);
   height: var(--ui-switch-height);
-  margin-top: max(0px, calc((var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) - var(--ui-switch-height)) / 2));
+  margin-top: max(
+    0px,
+    calc(
+      (
+          var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) -
+            var(--ui-switch-height)
+        ) /
+        2
+    )
+  );
   padding: calc(var(--ui-space, 4px) / 2);
   border: var(--ui-border-width, 1px) solid var(--ui-border);
   border-radius: var(--ui-switch-height);
@@ -103,22 +141,42 @@
   translate: var(--ui-switch-offset) 0;
 }
 
+/* Busy: the switch stays focusable (read-only) and shows progress inside the thumb. */
+:where([data-moru-registry]) .ui-switch-label[data-loading],
+:where([data-moru-registry]) .ui-switch[data-loading] {
+  cursor: progress;
+}
+:where([data-moru-registry]) .ui-switch[data-loading] .ui-switch-thumb {
+  display: grid;
+  place-items: center;
+}
+:where([data-moru-registry]) .ui-switch-loading-indicator {
+  width: 64%;
+  height: 64%;
+  color: var(--ui-muted, #6e6e6b);
+}
+:where([data-moru-registry]) .ui-switch[data-checked] .ui-switch-loading-indicator {
+  color: var(--ui-primary, #181818);
+}
+
 :where([data-moru-registry]) .ui-switch:dir(rtl)[data-checked] .ui-switch-thumb {
   translate: calc(var(--ui-switch-offset) * -1) 0;
 }
 
-:where([data-moru-registry]) .ui-switch:hover:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
   background: var(--ui-control-hover-border);
   border-color: var(--ui-control-hover-border);
 }
 
-:where([data-moru-registry]) .ui-switch[data-checked]:hover:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch[data-checked]:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
   background: var(--ui-primary-hover);
   border-color: var(--ui-primary-hover);
   color: var(--ui-primary-hover-foreground);
 }
 
-:where([data-moru-registry]) .ui-switch[data-checked]:active:not([data-disabled]):not([aria-invalid='true']) {
+:where([data-moru-registry]) .ui-switch[data-checked]:active:not([data-disabled]):not([aria-invalid='true']):not(
+    [data-loading]
+  ) {
   background: var(--ui-primary-pressed);
   border-color: var(--ui-primary-pressed);
   color: var(--ui-primary-pressed-foreground);
@@ -140,7 +198,16 @@
   justify-content: center;
   width: var(--ui-toggle-size);
   height: var(--ui-toggle-size);
-  margin-top: max(0px, calc((var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) - var(--ui-toggle-size)) / 2));
+  margin-top: max(
+    0px,
+    calc(
+      (
+          var(--ui-type-label-size, 13px) * var(--ui-type-label-line-height, 1.5) -
+            var(--ui-toggle-size)
+        ) /
+        2
+    )
+  );
   border: var(--ui-border-width, 1px) solid var(--ui-border);
   border-radius: 50%;
   background: var(--ui-control-border, #8a8a86);
@@ -201,7 +268,8 @@
   cursor: not-allowed;
 }
 
-:where([data-moru-registry]) :is(.ui-switch-label, .ui-radio-option)[data-disabled] :is(.ui-switch-description, .ui-radio-description) {
+:where([data-moru-registry]) :is(.ui-switch-label, .ui-radio-option)[data-disabled]
+  :is(.ui-switch-description, .ui-radio-description) {
   color: inherit;
 }
 
@@ -265,7 +333,9 @@
   border-radius: 50%;
   background: var(--ui-primary);
   outline: none;
-  transition: background-color var(--ui-duration, 160ms), border-color var(--ui-duration, 160ms),
+  transition:
+    background-color var(--ui-duration, 160ms),
+    border-color var(--ui-duration, 160ms),
     box-shadow var(--ui-duration, 160ms);
 }
 
@@ -315,10 +385,26 @@
   box-shadow: none;
 }
 
+@media (pointer: coarse) {
+  :where([data-moru-registry]) .ui-slider-control {
+    height: max(44px, var(--ui-control-size-local), var(--ui-toggle-size));
+  }
+}
+
 @media (forced-colors: active) {
-  :where([data-moru-registry]) .ui-switch, :where([data-moru-registry]) .ui-radio { border: 1px solid ButtonText; }
-  :where([data-moru-registry]) .ui-radio-indicator, :where([data-moru-registry]) .ui-slider-thumb { background: Highlight; forced-color-adjust: none; }
-  :where([data-moru-registry]) .ui-switch-thumb { background: ButtonText; forced-color-adjust: none; }
+  :where([data-moru-registry]) .ui-switch,
+  :where([data-moru-registry]) .ui-radio {
+    border: 1px solid ButtonText;
+  }
+  :where([data-moru-registry]) .ui-radio-indicator,
+  :where([data-moru-registry]) .ui-slider-thumb {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+  :where([data-moru-registry]) .ui-switch-thumb {
+    background: ButtonText;
+    forced-color-adjust: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -327,7 +413,7 @@
   :where([data-moru-registry]) .ui-radio,
   :where([data-moru-registry]) .ui-slider-indicator,
   :where([data-moru-registry]) .ui-slider-thumb {
-  transition: none;
-}
+    transition: none;
+  }
 }
 

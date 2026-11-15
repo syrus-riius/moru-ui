@@ -1,10 +1,12 @@
+import { useI18n } from '../../lib/i18n'
 import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { X } from 'lucide-react'
 import { cn } from '../../lib/cn'
 import { useThemePortalContainer } from './theme-scope'
 import { OverlayPortal } from './overlay-portal'
-import './advanced-overlays.css'
+import './overlay-shared.css'
+import './sheet.css'
 
 export interface SheetProps {
   trigger?: ReactElement
@@ -23,21 +25,46 @@ export interface SheetProps {
 
 /** A modal edge panel; Base UI handles focus trapping, Escape, and scroll locking. */
 export function Sheet({
-  trigger, title, description, children, footer, open, defaultOpen,
-  onOpenChange, side = 'right', className, initialFocus, finalFocus,
+  trigger,
+  title,
+  description,
+  children,
+  footer,
+  open,
+  defaultOpen,
+  onOpenChange,
+  side = 'right',
+  className,
+  initialFocus,
+  finalFocus,
 }: SheetProps) {
+  const { t } = useI18n()
+
   const portalContainer = useThemePortalContainer()
   return (
-    <BaseDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}>
+    <BaseDialog.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
       {trigger && <BaseDialog.Trigger render={trigger} />}
       <OverlayPortal portal={BaseDialog.Portal} kind="modal" container={portalContainer}>
         <BaseDialog.Backdrop className="ui-overlay-backdrop" />
-        <BaseDialog.Popup className={cn('ui-sheet', className)} data-side={side} initialFocus={initialFocus} finalFocus={finalFocus}>
+        <BaseDialog.Popup
+          className={cn('ui-sheet', className)}
+          data-side={side}
+          initialFocus={initialFocus}
+          finalFocus={finalFocus}
+        >
           <div className="ui-sheet-header">
             <BaseDialog.Title className="ui-overlay-title">{title}</BaseDialog.Title>
-            {description && <BaseDialog.Description className="ui-overlay-description">{description}</BaseDialog.Description>}
+            {description && (
+              <BaseDialog.Description className="ui-overlay-description">
+                {description}
+              </BaseDialog.Description>
+            )}
           </div>
-          <BaseDialog.Close className="ui-overlay-close ui-sheet-close" aria-label="패널 닫기">
+          <BaseDialog.Close className="ui-overlay-close ui-sheet-close" aria-label={t('패널 닫기')}>
             <X size={18} aria-hidden="true" />
           </BaseDialog.Close>
           <div className="ui-sheet-content">{children}</div>

@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { ThemeScope } from '../components/ui/theme-scope'
+import { ThemeScope, useThemePortalContainer } from '../components/ui/theme-scope'
 import type { ComponentSpacingOverrides } from './component-spacing'
 import {
   applyDensity,
@@ -16,8 +15,6 @@ import {
 } from './tokens'
 import { parseThemeState, restoreThemeState } from './useTheme'
 
-// Static rendering can inspect the popup host when portals return their child.
-vi.mock('react-dom', () => ({ createPortal: (children: ReactNode) => children }))
 afterEach(() => vi.unstubAllGlobals())
 
 const spacing: ComponentSpacingOverrides = {
@@ -171,19 +168,36 @@ describe('component spacing CSS reuse and theme isolation', () => {
     expect(markup).not.toContain(':root[data-theme]')
   })
 
-  it('uses the same spacing scope and variables on the popup host', () => {
-    vi.stubGlobal('document', { body: {} })
-    const markup = renderToStaticMarkup(
+  it('keeps server markup identical when a document is present, delaying the popup host until mount', () => {
+    const content = (
       <ThemeScope tokens={customTokens()} mode="dark">
         <button className="ui-button">Open</button>
-      </ThemeScope>,
+      </ThemeScope>
     )
+    const serverMarkup = renderToStaticMarkup(content)
+    vi.stubGlobal('document', { body: {} })
+    const markup = renderToStaticMarkup(content)
+    expect(markup).toBe(serverMarkup)
     const scopeIds = [...markup.matchAll(/<div[^>]*data-moru-spacing-scope="([^"]+)"/g)].map(
       (match) => match[1],
     )
-    expect(scopeIds).toHaveLength(2)
-    expect(scopeIds[0]).toBe(scopeIds[1])
-    expect(markup).toContain('class="ui-theme-scope ui-theme-portal"')
-    expect(markup.match(/--ui-component-card-margin-bottom:18px/g)).toHaveLength(2)
+    expect(scopeIds).toHaveLength(1)
+    expect(markup).not.toContain('class="ui-theme-scope ui-theme-portal"')
+    expect(markup.match(/--ui-component-card-margin-bottom:18px/g)).toHaveLength(1)
+  })
+
+  it('makes scoped popups wait for their host while preserving unscoped body portals', () => {
+    function PortalConsumer() {
+      const container = useThemePortalContainer()
+      return <span>{container === null ? 'wait for theme host' : 'use default portal'}</span>
+    }
+    expect(renderToStaticMarkup(<PortalConsumer />)).toContain('use default portal')
+    expect(
+      renderToStaticMarkup(
+        <ThemeScope tokens={defaultTokens} mode="light">
+          <PortalConsumer />
+        </ThemeScope>,
+      ),
+    ).toContain('wait for theme host')
   })
 })

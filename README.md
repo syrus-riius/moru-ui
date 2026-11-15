@@ -2,9 +2,9 @@
 
 **A solid foundation. Made yours.**
 
-Moru is an MIT-licensed UI source library and design lab built with React,
-TypeScript, Base UI and Tailwind CSS. Start with working components and tokens,
-then shape them into your own product.
+Moru is an MIT-licensed React UI library and design lab built with TypeScript
+and Base UI. The lab uses Tailwind CSS; the npm library does not require it.
+Start with working components and tokens, then shape them into your own product.
 
 [Explore Moru](https://moru-ui-lab.riius.chatgpt.site/) ·
 [Components](https://moru-ui-lab.riius.chatgpt.site/#components) ·
@@ -21,12 +21,41 @@ then shape them into your own product.
 - A responsive wireframe simulator with auto layout and linked screens.
 - A separate React Native / Expo implementation and mobile examples.
 
-Moru ships source starters and a **selective component registry**. It is **not
-published as an npm library**. The gallery and simulator
-are a design lab; authentication, uploads and persistence in examples are local
-demonstrations. Connect your own application services.
+Moru is available as an **npm beta**, source starters, and a **selective component
+registry**. The gallery and simulator are a design lab; authentication, uploads
+and persistence in examples are local demonstrations. Connect your own
+application services.
 
 ## Start a web app
+
+### Install the npm package
+
+In a React app using React and React DOM `^19.3.0`:
+
+```sh
+npm install moru-ui@beta
+```
+
+Import the shared stylesheet once and render components inside `MoruProvider`:
+
+```tsx
+import { Button, MoruProvider } from 'moru-ui'
+import 'moru-ui/styles.css'
+
+export function Example() {
+  return (
+    <MoruProvider mode="light" locale="en">
+      <Button>Continue</Button>
+    </MoruProvider>
+  )
+}
+```
+
+The published `0.5.0-beta.2` includes the full web component library, with
+separate block and optional-dependency entry points. Both `npm install moru-ui`
+and `npm install moru-ui@beta` currently install this beta release. See the
+[npm package guide](packages/moru-react/README.md) for import paths, optional
+dependencies, tokens, and Next.js setup.
 
 ### Build with an AI coding assistant
 
@@ -195,8 +224,10 @@ starter's original license is preserved in `apps/moru-expo/LICENSE`.
 ## 한국어
 
 Moru UI는 **단단한 기본, 당신만의 UI**를 지향합니다. 웹 스타터를 받아
-실행하거나 이 저장소 전체를 실행할 수 있습니다. 현재는 소스를 가져와
-수정하는 방식이며, v0.4.1에서 갤러리 전체 79종과 StatusMessage·FormattedInput을 포함한 UI 81개·공통 기반 1개·블록 6개,
+실행하거나 이 저장소 전체를 실행할 수 있습니다. `npm install moru-ui@beta`로
+공개된 베타 패키지를 설치하거나, 소스를 가져와 직접 수정할 수 있습니다.
+npm 공개 범위와 다음 릴리스 준비 상태는 위 설치 안내와 [패키지 가이드](packages/moru-react/README.md)를 참고하세요.
+소스 레지스트리 v0.4.1에서는 갤러리 전체 79종과 StatusMessage·FormattedInput을 포함한 UI 81개·공통 기반 1개·블록 6개,
 Dialog 호환 별칭과 블록 번역 지원 항목을 포함한 총 90개 항목을 선택 설치할 수 있습니다. 8개 분야의 전체 설치 이름과 Toast·DataTable·Chart 등의
 실제 API 예시는 [한국어 선택 설치 안내](docs/registry.ko.md)를 참고하세요.
 자세한 사용법은 [한국어 랩 가이드](docs/lab-guide.ko.md)를 참고하세요.

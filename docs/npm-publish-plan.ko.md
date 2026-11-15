@@ -2,6 +2,8 @@
 
 작성일 2026-11-15. 조사와 계획만 담은 문서입니다. 이 문서를 쓰면서 코드, 의존성, 생성물은 바꾸지 않았습니다.
 
+> 이 문서는 첫 공개 이전의 조사 기록입니다. 이후 `0.5.0-beta.1`이 공개되었으며, 전체 웹 컴포넌트를 포함하는 `0.5.0-beta.2`의 사용법과 공개 진입점은 `packages/moru-react/README.md`와 `packages/moru-react/package.json`을 기준으로 확인하세요. 아래의 당시 파일 수·줄 번호·크기와 미구현 항목은 현재 상태를 뜻하지 않습니다.
+
 ## 읽는 법
 
 - **[확인]** 은 저장소 파일을 직접 읽었거나, 설치되어 있는 도구를 읽기 전용으로 실행해 얻은 사실입니다. 파일 경로와 줄 번호를 함께 적었습니다.
@@ -220,7 +222,7 @@ npm view moru-ui name version
 **2안**으로 시작합니다. 컴포넌트별 CSS는 나중에 추가해도 기존 사용자를 깨지 않지만, 한번 공개한 것을 빼면 깨집니다. 그러니 첫 공개는 작은 계약으로 하고, 3안은 수요가 확인되면 추가합니다.
 
 - **파일**: `moru-ui/styles.css` 하나입니다. README 초안(`packages/moru-react/README.md:23`)과 같습니다.
-- **합치는 순서**: 리셋(현재 `utilities.css`에 남는 두 규칙), `styles.css`(`form-controls`, `feedback` 포함), `style-packs.css`, `*-shared.css`와 `enhanced-input.css`, 컴포넌트 CSS(이름순), `readability.css` 순서입니다. `readability.css`는 랩(`main.tsx:10`)과 레지스트리(`registry/moru/styles.css:4`) 모두에서 마지막입니다. 이 순서로 합친 결과를 랩 갤러리와 화면으로 비교해 확정합니다.
+- **합치는 순서**: 리셋(현재 `utilities.css`에 남는 두 규칙), `styles.css`(`form-controls`, `feedback` 포함), `style-packs.css`, `*-shared.css`와 `enhanced-input.css`, 기본 컴포넌트 CSS(이름순), `*-variations.css`(이름순), `readability.css` 순서입니다. 같은 파일은 한 번만 합칩니다. 변형 CSS는 기본 CSS 뒤에 두어 `chart-variations.css`가 `chart.css`에 덮이지 않게 합니다. `readability.css`는 랩(`main.tsx:10`)과 레지스트리(`registry/moru/styles.css:4`) 모두에서 마지막입니다. 이 순서로 합친 결과를 랩 갤러리와 화면으로 비교해 확정합니다.
 - **스코프**: 레지스트리와 같은 `:where([data-moru-registry])` 스코프와 keyframes 접두를 유지합니다. 명시도를 올리지 않으면서 소비자의 `.ui-*` 클래스나 keyframes 이름과 겹치지 않게 합니다. 토큰이 `ThemeScope` 안에서만 주어지므로 `MoruProvider` 밖의 컴포넌트는 어차피 제대로 그려지지 않습니다. 따라서 스코프 때문에 새로 생기는 제약은 없습니다.
 - **레이어**: 씌우지 않습니다. 지금의 랩, 레지스트리와 같은 캐스케이드 위치입니다. Tailwind 사용자가 유틸리티로 Moru 스타일을 덮어쓰고 싶으면 자기 CSS에서 레이어를 지정해 불러오는 방법을 안내합니다.
 

@@ -1524,34 +1524,6 @@ h1 {
 .base-ui-link > svg:last-child {
   margin-left: auto;
 }
-.export-format-tabs {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-.export-format-tabs > button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  background: none;
-  border: var(--ui-border-width, 0px) solid var(--ui-border);
-  border-radius: 5px;
-  padding: 7px 10px;
-  color: var(--ui-muted);
-}
-.export-format-tabs > button.active {
-  color: var(--ui-primary);
-  background: var(--ui-primary-soft);
-  border-color: var(--ui-primary);
-}
-.export-format-tabs > .import-button {
-  margin-left: auto;
-  border-color: transparent;
-  font-size: 10px;
-  padding: 7px 0;
-}
 .export-code {
   width: 100%;
   height: 310px;
@@ -2049,16 +2021,6 @@ h1 {
     font-size: 9px;
     padding: 14px 12px;
     margin-left: -30px;
-  }
-  .export-format-tabs {
-    gap: 5px;
-  }
-  .export-format-tabs > button {
-    font-size: 10px;
-    padding: 7px 9px;
-  }
-  .export-format-tabs > .import-button {
-    font-size: 9px;
   }
   .export-code {
     font-size: 10px;

@@ -3,8 +3,11 @@
 Original Moru UI code and documentation are licensed under the MIT License in
 `LICENSE`. Keep that license and its copyright notice when redistributing copies
 or substantial portions. Third-party software and assets retain their own terms.
-The repository, source starters and local packages are not published npm packages.
-`private: true` prevents accidental npm publication; it does not restrict the MIT
+The repository root is the UI Lab application; its `private: true` setting
+prevents accidentally publishing the lab to npm. The web library in
+`packages/moru-react` is published separately as `moru-ui`, with its own package
+metadata and distribution notice. Source starters and the native implementation
+remain separate distributions. These packaging settings do not restrict the MIT
 license granted to Moru's own source.
 
 ## Third-party code

@@ -36,7 +36,7 @@
   ],
   "meta": {
     "version": "0.4.1",
-    "sourceHash": "2d762b0941586a46fa01d8fe6bf3652a791fe2ad3256983c183bcdcf98a441a9",
+    "sourceHash": "4a335d8fd609623b475244615077df00b6b1a47679124a75459bafdfd0c731e7",
     "license": "MIT",
     "testedWith": {
       "react": "19.3.1",

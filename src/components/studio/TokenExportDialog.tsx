@@ -1,10 +1,16 @@
-import { useRef, useState } from 'react'
-import { ArrowDownToLine, Check, Code2, Copy, FileJson, Upload } from 'lucide-react'
+import { lazy, Suspense, useRef, useState } from 'react'
+import { ArrowDownToLine, ArrowUpRight, Check, Copy, Upload } from 'lucide-react'
 import { useI18n } from '../../i18n'
 import { Button } from '../ui/button'
 import { Modal, type ModalProps } from '../ui/modal'
+import { Tabs } from '../ui/tabs'
+import './token-export-dialog.css'
 
-/** Export the edited tokens as CSS variables or JSON, or load a saved JSON file. */
+const TokenInstallGuide = lazy(() =>
+  import('../site/TokenInstallGuide').then((module) => ({ default: module.TokenInstallGuide })),
+)
+
+/** A guided npm handoff, with the original JSON/CSS export and import tools alongside it. */
 export function TokenExportDialog({
   open,
   onOpenChange,
@@ -15,6 +21,7 @@ export function TokenExportDialog({
   copied,
   onCopy,
   onNotice,
+  onOpenGuide,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -25,11 +32,15 @@ export function TokenExportDialog({
   copied: boolean
   onCopy: (text: string) => void
   onNotice: (title: string) => void
+  onOpenGuide?: () => void
 }) {
   const { t } = useI18n()
-  const [exportFormat, setExportFormat] = useState<'css' | 'json'>('css')
+  const [exportFormat, setExportFormat] = useState<'npm' | 'css' | 'json'>('npm')
   const importRef = useRef<HTMLInputElement>(null)
-  const exportText = exportFormat === 'css' ? exportCss() : exportJson()
+  const lastCopied = useRef('')
+  const json = exportJson()
+  const exportText = exportFormat === 'css' ? exportCss() : json
+  const copyComplete = copied && lastCopied.current === exportText
   function download() {
     const blob = new Blob([exportText], {
       type: exportFormat === 'css' ? 'text/css' : 'application/json',
@@ -69,53 +80,81 @@ export function TokenExportDialog({
         finalFocus={finalFocus}
         title={t('내 디자인을 가져가세요.')}
         description={t('조절한 토큰을 프로젝트에서 그대로 사용하세요.')}
+        size="lg"
+        className="token-export-dialog"
         footer={
-          <>
-            <Button variant="secondary" onClick={() => onCopy(exportText)}>
-              {copied ? <Check size={14} /> : <Copy size={14} />}
-              {copied ? t('복사했어요') : t('클립보드에 복사')}
-            </Button>
-            <Button onClick={download}>
-              <ArrowDownToLine size={14} />
-              {t('다운로드')}
-            </Button>
-          </>
+          exportFormat !== 'npm' ? (
+            <>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  lastCopied.current = exportText
+                  onCopy(exportText)
+                }}
+              >
+                {copyComplete ? <Check size={14} /> : <Copy size={14} />}
+                {copyComplete ? t('복사했어요') : t('클립보드에 복사')}
+              </Button>
+              <Button onClick={download}>
+                <ArrowDownToLine size={14} />
+                {t('다운로드')}
+              </Button>
+            </>
+          ) : undefined
         }
       >
-        <div className="export-format-tabs" role="group" aria-label={t('내보내기 형식')}>
-          <button
-            className={exportFormat === 'css' ? 'active' : ''}
-            aria-pressed={exportFormat === 'css'}
-            onClick={() => setExportFormat('css')}
-          >
-            <Code2 size={15} />
-            {t('CSS 변수')}
-          </button>
-          <button
-            className={exportFormat === 'json' ? 'active' : ''}
-            aria-pressed={exportFormat === 'json'}
-            onClick={() => setExportFormat('json')}
-          >
-            <FileJson size={15} />
-            {t('JSON 설정')}
-          </button>
-          <button className="import-button" onClick={() => importRef.current?.click()}>
+        <div className="token-export-tools">
+          {onOpenGuide ? (
+            <Button variant="ghost" size="sm" onClick={onOpenGuide}>
+              <ArrowUpRight size={14} aria-hidden="true" />
+              {t('안내 페이지 열기')}
+            </Button>
+          ) : null}
+          <Button variant="secondary" size="sm" onClick={() => importRef.current?.click()}>
             <Upload size={13} />
             {t('불러오기')}
-          </button>
+          </Button>
         </div>
-        <textarea
-          className="export-code"
-          aria-label={t('내보내기 코드')}
-          value={exportText}
-          readOnly
-          spellCheck={false}
+        <Tabs
+          className="token-export-tabs"
+          size="sm"
+          value={exportFormat}
+          onValueChange={(value) => setExportFormat(value as typeof exportFormat)}
+          aria-label={t('내보내기 형식')}
+          items={[
+            {
+              value: 'npm',
+              label: t('npm 적용 안내'),
+              content: (
+                <Suspense fallback={<p role="status">{t('적용 안내를 준비하고 있어요.')}</p>}>
+                  <TokenInstallGuide json={json} embedded />
+                </Suspense>
+              ),
+            },
+            ...(['json', 'css'] as const).map((format) => ({
+              value: format,
+              label: t(format === 'json' ? 'JSON 설정' : 'CSS 변수'),
+              content: (
+                <>
+                  <textarea
+                    className="export-code"
+                    aria-label={t('내보내기 코드')}
+                    value={format === 'json' ? json : exportCss()}
+                    readOnly
+                    spellCheck={false}
+                  />
+                  <p className="export-note">
+                    {t(
+                      format === 'json'
+                        ? '라이트·다크 모드 설정을 포함합니다. JSON으로 다시 불러올 수 있어요.'
+                        : 'CSS 내보내기는 전역 변수용입니다. npm에서는 적용 안내의 JSON과 Provider를 사용하세요.',
+                    )}
+                  </p>
+                </>
+              ),
+            })),
+          ]}
         />
-        <p className="export-note">
-          {exportFormat === 'css'
-            ? t('현재 모드의 CSS입니다. 프로젝트의 전역 스타일에 추가해 주세요.')
-            : t('라이트·다크 모드 설정을 포함합니다. JSON으로 다시 불러올 수 있어요.')}
-        </p>
       </Modal>
     </>
   )

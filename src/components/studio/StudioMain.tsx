@@ -53,6 +53,10 @@ const BrandStory = lazy(() =>
   import('../site/BrandStory').then((module) => ({ default: module.BrandStory })),
 )
 
+const TokenInstallGuide = lazy(() =>
+  import('../site/TokenInstallGuide').then((module) => ({ default: module.TokenInstallGuide })),
+)
+
 /** The page content for the current view. */
 export function StudioMain() {
   const { t } = useI18n()
@@ -168,12 +172,13 @@ export function StudioMain() {
           </div>
         </header>
       ) : null}
-      {view === 'guide' || view === 'components' ? (
+      {view === 'guide' || view === 'token-guide' || view === 'components' ? (
         <MoruDocsLayout
           page={componentPage}
           active={view}
           compact={compactDocs || (componentInspectorDocked && compactInspectorWorkspace)}
           onGuide={() => go('guide')}
+          onTokenGuide={() => go('token-guide')}
           onNavigate={navigateComponentPage}
           onSelect={selectComponent}
           tools={
@@ -196,7 +201,11 @@ export function StudioMain() {
             ) : undefined
           }
         >
-          {view === 'guide' ? (
+          {view === 'token-guide' ? (
+            <Suspense fallback={<p role="status">{t('적용 안내를 준비하고 있어요.')}</p>}>
+              <TokenInstallGuide json={theme.exportJson()} onEdit={() => go('tokens')} />
+            </Suspense>
+          ) : view === 'guide' ? (
             <GettingStartedGuide
               onProjectTemplate={() => go('project-template')}
               aiAction={

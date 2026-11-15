@@ -46,6 +46,13 @@ export function StudioCommandPalette({
           keywords: ['install', 'guide'],
           onSelect: () => go('guide'),
         },
+        {
+          id: 'token-guide',
+          label: t('내 프로젝트에 적용'),
+          group: t('문서'),
+          keywords: ['npm', 'install', 'provider', 'tokens', 'json', '내보내기'],
+          onSelect: () => go('token-guide'),
+        },
         ...components.map((component) => ({
           id: `component:${component.id}`,
           label: component.name,

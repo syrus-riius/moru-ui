@@ -1,6 +1,6 @@
 import { useI18n } from '../../i18n'
 import { useRef, useState, type ReactNode } from 'react'
-import { BookOpen, Search, X } from 'lucide-react'
+import { BookOpen, Palette, Search, X } from 'lucide-react'
 import { ComponentCategoryNavigation } from '../catalog/ComponentCategoryNavigation'
 import type { ComponentId } from '../catalog/component-catalog'
 import type { ComponentPage } from '../catalog/component-pages'
@@ -11,9 +11,10 @@ import './component-design-inspector.css'
 
 type MoruDocsLayoutProps = {
   page: ComponentPage
-  active: 'guide' | 'components'
+  active: 'guide' | 'token-guide' | 'components'
   compact: boolean
   onGuide: () => void
+  onTokenGuide?: () => void
   onNavigate: (page: ComponentPage) => void
   onSelect: (id: ComponentId) => void
   tools?: ReactNode
@@ -25,6 +26,7 @@ export function MoruDocsLayout({
   active,
   compact,
   onGuide,
+  onTokenGuide,
   onNavigate,
   onSelect,
   tools,
@@ -98,6 +100,28 @@ export function MoruDocsLayout({
       >
         <BookOpen aria-hidden="true" />
         {t('시작하기')}
+      </a>
+      <a
+        className="moru-docs-guide-link"
+        href="#guide/tokens"
+        aria-current={active === 'token-guide' ? 'page' : undefined}
+        onClick={(event) => {
+          if (
+            !onTokenGuide ||
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.altKey ||
+            event.shiftKey
+          )
+            return
+          event.preventDefault()
+          follow(onTokenGuide)
+        }}
+      >
+        <Palette aria-hidden="true" />
+        {t('내 프로젝트에 적용')}
       </a>
       <p className="moru-docs-sidebar-label">{t('컴포넌트')}</p>
       <ComponentCategoryNavigation

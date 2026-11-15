@@ -3,12 +3,12 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useId,
   useMemo,
-  useRef,
+  useState,
   type CSSProperties,
   type HTMLAttributes,
-  type RefObject,
 } from 'react'
 import { createPortal } from 'react-dom'
 import { getCssVariables, type ThemeMode, type ThemeTokens } from './_theme/tokens'
@@ -22,7 +22,7 @@ export type ThemeScopeProps = HTMLAttributes<HTMLDivElement> & {
   mode: ThemeMode
 }
 
-const ThemePortalContext = createContext<RefObject<HTMLDivElement | null> | undefined>(undefined)
+const ThemePortalContext = createContext<HTMLDivElement | null | undefined>(undefined)
 
 export function useThemePortalContainer() {
   return useContext(ThemePortalContext)
@@ -37,8 +37,14 @@ export function ThemeScope({
   children,
   ...props
 }: ThemeScopeProps) {
-  const portalContainer = useRef<HTMLDivElement>(null)
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null)
+  const [portalContainer, setPortalContainer] = useState<HTMLDivElement | null>(null)
   const spacingScope = useId()
+  // Server markup and the first client render must match. An explicit null
+  // container also makes initially open popups wait for their themed host.
+  useEffect(() => {
+    setPortalTarget(document.body)
+  }, [])
   // Deriving the variables walks every token and runs contrast searches. A parent
   // re-render with the same tokens reuses the previous result.
   const variables = useMemo(() => getCssVariables(tokens, mode), [tokens, mode])
@@ -80,15 +86,15 @@ export function ThemeScope({
         {componentCss ? <style>{componentCss}</style> : null}
         {children}
       </div>
-      {typeof document !== 'undefined' &&
+      {portalTarget &&
         createPortal(
           <div
             {...attributes}
-            ref={portalContainer}
+            ref={setPortalContainer}
             className="ui-theme-scope ui-theme-portal"
             style={portalStyle}
           />,
-          document.body,
+          portalTarget,
         )}
     </ThemePortalContext.Provider>
   )

@@ -24,6 +24,7 @@ function loadCatalog() {
     import('./messages/examples'),
     import('./messages/input-variations'),
     import('./messages/motion-feedback'),
+    import('./messages/token-install'),
   ])
     .then(
       ([
@@ -36,6 +37,7 @@ function loadCatalog() {
         examples,
         inputVariations,
         motionFeedback,
+        tokenInstall,
       ]) => ({
         // Block copy is no longer part of the library provider; the lab keeps showing it.
         ...blockMessages,
@@ -48,6 +50,7 @@ function loadCatalog() {
         ...examples.exampleMessages,
         ...inputVariations.inputVariationMessages,
         ...motionFeedback.motionFeedbackMessages,
+        ...tokenInstall.tokenInstallMessages,
       }),
     )
     .catch((error) => {

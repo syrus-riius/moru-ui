@@ -24,7 +24,12 @@
     "project:starter:build": "node scripts/build-project-starter.mjs",
     "project:starter:check": "node scripts/build-project-starter.mjs --check",
     "ai:build": "node scripts/build-ai-docs.mjs",
-    "ai:check": "node scripts/build-ai-docs.mjs --check"
+    "ai:check": "node scripts/build-ai-docs.mjs --check",
+    "package:compile": "tsc -p tsconfig.package.json",
+    "package:build": "node scripts/build-package.mjs",
+    "package:test": "node --test scripts/build-package.test.mjs",
+    "package:pack": "npm run package:build && npm pack ./packages/moru-react --pack-destination ./packages/moru-react",
+    "package:smoke": "node scripts/test-package-install.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",

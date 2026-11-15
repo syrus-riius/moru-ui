@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ThemeScope } from '../components/ui/theme-scope'
@@ -20,7 +19,6 @@ import {
 } from './useTheme'
 import { normalizeColorSchemeSettings } from './color-scheme'
 
-vi.mock('react-dom', () => ({ createPortal: (children: ReactNode) => children }))
 afterEach(() => vi.unstubAllGlobals())
 
 describe('style pack token compatibility', () => {
@@ -165,7 +163,7 @@ describe('style pack scope and exports', () => {
     },
   )
 
-  it('resets effects at a nested Default boundary and mirrors each scope to its popup host', () => {
+  it('resets effects at a nested Default boundary without rendering popup hosts before mount', () => {
     vi.stubGlobal('document', { body: {} })
     const glass = applyStylePack(defaultTokens, 'glass')
     const markup = renderToStaticMarkup(
@@ -175,10 +173,10 @@ describe('style pack scope and exports', () => {
         </ThemeScope>
       </ThemeScope>,
     )
-    expect(markup.match(/data-style-pack="glass"/g)).toHaveLength(2)
-    expect(markup.match(/data-style-pack="default"/g)).toHaveLength(2)
-    expect(markup.match(/--ui-pack-surface-filter:blur\(16px\) saturate\(125%\)/g)).toHaveLength(2)
-    expect(markup.match(/--ui-pack-surface-filter:none/g)).toHaveLength(2)
-    expect(markup.match(/class="ui-theme-scope ui-theme-portal"/g)).toHaveLength(2)
+    expect(markup.match(/data-style-pack="glass"/g)).toHaveLength(1)
+    expect(markup.match(/data-style-pack="default"/g)).toHaveLength(1)
+    expect(markup.match(/--ui-pack-surface-filter:blur\(16px\) saturate\(125%\)/g)).toHaveLength(1)
+    expect(markup.match(/--ui-pack-surface-filter:none/g)).toHaveLength(1)
+    expect(markup).not.toContain('class="ui-theme-scope ui-theme-portal"')
   })
 })

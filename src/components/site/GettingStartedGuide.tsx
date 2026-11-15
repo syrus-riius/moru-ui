@@ -33,6 +33,26 @@ export function GettingStartedGuide({
         <p>{t('React 프로젝트에 Moru의 Input을 설치하고 테마를 연결해 보세요.')}</p>
       </header>
 
+      <section aria-labelledby="moru-start-npm">
+        <h2 id="moru-start-npm">{t('npm으로 내 디자인 적용하기')}</h2>
+        <p>
+          {t(
+            '패키지를 설치하고, 스튜디오에서 만든 토큰을 Provider에 연결하세요. Tailwind는 필요하지 않습니다.',
+          )}
+        </p>
+        <CodeBlock
+          value="npm install moru-ui"
+          filename="npm"
+          language="sh"
+          size="sm"
+          lineNumbers={false}
+        />
+        <a className="moru-start-link" href="#guide/tokens">
+          {t('내 프로젝트에 적용')}
+          <ArrowUpRight size={14} aria-hidden="true" />
+        </a>
+      </section>
+
       <section className="moru-start-ai" aria-labelledby="moru-start-ai">
         <span className="moru-start-ai__eyebrow">DESIGNED FOR PEOPLE. READY FOR AI.</span>
         <h2 id="moru-start-ai">{t('AI와 함께 만들기')}</h2>
@@ -59,7 +79,7 @@ export function GettingStartedGuide({
       </section>
 
       <section aria-labelledby="moru-start-prepare">
-        <h2 id="moru-start-prepare">{t('프로젝트 준비')}</h2>
+        <h2 id="moru-start-prepare">{t('소스 설치 준비')}</h2>
         <p>
           {t(
             'Node.js 24 이상과 React 19.3, TypeScript, Vite, Tailwind CSS 4를 사용합니다. 프로젝트에 Tailwind와 components.json을 준비하세요.',

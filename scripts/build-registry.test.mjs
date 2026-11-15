@@ -320,7 +320,10 @@ test('core installs scoped runtime tokens rather than default root CSS or the ed
   )
   assert.match(content('theme-scope.tsx'), /'data-moru-registry': ''/)
   assert.match(content('theme-scope.tsx'), /<div\s+\{\.\.\.props\}\s+\{\.\.\.attributes\}/)
-  assert.match(content('theme-scope.tsx'), /<div\s+\{\.\.\.attributes\}\s+ref=\{portalContainer\}/)
+  assert.match(
+    content('theme-scope.tsx'),
+    /<div\s+\{\.\.\.attributes\}\s+ref=\{setPortalContainer\}/,
+  )
 })
 
 test('every installation retains the full Moru MIT grant and repository notice reference', async () => {

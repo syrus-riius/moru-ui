@@ -57,6 +57,21 @@ Run the root checks again after regenerating artifacts. Do not commit local QA o
 
 - After editing `src/components/project-template`, the project starter template, the selected registry sources, dependencies or licenses, run `npm run project:starter:build`. Include the ZIP and manifest, extract the ZIP into a new directory, then run its `npm ci` and `npm run build`. Keep this template's runtime dependencies minimal.
 
+## Verify the npm package
+
+The publishable web package is `packages/moru-react`; the repository root remains a private lab app. After changing public web components, blocks, tokens, or the package build, run from the root:
+
+```sh
+npm run package:test
+npm run package:build
+npm run package:pack
+npm run package:smoke -- ./packages/moru-react/moru-ui-0.5.0-beta.2.tgz
+```
+
+Use the tarball filename matching `packages/moru-react/package.json`. `package:build` emits JavaScript, type declarations, and the shared stylesheet; `package:pack` rebuilds and creates the tarball. The smoke check installs that exact tarball into a temporary consumer outside this repository, checks core imports without optional peers, then installs the optional peers and checks their entry points with TypeScript and Vite. Running `package:smoke` without a filename builds and packs a fresh archive itself. It does not publish to npm.
+
+Keep package exports, optional peer dependencies, and the package README in sync. Record Next.js and browser checks separately; the installation smoke script does not establish every framework or interaction's compatibility. Do not commit `dist`, temporary consumers, or `.tgz` files. Publication and npm authentication are maintainer actions after verification.
+
 ## React Native and Expo changes
 
 Read [the Expo app instructions](apps/moru-expo/AGENTS.md), [its README](apps/moru-expo/README.md), and [the native package guide](packages/moru-native/README.md) before changing native code. Use documentation matching the installed Expo SDK rather than assuming a web or older SDK API applies.

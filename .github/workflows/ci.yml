@@ -35,6 +35,14 @@ jobs:
         run: npm run format:check
       - name: Run tests
         run: npm test
+      - name: Check npm package generation
+        run: npm run package:test
+      - name: Build npm package
+        run: npm run package:build
+      - name: Inspect npm package contents
+        run: npm pack ./packages/moru-react --dry-run
+      - name: Install npm package in an isolated consumer
+        run: npm run package:smoke
       - name: Check generated artifacts and build
         run: npm run build
 

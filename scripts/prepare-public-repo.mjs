@@ -22,6 +22,7 @@ const allowed = [
   'tsconfig.json',
   'tsconfig.app.json',
   'tsconfig.node.json',
+  'tsconfig.package.json',
   'src',
   'scripts',
   'docs',
@@ -29,6 +30,7 @@ const allowed = [
   'registry',
   'registry.json',
   'packages/moru-native',
+  'packages/moru-react',
   'public',
   'apps/moru-expo/src',
   'apps/moru-expo/assets',
@@ -64,7 +66,7 @@ const skip = (name) =>
   excluded.has(name) ||
   name === '.DS_Store' ||
   name.startsWith('.env') ||
-  /\.(?:tsbuildinfo|log|pem|key|p12|mobileprovision|keystore|jks)$/.test(name)
+  /\.(?:tgz|tsbuildinfo|log|pem|key|p12|mobileprovision|keystore|jks)$/.test(name)
 
 async function refuseSymlinkSegments(absolute, allowMissing = false) {
   let current = path.parse(absolute).root

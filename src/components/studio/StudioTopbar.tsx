@@ -140,6 +140,7 @@ export function StudioTopbar() {
                     'project-template': t('프로젝트·할 일 템플릿'),
                     tokens: t('디자인 토큰'),
                     guide: t('시작 가이드'),
+                    'token-guide': t('내 프로젝트에 적용'),
                     comparison: t('디자인 비교'),
                     states: t('상태 표현'),
                     brand: t('Moru 이야기'),

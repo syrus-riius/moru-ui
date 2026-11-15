@@ -2,7 +2,7 @@
 
 Anchored popup with managed focus, collision handling and scoped portal styling.
 
-Version: 0.4.1. Source hash: 92d4b85e1d28cd9eda9391ef75e1e633fa26d884c86603172df42465b8fa832c.
+Version: 0.4.1. Source hash: 330cfc12106a86e9393b1d2a455d5a28d7d11fdeccfe17f602eda7db8f347a38.
 
 ## Discovery
 

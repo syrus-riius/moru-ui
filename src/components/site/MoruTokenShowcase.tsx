@@ -107,7 +107,7 @@ function InteractionBoundary({
     frame.current = requestAnimationFrame(() => {
       const target = document.activeElement
       onInteraction(
-        Boolean(target && (content.current?.contains(target) || portal?.current?.contains(target))),
+        Boolean(target && (content.current?.contains(target) || portal?.contains(target))),
       )
     })
   }

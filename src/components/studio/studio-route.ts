@@ -14,6 +14,7 @@ export type View =
   | 'project-template'
   | 'tokens'
   | 'guide'
+  | 'token-guide'
   | 'comparison'
   | 'states'
   | 'brand'
@@ -27,6 +28,7 @@ export const views: readonly View[] = [
   'project-template',
   'tokens',
   'guide',
+  'token-guide',
   'comparison',
   'states',
   'brand',
@@ -35,6 +37,7 @@ export const views: readonly View[] = [
 ]
 export function viewFromHash(hash: string): View {
   if (!hash || hash === '#home') return 'home'
+  if (hash === '#guide/tokens') return 'token-guide'
   if (hash === '#blocks' || hash.startsWith('#blocks/')) return 'blocks'
   if (parseComponentPage(hash)) return 'components'
   const candidate = hash.slice(1) as View
@@ -44,7 +47,17 @@ export function isStandaloneView(view: View) {
   return view === 'simulator' || view === 'examples' || view === 'project-template'
 }
 export function viewUrl(view: View, page: ComponentPage = { kind: 'index' }) {
-  return `${window.location.pathname}${window.location.search}${view === 'home' ? '' : view === 'components' ? componentPageHash(page) : view === 'blocks' ? blockHash(blockIdFromHash(window.location.hash)) : `#${view}`}`
+  const hash =
+    view === 'home'
+      ? ''
+      : view === 'token-guide'
+        ? '#guide/tokens'
+        : view === 'components'
+          ? componentPageHash(page)
+          : view === 'blocks'
+            ? blockHash(blockIdFromHash(window.location.hash))
+            : `#${view}`
+  return `${window.location.pathname}${window.location.search}${hash}`
 }
 export function libraryReturn() {
   const value = window.history.state?.moruStudioReturn

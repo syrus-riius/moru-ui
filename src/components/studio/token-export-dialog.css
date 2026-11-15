@@ -1,0 +1,36 @@
+.token-export-dialog .token-export-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-control-gap, 8px);
+  margin-bottom: var(--ui-form-gap, 24px);
+}
+
+.token-export-dialog .token-export-tabs {
+  min-width: 0;
+}
+
+.token-export-dialog .token-export-tabs > .ui-tabs-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+}
+
+.token-export-dialog .token-export-tabs > .ui-tabs-list > .ui-tabs-tab {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.token-export-dialog .token-export-tabs > .ui-tabs-panel {
+  min-width: 0;
+  margin-top: var(--ui-form-gap, 24px);
+}
+
+.token-export-dialog .export-code {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}

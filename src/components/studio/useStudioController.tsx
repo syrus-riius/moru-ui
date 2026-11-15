@@ -43,11 +43,12 @@ export function useStudioController() {
   const publicView =
     view === 'home' ||
     view === 'guide' ||
+    view === 'token-guide' ||
     view === 'components' ||
     view === 'blocks' ||
     view === 'brand'
   const siteSection: MoruSiteSection =
-    view === 'guide' || view === 'brand'
+    view === 'guide' || view === 'token-guide' || view === 'brand'
       ? 'docs'
       : view === 'home' || view === 'components' || view === 'blocks'
         ? view
@@ -206,9 +207,11 @@ export function useStudioController() {
             ? t('예제 허브 · Moru UI')
             : view === 'guide'
               ? t('시작하기 · Moru UI')
-              : view === 'components'
-                ? `${t(componentPageTitle(componentPage))} · Moru UI`
-                : t('Moru UI — 단단한 기본, 당신만의 UI.')
+              : view === 'token-guide'
+                ? `${t('내 프로젝트에 적용')} · Moru UI`
+                : view === 'components'
+                  ? `${t(componentPageTitle(componentPage))} · Moru UI`
+                  : t('Moru UI — 단단한 기본, 당신만의 UI.')
   }, [view, componentRouteKey, t])
 
   function navigateComponentPage(next: ComponentPage, search = false) {

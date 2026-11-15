@@ -64,6 +64,10 @@ export function StudioOverlays() {
         copied={copied === 'export'}
         onCopy={(text) => void copy(text, 'export')}
         onNotice={setNotice}
+        onOpenGuide={() => {
+          setExportOpen(false)
+          go('token-guide')
+        }}
       />
     </>
   )

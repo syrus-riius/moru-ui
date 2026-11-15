@@ -215,7 +215,7 @@
 :where([data-moru-registry]) .ui-sidebar-toggle:hover:not(:disabled),
 :where([data-moru-registry]) .ui-sidebar-item:hover:not(:disabled),
 :where([data-moru-registry]) .ui-sidebar-mobile-trigger:hover:not(:disabled) {
-  background: var(--ui-control-hover-bg, #f3f3f1);
+  background-color: var(--ui-control-hover-bg, #f3f3f1);
 }
 :where([data-moru-registry]) .ui-sidebar-item[aria-current]:hover:not(:disabled) {
   background: var(--ui-primary-hover, #303030);

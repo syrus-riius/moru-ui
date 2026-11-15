@@ -95,13 +95,19 @@
   height: var(--ui-size-icon);
 }
 .ui-toggle-group-item:hover:not(:disabled) {
-  background: var(--ui-control-hover-bg, #f3f3f1);
+  background-color: var(--ui-control-hover-bg, #f3f3f1);
   color: var(--ui-text, #171717);
 }
 .ui-toggle-group-item[data-pressed] {
   background: var(--ui-primary, #181818);
   color: var(--ui-primary-foreground, #fff);
   border-color: transparent;
+}
+.ui-toggle-group-item[data-pressed]:hover:not(:disabled):not([data-disabled]):not(
+    [aria-disabled='true']
+  ) {
+  background-color: var(--ui-primary-hover, #303030);
+  color: var(--ui-primary-hover-foreground, #fff);
 }
 .ui-toggle-group-item:disabled {
   background: var(--ui-disabled-bg, #f3f3f1);

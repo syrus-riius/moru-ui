@@ -42,7 +42,7 @@
 }
 
 :where([data-moru-registry]) .ui-switch:not([data-checked]):not([data-disabled]):not([aria-invalid='true']) {
-  background: var(--ui-control-border, #8a8a86);
+  background-color: var(--ui-control-border, #8a8a86);
   border-color: var(--ui-control-border, #8a8a86);
   color: var(--ui-surface, #fff);
 }

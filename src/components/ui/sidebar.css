@@ -214,7 +214,7 @@
 .ui-sidebar-toggle:hover:not(:disabled),
 .ui-sidebar-item:hover:not(:disabled),
 .ui-sidebar-mobile-trigger:hover:not(:disabled) {
-  background: var(--ui-control-hover-bg, #f3f3f1);
+  background-color: var(--ui-control-hover-bg, #f3f3f1);
 }
 .ui-sidebar-item[aria-current]:hover:not(:disabled) {
   background: var(--ui-primary-hover, #303030);

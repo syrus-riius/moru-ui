@@ -121,7 +121,14 @@
   .ui-combobox.ui-combobox,
   .ui-number-input-group.ui-number-input-group,
   .ui-multi-select.ui-multi-select,
-  .ui-time-picker-control.ui-time-picker-control
+  .ui-time-picker-control.ui-time-picker-control,
+  .ui-checkbox.ui-checkbox,
+  .ui-radio.ui-radio,
+  .ui-switch.ui-switch,
+  .ui-file-input input[type='file'],
+  .ui-button.ui-button:where([data-variant='secondary']),
+  .ui-toggle.ui-toggle:where(:not([data-pressed])),
+  .ui-slider:where(:not([data-disabled], [aria-invalid='true'])) .ui-slider-thumb
 ):where(
   :not(
     :disabled,
@@ -158,21 +165,92 @@
   box-shadow: var(--ui-pack-control-shadow, none);
 }
 
-/* Action glow stays independent of focus rings and semantic error feedback. */
-:where([data-moru-registry]) .ui-button.ui-button[data-variant='primary']:where(
+/* Grouping rails retain their own opaque fill and do not gain a second blur. */
+:where([data-moru-registry]) :is(.ui-tabs-list.ui-tabs-list, .ui-toggle-group.ui-toggle-group, .ui-menubar.ui-menubar):where(
+  :not([data-disabled], [aria-disabled='true'])
+) {
+  background-image: var(--ui-pack-control-image, none);
+  box-shadow: var(--ui-pack-highlight-shadow, none);
+}
+
+/* Small filled surfaces share the control material, not the state of their children. */
+:where([data-moru-registry]) :is(
+  .ui-kbd.ui-kbd,
+  .ui-item.ui-item:where([data-variant='muted']),
+  .ui-context-menu-trigger.ui-context-menu-trigger,
+  .ui-sidebar-mobile-trigger.ui-sidebar-mobile-trigger
+):where(:not(:disabled, [data-disabled], [aria-disabled='true'], [aria-invalid='true'])) {
+  background-image: var(--ui-pack-control-image, none);
+  box-shadow: var(--ui-pack-control-shadow, none);
+}
+
+/* Checked controls use the same opaque inverse treatment as primary buttons. */
+:where([data-moru-registry]) :is(.ui-checkbox.ui-checkbox, .ui-radio.ui-radio, .ui-switch.ui-switch)[data-checked] {
+  background-image: none;
+}
+
+/* Opaque headers share their parent's material instead of hiding it. */
+:where([data-moru-registry]) :is(
+  .ui-code-block-header.ui-code-block-header,
+  .ui-table-head.ui-table-head,
+  .ui-scroll-corner.ui-scroll-corner
+) {
+  background-color: var(--ui-pack-contained-surface-bg, var(--ui-surface));
+}
+
+/* Semantic fills/text stay calibrated; their glow follows the foreground tone. */
+:where([data-moru-registry]) .ui-attachment.ui-attachment:where([data-status='error']) {
+  background-image: none;
+  box-shadow: none;
+}
+:where([data-moru-registry]) :is(.ui-badge.ui-badge, .ui-alert.ui-alert, .ui-status-message.ui-status-message) {
+  box-shadow: var(--ui-pack-tonal-shadow, none);
+}
+:where([data-moru-registry]) :is(
+  .ui-alert.ui-alert,
+  .ui-status-message.ui-status-message,
+  .ui-badge.ui-badge:where([data-variant='secondary'], [data-variant='outline']),
+  .ui-bubble.ui-bubble:where(:not([data-variant='secondary']))
+) {
+  background-image: var(--ui-pack-tonal-image, none);
+}
+/* Inverse fills stay opaque: lighting must not lower foreground contrast. */
+:where([data-moru-registry]) .ui-bubble.ui-bubble {
+  box-shadow: var(--ui-pack-control-shadow, none);
+}
+:where([data-moru-registry]) .ui-tooltip.ui-tooltip {
+  box-shadow: var(--ui-pack-surface-shadow, var(--ui-shadow));
+}
+
+/* Action glow stays independent of focus/error feedback. The extra class keeps
+ * pressed effects above base state rules regardless of lazy stylesheet order. */
+:where([data-moru-registry]) .ui-button.ui-button.ui-button[data-variant='primary']:where(
     :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
   ) {
   box-shadow: var(--ui-pack-action-shadow, none);
 }
 
-:where([data-moru-registry]) .ui-button.ui-button[data-variant='primary']:where(
+:where([data-moru-registry]) .ui-button.ui-button.ui-button[data-variant='primary']:where(
     :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
   ):is(:not([data-ui-state]):hover, [data-ui-state='hover']) {
   box-shadow: var(--ui-pack-action-hover-shadow, var(--ui-pack-action-shadow, none));
 }
 
-:where([data-moru-registry]) .ui-button.ui-button[data-variant='primary']:where(
+:where([data-moru-registry]) .ui-button.ui-button.ui-button[data-variant='primary']:where(
     :not(:disabled, [data-disabled], [aria-disabled='true'], [data-loading], [aria-invalid='true'])
+  ):is(:not([data-ui-state]):active, [data-ui-state='pressed']) {
+  box-shadow: var(--ui-pack-pressed-shadow, inset 0 1px 2px #00000018);
+}
+
+:where([data-moru-registry]) .ui-button.ui-button.ui-button[data-variant='secondary']:where(
+    :not(
+      :disabled,
+      [data-disabled],
+      [aria-disabled='true'],
+      [aria-busy='true'],
+      [data-loading],
+      [aria-invalid='true']
+    )
   ):is(:not([data-ui-state]):active, [data-ui-state='pressed']) {
   box-shadow: var(--ui-pack-pressed-shadow, inset 0 1px 2px #00000018);
 }
@@ -182,8 +260,35 @@
   .ui-navigation-trigger.ui-navigation-trigger[data-active],
   .ui-navigation-trigger.ui-navigation-trigger[data-popup-open],
   .ui-menubar-trigger.ui-menubar-trigger[data-popup-open],
-  .ui-sidebar-item.ui-sidebar-item[aria-current]
-):where(:not(:disabled, [data-disabled], [aria-disabled='true'], [aria-invalid='true'])) {
+  .ui-sidebar-item.ui-sidebar-item[aria-current],
+  .ui-checkbox.ui-checkbox[data-checked],
+  .ui-radio.ui-radio[data-checked],
+  .ui-switch.ui-switch[data-checked],
+  .ui-toggle.ui-toggle[data-pressed],
+  .ui-toggle-group-item.ui-toggle-group-item[data-pressed],
+  .ui-pagination-button.ui-pagination-button[aria-current='page'],
+  .ui-accordion-trigger.ui-accordion-trigger[data-open],
+  .ui-time-picker-grid button[aria-pressed='true'],
+  .ui-time-picker-apply.ui-time-picker-apply,
+  .ui-header-navigation [aria-current='page'],
+  .ui-slider:where(:not([data-disabled], [aria-invalid='true'])) .ui-slider-indicator,
+  .ui-stepper:where(:not([data-disabled]))
+    .ui-stepper-item:where([data-status='current'])
+    .ui-stepper-button:where(:not(:disabled, [aria-disabled='true']))
+    .ui-stepper-marker
+):where(
+  :not(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true'],
+    [aria-invalid='true'],
+    [aria-busy='true'],
+    [data-loading],
+    [data-ui-state='error'],
+    [data-ui-state='disabled'],
+    [data-ui-state='loading']
+  )
+) {
   box-shadow: var(--ui-pack-active-shadow, none);
 }
 
@@ -232,7 +337,34 @@
     .ui-combobox,
     .ui-number-input-group,
     .ui-multi-select,
-    .ui-time-picker-control
+    .ui-time-picker-control,
+    .ui-button,
+    .ui-checkbox,
+    .ui-radio,
+    .ui-switch,
+    .ui-file-input input[type='file'],
+    .ui-slider-thumb,
+    .ui-slider-indicator,
+    .ui-tabs-list,
+    .ui-toggle-group,
+    .ui-toggle-group-item,
+    .ui-toggle,
+    .ui-kbd,
+    .ui-item,
+    .ui-context-menu-trigger,
+    .ui-sidebar-mobile-trigger,
+    .ui-menubar,
+    .ui-pagination-button,
+    .ui-stepper-marker,
+    .ui-accordion-trigger,
+    .ui-time-picker-grid button,
+    .ui-time-picker-apply,
+    .ui-header-navigation [aria-current],
+    .ui-tooltip,
+    .ui-bubble,
+    .ui-badge,
+    .ui-alert,
+    .ui-status-message
   ) {
     --ui-pack-surface-bg: var(--ui-surface, #fff);
     --ui-pack-surface-image: none;
@@ -241,6 +373,9 @@
     --ui-pack-sidebar-shadow: none;
     --ui-pack-control-image: none;
     --ui-pack-control-shadow: none;
+    --ui-pack-contained-surface-bg: var(--ui-surface);
+    --ui-pack-tonal-image: none;
+    --ui-pack-tonal-shadow: none;
   }
 }
 
@@ -280,7 +415,34 @@
     .ui-combobox,
     .ui-number-input-group,
     .ui-multi-select,
-    .ui-time-picker-control
+    .ui-time-picker-control,
+    .ui-button,
+    .ui-checkbox,
+    .ui-radio,
+    .ui-switch,
+    .ui-file-input input[type='file'],
+    .ui-slider-thumb,
+    .ui-slider-indicator,
+    .ui-tabs-list,
+    .ui-toggle-group,
+    .ui-toggle-group-item,
+    .ui-toggle,
+    .ui-kbd,
+    .ui-item,
+    .ui-context-menu-trigger,
+    .ui-sidebar-mobile-trigger,
+    .ui-menubar,
+    .ui-pagination-button,
+    .ui-stepper-marker,
+    .ui-accordion-trigger,
+    .ui-time-picker-grid button,
+    .ui-time-picker-apply,
+    .ui-header-navigation [aria-current],
+    .ui-tooltip,
+    .ui-bubble,
+    .ui-badge,
+    .ui-alert,
+    .ui-status-message
   ) {
     --ui-pack-surface-bg: var(--ui-surface, #fff);
     --ui-pack-surface-image: none;
@@ -289,6 +451,9 @@
     --ui-pack-sidebar-shadow: none;
     --ui-pack-control-image: none;
     --ui-pack-control-shadow: none;
+    --ui-pack-contained-surface-bg: var(--ui-surface);
+    --ui-pack-tonal-image: none;
+    --ui-pack-tonal-shadow: none;
   }
 }
 
@@ -330,6 +495,32 @@
     .ui-multi-select,
     .ui-time-picker-control,
     .ui-button,
+    .ui-checkbox,
+    .ui-radio,
+    .ui-switch,
+    .ui-file-input input[type='file'],
+    .ui-slider-thumb,
+    .ui-slider-indicator,
+    .ui-tabs-list,
+    .ui-toggle-group,
+    .ui-toggle-group-item,
+    .ui-toggle,
+    .ui-kbd,
+    .ui-item,
+    .ui-context-menu-trigger,
+    .ui-sidebar-mobile-trigger,
+    .ui-menubar,
+    .ui-pagination-button,
+    .ui-stepper-marker,
+    .ui-accordion-trigger,
+    .ui-time-picker-grid button,
+    .ui-time-picker-apply,
+    .ui-header-navigation [aria-current],
+    .ui-tooltip,
+    .ui-bubble,
+    .ui-badge,
+    .ui-alert,
+    .ui-status-message,
     .ui-tabs-tab,
     .ui-navigation-trigger,
     .ui-menubar-trigger,
@@ -341,10 +532,15 @@
     --ui-pack-sidebar-shadow: none;
     --ui-pack-control-image: none;
     --ui-pack-control-shadow: none;
+    --ui-pack-contained-surface-bg: var(--ui-surface);
+    --ui-pack-tonal-image: none;
+    --ui-pack-tonal-shadow: none;
     --ui-pack-action-shadow: none;
     --ui-pack-action-hover-shadow: none;
     --ui-pack-pressed-shadow: none;
     --ui-pack-active-shadow: none;
+    --ui-pack-selection-shadow: 0 0 0 0 transparent;
+    --ui-pack-highlight-shadow: none;
   }
   :where([data-moru-registry]) :is(
     .ui-card.ui-card,

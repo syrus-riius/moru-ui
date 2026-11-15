@@ -1,6 +1,6 @@
 # Moru for Expo / React Native
 
-Version 0.4.1 · source 5a0a4b244fa08e5ec114908231ad33098aa6646cb022935d28cab19340a90d48
+Version 0.4.1 · source baf065ccb1fccaa4eed187992c95b92d1b8fd9b7084c361d9faa54b0f7c55c24
 
 The web catalog is not a native component catalog. Use `apps/moru-expo` with the local `packages/moru-native` package. Its dependency is `file:../../packages/moru-native`; preserve that monorepo relation or deliberately relocate both. This is not an npm publication claim.
 

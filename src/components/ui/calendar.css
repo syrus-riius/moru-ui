@@ -382,6 +382,7 @@
   font-weight: var(--ui-type-label-weight, 550);
 }
 .ui-calendar-day[data-today] .ui-calendar-day-content {
+  --ui-calendar-selection-marker: inset 0 -2px var(--ui-accent, #ef543d);
   box-shadow: inset 0 -2px var(--ui-accent, #ef543d);
 }
 
@@ -405,6 +406,7 @@
 .ui-calendar[data-variant='activity'][data-mode='single']
   .ui-calendar-day[data-selected]
   .ui-calendar-day-content {
+  --ui-calendar-selection-marker: inset 0 0 0 2px var(--ui-primary-foreground, #fff);
   box-shadow: inset 0 0 0 2px var(--ui-primary-foreground, #fff);
 }
 .ui-calendar .ui-calendar-day[data-selected] .ui-calendar-day-markers {
@@ -489,6 +491,21 @@
   .ui-calendar-day-content {
   background: var(--ui-disabled-bg, #f3f3f1);
   color: var(--ui-disabled-text, #a1a1aa);
+}
+/* Highlight the selected point or range endpoints, not every date in a range.
+   Today and activity markers keep their original inset geometry. */
+.ui-calendar[data-mode='single']:not([data-disabled])
+  .ui-calendar-day[data-selected]:not(:disabled)
+  .ui-calendar-day-content,
+.ui-calendar[data-mode='range']:not([data-disabled])
+  .ui-calendar-day[data-range-edge]:not(:disabled)
+  .ui-calendar-day-content {
+  box-shadow:
+    var(--ui-calendar-selection-marker, 0 0 0 0 transparent),
+    var(--ui-pack-selection-shadow, 0 0 0 0 transparent);
+}
+.ui-calendar:not([data-disabled]) .ui-calendar-period-option[data-selected]:not(:disabled) {
+  box-shadow: var(--ui-pack-active-shadow, none);
 }
 .ui-calendar-range-status {
   margin: calc(var(--ui-control-gap, 8px) * 1.5) 0 0;
@@ -666,6 +683,11 @@
   }
 }
 @media (forced-colors: active) {
+  .ui-calendar-day-content,
+  .ui-calendar-period-option {
+    --ui-pack-selection-shadow: 0 0 0 0 transparent;
+    --ui-pack-active-shadow: none;
+  }
   .ui-calendar-day[data-selected] .ui-calendar-day-content,
   .ui-calendar-period-option[data-selected] {
     outline: 2px solid Highlight;

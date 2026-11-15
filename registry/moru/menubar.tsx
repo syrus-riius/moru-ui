@@ -49,6 +49,7 @@ export function Menubar({
       className={cn('ui-menubar', className)}
       aria-label={label}
       disabled={disabled}
+      data-disabled={disabled || undefined}
       data-size={size}
     >
       {menus.map((menu) => (

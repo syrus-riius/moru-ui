@@ -33,7 +33,7 @@
   --ui-size-icon: var(--ui-icon-size-lg, 18px);
 }
 .ui-toggle:hover:not(:disabled) {
-  background: var(--ui-surface-hover, #f3f3f1);
+  background-color: var(--ui-surface-hover, #f3f3f1);
 }
 .ui-toggle:focus-visible {
   outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
@@ -77,6 +77,10 @@
   color: var(--ui-primary-foreground, #fff);
   background: var(--ui-primary, #181818);
   border-color: transparent;
+}
+.ui-toggle[data-pressed]:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']) {
+  background-color: var(--ui-primary-hover, #303030);
+  color: var(--ui-primary-hover-foreground, #fff);
 }
 .ui-toggle:active:not(:disabled) {
   transform: translateY(1px);

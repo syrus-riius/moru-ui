@@ -151,8 +151,12 @@ describe('style pack scope and exports', () => {
       '--ui-pack-control-image',
       '--ui-pack-control-shadow',
       '--ui-pack-sidebar-shadow',
+      '--ui-pack-tonal-image',
+      '--ui-pack-tonal-shadow',
     ])
       expect(neutral[key]).toBe('none')
+    expect(neutral['--ui-pack-contained-surface-bg']).toBe('var(--ui-surface)')
+    expect(neutral['--ui-pack-selection-shadow']).toBe('0 0 0 0 transparent')
   })
 
   it('honors zero effects and preserves previously saved effect strengths', () => {
@@ -178,6 +182,18 @@ describe('style pack scope and exports', () => {
     expect(off['--ui-pack-surface-image']).toBe('none')
     expect(off['--ui-pack-control-shadow']).toBe('none')
     expect(off['--ui-pack-active-shadow']).toBe('none')
+    expect(off['--ui-pack-selection-shadow']).toBe('0 0 0 0 transparent')
+    expect(off['--ui-pack-tonal-shadow']).toBe('none')
+  })
+
+  it('keeps semantic lighting separate from accent lighting and composes selection markers', () => {
+    const neon = getStylePackVariables(applyStylePack(defaultTokens, 'neon'), 'dark')
+    expect(neon['--ui-pack-tonal-shadow']).toContain('currentColor')
+    expect(neon['--ui-pack-tonal-shadow']).not.toContain(defaultTokens.accent)
+    expect(neon['--ui-pack-selection-shadow']).toBe(neon['--ui-pack-active-shadow'])
+    const glass = getStylePackVariables(applyStylePack(defaultTokens, 'glass'), 'light')
+    expect(glass['--ui-pack-contained-surface-bg']).toBe('transparent')
+    expect(glass['--ui-pack-tonal-image']).not.toContain(defaultTokens.accent)
   })
 
   it('uses accent for neon and preserves readable opaque foreground/background tokens', () => {

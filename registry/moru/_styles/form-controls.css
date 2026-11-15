@@ -132,7 +132,7 @@
 }
 
 :where([data-moru-registry]) .ui-switch[data-checked] {
-  background: var(--ui-primary);
+  background-color: var(--ui-primary);
   border-color: var(--ui-primary);
   color: var(--ui-primary-foreground);
 }
@@ -164,12 +164,12 @@
 }
 
 :where([data-moru-registry]) .ui-switch:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
-  background: var(--ui-control-hover-border);
+  background-color: var(--ui-control-hover-border);
   border-color: var(--ui-control-hover-border);
 }
 
 :where([data-moru-registry]) .ui-switch[data-checked]:hover:not([data-disabled]):not([aria-invalid='true']):not([data-loading]) {
-  background: var(--ui-primary-hover);
+  background-color: var(--ui-primary-hover);
   border-color: var(--ui-primary-hover);
   color: var(--ui-primary-hover-foreground);
 }
@@ -177,7 +177,7 @@
 :where([data-moru-registry]) .ui-switch[data-checked]:active:not([data-disabled]):not([aria-invalid='true']):not(
     [data-loading]
   ) {
-  background: var(--ui-primary-pressed);
+  background-color: var(--ui-primary-pressed);
   border-color: var(--ui-primary-pressed);
   color: var(--ui-primary-pressed-foreground);
 }
@@ -227,7 +227,7 @@
 }
 
 :where([data-moru-registry]) .ui-radio:hover:not([data-disabled]):not([aria-invalid='true']) {
-  background: var(--ui-control-hover-border, #7c7c78);
+  background-color: var(--ui-control-hover-border, #7c7c78);
   border-color: var(--ui-control-hover-border);
 }
 
@@ -237,7 +237,7 @@
 }
 
 :where([data-moru-registry]) .ui-radio:active:not([data-disabled]):not([aria-invalid='true']) {
-  background: var(--ui-control-pressed-border, #6e6e6b);
+  background-color: var(--ui-control-pressed-border, #6e6e6b);
   border-color: var(--ui-control-pressed-border);
 }
 
@@ -342,7 +342,7 @@
 :where([data-moru-registry]) .ui-slider:not([data-disabled]) .ui-slider-thumb:hover,
 :where([data-moru-registry]) .ui-slider:not([data-disabled]) .ui-slider-thumb[data-dragging] {
   border-color: var(--ui-primary-hover);
-  background: var(--ui-primary-hover);
+  background-color: var(--ui-primary-hover);
 }
 
 :where([data-moru-registry]) .ui-slider-thumb:has(input:focus-visible) {

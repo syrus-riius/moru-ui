@@ -40,13 +40,13 @@
   line-height: var(--ui-file-button-height);
   border: var(--ui-border-width, 1px) solid var(--ui-control-border, var(--ui-border, #8a8a86));
   border-radius: var(--ui-radius);
-  background: var(--ui-input-bg);
+  background-color: var(--ui-input-bg);
   color: var(--ui-muted);
   overflow-wrap: anywhere;
 }
 :where([data-moru-registry]) .ui-file-input input[type='file']:not(:disabled):not([aria-invalid='true']):hover {
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
-  background: var(--ui-control-hover-bg, var(--ui-input-bg));
+  background-color: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
 :where([data-moru-registry]) .ui-file-input[data-size='sm'] {
   --ui-file-height: var(--ui-control-height-sm, 32px);

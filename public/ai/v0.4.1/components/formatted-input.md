@@ -2,7 +2,7 @@
 
 Purpose-built input formats for cards, phone, email, URLs, IP addresses and Korean postal codes, with optional validation helpers.
 
-Version: 0.4.1. Source hash: 5a0a4b244fa08e5ec114908231ad33098aa6646cb022935d28cab19340a90d48.
+Version: 0.4.1. Source hash: baf065ccb1fccaa4eed187992c95b92d1b8fd9b7084c361d9faa54b0f7c55c24.
 
 ## Discovery
 

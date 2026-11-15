@@ -74,6 +74,11 @@ export function getStylePackVariables(
     '--ui-pack-sidebar-shadow': 'none',
     '--ui-pack-control-image': 'none',
     '--ui-pack-control-shadow': 'none',
+    '--ui-pack-contained-surface-bg': 'var(--ui-surface)',
+    '--ui-pack-tonal-image': 'none',
+    '--ui-pack-tonal-shadow': 'none',
+    // A transparent shadow composes with an existing inset marker; `none` cannot.
+    '--ui-pack-selection-shadow': '0 0 0 0 transparent',
     '--ui-pack-highlight-shadow': 'none',
     '--ui-pack-action-shadow': 'none',
     '--ui-pack-action-hover-shadow': 'none',
@@ -81,6 +86,9 @@ export function getStylePackVariables(
     '--ui-pack-pressed-shadow': 'inset 0 1px 2px #00000018',
   }
   if (preset === 'default') return variables
+
+  // One outer surface owns the material, including its otherwise opaque header.
+  variables['--ui-pack-contained-surface-bg'] = 'transparent'
 
   const edgeColor = preset === 'glass' ? '#ffffff' : tokens.accent
   const edge =
@@ -91,6 +99,8 @@ export function getStylePackVariables(
   if (preset === 'glass') {
     variables['--ui-pack-surface-bg'] = alpha(tokens.surface, surfaceOpacity)
     if (highlight > 0) {
+      variables['--ui-pack-tonal-image'] =
+        `linear-gradient(135deg, ${alpha('#ffffff', highlight * 0.12)}, transparent 65%)`
       // A reflective tint remains visible on plain backdrops as well as imagery.
       variables['--ui-pack-surface-image'] =
         `linear-gradient(135deg, ${alpha('#ffffff', highlight * 0.65)}, transparent 45%, ${alpha(tokens.accent, highlight * 0.3)})`
@@ -112,6 +122,7 @@ export function getStylePackVariables(
       .filter(Boolean)
       .join(', ')
     variables['--ui-pack-control-shadow'] = edge || 'none'
+    variables['--ui-pack-tonal-shadow'] = edge || 'none'
   } else {
     variables['--ui-pack-surface-shadow'] = edge || 'var(--ui-shadow)'
     if (highlight > 0) {
@@ -136,7 +147,22 @@ export function getStylePackVariables(
       variables['--ui-pack-pressed-shadow'] =
         `inset 0 1px 2px #00000018, ${variables['--ui-pack-active-shadow']}`
     }
+    // Semantic surfaces retain their fill and use their foreground tone for lighting.
+    const tonalColor = 'currentColor'
+    variables['--ui-pack-tonal-shadow'] =
+      [
+        highlight > 0
+          ? `inset 0 0 0 1px color-mix(in srgb, ${tonalColor} ${Math.round(highlight * 100)}%, transparent)`
+          : '',
+        glow > 0
+          ? `0 0 ${glow}px color-mix(in srgb, ${tonalColor} ${mode === 'dark' ? 32 : 22}%, transparent)`
+          : '',
+      ]
+        .filter(Boolean)
+        .join(', ') || 'none'
   }
   variables['--ui-pack-sidebar-shadow'] = variables['--ui-pack-surface-shadow']
+  if (variables['--ui-pack-active-shadow'] !== 'none')
+    variables['--ui-pack-selection-shadow'] = variables['--ui-pack-active-shadow']
   return variables
 }

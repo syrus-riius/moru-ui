@@ -48,7 +48,7 @@
   background: transparent;
 }
 .ui-item[data-variant='muted'] {
-  background: var(--ui-surface-hover, #f3f3f1);
+  background-color: var(--ui-surface-hover, #f3f3f1);
 }
 .ui-item-group {
   display: flex;

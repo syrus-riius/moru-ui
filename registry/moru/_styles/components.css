@@ -343,7 +343,7 @@
 }
 
 :where([data-moru-registry]) .ui-checkbox[data-checked] {
-  background: var(--ui-primary, #181818);
+  background-color: var(--ui-primary, #181818);
   border-color: var(--ui-primary, #181818);
 }
 
@@ -748,13 +748,13 @@
 
 :where([data-moru-registry]) .ui-button:not([data-ui-state]):hover:not(:disabled):not([data-disabled]),
 :where([data-moru-registry]) .ui-button[data-ui-state='hover']:not(:disabled):not([data-disabled]) {
-  background: var(--ui-button-hover-bg);
+  background-color: var(--ui-button-hover-bg);
   color: var(--ui-button-hover-text);
 }
 
 :where([data-moru-registry]) .ui-button:not([data-ui-state]):active:not(:disabled):not([data-disabled]),
 :where([data-moru-registry]) .ui-button[data-ui-state='pressed']:not(:disabled):not([data-disabled]) {
-  background: var(--ui-button-pressed-bg);
+  background-color: var(--ui-button-pressed-bg);
   color: var(--ui-button-pressed-text);
   box-shadow: inset 0 1px 2px #00000018;
 }
@@ -795,7 +795,7 @@
 :where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='hover']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
-  background: var(--ui-control-hover-border, #7c7c78);
+  background-color: var(--ui-control-hover-border, #7c7c78);
 }
 
 :where([data-moru-registry]) .ui-checkbox:not([data-checked]):not([data-ui-state]):active:not(:disabled):not(
@@ -804,14 +804,14 @@
 :where([data-moru-registry]) .ui-checkbox:not([data-checked])[data-ui-state='pressed']:not(:disabled):not([data-disabled]):not(
     [aria-invalid='true']
   ) {
-  background: var(--ui-control-pressed-border, #6e6e6b);
+  background-color: var(--ui-control-pressed-border, #6e6e6b);
 }
 
 :where([data-moru-registry]) .ui-checkbox[data-checked]:not([data-ui-state]):hover:not([data-disabled]):not(
     [aria-invalid='true']
   ):not([data-loading]),
 :where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='hover']:not([data-disabled]):not([aria-invalid='true']) {
-  background: var(--ui-primary-hover, #303030);
+  background-color: var(--ui-primary-hover, #303030);
   border-color: var(--ui-primary-hover, #303030);
   color: var(--ui-primary-hover-foreground, white);
 }
@@ -822,7 +822,7 @@
 :where([data-moru-registry]) .ui-checkbox[data-checked][data-ui-state='pressed']:not([data-disabled]):not(
     [aria-invalid='true']
   ) {
-  background: var(--ui-primary-pressed, #0b0b0b);
+  background-color: var(--ui-primary-pressed, #0b0b0b);
   border-color: var(--ui-primary-pressed, #0b0b0b);
   color: var(--ui-primary-pressed-foreground, white);
 }

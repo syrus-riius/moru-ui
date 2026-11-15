@@ -10,6 +10,7 @@ import { ComponentDocumentationLayout } from './ComponentDocumentationLayout'
 import { ComponentInstallation } from './ComponentInstallation'
 import { ComponentApiReference } from './ComponentApiReference'
 import { loadComponentDocument, type ComponentDocument } from './component-document'
+import { ComponentVariations } from './variations/ComponentVariations'
 
 export function ComponentDocumentation({
   id,
@@ -46,6 +47,7 @@ export function ComponentDocumentation({
   const reference = document?.id === registryId ? document : null
   const sections = [
     { id: `${id}-preview`, label: '미리보기' },
+    { id: `${id}-variations`, label: '베리에이션' },
     { id: `${id}-installation`, label: '설치' },
     { id: `${id}-usage`, label: '사용법' },
     { id: `${id}-props`, label: 'Props' },
@@ -66,7 +68,7 @@ export function ComponentDocumentation({
   return (
     <ComponentDocumentationLayout
       id={id}
-      sections={reference ? sections : sections.slice(0, 1)}
+      sections={reference ? sections : sections.slice(0, 2)}
       onOpenStudio={onOpenStudio}
       onNavigate={onNavigate}
       aiAction={aiAction}
@@ -105,6 +107,17 @@ export function ComponentDocumentation({
         <p className="moru-component-doc__preview-note">
           {t('미리보기에서 동작과 상태를 살펴보고, 사용법에서 기본 예제 코드를 복사하세요.')}
         </p>
+      </section>
+      <section aria-labelledby={`${id}-variations`}>
+        <h2 id={`${id}-variations`} tabIndex={-1}>
+          {t('베리에이션')}
+        </h2>
+        <p>
+          {t(
+            '같은 디자인 토큰에서 크기와 상태를 비교하세요. 각 예제는 컴포넌트가 지원하는 실제 옵션을 사용합니다.',
+          )}
+        </p>
+        <ComponentVariations key={id} id={id} />
       </section>
       {reference ? (
         <>

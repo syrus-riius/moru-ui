@@ -122,13 +122,13 @@
   scroll-snap-align: start;
 }
 @media (max-width: 380px) {
-  .ui-attachment {
+  .ui-attachment[data-orientation='horizontal'] {
     flex-wrap: wrap;
   }
-  .ui-attachment-actions {
+  .ui-attachment[data-orientation='horizontal'] .ui-attachment-actions {
     margin-inline-start: auto;
   }
-  .ui-attachment-content {
+  .ui-attachment[data-orientation='horizontal'] .ui-attachment-content {
     flex-basis: calc(100% - var(--ui-attachment-media-size) - var(--ui-control-gap));
   }
 }

@@ -2,7 +2,7 @@
 
 Page navigation with bounded values, compact ranges and accessible controls.
 
-Version: 0.4.1. Source hash: 3d50d8d1c9951acff47d57ffd227011e1e268683be793d82d543261e48d83ef7.
+Version: 0.4.1. Source hash: 08414026dbe9c50ebadb9391b938ed8ed1e97050bc3c6b5f7c1b6fd190aa8ab2.
 
 ## Discovery
 

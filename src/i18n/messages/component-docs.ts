@@ -1,4 +1,23 @@
+import { componentVariationMessages } from './component-variations'
+
 export const componentDocMessages: Record<string, { en: string; ja: string; 'zh-CN': string }> = {
+  ...componentVariationMessages,
+  베리에이션: { en: 'Variations', ja: 'バリエーション', 'zh-CN': '变体' },
+  '베리에이션을 불러오는 중': {
+    en: 'Loading variations',
+    ja: 'バリエーションを読み込み中',
+    'zh-CN': '正在加载变体',
+  },
+  '크기 비교': { en: 'Size comparison', ja: 'サイズの比較', 'zh-CN': '尺寸比较' },
+  '상태 비교': { en: 'State comparison', ja: '状態の比較', 'zh-CN': '状态比较' },
+  '형태 비교': { en: 'Variant comparison', ja: '表示形式の比較', 'zh-CN': '样式比较' },
+  '트리거 비활성': { en: 'Disabled trigger', ja: 'トリガー無効', 'zh-CN': '禁用触发器' },
+  '같은 디자인 토큰에서 크기와 상태를 비교하세요. 각 예제는 컴포넌트가 지원하는 실제 옵션을 사용합니다.':
+    {
+      en: 'Compare sizes and states with the same design tokens. Each example uses options the component actually supports.',
+      ja: '同じデザイントークンでサイズと状態を比較できます。各サンプルは、コンポーネントが対応しているオプションを使用しています。',
+      'zh-CN': '在相同设计令牌下比较尺寸与状态。每个示例都使用组件实际支持的选项。',
+    },
   '보조 타입 속성': {
     en: 'Supporting type properties',
     ja: '補助型のプロパティ',

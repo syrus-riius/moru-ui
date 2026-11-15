@@ -123,13 +123,13 @@
   scroll-snap-align: start;
 }
 @media (max-width: 380px) {
-  :where([data-moru-registry]) .ui-attachment {
+  :where([data-moru-registry]) .ui-attachment[data-orientation='horizontal'] {
     flex-wrap: wrap;
   }
-  :where([data-moru-registry]) .ui-attachment-actions {
+  :where([data-moru-registry]) .ui-attachment[data-orientation='horizontal'] .ui-attachment-actions {
     margin-inline-start: auto;
   }
-  :where([data-moru-registry]) .ui-attachment-content {
+  :where([data-moru-registry]) .ui-attachment[data-orientation='horizontal'] .ui-attachment-content {
     flex-basis: calc(100% - var(--ui-attachment-media-size) - var(--ui-control-gap));
   }
 }

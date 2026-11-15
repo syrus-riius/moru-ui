@@ -7,9 +7,11 @@ import { InputVariationsDemo } from '../demos/InputVariationsDemo'
 import { ComponentDocumentationLayout } from './ComponentDocumentationLayout'
 import { ComponentInstallation } from './ComponentInstallation'
 import type { ComponentPage } from '../catalog/component-pages'
+import { sizes, VariationExample, VariationGroup } from './variations/VariationLayout'
 
 const sections = [
   { id: 'input-preview', label: '미리보기' },
+  { id: 'input-sizes', label: '크기 비교' },
   { id: 'input-variations', label: '입력 베리에이션' },
   { id: 'input-installation', label: '설치' },
   { id: 'input-usage', label: '사용법' },
@@ -220,6 +222,25 @@ export function InputDocumentation({
         />
       </section>
 
+      <section aria-labelledby="input-sizes">
+        <h2 id="input-sizes" tabIndex={-1}>
+          {t('크기 비교')}
+        </h2>
+        <p>
+          {t(
+            '같은 디자인 토큰에서 크기와 상태를 비교하세요. 각 예제는 컴포넌트가 지원하는 실제 옵션을 사용합니다.',
+          )}
+        </p>
+        <VariationGroup title="Small · Medium · Large">
+          {sizes.map((size) => (
+            <VariationExample key={size} label={size.toUpperCase()} code={`size="${size}"`}>
+              <InputExample
+                input={{ name: `size-${size}`, size, placeholder: 'name@example.com' }}
+              />
+            </VariationExample>
+          ))}
+        </VariationGroup>
+      </section>
       <section aria-labelledby="input-variations">
         <h2 id="input-variations" tabIndex={-1}>
           {t('입력 베리에이션')}

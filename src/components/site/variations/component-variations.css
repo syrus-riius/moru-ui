@@ -1,0 +1,135 @@
+.doc-variation-group {
+  min-width: 0;
+  margin-top: 28px;
+}
+
+.doc-variation-group-heading {
+  margin-bottom: 12px;
+}
+
+.moru-component-doc .doc-variation-group-heading h3 {
+  margin: 0;
+  color: var(--chrome-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.doc-variation-group-heading > p {
+  max-width: 66ch;
+  margin: 6px 0 0;
+  color: var(--chrome-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.doc-variation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.doc-variation-grid[data-wide] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.doc-variation-example {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ui-control-gap, 8px) * 2);
+  padding: var(--ui-card-padding, 24px);
+  border: var(--ui-border-width, 0px) solid var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+}
+
+.doc-variation-example[data-wide] {
+  grid-column: 1 / -1;
+}
+
+.doc-variation-example-heading {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.doc-variation-example-heading h4 {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 650;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.doc-variation-example-heading code {
+  color: var(--ui-muted);
+  font-size: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.doc-variation-preview {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--ui-control-gap, 8px);
+  flex: 1;
+  min-height: 80px;
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-type-body-size);
+  line-height: var(--ui-type-body-line-height);
+  overflow-wrap: anywhere;
+}
+
+.doc-variation-preview > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.doc-variation-preview > :is(.ui-button, .ui-badge, .ui-avatar, .ui-spinner) {
+  align-self: flex-start;
+}
+
+.doc-variation-preview p {
+  margin: 0;
+}
+
+.doc-variation-loading {
+  min-height: 160px;
+  padding: 24px;
+  color: var(--chrome-muted);
+}
+
+@container component-documentation (max-width: 640px) {
+  .doc-variation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .doc-variation-grid[data-wide] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@container component-documentation (max-width: 440px) {
+  .doc-variation-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Give large controls room without shrinking their actual size or touch targets. */
+@container component-documentation (max-width: 360px) {
+  .doc-variation-example {
+    padding-inline: min(var(--ui-card-padding, 24px), 16px);
+  }
+  .doc-variation-example:has(> .doc-variation-preview > .ui-calendar) {
+    padding-inline: min(var(--ui-card-padding, 24px), 8px);
+  }
+}

@@ -90,9 +90,9 @@ export function StudioCommandPalette({
         },
         {
           id: 'simulator',
-          label: t('시뮬레이터 열기'),
+          label: `${t('시뮬레이터 열기')} · BETA`,
           group: t('화면'),
-          keywords: ['simulator', 'wireframe', '와이어프레임'],
+          keywords: ['simulator', 'wireframe', '와이어프레임', 'beta', '베타'],
           onSelect: () => go('simulator'),
         },
         {

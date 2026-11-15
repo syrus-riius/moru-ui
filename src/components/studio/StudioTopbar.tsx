@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Breadcrumb } from '../ui/breadcrumb'
+import { SimulatorBetaBadge } from '../simulator/SimulatorBetaBadge'
 
 import { useStudio } from './useStudioController'
 
@@ -61,6 +62,7 @@ export function StudioTopbar() {
                 </span>
               )}
             </div>
+            {view === 'simulator' ? <SimulatorBetaBadge /> : null}
           </div>
           <div className="standalone-actions">
             <LanguageSelector />

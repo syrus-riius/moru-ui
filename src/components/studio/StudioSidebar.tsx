@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react'
 import { Button } from '../ui/button'
+import { SimulatorBetaBadge } from '../simulator/SimulatorBetaBadge'
 import { components } from '../catalog/component-catalog'
 import { ComponentCategoryNavigation } from '../catalog/ComponentCategoryNavigation'
 import { MoruLogo, MoruMark } from '../brand'
@@ -133,7 +134,7 @@ export function StudioSidebar() {
           <Button variant="ghost" size="sm" textWrap="wrap" onClick={() => go('simulator')}>
             <LayoutPanelTop size={17} />
             {t('시뮬레이터')}
-            <span className="nav-new">NEW</span>
+            <SimulatorBetaBadge className="simulator-beta-nav" />
           </Button>
           <Button
             variant="ghost"

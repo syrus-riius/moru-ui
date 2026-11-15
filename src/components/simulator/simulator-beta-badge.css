@@ -1,0 +1,10 @@
+.ui-badge.simulator-beta-badge {
+  flex: none;
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.simulator-beta-nav {
+  margin-inline-start: auto;
+}

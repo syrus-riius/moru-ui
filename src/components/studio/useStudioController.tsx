@@ -199,19 +199,21 @@ export function useStudioController() {
 
   useEffect(() => {
     document.title =
-      view === 'project-template'
-        ? t('프로젝트·할 일 템플릿 · Moru UI')
-        : view === 'blocks'
-          ? t('화면 블록 · Moru UI')
-          : view === 'examples'
-            ? t('예제 허브 · Moru UI')
-            : view === 'guide'
-              ? t('시작하기 · Moru UI')
-              : view === 'token-guide'
-                ? `${t('내 프로젝트에 적용')} · Moru UI`
-                : view === 'components'
-                  ? `${t(componentPageTitle(componentPage))} · Moru UI`
-                  : t('Moru UI — 단단한 기본, 당신만의 UI.')
+      view === 'simulator'
+        ? `${t('시뮬레이터')} · BETA · Moru UI`
+        : view === 'project-template'
+          ? t('프로젝트·할 일 템플릿 · Moru UI')
+          : view === 'blocks'
+            ? t('화면 블록 · Moru UI')
+            : view === 'examples'
+              ? t('예제 허브 · Moru UI')
+              : view === 'guide'
+                ? t('시작하기 · Moru UI')
+                : view === 'token-guide'
+                  ? `${t('내 프로젝트에 적용')} · Moru UI`
+                  : view === 'components'
+                    ? `${t(componentPageTitle(componentPage))} · Moru UI`
+                    : t('Moru UI — 단단한 기본, 당신만의 UI.')
   }, [view, componentRouteKey, t])
 
   function navigateComponentPage(next: ComponentPage, search = false) {

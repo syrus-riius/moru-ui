@@ -1,4 +1,5 @@
 import { useI18n } from '../../i18n'
+import { SimulatorBetaBadge } from '../simulator/SimulatorBetaBadge'
 import { filterLocalizedComponents } from './catalog-search'
 import { Fragment, useRef, type MouseEvent, type ReactNode, type RefObject } from 'react'
 import {
@@ -305,6 +306,7 @@ export function ComponentCatalogPage({
         <a href="#simulator" onClick={(event) => follow(event, onSimulator)}>
           <LayoutPanelTop size={13} aria-hidden="true" />
           {t('시뮬레이터')}
+          <SimulatorBetaBadge />
           <ArrowRight size={12} aria-hidden="true" />
         </a>
       </aside>

@@ -11,6 +11,7 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { Button } from '../ui/button'
+import { SimulatorBetaBadge } from '../simulator/SimulatorBetaBadge'
 import { useToast } from '../ui/toast'
 import { BlockPreview } from './BlockPreview'
 import { BLOCKS, getBlockSource, type BlockId } from './block-catalog'
@@ -177,6 +178,7 @@ export function BlocksPage({
           <Button variant="primary" size="sm" onClick={() => onInsert(selected.id, device)}>
             <Layers3 size={14} aria-hidden="true" />
             {t('시뮬레이터에 넣기')}
+            <SimulatorBetaBadge />
           </Button>
         </header>
 

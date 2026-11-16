@@ -65,7 +65,7 @@ The publishable web package is `packages/moru-react`; the repository root remain
 npm run package:test
 npm run package:build
 npm run package:pack
-npm run package:smoke -- ./packages/moru-react/moru-ui-0.5.0-beta.2.tgz
+npm run package:smoke -- ./packages/moru-react/moru-ui-0.5.0-beta.3.tgz
 ```
 
 Use the tarball filename matching `packages/moru-react/package.json`. `package:build` emits JavaScript, type declarations, and the shared stylesheet; `package:pack` rebuilds and creates the tarball. The smoke check installs that exact tarball into a temporary consumer outside this repository, checks core imports without optional peers, then installs the optional peers and checks their entry points with TypeScript and Vite. Running `package:smoke` without a filename builds and packs a fresh archive itself. It does not publish to npm.

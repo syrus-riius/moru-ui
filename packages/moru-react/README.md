@@ -3,7 +3,7 @@
 React UI components for thoughtful human experiences: a consistent foundation,
 useful interactions, and a shared design token system.
 
-This README describes the `0.5.0-beta.2` package. It includes the web component
+This README describes the `0.5.0-beta.3` package. It includes the web component
 library, reusable blocks, TypeScript declarations, and scoped styles. The UI Lab,
 simulator, and React Native components are not part of this package.
 
@@ -121,6 +121,39 @@ When you pass `tokens`, the provider uses those values directly; `mode` does not
 convert a custom light palette to dark. Density options are `compact`, `standard`,
 and `comfortable`. Built-in locale identifiers are `ko`, `en`, `ja`, and `zh-CN`.
 Application content and your own labels still need your translations.
+
+### Glass and Neon
+
+Style packs change the material and lighting while keeping your palette and
+spacing. Supply the appearance values with your tokens:
+
+```tsx
+import { defaultTokens, MoruProvider, type ThemeTokens } from 'moru-ui'
+
+const tokens: ThemeTokens = {
+  ...defaultTokens,
+  appearance: {
+    preset: 'glass',
+    surfaceOpacity: 0.72,
+    blur: 16,
+    glow: 0,
+    highlight: 0.4,
+  },
+}
+
+export function GlassExample() {
+  return <MoruProvider tokens={tokens}>{/* Moru components */}</MoruProvider>
+}
+```
+
+For Neon, use `preset: 'neon'`, `surfaceOpacity: 1`, `blur: 0`, `glow: 18`, and
+`highlight: 0.35`. Keep the shared stylesheet imported as shown above. An inner
+provider with `defaultTokens` resets the outer material. Error, disabled, loading,
+and keyboard-focus indicators keep their meaning in either pack.
+
+Version `0.5.0-beta.3` fixes missing effects on small controls and selected states,
+opaque nested headers that hid material surfaces, and hover/pressed styles that
+overrode Glass or Neon. Existing imports and provider props remain the same.
 
 Font files are not bundled or downloaded by Moru. Its font-family tokens include
 Pretendard, Noto Sans, and system fallbacks. Load any desired font in your own app,

@@ -51,7 +51,7 @@ export function Example() {
 }
 ```
 
-The published `0.5.0-beta.2` includes the full web component library, with
+The published `0.5.0-beta.3` includes the full web component library, with
 separate block and optional-dependency entry points. Both `npm install moru-ui`
 and `npm install moru-ui@beta` currently install this beta release. See the
 [npm package guide](packages/moru-react/README.md) for import paths, optional

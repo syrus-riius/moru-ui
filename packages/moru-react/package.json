@@ -1,6 +1,6 @@
 {
   "name": "moru-ui",
-  "version": "0.5.0-beta.2",
+  "version": "0.5.0-beta.3",
   "description": "React UI components built for thoughtful human experiences.",
   "type": "module",
   "license": "MIT",
@@ -50,7 +50,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "NOTICE.md"
+    "NOTICE.md",
+    "CHANGELOG.md"
   ],
   "sideEffects": [
     "**/*.css"

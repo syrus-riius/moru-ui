@@ -11,7 +11,7 @@ import {
   type ThemeTokens,
 } from '../../theme/tokens'
 
-export const moruNpmVersion = '0.5.0-beta.2'
+export const moruNpmVersion = '0.5.0-beta.3'
 export type TokenInstallTarget = 'vite' | 'next'
 export type TokenInstallFile = {
   path: string

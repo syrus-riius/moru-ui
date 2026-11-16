@@ -101,7 +101,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
         aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}
         aria-busy={busy || undefined}
         className={cn(
-          'ui-select flex w-full min-w-0 items-center justify-between gap-2',
+          'ui-select ui-field-focus flex w-full min-w-0 items-center justify-between gap-2',
           className,
         )}
         data-size={size}

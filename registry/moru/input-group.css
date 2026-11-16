@@ -38,11 +38,7 @@
   --ui-group-padding: var(--ui-control-padding-x-lg, 18px);
   --ui-group-icon: var(--ui-icon-size-lg, 18px);
 }
-:where([data-moru-registry]) .ui-input-group:focus-within {
-  border-color: var(--ui-primary, #181818);
-  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
-  outline-offset: 2px;
-}
+
 :where([data-moru-registry]) .ui-input-group:has([aria-invalid='true']) {
   border-color: var(--ui-danger, #c14b45);
   background: var(--ui-danger-soft, #f9efef);
@@ -62,13 +58,7 @@
   color: var(--ui-loading-text, #303030);
   cursor: progress;
 }
-:where([data-moru-registry]) .ui-input-group:has([data-ui-state='focus']) {
-  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
-  outline-offset: 2px;
-}
-:where([data-moru-registry]) .ui-input-group:has([aria-invalid='true']):has([data-ui-state='focus']) {
-  outline-color: var(--ui-error-ring, var(--ui-danger, #c14b45));
-}
+
 :where([data-moru-registry]) .ui-input-group .ui-input-group-input:disabled,
 :where([data-moru-registry]) .ui-input-group .ui-input-group-textarea:disabled {
   cursor: not-allowed;
@@ -155,25 +145,25 @@
 }
 
 /* Grouped controls own pointer and preview states as one surface. */
-:where([data-moru-registry]) .ui-input-group:has(
+:where([data-moru-registry]) .ui-input-group:where(:not(:focus-within)):has(
     :is(.ui-input-group-input, .ui-input-group-textarea):not(:disabled):not([aria-invalid='true'])
-  ):is(:hover):not(:has([data-ui-state])), :where([data-moru-registry]) .ui-input-group:has(
-  :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='hover']:not(:disabled):not(
-      [aria-invalid='true']
-    )
-) {
+  ):is(:hover):not(:has([data-ui-state])), :where([data-moru-registry]) .ui-input-group:where(:not(:focus-within)):has(
+    :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='hover']:not(:disabled):not(
+        [aria-invalid='true']
+      )
+  ) {
   background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-control-hover-border, var(--ui-border));
 }
-:where([data-moru-registry]) .ui-input-group:has(
-  :is(.ui-input-group-input, .ui-input-group-textarea):active:not(:disabled):not(
-      [aria-invalid='true']
-    ):not([data-ui-state])
-), :where([data-moru-registry]) .ui-input-group:has(
-  :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='pressed']:not(:disabled):not(
-      [aria-invalid='true']
-    )
-) {
+:where([data-moru-registry]) .ui-input-group:where(:not(:focus-within)):has(
+    :is(.ui-input-group-input, .ui-input-group-textarea):active:not(:disabled):not(
+        [aria-invalid='true']
+      ):not([data-ui-state])
+  ), :where([data-moru-registry]) .ui-input-group:where(:not(:focus-within)):has(
+    :is(.ui-input-group-input, .ui-input-group-textarea)[data-ui-state='pressed']:not(
+        :disabled
+      ):not([aria-invalid='true'])
+  ) {
   background-color: var(--ui-control-pressed-bg, #e8e8e4);
   border-color: var(--ui-control-pressed-border, #a1a1aa);
 }

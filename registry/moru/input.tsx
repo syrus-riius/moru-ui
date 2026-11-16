@@ -44,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
       aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}
       aria-busy={busy || undefined}
-      className={cn('ui-input w-full min-w-0', className)}
+      className={cn('ui-input ui-field-focus w-full min-w-0', className)}
       data-size={size}
       data-ui-state={previewState}
       data-loading={busy || undefined}

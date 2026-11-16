@@ -425,12 +425,7 @@
   color: var(--ui-primary-pressed-foreground, white);
 }
 
-:where([data-moru-registry]) :is(
-  .ui-calendar-navigation,
-  .ui-calendar-day,
-  .ui-date-picker-trigger,
-  .ui-date-picker-action
-):focus-visible {
+:where([data-moru-registry]) :is(.ui-calendar-navigation, .ui-calendar-day, .ui-date-picker-action):focus-visible {
   outline: 2px solid var(--ui-focus-ring, #181818);
   outline-offset: -2px;
 }
@@ -594,11 +589,15 @@
 :where([data-moru-registry]) .ui-date-picker-trigger[data-placeholder] {
   color: var(--ui-muted, #6e6e6b);
 }
-:where([data-moru-registry]) .ui-date-picker-trigger:hover:not(:disabled):not([aria-disabled='true']) {
+:where([data-moru-registry]) .ui-date-picker-trigger:where(:not(:focus-within)):hover:not(:disabled):not(
+    [aria-disabled='true']
+  ) {
   background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-control-hover-border, #c4c4ca);
 }
-:where([data-moru-registry]) .ui-date-picker-trigger:active:not(:disabled):not([aria-disabled='true']) {
+:where([data-moru-registry]) .ui-date-picker-trigger:where(:not(:focus-within)):active:not(:disabled):not(
+    [aria-disabled='true']
+  ) {
   background-color: var(--ui-control-pressed-bg, #e8e8e4);
 }
 :where([data-moru-registry]) .ui-date-picker-trigger[aria-invalid='true'] {

@@ -10,6 +10,14 @@ import {
 import { applyStylePack } from './style-packs'
 
 describe('native theme bridge', () => {
+  it('keeps web focus intent separate from native runtime tokens', () => {
+    const focus = { style: 'surface' as const, width: 1, offset: 0, color: '#5577cc' }
+    const output = createNativeThemeExport({ ...defaultTokens, focus }, 'light')
+    expect(output.designIntent.focus).toEqual(focus)
+    expect(output.compatibility.inputFocus).toBe('platform-default')
+    expect(output.tokens).not.toHaveProperty('focus')
+  })
+
   it('preserves style intent while explicitly exporting a solid native fallback', () => {
     const source = applyStylePack(defaultTokens, 'glass')
     const output = createNativeThemeExport(source, 'light')

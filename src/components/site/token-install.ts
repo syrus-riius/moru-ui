@@ -24,6 +24,7 @@ export type TokenInstallGuide = {
   text: string
   mode: ThemeMode
   fontFamily: FontFamily
+  compatibilityNote: string
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -218,6 +219,15 @@ const guideCopy: Record<Locale, string[]> = {
   ],
 }
 
+// The Lab may lead the published package. Keep this limit visible in both UI and copied instructions.
+const focusCompatibility: Record<Locale, string> = {
+  ko: '입력 포커스의 슬림·서피스·언더라인·링 설정은 현재 Lab과 최신 소스에서 지원합니다. npm 0.5.0-beta.3에서는 기존 포커스 표시가 유지됩니다. JSON에는 설정이 보존되며, npm 반영 후 해당 기능을 지원하는 버전으로 업데이트해야 적용됩니다.',
+  en: 'Slim, Surface, Underline and Ring input focus settings are currently supported in the Lab and latest source. npm 0.5.0-beta.3 keeps its existing focus indicators. The settings stay in your JSON; update to an npm version that supports them once released to apply them.',
+  ja: '入力フォーカスのスリム・サーフェス・アンダーライン・リング設定は、現在Labと最新ソースで対応しています。npm 0.5.0-beta.3では従来のフォーカス表示が維持されます。設定はJSONに保存され、対応するnpmバージョンの公開後に更新すると適用できます。',
+  'zh-CN':
+    '输入焦点的细线、表面、下划线和外环设置目前适用于Lab和最新源码。npm 0.5.0-beta.3仍保留原有焦点样式。设置会保存在JSON中；待支持该功能的npm版本发布后，更新即可应用。',
+}
+
 const pageStyle = `{
         display: 'grid',
         alignContent: 'start',
@@ -317,6 +327,7 @@ export default function Page() {
     `# Moru UI · ${target === 'vite' ? 'React / Vite' : 'Next.js App Router'}`,
     '',
     ...guideCopy[locale].slice(0, -1),
+    focusCompatibility[locale],
     '',
     '```bash',
     command,
@@ -333,5 +344,12 @@ export default function Page() {
     guideCopy[locale].at(-1),
     '',
   ].join('\n')
-  return { command, files, text, mode: design.mode, fontFamily: design.fontFamily }
+  return {
+    command,
+    files,
+    text,
+    mode: design.mode,
+    fontFamily: design.fontFamily,
+    compatibilityNote: focusCompatibility[locale],
+  }
 }

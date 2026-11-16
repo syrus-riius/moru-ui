@@ -8,7 +8,7 @@ import {
   validateTokens,
   type ThemeMode,
 } from './tokens'
-import { parseThemeState, restoreThemeState } from './useTheme'
+import { applyThemeTokensState, parseThemeState, restoreThemeState } from './useTheme'
 
 function savedState(schemaVersion: number, mode: ThemeMode = 'dark') {
   const light = validateTokens({
@@ -218,5 +218,37 @@ describe('explicit theme file parsing', () => {
     expect(parsed.themes.light.radius).toBe(defaultTokens.radius)
     expect(parsed.themes.light.text).toBe('#123456')
     expect(parsed.themes.light.success).toBe(saved.themes.light.success)
+  })
+})
+
+describe('shared input focus preferences', () => {
+  it('shares edits across modes, keeps palettes, and restores them from saved JSON', () => {
+    const previous = parseThemeState(savedState(9))!
+    previous.presetId = DEFAULT_PRESET_ID
+    const before = structuredClone(previous)
+    const focus = { style: 'underline' as const, width: 2, offset: 0, color: '#5577cc' }
+    const updated = applyThemeTokensState(previous, (current) => ({ ...current, focus }))
+    expect(updated.presetId).toBe(previous.presetId)
+    for (const mode of ['light', 'dark'] as const) {
+      expect(updated.themes[mode].focus).toEqual(focus)
+      for (const key of colorTokenKeys)
+        expect(updated.themes[mode][key]).toBe(previous.themes[mode][key])
+    }
+    expect(updated.themes.light.focus).not.toBe(updated.themes.dark.focus)
+    expect(restoreThemeState(JSON.parse(JSON.stringify(updated)))).toEqual(updated)
+    expect(previous).toEqual(before)
+  })
+
+  it('keeps legacy omission while sharing an explicit reset to default focus', () => {
+    const previous = parseThemeState(savedState(9))!
+    expect(previous.themes.light).not.toHaveProperty('focus')
+    expect(previous.themes.dark).not.toHaveProperty('focus')
+    const styled = applyThemeTokensState(previous, (current) => ({
+      ...current,
+      focus: { style: 'ring', width: 3, offset: 4, color: '#5577cc' },
+    }))
+    const reset = applyThemeTokensState(styled, (current) => ({ ...current, focus: undefined }))
+    expect(reset.themes.light.focus).toEqual({ style: 'slim', width: 1, offset: 0 })
+    expect(reset.themes.dark.focus).toEqual(reset.themes.light.focus)
   })
 })

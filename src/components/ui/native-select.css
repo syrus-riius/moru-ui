@@ -78,14 +78,11 @@
   background: var(--ui-surface, #fff);
   color: var(--ui-text, #171717);
 }
-.ui-native-select:hover:not(:disabled) {
+.ui-native-select:where(:not(:focus-within)):hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-border, #e8e8e4);
 }
-.ui-native-select:focus-visible {
-  outline: 2px solid var(--ui-focus-ring, var(--ui-ring, #181818));
-  outline-offset: 3px;
-}
+
 .ui-native-select[aria-invalid='true'] {
   border-color: var(--ui-danger, #c14b45);
   background: var(--ui-danger-soft, #f9efef);

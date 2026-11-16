@@ -11,7 +11,7 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(function I
   { className, ...props },
   ref,
 ) {
-  return <div {...props} ref={ref} className={cn('ui-input-group', className)} />
+  return <div {...props} ref={ref} className={cn('ui-input-group ui-field-focus', className)} />
 })
 export type InputGroupAddonProps = HTMLAttributes<HTMLDivElement> & {
   align?: 'inline-start' | 'inline-end' | 'block-start' | 'block-end'

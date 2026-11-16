@@ -131,7 +131,7 @@ export function Command({
               </svg>
             </BaseDialog.Close>
           </div>
-          <div className="ui-command-search">
+          <div className="ui-command-search ui-field-focus">
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.5" />
               <path d="m13 13 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

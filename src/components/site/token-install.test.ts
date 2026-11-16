@@ -67,6 +67,23 @@ function imports(code: string) {
 }
 
 describe('token installation export', () => {
+  it.each(locales)(
+    'preserves focus settings and states the published package limit in %s',
+    (locale) => {
+      const saved = snapshot()
+      const focus = { style: 'surface' as const, width: 1, offset: 0, color: '#5577cc' }
+      saved.themes.light.focus = focus
+      saved.themes.dark.focus = { ...focus }
+      const guide = createTokenInstallGuide(JSON.stringify(saved), 'vite', locale)
+      const copied = JSON.parse(file(guide, 'src/moru-tokens.json'))
+      expect(copied.themes.light.focus).toEqual(focus)
+      expect(copied.themes.dark.focus).toEqual(focus)
+      expect(guide.compatibilityNote).toContain('0.5.0-beta.3')
+      expect(guide.text).toContain(guide.compatibilityNote)
+      expect(guide.command).toContain(`moru-ui@${moruNpmVersion}`)
+    },
+  )
+
   it.each(['light', 'dark'] as const)(
     'preserves both exact saved themes and editor metadata when exporting %s mode',
     (mode) => {

@@ -104,6 +104,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(function F
           ref={inputRef}
           id={id ?? field?.controlId ?? generatedId}
           type="file"
+          className="ui-field-focus"
           disabled={unavailable}
           aria-busy={busy || undefined}
           aria-invalid={

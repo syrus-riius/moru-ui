@@ -12,6 +12,7 @@ import type { ColorSchemeSettings } from '../../theme/color-scheme'
 import { ColorSchemeEditor } from './ColorSchemeEditor'
 import { ShapeRhythmEditor } from './ShapeRhythmEditor'
 import { StylePackEditor } from './StylePackEditor'
+import { FocusEditor } from './FocusEditor'
 import { DesignQualityWorkbench } from './DesignQualityWorkbench'
 import './design-tokens-page.css'
 
@@ -147,6 +148,7 @@ export function DesignTokensPage({
           </p>
         </header>
         <StylePackEditor tokens={tokens} mode={mode} onTokensChange={onTokensChange} />
+        <FocusEditor tokens={tokens} mode={mode} onTokensChange={onTokensChange} />
       </section>
       <section {...panelProps('color')} className="design-token-section">
         <header className="design-token-section-heading">

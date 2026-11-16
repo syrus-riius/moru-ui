@@ -53,7 +53,7 @@ export const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(fun
       data-loading={busy || undefined}
       ref={ref}
       {...(!field ? { id } : {})}
-      className={cn('ui-native-select', className)}
+      className={cn('ui-native-select ui-field-focus', className)}
       data-size={size}
       aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
       aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}

@@ -30,6 +30,7 @@ import { TokenDensityControls } from './TokenDensityControls'
 import { ComponentSpacingControls } from './ComponentSpacingControls'
 import { ShapeRhythmEditor } from './ShapeRhythmEditor'
 import { StylePackEditor } from './StylePackEditor'
+import { FocusEditor } from './FocusEditor'
 import { colorGroupLabels, colorRoleLabels } from './color-editor-labels'
 import { Button } from '../ui/button'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
@@ -551,6 +552,7 @@ export function TokenEditor({
           <h3>{t('효과')}</h3>
           <span>EFFECTS</span>
         </div>
+        <FocusEditor compact tokens={tokens} mode={mode} onTokensChange={onTokensChange} />
         <div className="token-range-list">
           <RangeControl token="shadow" value={tokens.shadow} onChange={onChange} />
           <RangeControl token="duration" value={tokens.duration} onChange={onChange} />

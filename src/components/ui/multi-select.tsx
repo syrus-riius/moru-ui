@@ -162,7 +162,7 @@ export function MultiSelect({
         autoHighlight
       >
         <BaseCombobox.InputGroup
-          className="ui-multi-select ui-enhanced-input"
+          className="ui-multi-select ui-enhanced-input ui-field-focus"
           data-size={size}
           data-loading={loading || undefined}
         >

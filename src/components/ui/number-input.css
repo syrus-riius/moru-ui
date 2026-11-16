@@ -11,16 +11,13 @@
     background-color var(--ui-duration, 160ms),
     border-color var(--ui-duration, 160ms);
 }
-.ui-number-input-group:hover:not(
+.ui-number-input-group:where(:not(:focus-within)):hover:not(
     :has(input:is(:disabled, [aria-busy='true']), [aria-invalid='true'])
   ) {
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
   background-color: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
-.ui-number-input-group:focus-within {
-  outline: 2px solid var(--ui-focus-ring, #181818);
-  outline-offset: 2px;
-}
+
 .ui-number-input-group:has([aria-invalid='true']) {
   border-color: var(--ui-danger, #b93d37);
   background: var(--ui-danger-soft, #f9efef);

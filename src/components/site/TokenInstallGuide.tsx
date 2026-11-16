@@ -118,6 +118,8 @@ export function TokenInstallGuide({ json, onEdit, embedded = false }: TokenInsta
         </div>
       </header>
 
+      <p className="token-install-callout">{guide.compatibilityNote}</p>
+
       <div className="token-install-toolbar">
         <div className="token-install-target">
           <span id={`${id}-target`}>{t('사용 중인 프로젝트')}</span>

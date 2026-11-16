@@ -174,7 +174,8 @@ export const InputOTP = forwardRef<HTMLInputElement, InputOTPProps>(function Inp
         {Array.from({ length: count }, (_, index) => (
           <span
             key={index}
-            className="ui-input-otp-slot"
+            className="ui-input-otp-slot ui-field-focus"
+            data-ui-state={focused && Math.min(caret, count - 1) === index ? 'focus' : undefined}
             data-active={(focused && Math.min(caret, count - 1) === index) || undefined}
           >
             {current[index] ??

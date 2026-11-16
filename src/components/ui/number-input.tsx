@@ -139,7 +139,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
       className={cn('ui-number-input ui-enhanced-input', className)}
       data-size={size}
     >
-      <BaseNumberField.Group className="ui-number-input-group" data-loading={loading || undefined}>
+      <BaseNumberField.Group
+        className="ui-number-input-group ui-field-focus"
+        data-loading={loading || undefined}
+      >
         {!hideControls && (
           <BaseNumberField.Decrement
             className="ui-enhanced-input-action"

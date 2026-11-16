@@ -45,7 +45,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       aria-describedby={mergeDescriptionIds(describedBy, field?.describedBy)}
       aria-invalid={previewState === 'error' ? true : (invalid ?? (field?.invalid || undefined))}
       aria-busy={busy || undefined}
-      className={cn('ui-textarea w-full min-w-0', className)}
+      className={cn('ui-textarea ui-field-focus w-full min-w-0', className)}
       data-size={size}
       data-ui-state={previewState}
       data-loading={busy || undefined}

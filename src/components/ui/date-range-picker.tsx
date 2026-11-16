@@ -169,7 +169,7 @@ export function DateRangePicker({
     <BasePopover.Trigger
       ref={triggerRef}
       {...(!field ? { id: controlId } : {})}
-      className="ui-date-picker-trigger ui-date-range-picker-trigger"
+      className="ui-date-picker-trigger ui-date-range-picker-trigger ui-field-focus"
       data-size={size}
       // Busy uses aria-disabled like read-only does, so the trigger keeps keyboard focus.
       disabled={disabled}

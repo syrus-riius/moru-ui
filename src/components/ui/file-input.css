@@ -43,7 +43,8 @@
   color: var(--ui-muted);
   overflow-wrap: anywhere;
 }
-.ui-file-input input[type='file']:not(:disabled):not([aria-invalid='true']):hover {
+.ui-file-input
+  input[type='file']:where(:not(:focus)):not(:disabled):not([aria-invalid='true']):hover {
   border-color: var(--ui-control-hover-border, var(--ui-control-border, #8a8a86));
   background-color: var(--ui-control-hover-bg, var(--ui-input-bg));
 }
@@ -77,10 +78,7 @@
 .ui-file-input input[type='file']:not(:disabled):hover::file-selector-button {
   background: var(--ui-control-hover-bg);
 }
-.ui-file-input input[type='file']:focus-visible {
-  outline: 2px solid var(--ui-focus-ring, var(--ui-primary, #181818));
-  outline-offset: 2px;
-}
+
 .ui-file-input input[type='file'][aria-invalid='true'] {
   outline-color: var(--ui-error-ring, var(--ui-danger));
   border-color: var(--ui-danger);

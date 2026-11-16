@@ -58,17 +58,13 @@
     border-color var(--ui-duration, 160ms),
     box-shadow var(--ui-duration, 160ms);
 }
-.ui-combobox:hover:not(:has(input:is(:disabled, [aria-busy='true']))):not(
-    :has([aria-invalid='true'])
-  ) {
+.ui-combobox:where(:not(:focus-within)):hover:not(
+    :has(input:is(:disabled, [aria-busy='true']))
+  ):not(:has([aria-invalid='true'])) {
   background-color: color-mix(in srgb, var(--ui-input-bg, #f0f0ed) 94%, var(--ui-text, #171717));
   border-color: var(--ui-border, #e8e8e4);
 }
-.ui-combobox:focus-within {
-  border-color: var(--ui-focus-ring, #181818);
-  outline: 2px solid var(--ui-focus-ring, #181818);
-  outline-offset: 2px;
-}
+
 .ui-combobox:has([aria-invalid='true']) {
   border-color: var(--ui-danger, #b34040);
   background: var(--ui-danger-soft, #f9efef);

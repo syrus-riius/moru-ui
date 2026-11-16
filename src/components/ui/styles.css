@@ -1,3 +1,4 @@
+@import './input-focus.css';
 @import './form-controls.css';
 @import './feedback.css';
 
@@ -767,7 +768,7 @@
 }
 
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
-    :not(.ui-input-group-input, .ui-input-group-textarea)
+    :not(.ui-input-group-input, .ui-input-group-textarea, .ui-field-focus:focus-within)
   ):not([data-ui-state]):hover:not(:disabled):not([data-disabled]):not([data-loading]):not(
     [aria-invalid='true']
   ),
@@ -779,7 +780,7 @@
 }
 
 :is(.ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
-    :not(.ui-input-group-input, .ui-input-group-textarea)
+    :not(.ui-input-group-input, .ui-input-group-textarea, .ui-field-focus:focus-within)
   ):not([data-ui-state]):active:not(:disabled):not([data-disabled]):not([data-loading]):not(
     [aria-invalid='true']
   ),
@@ -828,13 +829,9 @@
   color: var(--ui-primary-pressed-foreground, white);
 }
 
-:is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
-    :not(.ui-input-group-input, .ui-input-group-textarea)
-  ):focus-visible,
+:is(.ui-button, .ui-checkbox):focus-visible,
 .ui-checkbox[data-focused],
-:is(.ui-button, .ui-input, .ui-textarea, .ui-select, .ui-checkbox):where(
-    :not(.ui-input-group-input, .ui-input-group-textarea)
-  )[data-ui-state='focus'] {
+:is(.ui-button, .ui-checkbox)[data-ui-state='focus'] {
   outline: 2px solid var(--ui-focus-ring, #181818);
   outline-offset: 3px;
 }

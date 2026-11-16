@@ -48,6 +48,7 @@ const structuralKeys = [
   'typography',
   'duration',
   'appearance',
+  'focus',
 ] as const
 const sharedKeys = ['accent', ...structuralKeys] as const
 
@@ -71,7 +72,7 @@ function defaultState(): ThemeState {
 function shareStructure(target: ThemeTokens, source: ThemeTokens): ThemeTokens {
   const next = { ...target }
   for (const key of structuralKeys) {
-    if (key === 'appearance' && source.appearance === undefined) delete next.appearance
+    if ((key === 'appearance' || key === 'focus') && source[key] === undefined) delete next[key]
     else Object.assign(next, { [key]: source[key] })
   }
   return validateTokens(next)
@@ -168,10 +169,13 @@ export function applyThemeTokensState(
 ): ThemeState {
   const current = previous.themes[previous.mode]
   const next = validateTokens(typeof value === 'function' ? value(current) : value, current)
-  const appearanceOnly =
-    (next.appearance !== undefined || current.appearance !== undefined) &&
+  const recipeOnly =
+    (next.appearance !== undefined ||
+      current.appearance !== undefined ||
+      next.focus !== undefined ||
+      current.focus !== undefined) &&
     (Object.keys(defaultTokens) as (keyof ThemeTokens)[])
-      .filter((key) => key !== 'appearance')
+      .filter((key) => key !== 'appearance' && key !== 'focus')
       .every(
         (key) =>
           current[key] === next[key] || JSON.stringify(current[key]) === JSON.stringify(next[key]),
@@ -190,9 +194,9 @@ export function applyThemeTokensState(
   if (next.accent !== current.accent) delete colorSchemes[otherMode]
   return {
     ...previous,
-    presetId: appearanceOnly ? previous.presetId : 'custom',
+    presetId: recipeOnly ? previous.presetId : 'custom',
     themes: { ...previous.themes, [previous.mode]: next, [otherMode]: other },
-    ...(!appearanceOnly && previous.colorSchemes ? { colorSchemes } : {}),
+    ...(!recipeOnly && previous.colorSchemes ? { colorSchemes } : {}),
   }
 }
 

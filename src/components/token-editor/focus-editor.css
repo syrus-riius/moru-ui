@@ -1,0 +1,160 @@
+.moru-focus-editor {
+  display: grid;
+  min-width: 0;
+  gap: var(--ui-form-gap, 24px);
+  color: var(--chrome-text, var(--ui-text));
+  container: focus-editor / inline-size;
+}
+.moru-focus-heading {
+  display: grid;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-focus-heading h3 {
+  margin: 0;
+  font-size: var(--ui-type-heading-size, 20px);
+  font-weight: var(--ui-type-heading-weight, 600);
+}
+.moru-focus-heading p,
+.moru-focus-note {
+  margin: 0;
+  color: var(--chrome-muted, var(--ui-muted));
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-body-line-height, 1.6);
+  overflow-wrap: anywhere;
+}
+.moru-focus-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+.moru-focus-options .ui-button {
+  min-height: 40px;
+  height: auto;
+  min-width: 0;
+  justify-content: space-between;
+  padding-block: var(--ui-control-gap, 8px);
+}
+.moru-focus-options .ui-button[aria-pressed='true'] {
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+  box-shadow: inset 0 -2px 0 var(--ui-focus-ring);
+}
+.moru-focus-options svg {
+  flex: none;
+}
+.moru-focus-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-form-gap, 24px);
+}
+.moru-focus-metric,
+.moru-focus-color {
+  display: grid;
+  gap: var(--ui-control-gap, 8px);
+  min-width: 0;
+}
+.moru-focus-metric > div:first-child,
+.moru-focus-color-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--ui-control-gap, 8px);
+  font-size: var(--ui-type-label-size, 14px);
+}
+.moru-focus-metric output,
+.moru-focus-color-heading > span {
+  flex: none;
+  color: var(--chrome-muted, var(--ui-muted));
+  font-size: var(--ui-type-caption-size, 12px);
+  font-variant-numeric: tabular-nums;
+}
+.moru-focus-color-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-focus-color-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+  min-height: var(--ui-control-height-sm, 32px);
+  padding: var(--ui-space, 4px) var(--ui-control-padding-x-sm, 10px);
+  border-radius: var(--ui-radius, 6px);
+  background: var(--ui-input-bg);
+  cursor: pointer;
+}
+.moru-focus-color-picker input {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.moru-focus-color-picker input::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+.moru-focus-color-picker input::-webkit-color-swatch,
+.moru-focus-color-picker input::-moz-color-swatch {
+  border: 0;
+  border-radius: 50%;
+}
+.moru-focus-color-picker code {
+  font-size: var(--ui-type-caption-size, 12px);
+}
+.moru-focus-preview-scope {
+  min-width: 0;
+  background: var(--ui-surface);
+  border-radius: var(--ui-card-radius);
+  padding: max(12px, var(--ui-control-padding-x-sm, 10px));
+}
+.moru-focus-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-form-gap, 24px);
+}
+.moru-focus-preview .ui-field {
+  min-width: 0;
+}
+.moru-focus-editor[data-compact] .moru-focus-heading h3 {
+  font-size: var(--ui-type-label-size, 14px);
+}
+.moru-focus-editor[data-compact] .moru-focus-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.moru-focus-editor[data-compact] .moru-focus-metrics,
+.moru-focus-editor[data-compact] .moru-focus-preview {
+  grid-template-columns: minmax(0, 1fr);
+}
+.moru-focus-editor[data-compact] {
+  color: var(--editor-text, var(--ui-text));
+}
+.moru-focus-editor[data-compact]
+  :is(.moru-focus-note, .moru-focus-heading p, output, .moru-focus-color-heading > span) {
+  color: var(--editor-muted, var(--ui-muted));
+}
+.token-editor-section > .moru-focus-editor {
+  margin-block: var(--editor-section-gap, 24px);
+}
+.design-token-section > .moru-focus-editor {
+  margin-top: var(--ui-section-gap, 40px);
+}
+@container focus-editor (max-width: 520px) {
+  .moru-focus-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .moru-focus-preview,
+  .moru-focus-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (pointer: coarse) {
+  .moru-focus-options .ui-button,
+  .moru-focus-color-controls .ui-button,
+  .moru-focus-color-picker {
+    min-height: 44px;
+  }
+}

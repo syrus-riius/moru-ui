@@ -11,6 +11,25 @@ export type ThemeMode = 'light' | 'dark'
 export type Density = 'compact' | 'standard' | 'comfortable'
 export type FontFamily = 'sans' | 'serif' | 'mono' | 'noto-sans' | 'pretendard'
 export type SemanticTone = 'success' | 'warning' | 'info' | 'danger'
+export type FocusStyle = 'slim' | 'surface' | 'underline' | 'ring'
+export type FocusTokens = {
+  style: FocusStyle
+  width: number
+  offset: number
+  /** Omit to follow the theme's primary color. Derived colors retain usable contrast. */
+  color?: string
+}
+
+export const focusStyleOptions: {
+  value: FocusStyle
+  label: string
+  description: string
+}[] = [
+  { value: 'slim', label: '슬림', description: '얇은 선과 은은한 배경 변화' },
+  { value: 'surface', label: '서피스', description: '외곽선 없이 배경으로 강조' },
+  { value: 'underline', label: '언더라인', description: '아래쪽 선과 배경으로 강조' },
+  { value: 'ring', label: '링', description: '바깥쪽 선으로 분명하게 강조' },
+]
 export type TypographyRole = 'display' | 'heading' | 'body' | 'label' | 'caption' | 'code'
 export type TypographyStyle = {
   size: number
@@ -66,6 +85,8 @@ export type ThemeTokens = {
   duration: number
   /** Optional visual recipe. Omitted in existing projects means Default. */
   appearance?: StyleAppearance
+  /** Input focus treatment. Omitted in existing projects means a slim 1px indicator. */
+  focus?: FocusTokens
 }
 
 export type TokenChange = <K extends keyof ThemeTokens>(key: K, value: ThemeTokens[K]) => void
@@ -331,6 +352,21 @@ function objectRecord(value: unknown): Record<string, unknown> | null {
     : null
 }
 
+/** Keep imported focus values bounded; never accept arbitrary CSS into the theme. */
+export function resolveFocus(value?: unknown): FocusTokens {
+  const input = objectRecord(value) ?? {}
+  const style = focusStyleOptions.some(({ value }) => value === input.style)
+    ? (input.style as FocusStyle)
+    : 'slim'
+  const color = normalizeColor(input.color)
+  return {
+    style,
+    width: boundedNumber(input.width, 1, { min: 1, max: 3, step: 0.5 }),
+    offset: boundedNumber(input.offset, 0, { min: 0, max: 4, step: 0.5 }),
+    ...(color ? { color } : {}),
+  }
+}
+
 function validateDensityOverrides(
   value: unknown,
   fallback: DensityOverrides = {},
@@ -442,6 +478,7 @@ export function applyDensity(tokens: ThemeTokens, density: Density): ThemeTokens
   return {
     ...tokens,
     ...(tokens.appearance ? { appearance: resolveAppearance(tokens.appearance) } : {}),
+    ...(tokens.focus ? { focus: resolveFocus(tokens.focus) } : {}),
     typography: cloneTypography(tokens.typography),
     componentSpacing: validateComponentSpacing(tokens.componentSpacing),
     density,
@@ -470,6 +507,7 @@ export function applyFontFamily(tokens: ThemeTokens, fontFamily: FontFamily): Th
   return {
     ...tokens,
     ...(tokens.appearance ? { appearance: resolveAppearance(tokens.appearance) } : {}),
+    ...(tokens.focus ? { focus: resolveFocus(tokens.focus) } : {}),
     densityOverrides: validateDensityOverrides(tokens.densityOverrides),
     componentSpacing: validateComponentSpacing(tokens.componentSpacing),
     fontFamily,
@@ -507,6 +545,8 @@ export function validateTokens(value: unknown, fallback = defaultTokens): ThemeT
     tokens.appearance = resolveAppearance(
       Object.hasOwn(input, 'appearance') ? input.appearance : fallback.appearance,
     )
+  if (Object.hasOwn(input, 'focus') || fallback.focus !== undefined)
+    tokens.focus = resolveFocus(Object.hasOwn(input, 'focus') ? input.focus : fallback.focus)
   for (const key of colorTokenKeys) tokens[key] = normalizeColor(input[key]) ?? fallback[key]
   for (const key of ['radius', 'borderWidth', 'shadow', 'duration'] as const)
     tokens[key] = boundedNumber(input[key], fallback[key], tokenDefinitions[key])
@@ -629,6 +669,7 @@ export function createDarkTokens(light: ThemeTokens): ThemeTokens {
   return {
     ...light,
     ...(light.appearance ? { appearance: resolveAppearance(light.appearance) } : {}),
+    ...(light.focus ? { focus: resolveFocus(light.focus) } : {}),
     typography: cloneTypography(light.typography),
     densityOverrides: validateDensityOverrides(light.densityOverrides),
     componentSpacing: validateComponentSpacing(light.componentSpacing),
@@ -644,6 +685,43 @@ export function createDarkTokens(light: ThemeTokens): ThemeTokens {
     warning: '#e7bc72',
     info: '#bbbbb5',
   }
+}
+
+/** Fields own a separate focus recipe; buttons and navigation keep their familiar ring. */
+function fieldFocusVariables(tokens: ThemeTokens, inputBackground: string): Record<string, string> {
+  const focus = resolveFocus(tokens.focus)
+  const surface = focus.style === 'surface'
+  const line = focus.style === 'underline'
+  const surrounding = [inputBackground, tokens.surface, tokens.background]
+  const variables: Record<string, string> = {
+    '--ui-field-focus-width': surface || line ? '0px' : `${focus.width}px`,
+    '--ui-field-focus-offset': surface || line ? '0px' : `${focus.offset}px`,
+    '--ui-field-focus-image': surface ? 'none' : 'var(--ui-pack-control-image, none)',
+  }
+  for (const [prefix, base] of [
+    ['--ui-field-focus', focus.color ?? tokens.primary],
+    ['--ui-field-error-focus', tokens.danger],
+  ] as const) {
+    // A surface is the indicator itself: retain enough brand/semantic hue that
+    // contrast correction does not turn error and ordinary focus into the same gray.
+    const background = surface
+      ? contrastColor(mixColors(inputBackground, base, 0.65), surrounding, 3)
+      : mixColors(inputBackground, base, 0.07)
+    const color = contrastColor(
+      base,
+      surface ? surrounding : [background, tokens.surface, tokens.background],
+      3,
+    )
+    variables[`${prefix}-color`] = color
+    variables[`${prefix}-bg`] = background
+    variables[`${prefix}-border`] = surface ? background : color
+    variables[`${prefix}-text`] = contrastColor(tokens.text, [background], 4.5)
+    variables[`${prefix}-muted`] = contrastColor(tokens.muted, [background], 4.5)
+    variables[`${prefix}-shadow`] = line
+      ? `inset 0 -${Math.max(2, focus.width)}px 0 0 ${color}`
+      : 'inset 0 0 0 0 transparent'
+  }
+  return variables
 }
 
 export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<string, string> {
@@ -764,6 +842,7 @@ export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<st
     [tokens.surface, tokens.background],
     3,
   )
+  Object.assign(variables, fieldFocusVariables(tokens, variables['--ui-input-bg']))
   variables['--ui-disabled-bg'] = mixColors(
     tokens.surface,
     tokens.text,

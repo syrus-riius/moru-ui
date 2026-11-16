@@ -4,6 +4,7 @@ import {
   mixColors,
   readableForeground,
   resolveDensity,
+  resolveFocus,
   typographyRoleOptions,
   type ThemeMode,
   type ThemeTokens,
@@ -49,7 +50,10 @@ export function createNativeThemeExport(tokens: ThemeTokens, mode: ThemeMode) {
     schemaVersion: 2,
     platform: 'react-native' as const,
     mode,
-    designIntent: { appearance: resolveAppearance(tokens.appearance) },
+    designIntent: {
+      appearance: resolveAppearance(tokens.appearance),
+      focus: resolveFocus(tokens.focus),
+    },
     tokens: {
       space: metrics.spacing,
       radius: tokens.radius,
@@ -81,6 +85,9 @@ export function createNativeThemeExport(tokens: ThemeTokens, mode: ThemeMode) {
       stylePack: 'solid-fallback',
       stylePackNote:
         'Glass·Neon의 블러·발광은 웹 스타일입니다. 이 네이티브 내보내기는 컬러·타이포·간격을 적용하고 표면 효과는 기본 불투명 표면으로 대체합니다. designIntent에는 원래 스타일 설정을 보관합니다.',
+      inputFocus: 'platform-default',
+      inputFocusNote:
+        '입력 포커스 스타일은 웹 전용입니다. designIntent.focus에 설정을 보존하며 네이티브 입력의 포커스 표시는 플랫폼 기본 동작을 따릅니다.',
       nativeFont: 'system-until-registered',
       weightStep: 100,
       componentSpacing:

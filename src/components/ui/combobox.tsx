@@ -118,7 +118,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
       required={required}
     >
       <BaseCombobox.InputGroup
-        className={cn('ui-combobox', className)}
+        className={cn('ui-combobox ui-field-focus', className)}
         data-size={size}
         data-loading={loading || undefined}
       >

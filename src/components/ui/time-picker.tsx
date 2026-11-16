@@ -302,7 +302,7 @@ export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function
         </label>
       ) : null}
       <BasePopover.Root open={open && !unavailable && !readOnly} onOpenChange={openPicker}>
-        <div className="ui-time-picker-control">
+        <div className="ui-time-picker-control ui-field-focus">
           {registerWithField ? <BaseInput {...inputProps} /> : <input {...inputProps} />}
           {clearable && selected && !readOnly ? (
             <button

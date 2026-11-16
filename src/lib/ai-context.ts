@@ -154,7 +154,7 @@ export function buildAiContext({
       `Start from ${origin}/downloads/moru-native-starter.zip and preserve its apps/ + packages/ layout. @moru/native is a local package, not a published npm dependency.`,
       'Use MoruNativeProvider inside SafeAreaProvider. Pass the exported mode and tokens below. Use native exports, onPress and onChangeText; do not use web DOM components, CSS variables or registry install commands.',
       'Use numeric native typography/spacing. webFontFamily applies only to React Native Web; device fonts require registration. Keep system fonts until native font files have been registered. Test safe areas, keyboard avoidance and accessibility on a device.',
-      'Style-pack intent is preserved in designIntent.appearance. The current native exporter uses solid surfaces: web glass blur/neon glow are not implemented by MoruNativeProvider. Do not claim effect parity or paste CSS into native views.',
+      'Style-pack intent is preserved in designIntent.appearance. The current native exporter uses solid surfaces: web glass blur/neon glow are not implemented by MoruNativeProvider. Input focus settings are preserved in designIntent.focus; native input focus uses platform defaults. Do not claim effect parity or paste CSS into native views.',
       `Read ${origin}${aiExpoPath()} for native exports and boundaries.`,
       '',
       '## Native design snapshot',

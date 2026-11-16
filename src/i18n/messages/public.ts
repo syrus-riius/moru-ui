@@ -1277,4 +1277,211 @@ export const publicMessages: Record<string, { en: string; ja: string; 'zh-CN': s
     ja: '会話・コンテンツ',
     'zh-CN': '对话与内容',
   },
+
+  베타: {
+    en: 'Beta',
+    ja: 'ベータ',
+    'zh-CN': '测试版',
+  },
+  '패키지 설치부터 첫 입력창까지. 내 React 프로젝트에서 Moru를 시작하세요.': {
+    en: 'From installing the package to your first input. Get started with Moru in your React project.',
+    ja: 'パッケージのインストールから、最初の入力欄まで。ReactプロジェクトでMoruを使い始めましょう。',
+    'zh-CN': '从安装软件包到创建第一个输入框，在你的 React 项目中开始使用 Moru。',
+  },
+  '시작 전 확인': {
+    en: 'Before you start',
+    ja: '始める前に',
+    'zh-CN': '开始之前',
+  },
+  'React와 React DOM 19.3 이상, 20 미만의 웹 프로젝트가 필요합니다.': {
+    en: 'Your web project needs React and React DOM version 19.3 or later, below version 20.',
+    ja: 'ReactとReact DOMが19.3以上、20未満のWebプロジェクトが必要です。',
+    'zh-CN': '需要使用 React 和 React DOM 19.3 及以上且低于 20 的 Web 项目。',
+  },
+  'ES Modules를 사용합니다. Tailwind CSS와 별도 CLI는 필요하지 않습니다.': {
+    en: 'Moru uses ES Modules. Tailwind CSS and a separate CLI are not required.',
+    ja: 'ES Modulesを使用します。Tailwind CSSや専用CLIは不要です。',
+    'zh-CN': 'Moru 使用 ES Modules，无需 Tailwind CSS 或额外的 CLI。',
+  },
+  'React Native·Expo는 별도 구현이며 이 npm 패키지에 포함되지 않습니다.': {
+    en: 'React Native and Expo have a separate implementation and are not included in this npm package.',
+    ja: 'React Native・Expoは別の実装で、このnpmパッケージには含まれません。',
+    'zh-CN': 'React Native 和 Expo 使用独立实现，不包含在此 npm 软件包中。',
+  },
+  '아래 예제는 Vite + React + TypeScript 프로젝트 기준입니다.': {
+    en: 'The examples below use a Vite + React + TypeScript project.',
+    ja: '以下の例は、Vite + React + TypeScriptプロジェクトを前提としています。',
+    'zh-CN': '以下示例基于 Vite + React + TypeScript 项目。',
+  },
+  '아직 프로젝트가 없나요?': {
+    en: 'Need to create a project?',
+    ja: 'まだプロジェクトがありませんか？',
+    'zh-CN': '还没有项目？',
+  },
+  'package.json이 있는 프로젝트 폴더에서 실행하세요.': {
+    en: 'Run this in the project folder containing package.json.',
+    ja: 'package.jsonがあるプロジェクトフォルダーで実行してください。',
+    'zh-CN': '在包含 package.json 的项目文件夹中运行此命令。',
+  },
+  '현재 latest와 beta는 같은 베타 버전입니다. 위 명령은 이 안내에서 확인한 버전을 설치합니다.': {
+    en: 'The latest and beta tags currently point to the same beta release. This command installs the version verified for this guide.',
+    ja: '現在、latestとbetaは同じベータ版を指しています。このコマンドは、本ガイドで確認したバージョンをインストールします。',
+    'zh-CN': '目前 latest 和 beta 标签指向同一个测试版本。此命令会安装本指南已验证的版本。',
+  },
+  '스타일과 Provider 연결': {
+    en: 'Connect styles and the provider',
+    ja: 'スタイルとProviderを接続',
+    'zh-CN': '连接样式和 Provider',
+  },
+  'src/App.tsx를 아래 예제로 바꿔 보세요. 스타일은 앱에서 한 번 불러오고, MoruProvider 안에 컴포넌트를 배치합니다.':
+    {
+      en: 'Replace src/App.tsx with the example below. Import the styles once in your app and place components inside MoruProvider.',
+      ja: 'src/App.tsxを以下の例に置き換えてください。スタイルはアプリで一度だけ読み込み、コンポーネントをMoruProviderの中に配置します。',
+      'zh-CN':
+        '将 src/App.tsx 替换为以下示例。在应用中导入一次样式，并将组件放在 MoruProvider 内。',
+    },
+  '프로젝트 이름 라벨과 입력창이 보이고 입력할 수 있으면 준비 완료입니다.': {
+    en: 'You are ready when the project name label and input appear and you can type into the field.',
+    ja: 'プロジェクト名のラベルと入力欄が表示され、文字を入力できれば準備完了です。',
+    'zh-CN': '看到项目名称标签和输入框，并能输入文字，就说明设置成功了。',
+  },
+  '처음에는 기본 테마로 동작합니다. 별칭 설정이나 토큰 파일을 먼저 만들 필요는 없습니다.': {
+    en: 'Moru starts with the default theme. You do not need to configure aliases or create a token file first.',
+    ja: '最初はデフォルトテーマで動作します。エイリアスの設定やトークンファイルの作成は、事前に行う必要はありません。',
+    'zh-CN': 'Moru 初始使用默认主题，无需先配置路径别名或创建设计令牌文件。',
+  },
+  'Next.js App Router에서 사용한다면': {
+    en: 'Using Next.js App Router?',
+    ja: 'Next.js App Routerで使う場合',
+    'zh-CN': '使用 Next.js App Router？',
+  },
+  '클라이언트 Provider를 만들고 기존 루트 레이아웃에 연결하세요. 기존 메타데이터와 전역 스타일은 유지합니다.':
+    {
+      en: 'Create a client provider and connect it to your existing root layout. Keep your existing metadata and global styles.',
+      ja: 'クライアントProviderを作成し、既存のルートレイアウトに接続してください。既存のメタデータとグローバルスタイルは維持します。',
+      'zh-CN': '创建客户端 Provider 并连接到现有根布局，保留原有的元数据和全局样式。',
+    },
+  'src/app 구조라면 같은 파일을 src/app 안에 둡니다. 상태와 이벤트 핸들러는 클라이언트 컴포넌트에서 사용하세요.':
+    {
+      en: 'If your project uses src/app, place these files there. Use state and event handlers in client components.',
+      ja: 'src/app構成の場合は、同じファイルをsrc/app内に配置します。状態とイベントハンドラーはクライアントコンポーネントで使用してください。',
+      'zh-CN':
+        '如果项目使用 src/app 目录，请将这些文件放在其中。状态和事件处理函数应在客户端组件中使用。',
+    },
+  '내 디자인과 언어 적용': {
+    en: 'Apply your design and language',
+    ja: 'デザインと言語を設定',
+    'zh-CN': '应用你的设计和语言',
+  },
+  '기본 사용을 확인했다면 색상·크기·간격을 내 디자인으로 바꿔 보세요. 스튜디오에서 만든 토큰 JSON과 Provider 코드를 함께 가져올 수 있습니다.':
+    {
+      en: 'Once the basics work, customize the colors, sizes, and spacing. Export your token JSON and provider code together from the studio.',
+      ja: '基本動作を確認したら、色・サイズ・余白を自分のデザインに合わせてみましょう。スタジオで作成したトークンJSONとProviderコードを一緒に取得できます。',
+      'zh-CN':
+        '确认基本功能正常后，即可自定义颜色、尺寸和间距。你可以从工作室一并导出设计令牌 JSON 和 Provider 代码。',
+    },
+  '언어와 날짜 표시 설정': {
+    en: 'Set language and date formatting',
+    ja: '言語と日付表示を設定',
+    'zh-CN': '设置语言和日期格式',
+  },
+  '업데이트와 다음 단계': {
+    en: 'Updates and next steps',
+    ja: 'アップデートと次のステップ',
+    'zh-CN': '更新与后续步骤',
+  },
+  '새 버전의 변경 기록을 확인한 뒤 패키지를 업데이트하세요. 직접 만든 토큰과 앱 코드는 프로젝트에서 관리합니다.':
+    {
+      en: 'Review the release notes before updating the package. Keep your custom tokens and application code in your project.',
+      ja: '新しいバージョンの変更履歴を確認してから、パッケージを更新してください。独自のトークンとアプリのコードはプロジェクトで管理します。',
+      'zh-CN': '更新软件包前，请先查看新版本的更新日志。自定义设计令牌和应用代码由你的项目管理。',
+    },
+  'npm 패키지 사용법': {
+    en: 'npm package guide',
+    ja: 'npmパッケージの使い方',
+    'zh-CN': 'npm 软件包使用指南',
+  },
+  '변경 기록': {
+    en: 'Changelog',
+    ja: '変更履歴',
+    'zh-CN': '更新日志',
+  },
+  '블록 둘러보기': {
+    en: 'Explore blocks',
+    ja: 'ブロックを見る',
+    'zh-CN': '浏览区块',
+  },
+  '소스 코드로 시작하는 다른 방법': {
+    en: 'Other ways to start with source code',
+    ja: 'ソースコードから始める方法',
+    'zh-CN': '从源代码开始的其他方式',
+  },
+  '컴포넌트 구현을 직접 수정하려면 소스 설치를 선택할 수 있습니다. 위 npm 설치 과정에 추가로 수행하는 단계는 아닙니다.':
+    {
+      en: 'Choose a source installation if you want to edit component implementations. This is an alternative to the npm setup above, not an additional step.',
+      ja: 'コンポーネントの実装を直接編集したい場合は、ソースのインストールを選べます。上記のnpmインストールに追加する手順ではありません。',
+      'zh-CN':
+        '如果需要直接修改组件实现，可以选择安装源代码。这是 npm 安装的替代方式，无需在上述步骤后额外执行。',
+    },
+  '레지스트리에서 필요한 소스만 설치': {
+    en: 'Install selected sources from the registry',
+    ja: 'レジストリから必要なソースをインストール',
+    'zh-CN': '从注册表安装所需源代码',
+  },
+  '이 경로는 shadcn CLI로 Moru 소스를 복사합니다. Node.js 24 이상, React 19.3, TypeScript, Tailwind CSS 4와 components.json이 준비된 Vite 프로젝트를 기준으로 합니다.':
+    {
+      en: 'This option copies Moru sources using the shadcn CLI. It assumes a Vite project with Node.js 24 or later, React 19.3, TypeScript, Tailwind CSS 4, and components.json configured.',
+      ja: 'この方法はshadcn CLIでMoruのソースをコピーします。Node.js 24以上、React 19.3、TypeScript、Tailwind CSS 4、components.jsonを準備したViteプロジェクトを前提としています。',
+      'zh-CN':
+        '此方式通过 shadcn CLI 复制 Moru 源代码，需要已配置 Node.js 24 及以上、React 19.3、TypeScript、Tailwind CSS 4 和 components.json 的 Vite 项目。',
+    },
+  '소스 설치용 프로젝트 설정': {
+    en: 'Set up a project for source installation',
+    ja: 'ソースインストール用のプロジェクト設定',
+    'zh-CN': '配置源代码安装项目',
+  },
+  '생성된 파일을 프로젝트 별칭에 맞게 불러옵니다. npm 설치 예제와 import 경로가 다릅니다.': {
+    en: 'Import the generated files using your project aliases. These import paths differ from the npm examples.',
+    ja: '生成されたファイルをプロジェクトのエイリアスに合わせて読み込みます。npmの例とはimportパスが異なります。',
+    'zh-CN': '使用项目的路径别名导入生成的文件，这些导入路径与 npm 示例不同。',
+  },
+  '소스를 업데이트할 때는 현재 파일을 커밋하고 CLI의 변경 비교·덮어쓰기 안내를 확인하세요.': {
+    en: 'Before updating sources, commit your current files and review the CLI diff and overwrite prompts.',
+    ja: 'ソースを更新する前に現在のファイルをコミットし、CLIの差分・上書き案内を確認してください。',
+    'zh-CN': '更新源代码前，请提交当前文件，并查看 CLI 的差异比较和覆盖提示。',
+  },
+  '레지스트리 설치 문서': {
+    en: 'Registry installation guide',
+    ja: 'レジストリのインストールガイド',
+    'zh-CN': '注册表安装指南',
+  },
+  '소스 포함 웹 스타터와 예제': {
+    en: 'Web starter and examples with source code',
+    ja: 'ソース付きWebスターターとサンプル',
+    'zh-CN': '包含源代码的 Web 启动模板与示例',
+  },
+  '웹 스타터 ZIP은 Moru 소스를 포함한 별도 프로젝트입니다. 압축을 풀고 해당 폴더에서 npm ci와 npm run dev를 실행하세요.':
+    {
+      en: 'The web starter ZIP is a separate project containing Moru sources. Extract it, then run npm ci and npm run dev in that folder.',
+      ja: 'WebスターターのZIPは、Moruのソースを含む別のプロジェクトです。展開したフォルダーでnpm ciとnpm run devを実行してください。',
+      'zh-CN':
+        'Web 启动模板 ZIP 是包含 Moru 源代码的独立项目。解压后，在对应文件夹中运行 npm ci 和 npm run dev。',
+    },
+  'AI에 소스 설치 명세 전달': {
+    en: 'Give source installation instructions to AI',
+    ja: 'AIにソースインストールの仕様を渡す',
+    'zh-CN': '向 AI 提供源代码安装说明',
+  },
+  '이 도구는 웹 레지스트리 또는 Expo 소스용 명세를 만듭니다. npm으로 작업할 때는 위 설치 예제와 토큰 적용 안내를 AI에 전달하세요.':
+    {
+      en: 'This tool prepares instructions for web registry or Expo sources. For npm projects, give your AI the installation examples above and the token setup guide.',
+      ja: 'このツールはWebレジストリまたはExpoソース用の仕様を作成します。npmを使う場合は、上記のインストール例とトークン適用ガイドをAIに渡してください。',
+      'zh-CN':
+        '此工具为 Web 注册表或 Expo 源代码生成说明。使用 npm 时，请向 AI 提供上述安装示例和设计令牌应用指南。',
+    },
+  'AI 소스 안내': {
+    en: 'AI source guide',
+    ja: 'AI向けソースガイド',
+    'zh-CN': 'AI 源代码指南',
+  },
 }

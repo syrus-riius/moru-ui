@@ -411,6 +411,143 @@
 .moru-start-doc {
   max-width: 760px;
 }
+.moru-start-release {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 20px;
+  color: var(--guide-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.moru-start-release > span:first-child {
+  color: var(--chrome-text);
+  font-weight: 600;
+}
+.moru-start-release > a {
+  color: inherit;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  text-underline-offset: 4px;
+}
+.moru-start-release > span:last-child {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--chrome-code);
+}
+.moru-start-requirements {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: var(--chrome-code);
+}
+.moru-start-requirements > strong {
+  font-size: 14px;
+}
+.moru-start-requirements ul {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 16px;
+  padding-inline-start: 20px;
+  color: var(--guide-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.moru-start-requirements > p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.moru-start-number {
+  flex: none;
+  color: var(--chrome-muted);
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.8;
+  padding-top: 4px;
+}
+.moru-start-doc h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  overflow-wrap: anywhere;
+}
+.moru-start-doc .moru-doc-code + .moru-doc-code {
+  margin-top: 16px;
+}
+.moru-start-doc p.moru-start-note {
+  margin-top: 14px;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+.moru-start-doc p.moru-start-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  color: var(--chrome-text);
+  font-size: 14px;
+}
+.moru-start-check > svg {
+  flex: none;
+  margin-top: 4px;
+}
+.moru-start-disclosure {
+  min-width: 0;
+  margin-top: 20px;
+  border-radius: 12px;
+  background: var(--chrome-code);
+}
+.moru-start-disclosure > summary {
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.moru-start-disclosure > div {
+  min-width: 0;
+  padding: 4px 20px 20px;
+}
+.moru-start-disclosure .getting-started-actions {
+  align-items: center;
+}
+.moru-start-disclosure .moru-doc-code {
+  margin-top: 16px;
+}
+.moru-start-locales {
+  color: var(--chrome-text);
+  font-size: 13px;
+}
+.moru-start-doc .moru-start-alternatives {
+  margin-top: 48px;
+}
+.moru-start-doc :is(summary, a):focus-visible {
+  outline: 2px solid var(--chrome-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.moru-start-link > svg {
+  flex: none;
+}
+@container guide-content (max-width: 480px) {
+  .moru-start-requirements {
+    padding: 20px;
+  }
+  .moru-start-doc .getting-started-button,
+  .moru-start-doc .moru-start-link {
+    min-height: 44px;
+  }
+  .moru-start-disclosure > summary {
+    padding: 16px;
+  }
+  .moru-start-disclosure > div {
+    padding: 0 16px 16px;
+  }
+}
 .moru-start-ai {
   padding: 24px;
   background: var(--chrome-code);
@@ -454,6 +591,11 @@
   font-size: 15px;
   line-height: 1.75;
   word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.moru-start-doc:lang(ja) p,
+.moru-start-doc:lang(zh-CN) p {
+  word-break: normal;
 }
 .moru-start-intro p {
   font-size: clamp(15px, 1.7vw, 18px);

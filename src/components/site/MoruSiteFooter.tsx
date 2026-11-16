@@ -44,7 +44,7 @@ export function MoruSiteFooter({ version, compact = false }: MoruSiteFooterProps
           ))
         )
       }
-      copyright={<span>Moru UI · v{version} · MIT</span>}
+      copyright={<span>Moru UI Lab · v{version} · MIT</span>}
       meta={
         <a
           className="moru-site-footer__source"

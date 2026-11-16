@@ -1,6 +1,6 @@
 # Build with Moru UI
 
-Version 0.4.1 · source baf065ccb1fccaa4eed187992c95b92d1b8fd9b7084c361d9faa54b0f7c55c24
+Version 0.4.1 · source 27e6f5b10b06dae29c6129d5ab80e735d6c44f2d84f74acf4149c979e0f65f4e
 
 Read this file once, then [catalog.json](/ai/v0.4.1/catalog.json) and only the selected item docs. Moru is a source-owned design system: fundamentals → behavior → technology → visual refinement. Use the existing components and interaction behavior before adding bespoke UI.
 
@@ -9,7 +9,8 @@ Read this file once, then [catalog.json](/ai/v0.4.1/catalog.json) and only the s
 - **Web registry:** install individual source items into an existing React application. The catalog covers web items. Default import prefix is `@/components/ui/moru/`; honor the actual `components.json` UI alias.
 - **Web starter:** `templates/moru-web-starter` contains copied source with `./components/ui/` imports and `./theme/` tokens. It does not contain the registry-generated MoruProvider. Keep the starter setup and source imports.
 - **Expo / React Native:** read [expo.md](/ai/v0.4.1/expo.md). Native source, APIs, provider and styles are separate. Do not import the web registry into a native screen.
-- The registry currently targets Vite + React. Do not claim SSR/Next.js or native support for these web components without doing the necessary integration work. Neither `moru-ui` nor `@moru/native` should be assumed to exist as a published npm UI package.
+- **Published npm package:** `moru-ui` is also available on npm. Follow the [npm package guide](https://github.com/syrus-riius/moru-ui/blob/main/packages/moru-react/README.md) for its imports, provider and optional dependencies. This catalog describes source installation; do not mix its local source import paths with npm package imports.
+- The source registry currently targets Vite + React. Do not claim SSR/Next.js or native support for this source setup without doing the necessary integration work. `@moru/native` remains a local package, not a published npm dependency.
 
 ## Web registry setup
 

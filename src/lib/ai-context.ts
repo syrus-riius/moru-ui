@@ -165,12 +165,13 @@ export function buildAiContext({
     if (platformGuide?.trim()) lines.push('', '## Native usage guide', platformGuide.trim())
   } else {
     lines.push(
+      'This packet describes a source distribution. The published moru-ui npm package is a separate installation option; follow https://github.com/syrus-riius/moru-ui/blob/main/packages/moru-react/README.md for its imports and setup instead of mixing the two installation paths.',
       'Inspect the project first. Supported baseline: Vite, React 19.3, TypeScript, Tailwind CSS 4, Node.js 24+. Check the project dependencies before choosing another runtime or SSR setup.',
     )
     if (target === 'web-registry') {
       lines.push(
         'Resolve the UI alias from components.json. The examples use @/components/ui/moru; adapt this prefix to the actual alias. Install only missing items and review local edits before updates; do not overwrite customized source blindly.',
-        'Import moru/styles.css once and wrap the area in MoruProvider from moru/provider. Pass the complete tokens snapshot and mode below. Moru is source-distributed, not an npm UI package.',
+        'Import moru/styles.css once and wrap the area in MoruProvider from moru/provider. Pass the complete tokens snapshot and mode below. This registry installation copies source files into the project; it does not install the moru-ui npm package.',
         '',
         '```sh',
         ...selected.map(

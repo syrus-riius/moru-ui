@@ -2,6 +2,8 @@
 
 Moru v0.4.1은 shadcn CLI를 통해 컴포넌트 소스를 프로젝트에 설치합니다.
 선택한 파일을 직접 수정할 수 있으며 Moru npm 라이브러리에 종속되지 않습니다.
+이 문서는 소스 선택 설치 경로를 설명합니다. 게시된 npm 패키지 `moru-ui`를 사용하려면
+[npm 패키지 가이드](../packages/moru-react/README.md)를 따르세요. npm 설치와 아래의 소스 설치 절차를 함께 실행할 필요는 없습니다.
 공통 기반 1개·UI 항목 81개·재사용 블록 6개, 기존 Dialog 호환 별칭 1개, 블록이 함께 설치하는 번역 지원 항목(`block-messages`) 1개로 총 90개 설치 항목을 제공합니다.
 8개 분야의 갤러리 79종과 StatusMessage, FormattedInput을 포함합니다. 새 코드에서는 Modal을 사용하며 Header와 Footer도 개별 설치할 수 있습니다.
 항목 수는 설치 단위의 수이며 파일 수나 React export 수와는 다릅니다.
@@ -407,7 +409,8 @@ Tabs·Menu·Popover·Drawer는 v0.3.3부터, 날짜·시간 다섯 항목은 v0.
 
 GitHub의 `registry.json`도 같은 항목을 제공합니다. GitHub 주소 형식은
 `syrus-riius/moru-ui/button#v0.4.1`이며, 릴리스 태그와 각 의존성의 버전을 함께 고정합니다.
-HTTP 주소가 기본 설치 안내입니다. Moru의 npm 패키지는 게시하지 않았습니다.
+이 소스 레지스트리에서는 HTTP 주소를 기본 설치 경로로 안내합니다. 게시된 npm 패키지
+`moru-ui`의 설치·import·업데이트 방법은 [npm 패키지 가이드](../packages/moru-react/README.md)에서 확인하세요.
 
 ## 지원 범위
 

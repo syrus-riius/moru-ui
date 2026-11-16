@@ -2,7 +2,7 @@
 
 Readable connection or synchronization status with an optional pulse and polite announcement.
 
-Version: 0.4.1. Source hash: baf065ccb1fccaa4eed187992c95b92d1b8fd9b7084c361d9faa54b0f7c55c24.
+Version: 0.4.1. Source hash: 27e6f5b10b06dae29c6129d5ab80e735d6c44f2d84f74acf4149c979e0f65f4e.
 
 ## Discovery
 

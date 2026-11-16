@@ -263,7 +263,8 @@ function startDoc(sourceHash) {
 - **Web registry:** install individual source items into an existing React application. The catalog covers web items. Default import prefix is \`@/components/ui/moru/\`; honor the actual \`components.json\` UI alias.
 - **Web starter:** \`templates/moru-web-starter\` contains copied source with \`./components/ui/\` imports and \`./theme/\` tokens. It does not contain the registry-generated MoruProvider. Keep the starter setup and source imports.
 - **Expo / React Native:** read [expo.md](${base}/expo.md). Native source, APIs, provider and styles are separate. Do not import the web registry into a native screen.
-- The registry currently targets Vite + React. Do not claim SSR/Next.js or native support for these web components without doing the necessary integration work. Neither \`moru-ui\` nor \`@moru/native\` should be assumed to exist as a published npm UI package.
+- **Published npm package:** \`moru-ui\` is also available on npm. Follow the [npm package guide](https://github.com/${registryRepository}/blob/main/packages/moru-react/README.md) for its imports, provider and optional dependencies. This catalog describes source installation; do not mix its local source import paths with npm package imports.
+- The source registry currently targets Vite + React. Do not claim SSR/Next.js or native support for this source setup without doing the necessary integration work. \`@moru/native\` remains a local package, not a published npm dependency.
 
 ## Web registry setup\n
 Use the existing project’s React/TypeScript setup and configured shadcn CLI alias. Install the smallest useful set; dependencies are included automatically. Add other items by the same versioned URL.
@@ -497,7 +498,7 @@ export async function generateAiDocs(root = defaultRoot) {
   }
   artifacts.set(
     'public/llms.txt',
-    `# Moru UI\n\n> Source-owned React UI: fundamentals, behavior, technology and visual refinement. Read only the platform guide and components needed for your task.\n\n- [Start here](${registryOrigin}${base}/start.md): registry vs starter setup, design and interaction rules.\n- [Catalog](${registryOrigin}${base}/catalog.json): version ${registryVersion}, actual exports, dependencies and per-item doc paths.\n- [Expo / React Native](${registryOrigin}${base}/expo.md): separate native source and APIs.\n\nMoru APIs are not interchangeable with shadcn/ui. Preserve the existing project setup; consult source-derived props before generating code.\n`,
+    `# Moru UI\n\n> React UI: fundamentals, behavior, technology and visual refinement. Choose npm or a source distribution, then read only the guide and components needed for your task.\n\n- [npm package guide](https://github.com/${registryRepository}/blob/main/packages/moru-react/README.md): the published moru-ui package, imports, provider and optional dependencies.\n- [Source installation guide](${registryOrigin}${base}/start.md): registry vs source starter setup, design and interaction rules.\n- [Source catalog](${registryOrigin}${base}/catalog.json): registry version ${registryVersion}, actual exports, dependencies and per-item source import paths.\n- [Expo / React Native](${registryOrigin}${base}/expo.md): separate native source and APIs.\n\nMoru APIs are not interchangeable with shadcn/ui. Preserve the existing project setup; consult source-derived props before generating code. Do not use registry import paths as npm package imports.\n`,
   )
   return { artifacts, sourceHash, itemCount: entries.length }
 }

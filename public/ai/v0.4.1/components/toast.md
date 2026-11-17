@@ -1,8 +1,8 @@
 # Toast
 
-ToastProvider and useToast for dismissible semantic application notifications.
+ToastProvider and useToast for stacked or listed notifications with actions and dismissal.
 
-Version: 0.4.1. Source hash: 9e7fc610717ab4a2a951696248d6d47b7eb7d11cbfffc90d292087c06ac3c874.
+Version: 0.4.1. Source hash: 2fd87d38eaaf0375eb097047b65a7d17f1067292b1a98efdbfd46ccdaa31ff28.
 
 ## Discovery
 
@@ -17,6 +17,9 @@ Version: 0.4.1. Source hash: 9e7fc610717ab4a2a951696248d6d47b7eb7d11cbfffc90d292
 ## Usage and interaction
 
 - ToastProvider must wrap consumers of useToast. Inspect the exported provider and hook signatures below before composing toast actions.
+- Use <ToastProvider layout="stack"> for layered notifications or layout="list" for the default separate cards. Keep one provider at the app boundary; do not create a provider for each action.
+- Stacked notifications expand on hover or keyboard focus (F6). Touch devices show an expanded list so every action remains reachable. limit controls visible notifications, not an application inbox.
+- toast(options) returns an id. dismiss(id) closes that toast; dismiss() closes all. duration: 0 persists until dismissed. Use action.onClick for a real undo operation; a notification alone does not persist or revert application data.
 
 ## Source-derived API
 
@@ -36,11 +39,26 @@ interface ToastOptions {
   /** Time in milliseconds. Zero keeps the notification until it is dismissed. */
   duration?: number
 }
+
+interface ToastProviderProps {
+  children: ReactNode
+  /** Present notifications separately, or overlap them until hovered or focused. */
+  layout?: 'list' | 'stack'
+  /** Maximum visible notifications, clamped between 1 and 5. Defaults to 3. */
+  limit?: number
+}
 ```
 
 Exported function declaration excerpts (return types may be inferred in source):
 
 ```ts
-function ToastProvider({ children }: { children: ReactNode });
+function ToastProvider({ children, layout = 'list', limit = 3 }: ToastProviderProps);
 function useToast();
 ```
+
+## Declared defaults
+
+Extracted from exported component parameter/props destructuring. Identifier values refer to the installed source; omitted props are not necessarily unsupported.
+
+- `ToastProvider.layout`: `'list'`
+- `ToastProvider.limit`: `3`

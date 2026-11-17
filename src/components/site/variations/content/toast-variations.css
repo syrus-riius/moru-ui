@@ -1,0 +1,28 @@
+.moru-toast-demo {
+  display: grid;
+  gap: var(--ui-form-gap, 24px);
+  min-width: 0;
+}
+.moru-toast-demo > p {
+  margin: 0;
+  max-width: 65ch;
+  overflow-wrap: anywhere;
+}
+.moru-toast-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ui-control-gap, 8px);
+}
+.moru-toast-demo-actions .ui-button {
+  max-width: 100%;
+}
+.moru-toast-demo-note,
+.moru-toast-demo-status {
+  color: var(--ui-muted);
+  font-size: var(--ui-type-caption-size, 12px);
+  line-height: var(--ui-type-caption-line-height, 1.5);
+}
+.moru-toast-demo-status {
+  min-height: 1.5em;
+}

@@ -423,7 +423,7 @@ export const registryInstallGroups = [
       {
         name: 'toast',
         label: 'Toast',
-        keywords: '상태 · 피드백 결과 알림과 실행 취소 토스트 알림 실행취소',
+        keywords: '상태 · 피드백 스택 목록 알림 실행 취소 토스트 stacked notification',
       },
       {
         name: 'empty',

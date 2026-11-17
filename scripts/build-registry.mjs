@@ -448,7 +448,8 @@ export const registryDefinitions = [
     name: 'toast',
     entry: 'src/components/ui/toast.tsx',
     title: 'Toast',
-    description: 'ToastProvider and useToast for dismissible semantic application notifications.',
+    description:
+      'ToastProvider and useToast for stacked or listed notifications with actions and dismissal.',
   },
   {
     name: 'empty',

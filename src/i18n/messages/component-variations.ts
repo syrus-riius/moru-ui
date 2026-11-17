@@ -182,4 +182,99 @@ export const componentVariationMessages: Record<
   },
   '로딩 시작': { en: 'Start loading', ja: '読み込み開始', 'zh-CN': '开始加载' },
   '손잡이 없음': { en: 'Without grip', ja: 'グリップなし', 'zh-CN': '无拖动手柄' },
+  '스택형 알림': { en: 'Stacked notifications', ja: 'スタック通知', 'zh-CN': '堆叠通知' },
+  '목록형 알림': { en: 'List notifications', ja: 'リスト通知', 'zh-CN': '列表通知' },
+  '알림은 화면 오른쪽 아래에 나타납니다. 실제 알림을 띄워 배치와 동작을 비교하세요.': {
+    en: 'Notifications appear in the bottom-right corner. Show real notifications to compare layouts and behavior.',
+    ja: '通知は画面右下に表示されます。実際に通知を出して、配置と動作を比べてください。',
+    'zh-CN': '通知显示在屏幕右下角。触发实际通知，比较布局与交互。',
+  },
+  '여러 알림을 포개어 표시합니다. 포인터를 올리거나 F6 키로 이동하면 펼쳐집니다.': {
+    en: 'Notifications overlap in a stack. Hover over them or press F6 to expand and navigate.',
+    ja: '複数の通知を重ねて表示します。ポインターを合わせるか、F6キーで移動すると展開します。',
+    'zh-CN': '多条通知以堆叠形式显示。悬停或按 F6 移入即可展开。',
+  },
+  '한 개 추가': { en: 'Add one', ja: '1件追加', 'zh-CN': '添加一条' },
+  '3개 쌓기': { en: 'Stack three', ja: '3件重ねる', 'zh-CN': '堆叠三条' },
+  '긴 알림': { en: 'Long notification', ja: '長い通知', 'zh-CN': '长通知' },
+  '파일 업로드 완료': {
+    en: 'File uploaded',
+    ja: 'ファイルをアップロードしました',
+    'zh-CN': '文件上传完成',
+  },
+  '디자인 토큰 적용 완료': {
+    en: 'Design tokens applied',
+    ja: 'デザイントークンを適用しました',
+    'zh-CN': '设计令牌应用完成',
+  },
+  '이 알림은 미리보기입니다.': {
+    en: 'This is a preview notification.',
+    ja: 'これは通知のプレビューです。',
+    'zh-CN': '这是一条预览通知。',
+  },
+  '팀의 모든 프로젝트에 새로운 디자인 설정을 적용했어요.': {
+    en: 'New design settings have been applied to every project in your team.',
+    ja: 'チームのすべてのプロジェクトに新しいデザイン設定を適用しました。',
+    'zh-CN': '已将新的设计设置应用到团队的所有项目。',
+  },
+  '색상과 글꼴, 간격, 모서리 설정이 함께 반영되었습니다. 긴 설명과 여러 줄 제목이 작은 화면에서도 어떻게 표시되는지 확인하는 미리보기입니다.':
+    {
+      en: 'Colors, fonts, spacing, and corner settings have been updated together. This preview shows how long descriptions and multiline titles appear on smaller screens.',
+      ja: '色、フォント、余白、角の設定をまとめて反映しました。長い説明や複数行のタイトルが、小さな画面でどう表示されるかを確認するプレビューです。',
+      'zh-CN':
+        '颜色、字体、间距和圆角设置已一同更新。此预览用于查看长说明和多行标题在小屏幕上的显示效果。',
+    },
+  '작업을 보관했어요.': {
+    en: 'Task archived.',
+    ja: 'タスクをアーカイブしました。',
+    'zh-CN': '任务已归档。',
+  },
+  '실행 취소를 눌러 되돌릴 수 있어요. 이 예제 안에서만 동작합니다.': {
+    en: 'Select Undo to restore it. This action only affects this example.',
+    ja: '「元に戻す」で復元できます。このサンプル内でのみ動作します。',
+    'zh-CN': '点击“撤销”即可恢复。此操作仅在当前示例内生效。',
+  },
+  '보관을 취소했어요.': {
+    en: 'Archive undone.',
+    ja: 'アーカイブを取り消しました。',
+    'zh-CN': '已撤销归档。',
+  },
+  '실행 취소 알림': {
+    en: 'Notification with undo',
+    ja: '元に戻せる通知',
+    'zh-CN': '带撤销操作的通知',
+  },
+  '모든 알림을 닫았어요.': {
+    en: 'All notifications dismissed.',
+    ja: 'すべての通知を閉じました。',
+    'zh-CN': '已关闭所有通知。',
+  },
+  '모두 닫기': { en: 'Dismiss all', ja: 'すべて閉じる', 'zh-CN': '全部关闭' },
+  '‘3개 쌓기’와 긴 알림은 직접 닫을 때까지 유지됩니다.': {
+    en: 'The three-notification stack and long notifications stay until you dismiss them.',
+    ja: '「3件重ねる」と長い通知は、手動で閉じるまで表示されます。',
+    'zh-CN': '“堆叠三条”和长通知会一直显示，直到手动关闭。',
+  },
+  '알림을 겹치지 않고 세로로 표시합니다. 기존 기본 배치입니다.': {
+    en: 'Notifications appear in a vertical list without overlap. This is the existing default layout.',
+    ja: '通知を重ねず、縦のリストで表示します。従来の標準レイアウトです。',
+    'zh-CN': '通知纵向排列，不相互重叠。这是原有的默认布局。',
+  },
+  '목록으로 3개 보기': {
+    en: 'Show three in a list',
+    ja: '3件をリストで表示',
+    'zh-CN': '以列表显示三条',
+  },
+  '스택형 알림은 현재 Lab·레지스트리에서 제공하며 npm 0.5.0-beta.3에는 아직 포함되지 않습니다.': {
+    en: 'Stacked notifications are available in the Lab and registry. They are not yet included in npm version 0.5.0-beta.3.',
+    ja: 'スタック通知は現在Labとレジストリで利用できます。npmの0.5.0-beta.3にはまだ含まれていません。',
+    'zh-CN': '堆叠通知目前可在 Lab 和注册表中使用，尚未包含在 npm 0.5.0-beta.3 中。',
+  },
+  'F6로 알림 영역에 들어가고 Tab으로 이동합니다. 영역에서 Shift+Tab을 누르면 이전 위치로 돌아갑니다. 터치 화면에서는 알림을 펼쳐 표시합니다.':
+    {
+      en: 'Press F6 to enter the notification area, then Tab to move through it. Shift+Tab from the area returns to your previous position. Notifications stay expanded on touch screens.',
+      ja: 'F6で通知エリアに入り、Tabで移動します。エリアからShift+Tabを押すと元の位置に戻ります。タッチ画面では通知を展開して表示します。',
+      'zh-CN':
+        '按 F6 进入通知区域，再按 Tab 移动。在区域中按 Shift+Tab 可返回先前位置。触摸屏上会展开显示通知。',
+    },
 }

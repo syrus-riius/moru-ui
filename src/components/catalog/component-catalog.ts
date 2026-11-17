@@ -187,7 +187,7 @@ export const components = [
   {
     id: 'toast',
     name: 'Toast',
-    subtitle: '결과 알림과 실행 취소',
+    subtitle: '스택·목록형 알림과 실행 취소',
     category: 'feedback',
     generation: 'advanced',
   },
@@ -329,7 +329,7 @@ export const componentAliases: Record<ComponentId, string> = {
   progress: '진행률 프로그레스 버퍼 스트라이프 indeterminate buffered progress bar',
   separator: '구분선 세퍼레이터',
   skeleton: '스켈레톤 로딩 쉬머 펄스 shimmer pulse placeholder',
-  toast: '토스트 알림 실행취소',
+  toast: '토스트 알림 실행취소 스택 쌓기 stacked notification',
   combobox: '콤보박스 검색 선택',
   'alert-dialog': '알림대화상자 삭제 확인',
   sheet: '시트 드로어 패널',
@@ -383,7 +383,7 @@ export const snippets: Record<ComponentId, string> = {
   'file-input':
     '<Field label="프로젝트 문서" description="PDF · 최대 5MB, 3개까지">\n  <FileInput name="brief" accept=".pdf" multiple\n    maxSize={5 * 1024 * 1024} maxFiles={3}\n    onFilesChange={setFiles} />\n</Field>\n{/* 선택한 File을 실제 업로드할 때는 서버에서도 검증하세요. */}',
   toast:
-    'const { toast } = useToast()\n\n<Button onClick={() => toast({\n  title: "변경 사항을 저장했어요.",\n  tone: "success",\n})}>저장하기</Button>\n\n{/* 앱을 ToastProvider로 감싸세요. */}',
+    'const { toast } = useToast()\n\n<Button onClick={() => toast({\n  title: "변경 사항을 저장했어요.",\n  tone: "success",\n})}>저장하기</Button>\n\n{/* 앱을 <ToastProvider layout="stack">으로 감싸면 알림이 쌓입니다. */}',
   combobox:
     '<Combobox\n  aria-label="프로젝트 담당자"\n  placeholder="이름으로 검색"\n  items={[\n    { value: "minji", label: "민지" },\n    { value: "suhyeon", label: "수현" },\n  ]}\n/>',
   'alert-dialog':

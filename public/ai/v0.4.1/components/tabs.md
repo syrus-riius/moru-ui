@@ -2,7 +2,7 @@
 
 Accessible horizontal or vertical tabs with controlled selection and keyboard navigation.
 
-Version: 0.4.1. Source hash: 9e7fc610717ab4a2a951696248d6d47b7eb7d11cbfffc90d292087c06ac3c874.
+Version: 0.4.1. Source hash: 2fd87d38eaaf0375eb097047b65a7d17f1067292b1a98efdbfd46ccdaa31ff28.
 
 ## Discovery
 

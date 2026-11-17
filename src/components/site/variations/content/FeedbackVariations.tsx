@@ -14,7 +14,7 @@ import { RingProgress } from '../../../ui/ring-progress'
 import { Skeleton } from '../../../ui/skeleton'
 import { Spinner } from '../../../ui/spinner'
 import { StatusIndicator } from '../../../ui/status-indicator'
-import { ToastProvider, useToast } from '../../../ui/toast'
+import { ToastVariations } from './ToastVariations'
 import { VariationExample, VariationGroup, sizes } from '../VariationLayout'
 
 const tones = ['info', 'success', 'warning', 'danger'] as const
@@ -156,27 +156,7 @@ export function FeedbackVariations({ id }: { id: ComponentId }) {
         </VariationGroup>
       )
     case 'toast':
-      return (
-        <ToastProvider>
-          <VariationGroup title="상태 비교" wide>
-            {tones.map((tone) => (
-              <VariationExample
-                key={tone}
-                label={toneLabels[tone]}
-                code={`toast({ title, tone: "${tone}" })`}
-              >
-                <ToastTrigger tone={tone} />
-              </VariationExample>
-            ))}
-            <VariationExample label="실행 취소" code="toast({ title, action: { label, onClick } })">
-              <ToastTrigger tone="success" actionable />
-            </VariationExample>
-            <VariationExample label="직접 닫기" code="toast({ title, duration: 0 })">
-              <ToastTrigger tone="info" persistent />
-            </VariationExample>
-          </VariationGroup>
-        </ToastProvider>
-      )
+      return <ToastVariations />
     case 'empty':
       return (
         <VariationGroup title="베리에이션" wide>
@@ -339,42 +319,6 @@ function SkeletonContent({
       <Skeleton animation={animation} paused={paused} style={{ height: 16, width: '70%' }} />
       <Skeleton animation={animation} paused={paused} style={{ height: 16 }} />
     </div>
-  )
-}
-
-function ToastTrigger({
-  tone,
-  actionable = false,
-  persistent = false,
-}: {
-  tone: (typeof tones)[number]
-  actionable?: boolean
-  persistent?: boolean
-}) {
-  const { t } = useI18n()
-  const { toast } = useToast()
-  const [undone, setUndone] = useState(false)
-  return (
-    <>
-      <Button
-        variant="secondary"
-        onClick={() => {
-          setUndone(false)
-          toast({
-            title: t(toneLabels[tone]),
-            description: t('프로젝트 설정을 확인하세요.'),
-            tone,
-            duration: persistent ? 0 : 5000,
-            action: actionable
-              ? { label: t('실행 취소'), onClick: () => setUndone(true) }
-              : undefined,
-          })
-        }}
-      >
-        {t('알림 표시')}
-      </Button>
-      {undone ? <span role="status">{t('실행 취소')}</span> : null}
-    </>
   )
 }
 

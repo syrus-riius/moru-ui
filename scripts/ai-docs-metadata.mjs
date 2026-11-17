@@ -478,6 +478,9 @@ export function WorkspaceSettings() {
   toast: {
     notes: [
       'ToastProvider must wrap consumers of useToast. Inspect the exported provider and hook signatures below before composing toast actions.',
+      'Use <ToastProvider layout="stack"> for layered notifications or layout="list" for the default separate cards. Keep one provider at the app boundary; do not create a provider for each action.',
+      'Stacked notifications expand on hover or keyboard focus (F6). Touch devices show an expanded list so every action remains reachable. limit controls visible notifications, not an application inbox.',
+      'toast(options) returns an id. dismiss(id) closes that toast; dismiss() closes all. duration: 0 persists until dismissed. Use action.onClick for a real undo operation; a notification alone does not persist or revert application data.',
     ],
   },
 }

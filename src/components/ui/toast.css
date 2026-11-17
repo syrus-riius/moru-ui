@@ -32,6 +32,10 @@
   pointer-events: none;
 }
 
+.ui-toast-items {
+  display: contents;
+}
+
 .ui-toast {
   --ui-toast-inset: calc(var(--ui-space, 4px) * 4);
   --ui-toast-close-inset: calc(var(--ui-space, 4px) * 3);
@@ -100,6 +104,14 @@
   color: var(--ui-danger-surface-text, #c44747);
 }
 .ui-toast-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-control-gap, 8px);
+  flex: 1;
+  min-width: 0;
+}
+
+.ui-toast-copy {
   min-width: 0;
 }
 .ui-toast-title {
@@ -148,6 +160,224 @@
   background: var(--ui-control-pressed-bg, #e8e8e4);
 }
 
+/* The viewport scrolls only when the spread cards are taller than the screen.
+ * The items track reserves space for measured Base UI cards and their outside close buttons. */
+.ui-toast-viewport[data-layout='stack'] {
+  --ui-toast-stack-gutter: 16px;
+  --ui-toast-stack-peek: 8px;
+  --ui-toast-stack-gap: 20px;
+  --ui-toast-screen-space: calc(
+    100dvh - max(8px, env(safe-area-inset-bottom)) - max(8px, env(safe-area-inset-top))
+  );
+  box-sizing: border-box;
+  inset-inline-end: max(8px, env(safe-area-inset-right));
+  inset-block-end: max(8px, env(safe-area-inset-bottom));
+  width: min(412px, calc(100vw - 16px));
+  max-height: var(--ui-toast-screen-space);
+  padding: var(--ui-toast-stack-gutter);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-items {
+  --ui-toast-peek-space: calc(var(--ui-toast-stack-depth) * var(--ui-toast-stack-peek));
+  --ui-toast-max-card: calc(
+    var(--ui-toast-screen-space) - var(--ui-toast-stack-gutter) * 2 - var(--ui-toast-peek-space)
+  );
+  --ui-toast-spread-height: calc(
+    var(--ui-toast-height-total) + var(--ui-toast-stack-depth) * var(--ui-toast-stack-gap)
+  );
+  display: block;
+  position: relative;
+  flex: none;
+  height: calc(
+    var(--ui-toast-head-height, var(--toast-frontmost-height, var(--ui-control-height-lg, 48px))) +
+      var(--ui-toast-peek-space)
+  );
+  transition: height var(--ui-duration, 160ms) ease;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast {
+  --ui-toast-inset: clamp(12px, calc(var(--ui-space, 4px) * 4), 24px);
+  --ui-toast-close-size: clamp(28px, var(--ui-control-height-sm, 32px), 32px);
+  --ui-toast-stack-offset: calc(-1 * var(--toast-index, 0) * var(--ui-toast-stack-peek));
+  --ui-toast-stack-scale: calc(1 - var(--toast-index, 0) * 0.055);
+  --ui-toast-stack-rise: 0px;
+  z-index: calc(8 - var(--toast-index, 0));
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  min-height: 0;
+  max-height: var(--ui-toast-max-card);
+  padding: var(--ui-toast-inset);
+  overflow: visible;
+  transform: translateY(calc(var(--ui-toast-stack-offset) + var(--ui-toast-stack-rise)))
+    scale(var(--ui-toast-stack-scale));
+  transform-origin: top center;
+  transition:
+    transform var(--ui-duration, 160ms) ease,
+    opacity var(--ui-duration, 160ms) ease;
+}
+
+/* Retain pack effects while separating similar layers when border/shadow tokens are zero. */
+.ui-toast-viewport[data-layout='stack'] .ui-toast.ui-toast {
+  background-color: color-mix(
+    in srgb,
+    var(--ui-pack-surface-bg, var(--ui-surface, #fff)),
+    var(--ui-text, #171717) calc(var(--toast-index, 0) * 3%)
+  );
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    0 3px 10px color-mix(in srgb, #000 15%, transparent),
+    0 1px 2px color-mix(in srgb, var(--ui-text, #171717) 16%, transparent);
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-content {
+  max-height: max(
+    0px,
+    calc(var(--ui-toast-max-card) - 2 * (var(--ui-toast-inset) + var(--ui-border-width, 1px)))
+  );
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  transition: opacity var(--ui-duration, 160ms) ease;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-action:focus-visible {
+  outline-offset: -2px;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-close {
+  inset-block: -10px auto;
+  inset-inline-start: -10px;
+  inset-inline-end: auto;
+  border: 1px solid color-mix(in srgb, var(--ui-text, #171717) 22%, transparent);
+  border-radius: 50%;
+  background: var(--ui-surface, #fff);
+  color: var(--ui-text, #171717);
+  box-shadow: 0 2px 8px #0002;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-close:hover {
+  background: var(--ui-control-hover-bg, #f3f3f1);
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast-close:active {
+  background: var(--ui-control-pressed-bg, #e8e8e4);
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast:where(:has(.ui-toast-content[data-behind])) {
+  height: var(--ui-toast-head-height, var(--toast-frontmost-height, var(--toast-height, auto)));
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast:where(:has(.ui-toast-content[data-behind])) > * {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ui-toast-viewport[data-layout='stack']
+  .ui-toast:where(:has(.ui-toast-content[data-behind]))
+  .ui-toast-close {
+  visibility: hidden;
+}
+
+.ui-toast-viewport[data-layout='stack']:is([data-expanded], :focus-within) {
+  pointer-events: auto;
+}
+
+.ui-toast-viewport[data-layout='stack']:is([data-expanded], :focus-within) .ui-toast-items {
+  height: var(--ui-toast-spread-height);
+  pointer-events: auto;
+}
+
+.ui-toast-viewport[data-layout='stack']:is([data-expanded], :focus-within) .ui-toast {
+  --ui-toast-stack-offset: calc(
+    -1 * (var(--toast-offset-y, 0px) + var(--toast-index, 0) * var(--ui-toast-stack-gap))
+  );
+  --ui-toast-stack-scale: 1;
+  height: auto;
+}
+
+.ui-toast-viewport[data-layout='stack']:is([data-expanded], :focus-within) .ui-toast > * {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ui-toast-viewport[data-layout='stack']:is([data-expanded], :focus-within)
+  .ui-toast
+  .ui-toast-close {
+  visibility: visible;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast:is([data-starting-style], [data-ending-style]) {
+  --ui-toast-stack-rise: 12px;
+  opacity: 0;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast[data-ending-style] {
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast[data-ending-style] > * {
+  pointer-events: none;
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast[data-ending-style][data-swipe-direction='right'] {
+  transform: translateX(calc(100% + 24px)) translateY(var(--ui-toast-stack-offset));
+}
+
+.ui-toast-viewport[data-layout='stack'] .ui-toast[data-ending-style][data-swipe-direction='down'] {
+  transform: translateY(calc(100% + 24px));
+}
+
+/* Keep every action reachable on touch devices without requiring a hover gesture. */
+@media (any-pointer: coarse) {
+  .ui-toast-viewport[data-layout='stack'] {
+    pointer-events: auto;
+  }
+  .ui-toast-viewport[data-layout='stack'] .ui-toast-items {
+    height: var(--ui-toast-spread-height);
+    pointer-events: auto;
+  }
+  .ui-toast-viewport[data-layout='stack'] .ui-toast {
+    --ui-toast-close-size: 44px;
+    --ui-toast-stack-offset: calc(
+      -1 * (var(--toast-offset-y, 0px) + var(--toast-index, 0) * var(--ui-toast-stack-gap))
+    );
+    --ui-toast-stack-scale: 1;
+    padding-inline-start: max(var(--ui-toast-inset), 40px);
+  }
+  .ui-toast-viewport[data-layout='stack'] .ui-toast:where(:has(.ui-toast-content[data-behind])) {
+    height: auto;
+  }
+  .ui-toast-viewport[data-layout='stack']
+    .ui-toast:where(:has(.ui-toast-content[data-behind]))
+    > * {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .ui-toast-viewport[data-layout='stack']
+    .ui-toast:where(:has(.ui-toast-content[data-behind]))
+    .ui-toast-close {
+    visibility: visible;
+  }
+}
+
+/* Keep the empty live region mounted so the first announced item is detected. */
+.ui-toast-viewport[data-layout='stack'][data-empty] {
+  padding: 0;
+  pointer-events: none;
+}
+
 @media (pointer: coarse) {
   .ui-toast {
     --ui-toast-close-size: max(44px, var(--ui-control-height-sm, 32px));
@@ -162,10 +392,16 @@
     inset-inline: 16px;
     width: auto;
   }
+  .ui-toast-viewport[data-layout='stack'] {
+    inset-inline-start: max(0px, env(safe-area-inset-left));
+    inset-inline-end: max(0px, env(safe-area-inset-right));
+    width: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ui-toast {
+  .ui-toast,
+  .ui-toast-viewport[data-layout='stack'] :is(.ui-toast, .ui-toast-content, .ui-toast-items) {
     transition: none;
   }
 }

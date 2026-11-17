@@ -536,6 +536,11 @@ export const catalogMessages = {
     ja: '結果の通知と取り消し',
     'zh-CN': '结果通知与撤销',
   },
+  '스택·목록형 알림과 실행 취소': {
+    en: 'Stacked or listed notifications with undo',
+    ja: 'スタック・リスト通知と取り消し',
+    'zh-CN': '堆叠、列表通知与撤销',
+  },
   '검색해서 고르는 목록': {
     en: 'Searchable selection list',
     ja: '検索できる選択リスト',

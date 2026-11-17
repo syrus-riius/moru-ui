@@ -1,6 +1,6 @@
 # Build with Moru UI
 
-Version 0.4.1 · source 9e7fc610717ab4a2a951696248d6d47b7eb7d11cbfffc90d292087c06ac3c874
+Version 0.4.1 · source 2fd87d38eaaf0375eb097047b65a7d17f1067292b1a98efdbfd46ccdaa31ff28
 
 Read this file once, then [catalog.json](/ai/v0.4.1/catalog.json) and only the selected item docs. Moru is a source-owned design system: fundamentals → behavior → technology → visual refinement. Use the existing components and interaction behavior before adding bespoke UI.
 

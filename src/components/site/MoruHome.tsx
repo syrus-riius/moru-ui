@@ -16,6 +16,7 @@ import { Checkbox } from '../ui/checkbox'
 import { Input } from '../ui/input'
 import { Progress } from '../ui/progress'
 import { MoruHomeExamples } from './MoruHomeExamples'
+import { MoruHomeBenefits } from './MoruHomeBenefits'
 import { MoruTokenShowcase } from './MoruTokenShowcase'
 import type { ThemeMode, ThemeTokens } from '../../theme/tokens'
 import './moru-home.css'
@@ -101,9 +102,9 @@ export function MoruHome({
             <section className="moru-home-hero">
               <h1>{t('단단한 기본에서, 자연스러운 경험까지.')}</h1>
               <p>
-                {t('세심한 기능, 정교한 기술, 절제된 디자인.')}
+                {t('사람에게 자연스럽고, 만드는 과정은 일관되게.')}
                 <br />
-                {t('Moru는 한 번의 입력부터 다음 행동까지 자연스럽게 이어줍니다.')}
+                {t('디자인 토큰으로 화면을 정돈하고, 세심한 동작으로 사용의 흐름을 이어갑니다.')}
               </p>
               <div className="moru-home-actions">
                 <a
@@ -122,7 +123,24 @@ export function MoruHome({
                   {t('컴포넌트 둘러보기')}
                 </a>
               </div>
+              <ol
+                className="moru-home-principles"
+                aria-label={t('기본부터 디자인까지, 하나의 기준으로.')}
+              >
+                {['단단한 기본', '세심한 기능', '정교한 기술', '절제된 디자인'].map((principle) => (
+                  <li key={principle}>{t(principle)}</li>
+                ))}
+              </ol>
             </section>
+            <MoruHomeBenefits tokens={tokens} mode={mode} />
+            <div className="moru-home-showcase-heading">
+              <h2>{t('움직이는 예제로 확인하세요.')}</h2>
+              <p>
+                {t(
+                  '같은 컴포넌트가 토큰에 맞춰 달라집니다. 직접 입력하고, 선택하고, 나만의 설정으로 이어가세요.',
+                )}
+              </p>
+            </div>
           </div>
         )}
       >

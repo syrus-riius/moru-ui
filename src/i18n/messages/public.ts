@@ -1565,4 +1565,87 @@ export const publicMessages: Record<string, { en: string; ja: string; 'zh-CN': s
     ja: '入力欄を操作してみてください。ボタンとリンクのキーボードフォーカス表示は維持されます。',
     'zh-CN': '可直接操作输入框。按钮和链接会保留键盘焦点指示。',
   },
+  '사람에게 자연스럽고, 만드는 과정은 일관되게.': {
+    en: 'Natural to use. Consistent to build.',
+    ja: '使う人には自然に、つくる過程には一貫性を。',
+    'zh-CN': '使用自然，构建有序。',
+  },
+  '디자인 토큰으로 화면을 정돈하고, 세심한 동작으로 사용의 흐름을 이어갑니다.': {
+    en: 'Design tokens bring consistency to your screens. Thoughtful interactions connect each step.',
+    ja: 'デザイントークンで画面を整え、細やかな動作で使う流れをつなぎます。',
+    'zh-CN': '用设计令牌统一界面，以细致的交互衔接每一步操作。',
+  },
+  '기본부터 디자인까지, 하나의 기준으로.': {
+    en: 'One standard, from foundations to design.',
+    ja: '基本からデザインまで、ひとつの基準で。',
+    'zh-CN': '从基础到设计，遵循统一标准。',
+  },
+  'Moru를 선택하는 이유': {
+    en: 'Why choose Moru',
+    ja: 'Moruを選ぶ理由',
+    'zh-CN': '为什么选择 Moru',
+  },
+  '한 번의 설정, 일관된 화면.': {
+    en: 'One setup. A consistent interface.',
+    ja: '一度の設定で、一貫した画面に。',
+    'zh-CN': '一次设置，界面始终如一。',
+  },
+  '컬러·타이포·간격·밀도를 공통 토큰으로 조절하고, JSON과 Provider 코드로 내 프로젝트에 이어 쓰세요.':
+    {
+      en: 'Adjust color, typography, spacing, and density with shared tokens, then bring them into your project with JSON and Provider code.',
+      ja: '共通トークンで色・文字組み・余白・密度を調整し、JSONとProviderのコードで自分のプロジェクトに引き継げます。',
+      'zh-CN':
+        '通过共用令牌调整颜色、字体排版、间距和密度，再将 JSON 和 Provider 代码应用到你的项目中。',
+    },
+  '내 프로젝트에 토큰 적용하기': {
+    en: 'Apply tokens to your project',
+    ja: 'プロジェクトにトークンを適用',
+    'zh-CN': '将令牌应用到我的项目',
+  },
+  '다음 행동까지 이어지는 입력.': {
+    en: 'Inputs that connect to the next step.',
+    ja: '次の操作へとつながる入力。',
+    'zh-CN': '让输入自然衔接下一步。',
+  },
+  '인증번호 붙여넣기, 방향키 탐색, 오류 안내까지. 자주 필요한 동작을 함께 제공해 화면의 흐름에 집중할 수 있습니다.':
+    {
+      en: 'Paste verification codes, navigate with arrow keys, and get clear error feedback. Common interactions are included, so you can focus on the flow of your app.',
+      ja: '認証コードの貼り付け、矢印キーでの移動、エラー案内まで。よく使う動作を備えているので、画面全体の流れに集中できます。',
+      'zh-CN': '从粘贴验证码、方向键导航到错误提示，常用交互均已提供，让你专注于应用的使用流程。',
+    },
+  '입력 경험 직접 써보기': {
+    en: 'Try the input experience',
+    ja: '入力の使い心地を試す',
+    'zh-CN': '亲自体验输入交互',
+  },
+  'AI에도 전해지는 디자인 기준.': {
+    en: 'Design standards your AI can follow.',
+    ja: 'AIにも伝わるデザインの基準。',
+    'zh-CN': '让 AI 也能遵循设计标准。',
+  },
+  '선택한 컴포넌트의 실제 API와 디자인 토큰을 함께 전달하세요. AI가 같은 기준을 참고해 화면을 조합할 수 있습니다.':
+    {
+      en: 'Share the actual APIs and design tokens for your selected components. Your AI can use the same standards to compose screens.',
+      ja: '選んだコンポーネントの実際のAPIとデザイントークンを一緒に渡せます。AIも同じ基準を参照して画面を組み立てられます。',
+      'zh-CN': '将所选组件的实际 API 与设计令牌一同传递给 AI，让它参考相同标准来组合界面。',
+    },
+  '컴포넌트 소스·스타터용 명세': {
+    en: 'Specs for component sources and starters',
+    ja: 'コンポーネントのソース・スターター向け仕様',
+    'zh-CN': '适用于组件源码和启动模板的规范',
+  },
+  '움직이는 예제로 확인하세요.': {
+    en: 'Explore live examples.',
+    ja: '動くサンプルで確かめてください。',
+    'zh-CN': '通过实时示例亲自体验。',
+  },
+  '같은 컴포넌트가 토큰에 맞춰 달라집니다. 직접 입력하고, 선택하고, 나만의 설정으로 이어가세요.': {
+    en: 'The same components adapt to your tokens. Type, select, and make the settings your own.',
+    ja: '同じコンポーネントがトークンに合わせて変わります。入力や選択を試して、自分だけの設定につなげてください。',
+    'zh-CN': '相同组件会随令牌变化。亲自输入、选择，再调整为自己的设置。',
+  },
+  '단단한 기본': { en: 'Solid foundations', ja: '確かな基本', 'zh-CN': '扎实的基础' },
+  '세심한 기능': { en: 'Thoughtful functionality', ja: '細やかな機能', 'zh-CN': '细致的功能' },
+  '정교한 기술': { en: 'Precise engineering', ja: '緻密な技術', 'zh-CN': '精湛的技术' },
+  '절제된 디자인': { en: 'Restrained design', ja: '抑制の効いたデザイン', 'zh-CN': '克制的设计' },
 }

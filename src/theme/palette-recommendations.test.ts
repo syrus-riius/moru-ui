@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { hexToOklch } from './color-scheme'
+import { harmonyOptions, hexToOklch } from './color-scheme'
 import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
@@ -7,6 +7,7 @@ import {
   generateRandomPaletteSet,
   paletteRoleKeys,
   type PaletteLocks,
+  type PaletteHarmony,
 } from './palette-recommendations'
 import {
   createDarkTokens,
@@ -18,6 +19,15 @@ import {
 
 const modes: ThemeMode[] = ['light', 'dark']
 const seeds = ['#000000', '#ffffff', '#808080', '#c5d86d', '#f05d23', '#0000ff', '#00ff00']
+const harmonyIds = {
+  mono: 'tonal',
+  analogous: 'analogous',
+  complementary: 'complementary',
+  split: 'split',
+  triadic: 'triadic',
+} as const
+const hueDistance = (first: number, second: number) =>
+  Math.abs(((first - second + 540) % 360) - 180)
 
 describe('palette recommendations', () => {
   it.each(modes)(
@@ -26,8 +36,8 @@ describe('palette recommendations', () => {
       const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
       for (const seed of seeds) {
         const recommendations = generatePaletteRecommendations(seed, mode)
-        expect(recommendations).toHaveLength(3)
-        expect(new Set(recommendations.map(({ colors }) => colors.accent)).size).toBe(3)
+        expect(recommendations).toHaveLength(5)
+        expect(new Set(recommendations.map(({ colors }) => colors.accent)).size).toBe(5)
         for (const { colors } of recommendations) {
           expect(colors.primary).toBe(seed)
           expect(Object.keys(colors).sort()).toEqual([...paletteRoleKeys].sort())
@@ -45,7 +55,7 @@ describe('palette recommendations', () => {
   it('normalizes shorthand seeds and returns no invented palette for malformed input', () => {
     expect(
       generatePaletteRecommendations(' #ABC ', 'light').map(({ colors }) => colors.primary),
-    ).toEqual(['#aabbcc', '#aabbcc', '#aabbcc'])
+    ).toEqual(Array(5).fill('#aabbcc'))
     for (const seed of ['', 'red', '#abcd', '#000000ff', 'rgb(0,0,0)']) {
       expect(generatePaletteRecommendations(seed, 'light')).toEqual([])
     }
@@ -66,10 +76,70 @@ describe('palette recommendations', () => {
     const seed = '#f05d23'
     const origin = hexToOklch(seed).h
     const palettes = generatePaletteRecommendations(seed, 'light')
-    for (const [index, offset] of [0, 30, 180].entries()) {
+    for (const [index, offset] of [0, -30, 180, 150, 120].entries()) {
       const accentHue = hexToOklch(palettes[index].colors.accent).h
       const distance = Math.abs(((accentHue - origin - offset + 540) % 360) - 180)
       expect(distance).toBeLessThan(2)
+    }
+  })
+
+  it.each(modes)('assigns the third hue to actual neutral tokens in %s', (mode) => {
+    const seed = '#f05d23'
+    const origin = hexToOklch(seed).h
+    for (const { value, angles } of harmonyOptions) {
+      const [candidate] = generatePaletteRecommendations(seed, mode, {}, value)
+      const neutralHue = origin + (angles[2] ?? 0)
+      for (const role of ['background', 'border'] as const) {
+        const neutral = hexToOklch(candidate.colors[role])
+        // These low-chroma tokens are still visibly tinted, not achromatic placeholders.
+        expect(neutral.c).toBeGreaterThan(0.01)
+        expect(hueDistance(neutral.h, neutralHue)).toBeLessThan(6)
+      }
+      expect(
+        hueDistance(hexToOklch(candidate.colors.accent).h, origin + (angles[1] ?? 0)),
+      ).toBeLessThan(2)
+    }
+  })
+
+  it('keeps grayscale seeds achromatic for every harmony', () => {
+    for (const seed of ['#000000', '#ffffff', '#808080']) {
+      for (const { colors } of generatePaletteRecommendations(seed, 'light')) {
+        expect(Object.values(colors).every((color) => hexToOklch(color).c < 0.0001)).toBe(true)
+      }
+    }
+  })
+})
+
+describe('selected palette harmonies', () => {
+  it.each(harmonyOptions)('constrains both manual and random results to $value', ({ value }) => {
+    for (const mode of modes) {
+      const [manual, ...rest] = generatePaletteRecommendations('#f05d23', mode, {}, value)
+      expect(rest).toEqual([])
+      expect(manual.id).toBe(harmonyIds[value])
+      for (const sample of [0, 0.25, 0.5, 0.75, 1]) {
+        const result = generateRandomPaletteSet(mode, '#f05d23', {}, () => sample, value)
+        expect(result.selectedId).toBe(harmonyIds[value])
+        expect(result.recommendations.map(({ id }) => id)).toEqual([harmonyIds[value]])
+        const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
+        expect(
+          auditPaletteRecommendation({ ...base, ...result.recommendations[0].colors }, mode).every(
+            ({ pass }) => pass,
+          ),
+        ).toBe(true)
+      }
+    }
+  })
+
+  it.each(modes)('retains exact locks when changing the harmony in %s', (mode) => {
+    const locks = { primary: '#e66442', accent: '#66aacc' }
+    const harmonies: PaletteHarmony[] = ['all', ...harmonyOptions.map(({ value }) => value)]
+    for (const harmony of harmonies) {
+      const manual = generatePaletteRecommendations('#123456', mode, locks, harmony)
+      const random = generateRandomPaletteSet(mode, '#123456', locks, () => 0.4, harmony)
+      for (const candidate of [...manual, ...random.recommendations]) {
+        expect(candidate.colors.primary).toBe(locks.primary)
+        expect(candidate.colors.accent).toBe(locks.accent)
+      }
     }
   })
 })
@@ -82,7 +152,7 @@ describe('locked palette recommendations', () => {
       const manual = generatePaletteRecommendations('#f05d23', mode, locks)
       const first = generateRandomPaletteSet(mode, '#f05d23', locks, () => 0.1)
       const second = generateRandomPaletteSet(mode, first.seed, locks, () => 0.8)
-      expect(first.recommendations).toHaveLength(3)
+      expect(first.recommendations).toHaveLength(5)
       expect(first.recommendations.map(({ id }) => id)).toContain(first.selectedId)
       for (const [index, candidate] of first.recommendations.entries()) {
         expect(candidate.colors.primary).toBe('#aabbcc')
@@ -106,7 +176,7 @@ describe('locked palette recommendations', () => {
   it.each(modes)('derives the inverse harmony from a locked accent in %s', (mode) => {
     const accent = '#f05d23'
     const recommendations = generatePaletteRecommendations('#456cab', mode, { accent })
-    for (const [index, offset] of [0, 30, 180].entries()) {
+    for (const [index, offset] of [0, -30, 180, 150, 120].entries()) {
       const { colors } = recommendations[index]
       expect(colors.accent).toBe(accent)
       const difference = Math.abs(
@@ -119,10 +189,12 @@ describe('locked palette recommendations', () => {
   it('uses other chromatic locks as an anchor when neither primary nor accent is locked', () => {
     const background = '#163e80'
     const recommendations = generatePaletteRecommendations('#f05d23', 'dark', { background })
-    for (const { colors } of recommendations) {
+    for (const [index, { colors }] of recommendations.entries()) {
       expect(colors.background).toBe(background)
+      const neutralOffset = harmonyOptions[index].angles[2] ?? 0
       const difference = Math.abs(
-        ((hexToOklch(colors.primary).h - hexToOklch(background).h + 540) % 360) - 180,
+        ((hexToOklch(colors.primary).h + neutralOffset - hexToOklch(background).h + 540) % 360) -
+          180,
       )
       expect(difference).toBeLessThan(2)
     }
@@ -218,7 +290,7 @@ describe('locked palette recommendations', () => {
 })
 
 describe('random palette recommendations', () => {
-  it.each(modes)('reuses all three recipes with valid, readable colors in %s', (mode) => {
+  it.each(modes)('reuses all five recipes with valid, readable colors in %s', (mode) => {
     const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
     const ids = new Set<string>()
     for (let sample = 0; sample <= 12; sample++) {
@@ -241,7 +313,7 @@ describe('random palette recommendations', () => {
         ),
       ).toBe(true)
     }
-    expect([...ids].sort()).toEqual(['analogous', 'complementary', 'tonal'])
+    expect([...ids].sort()).toEqual(['analogous', 'complementary', 'split', 'tonal', 'triadic'])
   })
 
   it('is deterministic with injected randomness and normalizes the previous seed', () => {

@@ -35,6 +35,48 @@
   font-weight: var(--ui-type-label-weight);
 }
 
+.palette-recommendations__harmony {
+  display: grid;
+  gap: var(--editor-gap);
+  min-width: 0;
+}
+
+.palette-recommendations__harmony > p {
+  margin: 0;
+}
+
+.palette-recommendations .palette-recommendations__harmony-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: max(4px, var(--editor-gap));
+  padding: 0;
+  background: none;
+}
+
+.palette-recommendations__harmony-options .ui-toggle-group-item {
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 7px;
+  min-height: 44px;
+  border: 0;
+  background: var(--editor-bg);
+  color: var(--editor-text);
+  font-size: var(--ui-type-caption-size);
+  white-space: normal;
+  text-align: start;
+}
+
+.palette-recommendations__harmony-options .ui-toggle-group-item[data-pressed] {
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+  box-shadow: inset 0 0 0 1px var(--editor-active);
+}
+
+.palette-recommendations__harmony-options .ui-toggle-group-icon > svg {
+  width: 28px;
+  height: 28px;
+}
+
 .palette-recommendations__seed {
   display: grid;
   grid-template-columns: var(--ui-control-height-sm) minmax(0, 1fr);

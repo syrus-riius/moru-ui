@@ -1,10 +1,4 @@
-import {
-  generateColorScheme,
-  hexToOklch,
-  oklchToHex,
-  type ColorHarmony,
-  type NeutralTemperature,
-} from './color-scheme'
+import { harmonyOptions, hexToOklch, oklchToHex, type ColorHarmony } from './color-scheme'
 import {
   getContrastRatio,
   getCssVariables,
@@ -27,8 +21,9 @@ export const paletteRoleKeys = [
 export type PaletteRole = (typeof paletteRoleKeys)[number]
 export type PaletteColors = Pick<ThemeTokens, PaletteRole>
 export type PaletteLocks = Partial<PaletteColors>
+export type PaletteHarmony = ColorHarmony | 'all'
 export type PaletteRecommendation = {
-  id: 'tonal' | 'analogous' | 'complementary'
+  id: 'tonal' | 'analogous' | 'complementary' | 'split' | 'triadic'
   name: string
   description: string
   colors: PaletteColors
@@ -36,8 +31,6 @@ export type PaletteRecommendation = {
 
 type PaletteRecipe = Omit<PaletteRecommendation, 'colors'> & {
   harmony: ColorHarmony
-  temperature: NeutralTemperature
-  hueOffset: number
   lightnessOffset: number
   chromaScale: number
 }
@@ -45,33 +38,43 @@ type PaletteRecipe = Omit<PaletteRecommendation, 'colors'> & {
 const recipes: readonly PaletteRecipe[] = [
   {
     id: 'tonal',
-    name: '톤 온 톤',
+    name: '단색',
     description: '같은 색의 명도 차이로 차분한 위계를 만듭니다.',
     harmony: 'mono',
-    temperature: 'brand',
-    hueOffset: 0,
     lightnessOffset: 0,
     chromaScale: 0.75,
   },
   {
     id: 'analogous',
-    name: '유사색 조합',
-    description: '가까운 색의 액센트와 따뜻한 중립색을 조합합니다.',
+    name: '유사색',
+    description: '기준색 양옆의 색을 액센트와 중립색에 나누어 적용합니다.',
     harmony: 'analogous',
-    temperature: 'warm',
-    hueOffset: 30,
     lightnessOffset: 0.06,
     chromaScale: 0.9,
   },
   {
     id: 'complementary',
-    name: '보색 조합',
-    description: '맞은편 색의 액센트와 차가운 중립색을 조합합니다.',
+    name: '보색',
+    description: '맞은편 색을 액센트로, 기준색을 중립색으로 사용합니다.',
     harmony: 'complementary',
-    temperature: 'cool',
-    hueOffset: 180,
     lightnessOffset: -0.06,
     chromaScale: 1,
+  },
+  {
+    id: 'split',
+    name: '분할 보색',
+    description: '150°·210°의 두 색을 액센트와 중립색에 나누어 적용합니다.',
+    harmony: 'split',
+    lightnessOffset: 0.03,
+    chromaScale: 0.95,
+  },
+  {
+    id: 'triadic',
+    name: '삼각 배색',
+    description: '120° 간격의 세 색을 프라이머리·액센트·중립색에 적용합니다.',
+    harmony: 'triadic',
+    lightnessOffset: -0.03,
+    chromaScale: 0.85,
   },
 ]
 
@@ -101,23 +104,25 @@ type PaletteVariation = { lightness: number; chroma: number; neutral: number }
 
 /**
  * Keep the brand seed intact as the primary action color. Related hues belong
- * to accent; they never overwrite the semantic colors or structural tokens.
- * Achromatic seeds use different lightness and neutral temperatures instead.
+ * to accent and tinted neutral surfaces, never to semantic or structural tokens.
+ * Achromatic seeds use lightness variations instead of inventing a hue.
  */
 export function generatePaletteRecommendations(
   input: string,
   mode: ThemeMode,
   locks: PaletteLocks = {},
+  harmony: PaletteHarmony = 'all',
 ): PaletteRecommendation[] {
   const seed = normalizeColor(input)
   if (!seed) return []
-  return createRecommendations(seed, mode, normalizeLocks(locks))
+  return createRecommendations(seed, mode, normalizeLocks(locks), harmony)
 }
 
 function createRecommendations(
   seed: string,
   mode: ThemeMode,
   locks: PaletteLocks,
+  harmony: PaletteHarmony,
   variation?: PaletteVariation,
 ): PaletteRecommendation[] {
   const source = hexToOklch(locks.primary ?? seed)
@@ -125,49 +130,43 @@ function createRecommendations(
   const secondaryHue = secondaryAnchorHue(locks)
   const accentLightness = mode === 'dark' ? 0.76 : 0.58
 
-  return recipes.map((recipe) => {
+  // Keep all five as the default, including when untrusted JS supplies a bad option.
+  const matching = recipes.filter((recipe) => recipe.harmony === harmony)
+  const selectedRecipes = matching.length ? matching : recipes
+  return selectedRecipes.map((recipe) => {
+    const angles = harmonyOptions.find(({ value }) => value === recipe.harmony)!.angles
+    const accentOffset = angles[1] ?? 0
+    const neutralOffset = angles[2] ?? 0
     const hue = locks.primary
       ? source.h
       : accentAnchor && accentAnchor.c >= 0.02
-        ? accentAnchor.h - recipe.hueOffset
-        : (secondaryHue ?? source.h)
+        ? accentAnchor.h - accentOffset
+        : secondaryHue === undefined
+          ? source.h
+          : secondaryHue - neutralOffset
     const primary =
       locks.primary ??
       (hue === source.h ? seed : oklchToHex(source.l, Math.max(source.c, 0.06), hue))
     const base = hexToOklch(primary)
     const chroma = Math.min(base.c * recipe.chromaScale * (variation?.chroma ?? 1), 0.2)
-    const { colors } = generateColorScheme(
-      {
-        seed: primary,
-        harmony: recipe.harmony,
-        chroma,
-        temperature: recipe.temperature,
-        neutralActions: false,
-      },
-      mode,
-    )
+    // The third harmony arm has a real token role: it softly tints the surfaces,
+    // text, and border. A single accent alone cannot represent a three-hue rule.
+    const neutralChroma = Math.min(0.026, chroma * 0.18)
+    const neutral = (lightness: number) =>
+      oklchToHex(lightness + (variation?.neutral ?? 0), neutralChroma, base.h + neutralOffset)
+    const dark = mode === 'dark'
     const palette: PaletteColors = {
       primary,
       accent: oklchToHex(
         accentLightness + recipe.lightnessOffset + (variation?.lightness ?? 0),
         chroma,
-        base.h + recipe.hueOffset,
+        base.h + accentOffset,
       ),
-      background: colors.background,
-      surface: colors.surface,
-      text: colors.text,
-      muted: colors.muted,
-      border: colors.border,
-    }
-    if (variation) {
-      for (const role of ['background', 'surface', 'text', 'muted', 'border'] as const) {
-        const neutral = hexToOklch(palette[role])
-        palette[role] = oklchToHex(
-          neutral.l + variation.neutral,
-          neutral.c * variation.chroma,
-          neutral.h,
-        )
-      }
+      background: neutral(dark ? 0.14 : 0.955),
+      surface: neutral(dark ? 0.19 : 0.99),
+      text: neutral(dark ? 0.96 : 0.18),
+      muted: neutral(dark ? 0.73 : 0.48),
+      border: neutral(dark ? 0.32 : 0.88),
     }
     return {
       id: recipe.id,
@@ -184,7 +183,7 @@ function randomUnit(random: () => number): number {
 }
 
 /**
- * Sample a new brand color, then reuse the same three role-aware recipes.
+ * Sample a new brand color, then reuse the selected role-aware harmony recipes.
  * Excluding the previous hue's ±60° arc guarantees a visible change without
  * retries, even when an injected random source repeatedly returns one value.
  */
@@ -202,6 +201,7 @@ export function generateRandomPaletteSet(
   previousSeed?: string,
   locks: PaletteLocks = {},
   random: () => number = Math.random,
+  harmony: PaletteHarmony = 'all',
 ): {
   seed: string
   recommendations: PaletteRecommendation[]
@@ -227,7 +227,7 @@ export function generateRandomPaletteSet(
         neutral: (hueSample - 0.5) * 0.05,
       }
     : undefined
-  const recommendations = createRecommendations(seed, mode, normalizedLocks, variation)
+  const recommendations = createRecommendations(seed, mode, normalizedLocks, harmony, variation)
   return {
     seed,
     recommendations,

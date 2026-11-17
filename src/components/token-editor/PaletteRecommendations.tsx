@@ -7,14 +7,17 @@ import {
   generateRandomPaletteSet,
   paletteRoleKeys,
   type PaletteColors,
+  type PaletteHarmony,
   type PaletteLocks,
   type PaletteRecommendation,
   type PaletteRole,
 } from '../../theme/palette-recommendations'
+import { harmonyOptions } from '../../theme/color-scheme'
 import { normalizeColor, type ThemeMode, type ThemeTokens } from '../../theme/tokens'
 import { Button } from '../ui/button'
 import { Collapsible } from '../ui/collapsible'
 import { Input } from '../ui/input'
+import { ToggleGroup } from '../ui/toggle-group'
 import { colorRoleLabels } from './color-editor-labels'
 import './palette-recommendations.css'
 
@@ -42,7 +45,32 @@ type PaletteBatch = {
   seed: string
   mode: ThemeMode
   lockKey: string
+  harmony: PaletteHarmony
   recommendations: PaletteRecommendation[]
+}
+
+function HarmonyIcon({ angles }: { angles: readonly number[] }) {
+  const points = angles.map((angle) => {
+    const radians = ((angle - 90) * Math.PI) / 180
+    return { x: 16 + Math.cos(radians) * 11, y: 16 + Math.sin(radians) * 11 }
+  })
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+      <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="3" opacity="0.16" />
+      {points.length > 1 && (
+        <polygon
+          points={points.map(({ x, y }) => `${x},${y}`).join(' ')}
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinejoin="round"
+        />
+      )}
+      {points.map(({ x, y }, index) => (
+        <circle key={index} cx={x} cy={y} r="2.4" fill="currentColor" />
+      ))}
+      {points.length === 1 && <circle cx="16" cy="16" r="2.4" fill="currentColor" opacity="0.45" />}
+    </svg>
+  )
 }
 
 export function PaletteRecommendations({
@@ -63,6 +91,7 @@ export function PaletteRecommendations({
   const [seedEdited, setSeedEdited] = useState(false)
   const [generatedSeed, setGeneratedSeed] = useState(initialSeed)
   const [batch, setBatch] = useState<PaletteBatch | null>(null)
+  const [harmony, setHarmony] = useState<PaletteHarmony>('all')
   const [previewRevision, setPreviewRevision] = useState(preview ? 1 : 0)
   const [message, setMessage] = useState('')
   const savedPrimary = useRef(tokens.primary)
@@ -102,11 +131,17 @@ export function PaletteRecommendations({
   const candidates = useMemo(() => {
     // Random suggestions include their own lightness/chroma variations. Keep the
     // exact generated set until its seed, mode, or locked colors change.
-    if (batch?.seed === candidateSeed && batch.mode === mode && batch.lockKey === lockKey) {
+    if (
+      batch?.seed === candidateSeed &&
+      batch.mode === mode &&
+      batch.lockKey === lockKey &&
+      batch.harmony === harmony
+    ) {
       return batch.recommendations
     }
-    return generatePaletteRecommendations(candidateSeed, mode, locks)
-  }, [batch, candidateSeed, mode, lockKey, locks])
+    return generatePaletteRecommendations(candidateSeed, mode, locks, harmony)
+  }, [batch, candidateSeed, mode, lockKey, locks, harmony])
+  const harmonyOption = harmonyOptions.find((option) => option.value === harmony)
   const examinedTokens = useMemo(
     () => (activePreview ? { ...tokens, ...activePreview.colors } : null),
     [tokens, activePreview],
@@ -126,12 +161,12 @@ export function PaletteRecommendations({
     if (!normalizedSeed || allLocked) return
     // Keep the current preview while choosing another candidate. Cancelling here
     // would replace locked preview colors with their previously saved values.
-    const recommendations = generatePaletteRecommendations(normalizedSeed, mode, locks)
+    const recommendations = generatePaletteRecommendations(normalizedSeed, mode, locks, harmony)
     setSeed(normalizedSeed)
     setSeedEdited(false)
     setGeneratedSeed(normalizedSeed)
-    setBatch({ seed: normalizedSeed, mode, lockKey, recommendations })
-    setMessage('팔레트 3개를 추천했습니다. 후보를 눌러 미리 보세요.')
+    setBatch({ seed: normalizedSeed, mode, lockKey, harmony, recommendations })
+    setMessage('팔레트 {count}개를 추천했습니다. 후보를 눌러 미리 보세요.')
   }
 
   function randomize() {
@@ -140,13 +175,15 @@ export function PaletteRecommendations({
       mode,
       primaryLocked ? generatedSeed : (normalizedSeed ?? generatedSeed),
       locks,
+      Math.random,
+      harmony,
     )
     const candidate = result.recommendations.find((item) => item.id === result.selectedId)
     if (!candidate) return
     setSeed(candidate.colors.primary)
     setSeedEdited(false)
     setGeneratedSeed(result.seed)
-    setBatch({ seed: result.seed, mode, lockKey, recommendations: result.recommendations })
+    setBatch({ seed: result.seed, mode, lockKey, harmony, recommendations: result.recommendations })
     setPreviewRevision((revision) => revision + 1)
     setMessage('')
     onPreview(candidate)
@@ -158,9 +195,41 @@ export function PaletteRecommendations({
         <div className="palette-recommendations__body">
           <p className="palette-recommendations__note">
             {t(
-              '기준색과 잠금 조건으로 세 가지 조합을 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.',
+              '배색 규칙과 잠금 조건으로 팔레트를 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.',
             )}
           </p>
+          <div className="palette-recommendations__harmony">
+            <span id={`${id}-harmony`} className="palette-recommendations__label">
+              {t('배색 규칙')}
+            </span>
+            <ToggleGroup
+              size="sm"
+              className="palette-recommendations__harmony-options"
+              aria-labelledby={`${id}-harmony`}
+              preventEmpty
+              value={[harmony]}
+              items={[
+                { value: 'all', label: t('전체 추천'), icon: <Shuffle aria-hidden="true" /> },
+                ...harmonyOptions.map((option) => ({
+                  value: option.value,
+                  label: t(option.label),
+                  icon: <HarmonyIcon angles={option.angles} />,
+                })),
+              ]}
+              onValueChange={([value]) => {
+                if (value !== 'all' && !harmonyOptions.some((option) => option.value === value))
+                  return
+                setHarmony(value as PaletteHarmony)
+                setMessage('배색 규칙을 바꿨습니다. 후보를 선택하거나 랜덤 추천을 눌러 적용하세요.')
+              }}
+            />
+            <p className="palette-recommendations__note">
+              {t(
+                harmonyOption?.description ??
+                  '다섯 가지 배색을 비교하거나, 원하는 규칙만 선택해 추천받으세요.',
+              )}
+            </p>
+          </div>
           <label htmlFor={`${id}-seed`} className="palette-recommendations__label">
             {t('팔레트 기준색')}
           </label>
@@ -284,7 +353,7 @@ export function PaletteRecommendations({
           <div
             className="palette-recommendations__candidates"
             role="group"
-            aria-label={t('추천 팔레트 3개')}
+            aria-label={t('추천 팔레트 {count}개', { count: candidates.length })}
           >
             {candidates.map((candidate) => {
               const selected =
@@ -337,7 +406,7 @@ export function PaletteRecommendations({
             {recommendationsStale
               ? t('기준색을 바꿨습니다. 팔레트를 다시 추천해 주세요.')
               : message
-                ? t(message)
+                ? t(message, { count: candidates.length })
                 : null}
             {activePreview ? (
               <span className="palette-recommendations__preview-status">

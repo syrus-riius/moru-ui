@@ -3,10 +3,22 @@ export const paletteRecommendationMessages: Record<
   { en: string; ja: string; 'zh-CN': string }
 > = {
   '팔레트 추천': { en: 'Palette suggestions', ja: 'パレットの提案', 'zh-CN': '推荐配色' },
-  '기준색과 잠금 조건으로 세 가지 조합을 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.': {
-    en: 'Three combinations using your seed and locked colors. Select one to preview before saving.',
-    ja: '基準色とロック条件から3つの組み合わせをつくります。選択して保存前にプレビューできます。',
-    'zh-CN': '根据基准色和锁定条件生成三种配色。选择一种，在保存前预览。',
+  '배색 규칙과 잠금 조건으로 팔레트를 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.': {
+    en: 'Create palettes with a harmony rule and your locked colors. Select one to preview before saving.',
+    ja: '配色ルールとロック条件からパレットをつくります。選択して保存前にプレビューできます。',
+    'zh-CN': '根据配色规则和锁定条件生成配色。选择一种，在保存前预览。',
+  },
+  '배색 규칙': { en: 'Color harmony', ja: '配色ルール', 'zh-CN': '配色规则' },
+  '전체 추천': { en: 'All harmonies', ja: 'すべての配色', 'zh-CN': '全部配色' },
+  '다섯 가지 배색을 비교하거나, 원하는 규칙만 선택해 추천받으세요.': {
+    en: 'Compare five harmonies, or select one rule for your suggestions.',
+    ja: '5つの配色を比較するか、好みのルールを選んで提案を受けられます。',
+    'zh-CN': '比较五种配色，或选择一种规则获取推荐。',
+  },
+  '배색 규칙을 바꿨습니다. 후보를 선택하거나 랜덤 추천을 눌러 적용하세요.': {
+    en: 'Harmony changed. Choose a candidate or use Random palette to update the preview.',
+    ja: '配色ルールを変更しました。候補を選ぶか、ランダム提案でプレビューに適用してください。',
+    'zh-CN': '配色规则已更改。请选择候选配色或点击随机推荐来更新预览。',
   },
   '팔레트 기준색': { en: 'Seed color', ja: 'パレットの基準色', 'zh-CN': '配色基准色' },
   '팔레트 기준색 선택': {
@@ -86,20 +98,20 @@ export const paletteRecommendationMessages: Record<
     ja: 'ランダム提案は基準色も変えて、結果をすぐにプレビューします。保存前ならいつでも元に戻せます。',
     'zh-CN': '随机推荐会更改基准色并立即预览结果。保存前可随时还原。',
   },
-  '추천 팔레트 3개': {
-    en: 'Three suggested palettes',
-    ja: '3つのおすすめパレット',
-    'zh-CN': '三种推荐配色',
+  '추천 팔레트 {count}개': {
+    en: 'Suggested palettes: {count}',
+    ja: '{count}件のおすすめパレット',
+    'zh-CN': '{count} 种推荐配色',
   },
   '{name} 팔레트 미리보기': {
     en: 'Preview {name} palette',
     ja: '「{name}」パレットをプレビュー',
     'zh-CN': '预览「{name}」配色',
   },
-  '팔레트 3개를 추천했습니다. 후보를 눌러 미리 보세요.': {
-    en: 'Three palettes are ready. Select one to preview.',
-    ja: '3つのパレットを提案しました。選択してプレビューしてください。',
-    'zh-CN': '已推荐三种配色。选择一种即可预览。',
+  '팔레트 {count}개를 추천했습니다. 후보를 눌러 미리 보세요.': {
+    en: 'Palettes ready: {count}. Select one to preview.',
+    ja: '{count}件のパレットを提案しました。選択してプレビューしてください。',
+    'zh-CN': '已推荐 {count} 种配色。选择一种即可预览。',
   },
   '기준색을 바꿨습니다. 팔레트를 다시 추천해 주세요.': {
     en: 'The seed color changed. Generate new suggestions.',
@@ -170,15 +182,25 @@ export const paletteRecommendationMessages: Record<
     ja: '同じ色の明度差で落ち着いた階層をつくります。',
     'zh-CN': '用同一色相的明度变化，形成沉稳的层次。',
   },
-  '가까운 색의 액센트와 따뜻한 중립색을 조합합니다.': {
-    en: 'A neighboring accent hue paired with warm neutrals.',
-    ja: '近い色相のアクセントと暖かいニュートラルカラーを組み合わせます。',
-    'zh-CN': '将相邻色相的强调色与暖中性色搭配。',
+  '기준색 양옆의 색을 액센트와 중립색에 나누어 적용합니다.': {
+    en: 'Use neighboring hues for the accent and tinted neutrals.',
+    ja: '基準色の両側の色をアクセントとニュートラルカラーに分けて適用します。',
+    'zh-CN': '将基准色两侧的颜色分别用于强调色和带色调的中性色。',
   },
-  '맞은편 색의 액센트와 차가운 중립색을 조합합니다.': {
-    en: 'An opposite accent hue paired with cool neutrals.',
-    ja: '反対の色相のアクセントと涼しいニュートラルカラーを組み合わせます。',
-    'zh-CN': '将互补色相的强调色与冷中性色搭配。',
+  '맞은편 색을 액센트로, 기준색을 중립색으로 사용합니다.': {
+    en: 'Use the opposite hue for the accent and the seed hue for tinted neutrals.',
+    ja: '反対色をアクセントに、基準色の色相をニュートラルカラーに使用します。',
+    'zh-CN': '使用互补色相作为强调色，基准色相作为带色调的中性色。',
+  },
+  '150°·210°의 두 색을 액센트와 중립색에 나누어 적용합니다.': {
+    en: 'Use hues at 150° and 210° for the accent and tinted neutrals.',
+    ja: '150°と210°の2色をアクセントとニュートラルカラーに分けて適用します。',
+    'zh-CN': '将 150° 和 210° 的两种颜色分别用于强调色和带色调的中性色。',
+  },
+  '120° 간격의 세 색을 프라이머리·액센트·중립색에 적용합니다.': {
+    en: 'Use three hues 120° apart for primary, accent, and tinted neutrals.',
+    ja: '120°間隔の3色をプライマリー・アクセント・ニュートラルカラーに適用します。',
+    'zh-CN': '将相隔 120° 的三种颜色用于主色、强调色和带色调的中性色。',
   },
   '버튼 글자 / 프라이머리': {
     en: 'Button text / Primary',

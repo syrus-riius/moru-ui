@@ -18,6 +18,7 @@ export function MoruPlayground() {
   const [mobileEditorOpen, setMobileEditorOpen] = useState(!compact)
   const [headerHeight, setHeaderHeight] = useState(64)
   const panelRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const panelVisible = !compact || mobileEditorOpen
 
   // Preserve the visible editor when resizing; never hide an input that has focus.
@@ -83,7 +84,14 @@ export function MoruPlayground() {
           hidden={!panelVisible}
         >
           <TokenEditor
-            tokens={theme.tokens}
+            tokens={theme.savedTokens}
+            palette={{
+              savedTokens: theme.savedTokens,
+              preview: theme.palettePreview,
+              onPreview: theme.previewPalette,
+              onSave: theme.savePalettePreview,
+              onCancel: theme.cancelPalettePreview,
+            }}
             mode={theme.mode}
             presetId={theme.presetId}
             focusRequest={tokenFocusRequest}
@@ -104,11 +112,18 @@ export function MoruPlayground() {
         <ToastProvider layout="stack">
           <header className="moru-playground-heading">
             <div>
-              <h1>Playground</h1>
+              <h1 ref={headingRef} tabIndex={-1}>
+                Playground
+              </h1>
               <p>{t('직접 눌러보고, 나만의 디자인으로 다듬어 보세요.')}</p>
             </div>
             <div className="moru-playground-actions">
-              <Button size="sm" variant="secondary" onClick={() => setExportOpen(true)}>
+              <Button
+                size="sm"
+                variant="secondary"
+                disabled={Boolean(theme.palettePreview)}
+                onClick={() => setExportOpen(true)}
+              >
                 <Download size={15} aria-hidden="true" />
                 {t('토큰 내보내기')}
               </Button>
@@ -129,6 +144,35 @@ export function MoruPlayground() {
               </Button>
             </div>
           </header>
+          {theme.palettePreview ? (
+            <div className="moru-playground-palette-status">
+              <div role="status">
+                <strong>{t(theme.palettePreview.name)}</strong>
+                <span>{t('팔레트 미리보기 · 아직 저장되지 않았어요.')}</span>
+              </div>
+              <div className="moru-playground-actions">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => {
+                    headingRef.current?.focus({ preventScroll: true })
+                    theme.cancelPalettePreview()
+                  }}
+                >
+                  {t('되돌리기')}
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    headingRef.current?.focus({ preventScroll: true })
+                    theme.savePalettePreview()
+                  }}
+                >
+                  {t('이 팔레트 저장')}
+                </Button>
+              </div>
+            </div>
+          ) : null}
           <PlaygroundExamples />
           <footer className="moru-playground-note">
             {t(

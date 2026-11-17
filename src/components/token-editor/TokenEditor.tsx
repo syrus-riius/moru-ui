@@ -31,6 +31,7 @@ import { ComponentSpacingControls } from './ComponentSpacingControls'
 import { ShapeRhythmEditor } from './ShapeRhythmEditor'
 import { StylePackEditor } from './StylePackEditor'
 import { FocusEditor } from './FocusEditor'
+import { PaletteRecommendations, type PaletteRecommendationsProps } from './PaletteRecommendations'
 import { colorGroupLabels, colorRoleLabels } from './color-editor-labels'
 import { Button } from '../ui/button'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
@@ -56,6 +57,7 @@ export type TokenEditorProps = {
   focusRequest?: { id: string; serial: number }
   spacingTarget?: ComponentSpacingKey
   onSpacingTargetChange?: (target: ComponentSpacingKey) => void
+  palette?: Omit<PaletteRecommendationsProps, 'tokens' | 'mode'> & { savedTokens: ThemeTokens }
   children?: ReactNode
 }
 
@@ -294,6 +296,7 @@ export function TokenEditor({
   focusRequest,
   spacingTarget,
   onSpacingTargetChange,
+  palette,
   children,
 }: TokenEditorProps) {
   const { t } = useI18n()
@@ -326,48 +329,60 @@ export function TokenEditor({
     target.focus({ preventScroll: true })
   }, [activeTab, colorTab, focusId, focusSerial])
   const colorsContent = (
-    <Tabs
-      className="token-color-tabs"
-      size="sm"
-      activateOnFocus
-      value={colorTab}
-      onValueChange={(next) => setColorTab(next as ColorTab)}
-      aria-label={t('색상 카테고리')}
-      items={colorTabs.map(({ id: group, label }) => ({
-        value: group,
-        label: t(label),
-        content: (
-          <section className="token-editor-section token-color-panel">
-            <div className="token-color-list">
-              {(group === 'foundation'
-                ? colorLabels
-                : semanticToneOptions.map(({ value }) => ({
-                    key: value,
-                    label: colorRoleLabels[value],
-                    name: value.charAt(0).toUpperCase() + value.slice(1),
-                  }))
-              ).map(({ key, label: colorLabel, name }) => (
-                <ColorControl
-                  key={key}
-                  token={key}
-                  label={colorLabel}
-                  name={name}
-                  value={tokens[key]}
-                  onChange={onChange}
-                />
-              ))}
-            </div>
-            {group === 'semantic' ? (
-              <p className="token-section-note">
-                {t('{mode} 모드의 시맨틱 컬러입니다.', {
-                  mode: t(mode === 'light' ? '라이트' : '다크'),
-                })}
-              </p>
-            ) : null}
-          </section>
-        ),
-      }))}
-    />
+    <>
+      {palette ? (
+        <PaletteRecommendations
+          tokens={palette.savedTokens}
+          mode={mode}
+          preview={palette.preview}
+          onPreview={palette.onPreview}
+          onSave={palette.onSave}
+          onCancel={palette.onCancel}
+        />
+      ) : null}
+      <Tabs
+        className="token-color-tabs"
+        size="sm"
+        activateOnFocus
+        value={colorTab}
+        onValueChange={(next) => setColorTab(next as ColorTab)}
+        aria-label={t('색상 카테고리')}
+        items={colorTabs.map(({ id: group, label }) => ({
+          value: group,
+          label: t(label),
+          content: (
+            <section className="token-editor-section token-color-panel">
+              <div className="token-color-list">
+                {(group === 'foundation'
+                  ? colorLabels
+                  : semanticToneOptions.map(({ value }) => ({
+                      key: value,
+                      label: colorRoleLabels[value],
+                      name: value.charAt(0).toUpperCase() + value.slice(1),
+                    }))
+                ).map(({ key, label: colorLabel, name }) => (
+                  <ColorControl
+                    key={key}
+                    token={key}
+                    label={colorLabel}
+                    name={name}
+                    value={tokens[key]}
+                    onChange={onChange}
+                  />
+                ))}
+              </div>
+              {group === 'semantic' ? (
+                <p className="token-section-note">
+                  {t('{mode} 모드의 시맨틱 컬러입니다.', {
+                    mode: t(mode === 'light' ? '라이트' : '다크'),
+                  })}
+                </p>
+              ) : null}
+            </section>
+          ),
+        }))}
+      />
+    </>
   )
 
   const typographyContent = (
@@ -599,6 +614,7 @@ export function TokenEditor({
                     className="token-export-button"
                     aria-label={t('코드 내보내기')}
                     onClick={onExport}
+                    disabled={Boolean(palette?.preview)}
                   >
                     {t('내보내기')}
                     <ArrowUpRight size={13} aria-hidden="true" />
@@ -614,7 +630,13 @@ export function TokenEditor({
                     {t('초기화')}
                   </Button>
                 </div>
-                <p>{t('이 브라우저에 자동 저장')}</p>
+                <p>
+                  {t(
+                    palette?.preview
+                      ? '팔레트 미리보기는 아직 저장되지 않았습니다.'
+                      : '이 브라우저에 자동 저장',
+                  )}
+                </p>
               </div>
               {children}
             </>

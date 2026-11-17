@@ -254,7 +254,7 @@ export function StudioMain() {
           ) : (
             <ComponentCatalogPage
               aiAction={
-                <AiContextButton tokens={theme.tokens} mode={theme.mode} initialItems={[]} />
+                <AiContextButton tokens={theme.savedTokens} mode={theme.mode} initialItems={[]} />
               }
               page={componentPage}
               query={query}
@@ -286,7 +286,7 @@ export function StudioMain() {
             onInsert={insertBlock}
             onExamples={() => go('examples')}
             renderAiAction={(id) => (
-              <AiContextButton tokens={theme.tokens} mode={theme.mode} initialItems={[id]} />
+              <AiContextButton tokens={theme.savedTokens} mode={theme.mode} initialItems={[id]} />
             )}
           />
         </Suspense>
@@ -391,8 +391,8 @@ export function StudioMain() {
       {view === 'examples' ? <ExamplesView /> : null}
       {view === 'tokens' ? (
         <DesignTokensPage
-          aiAction={<AiContextButton tokens={theme.tokens} mode={theme.mode} />}
-          tokens={theme.tokens}
+          aiAction={<AiContextButton tokens={theme.savedTokens} mode={theme.mode} />}
+          tokens={theme.savedTokens}
           cssText={theme.exportCss()}
           copied={copied === 'all-css'}
           mode={theme.mode}

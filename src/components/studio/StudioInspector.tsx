@@ -76,7 +76,14 @@ export function StudioInspector() {
             </Button>
           </div>
           <TokenEditor
-            tokens={theme.tokens}
+            tokens={theme.savedTokens}
+            palette={{
+              savedTokens: theme.savedTokens,
+              preview: theme.palettePreview,
+              onPreview: theme.previewPalette,
+              onSave: theme.savePalettePreview,
+              onCancel: theme.cancelPalettePreview,
+            }}
             focusRequest={tokenFocusRequest}
             spacingTarget={selected}
             onSpacingTargetChange={(target) => setSelected(target)}

@@ -28,6 +28,7 @@ function loadCatalog() {
     import('./messages/component-docs'),
     import('./messages/playground'),
     import('./messages/playground-examples'),
+    import('./messages/palette-recommendations'),
   ])
     .then(
       ([
@@ -44,6 +45,7 @@ function loadCatalog() {
         componentDocs,
         playground,
         playgroundExamples,
+        paletteRecommendations,
       ]) => ({
         // Block copy is no longer part of the library provider; the lab keeps showing it.
         ...blockMessages,
@@ -60,6 +62,7 @@ function loadCatalog() {
         ...componentDocs.componentDocMessages,
         ...playground.playgroundMessages,
         ...playgroundExamples.playgroundExampleMessages,
+        ...paletteRecommendations.paletteRecommendationMessages,
       }),
     )
     .catch((error) => {

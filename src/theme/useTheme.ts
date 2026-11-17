@@ -2,8 +2,9 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
+  useReducer,
   useRef,
-  useState,
   type SetStateAction,
 } from 'react'
 import { getComponentSpacingCss } from './component-spacing'
@@ -13,6 +14,11 @@ import {
   type ColorSchemeSettings,
 } from './color-scheme'
 import { resolveAppearance } from './style-packs'
+import {
+  paletteRoleKeys,
+  type PaletteColors,
+  type PaletteRecommendation,
+} from './palette-recommendations'
 import {
   applyDensity,
   applyFontFamily,
@@ -58,6 +64,76 @@ export type ThemeState = {
   presetId: string
   themes: Record<ThemeMode, ThemeTokens>
   colorSchemes?: Partial<Record<ThemeMode, ColorSchemeSettings>>
+}
+
+export type PalettePreview = {
+  id: PaletteRecommendation['id']
+  name: string
+  colors: PaletteColors
+  mode: ThemeMode
+}
+
+export type ThemeSession = {
+  saved: ThemeState
+  preview: PalettePreview | null
+}
+
+type ThemeSessionAction =
+  | { type: 'update'; update: SetStateAction<ThemeState> }
+  | { type: 'preview'; candidate: PaletteRecommendation }
+  | { type: 'save-preview' }
+  | { type: 'cancel-preview' }
+
+/** Preview is never part of the serializable theme; queued actions resolve against one session. */
+export function reduceThemeSession(
+  session: ThemeSession,
+  action: ThemeSessionAction,
+): ThemeSession {
+  switch (action.type) {
+    case 'update':
+      return {
+        saved: typeof action.update === 'function' ? action.update(session.saved) : action.update,
+        preview: null,
+      }
+    case 'preview': {
+      const colors = {} as PaletteColors
+      for (const key of paletteRoleKeys) {
+        const color = normalizeColor(action.candidate.colors[key])
+        if (!color) return session
+        colors[key] = color
+      }
+      return {
+        saved: session.saved,
+        preview: {
+          id: action.candidate.id,
+          name: action.candidate.name,
+          colors,
+          mode: session.saved.mode,
+        },
+      }
+    }
+    case 'save-preview': {
+      const { saved, preview } = session
+      if (!preview || preview.mode !== saved.mode) return session
+      const current = saved.themes[preview.mode]
+      const colorSchemes = { ...saved.colorSchemes }
+      delete colorSchemes[preview.mode]
+      return {
+        saved: {
+          ...saved,
+          presetId: 'custom',
+          themes: {
+            ...saved.themes,
+            [preview.mode]: validateTokens({ ...current, ...preview.colors }, current),
+          },
+          ...(saved.colorSchemes ? { colorSchemes } : {}),
+        },
+        preview: null,
+      }
+    }
+    case 'cancel-preview':
+      return session.preview ? { saved: session.saved, preview: null } : session
+  }
 }
 
 function defaultState(): ThemeState {
@@ -211,8 +287,28 @@ function readState(): ThemeState {
 }
 
 export function useTheme() {
-  const [state, setState] = useState<ThemeState>(readState)
-  const tokens = state.themes[state.mode]
+  const [session, dispatch] = useReducer(reduceThemeSession, undefined, () => ({
+    saved: readState(),
+    preview: null,
+  }))
+  const state = session.saved
+  const savedTokens = state.themes[state.mode]
+  const palettePreview = session.preview
+  const tokens = useMemo(
+    () =>
+      palettePreview?.mode === state.mode
+        ? { ...savedTokens, ...palettePreview.colors }
+        : savedTokens,
+    [savedTokens, palettePreview, state.mode],
+  )
+  const setState = useCallback((update: SetStateAction<ThemeState>) => {
+    dispatch({ type: 'update', update })
+  }, [])
+  const previewPalette = useCallback((candidate: PaletteRecommendation) => {
+    dispatch({ type: 'preview', candidate })
+  }, [])
+  const savePalettePreview = useCallback(() => dispatch({ type: 'save-preview' }), [])
+  const cancelPalettePreview = useCallback(() => dispatch({ type: 'cancel-preview' }), [])
   const componentSpacingStyle = useRef<HTMLStyleElement | null>(null)
 
   useLayoutEffect(
@@ -360,19 +456,22 @@ export function useTheme() {
     setState((previous) => ({ ...defaultState(), mode: previous.mode }))
   }, [])
 
-  const exportCss = useCallback(() => cssForTokens(tokens, state.mode), [tokens, state.mode])
+  const exportCss = useCallback(
+    () => cssForTokens(savedTokens, state.mode),
+    [savedTokens, state.mode],
+  )
   const exportJson = useCallback(
     () =>
       JSON.stringify(
         {
           ...state,
-          tokens,
-          cssVariables: getCssVariables(tokens, state.mode),
+          tokens: savedTokens,
+          cssVariables: getCssVariables(savedTokens, state.mode),
         },
         null,
         2,
       ),
-    [state, tokens],
+    [state, savedTokens],
   )
 
   const importJson = useCallback((text: string) => {
@@ -416,6 +515,11 @@ export function useTheme() {
 
   return {
     tokens,
+    savedTokens,
+    palettePreview,
+    previewPalette,
+    savePalettePreview,
+    cancelPalettePreview,
     themes: state.themes,
     setToken,
     setTokens,

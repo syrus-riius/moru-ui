@@ -73,7 +73,14 @@ export function useStudioController() {
     return page?.kind === 'detail' ? page.component : 'button'
   })
   const [code, setCode] = useState(false)
-  const [exportOpen, setExportOpen] = useState(false)
+  const [exportOpen, setExportOpenState] = useState(false)
+  function setExportOpen(open: boolean) {
+    if (open && theme.palettePreview) {
+      setNotice('팔레트를 저장하거나 되돌린 뒤 내보내세요.')
+      return
+    }
+    setExportOpenState(open)
+  }
   const [copied, setCopied] = useState('')
   const [commandOpen, setCommandOpen] = useState(false)
   const [mobileNav, setMobileNav] = useState(false)
@@ -114,6 +121,12 @@ export function useStudioController() {
     editorReturnTarget,
   )
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  // A palette is a temporary edit of this page, never a theme that follows navigation.
+  const cancelPalettePreview = theme.cancelPalettePreview
+  useEffect(() => {
+    cancelPalettePreview()
+  }, [view, componentRouteKey, blockId, cancelPalettePreview])
 
   useEffect(() => {
     function handleShortcut(event: KeyboardEvent) {
@@ -386,7 +399,7 @@ export function useStudioController() {
   }
   function exportNativeTheme() {
     const blob = new Blob(
-      [JSON.stringify(createNativeThemeExport(theme.tokens, theme.mode), null, 2)],
+      [JSON.stringify(createNativeThemeExport(theme.savedTokens, theme.mode), null, 2)],
       { type: 'application/json' },
     )
     const url = URL.createObjectURL(blob)

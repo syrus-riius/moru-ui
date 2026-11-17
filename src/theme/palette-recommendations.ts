@@ -78,6 +78,15 @@ const recipes: readonly PaletteRecipe[] = [
   },
 ]
 
+/** Shared labels for generated and directly edited palettes. */
+export function getPaletteRecommendationMetadata(
+  harmony: ColorHarmony,
+): Pick<PaletteRecommendation, 'id' | 'name' | 'description'> {
+  const { id, name, description } =
+    recipes.find((recipe) => recipe.harmony === harmony) ?? recipes[0]
+  return { id, name, description }
+}
+
 function normalizeLocks(input: PaletteLocks): PaletteLocks {
   const locks: PaletteLocks = {}
   if (!input || typeof input !== 'object') return locks

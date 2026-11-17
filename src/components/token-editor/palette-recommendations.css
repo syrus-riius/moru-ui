@@ -35,6 +35,12 @@
   font-weight: var(--ui-type-label-weight);
 }
 
+.palette-recommendations__wheel-rule {
+  font-size: var(--ui-type-label-size);
+  font-weight: var(--ui-type-label-weight);
+  overflow-wrap: anywhere;
+}
+
 .palette-recommendations__harmony {
   display: grid;
   gap: var(--editor-gap);

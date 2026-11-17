@@ -3,6 +3,45 @@ export const paletteRecommendationMessages: Record<
   { en: string; ja: string; 'zh-CN': string }
 > = {
   '팔레트 추천': { en: 'Palette suggestions', ja: 'パレットの提案', 'zh-CN': '推荐配色' },
+  색상환: { en: 'Color wheel', ja: '色相環', 'zh-CN': '色轮' },
+  '색상환 · {name}': {
+    en: 'Color wheel · {name}',
+    ja: '色相環 · {name}',
+    'zh-CN': '色轮 · {name}',
+  },
+  '편집할 색상': { en: 'Color to edit', ja: '編集する色', 'zh-CN': '编辑颜色' },
+  '색상 포인트': { en: 'Color points', ja: 'カラーポイント', 'zh-CN': '颜色控制点' },
+  '{role} · {color} · 색조 {hue}° · 채도 {chroma}': {
+    en: '{role} · {color} · Hue {hue}° · Chroma {chroma}',
+    ja: '{role} · {color} · 色相 {hue}° · 彩度 {chroma}',
+    'zh-CN': '{role} · {color} · 色相 {hue}° · 色度 {chroma}',
+  },
+  잠김: { en: 'Locked', ja: 'ロック中', 'zh-CN': '已锁定' },
+  '포인트를 드래그해 색조와 채도를 조절하세요. 잠근 색은 움직이지 않습니다.': {
+    en: 'Drag a point to adjust hue and chroma. Locked colors stay unchanged.',
+    ja: 'ポイントをドラッグして色相と彩度を調整します。ロックした色は変わりません。',
+    'zh-CN': '拖动控制点以调整色相和色度。锁定的颜色保持不变。',
+  },
+  '방향키 좌우: 색조 · 위아래: 채도 · Shift: 크게 조절': {
+    en: 'Left/right: hue · Up/down: chroma · Shift: larger steps',
+    ja: '左右キー: 色相 · 上下キー: 彩度 · Shift: 大きく調整',
+    'zh-CN': '左右方向键：色相 · 上下方向键：色度 · Shift：大幅调整',
+  },
+  '겹친 포인트는 색상 목록에서 선택하세요.': {
+    en: 'Choose overlapping points from the color list.',
+    ja: '重なったポイントは色のリストから選択できます。',
+    'zh-CN': '重叠的控制点可从颜色列表中选择。',
+  },
+  '선택한 색은 잠겨 있습니다. 잠금을 해제하면 조절할 수 있어요.': {
+    en: 'This color is locked. Unlock it to make changes.',
+    ja: '選択した色はロックされています。解除すると調整できます。',
+    'zh-CN': '所选颜色已锁定。解锁后即可调整。',
+  },
+  '색상환을 움직이면 {name} 규칙으로 조정합니다. 아래에서 다른 배색을 선택할 수 있어요.': {
+    en: 'The wheel uses {name}. Choose another harmony below to change the rule.',
+    ja: '色相環では「{name}」のルールで調整します。下で別の配色を選べます。',
+    'zh-CN': '色轮按「{name}」规则调整。可在下方选择其他配色规则。',
+  },
   '배색 규칙과 잠금 조건으로 팔레트를 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.': {
     en: 'Create palettes with a harmony rule and your locked colors. Select one to preview before saving.',
     ja: '配色ルールとロック条件からパレットをつくります。選択して保存前にプレビューできます。',
@@ -15,10 +54,10 @@ export const paletteRecommendationMessages: Record<
     ja: '5つの配色を比較するか、好みのルールを選んで提案を受けられます。',
     'zh-CN': '比较五种配色，或选择一种规则获取推荐。',
   },
-  '배색 규칙을 바꿨습니다. 후보를 선택하거나 랜덤 추천을 눌러 적용하세요.': {
-    en: 'Harmony changed. Choose a candidate or use Random palette to update the preview.',
-    ja: '配色ルールを変更しました。候補を選ぶか、ランダム提案でプレビューに適用してください。',
-    'zh-CN': '配色规则已更改。请选择候选配色或点击随机推荐来更新预览。',
+  '배색 규칙을 바꿨습니다. 색상환을 움직이거나 후보·랜덤 추천으로 미리 보세요.': {
+    en: 'Harmony changed. Move a wheel point, choose a candidate, or use Random palette to preview.',
+    ja: '配色ルールを変更しました。色相環のポイントを動かすか、候補・ランダム提案でプレビューしてください。',
+    'zh-CN': '配色规则已更改。移动色轮控制点、选择候选配色或随机推荐即可预览。',
   },
   '팔레트 기준색': { en: 'Seed color', ja: 'パレットの基準色', 'zh-CN': '配色基准色' },
   '팔레트 기준색 선택': {

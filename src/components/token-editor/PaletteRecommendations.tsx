@@ -12,13 +12,15 @@ import {
   type PaletteRecommendation,
   type PaletteRole,
 } from '../../theme/palette-recommendations'
-import { harmonyOptions } from '../../theme/color-scheme'
+import { harmonyOptions, type ColorHarmony } from '../../theme/color-scheme'
+import { createWheelPalette, type PaletteWheelChange } from '../../theme/palette-wheel'
 import { normalizeColor, type ThemeMode, type ThemeTokens } from '../../theme/tokens'
 import { Button } from '../ui/button'
 import { Collapsible } from '../ui/collapsible'
 import { Input } from '../ui/input'
 import { ToggleGroup } from '../ui/toggle-group'
 import { colorRoleLabels } from './color-editor-labels'
+import { PaletteColorWheel } from './PaletteColorWheel'
 import './palette-recommendations.css'
 
 export type PalettePreview = {
@@ -86,7 +88,8 @@ export function PaletteRecommendations({
 }: PaletteRecommendationsProps) {
   const { t } = useI18n()
   const id = useId()
-  const initialSeed = preview?.mode === mode ? preview.colors.primary : tokens.primary
+  const activePreview = preview?.mode === mode ? preview : null
+  const initialSeed = activePreview?.colors.primary ?? tokens.primary
   const [seed, setSeed] = useState(initialSeed)
   const [seedEdited, setSeedEdited] = useState(false)
   const [generatedSeed, setGeneratedSeed] = useState(initialSeed)
@@ -94,22 +97,28 @@ export function PaletteRecommendations({
   const [harmony, setHarmony] = useState<PaletteHarmony>('all')
   const [previewRevision, setPreviewRevision] = useState(preview ? 1 : 0)
   const [message, setMessage] = useState('')
+  const [wheelInteracting, setWheelInteracting] = useState(false)
+  const wheelChanged = useRef(false)
   const savedPrimary = useRef(tokens.primary)
   const previousMode = useRef(mode)
+  const hadPreview = useRef(Boolean(activePreview))
 
   useEffect(() => {
-    // External edits and mode changes start from the newly committed palette.
-    if (savedPrimary.current !== tokens.primary || previousMode.current !== mode) {
+    const previewEnded = hadPreview.current && !activePreview
+    hadPreview.current = Boolean(activePreview)
+    // The page-level Save/Revert actions must reset the wheel seed too, even
+    // when a locked primary means the committed primary itself did not change.
+    if (savedPrimary.current !== tokens.primary || previousMode.current !== mode || previewEnded) {
       savedPrimary.current = tokens.primary
       if (previousMode.current !== mode) setMessage('')
       previousMode.current = mode
       setSeed(tokens.primary)
       setSeedEdited(false)
       setGeneratedSeed(tokens.primary)
+      setBatch(null)
     }
-  }, [tokens.primary, mode])
+  }, [tokens.primary, mode, activePreview])
 
-  const activePreview = preview?.mode === mode ? preview : null
   const effectiveColors = activePreview?.colors ?? tokens
   const locks = useMemo(() => {
     const values: PaletteLocks = {}
@@ -142,6 +151,12 @@ export function PaletteRecommendations({
     return generatePaletteRecommendations(candidateSeed, mode, locks, harmony)
   }, [batch, candidateSeed, mode, lockKey, locks, harmony])
   const harmonyOption = harmonyOptions.find((option) => option.value === harmony)
+  const previewHarmony =
+    activePreview?.id === 'tonal'
+      ? 'mono'
+      : (harmonyOptions.find((option) => option.value === activePreview?.id)?.value ?? 'mono')
+  const wheelHarmony: ColorHarmony = harmony === 'all' ? previewHarmony : harmony
+  const wheelHarmonyName = harmonyOptions.find((option) => option.value === wheelHarmony)!.label
   const examinedTokens = useMemo(
     () => (activePreview ? { ...tokens, ...activePreview.colors } : null),
     [tokens, activePreview],
@@ -189,6 +204,27 @@ export function PaletteRecommendations({
     onPreview(candidate)
   }
 
+  function changeWheel(change: PaletteWheelChange) {
+    if (allLocked || lockedRoles.includes(change.role)) return
+    const candidate = createWheelPalette(change, mode, wheelHarmony, locks)
+    wheelChanged.current = true
+    setHarmony(wheelHarmony)
+    setSeed(candidate.colors.primary)
+    setSeedEdited(false)
+    setGeneratedSeed(candidate.colors.primary)
+    // Preserve the exact dragged palette, including contrast corrections, so
+    // the candidate card and the live components continue to show one result.
+    setBatch({
+      seed: candidate.colors.primary,
+      mode,
+      lockKey,
+      harmony: wheelHarmony,
+      recommendations: [candidate],
+    })
+    setMessage('')
+    onPreview(candidate)
+  }
+
   return (
     <section className="palette-recommendations" aria-label={t('팔레트 추천')}>
       <Collapsible title={t('팔레트 추천')} size="sm" defaultOpen>
@@ -198,6 +234,35 @@ export function PaletteRecommendations({
               '배색 규칙과 잠금 조건으로 팔레트를 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.',
             )}
           </p>
+          <p className="palette-recommendations__wheel-rule">
+            {t('색상환 · {name}', { name: t(wheelHarmonyName) })}
+          </p>
+          <PaletteColorWheel
+            interactionKey={`${mode}:${wheelHarmony}`}
+            colors={effectiveColors}
+            lockedRoles={lockedRoles}
+            disabled={allLocked}
+            onChange={changeWheel}
+            onInteractionStart={() => {
+              wheelChanged.current = false
+              setWheelInteracting(true)
+            }}
+            onInteractionEnd={() => {
+              setWheelInteracting(false)
+              if (wheelChanged.current) setPreviewRevision((revision) => revision + 1)
+              wheelChanged.current = false
+            }}
+          />
+          {harmony === 'all' && (
+            <p className="palette-recommendations__note">
+              {t(
+                '색상환을 움직이면 {name} 규칙으로 조정합니다. 아래에서 다른 배색을 선택할 수 있어요.',
+                {
+                  name: t(wheelHarmonyName),
+                },
+              )}
+            </p>
+          )}
           <div className="palette-recommendations__harmony">
             <span id={`${id}-harmony`} className="palette-recommendations__label">
               {t('배색 규칙')}
@@ -220,7 +285,9 @@ export function PaletteRecommendations({
                 if (value !== 'all' && !harmonyOptions.some((option) => option.value === value))
                   return
                 setHarmony(value as PaletteHarmony)
-                setMessage('배색 규칙을 바꿨습니다. 후보를 선택하거나 랜덤 추천을 눌러 적용하세요.')
+                setMessage(
+                  '배색 규칙을 바꿨습니다. 색상환을 움직이거나 후보·랜덤 추천으로 미리 보세요.',
+                )
               }}
             />
             <p className="palette-recommendations__note">
@@ -402,7 +469,11 @@ export function PaletteRecommendations({
             })}
           </div>
 
-          <p className="palette-recommendations__status" role="status" aria-live="polite">
+          <p
+            className="palette-recommendations__status"
+            role="status"
+            aria-live={wheelInteracting ? 'off' : 'polite'}
+          >
             {recommendationsStale
               ? t('기준색을 바꿨습니다. 팔레트를 다시 추천해 주세요.')
               : message

@@ -68,6 +68,31 @@ function imports(code: string) {
 
 describe('token installation export', () => {
   it.each(locales)(
+    'preserves primary text overrides through copied JSON and explains npm compatibility in %s',
+    (locale) => {
+      const saved = snapshot()
+      saved.themes.light.primaryForeground = '#FFF'
+      saved.themes.dark.primaryForeground = 'auto'
+      const guide = createTokenInstallGuide(JSON.stringify(saved), 'vite', locale)
+      const copied = JSON.parse(file(guide, 'src/moru-tokens.json'))
+      expect(copied.themes.light.primaryForeground).toBe('#FFF')
+      expect(copied.themes.dark.primaryForeground).toBe('auto')
+      expect(validateTokens(copied.themes.light).primaryForeground).toBe('#ffffff')
+      expect(validateTokens(copied.themes.dark).primaryForeground).toBe('auto')
+      expect(guide.compatibilityNote).toContain('primaryForeground')
+      expect(guide.compatibilityNote).toContain('0.5.0-beta.3')
+      expect(guide.text).toContain(guide.compatibilityNote)
+    },
+  )
+
+  it('does not show the custom foreground limitation for automatic or legacy primary text', () => {
+    const saved = snapshot()
+    saved.themes.light.primaryForeground = 'auto'
+    const guide = createTokenInstallGuide(JSON.stringify(saved), 'next')
+    expect(guide.compatibilityNote).not.toContain('primaryForeground')
+  })
+
+  it.each(locales)(
     'preserves focus settings and states the published package limit in %s',
     (locale) => {
       const saved = snapshot()
@@ -286,6 +311,8 @@ describe('invalid token exports', () => {
 
   it.each([
     { primary: 'url(javascript:alert(1))' },
+    { primaryForeground: 'var(--ui-text)' },
+    { primaryForeground: null },
     { radius: 9000 },
     { fontFamily: 'unknown-font' },
     { typography: { body: { size: '16' } } },

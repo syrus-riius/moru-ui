@@ -78,7 +78,8 @@ function validTheme(value: unknown): value is ThemeTokens {
   // validateTokens is intentionally forgiving at runtime. Export is stricter:
   // reject settings that would silently be replaced, clamped or dropped.
   return Object.entries(normalized).every(([key, expected]) =>
-    colorTokenKeys.some((color) => color === key)
+    colorTokenKeys.some((color) => color === key) ||
+    (key === 'primaryForeground' && expected !== 'auto')
       ? normalizeColor(value[key]) === expected
       : sameValue(value[key], expected),
   )
@@ -117,6 +118,10 @@ function readDesign(json: string) {
     mode,
     fontFamily: current.fontFamily,
     fonts: new Set([design.themes.light.fontFamily, design.themes.dark.fontFamily]),
+    hasCustomPrimaryForeground: Boolean(
+      normalizeColor(design.themes.light.primaryForeground) ||
+      normalizeColor(design.themes.dark.primaryForeground),
+    ),
   }
 }
 
@@ -228,6 +233,14 @@ const focusCompatibility: Record<Locale, string> = {
     '输入焦点的细线、表面、下划线和外环设置目前适用于Lab和最新源码。npm 0.5.0-beta.3仍保留原有焦点样式。设置会保存在JSON中；待支持该功能的npm版本发布后，更新即可应用。',
 }
 
+const primaryForegroundCompatibility: Record<Locale, string> = {
+  ko: '직접 지정한 프라이머리 텍스트(primaryForeground)는 JSON에 보존됩니다. 현재 Lab과 최신 소스에서 적용되며, npm 0.5.0-beta.3은 자동 대비 색상을 사용합니다. 직접 지정값을 적용하려면 이 토큰을 지원하는 npm 버전이 필요합니다.',
+  en: 'Your custom primary text color (primaryForeground) is preserved in JSON and supported by the Lab and latest source. npm 0.5.0-beta.3 uses automatic contrast colors; applying your custom value requires an npm version that supports this token.',
+  ja: '指定したプライマリテキスト色（primaryForeground）はJSONに保持され、Labと最新ソースで適用されます。npm 0.5.0-beta.3は自動コントラスト色を使います。指定色の適用には、このトークンに対応したnpmバージョンが必要です。',
+  'zh-CN':
+    '自定义主色文字（primaryForeground）会保存在JSON中，并可用于Lab和最新源码。npm 0.5.0-beta.3使用自动对比色；应用自定义值需要支持此令牌的npm版本。',
+}
+
 const pageStyle = `{
         display: 'grid',
         alignContent: 'start',
@@ -323,11 +336,15 @@ export default function Page() {
     )
   }
 
+  const compatibilityNote = [
+    focusCompatibility[locale],
+    ...(design.hasCustomPrimaryForeground ? [primaryForegroundCompatibility[locale]] : []),
+  ].join('\n\n')
   const text = [
     `# Moru UI · ${target === 'vite' ? 'React / Vite' : 'Next.js App Router'}`,
     '',
     ...guideCopy[locale].slice(0, -1),
-    focusCompatibility[locale],
+    compatibilityNote,
     '',
     '```bash',
     command,
@@ -350,6 +367,6 @@ export default function Page() {
     text,
     mode: design.mode,
     fontFamily: design.fontFamily,
-    compatibilityNote: focusCompatibility[locale],
+    compatibilityNote,
   }
 }

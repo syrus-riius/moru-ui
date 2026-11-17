@@ -71,6 +71,7 @@ export type PalettePreview = {
   id: PaletteRecommendation['id']
   name: string
   colors: PaletteColors
+  primaryForeground?: string
   mode: ThemeMode
 }
 
@@ -119,8 +120,16 @@ export function reduceThemeSession(
     case 'preview': {
       const colors = {} as PaletteColors
       const { mode } = session.saved
-      const currentColors =
-        session.preview?.mode === mode ? session.preview.colors : session.saved.themes[mode]
+      const currentPreview = session.preview?.mode === mode ? session.preview : null
+      const currentColors = currentPreview?.colors ?? session.saved.themes[mode]
+      const requestedForeground = action.candidate.primaryForeground
+      const primaryForeground =
+        requestedForeground === undefined
+          ? (currentPreview?.primaryForeground ?? session.saved.themes[mode].primaryForeground)
+          : requestedForeground === 'auto'
+            ? 'auto'
+            : normalizeColor(requestedForeground)
+      if (primaryForeground === null) return session
       for (const key of paletteRoleKeys) {
         const color = normalizeColor(
           session.lockedRoles[mode].includes(key)
@@ -136,6 +145,7 @@ export function reduceThemeSession(
           id: action.candidate.id,
           name: action.candidate.name,
           colors,
+          ...(primaryForeground !== undefined ? { primaryForeground } : {}),
           mode: session.saved.mode,
         },
       }
@@ -153,7 +163,16 @@ export function reduceThemeSession(
           presetId: 'custom',
           themes: {
             ...saved.themes,
-            [preview.mode]: validateTokens({ ...current, ...preview.colors }, current),
+            [preview.mode]: validateTokens(
+              {
+                ...current,
+                ...preview.colors,
+                ...(preview.primaryForeground !== undefined
+                  ? { primaryForeground: preview.primaryForeground }
+                  : {}),
+              },
+              current,
+            ),
           },
           ...(saved.colorSchemes ? { colorSchemes } : {}),
         },
@@ -216,7 +235,11 @@ export function parseThemeState(value: unknown): ThemeState | null {
   )
     return null
   const light = validateTokens(themes.light)
-  const dark = shareStructure(validateTokens(themes.dark, createDarkTokens(light)), light)
+  const darkFallback = createDarkTokens(light)
+  // A missing on-primary override in a stored dark theme means automatic,
+  // not inheritance of the independent light theme's text color.
+  delete darkFallback.primaryForeground
+  const dark = shareStructure(validateTokens(themes.dark, darkFallback), light)
   const presetId =
     typeof data.presetId === 'string' && presets.some((preset) => preset.id === data.presetId)
       ? data.presetId
@@ -290,6 +313,7 @@ export function applyThemeTokensState(
   const current = previous.themes[previous.mode]
   const next = validateTokens(typeof value === 'function' ? value(current) : value, current)
   const recipeOnly =
+    current.primaryForeground === next.primaryForeground &&
     (next.appearance !== undefined ||
       current.appearance !== undefined ||
       next.focus !== undefined ||
@@ -342,7 +366,13 @@ export function useTheme() {
   const tokens = useMemo(
     () =>
       palettePreview?.mode === state.mode
-        ? { ...savedTokens, ...palettePreview.colors }
+        ? {
+            ...savedTokens,
+            ...palettePreview.colors,
+            ...(palettePreview.primaryForeground !== undefined
+              ? { primaryForeground: palettePreview.primaryForeground }
+              : {}),
+          }
         : savedTokens,
     [savedTokens, palettePreview, state.mode],
   )

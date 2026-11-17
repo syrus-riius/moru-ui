@@ -5,6 +5,7 @@ import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
   generateRandomPaletteSet,
+  getPaletteRecommendationMetadata,
   paletteRoleKeys,
   type PaletteColors,
   type PaletteHarmony,
@@ -14,19 +15,27 @@ import {
 } from '../../theme/palette-recommendations'
 import { harmonyOptions, type ColorHarmony } from '../../theme/color-scheme'
 import { createWheelPalette, type PaletteWheelChange } from '../../theme/palette-wheel'
-import { normalizeColor, type ThemeMode, type ThemeTokens } from '../../theme/tokens'
+import {
+  getContrastRatio,
+  normalizeColor,
+  readableForeground,
+  type ThemeMode,
+  type ThemeTokens,
+} from '../../theme/tokens'
 import { Button } from '../ui/button'
 import { Collapsible } from '../ui/collapsible'
 import { Input } from '../ui/input'
 import { ToggleGroup } from '../ui/toggle-group'
 import { colorRoleLabels } from './color-editor-labels'
 import { PaletteColorWheel } from './PaletteColorWheel'
+import { PaletteRoleColorEditor } from './PaletteRoleColorEditor'
 import './palette-recommendations.css'
 
 export type PalettePreview = {
   id: string
   name: string
   colors: PaletteColors
+  primaryForeground?: string
   mode: ThemeMode
 }
 
@@ -120,6 +129,10 @@ export function PaletteRecommendations({
   }, [tokens.primary, mode, activePreview])
 
   const effectiveColors = activePreview?.colors ?? tokens
+  const foregroundSetting = activePreview?.primaryForeground ?? tokens.primaryForeground ?? 'auto'
+  const primaryForeground =
+    normalizeColor(foregroundSetting) ?? readableForeground(effectiveColors.primary)
+  const primaryContrast = getContrastRatio(primaryForeground, effectiveColors.primary)
   const locks = useMemo(() => {
     const values: PaletteLocks = {}
     for (const role of lockedRoles) values[role] = effectiveColors[role]
@@ -158,8 +171,11 @@ export function PaletteRecommendations({
   const wheelHarmony: ColorHarmony = harmony === 'all' ? previewHarmony : harmony
   const wheelHarmonyName = harmonyOptions.find((option) => option.value === wheelHarmony)!.label
   const examinedTokens = useMemo(
-    () => (activePreview ? { ...tokens, ...activePreview.colors } : null),
-    [tokens, activePreview],
+    () =>
+      activePreview
+        ? { ...tokens, ...activePreview.colors, primaryForeground: foregroundSetting }
+        : null,
+    [tokens, activePreview, foregroundSetting],
   )
   const audits = useMemo(
     () => (examinedTokens ? auditPaletteRecommendation(examinedTokens, mode) : []),
@@ -221,6 +237,31 @@ export function PaletteRecommendations({
       harmony: wheelHarmony,
       recommendations: [candidate],
     })
+    setMessage('')
+    onPreview(candidate)
+  }
+
+  function editRole(role: PaletteRole | 'primaryForeground', value: string) {
+    if (role !== 'primaryForeground' && lockedRoles.includes(role)) return
+    const color = role === 'primaryForeground' && value === 'auto' ? value : normalizeColor(value)
+    if (!color) return
+    // Direct edits change only the chosen role. The wheel remains the explicit
+    // control for moving a whole harmony, and locks keep their current values.
+    const colors = Object.fromEntries(
+      paletteRoleKeys.map((key) => [key, key === role ? color : effectiveColors[key]]),
+    ) as PaletteColors
+    const candidate: PaletteRecommendation = {
+      ...getPaletteRecommendationMetadata(wheelHarmony),
+      name: '직접 편집',
+      description: '개별 색상을 직접 조정한 팔레트입니다.',
+      colors,
+      primaryForeground: role === 'primaryForeground' ? color : foregroundSetting,
+    }
+    setSeed(colors.primary)
+    setSeedEdited(false)
+    setGeneratedSeed(colors.primary)
+    setBatch({ seed: colors.primary, mode, lockKey, harmony, recommendations: [candidate] })
+    setPreviewRevision((revision) => revision + 1)
     setMessage('')
     onPreview(candidate)
   }
@@ -346,40 +387,84 @@ export function PaletteRecommendations({
               {t('잠금 모두 해제')}
             </Button>
           </div>
-          <dl className="palette-recommendations__roles">
+          <p className="palette-recommendations__note">
+            {t('색상을 눌러 해당 역할만 수정하세요. 잠근 색은 먼저 잠금을 해제해 주세요.')}
+          </p>
+          <div className="palette-recommendations__roles">
             {paletteRoleKeys.map((role) => {
               const locked = lockedRoles.includes(role)
               const roleName = t(colorRoleLabels[role])
               return (
                 <div key={role} data-locked={locked || undefined}>
-                  <dt>
-                    <span style={{ backgroundColor: effectiveColors[role] }} aria-hidden="true" />
-                    {roleName}
-                  </dt>
-                  <dd>
-                    <code>{effectiveColors[role].toUpperCase()}</code>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="palette-recommendations__lock"
-                      aria-pressed={locked}
-                      aria-label={t(locked ? '{role} 잠금 해제' : '{role} 잠금', {
-                        role: roleName,
-                      })}
-                      title={t(locked ? '{role} 잠금 해제' : '{role} 잠금', { role: roleName })}
-                      onClick={() => onToggleLock(role)}
-                    >
-                      {locked ? (
-                        <Lock size={14} aria-hidden="true" />
-                      ) : (
-                        <LockOpen size={14} aria-hidden="true" />
-                      )}
-                    </Button>
-                  </dd>
+                  <PaletteRoleColorEditor
+                    key={`${mode}:${role}`}
+                    label={roleName}
+                    value={effectiveColors[role]}
+                    disabled={locked}
+                    onChange={(color) => editRole(role, color)}
+                  />
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="palette-recommendations__lock"
+                    aria-pressed={locked}
+                    aria-label={t(locked ? '{role} 잠금 해제' : '{role} 잠금', {
+                      role: roleName,
+                    })}
+                    title={t(locked ? '{role} 잠금 해제' : '{role} 잠금', { role: roleName })}
+                    onClick={() => onToggleLock(role)}
+                  >
+                    {locked ? (
+                      <Lock size={14} aria-hidden="true" />
+                    ) : (
+                      <LockOpen size={14} aria-hidden="true" />
+                    )}
+                  </Button>
                 </div>
               )
             })}
-          </dl>
+          </div>
+          <PaletteRoleColorEditor
+            key={`${mode}:primaryForeground`}
+            label={t('프라이머리 위 텍스트')}
+            value={primaryForeground}
+            onChange={(color) => editRole('primaryForeground', color)}
+            auto={{
+              enabled: foregroundSetting === 'auto',
+              onReset: () => editRole('primaryForeground', 'auto'),
+            }}
+          >
+            <div className="palette-recommendations__foreground-presets">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => editRole('primaryForeground', '#ffffff')}
+              >
+                {t('흰색')}
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => editRole('primaryForeground', '#000000')}
+              >
+                {t('검정색')}
+              </Button>
+            </div>
+            <p className="palette-recommendations__note">
+              {t(
+                '본문과 별개로 프라이머리 버튼·선택 영역의 글자색을 정합니다. 자동은 배경 대비에 맞춰 선택합니다.',
+              )}
+            </p>
+            <div className="palette-recommendations__foreground-example">
+              <span style={{ background: effectiveColors.primary, color: primaryForeground }}>
+                {t('버튼 텍스트')}
+              </span>
+              <span data-pass={primaryContrast >= 4.5}>
+                {(Math.floor(primaryContrast * 100) / 100).toFixed(2)}:1 ·{' '}
+                {t(primaryContrast >= 4.5 ? '충족' : '조정 필요')}
+              </span>
+            </div>
+          </PaletteRoleColorEditor>
           {allLocked && (
             <p className="palette-recommendations__note" role="status">
               {t('모든 색이 잠겨 있습니다. 한 가지 이상 잠금을 해제하면 다시 추천할 수 있어요.')}
@@ -458,7 +543,7 @@ export function PaletteRecommendations({
                     ))}
                   </span>
                   <span className="palette-recommendations__description">
-                    {lockedRoles.length
+                    {lockedRoles.length && candidate.name !== '직접 편집'
                       ? t('{name} 규칙으로 잠기지 않은 색을 조정합니다.', {
                           name: t(candidate.name),
                         })

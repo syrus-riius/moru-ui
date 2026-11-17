@@ -286,3 +286,121 @@ describe('transient palette role locks', () => {
     expect(reduceThemeSession(replaced, { type: 'save-preview' })).toBe(replaced)
   })
 })
+
+describe('on-primary text preview', () => {
+  it('previews an explicit text color without saving it, then persists it with the palette', () => {
+    const initial = freeze(initialSession())
+    const stored = JSON.stringify(initial.saved)
+    const preview = reduceThemeSession(initial, {
+      type: 'preview',
+      candidate: { ...recommendation('#684bcc'), primaryForeground: '#FFF' },
+    })
+
+    expect(preview.preview?.primaryForeground).toBe('#ffffff')
+    expect(preview.saved).toBe(initial.saved)
+    expect(JSON.stringify(preview.saved)).toBe(stored)
+    const committed = reduceThemeSession(preview, { type: 'save-preview' })
+    expect(committed.saved.themes.light.primaryForeground).toBe('#ffffff')
+    expect(committed.saved.themes.light.text).toBe(recommendation().colors.text)
+    expect(committed.saved.themes.light.success).toBe(initial.saved.themes.light.success)
+    expect(committed.saved.themes.light.typography).toEqual(initial.saved.themes.light.typography)
+    expect(committed.saved.themes.dark).toBe(initial.saved.themes.dark)
+    expect(restoreThemeState(JSON.parse(JSON.stringify(committed.saved)))).toEqual(committed.saved)
+  })
+
+  it('retains explicit foreground through new wheel or random candidates and restores saved text on cancel', () => {
+    const initial = initialSession()
+    initial.saved.themes.light.primaryForeground = '#eeeeee'
+    freeze(initial)
+    const inherited = reduceThemeSession(initial, { type: 'preview', candidate: recommendation() })
+    const edited = reduceThemeSession(inherited, {
+      type: 'preview',
+      candidate: { ...recommendation(), primaryForeground: '#ffffff' },
+    })
+    const rotated = reduceThemeSession(edited, {
+      type: 'preview',
+      candidate: recommendation('#234567'),
+    })
+    expect(inherited.preview?.primaryForeground).toBe('#eeeeee')
+    expect(rotated.preview?.primaryForeground).toBe('#ffffff')
+
+    const cancelled = reduceThemeSession(rotated, { type: 'cancel-preview' })
+    expect(cancelled.preview).toBeNull()
+    expect(cancelled.saved.themes.light.primaryForeground).toBe('#eeeeee')
+    expect(cancelled.saved).toBe(initial.saved)
+    expect(reduceThemeSession(cancelled, { type: 'save-preview' })).toBe(cancelled)
+  })
+
+  it('allows an explicit automatic reset to replace a saved or previewed text override', () => {
+    const initial = initialSession()
+    initial.saved.themes.light.primaryForeground = '#ffffff'
+    const reset = reduceThemeSession(freeze(initial), {
+      type: 'preview',
+      candidate: { ...recommendation(), primaryForeground: 'auto' },
+    })
+    const next = reduceThemeSession(reset, {
+      type: 'preview',
+      candidate: recommendation('#fedcba'),
+    })
+    const committed = reduceThemeSession(next, { type: 'save-preview' })
+    expect(next.preview?.primaryForeground).toBe('auto')
+    expect(committed.saved.themes.light.primaryForeground).toBe('auto')
+    expect(restoreThemeState(JSON.parse(JSON.stringify(committed.saved)))).toEqual(committed.saved)
+  })
+
+  it('keeps role locks while editing foreground and rejects invalid text colors atomically', () => {
+    const initial = initialSession()
+    initial.lockedRoles.light = ['primary', 'surface']
+    freeze(initial)
+    const edited = reduceThemeSession(initial, {
+      type: 'preview',
+      candidate: { ...recommendation(), primaryForeground: '#ffffff' },
+    })
+    expect(edited.preview?.colors.primary).toBe(initial.saved.themes.light.primary)
+    expect(edited.preview?.colors.surface).toBe(initial.saved.themes.light.surface)
+    expect(edited.preview?.primaryForeground).toBe('#ffffff')
+    expect(edited.lockedRoles).toBe(initial.lockedRoles)
+    for (const invalid of ['url(invalid)', 'white', '', 'auto; color:red']) {
+      expect(
+        reduceThemeSession(edited, {
+          type: 'preview',
+          candidate: { ...recommendation(), primaryForeground: invalid },
+        }),
+      ).toBe(edited)
+    }
+  })
+
+  it('discards a text preview on mode change and derives the next preview from the new mode', () => {
+    const initial = initialSession()
+    initial.saved.themes.light.primaryForeground = '#ffffff'
+    initial.saved.themes.dark.primaryForeground = '#111111'
+    const preview = reduceThemeSession(freeze(initial), {
+      type: 'preview',
+      candidate: { ...recommendation(), primaryForeground: '#eeeeee' },
+    })
+    const switched = reduceThemeSession(preview, { type: 'set-mode', mode: 'dark' })
+    expect(switched.preview).toBeNull()
+    expect(reduceThemeSession(switched, { type: 'save-preview' })).toBe(switched)
+    const dark = reduceThemeSession(switched, { type: 'preview', candidate: recommendation() })
+    expect(dark.preview?.primaryForeground).toBe('#111111')
+    const committed = reduceThemeSession(dark, { type: 'save-preview' })
+    expect(committed.saved.themes.light).toBe(initial.saved.themes.light)
+    expect(committed.saved.themes.dark.primaryForeground).toBe('#111111')
+  })
+
+  it('marks a direct text override as custom while leaving harmony role locks intact', () => {
+    const initial = initialSession()
+    initial.lockedRoles.light = ['primary']
+    const updated = reduceThemeSession(freeze(initial), {
+      type: 'update',
+      update: (saved) =>
+        applyThemeTokensState(saved, (tokens) => ({ ...tokens, primaryForeground: '#ffffff' })),
+    })
+    expect(updated.saved.presetId).toBe('custom')
+    expect(updated.saved.themes.light.primaryForeground).toBe('#ffffff')
+    expect(updated.lockedRoles).toEqual(initial.lockedRoles)
+    expect(updated.saved.themes.dark.primaryForeground).toBe(
+      initial.saved.themes.dark.primaryForeground,
+    )
+  })
+})

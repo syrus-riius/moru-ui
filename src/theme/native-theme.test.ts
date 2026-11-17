@@ -10,6 +10,24 @@ import {
 import { applyStylePack } from './style-packs'
 
 describe('native theme bridge', () => {
+  it.each(['light', 'dark'] as const)(
+    'exports the exact %s primary text choice separately from body text',
+    (mode) => {
+      const source = {
+        ...defaultTokens,
+        primary: '#4639b2',
+        primaryForeground: '#ffeeee',
+        text: '#123456',
+      }
+      const output = createNativeThemeExport(source, mode)
+      expect(output.tokens.colors.primaryForeground).toBe('#ffeeee')
+      expect(output.tokens.colors.text).toBe('#123456')
+      const automatic = createNativeThemeExport({ ...source, primaryForeground: 'auto' }, mode)
+      expect(automatic.tokens.colors.primaryForeground).toBe('#ffffff')
+      expect(JSON.parse(JSON.stringify(output)).tokens.colors.primaryForeground).toBe('#ffeeee')
+    },
+  )
+
   it('keeps web focus intent separate from native runtime tokens', () => {
     const focus = { style: 'surface' as const, width: 1, offset: 0, color: '#5577cc' }
     const output = createNativeThemeExport({ ...defaultTokens, focus }, 'light')

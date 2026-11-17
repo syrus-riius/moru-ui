@@ -2,6 +2,48 @@ export const paletteRecommendationMessages: Record<
   string,
   { en: string; ja: string; 'zh-CN': string }
 > = {
+  '{role} 색상 편집': {
+    en: 'Edit {role} color',
+    ja: '{role}の色を編集',
+    'zh-CN': '编辑{role}颜色',
+  },
+  '{role} 색상 선택기': {
+    en: '{role} color picker',
+    ja: '{role}のカラーピッカー',
+    'zh-CN': '{role}颜色选择器',
+  },
+  '{role} HEX 편집': { en: '{role} HEX editor', ja: '{role}のHEX編集', 'zh-CN': '{role} HEX编辑' },
+  '#RGB 또는 #RRGGBB 형식으로 입력해 주세요.': {
+    en: 'Enter a color in #RGB or #RRGGBB format.',
+    ja: '#RGB または #RRGGBB 形式で入力してください。',
+    'zh-CN': '请输入 #RGB 或 #RRGGBB 格式的颜色。',
+  },
+  자동으로: { en: 'Use automatic', ja: '自動に戻す', 'zh-CN': '恢复自动' },
+  '직접 편집': { en: 'Custom edits', ja: '手動編集', 'zh-CN': '手动编辑' },
+  '개별 색상을 직접 조정한 팔레트입니다.': {
+    en: 'A palette with individually edited colors.',
+    ja: '各色を個別に調整したパレットです。',
+    'zh-CN': '已单独调整颜色的配色方案。',
+  },
+  '색상을 눌러 해당 역할만 수정하세요. 잠근 색은 먼저 잠금을 해제해 주세요.': {
+    en: 'Click a color to edit only that role. Unlock a color before editing it.',
+    ja: '色を押すと、その役割だけを編集できます。ロックした色は先に解除してください。',
+    'zh-CN': '点击颜色可单独修改该角色。编辑锁定颜色前请先解锁。',
+  },
+  '프라이머리 위 텍스트': {
+    en: 'On-primary text',
+    ja: 'プライマリ上の文字',
+    'zh-CN': '主色上的文字',
+  },
+  흰색: { en: 'White', ja: '白', 'zh-CN': '白色' },
+  검정색: { en: 'Black', ja: '黒', 'zh-CN': '黑色' },
+  '본문과 별개로 프라이머리 버튼·선택 영역의 글자색을 정합니다. 자동은 배경 대비에 맞춰 선택합니다.':
+    {
+      en: 'Set text on primary buttons and selected areas separately from body text. Auto chooses based on background contrast.',
+      ja: '本文とは別に、プライマリボタンや選択領域の文字色を設定します。自動では背景とのコントラストに合わせて選びます。',
+      'zh-CN': '单独设置主色按钮及选中区域的文字颜色，不影响正文。自动模式根据背景对比度选择。',
+    },
+
   '팔레트 추천': { en: 'Palette suggestions', ja: 'パレットの提案', 'zh-CN': '推荐配色' },
   색상환: { en: 'Color wheel', ja: '色相環', 'zh-CN': '色轮' },
   '색상환 · {name}': {

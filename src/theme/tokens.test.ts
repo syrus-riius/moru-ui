@@ -138,6 +138,102 @@ describe('token payload validation', () => {
   })
 })
 
+describe('primary surface text', () => {
+  it('keeps legacy themes unchanged and resolves auto independently of body text', () => {
+    expect(validateTokens({})).not.toHaveProperty('primaryForeground')
+    for (const primary of ['#111111', '#eeeeee']) {
+      const tokens = { ...defaultTokens, primary, text: '#884422' }
+      const legacy = getCssVariables(tokens, 'light')
+      const automatic = getCssVariables({ ...tokens, primaryForeground: 'auto' }, 'light')
+      expect(automatic).toEqual(legacy)
+      expect(automatic['--ui-primary-foreground']).toBe(readableForeground(primary))
+      expect(automatic['--ui-text']).toBe('#884422')
+    }
+  })
+
+  it.each(['light', 'dark'] as const)(
+    'preserves explicit text on solid primary states in %s mode',
+    (mode) => {
+      const tokens = validateTokens({
+        primary: '#5264A2',
+        primaryForeground: ' #FDE ',
+        text: '#123',
+      })
+      const css = getCssVariables(tokens, mode)
+      expect(tokens.primaryForeground).toBe('#ffddee')
+      for (const property of [
+        '--ui-primary-foreground',
+        '--ui-primary-hover-foreground',
+        '--ui-primary-pressed-foreground',
+        '--ui-loading-text',
+      ]) {
+        expect(css[property]).toBe('#ffddee')
+      }
+      expect(css['--ui-text']).toBe('#112233')
+      expect(css['--ui-danger-hover-foreground']).toBe(readableForeground(css['--ui-danger-hover']))
+      const automatic = getCssVariables({ ...tokens, primaryForeground: 'auto' }, mode)
+      expect(css['--ui-primary-soft-text']).toBe(automatic['--ui-primary-soft-text'])
+      expect(css['--ui-primary-surface-text']).toBe(automatic['--ui-primary-surface-text'])
+    },
+  )
+
+  it('round-trips a custom foreground and an explicit return to auto through JSON and CSS export', () => {
+    const custom = validateTokens({ primary: '#4639b2', primaryForeground: '#FFF' })
+    const imported = validateTokens(JSON.parse(JSON.stringify(custom)))
+    expect(imported.primaryForeground).toBe('#ffffff')
+    expect(cssForTokens(imported, 'light')).toContain('--ui-primary-foreground: #ffffff;')
+
+    const automatic = validateTokens({ primary: '#eeeeee', primaryForeground: 'auto' }, imported)
+    const restored = validateTokens(JSON.parse(JSON.stringify(automatic)), imported)
+    expect(restored.primaryForeground).toBe('auto')
+    expect(cssForTokens(restored, 'light')).toContain('--ui-primary-foreground: #000000;')
+  })
+
+  it('recalculates foreground when generating an inverted dark primary, preserving custom pairs otherwise', () => {
+    const inverted = createDarkTokens({ ...defaultTokens, primaryForeground: '#ffffff' })
+    expect(inverted.primaryForeground).toBe('auto')
+    expect(getCssVariables(inverted, 'dark')['--ui-primary-foreground']).toBe('#000000')
+    const unchanged = createDarkTokens({
+      ...defaultTokens,
+      primary: '#4639b2',
+      primaryForeground: '#ffffff',
+    })
+    expect(unchanged.primaryForeground).toBe('#ffffff')
+  })
+
+  it.each([null, {}, '#12345678', 'white', 'var(--body)', '#fff; display:none'])(
+    'rejects invalid imported primary foreground %j without losing the previous choice',
+    (primaryForeground) => {
+      const fallback = { ...defaultTokens, primaryForeground: '#ffffff' }
+      expect(validateTokens({ primaryForeground }, fallback).primaryForeground).toBe('#ffffff')
+      expect(validateTokens({ primaryForeground }).primaryForeground).toBe('auto')
+      expect(
+        getCssVariables(
+          { ...defaultTokens, primaryForeground: String(primaryForeground) },
+          'light',
+        )['--ui-primary-foreground'],
+      ).toBe(readableForeground(defaultTokens.primary))
+    },
+  )
+
+  it.each(['glass', 'neon'] as const)(
+    'keeps %s materials independent of the solid primary foreground',
+    (preset) => {
+      const tokens = validateTokens({
+        primary: '#4639b2',
+        primaryForeground: '#ffffff',
+        appearance: { preset },
+      })
+      const css = getCssVariables(tokens, 'light')
+      const automatic = getCssVariables({ ...tokens, primaryForeground: 'auto' }, 'light')
+      expect(css['--ui-primary-foreground']).toBe('#ffffff')
+      for (const name of Object.keys(css).filter((name) => name.startsWith('--ui-pack-'))) {
+        expect(css[name]).toBe(automatic[name])
+      }
+    },
+  )
+})
+
 describe('monochrome brand palettes', () => {
   const neutralKeys = ['background', 'surface', 'text', 'muted', 'border'] as const
 

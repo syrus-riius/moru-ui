@@ -2,7 +2,7 @@
 
 Wall-clock time field with direct input, hour/minute selection and configurable time bounds or steps.
 
-Version: 0.4.1. Source hash: 2fd87d38eaaf0375eb097047b65a7d17f1067292b1a98efdbfd46ccdaa31ff28.
+Version: 0.4.1. Source hash: cf8221846caa9e729f2295329aa88140290148a595053c1c2cd671fc80cb0e9b.
 
 ## Discovery
 

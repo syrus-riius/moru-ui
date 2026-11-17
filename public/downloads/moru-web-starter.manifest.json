@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "sourceHash": "02bbccb574915a60de9bbe0f6b8fa1f94c53a0482bfc9aa318ce8648f0f4a4ed",
+  "sourceHash": "2e50f47834d4bbec743f8af31ebeb19c1d63215b5f20b488cfe68f5d5e176b16",
   "archive": "/downloads/moru-web-starter.zip",
-  "archiveSha256": "249e425b426d8a0762306fb5efea299808d60ec27bb98334e058281f7ab2acd9",
-  "bytes": 362333,
+  "archiveSha256": "197b8945fa9486bed4123aee1bf5abf9a2f94e30b1065644f9d8a5d84c912fff",
+  "bytes": 362893,
   "fileCount": 217,
   "entry": "src/App.tsx"
 }

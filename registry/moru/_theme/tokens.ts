@@ -59,6 +59,8 @@ export type DensityMetrics = {
 
 export type ThemeTokens = {
   primary: string
+  /** Text on solid primary surfaces. Omit or use 'auto' to choose black/white by contrast. */
+  primaryForeground?: string
   /** A restrained brand detail, independent from the neutral action color. */
   accent: string
   background: string
@@ -548,6 +550,16 @@ export function validateTokens(value: unknown, fallback = defaultTokens): ThemeT
   if (Object.hasOwn(input, 'focus') || fallback.focus !== undefined)
     tokens.focus = resolveFocus(Object.hasOwn(input, 'focus') ? input.focus : fallback.focus)
   for (const key of colorTokenKeys) tokens[key] = normalizeColor(input[key]) ?? fallback[key]
+  if (Object.hasOwn(input, 'primaryForeground') || fallback.primaryForeground !== undefined) {
+    const fallbackForeground =
+      fallback.primaryForeground === 'auto'
+        ? 'auto'
+        : (normalizeColor(fallback.primaryForeground) ?? 'auto')
+    tokens.primaryForeground =
+      input.primaryForeground === 'auto'
+        ? 'auto'
+        : (normalizeColor(input.primaryForeground) ?? fallbackForeground)
+  }
   for (const key of ['radius', 'borderWidth', 'shadow', 'duration'] as const)
     tokens[key] = boundedNumber(input[key], fallback[key], tokenDefinitions[key])
   if (typeof input.fontFamily === 'string' && Object.hasOwn(fontFamilies, input.fontFamily)) {
@@ -668,6 +680,11 @@ function contrastColor(base: string, backgrounds: string[], minimum: number): st
 export function createDarkTokens(light: ThemeTokens): ThemeTokens {
   return {
     ...light,
+    // The neutral dark preset inverts its solid action fill. Recalculate its
+    // text instead of carrying a light-mode override onto that different fill.
+    ...(light.primary === defaultTokens.primary && light.primaryForeground !== undefined
+      ? { primaryForeground: 'auto' }
+      : {}),
     ...(light.appearance ? { appearance: resolveAppearance(light.appearance) } : {}),
     ...(light.focus ? { focus: resolveFocus(light.focus) } : {}),
     typography: cloneTypography(light.typography),
@@ -775,7 +792,8 @@ export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<st
   variables['--ui-space'] = `${density.spacing}px`
   variables['--ui-font-family'] = fontFamilies[tokens.fontFamily]
   variables['--ui-font-family-code'] = fontFamilies.mono
-  variables['--ui-primary-foreground'] = readableForeground(tokens.primary)
+  const primaryForeground = normalizeColor(tokens.primaryForeground)
+  variables['--ui-primary-foreground'] = primaryForeground ?? readableForeground(tokens.primary)
   for (const key of ['primary', 'danger'] as const) {
     for (const state of ['hover', 'pressed'] as const) {
       const background = mixColors(
@@ -784,7 +802,8 @@ export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<st
         state === 'hover' ? 0.12 : 0.22,
       )
       variables[`--ui-${key}-${state}`] = background
-      variables[`--ui-${key}-${state}-foreground`] = readableForeground(background)
+      variables[`--ui-${key}-${state}-foreground`] =
+        (key === 'primary' ? primaryForeground : null) ?? readableForeground(background)
     }
   }
   for (const tone of ['accent', ...semanticToneOptions.map(({ value }) => value)] as const) {
@@ -851,7 +870,7 @@ export function getCssVariables(tokens: ThemeTokens, mode: ThemeMode): Record<st
   variables['--ui-disabled-text'] = mixColors(tokens.surface, tokens.text, 0.38)
   variables['--ui-disabled-border'] = mixColors(tokens.surface, tokens.border, 0.7)
   variables['--ui-loading-bg'] = tokens.primary
-  variables['--ui-loading-text'] = readableForeground(tokens.primary)
+  variables['--ui-loading-text'] = variables['--ui-primary-foreground']
   variables['--ui-shadow-size'] = `${tokens.shadow}px`
   variables['--ui-shadow'] =
     tokens.shadow === 0

@@ -27,6 +27,8 @@ export type PaletteRecommendation = {
   name: string
   description: string
   colors: PaletteColors
+  /** Omitted recommendations preserve the current on-primary text preference. */
+  primaryForeground?: string
 }
 
 type PaletteRecipe = Omit<PaletteRecommendation, 'colors'> & {

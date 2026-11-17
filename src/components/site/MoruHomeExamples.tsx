@@ -93,6 +93,8 @@ function ExampleCard({
   )
 }
 
+export { ExampleCard as MoruHomeExampleCard }
+
 function TeamExample() {
   const { t } = useI18n()
   const formId = useId()
@@ -798,23 +800,31 @@ function MessageExample() {
   )
 }
 
+export function MoruHomeExampleCards() {
+  return (
+    <>
+      <ActivityExample />
+      <VerificationExample />
+      <TeamExample />
+      <PlanExample />
+      <BookingExample />
+      <SearchExample />
+      <GoalExample />
+      <SoundExample />
+      <NotificationsExample />
+      <SecurityExample />
+      <FilesExample />
+      <MessageExample />
+    </>
+  )
+}
+
 export function MoruHomeExamples() {
   const { t } = useI18n()
   return (
     <section className="moru-home-examples" aria-label={t('컴포넌트 조합 예제')}>
       <div className="moru-home-examples__grid">
-        <ActivityExample />
-        <VerificationExample />
-        <TeamExample />
-        <PlanExample />
-        <BookingExample />
-        <SearchExample />
-        <GoalExample />
-        <SoundExample />
-        <NotificationsExample />
-        <SecurityExample />
-        <FilesExample />
-        <MessageExample />
+        <MoruHomeExampleCards />
       </div>
     </section>
   )

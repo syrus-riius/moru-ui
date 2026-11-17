@@ -44,6 +44,7 @@ export function StudioInspector() {
         />
       ) : null}
       {view !== 'simulator' &&
+      view !== 'playground' &&
       ((!standalone && !publicView) || view === 'components' || editorOpen) ? (
         <aside
           id="design-inspector"

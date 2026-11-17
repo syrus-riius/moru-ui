@@ -28,6 +28,12 @@ const StateComparison = lazy(() =>
   import('../comparison/StateComparison').then((module) => ({ default: module.StateComparison })),
 )
 
+const MoruPlayground = lazy(() =>
+  import('../playground/MoruPlayground').then((module) => ({
+    default: module.MoruPlayground,
+  })),
+)
+
 const MoruSimulator = lazy(() =>
   import('../simulator/MoruSimulator').then((module) => ({
     default: module.MoruSimulator,
@@ -127,7 +133,7 @@ export function StudioMain() {
     <main
       id="main-content"
       tabIndex={-1}
-      className={`main-content ${publicView ? 'moru-public-main' : ''} ${view === 'blocks' || view === 'brand' ? 'moru-public-wide' : ''} ${standalone ? `standalone-workspace standalone-workspace-${view}` : ''} ${view === 'brand' ? 'main-content-brand' : ''} ${view === 'simulator' ? 'simulator-workspace' : ''} ${view === 'components' || view === 'blocks' ? 'component-workspace' : ''} ${view === 'examples' ? 'example-workspace' : ''} ${view === 'comparison' || view === 'states' ? 'comparison-workspace' : ''} ${view === 'tokens' || view === 'mobile' ? 'reference-workspace' : ''}`}
+      className={`main-content ${publicView ? 'moru-public-main' : ''} ${view === 'blocks' || view === 'brand' || view === 'playground' ? 'moru-public-wide' : ''} ${standalone ? `standalone-workspace standalone-workspace-${view}` : ''} ${view === 'brand' ? 'main-content-brand' : ''} ${view === 'simulator' ? 'simulator-workspace' : ''} ${view === 'playground' ? 'playground-workspace' : ''} ${view === 'components' || view === 'blocks' ? 'component-workspace' : ''} ${view === 'examples' ? 'example-workspace' : ''} ${view === 'comparison' || view === 'states' ? 'comparison-workspace' : ''} ${view === 'tokens' || view === 'mobile' ? 'reference-workspace' : ''}`}
       inert={drawerOpen}
     >
       {view === 'home' ? (
@@ -308,6 +314,17 @@ export function StudioMain() {
           />
         </Suspense>
       ) : null}
+      {view === 'playground' ? (
+        <Suspense
+          fallback={
+            <p className="comparison-loading" role="status">
+              {t('불러오는 중')}
+            </p>
+          }
+        >
+          <MoruPlayground />
+        </Suspense>
+      ) : null}
       {view === 'simulator' ? (
         <Suspense
           fallback={
@@ -389,7 +406,9 @@ export function StudioMain() {
           onEditColor={(key) => openEditor(`token-${key}`)}
         />
       ) : null}
-      {!standalone ? <MoruSiteFooter version={registryRelease} compact={!publicView} /> : null}
+      {!standalone && view !== 'playground' ? (
+        <MoruSiteFooter version={registryRelease} compact={!publicView} />
+      ) : null}
     </main>
   )
 }

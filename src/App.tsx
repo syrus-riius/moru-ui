@@ -57,7 +57,7 @@ function Studio() {
   return (
     <StudioProvider value={studio}>
       <div
-        className={`studio-shell ${standalone ? 'studio-shell-standalone' : ''} ${publicView ? 'studio-shell-public' : ''} ${view === 'components' ? 'studio-shell-components' : ''} ${view === 'blocks' ? 'studio-shell-blocks' : ''}`}
+        className={`studio-shell ${standalone ? 'studio-shell-standalone' : ''} ${publicView ? 'studio-shell-public' : ''} ${view === 'components' ? 'studio-shell-components' : ''} ${view === 'blocks' ? 'studio-shell-blocks' : ''} ${view === 'playground' ? 'studio-shell-playground' : ''}`}
       >
         <a
           className="skip-link"
@@ -84,7 +84,7 @@ function Studio() {
         <div className="workspace-main">
           <StudioTopbar />
           <div
-            className={`workspace-body ${standalone ? 'workspace-body-standalone' : ''} ${view === 'brand' ? 'workspace-body-brand' : ''} ${view === 'simulator' ? 'workspace-body-simulator' : ''} ${componentInspectorDocked ? 'workspace-body-design-docked' : ''}`}
+            className={`workspace-body ${standalone ? 'workspace-body-standalone' : ''} ${view === 'brand' ? 'workspace-body-brand' : ''} ${view === 'simulator' ? 'workspace-body-simulator' : ''} ${view === 'playground' ? 'workspace-body-playground' : ''} ${componentInspectorDocked ? 'workspace-body-design-docked' : ''}`}
           >
             <StudioMain />
             <StudioInspector />

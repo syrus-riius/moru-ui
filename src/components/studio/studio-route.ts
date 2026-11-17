@@ -8,6 +8,7 @@ import {
 /** Lab views and their hash routes. */
 export type View =
   | 'home'
+  | 'playground'
   | 'blocks'
   | 'components'
   | 'examples'
@@ -22,6 +23,7 @@ export type View =
   | 'mobile'
 export const views: readonly View[] = [
   'home',
+  'playground',
   'blocks',
   'components',
   'examples',

@@ -12,6 +12,7 @@ const navigation = [
   { id: 'components', href: '#components', label: '컴포넌트' },
   { id: 'blocks', href: '#blocks', label: '블록' },
   { id: 'examples', href: '#examples', label: '예제' },
+  { id: 'playground', href: '#playground', label: 'Playground' },
   { id: 'studio', href: '#tokens', label: '스튜디오' },
 ] as const
 
@@ -59,7 +60,7 @@ export function MoruSiteHeader({
       aria-current={active === id ? 'page' : undefined}
       onClick={(event) => navigate(event, id)}
     >
-      {t(label)}
+      {id === 'playground' ? label : t(label)}
     </a>
   ))
 

@@ -1,0 +1,158 @@
+.studio-shell-playground .moru-site-header .ui-header-row {
+  width: 100%;
+}
+
+.studio-shell-public .workspace-body > .moru-public-main.playground-workspace {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.moru-playground {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  align-items: start;
+  min-height: calc(100dvh - var(--playground-header-height));
+}
+
+.moru-playground-sidebar {
+  position: sticky;
+  top: var(--playground-header-height);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: calc(100dvh - var(--playground-header-height));
+  background: var(--ui-surface);
+}
+
+.moru-playground-token-panel,
+.moru-playground-token-panel > .token-editor {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.moru-playground-token-panel[hidden] {
+  display: none;
+}
+
+.moru-playground-mobile-bar {
+  display: none;
+}
+
+.moru-playground-preview {
+  min-width: 0;
+  min-height: calc(100dvh - var(--playground-header-height));
+  padding: 24px clamp(16px, 1.6vw, 28px) 32px;
+  color-scheme: light dark;
+  background: light-dark(
+    color-mix(in srgb, var(--ui-surface) 93%, var(--ui-text)),
+    color-mix(in srgb, var(--ui-surface) 35%, #000)
+  );
+  color: var(--ui-text);
+}
+
+.moru-playground-preview[data-mode='light'] {
+  color-scheme: light;
+}
+.moru-playground-preview[data-mode='dark'] {
+  color-scheme: dark;
+}
+
+.moru-playground-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-block-end: 24px;
+}
+
+.moru-playground-heading h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.moru-playground-heading p {
+  margin: 6px 0 0;
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.moru-playground-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.moru-playground-note {
+  margin-block-start: 28px;
+  color: var(--ui-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .moru-playground {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .moru-playground {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moru-playground-sidebar {
+    height: auto;
+    max-height: calc(100dvh - var(--playground-header-height) - 80px);
+  }
+  .moru-playground-mobile-bar {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--ui-surface);
+    font-size: 12px;
+    color: var(--ui-muted);
+  }
+  .moru-playground-mobile-bar .ui-button {
+    min-height: 44px;
+  }
+  .moru-playground-token-panel {
+    flex: none;
+    height: max(96px, min(50dvh, calc(100dvh - var(--playground-header-height) - 156px), 460px));
+  }
+  .moru-playground-preview {
+    padding: 20px 16px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moru-playground {
+    scroll-behavior: auto;
+  }
+}
+
+/* In a short landscape viewport, reserve space for the editable controls. */
+@media (max-width: 900px) and (max-height: 520px) {
+  .moru-playground-token-panel {
+    height: max(128px, calc(100dvh - var(--playground-header-height) - 136px));
+  }
+  .moru-playground-token-panel .token-editor-heading {
+    display: none;
+  }
+}

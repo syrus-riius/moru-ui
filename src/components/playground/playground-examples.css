@@ -1,0 +1,144 @@
+.moru-home-examples.moru-playground-examples {
+  --moru-example-gap: max(10px, calc(var(--ui-space, 4px) * 3));
+  --moru-example-grid-gap: max(12px, calc(var(--ui-space, 4px) * 4));
+  min-width: 0;
+  margin-block-end: 0;
+}
+
+.moru-playground-examples__columns {
+  columns: max(304px, calc(18 * var(--ui-type-label-size, 13px) + var(--ui-card-padding, 24px) * 2))
+    auto;
+  column-gap: var(--moru-example-grid-gap);
+}
+
+.moru-home-examples.moru-playground-examples .moru-home-example {
+  width: 100%;
+  min-height: 0;
+  margin: 0 0 var(--moru-example-grid-gap);
+  break-inside: avoid;
+  overflow-wrap: anywhere;
+}
+
+.moru-playground-examples .moru-home-example__icon {
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+
+.moru-playground-foundation {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(240px, 0.9fr);
+  align-items: center;
+  gap: var(--moru-example-grid-gap) calc(var(--moru-example-grid-gap) * 2);
+  min-width: 0;
+}
+
+.moru-playground-foundation__type {
+  min-width: 0;
+}
+
+.moru-playground-foundation__type .ui-typography {
+  margin: 0;
+}
+
+.moru-playground-foundation__type .ui-typography + .ui-typography {
+  margin-block-start: var(--ui-field-gap, 8px);
+  color: var(--ui-muted);
+}
+
+.moru-playground-foundation__display {
+  text-wrap: balance;
+}
+
+.moru-playground-foundation__palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 66px), 1fr));
+  gap: var(--moru-example-gap);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moru-playground-foundation__palette > li {
+  display: grid;
+  align-content: start;
+  gap: calc(var(--ui-space, 4px) * 1.5);
+  min-width: 0;
+}
+
+.moru-playground-foundation__swatch {
+  display: block;
+  min-height: max(30px, var(--ui-control-height-sm, 32px));
+  border: 1px solid color-mix(in srgb, var(--ui-text) 14%, transparent);
+  border-radius: var(--ui-radius);
+  background: var(--moru-playground-swatch);
+}
+
+.moru-playground-foundation__palette .ui-typography {
+  color: var(--ui-muted);
+}
+
+.moru-playground-examples__toolbar,
+.moru-playground-examples__revisions > li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--moru-example-row-gap);
+  min-width: 0;
+}
+
+.moru-playground-examples__toolbar > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.moru-playground-examples__revisions {
+  display: grid;
+  gap: var(--moru-example-gap);
+  margin: 0;
+  padding: var(--moru-example-inset);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+  list-style: none;
+}
+
+.moru-playground-examples__text-sample {
+  min-height: 4em;
+  margin: 0;
+  padding: var(--moru-example-inset);
+  border-radius: var(--ui-radius);
+  background: var(--ui-input-bg);
+}
+
+.moru-playground-examples__text-sample[data-bold] {
+  font-weight: max(600, var(--ui-type-heading-weight, 650));
+}
+
+.moru-playground-examples__text-sample[data-italic] {
+  font-style: italic;
+}
+
+.moru-playground-examples__text-sample[data-highlight] {
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+
+.moru-playground-examples .ui-tabs-list {
+  flex-wrap: wrap;
+}
+
+.moru-playground-examples .moru-home-example > .ui-typography,
+.moru-playground-examples .ui-tabs-panel .ui-typography {
+  margin: 0;
+}
+
+.moru-playground-examples .ui-table-cell {
+  overflow-wrap: anywhere;
+}
+
+@container moru-home-card (max-width: 490px) {
+  .moru-playground-foundation {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -136,6 +136,7 @@ export function StudioTopbar() {
                 {
                   label: {
                     home: t('홈'),
+                    playground: 'Playground',
                     blocks: t('화면 블록'),
                     components: t(catalogTitle),
                     examples: t('예제 화면'),

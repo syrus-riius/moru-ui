@@ -42,6 +42,7 @@ export function useStudioController() {
   const standalone = isStandaloneView(view)
   const publicView =
     view === 'home' ||
+    view === 'playground' ||
     view === 'guide' ||
     view === 'token-guide' ||
     view === 'components' ||
@@ -50,7 +51,7 @@ export function useStudioController() {
   const siteSection: MoruSiteSection =
     view === 'guide' || view === 'token-guide' || view === 'brand'
       ? 'docs'
-      : view === 'home' || view === 'components' || view === 'blocks'
+      : view === 'home' || view === 'components' || view === 'blocks' || view === 'playground'
         ? view
         : 'studio'
   const navigationTarget = useRef<{
@@ -97,7 +98,8 @@ export function useStudioController() {
     !componentInspectorDocked &&
     editorOpen &&
     view !== 'brand' &&
-    view !== 'simulator'
+    view !== 'simulator' &&
+    view !== 'playground'
   const drawerOpen = navDrawerOpen || editorDrawerOpen
   useDrawerFocus(
     navDrawerOpen && !exportOpen && !invite.open && !commandOpen,
@@ -197,21 +199,23 @@ export function useStudioController() {
 
   useEffect(() => {
     document.title =
-      view === 'simulator'
-        ? `${t('시뮬레이터')} · BETA · Moru UI`
-        : view === 'project-template'
-          ? t('프로젝트·할 일 템플릿 · Moru UI')
-          : view === 'blocks'
-            ? t('화면 블록 · Moru UI')
-            : view === 'examples'
-              ? t('예제 허브 · Moru UI')
-              : view === 'guide'
-                ? t('시작하기 · Moru UI')
-                : view === 'token-guide'
-                  ? `${t('내 프로젝트에 적용')} · Moru UI`
-                  : view === 'components'
-                    ? `${t(componentPageTitle(componentPage))} · Moru UI`
-                    : t('Moru UI — 단단한 기본, 당신만의 UI.')
+      view === 'playground'
+        ? 'Playground · Moru UI'
+        : view === 'simulator'
+          ? `${t('시뮬레이터')} · BETA · Moru UI`
+          : view === 'project-template'
+            ? t('프로젝트·할 일 템플릿 · Moru UI')
+            : view === 'blocks'
+              ? t('화면 블록 · Moru UI')
+              : view === 'examples'
+                ? t('예제 허브 · Moru UI')
+                : view === 'guide'
+                  ? t('시작하기 · Moru UI')
+                  : view === 'token-guide'
+                    ? `${t('내 프로젝트에 적용')} · Moru UI`
+                    : view === 'components'
+                      ? `${t(componentPageTitle(componentPage))} · Moru UI`
+                      : t('Moru UI — 단단한 기본, 당신만의 UI.')
   }, [view, componentRouteKey, t])
 
   function navigateComponentPage(next: ComponentPage, search = false) {
@@ -318,6 +322,13 @@ export function useStudioController() {
     setMobileNav(true)
   }
   function openEditor(tokenId: string | null = null) {
+    if (view === 'playground') {
+      setEditorOpen(false)
+      if (tokenId?.startsWith('token-'))
+        setTokenFocusRequest((previous) => ({ id: tokenId, serial: (previous?.serial ?? 0) + 1 }))
+      window.dispatchEvent(new CustomEvent('moru:playground-tokens', { detail: { tokenId } }))
+      return
+    }
     editorReturnTarget.current =
       document.activeElement instanceof HTMLElement ? document.activeElement : null
     editorFocusTarget.current = tokenId

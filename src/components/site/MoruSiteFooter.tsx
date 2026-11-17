@@ -8,6 +8,7 @@ const links = [
   { href: '#guide', label: '시작하기' },
   { href: '#components', label: '컴포넌트' },
   { href: '#blocks', label: '블록' },
+  { href: '#playground', label: 'Playground' },
   { href: '#tokens', label: '스튜디오' },
   { href: '#brand', label: 'Moru 이야기' },
 ] as const
@@ -39,7 +40,7 @@ export function MoruSiteFooter({ version, compact = false }: MoruSiteFooterProps
         ) : (
           links.map(({ href, label }) => (
             <a key={href} href={href}>
-              {t(label)}
+              {href === '#playground' ? label : t(label)}
             </a>
           ))
         )

@@ -82,6 +82,13 @@ export function StudioCommandPalette({
           onSelect: () => go('examples'),
         },
         {
+          id: 'playground',
+          label: 'Playground',
+          group: t('화면'),
+          keywords: ['playground', 'tokens', 'preview', '플레이그라운드', '토큰', '미리보기'],
+          onSelect: () => go('playground'),
+        },
+        {
           id: 'project-template',
           label: t('프로젝트·할 일 템플릿 열기'),
           group: t('화면'),

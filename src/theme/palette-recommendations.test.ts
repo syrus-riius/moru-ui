@@ -4,7 +4,9 @@ import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
   generateRandomPaletteRecommendation,
+  generateRandomPaletteSet,
   paletteRoleKeys,
+  type PaletteLocks,
 } from './palette-recommendations'
 import {
   createDarkTokens,
@@ -70,6 +72,149 @@ describe('palette recommendations', () => {
       expect(distance).toBeLessThan(2)
     }
   })
+})
+
+describe('locked palette recommendations', () => {
+  it.each(modes)(
+    'preserves exact normalized primary locks and varies free colors in %s',
+    (mode) => {
+      const locks = { primary: ' #ABC ' }
+      const manual = generatePaletteRecommendations('#f05d23', mode, locks)
+      const first = generateRandomPaletteSet(mode, '#f05d23', locks, () => 0.1)
+      const second = generateRandomPaletteSet(mode, first.seed, locks, () => 0.8)
+      expect(first.recommendations).toHaveLength(3)
+      expect(first.recommendations.map(({ id }) => id)).toContain(first.selectedId)
+      for (const [index, candidate] of first.recommendations.entries()) {
+        expect(candidate.colors.primary).toBe('#aabbcc')
+        expect(manual[index].colors.primary).toBe('#aabbcc')
+        expect(second.recommendations[index].colors.primary).toBe('#aabbcc')
+        expect(candidate.colors.accent).not.toBe(second.recommendations[index].colors.accent)
+        expect(candidate.colors.background).not.toBe(
+          second.recommendations[index].colors.background,
+        )
+        const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
+        for (const colors of [candidate.colors, second.recommendations[index].colors]) {
+          expect(
+            auditPaletteRecommendation({ ...base, ...colors }, mode).every(({ pass }) => pass),
+          ).toBe(true)
+        }
+      }
+      expect(generateRandomPaletteSet(mode, '#f05d23', locks, () => 0.1)).toEqual(first)
+    },
+  )
+
+  it.each(modes)('derives the inverse harmony from a locked accent in %s', (mode) => {
+    const accent = '#f05d23'
+    const recommendations = generatePaletteRecommendations('#456cab', mode, { accent })
+    for (const [index, offset] of [0, 30, 180].entries()) {
+      const { colors } = recommendations[index]
+      expect(colors.accent).toBe(accent)
+      const difference = Math.abs(
+        ((hexToOklch(colors.primary).h + offset - hexToOklch(accent).h + 540) % 360) - 180,
+      )
+      expect(difference).toBeLessThan(2)
+    }
+  })
+
+  it('uses other chromatic locks as an anchor when neither primary nor accent is locked', () => {
+    const background = '#163e80'
+    const recommendations = generatePaletteRecommendations('#f05d23', 'dark', { background })
+    for (const { colors } of recommendations) {
+      expect(colors.background).toBe(background)
+      const difference = Math.abs(
+        ((hexToOklch(colors.primary).h - hexToOklch(background).h + 540) % 360) - 180,
+      )
+      expect(difference).toBeLessThan(2)
+    }
+  })
+
+  it.each(modes)('solves coupled locked foreground/background contrast in %s', (mode) => {
+    const cases: PaletteLocks[] = [
+      { background: '#000000', surface: '#ffffff' },
+      { text: '#000000', muted: '#ffffff' },
+      { background: '#101010', text: '#ffffff' },
+      { surface: '#ffffff', text: '#111111' },
+      { muted: '#888888' },
+      { text: '#777777' },
+    ]
+    const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
+    for (const locks of cases) {
+      const candidates = [
+        ...generatePaletteRecommendations('#456cab', mode, locks),
+        ...generateRandomPaletteSet(mode, '#456cab', locks, () => 0.8).recommendations,
+      ]
+      for (const { colors } of candidates) {
+        for (const [role, value] of Object.entries(locks)) {
+          expect(colors[role as keyof typeof colors]).toBe(value)
+        }
+        const checks = auditPaletteRecommendation({ ...base, ...colors }, mode)
+        expect(
+          checks.filter(({ pass }) => !pass),
+          JSON.stringify({ locks, colors }),
+        ).toEqual([])
+      }
+    }
+  })
+
+  it('uses intermediate gray for simultaneous black/white constraints', () => {
+    const [foreground] = generatePaletteRecommendations('#456cab', 'light', {
+      background: '#000000',
+      surface: '#ffffff',
+    })
+    expect(foreground.colors.text).not.toBe('#000000')
+    expect(foreground.colors.text).not.toBe('#ffffff')
+    expect(getContrastRatio(foreground.colors.text, '#000000')).toBeGreaterThanOrEqual(4.5)
+    expect(getContrastRatio(foreground.colors.text, '#ffffff')).toBeGreaterThanOrEqual(4.5)
+    const [background] = generatePaletteRecommendations('#456cab', 'dark', {
+      text: '#000000',
+      muted: '#ffffff',
+    })
+    expect(getContrastRatio(background.colors.surface, '#000000')).toBeGreaterThanOrEqual(4.5)
+    expect(getContrastRatio(background.colors.surface, '#ffffff')).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it('keeps impossible locked pairs intact and exposes their raw contrast failures', () => {
+    const locks = { surface: '#ffffff', text: '#ffffff' }
+    for (const { colors } of generatePaletteRecommendations('#456cab', 'light', locks)) {
+      expect(colors.surface).toBe('#ffffff')
+      expect(colors.text).toBe('#ffffff')
+      const check = auditPaletteRecommendation({ ...defaultTokens, ...colors }, 'light').find(
+        ({ id }) => id === 'text-surface',
+      )!
+      expect(check.foreground).toBe('#ffffff')
+      expect(check.background).toBe('#ffffff')
+      expect(check.ratio).toBe(1)
+      expect(check.pass).toBe(false)
+    }
+  })
+
+  it.each(modes)(
+    'handles all seven locks and ignores malformed or unsupported locks in %s',
+    (mode) => {
+      const locks = {
+        primary: '#123456',
+        accent: '#abcdef',
+        background: '#ffffff',
+        surface: '#ffffff',
+        text: '#ffffff',
+        muted: '#ffffff',
+        border: '#123456',
+      }
+      for (const { colors } of generateRandomPaletteSet(mode, undefined, locks, () => 0.7)
+        .recommendations) {
+        expect(colors).toEqual(locks)
+      }
+      const malformed = Object.assign(Object.create({ primary: '#123456' }), {
+        accent: 'red',
+        surface: '#abcd',
+        success: '#ff0000',
+        unknown: '#ffffff',
+      })
+      expect(generatePaletteRecommendations('#456cab', mode, malformed)).toEqual(
+        generatePaletteRecommendations('#456cab', mode),
+      )
+    },
+  )
 })
 
 describe('random palette recommendations', () => {

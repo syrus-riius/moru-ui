@@ -83,6 +83,9 @@ export function StudioInspector() {
               onPreview: theme.previewPalette,
               onSave: theme.savePalettePreview,
               onCancel: theme.cancelPalettePreview,
+              lockedRoles: theme.paletteLockedRoles,
+              onToggleLock: theme.togglePaletteRoleLock,
+              onClearLocks: theme.clearPaletteLocks,
             }}
             focusRequest={tokenFocusRequest}
             spacingTarget={selected}

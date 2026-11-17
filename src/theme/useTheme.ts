@@ -18,6 +18,7 @@ import {
   paletteRoleKeys,
   type PaletteColors,
   type PaletteRecommendation,
+  type PaletteRole,
 } from './palette-recommendations'
 import {
   applyDensity,
@@ -76,13 +77,17 @@ export type PalettePreview = {
 export type ThemeSession = {
   saved: ThemeState
   preview: PalettePreview | null
+  lockedRoles: Record<ThemeMode, PaletteRole[]>
 }
 
 type ThemeSessionAction =
-  | { type: 'update'; update: SetStateAction<ThemeState> }
+  | { type: 'update'; update: SetStateAction<ThemeState>; resetLocks?: 'all' }
+  | { type: 'set-mode'; mode: ThemeMode }
   | { type: 'preview'; candidate: PaletteRecommendation }
   | { type: 'save-preview' }
   | { type: 'cancel-preview' }
+  | { type: 'toggle-role-lock'; role: PaletteRole }
+  | { type: 'clear-role-locks' }
 
 /** Preview is never part of the serializable theme; queued actions resolve against one session. */
 export function reduceThemeSession(
@@ -90,20 +95,43 @@ export function reduceThemeSession(
   action: ThemeSessionAction,
 ): ThemeSession {
   switch (action.type) {
-    case 'update':
-      return {
-        saved: typeof action.update === 'function' ? action.update(session.saved) : action.update,
-        preview: null,
+    case 'update': {
+      const saved =
+        typeof action.update === 'function' ? action.update(session.saved) : action.update
+      const lockedRoles = { ...session.lockedRoles }
+      for (const mode of ['light', 'dark'] as const) {
+        // Color edits release constraints only in the affected modes. Structural
+        // changes preserve role locks; explicit theme replacements clear both.
+        if (
+          action.resetLocks === 'all' ||
+          paletteRoleKeys.some((key) => saved.themes[mode][key] !== session.saved.themes[mode][key])
+        )
+          lockedRoles[mode] = []
       }
+      return {
+        saved,
+        preview: null,
+        lockedRoles,
+      }
+    }
+    case 'set-mode':
+      return { ...session, saved: { ...session.saved, mode: action.mode }, preview: null }
     case 'preview': {
       const colors = {} as PaletteColors
+      const { mode } = session.saved
+      const currentColors =
+        session.preview?.mode === mode ? session.preview.colors : session.saved.themes[mode]
       for (const key of paletteRoleKeys) {
-        const color = normalizeColor(action.candidate.colors[key])
+        const color = normalizeColor(
+          session.lockedRoles[mode].includes(key)
+            ? currentColors[key]
+            : action.candidate.colors[key],
+        )
         if (!color) return session
         colors[key] = color
       }
       return {
-        saved: session.saved,
+        ...session,
         preview: {
           id: action.candidate.id,
           name: action.candidate.name,
@@ -119,6 +147,7 @@ export function reduceThemeSession(
       const colorSchemes = { ...saved.colorSchemes }
       delete colorSchemes[preview.mode]
       return {
+        ...session,
         saved: {
           ...saved,
           presetId: 'custom',
@@ -132,7 +161,22 @@ export function reduceThemeSession(
       }
     }
     case 'cancel-preview':
-      return session.preview ? { saved: session.saved, preview: null } : session
+      return session.preview ? { ...session, preview: null } : session
+    case 'toggle-role-lock': {
+      if (!paletteRoleKeys.includes(action.role)) return session
+      const { mode } = session.saved
+      const current = session.lockedRoles[mode]
+      const roles = current.includes(action.role)
+        ? current.filter((role) => role !== action.role)
+        : paletteRoleKeys.filter((role) => role === action.role || current.includes(role))
+      return { ...session, lockedRoles: { ...session.lockedRoles, [mode]: roles } }
+    }
+    case 'clear-role-locks': {
+      const { mode } = session.saved
+      return session.lockedRoles[mode].length
+        ? { ...session, lockedRoles: { ...session.lockedRoles, [mode]: [] } }
+        : session
+    }
   }
 }
 
@@ -290,6 +334,7 @@ export function useTheme() {
   const [session, dispatch] = useReducer(reduceThemeSession, undefined, () => ({
     saved: readState(),
     preview: null,
+    lockedRoles: { light: [], dark: [] },
   }))
   const state = session.saved
   const savedTokens = state.themes[state.mode]
@@ -301,14 +346,18 @@ export function useTheme() {
         : savedTokens,
     [savedTokens, palettePreview, state.mode],
   )
-  const setState = useCallback((update: SetStateAction<ThemeState>) => {
-    dispatch({ type: 'update', update })
+  const setState = useCallback((update: SetStateAction<ThemeState>, resetLocks?: 'all') => {
+    dispatch({ type: 'update', update, resetLocks })
   }, [])
   const previewPalette = useCallback((candidate: PaletteRecommendation) => {
     dispatch({ type: 'preview', candidate })
   }, [])
   const savePalettePreview = useCallback(() => dispatch({ type: 'save-preview' }), [])
   const cancelPalettePreview = useCallback(() => dispatch({ type: 'cancel-preview' }), [])
+  const togglePaletteRoleLock = useCallback((role: PaletteRole) => {
+    dispatch({ type: 'toggle-role-lock', role })
+  }, [])
+  const clearPaletteLocks = useCallback(() => dispatch({ type: 'clear-role-locks' }), [])
   const componentSpacingStyle = useRef<HTMLStyleElement | null>(null)
 
   useLayoutEffect(
@@ -438,7 +487,7 @@ export function useTheme() {
         colorSchemes: undefined,
         themes: { light, dark: createDarkTokens(light) },
       }
-    })
+    }, 'all')
   }, [])
 
   const applyColorScheme = useCallback(
@@ -449,11 +498,11 @@ export function useTheme() {
   )
 
   const setMode = useCallback((mode: ThemeMode) => {
-    if (mode === 'light' || mode === 'dark') setState((previous) => ({ ...previous, mode }))
+    if (mode === 'light' || mode === 'dark') dispatch({ type: 'set-mode', mode })
   }, [])
 
   const reset = useCallback(() => {
-    setState((previous) => ({ ...defaultState(), mode: previous.mode }))
+    setState((previous) => ({ ...defaultState(), mode: previous.mode }), 'all')
   }, [])
 
   const exportCss = useCallback(
@@ -483,7 +532,7 @@ export function useTheme() {
     }
     const fullState = parseThemeState(value)
     if (fullState) {
-      setState(fullState)
+      setState(fullState, 'all')
       return
     }
     if (!value || typeof value !== 'object' || Array.isArray(value))
@@ -510,7 +559,7 @@ export function useTheme() {
         colorSchemes: undefined,
         themes: { light, dark: createDarkTokens(light) },
       }
-    })
+    }, 'all')
   }, [])
 
   return {
@@ -520,6 +569,9 @@ export function useTheme() {
     previewPalette,
     savePalettePreview,
     cancelPalettePreview,
+    paletteLockedRoles: session.lockedRoles[state.mode],
+    togglePaletteRoleLock,
+    clearPaletteLocks,
     themes: state.themes,
     setToken,
     setTokens,

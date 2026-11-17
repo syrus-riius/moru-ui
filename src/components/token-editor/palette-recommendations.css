@@ -58,6 +58,11 @@
   padding: 0;
 }
 
+.palette-recommendations__seed input[type='color']:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .palette-recommendations__seed input[type='color']::-webkit-color-swatch {
   border: 0;
   border-radius: max(0px, calc(var(--ui-radius) - 3px));
@@ -148,10 +153,32 @@
   color: var(--editor-text);
 }
 
+.palette-recommendations__preview-status {
+  display: block;
+}
+
+.palette-recommendations__roles-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-width: 0;
+}
+
+.palette-recommendations__roles-heading h3,
 .palette-recommendations__inspection h3 {
   margin: var(--editor-gap) 0 0;
   font-size: var(--ui-type-label-size);
   font-weight: var(--ui-type-heading-weight);
+}
+
+.palette-recommendations__roles-heading h3 {
+  margin: 0;
+}
+
+.palette-recommendations__roles-heading .ui-button {
+  min-width: 0;
 }
 
 .palette-recommendations__roles {
@@ -161,7 +188,6 @@
   font-size: var(--ui-type-caption-size);
 }
 
-.palette-recommendations__roles > div,
 .palette-recommendations__roles dt {
   display: flex;
   align-items: center;
@@ -170,8 +196,15 @@
 }
 
 .palette-recommendations__roles > div {
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.palette-recommendations__roles dt {
+  overflow-wrap: anywhere;
 }
 
 .palette-recommendations__roles dt > span {
@@ -183,7 +216,34 @@
 }
 
 .palette-recommendations__roles dd {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   margin: 0;
+}
+
+.palette-recommendations .palette-recommendations__lock {
+  flex: none;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  color: var(--editor-muted);
+}
+
+.palette-recommendations .palette-recommendations__lock[aria-pressed='true'] {
+  background: var(--ui-primary-soft);
+  color: var(--ui-primary-soft-text);
+}
+
+@media (pointer: coarse) {
+  .palette-recommendations .palette-recommendations__lock {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
 }
 
 .palette-recommendations__roles code {

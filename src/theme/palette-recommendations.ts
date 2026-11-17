@@ -12,6 +12,7 @@ import {
   type ThemeMode,
   type ThemeTokens,
 } from './tokens'
+import { resolvePaletteContrast } from './palette-constraints'
 
 export const paletteRoleKeys = [
   'primary',
@@ -23,7 +24,9 @@ export const paletteRoleKeys = [
   'border',
 ] as const
 
-export type PaletteColors = Pick<ThemeTokens, (typeof paletteRoleKeys)[number]>
+export type PaletteRole = (typeof paletteRoleKeys)[number]
+export type PaletteColors = Pick<ThemeTokens, PaletteRole>
+export type PaletteLocks = Partial<PaletteColors>
 export type PaletteRecommendation = {
   id: 'tonal' | 'analogous' | 'complementary'
   name: string
@@ -72,6 +75,30 @@ const recipes: readonly PaletteRecipe[] = [
   },
 ]
 
+function normalizeLocks(input: PaletteLocks): PaletteLocks {
+  const locks: PaletteLocks = {}
+  if (!input || typeof input !== 'object') return locks
+  for (const role of paletteRoleKeys) {
+    if (!Object.hasOwn(input, role)) continue
+    const color = normalizeColor(input[role])
+    if (color) locks[role] = color
+  }
+  return locks
+}
+
+function secondaryAnchorHue(locks: PaletteLocks): number | undefined {
+  const anchors = paletteRoleKeys
+    .filter((role) => role !== 'primary' && role !== 'accent' && locks[role])
+    .map((role) => hexToOklch(locks[role]!))
+    .filter(({ c }) => c >= 0.02)
+  if (!anchors.length) return undefined
+  const x = anchors.reduce((sum, { c, h }) => sum + c * Math.cos((h * Math.PI) / 180), 0)
+  const y = anchors.reduce((sum, { c, h }) => sum + c * Math.sin((h * Math.PI) / 180), 0)
+  return Math.hypot(x, y) < 0.001 ? anchors[0].h : (Math.atan2(y, x) * 180) / Math.PI
+}
+
+type PaletteVariation = { lightness: number; chroma: number; neutral: number }
+
 /**
  * Keep the brand seed intact as the primary action color. Related hues belong
  * to accent; they never overwrite the semantic colors or structural tokens.
@@ -80,17 +107,38 @@ const recipes: readonly PaletteRecipe[] = [
 export function generatePaletteRecommendations(
   input: string,
   mode: ThemeMode,
+  locks: PaletteLocks = {},
 ): PaletteRecommendation[] {
   const seed = normalizeColor(input)
   if (!seed) return []
-  const base = hexToOklch(seed)
+  return createRecommendations(seed, mode, normalizeLocks(locks))
+}
+
+function createRecommendations(
+  seed: string,
+  mode: ThemeMode,
+  locks: PaletteLocks,
+  variation?: PaletteVariation,
+): PaletteRecommendation[] {
+  const source = hexToOklch(locks.primary ?? seed)
+  const accentAnchor = locks.accent ? hexToOklch(locks.accent) : null
+  const secondaryHue = secondaryAnchorHue(locks)
   const accentLightness = mode === 'dark' ? 0.76 : 0.58
 
   return recipes.map((recipe) => {
-    const chroma = Math.min(base.c * recipe.chromaScale, 0.2)
+    const hue = locks.primary
+      ? source.h
+      : accentAnchor && accentAnchor.c >= 0.02
+        ? accentAnchor.h - recipe.hueOffset
+        : (secondaryHue ?? source.h)
+    const primary =
+      locks.primary ??
+      (hue === source.h ? seed : oklchToHex(source.l, Math.max(source.c, 0.06), hue))
+    const base = hexToOklch(primary)
+    const chroma = Math.min(base.c * recipe.chromaScale * (variation?.chroma ?? 1), 0.2)
     const { colors } = generateColorScheme(
       {
-        seed,
+        seed: primary,
         harmony: recipe.harmony,
         chroma,
         temperature: recipe.temperature,
@@ -98,23 +146,34 @@ export function generatePaletteRecommendations(
       },
       mode,
     )
+    const palette: PaletteColors = {
+      primary,
+      accent: oklchToHex(
+        accentLightness + recipe.lightnessOffset + (variation?.lightness ?? 0),
+        chroma,
+        base.h + recipe.hueOffset,
+      ),
+      background: colors.background,
+      surface: colors.surface,
+      text: colors.text,
+      muted: colors.muted,
+      border: colors.border,
+    }
+    if (variation) {
+      for (const role of ['background', 'surface', 'text', 'muted', 'border'] as const) {
+        const neutral = hexToOklch(palette[role])
+        palette[role] = oklchToHex(
+          neutral.l + variation.neutral,
+          neutral.c * variation.chroma,
+          neutral.h,
+        )
+      }
+    }
     return {
       id: recipe.id,
       name: recipe.name,
       description: recipe.description,
-      colors: {
-        primary: seed,
-        accent: oklchToHex(
-          accentLightness + recipe.lightnessOffset,
-          chroma,
-          base.h + recipe.hueOffset,
-        ),
-        background: colors.background,
-        surface: colors.surface,
-        text: colors.text,
-        muted: colors.muted,
-        border: colors.border,
-      },
+      colors: resolvePaletteContrast({ ...palette, ...locks }, locks),
     }
   })
 }
@@ -134,6 +193,21 @@ export function generateRandomPaletteRecommendation(
   previousSeed?: string,
   random: () => number = Math.random,
 ): PaletteRecommendation {
+  const result = generateRandomPaletteSet(mode, previousSeed, {}, random)
+  return result.recommendations.find(({ id }) => id === result.selectedId)!
+}
+
+export function generateRandomPaletteSet(
+  mode: ThemeMode,
+  previousSeed?: string,
+  locks: PaletteLocks = {},
+  random: () => number = Math.random,
+): {
+  seed: string
+  recommendations: PaletteRecommendation[]
+  selectedId: PaletteRecommendation['id']
+} {
+  const normalizedLocks = normalizeLocks(locks)
   const previous = normalizeColor(previousSeed)
   const previousColor = previous ? hexToOklch(previous) : null
   const hueSample = randomUnit(random)
@@ -141,11 +215,24 @@ export function generateRandomPaletteRecommendation(
     previousColor && previousColor.c >= 0.02
       ? (previousColor.h + 60 + hueSample * 240) % 360
       : hueSample * 360
-  const lightness = (mode === 'dark' ? 0.66 : 0.48) + randomUnit(random) * 0.18
-  const chroma = 0.1 + randomUnit(random) * 0.1
+  const lightnessSample = randomUnit(random)
+  const chromaSample = randomUnit(random)
+  const lightness = (mode === 'dark' ? 0.66 : 0.48) + lightnessSample * 0.18
+  const chroma = 0.1 + chromaSample * 0.1
   const seed = oklchToHex(lightness, chroma, hue)
-  const candidates = generatePaletteRecommendations(seed, mode)
-  return candidates[Math.floor(randomUnit(random) * candidates.length)]
+  const variation = Object.keys(normalizedLocks).length
+    ? {
+        lightness: (lightnessSample - 0.5) * 0.16,
+        chroma: 0.65 + chromaSample * 0.7,
+        neutral: (hueSample - 0.5) * 0.05,
+      }
+    : undefined
+  const recommendations = createRecommendations(seed, mode, normalizedLocks, variation)
+  return {
+    seed,
+    recommendations,
+    selectedId: recommendations[Math.floor(randomUnit(random) * recommendations.length)].id,
+  }
 }
 
 export type PaletteContrastCheck = {

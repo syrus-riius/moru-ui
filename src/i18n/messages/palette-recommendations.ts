@@ -3,10 +3,10 @@ export const paletteRecommendationMessages: Record<
   { en: string; ja: string; 'zh-CN': string }
 > = {
   '팔레트 추천': { en: 'Palette suggestions', ja: 'パレットの提案', 'zh-CN': '推荐配色' },
-  '기준색을 유지한 세 가지 조합입니다. 선택하면 저장 전에 미리 볼 수 있어요.': {
-    en: 'Three combinations that keep your seed color. Select one to preview before saving.',
-    ja: '基準色を保った3つの組み合わせです。選択して保存前にプレビューできます。',
-    'zh-CN': '三种保留基准色的配色。选择一种，在保存前预览。',
+  '기준색과 잠금 조건으로 세 가지 조합을 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.': {
+    en: 'Three combinations using your seed and locked colors. Select one to preview before saving.',
+    ja: '基準色とロック条件から3つの組み合わせをつくります。選択して保存前にプレビューできます。',
+    'zh-CN': '根据基准色和锁定条件生成三种配色。选择一种，在保存前预览。',
   },
   '팔레트 기준색': { en: 'Seed color', ja: 'パレットの基準色', 'zh-CN': '配色基准色' },
   '팔레트 기준색 선택': {
@@ -23,6 +23,63 @@ export const paletteRecommendationMessages: Record<
     en: 'Random palette',
     ja: 'ランダム提案',
     'zh-CN': '随机推荐',
+  },
+  '잠금 모두 해제': {
+    en: 'Unlock all',
+    ja: 'すべて解除',
+    'zh-CN': '全部解锁',
+  },
+  '{role} 잠금': {
+    en: 'Lock {role}',
+    ja: '{role}をロック',
+    'zh-CN': '锁定{role}',
+  },
+  '{role} 잠금 해제': {
+    en: 'Unlock {role}',
+    ja: '{role}のロックを解除',
+    'zh-CN': '解锁{role}',
+  },
+  '모든 색이 잠겨 있습니다. 한 가지 이상 잠금을 해제하면 다시 추천할 수 있어요.': {
+    en: 'All colors are locked. Unlock at least one to generate suggestions.',
+    ja: 'すべての色がロックされています。1つ以上解除すると再提案できます。',
+    'zh-CN': '所有颜色均已锁定。至少解锁一种颜色后即可重新推荐。',
+  },
+  '잠근 색은 유지하고 나머지만 추천합니다. 랜덤 추천은 잠기지 않은 기준색도 바꾸며 바로 미리 보여줍니다.':
+    {
+      en: 'Locked colors stay unchanged. Random varies unlocked colors, including the seed, and previews immediately.',
+      ja: 'ロックした色は維持して残りを提案します。ランダム提案は未ロックの基準色も変え、すぐにプレビューします。',
+      'zh-CN': '保留锁定颜色，仅推荐其余颜色。随机推荐也会更改未锁定的基准色，并立即预览。',
+    },
+  '잠근 색끼리의 조합은 유지됩니다. 조화와 대비는 별도로 확인하세요.': {
+    en: 'Relationships between locked colors stay unchanged. Check their harmony and contrast separately.',
+    ja: 'ロックした色同士の組み合わせは維持されます。調和とコントラストは別途確認してください。',
+    'zh-CN': '锁定颜色之间的搭配保持不变。请另行检查其协调性与对比度。',
+  },
+  '{name} 규칙으로 잠기지 않은 색을 조정합니다.': {
+    en: 'Uses the {name} recipe to adjust unlocked colors.',
+    ja: '「{name}」のルールで未ロックの色を調整します。',
+    'zh-CN': '按「{name}」规则调整未锁定的颜色。',
+  },
+  '되돌리면 저장된 색으로 복원되고, 역할별 잠금은 유지됩니다.': {
+    en: 'Revert restores saved colors and keeps the same roles locked.',
+    ja: '元に戻すと保存済みの色に復元され、役割ごとのロックは維持されます。',
+    'zh-CN': '还原会恢复已保存的颜色，并保留各角色的锁定状态。',
+  },
+  '미리보기 {number} · {name} · {color} · 아직 저장하지 않았습니다.': {
+    en: 'Preview {number} · {name} · {color} · Not saved yet.',
+    ja: 'プレビュー {number} · {name} · {color} · 未保存です。',
+    'zh-CN': '预览 {number} · {name} · {color} · 尚未保存。',
+  },
+  '잠근 색을 유지하면 일부 텍스트 대비가 부족합니다. 해당 색의 잠금을 풀고 다시 추천하거나 직접 조정하세요.':
+    {
+      en: 'Some text contrast checks fail with these locks. Unlock the relevant colors and regenerate, or adjust them manually.',
+      ja: 'ロックした色を維持すると一部の文字のコントラストが不足します。該当する色のロックを解除して再提案するか、手動で調整してください。',
+      'zh-CN': '保留这些锁定颜色时，部分文字对比度不足。请解锁相关颜色后重新推荐，或手动调整。',
+    },
+  '일부 텍스트 대비가 부족합니다. 색을 조정한 뒤 다시 확인하세요.': {
+    en: 'Some text contrast checks fail. Adjust the colors and check again.',
+    ja: '一部の文字のコントラストが不足しています。色を調整して再確認してください。',
+    'zh-CN': '部分文字对比度不足。请调整颜色后重新检查。',
   },
   '랜덤 추천은 기준색도 바꾸고 결과를 바로 미리 보여줍니다. 저장 전에는 언제든 되돌릴 수 있어요.': {
     en: 'Random changes the seed color and previews a palette immediately. Revert any time before saving.',

@@ -29,6 +29,7 @@ function initialSession(): ThemeSession {
       },
     },
     preview: null,
+    lockedRoles: { light: [], dark: [] },
   }
 }
 
@@ -126,8 +127,8 @@ describe('palette preview transactions', () => {
     const initial = initialSession()
     const preview = reduceThemeSession(initial, { type: 'preview', candidate: recommendation() })
     const changed = reduceThemeSession(preview, {
-      type: 'update',
-      update: (saved) => ({ ...saved, mode: 'dark' }),
+      type: 'set-mode',
+      mode: 'dark',
     })
     expect(changed.preview).toBeNull()
     expect(reduceThemeSession(changed, { type: 'save-preview' })).toBe(changed)
@@ -165,5 +166,123 @@ describe('palette preview transactions', () => {
     const cancelled = reduceThemeSession(preview, { type: 'cancel-preview' })
     expect(reduceThemeSession(cancelled, { type: 'save-preview' })).toBe(cancelled)
     expect(cancelled.saved).toBe(initial.saved)
+  })
+})
+
+describe('transient palette role locks', () => {
+  it('toggles role metadata without changing persisted tokens or the current preview', () => {
+    const initial = freeze(initialSession())
+    const stored = JSON.stringify(initial.saved)
+    const preview = reduceThemeSession(initial, { type: 'preview', candidate: recommendation() })
+    const surface = reduceThemeSession(preview, { type: 'toggle-role-lock', role: 'surface' })
+    const both = reduceThemeSession(surface, { type: 'toggle-role-lock', role: 'primary' })
+    const released = reduceThemeSession(both, { type: 'toggle-role-lock', role: 'surface' })
+
+    expect(both.lockedRoles.light).toEqual(['primary', 'surface'])
+    expect(released.lockedRoles.light).toEqual(['primary'])
+    expect(released.saved).toBe(initial.saved)
+    expect(released.preview).toBe(preview.preview)
+    expect(JSON.stringify(released.saved)).toBe(stored)
+    expect(released.saved).not.toHaveProperty('lockedRoles')
+  })
+
+  it('keeps independent mode locks and only clears the current mode on explicit unlock', () => {
+    const light = reduceThemeSession(initialSession(), {
+      type: 'toggle-role-lock',
+      role: 'primary',
+    })
+    const dark = reduceThemeSession(light, { type: 'set-mode', mode: 'dark' })
+    const locked = reduceThemeSession(dark, { type: 'toggle-role-lock', role: 'background' })
+    const switched = reduceThemeSession(locked, { type: 'set-mode', mode: 'light' })
+    const cleared = reduceThemeSession(switched, { type: 'clear-role-locks' })
+
+    expect(switched.lockedRoles).toEqual({ light: ['primary'], dark: ['background'] })
+    expect(cleared.lockedRoles).toEqual({ light: [], dark: ['background'] })
+    expect(cleared.saved).toBe(switched.saved)
+    expect(reduceThemeSession(cleared, { type: 'clear-role-locks' })).toBe(cleared)
+    expect(
+      reduceThemeSession(cleared, { type: 'set-mode', mode: 'dark' }).lockedRoles.dark,
+    ).toEqual(['background'])
+  })
+
+  it('protects the currently displayed locked colors against stale candidate snapshots', () => {
+    const initial = initialSession()
+    const first = reduceThemeSession(initial, { type: 'preview', candidate: recommendation() })
+    const primary = reduceThemeSession(first, { type: 'toggle-role-lock', role: 'primary' })
+    const locked = reduceThemeSession(primary, { type: 'toggle-role-lock', role: 'surface' })
+    const nextCandidate = recommendation('#123456')
+    nextCandidate.colors.surface = '#654321'
+    nextCandidate.colors.accent = '#abcdef'
+    const next = reduceThemeSession(freeze(locked), { type: 'preview', candidate: nextCandidate })
+    const saved = reduceThemeSession(next, { type: 'save-preview' })
+
+    expect(next.preview?.colors.primary).toBe(first.preview?.colors.primary)
+    expect(next.preview?.colors.surface).toBe(first.preview?.colors.surface)
+    expect(next.preview?.colors.accent).toBe('#abcdef')
+    expect(next.saved).toBe(initial.saved)
+    expect(saved.saved.themes.light.primary).toBe(first.preview?.colors.primary)
+    expect(saved.saved.themes.light.surface).toBe(first.preview?.colors.surface)
+    expect(saved.saved.themes.light.accent).toBe('#abcdef')
+    expect(saved.lockedRoles).toBe(locked.lockedRoles)
+  })
+
+  it('restores saved colors on cancel while retaining locks for subsequent recommendations', () => {
+    const initial = initialSession()
+    const first = reduceThemeSession(initial, { type: 'preview', candidate: recommendation() })
+    const locked = reduceThemeSession(first, { type: 'toggle-role-lock', role: 'primary' })
+    const cancelled = reduceThemeSession(locked, { type: 'cancel-preview' })
+    const next = reduceThemeSession(cancelled, {
+      type: 'preview',
+      candidate: recommendation('#123456'),
+    })
+
+    expect(cancelled.preview).toBeNull()
+    expect(cancelled.saved).toBe(initial.saved)
+    expect(cancelled.lockedRoles.light).toEqual(['primary'])
+    expect(next.preview?.colors.primary).toBe(initial.saved.themes.light.primary)
+    expect(next.preview?.colors.primary).not.toBe(first.preview?.colors.primary)
+  })
+
+  it('keeps color locks for structural edits, releasing only palettes affected by manual color edits', () => {
+    const initial = initialSession()
+    initial.lockedRoles = { light: ['primary'], dark: ['surface'] }
+    freeze(initial)
+    const shapeEdit = reduceThemeSession(initial, {
+      type: 'update',
+      update: (saved) => applyThemeTokensState(saved, (tokens) => ({ ...tokens, radius: 9 })),
+    })
+    const primaryEdit = reduceThemeSession(initial, {
+      type: 'update',
+      update: (saved) =>
+        applyThemeTokensState(saved, (tokens) => ({ ...tokens, primary: '#123abc' })),
+    })
+    const accentEdit = reduceThemeSession(initial, {
+      type: 'update',
+      update: (saved) =>
+        applyThemeTokensState(saved, (tokens) => ({ ...tokens, accent: '#123abc' })),
+    })
+
+    expect(shapeEdit.lockedRoles).toEqual(initial.lockedRoles)
+    expect(primaryEdit.lockedRoles).toEqual({ light: [], dark: ['surface'] })
+    expect(accentEdit.lockedRoles).toEqual({ light: [], dark: [] })
+  })
+
+  it('clears both mode locks for explicit reset, import, and preset replacements even if colors match', () => {
+    const initial = initialSession()
+    initial.lockedRoles = { light: ['primary'], dark: ['surface'] }
+    const preview = reduceThemeSession(freeze(initial), {
+      type: 'preview',
+      candidate: recommendation(),
+    })
+    const replaced = reduceThemeSession(preview, {
+      type: 'update',
+      update: initial.saved,
+      resetLocks: 'all',
+    })
+
+    expect(replaced.preview).toBeNull()
+    expect(replaced.lockedRoles).toEqual({ light: [], dark: [] })
+    expect(replaced.saved).toBe(initial.saved)
+    expect(reduceThemeSession(replaced, { type: 'save-preview' })).toBe(replaced)
   })
 })

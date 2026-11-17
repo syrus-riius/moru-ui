@@ -91,6 +91,9 @@ export function MoruPlayground() {
               onPreview: theme.previewPalette,
               onSave: theme.savePalettePreview,
               onCancel: theme.cancelPalettePreview,
+              lockedRoles: theme.paletteLockedRoles,
+              onToggleLock: theme.togglePaletteRoleLock,
+              onClearLocks: theme.clearPaletteLocks,
             }}
             mode={theme.mode}
             presetId={theme.presetId}

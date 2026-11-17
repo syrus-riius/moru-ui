@@ -1,13 +1,15 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
-import { Check, RotateCcw, Shuffle } from 'lucide-react'
+import { Check, Lock, LockOpen, RotateCcw, Shuffle } from 'lucide-react'
 import { useI18n } from '../../i18n'
 import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
-  generateRandomPaletteRecommendation,
+  generateRandomPaletteSet,
   paletteRoleKeys,
   type PaletteColors,
+  type PaletteLocks,
   type PaletteRecommendation,
+  type PaletteRole,
 } from '../../theme/palette-recommendations'
 import { normalizeColor, type ThemeMode, type ThemeTokens } from '../../theme/tokens'
 import { Button } from '../ui/button'
@@ -24,28 +26,44 @@ export type PalettePreview = {
 }
 
 export type PaletteRecommendationsProps = {
-  /** Committed tokens: a temporary preview must not become the next starting point. */
+  /** Committed tokens, kept separate so reverting never saves a temporary preview. */
   tokens: ThemeTokens
   mode: ThemeMode
   preview: PalettePreview | null
+  lockedRoles: PaletteRole[]
+  onToggleLock: (role: PaletteRole) => void
+  onClearLocks: () => void
   onPreview: (candidate: PaletteRecommendation) => void
   onSave: () => void
   onCancel: () => void
+}
+
+type PaletteBatch = {
+  seed: string
+  mode: ThemeMode
+  lockKey: string
+  recommendations: PaletteRecommendation[]
 }
 
 export function PaletteRecommendations({
   tokens,
   mode,
   preview,
+  lockedRoles,
+  onToggleLock,
+  onClearLocks,
   onPreview,
   onSave,
   onCancel,
 }: PaletteRecommendationsProps) {
   const { t } = useI18n()
   const id = useId()
-  const initialSeed = preview?.colors.primary ?? tokens.primary
+  const initialSeed = preview?.mode === mode ? preview.colors.primary : tokens.primary
   const [seed, setSeed] = useState(initialSeed)
+  const [seedEdited, setSeedEdited] = useState(false)
   const [generatedSeed, setGeneratedSeed] = useState(initialSeed)
+  const [batch, setBatch] = useState<PaletteBatch | null>(null)
+  const [previewRevision, setPreviewRevision] = useState(preview ? 1 : 0)
   const [message, setMessage] = useState('')
   const savedPrimary = useRef(tokens.primary)
   const previousMode = useRef(mode)
@@ -57,17 +75,38 @@ export function PaletteRecommendations({
       if (previousMode.current !== mode) setMessage('')
       previousMode.current = mode
       setSeed(tokens.primary)
+      setSeedEdited(false)
       setGeneratedSeed(tokens.primary)
     }
   }, [tokens.primary, mode])
 
-  const normalizedSeed = normalizeColor(seed)
-  const recommendationsStale = normalizedSeed !== generatedSeed
-  const candidates = useMemo(
-    () => generatePaletteRecommendations(generatedSeed, mode),
-    [generatedSeed, mode],
-  )
   const activePreview = preview?.mode === mode ? preview : null
+  const effectiveColors = activePreview?.colors ?? tokens
+  const locks = useMemo(() => {
+    const values: PaletteLocks = {}
+    for (const role of lockedRoles) values[role] = effectiveColors[role]
+    return values
+  }, [effectiveColors, lockedRoles])
+  const lockKey = paletteRoleKeys
+    .filter((role) => locks[role])
+    .map((role) => `${role}:${normalizeColor(locks[role]!)}`)
+    .join('|')
+  const primaryLocked = lockedRoles.includes('primary')
+  const allLocked = paletteRoleKeys.every((role) => lockedRoles.includes(role))
+  const visibleSeed = primaryLocked ? effectiveColors.primary : seed
+  const normalizedSeed = normalizeColor(visibleSeed)
+  // A random batch has an exploration seed even when primary itself is locked.
+  // Keep that seed as its identity; the displayed input still shows locked primary.
+  const candidateSeed = generatedSeed
+  const recommendationsStale = !primaryLocked && seedEdited
+  const candidates = useMemo(() => {
+    // Random suggestions include their own lightness/chroma variations. Keep the
+    // exact generated set until its seed, mode, or locked colors change.
+    if (batch?.seed === candidateSeed && batch.mode === mode && batch.lockKey === lockKey) {
+      return batch.recommendations
+    }
+    return generatePaletteRecommendations(candidateSeed, mode, locks)
+  }, [batch, candidateSeed, mode, lockKey, locks])
   const examinedTokens = useMemo(
     () => (activePreview ? { ...tokens, ...activePreview.colors } : null),
     [tokens, activePreview],
@@ -79,22 +118,36 @@ export function PaletteRecommendations({
 
   function editSeed(value: string) {
     setSeed(value)
+    setSeedEdited(true)
     setMessage('')
-    if (activePreview) onCancel()
   }
 
   function generate() {
-    if (!normalizedSeed) return
-    onCancel()
+    if (!normalizedSeed || allLocked) return
+    // Keep the current preview while choosing another candidate. Cancelling here
+    // would replace locked preview colors with their previously saved values.
+    const recommendations = generatePaletteRecommendations(normalizedSeed, mode, locks)
     setSeed(normalizedSeed)
+    setSeedEdited(false)
     setGeneratedSeed(normalizedSeed)
+    setBatch({ seed: normalizedSeed, mode, lockKey, recommendations })
     setMessage('팔레트 3개를 추천했습니다. 후보를 눌러 미리 보세요.')
   }
 
   function randomize() {
-    const candidate = generateRandomPaletteRecommendation(mode, normalizedSeed ?? generatedSeed)
+    if (allLocked) return
+    const result = generateRandomPaletteSet(
+      mode,
+      primaryLocked ? generatedSeed : (normalizedSeed ?? generatedSeed),
+      locks,
+    )
+    const candidate = result.recommendations.find((item) => item.id === result.selectedId)
+    if (!candidate) return
     setSeed(candidate.colors.primary)
-    setGeneratedSeed(candidate.colors.primary)
+    setSeedEdited(false)
+    setGeneratedSeed(result.seed)
+    setBatch({ seed: result.seed, mode, lockKey, recommendations: result.recommendations })
+    setPreviewRevision((revision) => revision + 1)
     setMessage('')
     onPreview(candidate)
   }
@@ -104,7 +157,9 @@ export function PaletteRecommendations({
       <Collapsible title={t('팔레트 추천')} size="sm" defaultOpen>
         <div className="palette-recommendations__body">
           <p className="palette-recommendations__note">
-            {t('기준색을 유지한 세 가지 조합입니다. 선택하면 저장 전에 미리 볼 수 있어요.')}
+            {t(
+              '기준색과 잠금 조건으로 세 가지 조합을 만듭니다. 선택하면 저장 전에 미리 볼 수 있어요.',
+            )}
           </p>
           <label htmlFor={`${id}-seed`} className="palette-recommendations__label">
             {t('팔레트 기준색')}
@@ -113,13 +168,15 @@ export function PaletteRecommendations({
             <input
               type="color"
               aria-label={t('팔레트 기준색 선택')}
-              value={normalizedSeed ?? generatedSeed}
+              value={normalizedSeed ?? candidateSeed}
+              disabled={primaryLocked}
               onChange={(event) => editSeed(event.target.value)}
             />
             <Input
               id={`${id}-seed`}
               size="sm"
-              value={seed.toUpperCase()}
+              value={visibleSeed.toUpperCase()}
+              disabled={primaryLocked}
               aria-invalid={!normalizedSeed || undefined}
               aria-describedby={!normalizedSeed ? `${id}-error` : undefined}
               spellCheck={false}
@@ -139,26 +196,90 @@ export function PaletteRecommendations({
               {t('#RRGGBB 형식으로 입력해 주세요.')}
             </p>
           )}
+
+          <div className="palette-recommendations__roles-heading">
+            <h3>{t('색상 역할')}</h3>
+            <Button
+              size="sm"
+              variant="ghost"
+              textWrap="wrap"
+              disabled={!lockedRoles.length}
+              focusableWhenDisabled
+              onClick={onClearLocks}
+            >
+              {t('잠금 모두 해제')}
+            </Button>
+          </div>
+          <dl className="palette-recommendations__roles">
+            {paletteRoleKeys.map((role) => {
+              const locked = lockedRoles.includes(role)
+              const roleName = t(colorRoleLabels[role])
+              return (
+                <div key={role} data-locked={locked || undefined}>
+                  <dt>
+                    <span style={{ backgroundColor: effectiveColors[role] }} aria-hidden="true" />
+                    {roleName}
+                  </dt>
+                  <dd>
+                    <code>{effectiveColors[role].toUpperCase()}</code>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="palette-recommendations__lock"
+                      aria-pressed={locked}
+                      aria-label={t(locked ? '{role} 잠금 해제' : '{role} 잠금', {
+                        role: roleName,
+                      })}
+                      title={t(locked ? '{role} 잠금 해제' : '{role} 잠금', { role: roleName })}
+                      onClick={() => onToggleLock(role)}
+                    >
+                      {locked ? (
+                        <Lock size={14} aria-hidden="true" />
+                      ) : (
+                        <LockOpen size={14} aria-hidden="true" />
+                      )}
+                    </Button>
+                  </dd>
+                </div>
+              )
+            })}
+          </dl>
+          {allLocked && (
+            <p className="palette-recommendations__note" role="status">
+              {t('모든 색이 잠겨 있습니다. 한 가지 이상 잠금을 해제하면 다시 추천할 수 있어요.')}
+            </p>
+          )}
           <div className="palette-recommendations__generate-actions">
             <Button
               size="sm"
               variant="secondary"
               textWrap="wrap"
-              disabled={!normalizedSeed}
+              disabled={!normalizedSeed || allLocked}
               onClick={generate}
             >
               {t('기준색으로 추천')}
             </Button>
-            <Button size="sm" variant="secondary" textWrap="wrap" onClick={randomize}>
+            <Button
+              size="sm"
+              variant="secondary"
+              textWrap="wrap"
+              disabled={allLocked}
+              onClick={randomize}
+            >
               <Shuffle size={14} aria-hidden="true" />
               {t('랜덤 추천')}
             </Button>
           </div>
           <p className="palette-recommendations__note">
             {t(
-              '랜덤 추천은 기준색도 바꾸고 결과를 바로 미리 보여줍니다. 저장 전에는 언제든 되돌릴 수 있어요.',
+              '잠근 색은 유지하고 나머지만 추천합니다. 랜덤 추천은 잠기지 않은 기준색도 바꾸며 바로 미리 보여줍니다.',
             )}
           </p>
+          {lockedRoles.length > 0 && (
+            <p className="palette-recommendations__note">
+              {t('잠근 색끼리의 조합은 유지됩니다. 조화와 대비는 별도로 확인하세요.')}
+            </p>
+          )}
 
           <div
             className="palette-recommendations__candidates"
@@ -166,7 +287,13 @@ export function PaletteRecommendations({
             aria-label={t('추천 팔레트 3개')}
           >
             {candidates.map((candidate) => {
-              const selected = activePreview?.id === candidate.id
+              const selected =
+                activePreview?.id === candidate.id &&
+                paletteRoleKeys.every(
+                  (role) =>
+                    normalizeColor(activePreview.colors[role]) ===
+                    normalizeColor(candidate.colors[role]),
+                )
               return (
                 <Button
                   key={candidate.id}
@@ -175,10 +302,13 @@ export function PaletteRecommendations({
                   textWrap="wrap"
                   className="palette-recommendations__candidate"
                   aria-pressed={selected}
-                  disabled={recommendationsStale}
+                  disabled={recommendationsStale || allLocked}
                   aria-label={t('{name} 팔레트 미리보기', { name: t(candidate.name) })}
                   onClick={() => {
                     setMessage('')
+                    setSeed(candidate.colors.primary)
+                    setSeedEdited(false)
+                    setPreviewRevision((revision) => revision + 1)
                     onPreview(candidate)
                   }}
                 >
@@ -192,7 +322,11 @@ export function PaletteRecommendations({
                     ))}
                   </span>
                   <span className="palette-recommendations__description">
-                    {t(candidate.description)}
+                    {lockedRoles.length
+                      ? t('{name} 규칙으로 잠기지 않은 색을 조정합니다.', {
+                          name: t(candidate.name),
+                        })
+                      : t(candidate.description)}
                   </span>
                 </Button>
               )
@@ -200,16 +334,22 @@ export function PaletteRecommendations({
           </div>
 
           <p className="palette-recommendations__status" role="status" aria-live="polite">
-            {activePreview
-              ? t('{name} · {color} · 미리보기 중, 아직 저장하지 않았습니다.', {
-                  name: t(activePreview.name),
-                  color: activePreview.colors.primary.toUpperCase(),
-                })
+            {recommendationsStale
+              ? t('기준색을 바꿨습니다. 팔레트를 다시 추천해 주세요.')
               : message
                 ? t(message)
-                : recommendationsStale
-                  ? t('기준색을 바꿨습니다. 팔레트를 다시 추천해 주세요.')
-                  : t('후보를 선택하면 실제 컴포넌트에 미리 적용됩니다.')}
+                : null}
+            {activePreview ? (
+              <span className="palette-recommendations__preview-status">
+                {t('미리보기 {number} · {name} · {color} · 아직 저장하지 않았습니다.', {
+                  number: previewRevision,
+                  name: t(activePreview.name),
+                  color: activePreview.colors.primary.toUpperCase(),
+                })}
+              </span>
+            ) : !message && !recommendationsStale ? (
+              t('후보를 선택하면 실제 컴포넌트에 미리 적용됩니다.')
+            ) : null}
           </p>
           <div className="palette-recommendations__actions">
             <Button
@@ -240,6 +380,9 @@ export function PaletteRecommendations({
             </Button>
           </div>
           <p className="palette-recommendations__note">
+            {t('되돌리면 저장된 색으로 복원되고, 역할별 잠금은 유지됩니다.')}
+          </p>
+          <p className="palette-recommendations__note">
             {t('{mode} 모드의 베이스 컬러만 저장합니다. 시맨틱 컬러와 다른 설정은 유지됩니다.', {
               mode: t(mode === 'light' ? '라이트' : '다크'),
             })}
@@ -247,24 +390,16 @@ export function PaletteRecommendations({
 
           {activePreview && (
             <div className="palette-recommendations__inspection">
-              <h3>{t('색상 역할')}</h3>
-              <dl className="palette-recommendations__roles">
-                {paletteRoleKeys.map((role) => (
-                  <div key={role}>
-                    <dt>
-                      <span
-                        style={{ backgroundColor: activePreview.colors[role] }}
-                        aria-hidden="true"
-                      />
-                      {t(colorRoleLabels[role])}
-                    </dt>
-                    <dd>
-                      <code>{activePreview.colors[role].toUpperCase()}</code>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
               <h3>{t('텍스트 대비 확인')}</h3>
+              {audits.some((audit) => !audit.pass) && (
+                <p className="palette-recommendations__error" role="status">
+                  {t(
+                    lockedRoles.length
+                      ? '잠근 색을 유지하면 일부 텍스트 대비가 부족합니다. 해당 색의 잠금을 풀고 다시 추천하거나 직접 조정하세요.'
+                      : '일부 텍스트 대비가 부족합니다. 색을 조정한 뒤 다시 확인하세요.',
+                  )}
+                </p>
+              )}
               <ul className="palette-recommendations__audits">
                 {audits.map((audit) => (
                   <li key={audit.id}>

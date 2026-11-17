@@ -338,6 +338,9 @@ export function TokenEditor({
           onPreview={palette.onPreview}
           onSave={palette.onSave}
           onCancel={palette.onCancel}
+          lockedRoles={palette.lockedRoles}
+          onToggleLock={palette.onToggleLock}
+          onClearLocks={palette.onClearLocks}
         />
       ) : null}
       <Tabs

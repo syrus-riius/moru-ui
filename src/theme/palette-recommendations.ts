@@ -119,6 +119,35 @@ export function generatePaletteRecommendations(
   })
 }
 
+function randomUnit(random: () => number): number {
+  const value = random()
+  return Number.isFinite(value) ? Math.min(1 - Number.EPSILON, Math.max(0, value)) : 0.5
+}
+
+/**
+ * Sample a new brand color, then reuse the same three role-aware recipes.
+ * Excluding the previous hue's ±60° arc guarantees a visible change without
+ * retries, even when an injected random source repeatedly returns one value.
+ */
+export function generateRandomPaletteRecommendation(
+  mode: ThemeMode,
+  previousSeed?: string,
+  random: () => number = Math.random,
+): PaletteRecommendation {
+  const previous = normalizeColor(previousSeed)
+  const previousColor = previous ? hexToOklch(previous) : null
+  const hueSample = randomUnit(random)
+  const hue =
+    previousColor && previousColor.c >= 0.02
+      ? (previousColor.h + 60 + hueSample * 240) % 360
+      : hueSample * 360
+  const lightness = (mode === 'dark' ? 0.66 : 0.48) + randomUnit(random) * 0.18
+  const chroma = 0.1 + randomUnit(random) * 0.1
+  const seed = oklchToHex(lightness, chroma, hue)
+  const candidates = generatePaletteRecommendations(seed, mode)
+  return candidates[Math.floor(randomUnit(random) * candidates.length)]
+}
+
 export type PaletteContrastCheck = {
   id: string
   label: string

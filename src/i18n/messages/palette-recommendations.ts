@@ -14,10 +14,20 @@ export const paletteRecommendationMessages: Record<
     ja: 'パレットの基準色を選択',
     'zh-CN': '选择配色基准色',
   },
-  '팔레트 3개 추천': {
-    en: 'Suggest 3 palettes',
-    ja: '3つのパレットを提案',
-    'zh-CN': '推荐 3 种配色',
+  '기준색으로 추천': {
+    en: 'Use seed color',
+    ja: '基準色から提案',
+    'zh-CN': '根据基准色推荐',
+  },
+  '랜덤 추천': {
+    en: 'Random palette',
+    ja: 'ランダム提案',
+    'zh-CN': '随机推荐',
+  },
+  '랜덤 추천은 기준색도 바꾸고 결과를 바로 미리 보여줍니다. 저장 전에는 언제든 되돌릴 수 있어요.': {
+    en: 'Random changes the seed color and previews a palette immediately. Revert any time before saving.',
+    ja: 'ランダム提案は基準色も変えて、結果をすぐにプレビューします。保存前ならいつでも元に戻せます。',
+    'zh-CN': '随机推荐会更改基准色并立即预览结果。保存前可随时还原。',
   },
   '추천 팔레트 3개': {
     en: 'Three suggested palettes',
@@ -39,10 +49,10 @@ export const paletteRecommendationMessages: Record<
     ja: '基準色が変わりました。パレットを再提案してください。',
     'zh-CN': '基准色已更改，请重新生成推荐配色。',
   },
-  '{name} · 미리보기 중, 아직 저장하지 않았습니다.': {
-    en: '{name} · Previewing, not saved yet.',
-    ja: '{name} · プレビュー中。まだ保存されていません。',
-    'zh-CN': '{name} · 正在预览，尚未保存。',
+  '{name} · {color} · 미리보기 중, 아직 저장하지 않았습니다.': {
+    en: '{name} · {color} · Previewing, not saved yet.',
+    ja: '{name} · {color} · プレビュー中。まだ保存されていません。',
+    'zh-CN': '{name} · {color} · 正在预览，尚未保存。',
   },
   '후보를 선택하면 실제 컴포넌트에 미리 적용됩니다.': {
     en: 'Select a palette to preview it on real components.',

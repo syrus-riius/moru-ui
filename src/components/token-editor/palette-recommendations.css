@@ -122,10 +122,20 @@
   flex: 1;
 }
 
+.palette-recommendations__generate-actions,
 .palette-recommendations__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--editor-gap);
+}
+
+.palette-recommendations__generate-actions .ui-button {
+  flex: 1 1 100px;
+  min-width: 0;
+}
+
+.palette-recommendations__generate-actions .ui-button svg {
+  flex: none;
 }
 
 .palette-recommendations__actions .ui-button {

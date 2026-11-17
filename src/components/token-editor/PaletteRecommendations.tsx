@@ -1,9 +1,10 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
-import { Check, RotateCcw } from 'lucide-react'
+import { Check, RotateCcw, Shuffle } from 'lucide-react'
 import { useI18n } from '../../i18n'
 import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
+  generateRandomPaletteRecommendation,
   paletteRoleKeys,
   type PaletteColors,
   type PaletteRecommendation,
@@ -90,6 +91,14 @@ export function PaletteRecommendations({
     setMessage('팔레트 3개를 추천했습니다. 후보를 눌러 미리 보세요.')
   }
 
+  function randomize() {
+    const candidate = generateRandomPaletteRecommendation(mode, normalizedSeed ?? generatedSeed)
+    setSeed(candidate.colors.primary)
+    setGeneratedSeed(candidate.colors.primary)
+    setMessage('')
+    onPreview(candidate)
+  }
+
   return (
     <section className="palette-recommendations" aria-label={t('팔레트 추천')}>
       <Collapsible title={t('팔레트 추천')} size="sm" defaultOpen>
@@ -130,15 +139,26 @@ export function PaletteRecommendations({
               {t('#RRGGBB 형식으로 입력해 주세요.')}
             </p>
           )}
-          <Button
-            size="sm"
-            variant="secondary"
-            textWrap="wrap"
-            disabled={!normalizedSeed}
-            onClick={generate}
-          >
-            {t('팔레트 3개 추천')}
-          </Button>
+          <div className="palette-recommendations__generate-actions">
+            <Button
+              size="sm"
+              variant="secondary"
+              textWrap="wrap"
+              disabled={!normalizedSeed}
+              onClick={generate}
+            >
+              {t('기준색으로 추천')}
+            </Button>
+            <Button size="sm" variant="secondary" textWrap="wrap" onClick={randomize}>
+              <Shuffle size={14} aria-hidden="true" />
+              {t('랜덤 추천')}
+            </Button>
+          </div>
+          <p className="palette-recommendations__note">
+            {t(
+              '랜덤 추천은 기준색도 바꾸고 결과를 바로 미리 보여줍니다. 저장 전에는 언제든 되돌릴 수 있어요.',
+            )}
+          </p>
 
           <div
             className="palette-recommendations__candidates"
@@ -181,8 +201,9 @@ export function PaletteRecommendations({
 
           <p className="palette-recommendations__status" role="status" aria-live="polite">
             {activePreview
-              ? t('{name} · 미리보기 중, 아직 저장하지 않았습니다.', {
+              ? t('{name} · {color} · 미리보기 중, 아직 저장하지 않았습니다.', {
                   name: t(activePreview.name),
+                  color: activePreview.colors.primary.toUpperCase(),
                 })
               : message
                 ? t(message)

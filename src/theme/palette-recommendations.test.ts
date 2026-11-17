@@ -3,6 +3,7 @@ import { hexToOklch } from './color-scheme'
 import {
   auditPaletteRecommendation,
   generatePaletteRecommendations,
+  generateRandomPaletteRecommendation,
   paletteRoleKeys,
 } from './palette-recommendations'
 import {
@@ -67,6 +68,78 @@ describe('palette recommendations', () => {
       const accentHue = hexToOklch(palettes[index].colors.accent).h
       const distance = Math.abs(((accentHue - origin - offset + 540) % 360) - 180)
       expect(distance).toBeLessThan(2)
+    }
+  })
+})
+
+describe('random palette recommendations', () => {
+  it.each(modes)('reuses all three recipes with valid, readable colors in %s', (mode) => {
+    const base = mode === 'dark' ? createDarkTokens(defaultTokens) : defaultTokens
+    const ids = new Set<string>()
+    for (let sample = 0; sample <= 12; sample++) {
+      const candidate = generateRandomPaletteRecommendation(mode, undefined, () => sample / 12)
+      ids.add(candidate.id)
+      expect(Object.keys(candidate.colors).sort()).toEqual([...paletteRoleKeys].sort())
+      for (const color of Object.values(candidate.colors)) expect(color).toMatch(/^#[\da-f]{6}$/)
+      expect(candidate).toEqual(
+        generatePaletteRecommendations(candidate.colors.primary, mode).find(
+          ({ id }) => id === candidate.id,
+        ),
+      )
+      const primary = hexToOklch(candidate.colors.primary)
+      expect(primary.l).toBeGreaterThanOrEqual(mode === 'dark' ? 0.658 : 0.478)
+      expect(primary.l).toBeLessThanOrEqual(mode === 'dark' ? 0.842 : 0.662)
+      expect(primary.c).toBeGreaterThan(0.02)
+      expect(
+        auditPaletteRecommendation({ ...base, ...candidate.colors }, mode).every(
+          ({ pass }) => pass,
+        ),
+      ).toBe(true)
+    }
+    expect([...ids].sort()).toEqual(['analogous', 'complementary', 'tonal'])
+  })
+
+  it('is deterministic with injected randomness and normalizes the previous seed', () => {
+    const first = generateRandomPaletteRecommendation('light', '#aabbcc', () => 0.35)
+    expect(generateRandomPaletteRecommendation('light', ' #ABC ', () => 0.35)).toEqual(first)
+    expect(generateRandomPaletteRecommendation('light', '#aabbcc', () => 0.35)).toEqual(first)
+    expect(generateRandomPaletteRecommendation('dark', '#aabbcc', () => 0.35)).not.toEqual(first)
+    expect(generateRandomPaletteRecommendation('light', 'invalid', () => 0.35)).toEqual(
+      generateRandomPaletteRecommendation('light', undefined, () => 0.35),
+    )
+  })
+
+  it.each(modes)('keeps changing hue with a constant random source in %s', (mode) => {
+    for (const value of [0, 0.5, 1]) {
+      let previous = '#f05d23'
+      for (let index = 0; index < 8; index++) {
+        const candidate = generateRandomPaletteRecommendation(mode, previous, () => value)
+        const current = candidate.colors.primary
+        const distance = Math.abs(
+          ((hexToOklch(current).h - hexToOklch(previous).h + 540) % 360) - 180,
+        )
+        expect(current).not.toBe(previous)
+        // The 60° minimum permits small rounding error after 8-bit sRGB conversion.
+        expect(distance).toBeGreaterThan(58)
+        previous = current
+      }
+    }
+  })
+
+  it('handles neutral previous colors and bounds malformed random values without retrying', () => {
+    for (const previous of ['#000000', '#ffffff', '#808080']) {
+      expect(
+        generateRandomPaletteRecommendation('light', previous, () => 0).colors.primary,
+      ).not.toBe(previous)
+    }
+    for (const value of [-1, 2, NaN, Infinity]) {
+      let calls = 0
+      const candidate = generateRandomPaletteRecommendation('dark', '#f05d23', () => {
+        calls++
+        return value
+      })
+      expect(calls).toBe(4)
+      for (const color of Object.values(candidate.colors)) expect(color).toMatch(/^#[\da-f]{6}$/)
     }
   })
 })
